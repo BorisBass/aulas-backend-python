@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios Práticos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: white;
+            font-family: Arial, sans-serif;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1A365D;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .exercises {
+            flex: 3;
+            margin-right: 30px;
+        }
+        .exercise-card {
+            background-color: #F7FAFC;
+            border-left: 4px solid #4299E1;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        .exercise-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1A365D;
+            margin-bottom: 10px;
+        }
+        .exercise-description {
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .code-hint {
+            background-color: #2D3748;
+            color: #E2E8F0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .image-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .image {
+            max-width: 380px;
+            max-height: 380px;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #1A365D;
+        }
+        .highlight {
+            color: #4299E1;
+            font-weight: bold;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer img {
+            width: 800px;
+            height: auto;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Exercícios Práticos</h1>
+        
+        <div class="content">
+            <div class="exercises">
+                <div class="exercise-card">
+                    <h3 class="exercise-title">1. Contagem Regressiva</h3>
+                    <p class="exercise-description">Crie um programa que faça uma contagem regressiva de 10 até 1, e então imprima "Lançamento!".</p>
+                    <div class="code-hint">
+                        # Use um laço for com range()<br>
+                        for i in range(10, 0, -1):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;# Seu código aqui
+                    </div>
+                </div>
+                
+                <div class="exercise-card">
+                    <h3 class="exercise-title">2. Soma de Números</h3>
+                    <p class="exercise-description">Escreva um programa que calcule a soma de todos os números de 1 a 100 usando um laço while.</p>
+                    <div class="code-hint">
+                        soma = 0<br>
+                        contador = 1<br>
+                        while contador <= 100:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;# Seu código aqui
+                    </div>
+                </div>
+                
+                <div class="exercise-card">
+                    <h3 class="exercise-title">3. Tabuada</h3>
+                    <p class="exercise-description">Crie um programa que imprima a tabuada de um número fornecido pelo usuário, de 1 a 10.</p>
+                    <div class="code-hint">
+                        numero = int(input("Digite um número: "))<br>
+                        for i in range(1, 11):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;# Seu código aqui
+                    </div>
+                </div>
+                
+                <div class="exercise-card">
+                    <h3 class="exercise-title">4. Encontrar Números Primos</h3>
+                    <p class="exercise-description">Escreva um programa que encontre todos os números primos entre 1 e 50 usando laços aninhados.</p>
+                    <div class="code-hint">
+                        for num in range(2, 51):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;eh_primo = True<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;for i in range(2, num):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Verifique se num é divisível por i
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://private-us-east-1.manuscdn.com/sessionFile/qU5wuDdih4idqinjQ5L55g/sandbox/slides_resource_i7ipvtkwsdn6wl1zjga0z-e54d5150-e2b-prod_1757954343128_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzL2NId1ZZdG5qdmt1eQ.png?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcVU1d3VEZGloNGlkcWlualE1TDU1Zy9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pN2lwdnRrd3NkbjZ3bDF6amdhMHotZTU0ZDUxNTAtZTJiLXByb2RfMTc1Nzk1NDM0MzEyOF9uYTFmbl9MMmh2YldVdmRXSjFiblIxTDNWd2JHOWhaQzl6WldGeVkyaGZhVzFoWjJWekwyTklkMVpaZEc1cWRtdDFlUS5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xNTYwLGhfMTU2MC9mb3JtYXQsd2VicCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=vZnsTw8X5ySUA5CMDq5lIgtr1wmfihjkXGixNRZqbJnJ3F0BDnVpUSC4oO6NK~SU9lg5jpDExWP5HhJXCXLiqK~5u0~QVcsHERUaXGw~B2wwtRcqAKdEcEWORi2sLzQm3sjdpaSknGQxgdRSHN0B2wyspxwmKhdfioTpgwDz80Fr4DNmNnx8C9a0Ddmp-8Koq1wlSEXB0Gl3IfTnZ9s6X7vlTE79GCib--L30LcY1c~ap4rCyLwszZx1hnv8EDe3CTCxhi-w~Zv7oPH6jVWO8VHVO433w4sRfRIBWzKh-lucwsTMc-~vK-JTZv2jtRkTO-2lyxfrwRDM~YWovALb7Q__" alt="Exercícios de Estruturas de Repetição em Python" class="image">
+                <p class="note">Pratique no <span class="highlight">Google Colab</span> para fixar os conceitos!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação e Acesso a Listas</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Criação e Acesso a Listas</h1>
+        
+        <div class="content">
+            <div class="text-content">
+                <h2 class="section-title">Criando Listas</h2>
+                <div class="code-block">
+                    # Lista vazia<br>
+                    lista_vazia = []<br>
+                    <br>
+                    # Lista com elementos<br>
+                    frutas = ["maçã", "banana", "laranja"]<br>
+                    <br>
+                    # Lista com diferentes tipos<br>
+                    misturada = [1, "texto", 3.14, True]<br>
+                    <br>
+                    # Usando list()<br>
+                    numeros = list(range(1, 6))  # [1, 2, 3, 4, 5]
+                </div>
+                
+                <h2 class="section-title">Acessando Elementos</h2>
+                <div class="code-block">
+                    frutas = ["maçã", "banana", "laranja", "uva"]<br>
+                    <br>
+                    # Acesso por índice (começa em 0)<br>
+                    print(frutas[0])    # "maçã"<br>
+                    print(frutas[2])    # "laranja"<br>
+                    <br>
+                    # Índice negativo (do final para o início)<br>
+                    print(frutas[-1])   # "uva"<br>
+                    print(frutas[-2])   # "laranja"
+                </div>
+                
+                <div class="note">
+                    <strong>Importante:</strong> O primeiro elemento tem índice 0, o segundo tem índice 1, e assim por diante. Índices negativos contam do final para o início.
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="images/python_lists.png" alt="Python e Listas" class="image">
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+
+</body>
+</html>

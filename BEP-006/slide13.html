@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos sort() e reverse()</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Métodos sort() e reverse()</h1>
+        
+        <div class="content">
+            <div class="text-content">
+                <h2 class="section-title">Método sort()</h2>
+                <p class="text-paragraph">
+                    O método <span class="highlight">sort()</span> ordena os elementos da lista <span class="highlight">in-place</span> (modifica a lista original).
+                </p>
+                
+                <h2 class="section-title">Método reverse()</h2>
+                <p class="text-paragraph">
+                    O método <span class="highlight">reverse()</span> inverte a ordem dos elementos da lista <span class="highlight">in-place</span>.
+                </p>
+                
+                <h2 class="section-title">Exemplos Práticos</h2>
+                <div class="code-block">
+                    # Ordenação<br>
+                    numeros = [3, 1, 4, 1, 5, 9, 2]<br>
+                    print("Original:", numeros)<br>
+                    <br>
+                    numeros.sort()<br>
+                    print("Ordenado:", numeros)  # [1, 1, 2, 3, 4, 5, 9]<br>
+                    <br>
+                    # Ordenação decrescente<br>
+                    numeros.sort(reverse=True)<br>
+                    print("Decrescente:", numeros)  # [9, 5, 4, 3, 2, 1, 1]<br>
+                    <br>
+                    # Inversão<br>
+                    frutas = ["maçã", "banana", "laranja"]<br>
+                    frutas.reverse()<br>
+                    print("Invertido:", frutas)  # ["laranja", "banana", "maçã"]
+                </div>
+                
+                <div class="note">
+                    <strong>Importante:</strong> Ambos os métodos modificam a lista original e não retornam uma nova lista.
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="images/python_lists.png" alt="Python e Listas" class="image">
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+

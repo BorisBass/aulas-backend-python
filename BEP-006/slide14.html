@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos count() e index()</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Métodos count() e index()</h1>
+        
+        <div class="content">
+            <div class="text-content">
+                <h2 class="section-title">Método count()</h2>
+                <p class="text-paragraph">
+                    O método <span class="highlight">count()</span> retorna o <span class="highlight">número de ocorrências</span> de um elemento na lista.
+                </p>
+                
+                <h2 class="section-title">Método index()</h2>
+                <p class="text-paragraph">
+                    O método <span class="highlight">index()</span> retorna o <span class="highlight">índice</span> da primeira ocorrência de um elemento na lista.
+                </p>
+                
+                <h2 class="section-title">Exemplos Práticos</h2>
+                <div class="code-block">
+                    numeros = [1, 2, 3, 2, 4, 2, 5]<br>
+                    <br>
+                    # Contando ocorrências<br>
+                    print(numeros.count(2))    # 3<br>
+                    print(numeros.count(7))    # 0<br>
+                    <br>
+                    # Encontrando índices<br>
+                    print(numeros.index(2))    # 1 (primeira ocorrência)<br>
+                    print(numeros.index(4))    # 4<br>
+                    <br>
+                    # Busca a partir de uma posição<br>
+                    print(numeros.index(2, 2)) # 3 (busca a partir do índice 2)<br>
+                    <br>
+                    # Tratamento de erro<br>
+                    if 7 in numeros:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(numeros.index(7))<br>
+                    else:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print("Elemento não encontrado!")
+                </div>
+                
+                <div class="note">
+                    <strong>Atenção:</strong> O index() gera erro se o elemento não for encontrado. Use 'in' para verificar antes.
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="images/python_lists.png" alt="Python e Listas" class="image">
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+

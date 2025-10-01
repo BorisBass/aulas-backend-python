@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos break e continue</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: white;
+            font-family: Arial, sans-serif;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1A365D;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-evenly;
+            flex: 1;
+        }
+        .commands-info {
+            flex: 3;
+            margin-right: 30px;
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 10px;
+        }
+        .command-section {
+            margin-bottom: 15px;
+        }
+        .command-title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1A365D;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .command-icon {
+            color: #4299E1;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .command-description {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .code-example {
+            background-color: #2D3748;
+            color: #E2E8F0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .output {
+            background-color: #EBF8FF;
+            border-left: 4px solid #4299E1;
+            padding: 6px 10px;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .highlight {
+            color: #4299E1;
+            font-weight: bold;
+        }
+        .image-container {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .image {
+            max-width: 380px;
+            max-height: 380px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer img {
+            width: 800px;
+            height: auto;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Comandos break e continue</h1>
+        
+        <div class="content">
+            <div class="commands-info">
+                <div class="command-section">
+                    <h3 class="command-title">
+                        <i class="fas fa-stop-circle command-icon"></i>
+                        Comando break
+                    </h3>
+                    <p class="command-description">
+                        O comando <span class="highlight">break</span> interrompe completamente a execução do laço, saindo dele imediatamente.
+                    </p>
+                    <div class="code-example">
+                        # Exemplo: Encontrar o primeiro número divisível por 7<br>
+                        for i in range(1, 100):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if i % 7 == 0:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f"Encontrado: {i}")<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break  # Sai do loop após encontrar
+                    </div>
+                    <div class="output">
+                        Encontrado: 7
+                    </div>
+                </div>
+                
+                <div class="command-section">
+                    <h3 class="command-title">
+                        <i class="fas fa-fast-forward command-icon"></i>
+                        Comando continue
+                    </h3>
+                    <p class="command-description">
+                        O comando <span class="highlight">continue</span> pula a iteração atual e avança para a próxima iteração do laço.
+                    </p>
+                    <div class="code-example">
+                        # Exemplo: Imprimir apenas números ímpares<br>
+                        for i in range(1, 10):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;if i % 2 == 0:  # Se for par<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue  # Pula para a próxima iteração<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;print(i, end=" ")
+                    </div>
+                    <div class="output">
+                        1 3 5 7 9
+                    </div>
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://private-us-east-1.manuscdn.com/sessionFile/qU5wuDdih4idqinjQ5L55g/sandbox/slides_resource_i7ipvtkwsdn6wl1zjga0z-e54d5150-e2b-prod_1757954311993_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzL1hvUDRoOWhkaGRuQQ.png?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcVU1d3VEZGloNGlkcWlualE1TDU1Zy9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pN2lwdnRrd3NkbjZ3bDF6amdhMHotZTU0ZDUxNTAtZTJiLXByb2RfMTc1Nzk1NDMxMTk5M19uYTFmbl9MMmh2YldVdmRXSjFiblIxTDNWd2JHOWhaQzl6WldGeVkyaGZhVzFoWjJWekwxaHZVRFJvT1doa2FHUnVRUS5wbmc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xNTYwLGhfMTU2MC9mb3JtYXQsd2VicCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=LDTkYwEZ9dMiumO5JKHX0FhppZ0LSo2AJ7qr6X28jGN4epfLoK7M4XbdXfTbc9bsvcCro7b20qJNc-uNGRoaVpAGD78ncW0DrO1VfRzmVSEGej4JfX8QtcWItD6o5AVFiXGscCEz2O45901~0-wMOgWegs5X0Ym9gk8caw~Db9Gnl1XCLP-VDUkeWUbISSit5EmyIa93tKPPtEOMnyX8Gm9WKOO0PXNitlqt6dK~AeronaGkU8~ej~mzYghgcUZjU1OdD7GfxHyfyB~g1c3NVWLSzJ97ngx2lwfmV-7IqfAc~xZ0kaTSd9~gqqi-5-aXa2-rrZWLFRAATVMmo8sUjg__" alt="Fluxograma de break e continue" class="image">
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+
+

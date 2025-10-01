@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos clear() e copy()</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Métodos clear() e copy()</h1>
+        
+        <div class="content">
+            <div class="text-content">
+                <h2 class="section-title">Método clear()</h2>
+                <p class="text-paragraph">
+                    O método <span class="highlight">clear()</span> remove <span class="highlight">todos os elementos</span> da lista, deixando-a vazia.
+                </p>
+                
+                <h2 class="section-title">Método copy()</h2>
+                <p class="text-paragraph">
+                    O método <span class="highlight">copy()</span> cria uma <span class="highlight">cópia superficial</span> da lista (nova lista com os mesmos elementos).
+                </p>
+                
+                <h2 class="section-title">Exemplos Práticos</h2>
+                <div class="code-block">
+                    # Método clear()<br>
+                    lista = [1, 2, 3, 4, 5]<br>
+                    print("Antes:", lista)<br>
+                    <br>
+                    lista.clear()<br>
+                    print("Após clear:", lista)  # []<br>
+                    print("Tamanho:", len(lista))  # 0<br>
+                    <br>
+                    # Método copy()<br>
+                    original = ["a", "b", "c"]<br>
+                    copia = original.copy()<br>
+                    <br>
+                    print("Original:", original)<br>
+                    print("Cópia:", copia)<br>
+                    <br>
+                    # Modificando a cópia<br>
+                    copia.append("d")<br>
+                    print("Original:", original)  # ["a", "b", "c"]<br>
+                    print("Cópia:", copia)        # ["a", "b", "c", "d"]
+                </div>
+                
+                <div class="note">
+                    <strong>Importante:</strong> copy() cria uma nova lista independente. Mudanças na cópia não afetam a original.
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="images/programming_concepts.png" alt="Métodos clear() e copy()" class="image">
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+

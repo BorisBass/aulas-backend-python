@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laços Aninhados</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            background: white;
+            font-family: Arial, sans-serif;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+        }
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1A365D;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .text-content {
+            flex: 1;
+            padding-right: 30px;
+        }
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1A365D;
+            margin-bottom: 15px;
+        }
+        .text-paragraph {
+            font-size: 18px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .code-block {
+            background-color: #2D3748;
+            color: #E2E8F0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .output {
+            background-color: #EBF8FF;
+            border-left: 4px solid #4299E1;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .highlight {
+            color: #4299E1;
+            font-weight: bold;
+        }
+        .note {
+            background-color: #F7FAFC;
+            border-left: 4px solid #4299E1;
+            padding: 10px 15px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .image-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .image {
+            max-width: 400px;
+            max-height: 400px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer img {
+            width: 800px;
+            height: auto;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <h1 class="title">Laços Aninhados</h1>
+        
+        <div class="content">
+            <div class="text-content">
+                <h2 class="section-title">O que são Laços Aninhados?</h2>
+                <p class="text-paragraph">
+                    Laços aninhados são <span class="highlight">loops dentro de loops</span>, onde cada iteração do loop externo executa o loop interno por completo.
+                </p>
+                
+                <h2 class="section-title">Exemplo: Padrão de Asteriscos</h2>
+                <div class="code-block">
+                    # Criando um padrão de asteriscos<br>
+                    for i in range(5):  # Loop externo<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;for j in range(i+1):  # Loop interno<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("*", end="")<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print()  # Nova linha após cada linha do padrão
+                </div>
+                
+                <div class="output">
+                    *<br>
+                    **<br>
+                    ***<br>
+                    ****<br>
+                    *****
+                </div>
+                
+                <h2 class="section-title">Aplicações Comuns</h2>
+                <p class="text-paragraph">
+                    • Processamento de matrizes e tabelas<br>
+                    • Geração de padrões e formas<br>
+                    • Comparação de todos os elementos entre si<br>
+                    • Algoritmos de ordenação e busca
+                </p>
+                
+                <div class="note">
+                    <strong>Dica:</strong> Cuidado com a eficiência! Laços aninhados têm complexidade O(n²) ou maior, o que pode tornar o programa lento para grandes conjuntos de dados.
+                </div>
+            </div>
+            
+            <div class="image-container">
+                <img src="https://private-us-east-1.manuscdn.com/sessionFile/qU5wuDdih4idqinjQ5L55g/sandbox/slides_resource_i7ipvtkwsdn6wl1zjga0z-e54d5150-e2b-prod_1757954249787_na1fn_L2hvbWUvdWJ1bnR1L3VwbG9hZC9zZWFyY2hfaW1hZ2VzLzhMQk83bko1MVgwUw.jpg?x-oss-process=image/resize,w_1560,h_1560/format,webp&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvcVU1d3VEZGloNGlkcWlualE1TDU1Zy9zYW5kYm94L3NsaWRlc19yZXNvdXJjZV9pN2lwdnRrd3NkbjZ3bDF6amdhMHotZTU0ZDUxNTAtZTJiLXByb2RfMTc1Nzk1NDI0OTc4N19uYTFmbl9MMmh2YldVdmRXSjFiblIxTDNWd2JHOWhaQzl6WldGeVkyaGZhVzFoWjJWekx6aE1RazgzYmtvMU1WZ3dVdy5qcGc~eC1vc3MtcHJvY2Vzcz1pbWFnZS9yZXNpemUsd18xNTYwLGhfMTU2MC9mb3JtYXQsd2VicCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Z2zMgS9~Zh~uh0BtxXawV-R~9cGFhKND6O3pEU7ecsWCxDyWWRnSRpgltrFkYRyNN9zSCuqFLTvwEbFPDRVDsoUMJo5g0JaCEZ~Uq~TOiwnmPYoP3cqcFvBIUQQvuT2uEY-0DBqIA7fyDlY4pSgiMuy6fzAQEEW6fCsTsmi9IScwryHh9TAaO2kEXKE-tzZ65l0deGFInJj89HNmEo~JUAaMXM33dKyPttsm3Mg9r-wahQIx6ITxVAHXJ0TkzgJaTr76kPKCMOC1LAdYZ1xAvpv4jxlPa1ULU5oKXCeV8EHc4MgZSGvNzmiqZDEFXovPtrq06~COj~pDvaMRLeyfnQ__" alt="Diagrama de Laços Aninhados" class="image">
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+
+
