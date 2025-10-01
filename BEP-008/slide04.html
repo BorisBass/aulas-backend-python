@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 04</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide4">
+                <h2><i class="fas fa-code"></i> Sintaxe Básica</h2>
+                
+                <h3>📝 Estrutura Fundamental</h3>
+                <div class="code-block">
+def nome_da_funcao():
+    # Código da função aqui
+    print("Esta é uma função")
+    return "resultado"  # Opcional
+                </div>
+                
+                <h3>🔧 Componentes Obrigatórios</h3>
+                <ul>
+                    <li><strong>def:</strong> Palavra-chave para definir função</li>
+                    <li><strong>nome_da_funcao:</strong> Nome único da função</li>
+                    <li><strong>():</strong> Parênteses (vazios se sem parâmetros)</li>
+                    <li><strong>:</strong> Dois pontos após os parênteses</li>
+                    <li><strong>Indentação:</strong> Código da função deve estar indentado</li>
+                </ul>
+                
+                <h3>📋 Regras de Nomenclatura</h3>
+                <div class="code-block">
+# ✅ Nomes válidos
+def calcular_media():
+def verificar_idade():
+def mostrar_resultado():
+def funcao123():
+
+# ❌ Nomes inválidos
+def 123funcao():  # Não pode começar com número
+def função():     # Não pode ter acentos
+def minha-funcao(): # Não pode ter hífen
+def def():        # Não pode usar palavra-chave
+                </div>
+                
+                <h3>🎯 Exemplos Práticos</h3>
+                <div class="code-block">
+# Função simples
+def cumprimentar():
+    print("Olá, mundo!")
+
+# Função com múltiplas linhas
+def mostrar_informacoes():
+    print("Nome: João Silva")
+    print("Idade: 25 anos")
+    print("Cidade: Salvador")
+
+# Função com retorno
+def obter_data():
+    return "15/03/2024"
+
+# Chamando as funções
+cumprimentar()
+mostrar_informacoes()
+data = obter_data()
+print(f"Data: {data}")
+                </div>
+                
+                <h3>⚠️ Erros Comuns</h3>
+                <div class="code-block">
+# ❌ Erro: Esqueceu os dois pontos
+def minha_funcao()  # Falta :
+    print("Erro!")
+
+# ❌ Erro: Indentação incorreta
+def minha_funcao():
+print("Erro!")  # Deve estar indentado
+
+# ❌ Erro: Nome inválido
+def 2funcao():  # Não pode começar com número
+    print("Erro!")
+
+# ✅ Correto
+def minha_funcao():
+    print("Correto!")
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Indentação:</strong> Use 4 espaços ou 1 tab consistentemente</li>
+                        <li><strong>Nomes:</strong> Use letras, números e underscore</li>
+                        <li><strong>Dois pontos:</strong> Sempre após os parênteses</li>
+                        <li><strong>Chamada:</strong> Use o nome da função + ()</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Completo</h5>
+                    <div class="code-block">
+# Definindo a função
+def calcular_area_retangulo():
+    largura = 5
+    altura = 3
+    area = largura * altura
+    print(f"Área: {area}")
+
+# Chamando a função
+calcular_area_retangulo()
+calcular_area_retangulo()  # Pode chamar várias vezes
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

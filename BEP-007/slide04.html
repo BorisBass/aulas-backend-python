@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 04</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide4">
+                <h2><i class="fas fa-cogs"></i> Características das Tuplas</h2>
+                
+                <h3>🔒 Imutabilidade</h3>
+                <div class="warning">
+                    <h4><i class="fas fa-lock"></i> Característica Principal</h4>
+                    <p>As tuplas são <strong>imutáveis</strong>, ou seja, uma vez criadas, não podem ser modificadas. Isso significa que você não pode adicionar, remover ou alterar elementos.</p>
+                </div>
+                
+                <div class="code-block">
+# Exemplo de imutabilidade
+coordenadas = (10, 20)
+print(coordenadas)  # (10, 20)
+
+# Tentativa de modificação (ERRO!)
+# coordenadas[0] = 15  # TypeError: 'tuple' object does not support item assignment
+# coordenadas.append(30)  # AttributeError: 'tuple' object has no attribute 'append'
+                </div>
+                
+                <h3>📊 Comparação: Tupla vs Lista</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Tupla</th>
+                            <th>Lista</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sintaxe</strong></td>
+                            <td><code class="code-inline">()</code></td>
+                            <td><code class="code-inline">[]</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mutabilidade</strong></td>
+                            <td>❌ Imutável</td>
+                            <td>✅ Mutável</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>🚀 Mais rápida</td>
+                            <td>🐌 Mais lenta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memória</strong></td>
+                            <td>💾 Menos memória</td>
+                            <td>💾 Mais memória</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hashable</strong></td>
+                            <td>✅ Sim</td>
+                            <td>❌ Não</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>🎯 Casos de Uso das Tuplas</h3>
+                <div class="comparison">
+                    <div class="comparison-item tupla">
+                        <h4><i class="fas fa-check-circle"></i> Use Tuplas Para:</h4>
+                        <ul style="text-align: left;">
+                            <li>Coordenadas (x, y)</li>
+                            <li>Configurações fixas</li>
+                            <li>Chaves de dicionários</li>
+                            <li>Retorno de múltiplos valores</li>
+                            <li>Dados que não devem mudar</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-item lista">
+                        <h4><i class="fas fa-times-circle"></i> NÃO Use Tuplas Para:</h4>
+                        <ul style="text-align: left;">
+                            <li>Listas de compras</li>
+                            <li>Dados que mudam frequentemente</li>
+                            <li>Quando precisa adicionar/remover</li>
+                            <li>Coleções dinâmicas</li>
+                            <li>Quando a ordem pode mudar</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Coordenadas Geográficas</h5>
+                    <div class="code-block">
+# Coordenadas de cidades (dados fixos)
+salvador = (-12.9714, -38.5014)
+sao_paulo = (-23.5505, -46.6333)
+rio_janeiro = (-22.9068, -43.1729)
+
+# Usando como chave em dicionário
+cidades = {
+    salvador: "Salvador, BA",
+    sao_paulo: "São Paulo, SP",
+    rio_janeiro: "Rio de Janeiro, RJ"
+}
+
+print(cidades[salvador])  # Salvador, BA
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

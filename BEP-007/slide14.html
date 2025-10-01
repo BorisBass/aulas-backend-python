@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 14</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide14">
+                <h2><i class="fas fa-tools"></i> Métodos de Dicionários</h2>
+                
+                <h3>🔧 Métodos Principais</h3>
+                <div class="code-block">
+# Dicionário para demonstração
+pessoa = {
+    "nome": "Ana Silva",
+    "idade": 28,
+    "profissao": "Designer",
+    "cidade": "Salvador"
+}
+
+# 1. keys() - retorna as chaves
+chaves = pessoa.keys()
+print("Chaves:", list(chaves))  # ['nome', 'idade', 'profissao', 'cidade']
+
+# 2. values() - retorna os valores
+valores = pessoa.values()
+print("Valores:", list(valores))  # ['Ana Silva', 28, 'Designer', 'Salvador']
+
+# 3. items() - retorna pares chave-valor
+itens = pessoa.items()
+print("Items:", list(itens))  # [('nome', 'Ana Silva'), ('idade', 28), ...]
+
+# 4. get() - acesso seguro
+nome = pessoa.get("nome", "Não informado")
+telefone = pessoa.get("telefone", "Não informado")
+print(f"Nome: {nome}, Telefone: {telefone}")
+                </div>
+                
+                <h3>📊 Verificações e Cópias</h3>
+                <div class="code-block">
+# Dicionário para teste
+dados = {"a": 1, "b": 2, "c": 3, "d": 4}
+
+# 1. in / not in - verificação de existência
+print(f"'a' existe: {'a' in dados}")      # True
+print(f"'e' existe: {'e' in dados}")      # False
+print(f"'e' não existe: {'e' not in dados}")  # True
+
+# 2. isinstance() - verificação de tipo
+print(f"É dicionário: {isinstance(dados, dict)}")  # True
+print(f"É lista: {isinstance(dados, list)}")       # False
+
+# 3. copy() - cópia do dicionário
+copia = dados.copy()
+print(f"Cópia: {copia}")
+print(f"São o mesmo objeto: {dados is copia}")  # False
+                </div>
+                
+                <h3>🔄 Métodos de Modificação</h3>
+                <div class="code-block">
+# Dicionário inicial
+contato = {"nome": "João", "idade": 25}
+
+# 1. update() - atualização em lote
+novos_dados = {"telefone": "99999-1111", "email": "joao@email.com"}
+contato.update(novos_dados)
+print("Após update():", contato)
+
+# 2. setdefault() - define valor se chave não existir
+contato.setdefault("cidade", "Salvador")
+contato.setdefault("nome", "João Silva")  # Não altera se já existir
+print("Após setdefault():", contato)
+
+# 3. pop() - remove e retorna valor
+idade = contato.pop("idade")
+print(f"Idade removida: {idade}")
+print("Após pop('idade'):", contato)
+
+# 4. popitem() - remove e retorna item arbitrário
+item = contato.popitem()
+print(f"Item removido: {item}")
+print("Após popitem():", contato)
+                </div>
+                
+                <h3>🔍 Busca Simples</h3>
+                <div class="code-block">
+# Dicionário com dados simples
+notas = {
+    "Ana": 8.5,
+    "Bruno": 6.8,
+    "Carla": 9.0,
+    "Diego": 7.2
+}
+
+# 1. Verificando se chave existe
+print(f"Ana tem nota: {'Ana' in notas}")  # True
+print(f"Elena tem nota: {'Elena' in notas}")  # False
+
+# 2. Acessando valor com get()
+nota_ana = notas.get("Ana", 0)
+nota_elena = notas.get("Elena", 0)
+print(f"Nota da Ana: {nota_ana}")
+print(f"Nota da Elena: {nota_elena}")
+
+# 3. Verificando se valor existe
+print(f"Nota 8.5 existe: {8.5 in notas.values()}")  # True
+print(f"Nota 10.0 existe: {10.0 in notas.values()}")  # False
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Contatos</h5>
+                    <div class="code-block">
+# Sistema de contatos simples
+contatos = {
+    "Ana": "99999-1111",
+    "Bruno": "99999-2222",
+    "Carla": "99999-3333"
+}
+
+# Adicionando novo contato
+contatos["Diego"] = "99999-4444"
+print("Contatos após adicionar Diego:", contatos)
+
+# Verificando se contato existe
+if "Ana" in contatos:
+    print(f"Telefone da Ana: {contatos['Ana']}")
+
+# Removendo contato
+telefone_removido = contatos.pop("Bruno")
+print(f"Bruno removido, telefone era: {telefone_removido}")
+print("Contatos restantes:", contatos)
+
+# Fazendo cópia para backup
+backup_contatos = contatos.copy()
+print("Backup criado:", backup_contatos)
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Resumo dos Métodos</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Função</th>
+                                <th>Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="code-inline">keys()</code></td>
+                                <td>Retorna as chaves</td>
+                                <td><code class="code-inline">dicio.keys()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="code-inline">values()</code></td>
+                                <td>Retorna os valores</td>
+                                <td><code class="code-inline">dicio.values()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="code-inline">items()</code></td>
+                                <td>Retorna pares chave-valor</td>
+                                <td><code class="code-inline">dicio.items()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="code-inline">get()</code></td>
+                                <td>Acesso seguro com valor padrão</td>
+                                <td><code class="code-inline">dicio.get("chave", "padrão")</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

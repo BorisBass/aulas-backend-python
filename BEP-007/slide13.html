@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 13</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide13">
+                <h2><i class="fas fa-trash"></i> Remoção de Elementos</h2>
+                
+                <h3>🗑️ Métodos de Remoção</h3>
+                <div class="code-block">
+# Dicionário inicial
+contato = {
+    "nome": "João Silva",
+    "telefone": "(71) 99999-1111",
+    "email": "joao@email.com",
+    "cidade": "Salvador",
+    "idade": 25
+}
+
+print("Contato original:", contato)
+
+# 1. Remoção com del
+del contato["idade"]
+print("Após remover 'idade':", contato)
+
+# 2. Remoção com pop() - retorna o valor
+telefone_removido = contato.pop("telefone")
+print(f"Telefone removido: {telefone_removido}")
+print("Após pop('telefone'):", contato)
+
+# 3. Remoção com pop() e valor padrão
+cidade_removida = contato.pop("cidade", "Não informado")
+print(f"Cidade removida: {cidade_removida}")
+
+# Tentativa de remover chave inexistente com valor padrão
+estado_removido = contato.pop("estado", "Não informado")
+print(f"Estado removido: {estado_removido}")
+                </div>
+                
+                <h3>🔄 Método popitem()</h3>
+                <p><strong>popitem():</strong> Remove e retorna o último item inserido no dicionário (LIFO - Last In, First Out)</p>
+                <div class="code-block">
+# Dicionário para teste
+dados = {
+    "a": 1,
+    "b": 2,
+    "c": 3,
+    "d": 4
+}
+
+print("Dicionário original:", dados)
+
+# Removendo o último item inserido (ordem de inserção em Python 3.7+)
+item_removido = dados.popitem()
+print(f"Item removido: {item_removido}")
+print("Após popitem():", dados)
+
+# Removendo mais itens
+item_removido2 = dados.popitem()
+print(f"Item removido: {item_removido2}")
+print("Após segundo popitem():", dados)
+
+# Demonstrando ordem LIFO (Last In, First Out)
+print("\n--- Demonstração da ordem LIFO ---")
+dados_teste = {"primeiro": 1, "segundo": 2, "terceiro": 3}
+print("Dicionário:", dados_teste)
+
+# Adicionando item por último
+dados_teste["quarto"] = 4
+print("Após adicionar 'quarto':", dados_teste)
+
+# popitem() remove o último adicionado
+item_removido = dados_teste.popitem()
+print(f"Item removido (último adicionado): {item_removido}")
+print("Dicionário após popitem():", dados_teste)
+
+# Removendo todos os itens restantes
+print("\n--- Removendo todos os itens ---")
+while dados_teste:
+    item = dados_teste.popitem()
+    print(f"Removido: {item}")
+print("Dicionário vazio:", dados_teste)
+                </div>
+                
+                <h3>🧹 Limpeza Completa</h3>
+                <div class="code-block">
+# Dicionário para limpeza
+inventario = {
+    "produto1": {"preco": 100, "estoque": 10},
+    "produto2": {"preco": 200, "estoque": 5},
+    "produto3": {"preco": 300, "estoque": 8}
+}
+
+print("Inventário original:", inventario)
+
+# Limpeza completa com clear()
+inventario.clear()
+print("Após clear():", inventario)
+print(f"Tamanho após clear(): {len(inventario)}")
+
+# Verificando se está vazio
+print(f"Está vazio: {not inventario}")
+print(f"Está vazio: {len(inventario) == 0}")
+                </div>
+                
+                <h3>🔍 Remoção Condicional</h3>
+                <div class="code-block">
+# Sistema de usuários
+usuarios = {
+    "admin": {"ativo": True, "nivel": "administrador"},
+    "user1": {"ativo": False, "nivel": "usuario"},
+    "user2": {"ativo": True, "nivel": "usuario"},
+    "user3": {"ativo": False, "nivel": "usuario"}
+}
+
+print("Usuários originais:", usuarios)
+
+# Removendo usuários inativos
+usuarios_ativos = {}
+for usuario, dados in usuarios.items():
+    if dados["ativo"]:
+        usuarios_ativos[usuario] = dados
+    else:
+        print(f"Removendo usuário inativo: {usuario}")
+
+usuarios = usuarios_ativos
+print("Usuários ativos:", usuarios)
+
+# Removendo usuários com nível específico
+usuarios_finais = {}
+for usuario, dados in usuarios.items():
+    if dados["nivel"] != "administrador":
+        usuarios_finais[usuario] = dados
+    else:
+        print(f"Mantendo administrador: {usuario}")
+
+usuarios = usuarios_finais
+print("Usuários finais:", usuarios)
+                </div>
+                
+                <h3>📊 Remoção em Lote</h3>
+                <div class="code-block">
+# Sistema de notas
+notas = {
+    "Ana": [8.5, 7.0, 9.2, 6.8],
+    "Bruno": [6.8, 8.0, 7.5, 5.0],
+    "Carla": [9.0, 8.5, 9.5, 8.0],
+    "Diego": [7.2, 6.5, 8.0, 7.5]
+}
+
+print("Notas originais:", notas)
+
+# Removendo alunos com média menor que 7.0
+alunos_aprovados = {}
+for aluno, lista_notas in notas.items():
+    media = sum(lista_notas) / len(lista_notas)
+    if media >= 7.0:
+        alunos_aprovados[aluno] = lista_notas
+    else:
+        print(f"Removendo aluno reprovado: {aluno} (média: {media:.2f})")
+
+notas = alunos_aprovados
+print("Alunos aprovados:", notas)
+
+# Removendo a menor nota de cada aluno
+for aluno in notas:
+    if len(notas[aluno]) > 1:
+        # Encontrando a menor nota
+        menor_nota = notas[aluno][0]
+        for nota in notas[aluno]:
+            if nota < menor_nota:
+                menor_nota = nota
+        
+        notas[aluno].remove(menor_nota)
+        print(f"Removida menor nota de {aluno}: {menor_nota}")
+
+print("Notas após remoção da menor:", notas)
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Cache</h5>
+                    <div class="code-block">
+# Sistema de cache com TTL (Time To Live)
+cache = {
+    "usuario_123": {"dados": "info", "timestamp": 1000},
+    "usuario_456": {"dados": "info", "timestamp": 2000},
+    "usuario_789": {"dados": "info", "timestamp": 3000}
+}
+
+print("Cache original:", cache)
+
+# Simulando limpeza de cache expirado
+tempo_atual = 2500
+ttl = 1500  # Time To Live
+itens_removidos = []
+
+# Verificando cada item do cache
+for chave, valor in list(cache.items()):
+    if tempo_atual - valor["timestamp"] > ttl:
+        del cache[chave]
+        itens_removidos.append(chave)
+        print(f"Item expirado removido: {chave}")
+
+print(f"Itens removidos: {itens_removidos}")
+print(f"Cache após limpeza: {cache}")
+
+# Adicionando novo item ao cache
+cache["usuario_999"] = {"dados": "nova_info", "timestamp": 2500}
+print("Cache com novo item:", cache)
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Cuidados na Remoção</h4>
+                    <ul>
+                        <li><strong>del:</strong> Gera erro se chave não existir</li>
+                        <li><strong>pop():</strong> Gera erro se chave não existir (sem valor padrão)</li>
+                        <li><strong>popitem():</strong> Gera erro em dicionário vazio</li>
+                        <li><strong>clear():</strong> Remove todos os itens de uma vez</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

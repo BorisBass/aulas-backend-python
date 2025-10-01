@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 19</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide19">
+                <h2><i class="fas fa-graduation-cap"></i> Resumo e Próximos Passos</h2>
+                
+                <h3>📚 O que Aprendemos</h3>
+                <div class="comparison">
+                    <div class="comparison-item tupla">
+                        <h4><i class="fas fa-list-ol"></i> Tuplas</h4>
+                        <ul style="text-align: left;">
+                            <li>✅ Estrutura imutável e ordenada</li>
+                            <li>✅ Sintaxe com parênteses ()</li>
+                            <li>✅ Métodos count() e index()</li>
+                            <li>✅ Desempacotamento de valores</li>
+                            <li>✅ Performance superior às listas</li>
+                            <li>✅ Uso como chaves de dicionários</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-item dicionario">
+                        <h4><i class="fas fa-book"></i> Dicionários</h4>
+                        <ul style="text-align: left;">
+                            <li>✅ Estrutura chave-valor mutável</li>
+                            <li>✅ Sintaxe com chaves {}</li>
+                            <li>✅ Métodos get(), keys(), values(), items()</li>
+                            <li>✅ Operações CRUD completas</li>
+                            <li>✅ Acesso eficiente por chave</li>
+                            <li>✅ Estruturas aninhadas</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3>🎯 Quando Usar Cada Estrutura</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Situação</th>
+                            <th>Use Tupla</th>
+                            <th>Use Dicionário</th>
+                            <th>Use Lista</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Dados fixos</strong></td>
+                            <td>✅ Coordenadas, configurações</td>
+                            <td>❌</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mapeamento</strong></td>
+                            <td>❌</td>
+                            <td>✅ Agenda, inventário</td>
+                            <td>❌</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sequência dinâmica</strong></td>
+                            <td>❌</td>
+                            <td>❌</td>
+                            <td>✅ Lista de compras</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance crítica</strong></td>
+                            <td>✅ Dados imutáveis</td>
+                            <td>✅ Busca por chave</td>
+                            <td>❌</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>💡 Melhores Práticas</h3>
+                <div class="highlight">
+                    <h4><i class="fas fa-star"></i> Tuplas</h4>
+                    <ul>
+                        <li><strong>Use para dados que não mudam:</strong> coordenadas, configurações, constantes</li>
+                        <li><strong>Desempacotamento:</strong> aproveite para extrair valores facilmente</li>
+                        <li><strong>Retorno de funções:</strong> retorne múltiplos valores como tupla</li>
+                        <li><strong>Chaves de dicionário:</strong> use quando precisar de chaves compostas</li>
+                    </ul>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-star"></i> Dicionários</h4>
+                    <ul>
+                        <li><strong>Use get():</strong> sempre prefira para acesso seguro</li>
+                        <li><strong>Verifique existência:</strong> use <code class="code-inline">in</code> antes de acessar</li>
+                        <li><strong>Iteração eficiente:</strong> use items() para pares chave-valor</li>
+                        <li><strong>Estruturas aninhadas:</strong> organize dados hierárquicos</li>
+                    </ul>
+                </div>
+                
+                <h3>🔮 Próximos Tópicos</h3>
+                <div class="example">
+                    <h5>📖 Temas para Estudar</h5>
+                    <ul>
+                        <li><strong>Conjuntos (Sets):</strong> Coleções de elementos únicos</li>
+                        <li><strong>List/Dict Comprehensions:</strong> Criação eficiente de estruturas</li>
+                        <li><strong>Funções com *args e **kwargs:</strong> Parâmetros dinâmicos</li>
+                        <li><strong>JSON e APIs:</strong> Manipulação de dados web</li>
+                        <li><strong>Pandas DataFrames:</strong> Análise de dados avançada</li>
+                        <li><strong>Algoritmos e estruturas:</strong> Ordenação, busca, grafos</li>
+                    </ul>
+                </div>
+                
+                <h3>🚀 Aplicações Práticas</h3>
+                <div class="code-block">
+# Exemplo de aplicação real: Sistema de análise de logs
+logs_sistema = [
+    {"timestamp": "2025-01-15 10:30:00", "nivel": "INFO", "usuario": "admin"},
+    {"timestamp": "2025-01-15 10:31:00", "nivel": "ERROR", "usuario": "user1"},
+    {"timestamp": "2025-01-15 10:32:00", "nivel": "WARNING", "usuario": "user2"},
+    {"timestamp": "2025-01-15 10:33:00", "nivel": "INFO", "usuario": "admin"}
+]
+
+# Análise com dicionários e tuplas
+estatisticas = {}
+for log in logs_sistema:
+    nivel = log["nivel"]
+    usuario = log["usuario"]
+    
+    # Usando tupla como chave composta
+    chave = (nivel, usuario)
+    
+    if chave in estatisticas:
+        estatisticas[chave] += 1
+    else:
+        estatisticas[chave] = 1
+
+print("Estatísticas de logs (nível, usuário): quantidade")
+for (nivel, usuario), quantidade in estatisticas.items():
+    print(f"  ({nivel}, {usuario}): {quantidade}")
+                </div>
+                
+                <h3>🎓 Recursos para Continuar</h3>
+                <div class="warning">
+                    <h4><i class="fas fa-link"></i> Links Úteis</h4>
+                    <ul>
+                        <li><strong>Documentação Python:</strong> docs.python.org</li>
+                        <li><strong>Python Tutor:</strong> pythontutor.com (visualizar execução)</li>
+                        <li><strong>Real Python:</strong> realpython.com (tutoriais avançados)</li>
+                        <li><strong>LeetCode:</strong> leetcode.com (prática de algoritmos)</li>
+                        <li><strong>GitHub:</strong> github.com (projetos open source)</li>
+                    </ul>
+                </div>
+                
+                <h3>🏆 Conclusão</h3>
+                <div class="highlight">
+                    <h4><i class="fas fa-trophy"></i> Parabéns!</h4>
+                    <p>Você dominou duas estruturas de dados fundamentais em Python! 🎉</p>
+                    <p><strong>Tuplas</strong> e <strong>dicionários</strong> são ferramentas poderosas que você usará constantemente no desenvolvimento de aplicações. Continue praticando e explorando suas possibilidades!</p>
+                    
+                    <p style="margin-top: 20px;">
+                        <strong>Próximo passo:</strong> Aplicar estes conceitos em projetos reais e explorar estruturas de dados mais avançadas.
+                    </p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <h4>💪 Continue Praticando! 💪</h4>
+                    <p style="font-size: 1.2em; color: #4B8BBE;">
+                        <strong>"A prática leva à perfeição!"</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

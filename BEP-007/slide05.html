@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 05</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide5">
+                <h2><i class="fas fa-balance-scale"></i> Diferenças: Tuplas vs Listas</h2>
+                
+                <div class="highlight">
+                    <h3>⚖️ Comparação Detalhada</h3>
+                    <p>Entender as diferenças entre tuplas e listas é fundamental para escolher a estrutura de dados mais adequada para cada situação.</p>
+                </div>
+                
+                <h3>🔍 Análise Comparativa</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Tupla</th>
+                            <th>Lista</th>
+                            <th>Impacto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mutabilidade</strong></td>
+                            <td>❌ Imutável</td>
+                            <td>✅ Mutável</td>
+                            <td>Tuplas são mais seguras</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>🚀 Mais rápida</td>
+                            <td>🐌 Mais lenta</td>
+                            <td>Tuplas são mais eficientes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memória</strong></td>
+                            <td>💾 Menos memória</td>
+                            <td>💾 Mais memória</td>
+                            <td>Tuplas economizam espaço</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Métodos</strong></td>
+                            <td>count(), index()</td>
+                            <td>append(), remove(), etc.</td>
+                            <td>Listas têm mais funcionalidades</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hashable</strong></td>
+                            <td>✅ Sim</td>
+                            <td>❌ Não</td>
+                            <td>Tuplas podem ser chaves</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>📊 Teste de Performance</h3>
+                <div class="code-block">
+import time
+
+# Teste de criação
+inicio = time.time()
+tupla = tuple(range(1000000))
+tempo_tupla = time.time() - inicio
+
+inicio = time.time()
+lista = list(range(1000000))
+tempo_lista = time.time() - inicio
+
+print(f"Tupla: {tempo_tupla:.4f}s")
+print(f"Lista: {tempo_lista:.4f}s")
+print(f"Tupla é {tempo_lista/tempo_tupla:.1f}x mais rápida")
+                </div>
+                
+                <h3>🎯 Quando Usar Cada Uma?</h3>
+                <div class="comparison">
+                    <div class="comparison-item tupla">
+                        <h4><i class="fas fa-list-ol"></i> Use Tuplas Quando:</h4>
+                        <ul style="text-align: left;">
+                            <li>Dados não devem ser alterados</li>
+                            <li>Performance é crítica</li>
+                            <li>Precisa usar como chave</li>
+                            <li>Retornar múltiplos valores</li>
+                            <li>Configurações fixas</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-item lista">
+                        <h4><i class="fas fa-list"></i> Use Listas Quando:</h4>
+                        <ul style="text-align: left;">
+                            <li>Dados podem mudar</li>
+                            <li>Precisa adicionar/remover</li>
+                            <li>Coleção dinâmica</li>
+                            <li>Múltiplas operações</li>
+                            <li>Ordem pode mudar</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático: Sistema de Coordenadas</h5>
+                    <div class="code-block">
+# Tupla: Coordenadas fixas de um ponto
+ponto_a = (10, 20)
+ponto_b = (30, 40)
+
+# Lista: Pontos que podem ser adicionados
+caminho = [ponto_a, ponto_b]
+caminho.append((50, 60))  # Adicionando novo ponto
+caminho.remove(ponto_a)   # Removendo ponto
+
+# Tupla: Configuração fixa
+config = ("localhost", 8080, True)
+
+# Lista: Logs que crescem
+logs = ["Erro 1", "Erro 2"]
+logs.append("Erro 3")  # Adicionando novo log
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica de Ouro</h4>
+                    <p><strong>Regra prática:</strong> Se você não precisa modificar os dados após a criação, use tupla. Se precisa de flexibilidade para modificar, use lista.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

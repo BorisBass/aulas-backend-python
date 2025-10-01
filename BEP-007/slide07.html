@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 07</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide7">
+                <h2><i class="fas fa-tools"></i> Métodos de Tuplas</h2>
+                
+                <div class="highlight">
+                    <h3>🔧 Métodos Disponíveis</h3>
+                    <p>As tuplas têm apenas <strong>2 métodos</strong> devido à sua natureza imutável: <code class="code-inline">count()</code> e <code class="code-inline">index()</code>.</p>
+                </div>
+                
+                <h3>🔢 Método count()</h3>
+                <div class="code-block">
+# Conta quantas vezes um elemento aparece
+cores = ("vermelho", "azul", "verde", "azul", "amarelo", "azul")
+
+# Contando ocorrências
+qtd_azul = cores.count("azul")
+qtd_verde = cores.count("verde")
+qtd_roxo = cores.count("roxo")
+
+print(f"Quantidade de 'azul': {qtd_azul}")    # 3
+print(f"Quantidade de 'verde': {qtd_verde}")  # 1
+print(f"Quantidade de 'roxo': {qtd_roxo}")    # 0
+                </div>
+                
+                <h3>📍 Método index()</h3>
+                <div class="code-block">
+# Encontra a posição da primeira ocorrência
+frutas = ("maçã", "banana", "laranja", "banana", "uva")
+
+# Encontrando posições
+pos_banana = frutas.index("banana")    # 1
+pos_laranja = frutas.index("laranja")  # 2
+pos_uva = frutas.index("uva")          # 4
+
+print(f"Posição de 'banana': {pos_banana}")
+print(f"Posição de 'laranja': {pos_laranja}")
+print(f"Posição de 'uva': {pos_uva}")
+
+# Erro se elemento não existir
+# pos_morango = frutas.index("morango")  # ValueError
+                </div>
+                
+                <h3>🔗 Operações com Tuplas</h3>
+                <div class="code-block">
+# Concatenação (+)
+tupla1 = (1, 2, 3)
+tupla2 = (4, 5, 6)
+concatenada = tupla1 + tupla2
+print(f"Concatenação: {concatenada}")  # (1, 2, 3, 4, 5, 6)
+
+# Repetição (*)
+repetida = tupla1 * 3
+print(f"Repetição: {repetida}")  # (1, 2, 3, 1, 2, 3, 1, 2, 3)
+
+# Verificação de pertinência (in)
+numeros = (1, 2, 3, 4, 5)
+print(f"3 está na tupla: {3 in numeros}")    # True
+print(f"6 está na tupla: {6 in numeros}")    # False
+                </div>
+                
+                <h3>📊 Funções Built-in</h3>
+                <div class="code-block">
+# Funções que funcionam com tuplas
+notas = (8.5, 7.0, 9.2, 6.8, 8.0)
+
+# Informações básicas
+print(f"Tamanho: {len(notas)}")           # 5
+print(f"Maior nota: {max(notas)}")        # 9.2
+print(f"Menor nota: {min(notas)}")        # 6.8
+print(f"Soma: {sum(notas)}")              # 39.5
+print(f"Média: {sum(notas)/len(notas):.2f}")  # 7.90
+
+# Verificação de tipos
+print(f"É tupla: {isinstance(notas, tuple)}")  # True
+print(f"É lista: {isinstance(notas, list)}")   # False
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Pontuação</h5>
+                    <div class="code-block">
+# Pontuações de um jogo
+pontuacoes = (100, 150, 200, 150, 300, 150, 250)
+
+# Análise das pontuações
+total_pontos = sum(pontuacoes)
+pontuacao_maxima = max(pontuacoes)
+pontuacao_minima = min(pontuacoes)
+media_pontos = total_pontos / len(pontuacoes)
+
+# Contando pontuações específicas
+qtd_150 = pontuacoes.count(150)
+pos_300 = pontuacoes.index(300)
+
+print(f"Total de pontos: {total_pontos}")
+print(f"Pontuação máxima: {pontuacao_maxima}")
+print(f"Pontuação mínima: {pontuacao_minima}")
+print(f"Média: {media_pontos:.2f}")
+print(f"Quantas vezes 150: {qtd_150}")
+print(f"Posição do 300: {pos_300}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Resumo dos Métodos</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Método</th>
+                                <th>Função</th>
+                                <th>Exemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="code-inline">count(x)</code></td>
+                                <td>Conta ocorrências de x</td>
+                                <td><code class="code-inline">tupla.count(5)</code></td>
+                            </tr>
+                            <tr>
+                                <td><code class="code-inline">index(x)</code></td>
+                                <td>Posição da primeira ocorrência de x</td>
+                                <td><code class="code-inline">tupla.index(5)</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

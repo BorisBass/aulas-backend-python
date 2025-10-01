@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 18</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide18">
+                <h2><i class="fas fa-puzzle-piece"></i> Exercícios Combinados</h2>
+                
+                <h3>🔄 Combinando Tuplas e Dicionários</h3>
+                <div class="code-block">
+# Sistema de coordenadas de cidades com informações adicionais
+cidades = {
+    "Salvador": {
+        "coordenadas": (-12.9714, -38.5014),
+        "populacao": 2886698,
+        "estado": "BA"
+    },
+    "São Paulo": {
+        "coordenadas": (-23.5505, -46.6333),
+        "populacao": 12396372,
+        "estado": "SP"
+    },
+    "Rio de Janeiro": {
+        "coordenadas": (-22.9068, -43.1729),
+        "populacao": 6775561,
+        "estado": "RJ"
+    }
+}
+
+# Exibindo informações das cidades
+for cidade, dados in cidades.items():
+    lat, lon = dados["coordenadas"]  # Desempacotamento da tupla
+    print(f"{cidade} ({dados['estado']}):")
+    print(f"  Coordenadas: {lat}, {lon}")
+    print(f"  População: {dados['populacao']:,}")
+
+# Calculando distância entre Salvador e São Paulo
+salvador = cidades["Salvador"]["coordenadas"]
+sp = cidades["São Paulo"]["coordenadas"]
+distancia = ((salvador[0] - sp[0])**2 + (salvador[1] - sp[1])**2)**0.5
+print(f"Distância Salvador-SP: {distancia:.2f} graus")
+                </div>
+                
+                <h3>🏆 Sistema de Competição</h3>
+                <div class="code-block">
+# Sistema de competição esportiva
+competicao = {
+    "equipe_a": {
+        "jogadores": ("João", "Maria", "Pedro", "Ana"),
+        "pontuacoes": (100, 150, 200, 180),
+        "categoria": "Profissional"
+    },
+    "equipe_b": {
+        "jogadores": ("Bruno", "Carla", "Diego", "Elena"),
+        "pontuacoes": (120, 140, 190, 160),
+        "categoria": "Profissional"
+    },
+    "equipe_c": {
+        "jogadores": ("Felipe", "Gabi", "Hugo", "Isa"),
+        "pontuacoes": (90, 110, 130, 140),
+        "categoria": "Amador"
+    }
+}
+
+# Analisando resultados
+for equipe, dados in competicao.items():
+    jogadores = dados["jogadores"]
+    pontuacoes = dados["pontuacoes"]
+    categoria = dados["categoria"]
+    
+    total_pontos = sum(pontuacoes)
+    media_pontos = total_pontos / len(pontuacoes)
+    
+    print(f"\n{equipe.upper()} ({categoria}):")
+    print(f"  Jogadores: {', '.join(jogadores)}")
+    print(f"  Pontuações: {pontuacoes}")
+    print(f"  Total: {total_pontos}")
+    print(f"  Média: {media_pontos:.2f}")
+    
+    # Melhor jogador da equipe
+    melhor_pontuacao = max(pontuacoes)
+    indice_melhor = pontuacoes.index(melhor_pontuacao)
+    melhor_jogador = jogadores[indice_melhor]
+    print(f"  Melhor jogador: {melhor_jogador} ({melhor_pontuacao} pontos)")
+
+# Equipe vencedora
+equipe_vencedora = max(competicao, key=lambda x: sum(competicao[x]["pontuacoes"]))
+print(f"\nEquipe vencedora: {equipe_vencedora.upper()}")
+                </div>
+                
+                <h3>📊 Sistema de Análise de Dados</h3>
+                <div class="code-block">
+# Sistema de análise de vendas por região
+vendas_regionais = {
+    "norte": {
+        "cidades": ("Manaus", "Belém", "Boa Vista"),
+        "vendas_mensais": (50000, 45000, 55000, 48000),
+        "meta_anual": 200000
+    },
+    "nordeste": {
+        "cidades": ("Salvador", "Recife", "Fortaleza"),
+        "vendas_mensais": (80000, 75000, 85000, 78000),
+        "meta_anual": 320000
+    },
+    "sudeste": {
+        "cidades": ("São Paulo", "Rio de Janeiro", "Belo Horizonte"),
+        "vendas_mensais": (120000, 115000, 125000, 118000),
+        "meta_anual": 480000
+    }
+}
+
+# Análise por região
+total_geral = 0
+for regiao, dados in vendas_regionais.items():
+    cidades = dados["cidades"]
+    vendas = dados["vendas_mensais"]
+    meta = dados["meta_anual"]
+    
+    total_vendas = sum(vendas)
+    total_geral += total_vendas
+    media_mensal = total_vendas / len(vendas)
+    percentual_meta = (total_vendas / meta) * 100
+    
+    print(f"\n{regiao.upper()}:")
+    print(f"  Cidades: {', '.join(cidades)}")
+    print(f"  Vendas mensais: {vendas}")
+    print(f"  Total vendido: R$ {total_vendas:,}")
+    print(f"  Média mensal: R$ {media_mensal:,.2f}")
+    print(f"  Meta anual: R$ {meta:,}")
+    print(f"  Atingimento: {percentual_meta:.1f}%")
+
+print(f"\nTotal geral: R$ {total_geral:,}")
+
+# Melhor região
+melhor_regiao = max(vendas_regionais, key=lambda x: sum(vendas_regionais[x]["vendas_mensais"]))
+print(f"Melhor região: {melhor_regiao.upper()}")
+                </div>
+                
+                <h3>🎓 Sistema Acadêmico</h3>
+                <div class="code-block">
+# Sistema acadêmico com múltiplas disciplinas
+alunos = {
+    "Ana Silva": {
+        "matricula": "2024001",
+        "curso": "Ciência da Computação",
+        "disciplinas": {
+            "Programação": (8.5, 7.0, 9.2),
+            "Matemática": (7.5, 8.0, 8.5),
+            "Física": (6.8, 7.2, 8.0)
+        }
+    },
+    "Bruno Costa": {
+        "matricula": "2024002",
+        "curso": "Engenharia",
+        "disciplinas": {
+            "Programação": (7.0, 8.0, 7.5),
+            "Matemática": (8.5, 9.0, 8.8),
+            "Física": (9.0, 8.5, 9.2)
+        }
+    }
+}
+
+# Análise acadêmica
+for aluno, dados in alunos.items():
+    print(f"\n{aluno} ({dados['matricula']}) - {dados['curso']}")
+    
+    todas_notas = []
+    for disciplina, notas in dados["disciplinas"].items():
+        media_disciplina = sum(notas) / len(notas)
+        todas_notas.extend(notas)
+        status = "Aprovado" if media_disciplina >= 7.0 else "Reprovado"
+        
+        print(f"  {disciplina}:")
+        print(f"    Notas: {notas}")
+        print(f"    Média: {media_disciplina:.2f} - {status}")
+    
+    # Média geral do aluno
+    media_geral = sum(todas_notas) / len(todas_notas)
+    print(f"  Média Geral: {media_geral:.2f}")
+
+# Estatísticas gerais
+todas_medias = []
+for aluno, dados in alunos.items():
+    todas_notas = []
+    for notas in dados["disciplinas"].values():
+        todas_notas.extend(notas)
+    media_aluno = sum(todas_notas) / len(todas_notas)
+    todas_medias.append(media_aluno)
+
+media_turma = sum(todas_medias) / len(todas_medias)
+print(f"\nMédia da turma: {media_turma:.2f}")
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de E-commerce</h5>
+                    <div class="code-block">
+# Sistema de e-commerce com produtos e avaliações
+produtos = {
+    "notebook_gamer": {
+        "categoria": "Eletrônicos",
+        "preco": 3500.00,
+        "especificacoes": ("Intel i7", "16GB RAM", "RTX 3060"),
+        "avaliacoes": (4.5, 4.8, 4.2, 4.7, 4.6),
+        "vendas_mensais": (25, 30, 28, 35)
+    },
+    "smartphone_premium": {
+        "categoria": "Eletrônicos",
+        "preco": 2200.00,
+        "especificacoes": ("128GB", "Câmera 64MP", "5G"),
+        "avaliacoes": (4.3, 4.6, 4.4, 4.5, 4.2),
+        "vendas_mensais": (50, 45, 55, 48)
+    }
+}
+
+# Relatório de produtos
+for produto, dados in produtos.items():
+    print(f"\n{produto.replace('_', ' ').title()}:")
+    print(f"  Preço: R$ {dados['preco']:.2f}")
+    print(f"  Especificações: {', '.join(dados['especificacoes'])}")
+    
+    # Análise de avaliações
+    avaliacoes = dados['avaliacoes']
+    media_avaliacoes = sum(avaliacoes) / len(avaliacoes)
+    print(f"  Avaliação média: {media_avaliacoes:.2f} ({len(avaliacoes)} avaliações)")
+    
+    # Análise de vendas
+    vendas = dados['vendas_mensais']
+    total_vendas = sum(vendas)
+    receita = total_vendas * dados['preco']
+    print(f"  Vendas: {total_vendas} unidades")
+    print(f"  Receita: R$ {receita:,.2f}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Vantagens da Combinação</h4>
+                    <ul>
+                        <li><strong>Flexibilidade:</strong> Tuplas para dados fixos, dicionários para flexíveis</li>
+                        <li><strong>Organização:</strong> Estruturas hierárquicas bem definidas</li>
+                        <li><strong>Performance:</strong> Acesso eficiente a dados estruturados</li>
+                        <li><strong>Manutenibilidade:</strong> Código mais limpo e legível</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

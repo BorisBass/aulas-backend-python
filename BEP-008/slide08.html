@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 08</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide8">
+                <h2><i class="fas fa-globe"></i> Escopo de Variáveis</h2>
+                
+                <h3>🔍 Conceito de Escopo</h3>
+                <p>O <strong>escopo</strong> define onde uma variável pode ser acessada no código.</p>
+                <div class="code-block">
+# Variável global
+nome_global = "João"
+
+def minha_funcao():
+    # Variável local
+    nome_local = "Maria"
+    print(f"Local: {nome_local}")
+    print(f"Global: {nome_global}")
+
+# Chamando a função
+minha_funcao()
+print(f"Fora da função - Global: {nome_global}")
+# print(f"Fora da função - Local: {nome_local}")  # Erro! Variável local não existe aqui
+                </div>
+                
+                <h3>🌍 Variáveis Globais</h3>
+                <p>Variáveis definidas fora de qualquer função. Podem ser acessadas de qualquer lugar.</p>
+                <div class="code-block">
+# Variáveis globais
+contador = 0
+nome = "Python"
+
+def incrementar():
+    global contador  # Indica que vamos modificar a variável global
+    contador += 1
+    print(f"Contador: {contador}")
+
+def mostrar_nome():
+    print(f"Nome: {nome}")  # Pode acessar variável global
+
+# Testando as funções
+incrementar()
+incrementar()
+mostrar_nome()
+print(f"Contador final: {contador}")
+                </div>
+                
+                <h3>🏠 Variáveis Locais</h3>
+                <p>Variáveis definidas dentro de uma função. Só existem dentro da função.</p>
+                <div class="code-block">
+def calcular_media(nota1, nota2, nota3):
+    # Variáveis locais
+    soma = nota1 + nota2 + nota3
+    media = soma / 3
+    print(f"Soma: {soma}")
+    print(f"Média: {media:.2f}")
+    return media
+
+# Chamando a função
+resultado = calcular_media(8, 9, 7)
+print(f"Resultado: {resultado}")
+
+# As variáveis 'soma' e 'media' não existem aqui
+# print(soma)  # Erro! Variável local não existe
+                </div>
+                
+                <h3>🔄 Regra LEGB</h3>
+                <p>Python procura variáveis nesta ordem:</p>
+                <ul>
+                    <li><strong>L</strong>ocal: Dentro da função</li>
+                    <li><strong>E</strong>nclosing: Função que contém a função</li>
+                    <li><strong>G</strong>lobal: No módulo principal</li>
+                    <li><strong>B</strong>uilt-in: Funções e variáveis do Python</li>
+                </ul>
+                
+                <div class="code-block">
+# Variável global
+nome = "Global"
+
+def funcao_externa():
+    nome = "Externa"
+    
+    def funcao_interna():
+        nome = "Interna"
+        print(f"Local: {nome}")
+    
+    funcao_interna()
+    print(f"Externa: {nome}")
+
+funcao_externa()
+print(f"Global: {nome}")
+                </div>
+                
+                <h3>⚠️ Modificando Variáveis Globais</h3>
+                <div class="code-block">
+# Variável global
+contador = 0
+
+def incrementar_global():
+    global contador  # Indica que vamos modificar a variável global
+    contador += 1
+    print(f"Contador: {contador}")
+
+def incrementar_local():
+    contador = 0  # Cria uma nova variável local
+    contador += 1
+    print(f"Contador local: {contador}")
+
+# Testando as funções
+print(f"Contador inicial: {contador}")
+incrementar_global()
+print(f"Contador após global: {contador}")
+incrementar_local()
+print(f"Contador após local: {contador}")
+                </div>
+                
+                <h3>🎯 Boas Práticas</h3>
+                <div class="code-block">
+# ✅ Boa prática: Usar parâmetros em vez de variáveis globais
+def calcular_media(notas):
+    return sum(notas) / len(notas)
+
+# ✅ Boa prática: Função pura (não modifica variáveis externas)
+def somar(a, b):
+    return a + b
+
+# ❌ Evitar: Modificar variáveis globais
+contador = 0
+
+def incrementar_mal():
+    global contador
+    contador += 1
+    return contador
+
+# ✅ Melhor: Passar valores como parâmetros
+def incrementar_bem(valor):
+    return valor + 1
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Cuidados Importantes</h4>
+                    <ul>
+                        <li><strong>Evite globais:</strong> Use parâmetros quando possível</li>
+                        <li><strong>Nomes claros:</strong> Use nomes descritivos para variáveis</li>
+                        <li><strong>Funções puras:</strong> Prefira funções que não modificam variáveis externas</li>
+                        <li><strong>Documentação:</strong> Documente quando usar variáveis globais</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Sistema de contagem de vendas
+vendas_total = 0  # Variável global
+
+def registrar_venda(valor):
+    global vendas_total
+    vendas_total += valor
+    print(f"Venda registrada: R$ {valor}")
+    print(f"Total de vendas: R$ {vendas_total}")
+
+def mostrar_total():
+    print(f"Total geral: R$ {vendas_total}")
+
+# Registrando vendas
+registrar_venda(100)
+registrar_venda(50)
+registrar_venda(75)
+mostrar_total()
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

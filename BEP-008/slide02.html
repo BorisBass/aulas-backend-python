@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 02</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide2">
+                <h2><i class="fas fa-question-circle"></i> O que são Funções?</h2>
+                
+                <h3>🔍 Definição</h3>
+                <p>Uma <strong>função</strong> é um bloco de código que executa uma tarefa específica e pode ser reutilizado várias vezes.</p>
+                
+                <div class="code-block">
+# Exemplo de função simples
+def cumprimentar():
+    print("Olá, mundo!")
+
+# Chamando a função
+cumprimentar()
+                </div>
+                
+                <h3>🏗️ Anatomia de uma Função</h3>
+                <div class="code-block">
+def nome_da_funcao():  # Definição da função
+    # Código da função
+    print("Esta é uma função")
+    return "resultado"  # Retorno (opcional)
+
+# Chamada da função
+resultado = nome_da_funcao()
+                </div>
+                
+                <h3>📋 Componentes</h3>
+                <ul>
+                    <li><strong>def:</strong> Palavra-chave para definir função</li>
+                    <li><strong>nome_da_funcao:</strong> Nome único da função</li>
+                    <li><strong>():</strong> Parênteses para parâmetros (opcionais)</li>
+                    <li><strong>:</strong> Dois pontos obrigatórios</li>
+                    <li><strong>Indentação:</strong> Código da função deve estar indentado</li>
+                </ul>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Regras Importantes</h4>
+                    <ul>
+                        <li><strong>Nomes:</strong> Use letras, números e underscore</li>
+                        <li><strong>Indentação:</strong> Use 4 espaços ou 1 tab</li>
+                        <li><strong>Dois pontos:</strong> Sempre após os parênteses</li>
+                        <li><strong>Chamada:</strong> Use o nome da função + ()</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Função para mostrar data
+def mostrar_data():
+    print("Hoje é 15 de março de 2024")
+    print("Dia da semana: Sexta-feira")
+
+# Chamando a função
+mostrar_data()
+mostrar_data()  # Pode chamar várias vezes
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

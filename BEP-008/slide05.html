@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 05</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide5">
+                <h2><i class="fas fa-arrow-right"></i> Parâmetros e Argumentos</h2>
+                
+                <h3>🔍 Diferença Conceitual</h3>
+                <ul>
+                    <li><strong>Parâmetro:</strong> Variável na definição da função</li>
+                    <li><strong>Argumento:</strong> Valor passado na chamada da função</li>
+                </ul>
+                
+                <div class="code-block">
+# Parâmetro (na definição)
+def cumprimentar(nome):  # 'nome' é o parâmetro
+    print(f"Olá, {nome}!")
+
+# Argumento (na chamada)
+cumprimentar("João")  # "João" é o argumento
+cumprimentar("Maria")  # "Maria" é o argumento
+                </div>
+                
+                <h3>📝 Sintaxe com Parâmetros</h3>
+                <div class="code-block">
+def nome_da_funcao(parametro1, parametro2):
+    # Código da função
+    print(f"Parâmetro 1: {parametro1}")
+    print(f"Parâmetro 2: {parametro2}")
+
+# Chamada da função
+nome_da_funcao("valor1", "valor2")
+                </div>
+                
+                <h3>🎯 Exemplos Práticos</h3>
+                <div class="code-block">
+# Função com um parâmetro
+def cumprimentar_pessoa(nome):
+    print(f"Olá, {nome}!")
+
+# Função com múltiplos parâmetros
+def somar_numeros(a, b):
+    resultado = a + b
+    print(f"{a} + {b} = {resultado}")
+
+# Função com parâmetros de diferentes tipos
+def mostrar_pessoa(nome, idade, cidade):
+    print(f"Nome: {nome}")
+    print(f"Idade: {idade}")
+    print(f"Cidade: {cidade}")
+
+# Chamando as funções
+cumprimentar_pessoa("Ana")
+somar_numeros(5, 3)
+mostrar_pessoa("João", 25, "Salvador")
+                </div>
+                
+                <h3>⚠️ Erros Comuns</h3>
+                <div class="code-block">
+# ❌ Erro: Número incorreto de argumentos
+def somar(a, b):
+    return a + b
+
+somar(5)  # Erro! Precisa de 2 argumentos
+somar(5, 3, 2)  # Erro! Muitos argumentos
+
+# ✅ Correto
+somar(5, 3)  # 2 argumentos para 2 parâmetros
+                </div>
+                
+                <h3>🔄 Ordem dos Parâmetros</h3>
+                <div class="code-block">
+# Função com parâmetros em ordem específica
+def calcular_media(nota1, nota2, nota3):
+    return (nota1 + nota2 + nota3) / 3
+
+# Chamada correta (ordem importa)
+media = calcular_media(8.5, 7.0, 9.2)
+print(f"Média: {media:.2f}")  # 8.23
+
+# Chamada com ordem diferente (mesmo resultado!)
+media = calcular_media(9.2, 8.5, 7.0)  # 8.23 (mesmo resultado)
+print(f"Média: {media:.2f}")  # 8.23
+
+# Exemplo onde ordem REALMENTE importa
+def criar_pessoa(nome, idade, cidade):
+    return f"{nome}, {idade} anos, de {cidade}"
+
+pessoa1 = criar_pessoa("João", 25, "Salvador")
+pessoa2 = criar_pessoa("Salvador", 25, "João")  # Resultado diferente!
+print(pessoa1)  # João, 25 anos, de Salvador
+print(pessoa2)  # Salvador, 25 anos, de João
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Número:</strong> Argumentos devem corresponder aos parâmetros</li>
+                        <li><strong>Ordem:</strong> Argumentos são passados na ordem dos parâmetros</li>
+                        <li><strong>Significado:</strong> A ordem importa quando os parâmetros têm significados diferentes</li>
+                        <li><strong>Tipos:</strong> Python não verifica tipos automaticamente</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Função para calcular área de retângulo
+def calcular_area_retangulo(largura, altura):
+    area = largura * altura
+    print(f"Área do retângulo: {area}")
+
+# Diferentes retângulos
+calcular_area_retangulo(5, 3)    # 15
+calcular_area_retangulo(10, 7)   # 70
+calcular_area_retangulo(4, 4)     # 16 (quadrado)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 10</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-book"></i> Funções com Dicionários</h2>
+                
+                <h3>📊 Processando Dicionários</h3>
+                <p>Funções podem receber dicionários como parâmetros e retornar dados processados.</p>
+                <div class="code-block">
+# Função para calcular média de notas em dicionário
+def calcular_media_aluno(notas):
+    if len(notas) == 0:
+        return 0
+    
+    soma = sum(notas.values())
+    media = soma / len(notas)
+    return media
+
+# Função para verificar aprovação
+def verificar_aprovacao(notas):
+    media = calcular_media_aluno(notas)
+    if media >= 7.0:
+        return True, media
+    else:
+        return False, media
+
+# Testando as funções
+notas_joao = {
+    "matematica": 8.5,
+    "portugues": 7.0,
+    "ciencias": 9.2
+}
+
+media = calcular_media_aluno(notas_joao)
+aprovado, media_final = verificar_aprovacao(notas_joao)
+
+print(f"Notas: {notas_joao}")
+print(f"Média: {media:.2f}")
+print(f"Aprovado: {aprovado}")
+                </div>
+                
+                <h3>🔍 Buscando em Dicionários</h3>
+                <div class="code-block">
+# Função para buscar informação
+def buscar_informacao(pessoa, campo):
+    if campo in pessoa:
+        return pessoa[campo]
+    else:
+        return "Campo não encontrado"
+
+# Função para verificar se chave existe
+def verificar_chave(dicionario, chave):
+    return chave in dicionario
+
+# Testando as funções
+pessoa = {
+    "nome": "João Silva",
+    "idade": 25,
+    "cidade": "Salvador",
+    "profissao": "Desenvolvedor"
+}
+
+nome = buscar_informacao(pessoa, "nome")
+telefone = buscar_informacao(pessoa, "telefone")
+tem_idade = verificar_chave(pessoa, "idade")
+tem_telefone = verificar_chave(pessoa, "telefone")
+
+print(f"Nome: {nome}")
+print(f"Telefone: {telefone}")
+print(f"Tem idade: {tem_idade}")
+print(f"Tem telefone: {tem_telefone}")
+                </div>
+                
+                <h3>➕ Adicionando ao Dicionário</h3>
+                <div class="code-block">
+# Função para adicionar informação
+def adicionar_informacao(pessoa, campo, valor):
+    pessoa[campo] = valor
+    print(f"Adicionado: {campo} = {valor}")
+
+# Função para atualizar múltiplas informações
+def atualizar_informacoes(pessoa, novas_info):
+    pessoa.update(novas_info)
+    print(f"Atualizado com: {novas_info}")
+
+# Testando as funções
+pessoa = {
+    "nome": "Maria",
+    "idade": 30
+}
+
+print(f"Pessoa original: {pessoa}")
+
+adicionar_informacao(pessoa, "cidade", "São Paulo")
+print(f"Após adicionar cidade: {pessoa}")
+
+atualizar_informacoes(pessoa, {"profissao": "Engenheira", "salario": 5000})
+print(f"Após atualizar: {pessoa}")
+                </div>
+                
+                <h3>📊 Estatísticas de Dicionários</h3>
+                <div class="code-block">
+# Função para calcular estatísticas de vendas
+def calcular_estatisticas_vendas(vendas):
+    if len(vendas) == 0:
+        return None
+    
+    total = sum(vendas.values())
+    media = total / len(vendas)
+    maior_venda = max(vendas.values())
+    menor_venda = min(vendas.values())
+    
+    # Encontrar mês com maior venda
+    melhor_mes = max(vendas, key=vendas.get)
+    
+    return {
+        "total": total,
+        "media": media,
+        "maior_venda": maior_venda,
+        "menor_venda": menor_venda,
+        "melhor_mes": melhor_mes,
+        "quantidade_meses": len(vendas)
+    }
+
+# Testando a função
+vendas = {
+    "janeiro": 15000,
+    "fevereiro": 18000,
+    "marco": 12000,
+    "abril": 22000
+}
+
+stats = calcular_estatisticas_vendas(vendas)
+if stats:
+    print(f"Vendas: {vendas}")
+    print(f"Total: R$ {stats['total']}")
+    print(f"Média: R$ {stats['media']:.2f}")
+    print(f"Maior venda: R$ {stats['maior_venda']}")
+    print(f"Menor venda: R$ {stats['menor_venda']}")
+    print(f"Melhor mês: {stats['melhor_mes']}")
+                </div>
+                
+                <h3>🔄 Modificando Dicionários</h3>
+                <div class="code-block">
+# Função para remover informação
+def remover_informacao(dicionario, chave):
+    if chave in dicionario:
+        valor_removido = dicionario.pop(chave)
+        print(f"Removido: {chave} = {valor_removido}")
+        return True
+    else:
+        print(f"Chave '{chave}' não encontrada")
+        return False
+
+# Função para limpar dicionário
+def limpar_dicionario(dicionario):
+    dicionario.clear()
+    print("Dicionário limpo")
+
+# Testando as funções
+pessoa = {
+    "nome": "Pedro",
+    "idade": 28,
+    "cidade": "Rio de Janeiro",
+    "profissao": "Designer"
+}
+
+print(f"Pessoa original: {pessoa}")
+
+removido = remover_informacao(pessoa, "idade")
+print(f"Após remover idade: {pessoa}")
+
+removido = remover_informacao(pessoa, "telefone")
+print(f"Após tentar remover telefone: {pessoa}")
+
+limpar_dicionario(pessoa)
+print(f"Após limpar: {pessoa}")
+                </div>
+                
+                <h3>📋 Criando Novos Dicionários</h3>
+                <div class="code-block">
+# Função para criar dicionário de contatos
+def criar_contato(nome, telefone, email):
+    return {
+        "nome": nome,
+        "telefone": telefone,
+        "email": email
+    }
+
+# Função para filtrar dicionário
+def filtrar_por_valor(dicionario, valor_minimo):
+    filtrado = {}
+    for chave, valor in dicionario.items():
+        if valor >= valor_minimo:
+            filtrado[chave] = valor
+    return filtrado
+
+# Testando as funções
+contato = criar_contato("Ana", "99999-1111", "ana@email.com")
+print(f"Contato criado: {contato}")
+
+vendas = {"produto1": 100, "produto2": 50, "produto3": 150, "produto4": 75}
+vendas_altas = filtrar_por_valor(vendas, 100)
+print(f"Vendas originais: {vendas}")
+print(f"Vendas altas (>=100): {vendas_altas}")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Verificação:</strong> Sempre verifique se a chave existe antes de acessar</li>
+                        <li><strong>Métodos:</strong> Use .get() para acesso seguro</li>
+                        <li><strong>Modificação:</strong> Dicionários são passados por referência</li>
+                        <li><strong>Retorno:</strong> Pode retornar dicionários, valores ou booleanos</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Sistema de inventário
+def processar_produto(produto):
+    if "preco" not in produto or "estoque" not in produto:
+        return "Produto incompleto"
+    
+    preco = produto["preco"]
+    estoque = produto["estoque"]
+    valor_total = preco * estoque
+    
+    if estoque < 10:
+        status = "Estoque baixo"
+    elif estoque > 100:
+        status = "Estoque alto"
+    else:
+        status = "Estoque normal"
+    
+    return {
+        "nome": produto.get("nome", "Sem nome"),
+        "valor_total": valor_total,
+        "status": status,
+        "preco": preco,
+        "estoque": estoque
+    }
+
+# Testando a função
+produto1 = {
+    "nome": "Notebook",
+    "preco": 2500,
+    "estoque": 5
+}
+
+produto2 = {
+    "nome": "Mouse",
+    "preco": 50,
+    "estoque": 150
+}
+
+resultado1 = processar_produto(produto1)
+resultado2 = processar_produto(produto2)
+
+print(f"Produto 1: {resultado1}")
+print(f"Produto 2: {resultado2}")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

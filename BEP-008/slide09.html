@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 09</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide9">
+                <h2><i class="fas fa-list"></i> Funções com Listas</h2>
+                
+                <h3>📊 Processando Listas</h3>
+                <p>Funções podem receber listas como parâmetros e retornar listas processadas.</p>
+                <div class="code-block">
+# Função para calcular média de uma lista
+def calcular_media_lista(notas):
+    if len(notas) == 0:
+        return 0
+    return sum(notas) / len(notas)
+
+# Função para encontrar o maior número
+def encontrar_maior(numeros):
+    if len(numeros) == 0:
+        return None
+    maior = numeros[0]
+    for numero in numeros:
+        if numero > maior:
+            maior = numero
+    return maior
+
+# Testando as funções
+notas = [8.5, 7.0, 9.2, 6.8]
+media = calcular_media_lista(notas)
+maior = encontrar_maior(notas)
+
+print(f"Notas: {notas}")
+print(f"Média: {media:.2f}")
+print(f"Maior: {maior}")
+                </div>
+                
+                <h3>🔄 Modificando Listas</h3>
+                <p>Funções podem modificar listas passadas como parâmetros.</p>
+                <div class="code-block">
+# Função para adicionar elemento à lista
+def adicionar_elemento(lista, elemento):
+    lista.append(elemento)
+    print(f"Elemento {elemento} adicionado")
+
+# Função para remover elemento da lista
+def remover_elemento(lista, elemento):
+    if elemento in lista:
+        lista.remove(elemento)
+        print(f"Elemento {elemento} removido")
+    else:
+        print(f"Elemento {elemento} não encontrado")
+
+# Testando as funções
+numeros = [1, 2, 3, 4, 5]
+print(f"Lista original: {numeros}")
+
+adicionar_elemento(numeros, 6)
+print(f"Após adicionar: {numeros}")
+
+remover_elemento(numeros, 3)
+print(f"Após remover: {numeros}")
+                </div>
+                
+                <h3>📋 Criando Novas Listas</h3>
+                <p>Funções podem criar e retornar novas listas.</p>
+                <div class="code-block">
+# Função para criar lista de pares
+def criar_lista_pares(numeros):
+    pares = []
+    for numero in numeros:
+        if numero % 2 == 0:
+            pares.append(numero)
+    return pares
+
+# Função para duplicar lista
+def duplicar_lista(lista):
+    nova_lista = []
+    for elemento in lista:
+        nova_lista.append(elemento * 2)
+    return nova_lista
+
+# Testando as funções
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+pares = criar_lista_pares(numeros)
+duplicados = duplicar_lista(numeros)
+
+print(f"Números: {numeros}")
+print(f"Pares: {pares}")
+print(f"Duplicados: {duplicados}")
+                </div>
+                
+                <h3>🔍 Buscando em Listas</h3>
+                <div class="code-block">
+# Função para buscar elemento
+def buscar_elemento(lista, elemento):
+    for i, item in enumerate(lista):
+        if item == elemento:
+            return i
+    return -1
+
+# Função para contar ocorrências
+def contar_ocorrencias(lista, elemento):
+    contador = 0
+    for item in lista:
+        if item == elemento:
+            contador += 1
+    return contador
+
+# Testando as funções
+frutas = ["maçã", "banana", "laranja", "maçã", "uva"]
+posicao = buscar_elemento(frutas, "maçã")
+quantidade = contar_ocorrencias(frutas, "maçã")
+
+print(f"Frutas: {frutas}")
+print(f"Posição da maçã: {posicao}")
+print(f"Quantidade de maçãs: {quantidade}")
+                </div>
+                
+                <h3>📊 Estatísticas de Listas</h3>
+                <div class="code-block">
+# Função para calcular estatísticas
+def calcular_estatisticas(numeros):
+    if len(numeros) == 0:
+        return None
+    
+    soma = sum(numeros)
+    media = soma / len(numeros)
+    maior = max(numeros)
+    menor = min(numeros)
+    
+    return {
+        "soma": soma,
+        "media": media,
+        "maior": maior,
+        "menor": menor,
+        "tamanho": len(numeros)
+    }
+
+# Testando a função
+notas = [8.5, 7.0, 9.2, 6.8, 8.0]
+stats = calcular_estatisticas(notas)
+
+if stats:
+    print(f"Notas: {notas}")
+    print(f"Soma: {stats['soma']}")
+    print(f"Média: {stats['media']:.2f}")
+    print(f"Maior: {stats['maior']}")
+    print(f"Menor: {stats['menor']}")
+    print(f"Tamanho: {stats['tamanho']}")
+                </div>
+                
+                <h3>🔄 Ordenando Listas</h3>
+                <div class="code-block">
+# Função para ordenar lista (crescente)
+def ordenar_crescente(lista):
+    lista_ordenada = lista.copy()  # Cria uma cópia
+    lista_ordenada.sort()
+    return lista_ordenada
+
+# Função para ordenar lista (decrescente)
+def ordenar_decrescente(lista):
+    lista_ordenada = lista.copy()  # Cria uma cópia
+    lista_ordenada.sort(reverse=True)
+    return lista_ordenada
+
+# Testando as funções
+numeros = [5, 2, 8, 1, 9, 3]
+crescente = ordenar_crescente(numeros)
+decrescente = ordenar_decrescente(numeros)
+
+print(f"Original: {numeros}")
+print(f"Crescente: {crescente}")
+print(f"Decrescente: {decrescente}")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Cópia:</strong> Use .copy() para não modificar a lista original</li>
+                        <li><strong>Verificação:</strong> Sempre verifique se a lista não está vazia</li>
+                        <li><strong>Retorno:</strong> Pode retornar listas, números, booleanos, etc.</li>
+                        <li><strong>Parâmetros:</strong> Listas são passadas por referência</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Sistema de notas de alunos
+def processar_notas_aluno(nome, notas):
+    if len(notas) == 0:
+        return f"{nome}: Sem notas"
+    
+    media = sum(notas) / len(notas)
+    maior = max(notas)
+    menor = min(notas)
+    
+    if media >= 7.0:
+        status = "Aprovado"
+    else:
+        status = "Reprovado"
+    
+    return {
+        "nome": nome,
+        "media": media,
+        "maior": maior,
+        "menor": menor,
+        "status": status
+    }
+
+# Testando a função
+aluno1 = processar_notas_aluno("João", [8.5, 7.0, 9.2])
+aluno2 = processar_notas_aluno("Maria", [6.0, 5.5, 6.8])
+
+print(f"Aluno: {aluno1['nome']}")
+print(f"Média: {aluno1['media']:.2f}")
+print(f"Status: {aluno1['status']}")
+
+print(f"\nAluno: {aluno2['nome']}")
+print(f"Média: {aluno2['media']:.2f}")
+print(f"Status: {aluno2['status']}")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

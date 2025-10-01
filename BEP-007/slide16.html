@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 16</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide16">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios - Tuplas</h2>
+                
+                <h3>🏋️ Exercício 1: Dados Pessoais</h3>
+                <div class="code-block">
+# Crie uma tupla com seus dados pessoais
+# (nome, idade, profissão, cidade)
+# Acesse cada elemento e exiba as informações
+
+# Solução:
+dados_pessoais = ("João Silva", 25, "Programador", "Salvador")
+
+# Acessando elementos
+nome = dados_pessoais[0]
+idade = dados_pessoais[1]
+profissao = dados_pessoais[2]
+cidade = dados_pessoais[3]
+
+print(f"Nome: {nome}")
+print(f"Idade: {idade}")
+print(f"Profissão: {profissao}")
+print(f"Cidade: {cidade}")
+
+# Desempacotamento
+nome, idade, profissao, cidade = dados_pessoais
+print(f"Desempacotamento: {nome} tem {idade} anos")
+                </div>
+                
+                <h3>🏋️ Exercício 2: Coordenadas Geográficas</h3>
+                <div class="code-block">
+# Crie tuplas representando coordenadas de cidades
+# Calcule a distância entre duas cidades
+
+# Solução:
+salvador = (-12.9714, -38.5014)
+sao_paulo = (-23.5505, -46.6333)
+
+# Desempacotando coordenadas
+lat1, lon1 = salvador
+lat2, lon2 = sao_paulo
+
+# Calculando distância (fórmula simplificada)
+distancia = ((lat2 - lat1)**2 + (lon2 - lon1)**2)**0.5
+print(f"Distância Salvador-SP: {distancia:.2f} graus")
+
+# Criando tupla de resultado
+resultado = (distancia, "graus")
+print(f"Resultado: {resultado}")
+                </div>
+                
+                <h3>🏋️ Exercício 3: Sistema de Notas</h3>
+                <div class="code-block">
+# Crie uma tupla com notas de um aluno
+# Calcule a média e determine se foi aprovado
+
+# Solução:
+notas = (8.5, 7.0, 9.2, 6.8, 8.0)
+
+# Calculando média
+soma = sum(notas)
+media = soma / len(notas)
+
+# Determinando status
+status = "Aprovado" if media >= 7.0 else "Reprovado"
+
+print(f"Notas: {notas}")
+print(f"Média: {media:.2f}")
+print(f"Status: {status}")
+
+# Usando funções built-in
+print(f"Maior nota: {max(notas)}")
+print(f"Menor nota: {min(notas)}")
+print(f"Total de notas: {len(notas)}")
+                </div>
+                
+                <h3>🏋️ Exercício 4: Análise de Dados</h3>
+                <div class="code-block">
+# Crie uma tupla com dados de vendas mensais
+# Analise os dados e encontre o melhor mês
+
+# Solução:
+vendas = (15000, 18000, 12000, 22000, 19000)
+meses = ("Janeiro", "Fevereiro", "Março", "Abril", "Maio")
+
+# Encontrando melhor mês
+maior_venda = max(vendas)
+indice_melhor = vendas.index(maior_venda)
+melhor_mes = meses[indice_melhor]
+
+# Estatísticas
+total_vendas = sum(vendas)
+media_vendas = total_vendas / len(vendas)
+
+print(f"Vendas: {vendas}")
+print(f"Melhor mês: {melhor_mes} (R$ {maior_venda})")
+print(f"Total: R$ {total_vendas}")
+print(f"Média: R$ {media_vendas:.2f}")
+
+# Usando zip para combinar dados
+dados_combinados = list(zip(meses, vendas))
+print(f"Dados combinados: {dados_combinados}")
+                </div>
+                
+                <h3>🏋️ Exercício 5: Sistema de Pontuação</h3>
+                <div class="code-block">
+# Crie um sistema de pontuação para um jogo
+# Calcule estatísticas dos jogadores
+
+# Solução:
+pontuacoes = (100, 150, 200, 150, 300, 150, 250)
+
+# Análise das pontuações
+total_pontos = sum(pontuacoes)
+pontuacao_maxima = max(pontuacoes)
+pontuacao_minima = min(pontuacoes)
+media_pontos = total_pontos / len(pontuacoes)
+
+# Contando pontuações específicas
+qtd_150 = pontuacoes.count(150)
+pos_300 = pontuacoes.index(300)
+
+print(f"Pontuações: {pontuacoes}")
+print(f"Total: {total_pontos}")
+print(f"Máxima: {pontuacao_maxima}")
+print(f"Mínima: {pontuacao_minima}")
+print(f"Média: {media_pontos:.2f}")
+print(f"Quantas vezes 150: {qtd_150}")
+print(f"Posição do 300: {pos_300}")
+
+# Criando tupla de estatísticas
+estatisticas = (total_pontos, pontuacao_maxima, pontuacao_minima, media_pontos)
+print(f"Estatísticas: {estatisticas}")
+                </div>
+                
+                <h3>🏋️ Exercício 6: Tupla Aninhada</h3>
+                <div class="code-block">
+# Crie uma tupla contendo outras tuplas
+# Represente pontos em um plano cartesiano
+
+# Solução:
+pontos = (
+    (0, 0),      # Origem
+    (3, 4),      # Ponto A
+    (6, 8),      # Ponto B
+    (9, 12)      # Ponto C
+)
+
+print("Pontos:", pontos)
+
+# Calculando distâncias da origem
+for i, ponto in enumerate(pontos):
+    x, y = ponto
+    distancia = (x**2 + y**2)**0.5
+    print(f"Ponto {i}: {ponto} - Distância da origem: {distancia:.2f}")
+
+# Encontrando ponto mais distante
+distancias = []
+for ponto in pontos:
+    x, y = ponto
+    distancia = (x**2 + y**2)**0.5
+    distancias.append(distancia)
+
+maior_distancia = max(distancias)
+indice_maior = distancias.index(maior_distancia)
+ponto_mais_distante = pontos[indice_maior]
+
+print(f"Ponto mais distante: {ponto_mais_distante} (distância: {maior_distancia:.2f})")
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Coordenadas</h5>
+                    <div class="code-block">
+# Sistema de coordenadas para um jogo
+coordenadas_jogo = (
+    (0, 0),    # Spawn
+    (10, 5),   # Checkpoint 1
+    (20, 10),  # Checkpoint 2
+    (30, 15),  # Checkpoint 3
+    (40, 20)   # Final
+)
+
+# Calculando distância total do percurso
+distancia_total = 0
+for i in range(1, len(coordenadas_jogo)):
+    x1, y1 = coordenadas_jogo[i-1]
+    x2, y2 = coordenadas_jogo[i]
+    distancia = ((x2 - x1)**2 + (y2 - y1)**2)**0.5
+    distancia_total += distancia
+
+print(f"Distância total do percurso: {distancia_total:.2f} unidades")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dicas para os Exercícios</h4>
+                    <ul>
+                        <li><strong>Desempacotamento:</strong> Use para acessar elementos facilmente</li>
+                        <li><strong>Funções built-in:</strong> Aproveite max(), min(), sum(), len()</li>
+                        <li><strong>Métodos:</strong> Use count() e index() quando necessário</li>
+                        <li><strong>Fatiamento:</strong> Extraia partes da tupla quando útil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

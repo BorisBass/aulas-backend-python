@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 12</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-edit"></i> Adição e Modificação</h2>
+                
+                <h3>➕ Adicionando Elementos</h3>
+                <div class="code-block">
+# Criando dicionário vazio
+contato = {}
+
+# Adicionando elementos um por um
+contato["nome"] = "João Silva"
+contato["telefone"] = "(71) 99999-1111"
+contato["email"] = "joao@email.com"
+contato["cidade"] = "Salvador"
+
+print("Contato:", contato)
+# {'nome': 'João Silva', 'telefone': '(71) 99999-1111', 'email': 'joao@email.com', 'cidade': 'Salvador'}
+
+# Adicionando elemento que já existe (sobrescreve)
+contato["telefone"] = "(71) 99999-2222"
+print("Telefone atualizado:", contato["telefone"])
+                </div>
+                
+                <h3>🔄 Modificando Valores</h3>
+                <div class="code-block">
+# Dicionário inicial
+produto = {
+    "nome": "Notebook",
+    "preco": 2500.00,
+    "estoque": 10
+}
+
+print("Produto original:", produto)
+
+# Modificando valores existentes
+produto["preco"] = 2200.00  # Desconto
+produto["estoque"] = 8      # Venda de 2 unidades
+
+print("Produto modificado:", produto)
+
+# Adicionando novos campos
+produto["categoria"] = "Eletrônicos"
+produto["garantia"] = "12 meses"
+
+print("Produto com novos campos:", produto)
+                </div>
+                
+                <h3>📦 Método update()</h3>
+                <div class="code-block">
+# Dicionário base
+pessoa = {
+    "nome": "Maria",
+    "idade": 25
+}
+
+# Atualizando com outro dicionário
+novos_dados = {
+    "profissao": "Engenheira",
+    "cidade": "São Paulo",
+    "telefone": "99999-3333"
+}
+
+pessoa.update(novos_dados)
+print("Pessoa atualizada:", pessoa)
+
+# Atualizando com pares chave-valor
+pessoa.update(idade=26, salario=5000)
+print("Pessoa com idade e salário:", pessoa)
+
+# Atualizando com lista de tuplas
+atualizacoes = [("departamento", "TI"), ("ativo", True)]
+pessoa.update(atualizacoes)
+print("Pessoa final:", pessoa)
+                </div>
+                
+                <h3>🔧 Modificação Condicional</h3>
+                <div class="code-block">
+# Sistema de inventário
+inventario = {
+    "notebook": {"preco": 2500, "estoque": 5},
+    "mouse": {"preco": 50, "estoque": 20},
+    "teclado": {"preco": 120, "estoque": 15}
+}
+
+# Verificando e atualizando preços condicionalmente
+produto = "notebook"
+estoque_minimo = 10
+
+# Verificando se produto existe
+if produto in inventario:
+    # Verificando se estoque está baixo
+    if inventario[produto]["estoque"] < estoque_minimo:
+        inventario[produto]["preco"] = 2000  # Desconto
+        print(f"Preço do {produto} atualizado para R$ 2000")
+    else:
+        print(f"Estoque do {produto} está adequado")
+else:
+    print(f"Produto {produto} não encontrado")
+
+# Verificando outro produto
+produto = "mouse"
+if produto in inventario:
+    if inventario[produto]["estoque"] < estoque_minimo:
+        inventario[produto]["preco"] = 45
+        print(f"Preço do {produto} atualizado")
+    else:
+        print(f"Estoque do {produto} está adequado")
+                </div>
+                
+                <h3>📊 Modificação em Lote</h3>
+                <div class="code-block">
+# Sistema de notas
+notas = {
+    "Ana": [8.5, 7.0, 9.2],
+    "Bruno": [6.8, 8.0, 7.5],
+    "Carla": [9.0, 8.5, 9.5]
+}
+
+# Adicionando nova nota para todos os alunos
+nova_nota = 8.0
+for aluno in notas:
+    notas[aluno].append(nova_nota)
+
+print("Notas com nova prova:", notas)
+
+# Calculando e adicionando médias
+for aluno, lista_notas in notas.items():
+    media = sum(lista_notas) / len(lista_notas)
+    notas[aluno] = {
+        "notas": lista_notas,
+        "media": media,
+        "status": "Aprovado" if media >= 7.0 else "Reprovado"
+    }
+
+print("Notas com médias:", notas)
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Vendas</h5>
+                    <div class="code-block">
+# Sistema de vendas
+vendas = {
+    "janeiro": 15000,
+    "fevereiro": 18000,
+    "marco": 12000
+}
+
+# Adicionando nova venda
+vendas["abril"] = 22000
+
+# Atualizando venda existente (correção)
+vendas["marco"] = 15000  # Correção de erro
+
+# Adicionando múltiplas vendas
+novas_vendas = {
+    "maio": 19000,
+    "junho": 21000
+}
+vendas.update(novas_vendas)
+
+# Calculando total e média
+total = sum(vendas.values())
+media = total / len(vendas)
+
+# Encontrando melhor mês (maior venda)
+melhor_mes = "janeiro"
+maior_venda = vendas["janeiro"]
+
+for mes, valor in vendas.items():
+    if valor > maior_venda:
+        maior_venda = valor
+        melhor_mes = mes
+
+# Adicionando estatísticas
+vendas["total"] = total
+vendas["media"] = media
+vendas["melhor_mes"] = melhor_mes
+
+print("Vendas com estatísticas:", vendas)
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Cuidados na Modificação</h4>
+                    <ul>
+                        <li><strong>Chaves existentes:</strong> Valores são sobrescritos</li>
+                        <li><strong>Chaves inexistentes:</strong> Novos pares são criados</li>
+                        <li><strong>Performance:</strong> update() é mais eficiente para múltiplas alterações</li>
+                        <li><strong>Backup:</strong> Faça cópia antes de modificações importantes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

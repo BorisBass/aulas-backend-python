@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 15</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide15">
+                <h2><i class="fas fa-check-circle"></i> Resumo e Próximos Passos</h2>
+                
+                <h3>📚 O que você aprendeu</h3>
+                <div class="highlight">
+                    <h4>✅ Conceitos Fundamentais</h4>
+                    <ul>
+                        <li><strong>Definição de funções:</strong> Como criar e usar funções</li>
+                        <li><strong>Parâmetros e argumentos:</strong> Passando dados para funções</li>
+                        <li><strong>Retorno de valores:</strong> Obtendo resultados das funções</li>
+                        <li><strong>Escopo de variáveis:</strong> Onde as variáveis existem</li>
+                    </ul>
+                </div>
+                
+                <h3>🔧 Habilidades Desenvolvidas</h3>
+                <div class="code-block">
+# Você agora pode:
+def criar_funcoes():
+    """Criar funções com diferentes propósitos"""
+    pass
+
+def usar_parametros(a, b, c=10):
+    """Usar parâmetros posicionais e nomeados"""
+    return a + b + c
+
+def retornar_valores(dados):
+    """Retornar valores únicos ou múltiplos"""
+    return dados, len(dados)
+
+def gerenciar_escopo():
+    """Entender escopo local e global"""
+    variavel_local = "existe apenas aqui"
+    return variavel_local
+                </div>
+                
+                <h3>🎯 Aplicações Práticas</h3>
+                <ul>
+                    <li><strong>Processamento de dados:</strong> Listas e dicionários</li>
+                    <li><strong>Validação:</strong> Verificação de condições</li>
+                    <li><strong>Cálculos:</strong> Operações matemáticas</li>
+                    <li><strong>Interface:</strong> Interação com usuário</li>
+                    <li><strong>Organização:</strong> Código modular e reutilizável</li>
+                </ul>
+                
+                <h3>📊 Projeto Realizado</h3>
+                <div class="example">
+                    <h5>💡 Calculadora Completa</h5>
+                    <p>Você criou uma calculadora completa com:</p>
+                    <ul>
+                        <li><strong>Operações básicas:</strong> Soma, subtração, multiplicação, divisão</li>
+                        <li><strong>Operações avançadas:</strong> Potência, raiz quadrada, porcentagem</li>
+                        <li><strong>Interface amigável:</strong> Menu e validação de entrada</li>
+                        <li><strong>Tratamento de erros:</strong> Divisão por zero, entradas inválidas</li>
+                    </ul>
+                </div>
+                
+                <h3>🚀 Próximos Passos</h3>
+                <div class="info">
+                    <h4><i class="fas fa-arrow-right"></i> BEP-009: Módulos e Bibliotecas</h4>
+                    <ul>
+                        <li><strong>Importação de módulos:</strong> Como usar bibliotecas</li>
+                        <li><strong>Bibliotecas padrão:</strong> Módulos do Python</li>
+                        <li><strong>Criação de módulos:</strong> Seus próprios módulos</li>
+                        <li><strong>Gerenciamento de dependências:</strong> pip e requirements</li>
+                    </ul>
+                </div>
+                
+                <h3>🎓 Conceitos Futuros</h3>
+                <div class="code-block">
+# Programação Orientada a Objetos
+class Calculadora:
+    def __init__(self):
+        self.historico = []
+    
+    def somar(self, a, b):
+        resultado = a + b
+        self.historico.append(f"{a} + {b} = {resultado}")
+        return resultado
+
+# Decoradores
+def medir_tempo(func):
+    def wrapper(*args, **kwargs):
+        inicio = time.time()
+        resultado = func(*args, **kwargs)
+        fim = time.time()
+        print(f"Tempo: {fim - inicio:.2f}s")
+        return resultado
+    return wrapper
+
+# Funções lambda
+quadrado = lambda x: x ** 2
+pares = list(filter(lambda x: x % 2 == 0, [1, 2, 3, 4, 5]))
+                </div>
+                
+                <h3>📈 Carreira em Python</h3>
+                <ul>
+                    <li><strong>Desenvolvimento Web:</strong> Django, Flask</li>
+                    <li><strong>Ciência de Dados:</strong> Pandas, NumPy, Matplotlib</li>
+                    <li><strong>Machine Learning:</strong> Scikit-learn, TensorFlow</li>
+                    <li><strong>Automação:</strong> Scripts e ferramentas</li>
+                    <li><strong>Desenvolvimento de Jogos:</strong> Pygame</li>
+                </ul>
+                
+                <h3>🎯 Dicas para Continuar</h3>
+                <div class="warning">
+                    <h4><i class="fas fa-lightbulb"></i> Como Praticar</h4>
+                    <ul>
+                        <li><strong>Projetos pessoais:</strong> Crie suas próprias aplicações</li>
+                        <li><strong>Exercícios online:</strong> HackerRank, LeetCode, Codewars</li>
+                        <li><strong>Contribuição:</strong> Participe de projetos open source</li>
+                        <li><strong>Comunidade:</strong> Participe de grupos e fóruns</li>
+                    </ul>
+                </div>
+                
+                <h3>📚 Recursos Adicionais</h3>
+                <ul>
+                    <li><strong>Documentação oficial:</strong> docs.python.org</li>
+                    <li><strong>Tutoriais:</strong> Python.org/tutorial</li>
+                    <li><strong>Livros:</strong> "Python Crash Course", "Automate the Boring Stuff"</li>
+                    <li><strong>Vídeos:</strong> YouTube, Coursera, Udemy</li>
+                    <li><strong>Comunidade:</strong> Stack Overflow, Reddit r/Python</li>
+                </ul>
+                
+                <div class="example">
+                    <h5>💡 Desafio Final</h5>
+                    <div class="code-block">
+# Crie uma função que simule um sistema bancário
+def sistema_bancario():
+    saldo = 0
+    
+    def depositar(valor):
+        nonlocal saldo
+        saldo += valor
+        return f"Depósito de R$ {valor}. Saldo: R$ {saldo}"
+    
+    def sacar(valor):
+        nonlocal saldo
+        if valor > saldo:
+            return "Saldo insuficiente"
+        saldo -= valor
+        return f"Saque de R$ {valor}. Saldo: R$ {saldo}"
+    
+    def consultar_saldo():
+        return f"Saldo atual: R$ {saldo}"
+    
+    return depositar, sacar, consultar_saldo
+
+# Teste o sistema
+dep, sac, saldo = sistema_bancario()
+print(dep(100))
+print(sac(50))
+print(saldo())
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <h3>🎉 Parabéns!</h3>
+                    <p>Você dominou os conceitos fundamentais de funções em Python! Agora você pode:</p>
+                    <ul>
+                        <li>✅ Criar funções reutilizáveis</li>
+                        <li>✅ Trabalhar com parâmetros e retornos</li>
+                        <li>✅ Entender escopo de variáveis</li>
+                        <li>✅ Aplicar funções em projetos reais</li>
+                        <li>✅ Seguir boas práticas de programação</li>
+                    </ul>
+                    <p><strong>Continue praticando e explore os próximos módulos!</strong></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 15</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide15">
+                <h2><i class="fas fa-calculator"></i> Funções Básicas com Dicionários</h2>
+                
+                <h3>🔧 Funções Simples</h3>
+                <div class="code-block">
+# Dicionário para demonstração
+vendas = {
+    "janeiro": 15000,
+    "fevereiro": 18000,
+    "marco": 12000,
+    "abril": 22000,
+    "maio": 19000
+}
+
+# 1. len() - tamanho do dicionário
+print(f"Quantidade de meses: {len(vendas)}")  # 5
+
+# 2. max() - valor máximo
+maior_venda = max(vendas.values())
+print(f"Maior venda: {maior_venda}")  # 22000
+
+# 3. min() - valor mínimo
+menor_venda = min(vendas.values())
+print(f"Menor venda: {menor_venda}")  # 12000
+
+# 4. sum() - soma dos valores
+total_vendas = sum(vendas.values())
+print(f"Total de vendas: {total_vendas}")  # 86000
+
+# 5. Média
+media_vendas = total_vendas / len(vendas)
+print(f"Média de vendas: {media_vendas:.2f}")  # 17200.00
+                </div>
+                
+                <h3>🔍 Trabalhando com Chaves e Valores</h3>
+                <div class="code-block">
+# Dicionário simples
+notas = {
+    "Ana": 8.5,
+    "Bruno": 6.8,
+    "Carla": 9.0,
+    "Diego": 7.2
+}
+
+# 1. Encontrando a maior nota
+maior_nota = max(notas.values())
+print(f"Maior nota: {maior_nota}")
+
+# 2. Encontrando a menor nota
+menor_nota = min(notas.values())
+print(f"Menor nota: {menor_nota}")
+
+# 3. Somando todas as notas
+total_notas = sum(notas.values())
+print(f"Total das notas: {total_notas}")
+
+# 4. Calculando a média
+media = total_notas / len(notas)
+print(f"Média das notas: {media:.2f}")
+
+# 5. Encontrando quem tem a maior nota
+melhor_aluno = max(notas, key=notas.get)
+print(f"Melhor aluno: {melhor_aluno}")
+                </div>
+                
+                <h3>📊 Análise Simples</h3>
+                <div class="code-block">
+# Dicionário com idades
+idades = {
+    "Ana": 20,
+    "Bruno": 19,
+    "Carla": 21,
+    "Diego": 20
+}
+
+# 1. Pessoa mais velha
+mais_velha = max(idades, key=idades.get)
+print(f"Pessoa mais velha: {mais_velha}")
+
+# 2. Pessoa mais nova
+mais_nova = min(idades, key=idades.get)
+print(f"Pessoa mais nova: {mais_nova}")
+
+# 3. Soma das idades
+total_idades = sum(idades.values())
+print(f"Total das idades: {total_idades}")
+
+# 4. Média das idades
+media_idades = total_idades / len(idades)
+print(f"Média das idades: {media_idades:.1f}")
+
+# 5. Quantas pessoas
+quantidade = len(idades)
+print(f"Quantidade de pessoas: {quantidade}")
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Notas</h5>
+                    <div class="code-block">
+# Sistema de notas de alunos
+alunos = {
+    "Ana": 8.5,
+    "Bruno": 6.8,
+    "Carla": 9.0,
+    "Diego": 7.2,
+    "Elena": 8.0
+}
+
+# Análise das notas
+print("=== ANÁLISE DE NOTAS ===")
+print(f"Total de alunos: {len(alunos)}")
+print(f"Maior nota: {max(alunos.values())}")
+print(f"Menor nota: {min(alunos.values())}")
+print(f"Soma das notas: {sum(alunos.values())}")
+print(f"Média das notas: {sum(alunos.values())/len(alunos):.2f}")
+
+# Melhor e pior aluno
+melhor = max(alunos, key=alunos.get)
+pior = min(alunos, key=alunos.get)
+print(f"Melhor aluno: {melhor} ({alunos[melhor]})")
+print(f"Pior aluno: {pior} ({alunos[pior]})")
+
+# Alunos aprovados (nota >= 7.0)
+aprovados = [nome for nome, nota in alunos.items() if nota >= 7.0]
+print(f"Alunos aprovados: {aprovados}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dicas de Uso</h4>
+                    <ul>
+                        <li><strong>len():</strong> Conta o número de pares chave-valor</li>
+                        <li><strong>max()/min():</strong> Funcionam com valores numéricos</li>
+                        <li><strong>sum():</strong> Soma todos os valores numéricos</li>
+                        <li><strong>key=:</strong> Use para encontrar chave com maior/menor valor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

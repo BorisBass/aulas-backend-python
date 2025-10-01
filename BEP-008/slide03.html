@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 03</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide3">
+                <h2><i class="fas fa-cogs"></i> Vantagens das Funções</h2>
+                
+                <h3>🔄 Reutilização de Código</h3>
+                <p>Escreva uma vez, use várias vezes. Evite repetir o mesmo código.</p>
+                <div class="code-block">
+# Sem função (repetitivo)
+print("Olá, João!")
+print("Olá, Maria!")
+print("Olá, Pedro!")
+
+# Com função (reutilizável)
+def cumprimentar(nome):
+    print(f"Olá, {nome}!")
+
+cumprimentar("João")
+cumprimentar("Maria")
+cumprimentar("Pedro")
+                </div>
+                
+                <h3>🧹 Organização do Código</h3>
+                <p>Divida seu programa em partes menores e mais gerenciáveis.</p>
+                <div class="code-block">
+# Código desorganizado (tudo junto)
+print("Calculando média...")
+nota1 = 8.5
+nota2 = 7.0
+nota3 = 9.2
+media = (nota1 + nota2 + nota3) / 3
+print(f"Média: {media:.2f}")
+
+# Código organizado (com funções)
+def calcular_media(nota1, nota2, nota3):
+    return (nota1 + nota2 + nota3) / 3
+
+def mostrar_resultado(media):
+    print(f"Média: {media:.2f}")
+
+media = calcular_media(8.5, 7.0, 9.2)
+mostrar_resultado(media)
+                </div>
+                
+                <h3>🔧 Facilidade de Manutenção</h3>
+                <p>Corrija ou melhore o código em um só lugar.</p>
+                <div class="code-block">
+# Se precisar mudar o cálculo da média
+def calcular_media(nota1, nota2, nota3):
+    # Mudança aqui afeta todo o programa
+    return (nota1 + nota2 + nota3) / 3
+                </div>
+                
+                <h3>👥 Trabalho em Equipe</h3>
+                <p>Diferentes pessoas podem trabalhar em funções diferentes.</p>
+                <div class="code-block">
+# Pessoa A: Função de entrada
+def ler_notas():
+    nota1 = float(input("Nota 1: "))
+    nota2 = float(input("Nota 2: "))
+    nota3 = float(input("Nota 3: "))
+    return nota1, nota2, nota3
+
+# Pessoa B: Função de cálculo
+def calcular_media(nota1, nota2, nota3):
+    return (nota1 + nota2 + nota3) / 3
+
+# Pessoa C: Função de saída
+def mostrar_resultado(media):
+    print(f"Média: {media:.2f}")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Benefícios das Funções</h4>
+                    <ul>
+                        <li><strong>Modularidade:</strong> Código dividido em módulos</li>
+                        <li><strong>Testabilidade:</strong> Teste cada função separadamente</li>
+                        <li><strong>Legibilidade:</strong> Código mais fácil de entender</li>
+                        <li><strong>Escalabilidade:</strong> Fácil de expandir e modificar</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Analogia: Funções como Ferramentas</h5>
+                    <p>Imagine uma caixa de ferramentas:</p>
+                    <ul>
+                        <li><strong>Martelo:</strong> Função para pregar</li>
+                        <li><strong>Chave de fenda:</strong> Função para apertar parafusos</li>
+                        <li><strong>Furadeira:</strong> Função para fazer furos</li>
+                    </ul>
+                    <p>Cada ferramenta tem uma função específica e pode ser reutilizada!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

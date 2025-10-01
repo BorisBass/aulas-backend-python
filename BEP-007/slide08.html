@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 08</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide8">
+                <h2><i class="fas fa-book"></i> O que são Dicionários?</h2>
+                
+                <div class="highlight">
+                    <h3>📖 Definição</h3>
+                    <p>Um <strong>dicionário</strong> é uma coleção de pares <strong>chave-valor</strong> em Python. É uma estrutura de dados que permite armazenar e acessar informações de forma organizada e eficiente.</p>
+                </div>
+                
+                <h3>🔑 Conceito Chave-Valor</h3>
+                <div class="code-block">
+# Estrutura básica: chave : valor
+contato = {
+    "nome": "João Silva",
+    "idade": 25,
+    "telefone": "(71) 99999-8888",
+    "email": "joao@email.com"
+}
+
+# Acessando valores através das chaves
+print(contato["nome"])      # João Silva
+print(contato["idade"])     # 25
+print(contato["telefone"])  # (71) 99999-8888
+                </div>
+                
+                <h3>✨ Características dos Dicionários</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Descrição</th>
+                            <th>Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mutável</strong></td>
+                            <td>Pode ser modificado após criação</td>
+                            <td><code class="code-inline">dicio["nova_chave"] = "valor"</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Indexado por chave</strong></td>
+                            <td>Acesso através de chaves, não índices</td>
+                            <td><code class="code-inline">dicio["chave"]</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chaves únicas</strong></td>
+                            <td>Cada chave aparece apenas uma vez</td>
+                            <td>Chaves duplicadas sobrescrevem</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Heterogêneo</strong></td>
+                            <td>Chaves e valores podem ser de tipos diferentes</td>
+                            <td><code class="code-inline">{1: "um", "dois": 2}</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>🏗️ Formas de Criar Dicionários</h3>
+                <div class="code-block">
+# 1. Dicionário vazio
+dicio_vazio = {}
+dicio_vazio2 = dict()
+
+# 2. Dicionário com elementos
+pessoa = {
+    "nome": "Maria",
+    "idade": 30,
+    "profissao": "Engenheira"
+}
+
+# 3. Usando dict() com pares
+cores = dict(vermelho="#FF0000", azul="#0000FF", verde="#00FF00")
+
+# 4. A partir de lista de tuplas
+pares = [("a", 1), ("b", 2), ("c", 3)]
+dicio_pares = dict(pares)
+
+# 5. Comprehension
+quadrados = {x: x**2 for x in range(1, 6)}
+print(quadrados)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+                </div>
+                
+                <h3>🎯 Casos de Uso dos Dicionários</h3>
+                <div class="comparison">
+                    <div class="comparison-item dicionario">
+                        <h4><i class="fas fa-check-circle"></i> Use Dicionários Para:</h4>
+                        <ul style="text-align: left;">
+                            <li>Agenda telefônica</li>
+                            <li>Configurações de sistema</li>
+                            <li>Inventário de produtos</li>
+                            <li>Dados de usuários</li>
+                            <li>Mapeamento de valores</li>
+                            <li>Contadores e frequências</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="comparison-item lista">
+                        <h4><i class="fas fa-times-circle"></i> NÃO Use Dicionários Para:</h4>
+                        <ul style="text-align: left;">
+                            <li>Listas ordenadas simples</li>
+                            <li>Quando a ordem é importante</li>
+                            <li>Coleções com elementos duplicados</li>
+                            <li>Operações matemáticas em sequência</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Inventário</h5>
+                    <div class="code-block">
+# Inventário de uma loja
+inventario = {
+    "notebook": {
+        "preco": 2500.00,
+        "estoque": 10,
+        "categoria": "Eletrônicos"
+    },
+    "mouse": {
+        "preco": 50.00,
+        "estoque": 25,
+        "categoria": "Acessórios"
+    },
+    "teclado": {
+        "preco": 120.00,
+        "estoque": 15,
+        "categoria": "Acessórios"
+    }
+}
+
+# Acessando informações
+produto = "notebook"
+info = inventario[produto]
+print(f"{produto.title()}:")
+print(f"  Preço: R$ {info['preco']:.2f}")
+print(f"  Estoque: {info['estoque']} unidades")
+print(f"  Categoria: {info['categoria']}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Analogia</h4>
+                    <p>Um dicionário é como um <strong>dicionário de palavras</strong>: você procura uma palavra (chave) para encontrar seu significado (valor). É uma forma muito eficiente de organizar e acessar informações.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

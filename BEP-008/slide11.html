@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 11</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-code-branch"></i> Funções com Condicionais</h2>
+                
+                <h3>🔍 Validação de Dados</h3>
+                <p>Funções podem usar estruturas condicionais para validar dados e tomar decisões.</p>
+                <div class="code-block">
+# Função para verificar se um número é par
+def verificar_par(numero):
+    if numero % 2 == 0:
+        return True
+    else:
+        return False
+
+# Função para classificar idade
+def classificar_idade(idade):
+    if idade < 0:
+        return "Idade inválida"
+    elif idade < 13:
+        return "Criança"
+    elif idade < 20:
+        return "Adolescente"
+    elif idade < 60:
+        return "Adulto"
+    else:
+        return "Idoso"
+
+# Testando as funções
+print(f"8 é par? {verificar_par(8)}")
+print(f"7 é par? {verificar_par(7)}")
+print(f"Idade 5: {classificar_idade(5)}")
+print(f"Idade 25: {classificar_idade(25)}")
+print(f"Idade 65: {classificar_idade(65)}")
+                </div>
+                
+                <h3>💰 Cálculos Condicionais</h3>
+                <div class="code-block">
+# Função para calcular desconto
+def calcular_desconto(valor, tipo_cliente):
+    if tipo_cliente == "vip":
+        desconto = 0.20  # 20%
+    elif tipo_cliente == "premium":
+        desconto = 0.15  # 15%
+    elif tipo_cliente == "regular":
+        desconto = 0.05  # 5%
+    else:
+        desconto = 0  # Sem desconto
+    
+    valor_desconto = valor * desconto
+    valor_final = valor - valor_desconto
+    return valor_final, valor_desconto
+
+# Testando a função
+compras = [
+    (100, "vip"),
+    (200, "premium"),
+    (150, "regular"),
+    (300, "novo")
+]
+
+for valor, tipo in compras:
+    valor_final, desconto = calcular_desconto(valor, tipo)
+    print(f"R$ {valor} ({tipo}): R$ {valor_final:.2f} (desconto: R$ {desconto:.2f})")
+                </div>
+                
+                <h3>📊 Verificação de Aprovação</h3>
+                <div class="code-block">
+# Função para verificar aprovação
+def verificar_aprovacao(nota1, nota2, nota3):
+    media = (nota1 + nota2 + nota3) / 3
+    
+    if media >= 9.0:
+        conceito = "Excelente"
+        aprovado = True
+    elif media >= 7.0:
+        conceito = "Bom"
+        aprovado = True
+    elif media >= 5.0:
+        conceito = "Regular"
+        aprovado = True
+    else:
+        conceito = "Insuficiente"
+        aprovado = False
+    
+    return aprovado, media, conceito
+
+# Testando a função
+alunos = [
+    (9.5, 9.0, 9.2),
+    (8.0, 7.5, 8.5),
+    (6.0, 5.5, 6.5),
+    (4.0, 3.5, 4.5)
+]
+
+for i, (n1, n2, n3) in enumerate(alunos, 1):
+    aprovado, media, conceito = verificar_aprovacao(n1, n2, n3)
+    status = "Aprovado" if aprovado else "Reprovado"
+    print(f"Aluno {i}: {status} - Média: {media:.2f} - Conceito: {conceito}")
+                </div>
+                
+                <h3>🔐 Validação de Acesso</h3>
+                <div class="code-block">
+# Função para verificar acesso
+def verificar_acesso(idade, tem_cartao):
+    if idade < 18:
+        return False, "Menor de idade"
+    elif not tem_cartao:
+        return False, "Sem cartão"
+    else:
+        return True, "Acesso liberado"
+
+# Testando a função
+usuarios = [
+    (20, True),
+    (16, True),
+    (25, False),
+    (30, True)
+]
+
+for idade, cartao in usuarios:
+    acesso, mensagem = verificar_acesso(idade, cartao)
+    print(f"Idade: {idade}, Cartão: {cartao} - {mensagem}")
+                </div>
+                
+                <h3>📈 Classificação de Performance</h3>
+                <div class="code-block">
+# Função para classificar performance
+def classificar_performance(vendas, meta):
+    if vendas >= meta * 1.5:
+        return "Excelente", "Bônus máximo"
+    elif vendas >= meta * 1.2:
+        return "Muito bom", "Bônus alto"
+    elif vendas >= meta:
+        return "Bom", "Bônus padrão"
+    elif vendas >= meta * 0.8:
+        return "Regular", "Sem bônus"
+    else:
+        return "Insuficiente", "Atenção necessária"
+
+# Testando a função
+vendedores = [
+    (15000, 10000),
+    (12000, 10000),
+    (10000, 10000),
+    (8000, 10000),
+    (5000, 10000)
+]
+
+for vendas, meta in vendedores:
+    performance, bonus = classificar_performance(vendas, meta)
+    print(f"Vendas: R$ {vendas}, Meta: R$ {meta} - {performance} - {bonus}")
+                </div>
+                
+                <h3>🎯 Validação de Formulário</h3>
+                <div class="code-block">
+# Função para validar formulário
+def validar_formulario(nome, email, idade):
+    erros = []
+    
+    # Validar nome
+    if len(nome) < 2:
+        erros.append("Nome muito curto")
+    
+    # Validar email
+    if "@" not in email:
+        erros.append("Email inválido")
+    
+    # Validar idade
+    if idade < 0 or idade > 120:
+        erros.append("Idade inválida")
+    
+    if len(erros) == 0:
+        return True, "Formulário válido"
+    else:
+        return False, erros
+
+# Testando a função
+formularios = [
+    ("João", "joao@email.com", 25),
+    ("A", "email_invalido", 150),
+    ("Maria", "maria@email.com", -5),
+    ("Pedro", "pedro@email.com", 30)
+]
+
+for nome, email, idade in formularios:
+    valido, resultado = validar_formulario(nome, email, idade)
+    if valido:
+        print(f"✅ {resultado}")
+    else:
+        print(f"❌ Erros: {resultado}")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Validação:</strong> Sempre valide dados de entrada</li>
+                        <li><strong>Retorno:</strong> Use múltiplos returns para diferentes casos</li>
+                        <li><strong>Clareza:</strong> Use nomes descritivos para variáveis</li>
+                        <li><strong>Testes:</strong> Teste todos os cenários possíveis</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Sistema de empréstimo
+def avaliar_emprestimo(renda, idade, score):
+    if idade < 18 or idade > 65:
+        return False, "Idade fora do permitido"
+    
+    if renda < 1000:
+        return False, "Renda insuficiente"
+    
+    if score < 300:
+        return False, "Score muito baixo"
+    elif score < 600:
+        return True, "Empréstimo aprovado com juros altos"
+    elif score < 800:
+        return True, "Empréstimo aprovado com juros médios"
+    else:
+        return True, "Empréstimo aprovado com juros baixos"
+
+# Testando a função
+solicitantes = [
+    (2000, 25, 750),
+    (500, 30, 400),
+    (3000, 17, 800),
+    (1500, 35, 300),
+    (2500, 40, 850)
+]
+
+for renda, idade, score in solicitantes:
+    aprovado, mensagem = avaliar_emprestimo(renda, idade, score)
+    print(f"Renda: R$ {renda}, Idade: {idade}, Score: {score} - {mensagem}")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

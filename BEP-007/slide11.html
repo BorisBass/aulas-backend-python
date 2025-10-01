@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 11</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-search"></i> Acesso a Dicionários</h2>
+                
+                <h3>🔍 Métodos de Acesso</h3>
+                <div class="code-block">
+pessoa = {
+    "nome": "Ana Silva",
+    "idade": 28,
+    "profissao": "Designer",
+    "cidade": "Salvador"
+}
+
+# 1. Acesso direto com []
+nome = pessoa["nome"]
+idade = pessoa["idade"]
+print(f"Nome: {nome}, Idade: {idade}")
+
+# 2. Método get() - mais seguro
+nome = pessoa.get("nome")
+telefone = pessoa.get("telefone")  # Retorna None se não existir
+telefone_default = pessoa.get("telefone", "Não informado")
+
+print(f"Nome: {nome}")
+print(f"Telefone: {telefone}")  # None
+print(f"Telefone: {telefone_default}")  # Não informado
+                </div>
+                
+                <h3>🛡️ Acesso Seguro</h3>
+                <div class="code-block">
+# Comparação entre acesso direto e get()
+dados = {"nome": "João", "idade": 25}
+
+# Acesso direto - pode gerar erro
+# profissao = dados["profissao"]  # KeyError!
+
+# Acesso seguro com get()
+profissao = dados.get("profissao", "Não informado")
+print(f"Profissão: {profissao}")  # Não informado
+
+# Verificando existência antes de acessar
+if "profissao" in dados:
+    profissao = dados["profissao"]
+else:
+    profissao = "Não informado"
+print(f"Profissão: {profissao}")
+                </div>
+                
+                <h3>🔑 Iterando sobre Dicionários</h3>
+                <div class="code-block">
+contato = {
+    "nome": "Maria",
+    "telefone": "99999-8888",
+    "email": "maria@email.com",
+    "cidade": "Salvador"
+}
+
+# Iterando sobre chaves
+print("Chaves:")
+for chave in contato.keys():
+    print(f"  {chave}")
+
+# Iterando sobre valores
+print("\nValores:")
+for valor in contato.values():
+    print(f"  {valor}")
+
+# Iterando sobre pares chave-valor
+print("\nPares chave-valor:")
+for chave, valor in contato.items():
+    print(f"  {chave}: {valor}")
+
+# Iterando diretamente (sobre chaves)
+print("\nIteração direta:")
+for chave in contato:
+    print(f"  {chave}: {contato[chave]}")
+                </div>
+                
+                <h3>📊 Acesso a Dados Aninhados</h3>
+                <div class="code-block">
+# Dicionário aninhado
+empresa = {
+    "nome": "TechCorp",
+    "funcionarios": {
+        "joao": {
+            "cargo": "Desenvolvedor",
+            "salario": 5000,
+            "departamento": "TI"
+        },
+        "maria": {
+            "cargo": "Designer",
+            "salario": 4000,
+            "departamento": "Design"
+        }
+    }
+}
+
+# Acesso a dados aninhados
+print(f"Empresa: {empresa['nome']}")
+print(f"João - Cargo: {empresa['funcionarios']['joao']['cargo']}")
+print(f"João - Salário: R$ {empresa['funcionarios']['joao']['salario']}")
+
+# Acesso seguro a dados aninhados
+joao_salario = empresa.get("funcionarios", {}).get("joao", {}).get("salario", 0)
+print(f"Salário do João: R$ {joao_salario}")
+
+# Iterando sobre funcionários
+print("\nFuncionários:")
+for nome, dados in empresa["funcionarios"].items():
+    print(f"  {nome.title()}: {dados['cargo']} - R$ {dados['salario']}")
+                </div>
+                
+                <h3>🔍 Verificações e Testes</h3>
+                <div class="code-block">
+dados = {"a": 1, "b": 2, "c": 3}
+
+# Verificando existência de chaves
+print(f"'a' existe: {'a' in dados}")      # True
+print(f"'d' existe: {'d' in dados}")      # False
+
+# Verificando existência de valores
+print(f"Valor 2 existe: {2 in dados.values()}")  # True
+print(f"Valor 4 existe: {4 in dados.values()}")  # False
+
+# Verificando existência de itens
+print(f"('a', 1) existe: {('a', 1) in dados.items()}")  # True
+
+# Usando not in
+print(f"'d' não existe: {'d' not in dados}")  # True
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Usuários</h5>
+                    <div class="code-block">
+# Sistema de usuários
+usuarios = {
+    "admin": {
+        "senha": "123456",
+        "nivel": "administrador",
+        "ativo": True
+    },
+    "usuario1": {
+        "senha": "senha123",
+        "nivel": "usuario",
+        "ativo": True
+    }
+}
+
+# Verificando se usuário existe
+usuario = "admin"
+if usuario in usuarios:
+    print(f"Usuário {usuario} encontrado!")
+    dados = usuarios[usuario]
+    print(f"Nível: {dados['nivel']}")
+    print(f"Ativo: {dados['ativo']}")
+else:
+    print(f"Usuário {usuario} não encontrado!")
+
+# Verificando senha
+senha_digitada = "123456"
+if usuario in usuarios:
+    dados = usuarios[usuario]
+    if dados["senha"] == senha_digitada:
+        print("Senha correta! Acesso liberado.")
+    else:
+        print("Senha incorreta! Acesso negado.")
+
+# Listando todos os usuários
+print("\nTodos os usuários:")
+for nome, dados in usuarios.items():
+    status = "Ativo" if dados["ativo"] else "Inativo"
+    print(f"  {nome}: {dados['nivel']} - {status}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dicas de Acesso</h4>
+                    <ul>
+                        <li><strong>Use get():</strong> Para acesso seguro com valor padrão</li>
+                        <li><strong>Verifique existência:</strong> Use <code class="code-inline">in</code> antes de acessar</li>
+                        <li><strong>Iteração eficiente:</strong> Use <code class="code-inline">items()</code> para pares chave-valor</li>
+                        <li><strong>Dados aninhados:</strong> Acesse nível por nível</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

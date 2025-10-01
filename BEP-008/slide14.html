@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 14</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide14">
+                <h2><i class="fas fa-star"></i> Boas Práticas</h2>
+                
+                <h3>📝 Nomenclatura</h3>
+                <p>Use nomes descritivos e claros para suas funções.</p>
+                <div class="code-block">
+# ✅ Boa nomenclatura
+def calcular_media_notas(notas):
+    return sum(notas) / len(notas)
+
+def verificar_aprovacao(media):
+    return media >= 7.0
+
+def obter_nome_completo(nome, sobrenome):
+    return f"{nome} {sobrenome}"
+
+# ❌ Nomenclatura ruim
+def calc(n):
+    return sum(n) / len(n)
+
+def check(m):
+    return m >= 7.0
+
+def get(n, s):
+    return f"{n} {s}"
+                </div>
+                
+                <h3>🎯 Responsabilidade Única</h3>
+                <p>Cada função deve ter uma única responsabilidade.</p>
+                <div class="code-block">
+# ✅ Boa prática: Funções com responsabilidade única
+def calcular_media(notas):
+    return sum(notas) / len(notas)
+
+def verificar_aprovacao(media):
+    return media >= 7.0
+
+def mostrar_resultado(media, aprovado):
+    print(f"Média: {media:.2f}")
+    print(f"Status: {'Aprovado' if aprovado else 'Reprovado'}")
+
+# ❌ Má prática: Função com múltiplas responsabilidades
+def processar_tudo(notas):
+    media = sum(notas) / len(notas)
+    aprovado = media >= 7.0
+    print(f"Média: {media:.2f}")
+    print(f"Status: {'Aprovado' if aprovado else 'Reprovado'}")
+    return media, aprovado
+                </div>
+                
+                <h3>📏 Tamanho das Funções</h3>
+                <p>Mantenha suas funções pequenas e focadas.</p>
+                <div class="code-block">
+# ✅ Boa prática: Função pequena e focada
+def verificar_idade(idade):
+    if idade < 0:
+        return "Idade inválida"
+    elif idade < 18:
+        return "Menor de idade"
+    else:
+        return "Maior de idade"
+
+# ❌ Má prática: Função muito longa
+def processar_aluno_completo(nome, idade, notas, endereco, telefone):
+    # Validação de dados
+    if len(nome) < 2:
+        return "Nome inválido"
+    if idade < 0:
+        return "Idade inválida"
+    if len(notas) == 0:
+        return "Sem notas"
+    
+    # Cálculo da média
+    media = sum(notas) / len(notas)
+    
+    # Verificação de aprovação
+    if media >= 7.0:
+        status = "Aprovado"
+    else:
+        status = "Reprovado"
+    
+    # Criação do relatório
+    relatorio = f"Nome: {nome}\n"
+    relatorio += f"Idade: {idade}\n"
+    relatorio += f"Média: {media:.2f}\n"
+    relatorio += f"Status: {status}\n"
+    relatorio += f"Endereço: {endereco}\n"
+    relatorio += f"Telefone: {telefone}\n"
+    
+    return relatorio
+                </div>
+                
+                <h3>🔄 Funções Puras</h3>
+                <p>Prefira funções que não modificam variáveis externas.</p>
+                <div class="code-block">
+# ✅ Boa prática: Função pura
+def somar(a, b):
+    return a + b
+
+def calcular_media(notas):
+    return sum(notas) / len(notas)
+
+# ❌ Má prática: Função com efeitos colaterais
+contador = 0
+
+def somar_com_contador(a, b):
+    global contador
+    contador += 1
+    return a + b
+
+# ✅ Melhor: Função pura com contador como parâmetro
+def somar_pura(a, b, contador):
+    return a + b, contador + 1
+                </div>
+                
+                <h3>📋 Documentação</h3>
+                <p>Documente suas funções com comentários claros.</p>
+                <div class="code-block">
+# ✅ Boa prática: Função bem documentada
+def calcular_media(notas):
+    """
+    Calcula a média de uma lista de notas.
+    
+    Args:
+        notas (list): Lista de números representando as notas
+        
+    Returns:
+        float: Média das notas
+        
+    Raises:
+        ValueError: Se a lista estiver vazia
+    """
+    if len(notas) == 0:
+        raise ValueError("Lista de notas não pode estar vazia")
+    
+    return sum(notas) / len(notas)
+
+# ❌ Má prática: Função sem documentação
+def calc(n):
+    return sum(n) / len(n)
+                </div>
+                
+                <h3>⚠️ Tratamento de Erros</h3>
+                <div class="code-block">
+# ✅ Boa prática: Tratamento de erros
+def dividir(a, b):
+    if b == 0:
+        return None  # ou raise ValueError("Divisão por zero")
+    return a / b
+
+def calcular_raiz_quadrada(numero):
+    if numero < 0:
+        return None  # ou raise ValueError("Não é possível calcular raiz de número negativo")
+    return numero ** 0.5
+
+# ✅ Melhor: Usando exceções
+def dividir_seguro(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        return None
+
+def calcular_raiz_segura(numero):
+    try:
+        return numero ** 0.5
+    except ValueError:
+        return None
+                </div>
+                
+                <h3>🎯 Parâmetros e Retorno</h3>
+                <div class="code-block">
+# ✅ Boa prática: Parâmetros claros e retorno consistente
+def processar_notas(notas, peso_avaliacao=1.0):
+    """
+    Processa uma lista de notas com peso opcional.
+    
+    Args:
+        notas (list): Lista de notas
+        peso_avaliacao (float): Peso da avaliação (padrão: 1.0)
+        
+    Returns:
+        dict: Dicionário com estatísticas das notas
+    """
+    if len(notas) == 0:
+        return {"erro": "Lista vazia"}
+    
+    media = sum(notas) / len(notas)
+    media_ponderada = media * peso_avaliacao
+    
+    return {
+        "media": media,
+        "media_ponderada": media_ponderada,
+        "quantidade": len(notas),
+        "maior": max(notas),
+        "menor": min(notas)
+    }
+
+# ❌ Má prática: Parâmetros confusos e retorno inconsistente
+def processar(n, p=1):
+    if len(n) == 0:
+        return "erro"
+    return sum(n) / len(n) * p
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Resumo das Boas Práticas</h4>
+                    <ul>
+                        <li><strong>Nomes claros:</strong> Use nomes descritivos</li>
+                        <li><strong>Responsabilidade única:</strong> Uma função, uma tarefa</li>
+                        <li><strong>Tamanho adequado:</strong> Funções pequenas e focadas</li>
+                        <li><strong>Funções puras:</strong> Evite efeitos colaterais</li>
+                        <li><strong>Documentação:</strong> Comente suas funções</li>
+                        <li><strong>Tratamento de erros:</strong> Valide entradas e trate erros</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo de Refatoração</h5>
+                    <div class="code-block">
+# ❌ Código ruim
+def processar_tudo(nome, idade, notas):
+    if len(nome) < 2:
+        print("Nome inválido")
+        return
+    if idade < 0:
+        print("Idade inválida")
+        return
+    if len(notas) == 0:
+        print("Sem notas")
+        return
+    
+    media = sum(notas) / len(notas)
+    if media >= 7.0:
+        status = "Aprovado"
+    else:
+        status = "Reprovado"
+    
+    print(f"Nome: {nome}")
+    print(f"Idade: {idade}")
+    print(f"Média: {media:.2f}")
+    print(f"Status: {status}")
+
+# ✅ Código refatorado
+def validar_dados(nome, idade, notas):
+    if len(nome) < 2:
+        return False, "Nome inválido"
+    if idade < 0:
+        return False, "Idade inválida"
+    if len(notas) == 0:
+        return False, "Sem notas"
+    return True, "Dados válidos"
+
+def calcular_media(notas):
+    return sum(notas) / len(notas)
+
+def verificar_aprovacao(media):
+    return media >= 7.0
+
+def mostrar_resultado(nome, idade, media, aprovado):
+    print(f"Nome: {nome}")
+    print(f"Idade: {idade}")
+    print(f"Média: {media:.2f}")
+    print(f"Status: {'Aprovado' if aprovado else 'Reprovado'}")
+
+def processar_aluno(nome, idade, notas):
+    valido, mensagem = validar_dados(nome, idade, notas)
+    if not valido:
+        print(mensagem)
+        return
+    
+    media = calcular_media(notas)
+    aprovado = verificar_aprovacao(media)
+    mostrar_resultado(nome, idade, media, aprovado)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

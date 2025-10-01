@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 09</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide9">
+                <h2><i class="fas fa-sitemap"></i> Estrutura de Dicionários</h2>
+                
+                <h3>🏗️ Anatomia de um Dicionário</h3>
+                <div class="code-block">
+# Estrutura: {chave1: valor1, chave2: valor2, ...}
+contato = {
+    "nome": "Ana Costa",           # chave: "nome", valor: "Ana Costa"
+    "idade": 28,                   # chave: "idade", valor: 28
+    "telefone": "(71) 99999-7777", # chave: "telefone", valor: "(71) 99999-7777"
+    "email": "ana@email.com"       # chave: "email", valor: "ana@email.com"
+}
+
+# Visualizando a estrutura
+print("Chaves:", contato.keys())     # dict_keys(['nome', 'idade', 'telefone', 'email'])
+print("Valores:", contato.values())  # dict_values(['Ana Costa', 28, '(71) 99999-7777', 'ana@email.com'])
+print("Items:", contato.items())     # dict_items([('nome', 'Ana Costa'), ('idade', 28), ...])
+                </div>
+                
+                <h3>🔑 Tipos de Chaves</h3>
+                <div class="code-block">
+# Chaves podem ser de diferentes tipos
+dicionario_misto = {
+    "string": "valor1",           # String
+    42: "valor2",                 # Número inteiro
+    3.14: "valor3",               # Número float
+    True: "valor4",               # Boolean
+    (1, 2, 3): "valor5"          # Tupla (hashable)
+}
+
+# Chaves devem ser hashable (imutáveis)
+# ERRO: listas não podem ser chaves
+# dicio_erro = {[1, 2]: "valor"}  # TypeError: unhashable type: 'list'
+
+print(dicionario_misto["string"])    # valor1
+print(dicionario_misto[42])          # valor2
+print(dicionario_misto[True])        # valor4
+print(dicionario_misto[(1, 2, 3)])   # valor5
+                </div>
+                
+                <h3>📊 Tipos de Valores</h3>
+                <div class="code-block">
+# Valores podem ser de qualquer tipo
+dicionario_valores = {
+    "string": "texto",
+    "numero": 42,
+    "float": 3.14,
+    "boolean": True,
+    "lista": [1, 2, 3],
+    "tupla": (4, 5, 6),
+    "dicionario": {"nested": "value"},
+    "none": None
+}
+
+# Acessando diferentes tipos de valores
+print(dicionario_valores["string"])        # texto
+print(dicionario_valores["lista"])         # [1, 2, 3]
+print(dicionario_valores["dicionario"])    # {'nested': 'value'}
+print(dicionario_valores["dicionario"]["nested"])  # value
+                </div>
+                
+                <h3>🔄 Dicionários Aninhados</h3>
+                <div class="code-block">
+# Dicionário dentro de dicionário
+empresa = {
+    "nome": "TechCorp",
+    "funcionarios": {
+        "joao": {
+            "cargo": "Desenvolvedor",
+            "salario": 5000,
+            "departamento": "TI"
+        },
+        "maria": {
+            "cargo": "Designer",
+            "salario": 4000,
+            "departamento": "Design"
+        }
+    },
+    "endereco": {
+        "rua": "Rua das Flores, 123",
+        "cidade": "Salvador",
+        "estado": "BA"
+    }
+}
+
+# Acessando dados aninhados
+print(f"Empresa: {empresa['nome']}")
+print(f"João - Cargo: {empresa['funcionarios']['joao']['cargo']}")
+print(f"Endereço: {empresa['endereco']['rua']}")
+                </div>
+                
+                <h3>📏 Tamanho e Verificações</h3>
+                <div class="code-block">
+dados = {"a": 1, "b": 2, "c": 3}
+
+# Tamanho do dicionário
+print(f"Tamanho: {len(dados)}")  # 3
+
+# Verificar se chave existe
+print(f"'a' existe: {'a' in dados}")      # True
+print(f"'d' existe: {'d' in dados}")      # False
+
+# Verificar se valor existe
+print(f"Valor 2 existe: {2 in dados.values()}")  # True
+print(f"Valor 4 existe: {4 in dados.values()}")  # False
+
+# Verificar se item existe
+print(f"('a', 1) existe: {('a', 1) in dados.items()}")  # True
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Sistema de Notas</h5>
+                    <div class="code-block">
+# Sistema de notas de alunos
+notas_alunos = {
+    "Ana": {
+        "matematica": [8.5, 7.0, 9.2],
+        "portugues": [7.5, 8.0, 8.5],
+        "ciencias": [9.0, 8.5, 9.5]
+    },
+    "Bruno": {
+        "matematica": [6.8, 8.0, 7.5],
+        "portugues": [7.2, 6.5, 8.0],
+        "ciencias": [8.0, 7.5, 8.5]
+    }
+}
+
+# Calculando média de um aluno
+aluno = "Ana"
+materia = "matematica"
+notas = notas_alunos[aluno][materia]
+media = sum(notas) / len(notas)
+
+print(f"{aluno} - {materia.title()}: {media:.2f}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Chaves únicas:</strong> Chaves duplicadas sobrescrevem valores anteriores</li>
+                        <li><strong>Hashable:</strong> Chaves devem ser imutáveis (strings, números, tuplas)</li>
+                        <li><strong>Flexibilidade:</strong> Valores podem ser de qualquer tipo</li>
+                        <li><strong>Aninhamento:</strong> Dicionários podem conter outros dicionários</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

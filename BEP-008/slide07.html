@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 07</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide7">
+                <h2><i class="fas fa-arrow-left"></i> Retorno de Valores</h2>
+                
+                <h3>🔄 Comando return</h3>
+                <p>O comando <strong>return</strong> envia um valor de volta para quem chamou a função.</p>
+                <div class="code-block">
+# Função sem return (retorna None)
+def cumprimentar():
+    print("Olá, mundo!")
+
+# Função com return
+def obter_saudacao():
+    return "Olá, mundo!"
+
+# Testando as funções
+cumprimentar()  # Imprime: Olá, mundo!
+mensagem = obter_saudacao()  # Retorna: "Olá, mundo!"
+print(mensagem)
+                </div>
+                
+                <h3>📊 Tipos de Retorno</h3>
+                <div class="code-block">
+# Retornando números
+def calcular_quadrado(numero):
+    return numero * numero
+
+# Retornando texto
+def obter_nome_completo(nome, sobrenome):
+    return f"{nome} {sobrenome}"
+
+# Retornando booleanos
+def verificar_par(numero):
+    return numero % 2 == 0
+
+# Retornando listas
+def criar_lista_pares():
+    return [2, 4, 6, 8, 10]
+
+# Testando as funções
+quadrado = calcular_quadrado(5)
+nome = obter_nome_completo("João", "Silva")
+par = verificar_par(8)
+pares = criar_lista_pares()
+
+print(f"Quadrado: {quadrado}")
+print(f"Nome: {nome}")
+print(f"É par: {par}")
+print(f"Pares: {pares}")
+                </div>
+                
+                <h3>🎯 Múltiplos Returns</h3>
+                <div class="code-block">
+# Função com múltiplos returns
+def verificar_idade(idade):
+    if idade < 0:
+        return "Idade inválida"
+    elif idade < 13:
+        return "Criança"
+    elif idade < 20:
+        return "Adolescente"
+    elif idade < 60:
+        return "Adulto"
+    else:
+        return "Idoso"
+
+# Testando diferentes idades
+print(verificar_idade(5))    # Criança
+print(verificar_idade(15))  # Adolescente
+print(verificar_idade(25))  # Adulto
+print(verificar_idade(65))  # Idoso
+print(verificar_idade(-1))  # Idade inválida
+                </div>
+                
+                <h3>📦 Retornando Múltiplos Valores</h3>
+                <div class="code-block">
+# Função que retorna múltiplos valores
+def calcular_estatisticas(numeros):
+    soma = sum(numeros)
+    media = soma / len(numeros)
+    maior = max(numeros)
+    menor = min(numeros)
+    return soma, media, maior, menor
+
+# Usando a função
+lista = [1, 2, 3, 4, 5]
+soma, media, maior, menor = calcular_estatisticas(lista)
+
+print(f"Lista: {lista}")
+print(f"Soma: {soma}")
+print(f"Média: {media:.2f}")
+print(f"Maior: {maior}")
+print(f"Menor: {menor}")
+                </div>
+                
+                <h3>⚠️ Funções sem Return</h3>
+                <div class="code-block">
+# Função sem return (retorna None)
+def mostrar_informacoes():
+    print("Nome: João Silva")
+    print("Idade: 25 anos")
+    print("Cidade: Salvador")
+
+# Função com return None (explícito)
+def processar_dados():
+    print("Processando dados...")
+    return None
+
+# Testando as funções
+resultado1 = mostrar_informacoes()
+resultado2 = processar_dados()
+
+print(f"Resultado 1: {resultado1}")  # None
+print(f"Resultado 2: {resultado2}")  # None
+                </div>
+                
+                <h3>🔄 Usando Valores Retornados</h3>
+                <div class="code-block">
+# Função que calcula e retorna
+def calcular_media(nota1, nota2, nota3):
+    return (nota1 + nota2 + nota3) / 3
+
+# Usando o valor retornado
+media = calcular_media(8.5, 7.0, 9.2)
+print(f"Média: {media:.2f}")
+
+# Usando em cálculos
+nova_media = media + 1.0
+print(f"Nova média: {nova_media:.2f}")
+
+# Usando em condições
+if media >= 7.0:
+    print("Aprovado!")
+else:
+    print("Reprovado!")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Dicas Importantes</h4>
+                    <ul>
+                        <li><strong>Return único:</strong> Uma função pode ter múltiplos returns</li>
+                        <li><strong>Valor padrão:</strong> Funções sem return retornam None</li>
+                        <li><strong>Múltiplos valores:</strong> Retornados como tupla</li>
+                        <li><strong>Uso imediato:</strong> Pode usar o valor retornado diretamente</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Função para verificar aprovação
+def verificar_aprovacao(nota1, nota2, nota3):
+    media = (nota1 + nota2 + nota3) / 3
+    if media >= 7.0:
+        return True, media
+    else:
+        return False, media
+
+# Testando a função
+aprovado, media = verificar_aprovacao(8.5, 7.0, 9.2)
+if aprovado:
+    print(f"Aprovado com média {media:.2f}")
+else:
+    print(f"Reprovado com média {media:.2f}")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

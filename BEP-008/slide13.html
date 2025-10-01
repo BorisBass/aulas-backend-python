@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 13</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide13">
+                <h2><i class="fas fa-calculator"></i> Projeto Integrador: Calculadora</h2>
+                
+                <h3>🎯 Objetivo do Projeto</h3>
+                <p>Criar uma calculadora completa usando funções, aplicando todos os conceitos aprendidos.</p>
+                
+                <h3>🔧 Funções Básicas</h3>
+                <div class="code-block">
+# Funções de operação básica
+def somar(a, b):
+    return a + b
+
+def subtrair(a, b):
+    return a - b
+
+def multiplicar(a, b):
+    return a * b
+
+def dividir(a, b):
+    if b == 0:
+        return None  # Divisão por zero
+    return a / b
+
+# Testando as funções
+print("Testando operações básicas:")
+print(f"5 + 3 = {somar(5, 3)}")
+print(f"10 - 4 = {subtrair(10, 4)}")
+print(f"6 * 7 = {multiplicar(6, 7)}")
+print(f"15 / 3 = {dividir(15, 3)}")
+print(f"10 / 0 = {dividir(10, 0)}")
+                </div>
+                
+                <h3>📊 Funções Avançadas</h3>
+                <div class="code-block">
+# Função para calcular potência
+def calcular_potencia(base, expoente):
+    return base ** expoente
+
+# Função para calcular raiz quadrada
+def calcular_raiz_quadrada(numero):
+    if numero < 0:
+        return None  # Raiz de número negativo
+    return numero ** 0.5
+
+# Função para calcular porcentagem
+def calcular_porcentagem(valor, percentual):
+    return (valor * percentual) / 100
+
+# Testando as funções
+print("\nTestando operações avançadas:")
+print(f"2^8 = {calcular_potencia(2, 8)}")
+print(f"√16 = {calcular_raiz_quadrada(16)}")
+print(f"√(-4) = {calcular_raiz_quadrada(-4)}")
+print(f"20% de 150 = {calcular_porcentagem(150, 20)}")
+                </div>
+                
+                <h3>🧮 Função Calculadora Principal</h3>
+                <div class="code-block">
+# Função principal da calculadora
+def calculadora(num1, num2, operacao):
+    if operacao == "+":
+        return somar(num1, num2)
+    elif operacao == "-":
+        return subtrair(num1, num2)
+    elif operacao == "*":
+        return multiplicar(num1, num2)
+    elif operacao == "/":
+        return dividir(num1, num2)
+    elif operacao == "^":
+        return calcular_potencia(num1, num2)
+    else:
+        return None  # Operação inválida
+
+# Testando a calculadora
+operacoes = [
+    (10, 5, "+"),
+    (10, 5, "-"),
+    (10, 5, "*"),
+    (10, 5, "/"),
+    (2, 3, "^"),
+    (10, 0, "/"),
+    (10, 5, "%")
+]
+
+print("\nTestando a calculadora:")
+for num1, num2, op in operacoes:
+    resultado = calculadora(num1, num2, op)
+    if resultado is not None:
+        print(f"{num1} {op} {num2} = {resultado}")
+    else:
+        print(f"{num1} {op} {num2} = erro (operação inválida ou divisão por zero)")
+                </div>
+                
+                <h3>📋 Função de Menu</h3>
+                <div class="code-block">
+# Função para mostrar menu
+def mostrar_menu():
+    print("\n" + "="*40)
+    print("CALCULADORA PYTHON")
+    print("="*40)
+    print("1. Soma (+)")
+    print("2. Subtração (-)")
+    print("3. Multiplicação (*)")
+    print("4. Divisão (/)")
+    print("5. Potência (^)")
+    print("6. Raiz quadrada (√)")
+    print("7. Porcentagem (%)")
+    print("0. Sair")
+    print("="*40)
+
+# Função para obter operação
+def obter_operacao():
+    operacoes = {
+        "1": "+", "2": "-", "3": "*", "4": "/", 
+        "5": "^", "6": "√", "7": "%"
+    }
+    return operacoes
+
+# Testando as funções
+mostrar_menu()
+operacoes = obter_operacao()
+print(f"Operações disponíveis: {operacoes}")
+                </div>
+                
+                <h3>🎮 Função de Interface</h3>
+                <div class="code-block">
+# Função para obter números
+def obter_numeros():
+    try:
+        num1 = float(input("Digite o primeiro número: "))
+        num2 = float(input("Digite o segundo número: "))
+        return num1, num2
+    except ValueError:
+        print("Erro: Digite números válidos!")
+        return None, None
+
+# Função para obter um número
+def obter_numero():
+    try:
+        numero = float(input("Digite o número: "))
+        return numero
+    except ValueError:
+        print("Erro: Digite um número válido!")
+        return None
+
+# Função para processar operação
+def processar_operacao(operacao):
+    if operacao in ["+", "-", "*", "/", "^"]:
+        num1, num2 = obter_numeros()
+        if num1 is not None and num2 is not None:
+            resultado = calculadora(num1, num2, operacao)
+            if resultado is not None:
+                print(f"Resultado: {resultado}")
+            else:
+                print("Erro na operação!")
+    
+    elif operacao == "√":
+        numero = obter_numero()
+        if numero is not None:
+            resultado = calcular_raiz_quadrada(numero)
+            if resultado is not None:
+                print(f"Resultado: {resultado}")
+            else:
+                print("Erro: Não é possível calcular raiz de número negativo!")
+    
+    elif operacao == "%":
+        valor = float(input("Digite o valor: "))
+        percentual = float(input("Digite o percentual: "))
+        resultado = calcular_porcentagem(valor, percentual)
+        print(f"Resultado: {resultado}")
+                </div>
+                
+                <h3>🔄 Função Principal</h3>
+                <div class="code-block">
+# Função principal do programa
+def executar_calculadora():
+    while True:
+        mostrar_menu()
+        opcao = input("Escolha uma opção: ")
+        
+        if opcao == "0":
+            print("Obrigado por usar a calculadora!")
+            break
+        elif opcao in ["1", "2", "3", "4", "5"]:
+            operacoes = obter_operacao()
+            operacao = operacoes[opcao]
+            processar_operacao(operacao)
+        elif opcao == "6":
+            processar_operacao("√")
+        elif opcao == "7":
+            processar_operacao("%")
+        else:
+            print("Opção inválida! Tente novamente.")
+        
+        input("\nPressione Enter para continuar...")
+
+# Executar a calculadora
+# executar_calculadora()  # Descomente para executar
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Características do Projeto</h4>
+                    <ul>
+                        <li><strong>Modular:</strong> Cada operação em uma função</li>
+                        <li><strong>Reutilizável:</strong> Funções podem ser usadas independentemente</li>
+                        <li><strong>Robusto:</strong> Tratamento de erros e validações</li>
+                        <li><strong>Extensível:</strong> Fácil de adicionar novas operações</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo de Uso</h5>
+                    <div class="code-block">
+# Exemplo de uso das funções
+print("Exemplo de uso da calculadora:")
+print(f"Soma: {calculadora(10, 5, '+')}")
+print(f"Subtração: {calculadora(10, 5, '-')}")
+print(f"Multiplicação: {calculadora(10, 5, '*')}")
+print(f"Divisão: {calculadora(10, 5, '/')}")
+print(f"Potência: {calculadora(2, 3, '^')}")
+print(f"Raiz quadrada: {calcular_raiz_quadrada(25)}")
+print(f"Porcentagem: {calcular_porcentagem(200, 15)}")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

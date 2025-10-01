@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-007: Tuplas e Dicionários - Slide 03</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h1>
+            <p>Conheça outras estruturas de dados fundamentais em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide3">
+                <h2><i class="fas fa-list-ol"></i> O que são Tuplas?</h2>
+                
+                <div class="highlight">
+                    <h3>📖 Definição</h3>
+                    <p>Uma <strong>tupla</strong> é uma coleção ordenada e <strong>imutável</strong> de elementos em Python. É similar a uma lista, mas com a diferença fundamental de que não pode ser modificada após sua criação.</p>
+                </div>
+                
+                <h3>🔧 Sintaxe Básica</h3>
+                <div class="code-block">
+# Criação de tuplas
+tupla_vazia = ()
+tupla_com_elementos = (1, 2, 3, 4, 5)
+tupla_mista = ("Python", 3.9, True, [1, 2, 3])
+
+# Também pode ser criada sem parênteses (em alguns casos)
+tupla_simples = 1, 2, 3, 4, 5
+                </div>
+                
+                <h3>✨ Características das Tuplas</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Descrição</th>
+                            <th>Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Ordenada</strong></td>
+                            <td>Elementos têm posição fixa</td>
+                            <td><code class="code-inline">(1, 2, 3) != (3, 2, 1)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Imutável</strong></td>
+                            <td>Não pode ser alterada após criação</td>
+                            <td><code class="code-inline">tupla[0] = 10  # ERRO!</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Indexada</strong></td>
+                            <td>Acesso por índice (0, 1, 2...)</td>
+                            <td><code class="code-inline">tupla[0]</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Heterogênea</strong></td>
+                            <td>Pode conter diferentes tipos</td>
+                            <td><code class="code-inline">(1, "texto", True)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Dados de uma pessoa
+pessoa = ("João Silva", 25, "Engenheiro", "Salvador")
+
+# Acessando elementos
+nome = pessoa[0]        # "João Silva"
+idade = pessoa[1]       # 25
+profissao = pessoa[2]   # "Engenheiro"
+cidade = pessoa[3]      # "Salvador"
+
+print(f"Nome: {nome}, Idade: {idade}")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-info-circle"></i> Vantagens das Tuplas</h4>
+                    <ul>
+                        <li><strong>Performance:</strong> Mais rápidas que listas</li>
+                        <li><strong>Segurança:</strong> Dados não podem ser alterados acidentalmente</li>
+                        <li><strong>Memória:</strong> Consomem menos memória</li>
+                        <li><strong>Hashable:</strong> Podem ser usadas como chaves em dicionários</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-008: Funções em Python - Slide 06</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide6">
+                <h2><i class="fas fa-list"></i> Tipos de Parâmetros</h2>
+                
+                <h3>📍 Parâmetros Posicionais</h3>
+                <p>Argumentos são passados na ordem dos parâmetros.</p>
+                <div class="code-block">
+def criar_pessoa(nome, idade, cidade):
+    return f"{nome}, {idade} anos, de {cidade}"
+
+# Chamada posicional
+pessoa1 = criar_pessoa("João", 25, "Salvador")
+print(pessoa1)  # João, 25 anos, de Salvador
+
+# Ordem importa!
+pessoa2 = criar_pessoa("Salvador", 25, "João")  # Resultado diferente!
+print(pessoa2)  # Salvador, 25 anos, de João
+                </div>
+                
+                <h3>🏷️ Parâmetros Nomeados</h3>
+                <p>Especifique o nome do parâmetro na chamada.</p>
+                <div class="code-block">
+def criar_pessoa(nome, idade, cidade):
+    return f"{nome}, {idade} anos, de {cidade}"
+
+# Chamada nomeada (ordem não importa)
+pessoa1 = criar_pessoa(idade=25, nome="João", cidade="Salvador")
+print(pessoa1)  # João, 25 anos, de Salvador
+
+# Misturando posicional e nomeado
+pessoa2 = criar_pessoa("Maria", cidade="Rio de Janeiro", idade=30)
+print(pessoa2)  # Maria, 30 anos, de Rio de Janeiro
+                </div>
+                
+                <h3>🔧 Valores Padrão</h3>
+                <p>Parâmetros opcionais com valores padrão.</p>
+                <div class="code-block">
+# Função com valor padrão
+def multiplicar(a, b=2):
+    return a * b
+
+# Chamadas diferentes
+resultado1 = multiplicar(5, 3)  # 5 * 3 = 15
+resultado2 = multiplicar(5)    # 5 * 2 = 10 (usa padrão)
+resultado3 = multiplicar(5, b=4)  # 5 * 4 = 20
+
+print(f"Resultado 1: {resultado1}")
+print(f"Resultado 2: {resultado2}")
+print(f"Resultado 3: {resultado3}")
+                </div>
+                
+                <h3>🎯 Exemplos com Valores Padrão</h3>
+                <div class="code-block">
+# Função de saudação com título padrão
+def cumprimentar(nome, titulo="Sr."):
+    return f"Olá, {titulo} {nome}!"
+
+# Diferentes chamadas
+print(cumprimentar("João"))                    # Olá, Sr. João!
+print(cumprimentar("Maria", "Sra."))          # Olá, Sra. Maria!
+print(cumprimentar("Pedro", "Dr."))           # Olá, Dr. Pedro!
+
+# Função de cálculo com operação padrão
+def calcular(a, b, operacao="+"):
+    if operacao == "+":
+        return a + b
+    elif operacao == "-":
+        return a - b
+    elif operacao == "*":
+        return a * b
+    elif operacao == "/":
+        return a / b
+
+print(calcular(10, 5))        # 15 (soma padrão)
+print(calcular(10, 5, "-"))   # 5 (subtração)
+print(calcular(10, 5, "*"))   # 50 (multiplicação)
+                </div>
+                
+                <h3>⚠️ Regras dos Valores Padrão</h3>
+                <div class="code-block">
+# ✅ Correto: parâmetros com padrão no final
+def funcao_correta(a, b, c=10):
+    return a + b + c
+
+# ❌ Erro: parâmetro sem padrão após parâmetro com padrão
+def funcao_errada(a, b=10, c):  # Erro!
+    return a + b + c
+
+# ✅ Correto: todos os parâmetros com padrão
+def funcao_todos_padrao(a=1, b=2, c=3):
+    return a + b + c
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Cuidados Importantes</h4>
+                    <ul>
+                        <li><strong>Ordem:</strong> Parâmetros sem padrão devem vir antes dos com padrão</li>
+                        <li><strong>Valores padrão:</strong> São calculados uma vez na definição</li>
+                        <li><strong>Mutabilidade:</strong> Evite usar listas ou dicionários como padrão</li>
+                        <li><strong>Clareza:</strong> Use nomes descritivos para parâmetros</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Função para formatar texto
+def formatar_texto(texto, maiusculo=False, tamanho=50):
+    if maiusculo:
+        texto = texto.upper()
+    
+    # Centralizar texto
+    texto_formatado = texto.center(tamanho)
+    return texto_formatado
+
+# Diferentes formatações
+print(formatar_texto("Python"))
+print(formatar_texto("Python", maiusculo=True))
+print(formatar_texto("Python", tamanho=30))
+print(formatar_texto("Python", maiusculo=True, tamanho=30))
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
