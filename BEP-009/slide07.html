@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 07</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide7">
+                <h2><i class="fas fa-tools"></i> Método format()</h2>
+                <h3>🔧 Método format()</h3>
+<p>Formatação de strings usando o método format()</p>
+
+<div class="code-block">
+# Formatação posicional
+nome = "Maria"
+idade = 30
+print("Olá, {}! Você tem {} anos.".format(nome, idade))
+
+# Formatação com índices
+print("Olá, {0}! Você tem {1} anos.".format(nome, idade))
+print("Idade: {1}, Nome: {0}".format(nome, idade))
+</div>
+
+<h3>🏷️ Formatação com Nomes</h3>
+<div class="code-block">
+# Formatação com nomes
+print("Olá, {nome}! Você tem {idade} anos.".format(nome="João", idade=25))
+
+# Com dicionário
+dados = {"nome": "Ana", "idade": 28}
+print("Olá, {nome}! Você tem {idade} anos.".format(**dados))
+</div>
+
+<h3>📊 Formatação de Números</h3>
+<div class="code-block">
+# Formatação de decimais
+preco = 19.99
+print("Preço: R$ {:.2f}".format(preco))
+
+# Formatação com separadores
+numero = 1000000
+print("Número: {:,}".format(numero))  # 1,000,000
+
+# Formatação de percentual
+taxa = 0.15
+print("Taxa: {:.1%}".format(taxa))
+</div>
+
+<div class="example">
+<h5>💡 Exemplo Prático</h5>
+<div class="code-block">
+# Relatório de vendas
+vendas = [
+    {"produto": "Notebook", "quantidade": 5, "preco": 2500.00},
+    {"produto": "Mouse", "quantidade": 10, "preco": 25.50}
+]
+
+for item in vendas:
+    total = item["quantidade"] * item["preco"]
+    print("{produto:10} | {quantidade:2d} x R$ {preco:7.2f} = R$ {total:8.2f}".format(
+        produto=item["produto"],
+        quantidade=item["quantidade"],
+        preco=item["preco"],
+        total=total
+    ))
+</div>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

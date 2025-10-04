@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-003: Operadores em Python - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-003: Operadores em Python</h1>
+            <p>Aritméticos, Relacionais e Lógicos</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+            <div class="slide active" id="slide4">
+                <h2><i class="fas fa-brain"></i> Operadores Lógicos</h2>
+                
+                <h3>🧠 Combinando Condições</h3>
+                <p>Os operadores lógicos combinam condições para formar expressões mais complexas:</p>
+                
+                <div class="code-block">
+# Operadores lógicos
+idade = 20
+salario = 5000
+
+# AND: ambas condições devem ser verdadeiras
+print(f"Maior de idade E salário alto: {idade >= 18 and salario > 3000}")
+
+# OR: pelo menos uma condição deve ser verdadeira
+print(f"Menor de idade OU salário baixo: {idade < 18 or salario < 3000}")
+
+# NOT: inverte o resultado
+print(f"NÃO é menor de idade: {not (idade < 18)}")
+                </div>
+                
+                <h3>📊 Tabela de Operadores Lógicos</h3>
+                <table class="code-table">
+                    <tr><th>Operador</th><th>Nome</th><th>Exemplo</th><th>Resultado</th></tr>
+                    <tr><td>and</td><td>E lógico</td><td>True and False</td><td>False</td></tr>
+                    <tr><td>or</td><td>OU lógico</td><td>True or False</td><td>True</td></tr>
+                    <tr><td>not</td><td>NÃO lógico</td><td>not True</td><td>False</td></tr>
+                </table>
+                
+                <h3>🔍 Tabela Verdade</h3>
+                <table class="code-table">
+                    <tr><th>A</th><th>B</th><th>A and B</th><th>A or B</th><th>not A</th></tr>
+                    <tr><td>True</td><td>True</td><td>True</td><td>True</td><td>False</td></tr>
+                    <tr><td>True</td><td>False</td><td>False</td><td>True</td><td>False</td></tr>
+                    <tr><td>False</td><td>True</td><td>False</td><td>True</td><td>True</td></tr>
+                    <tr><td>False</td><td>False</td><td>False</td><td>False</td><td>True</td></tr>
+                </table>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático: Sistema de Login</h5>
+                    <div class="code-block">
+usuario = input("Usuário: ")
+senha = input("Senha: ")
+
+# Verifica se usuário E senha estão corretos
+if usuario == "admin" and senha == "123456":
+    print("Login realizado com sucesso!")
+else:
+    print("Usuário ou senha incorretos!")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Use parênteses para agrupar condições complexas: (idade >= 18) and (salario > 3000)</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

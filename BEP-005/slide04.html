@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-005: Estruturas de Repetição - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-005: Estruturas de Repetição</h1>
+            <p>for e while em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide4">
+                <h2><i class="fas fa-stop"></i> Controle de Loops</h2>
+                
+                <h3>🛑 break e continue</h3>
+                <p>Podemos controlar o fluxo dos loops com break e continue:</p>
+                
+                <div class="code-block">
+# break: para o loop completamente
+for i in range(10):
+    if i == 5:
+        break  # Para aqui
+    print(f"Número: {i}")
+
+# continue: pula para a próxima iteração
+for i in range(10):
+    if i % 2 == 0:
+        continue  # Pula números pares
+    print(f"Ímpar: {i}")
+                </div>
+                
+                <h3>📝 Exemplo: Busca de Número</h3>
+                <div class="code-block">
+# Buscar um número específico
+numeros = [1, 3, 5, 7, 9, 11, 13, 15]
+numero_busca = int(input("Digite um número para buscar: "))
+
+encontrado = False
+for num in numeros:
+    if num == numero_busca:
+        print(f"Número {numero_busca} encontrado!")
+        encontrado = True
+        break  # Para a busca
+
+if not encontrado:
+    print(f"Número {numero_busca} não encontrado!")
+                </div>
+                
+                <h3>🎯 Exemplo: Números Ímpares</h3>
+                <div class="code-block">
+# Mostrar apenas números ímpares
+print("Números ímpares de 1 a 20:")
+for i in range(1, 21):
+    if i % 2 == 0:
+        continue  # Pula números pares
+    print(f"Ímpar: {i}")
+                </div>
+                
+                <h3>🔍 Exemplo: Validação com Limite</h3>
+                <div class="code-block">
+# Tentativas limitadas de login
+tentativas = 0
+max_tentativas = 3
+
+while tentativas < max_tentativas:
+    senha = input("Digite a senha: ")
+    if senha == "123456":
+        print("Login realizado!")
+        break
+    else:
+        tentativas += 1
+        if tentativas < max_tentativas:
+            print(f"Senha incorreta! Tentativas restantes: {max_tentativas - tentativas}")
+        else:
+            print("Conta bloqueada!")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Use break para sair de loops quando encontrar o que procura. Use continue para pular iterações desnecessárias!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

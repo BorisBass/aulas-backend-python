@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-004: Estruturas Condicionais - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-004: Estruturas Condicionais</h1>
+            <p>if, elif, else em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide3">
+                <h2><i class="fas fa-arrow-right"></i> Estrutura if-else</h2>
+                
+                <h3>🔄 Duas Opções</h3>
+                <p>O if-else executa um bloco se a condição for verdadeira, outro se for falsa:</p>
+                
+                <div class="code-block">
+# Sintaxe do if-else
+if condição:
+    # código se condição for True
+    print("Condição verdadeira!")
+else:
+    # código se condição for False
+    print("Condição falsa!")
+                </div>
+                
+                <h3>📝 Exemplo Prático</h3>
+                <div class="code-block">
+# Verificação de aprovação
+nota = float(input("Digite sua nota: "))
+
+if nota >= 7.0:
+    print("Aprovado! Parabéns!")
+else:
+    print("Reprovado. Estude mais!")
+
+print("Fim do programa")
+                </div>
+                
+                <h3>🎯 Mais Exemplos</h3>
+                <div class="code-block">
+# Verificação de idade
+idade = int(input("Sua idade: "))
+
+if idade >= 18:
+    print("Maior de idade")
+    print("Pode votar")
+else:
+    print("Menor de idade")
+    print("Não pode votar")
+
+# Verificação de número par/ímpar
+numero = int(input("Digite um número: "))
+
+if numero % 2 == 0:
+    print(f"{numero} é par")
+else:
+    print(f"{numero} é ímpar")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Use if-else quando tiver exatamente duas situações possíveis!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

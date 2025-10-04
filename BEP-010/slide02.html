@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-010: Tratamento de Exceções - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-010: Tratamento de Exceções</h1>
+            <p>Torne seus programas mais robustos e confiáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide2">
+                <h2><i class="fas fa-exclamation-circle"></i> O que são Exceções?</h2>
+                
+                <h3>🔍 Definição</h3>
+                <p>Exceções são <strong>erros que ocorrem durante a execução</strong> de um programa. Quando uma exceção acontece, o programa para abruptamente, a menos que o erro seja tratado.</p>
+                
+                <div class="code-block">
+# Exemplo de erro não tratado
+numero = int("abc")  # ValueError: invalid literal for int()
+                </div>
+                
+                <h3>📝 Exemplos de Exceções Comuns</h3>
+                
+                <div class="code-block">
+# 1. ValueError - Valor inválido
+idade = int("vinte")  # Erro: não é um número
+
+# 2. ZeroDivisionError - Divisão por zero
+resultado = 10 / 0  # Erro: divisão por zero
+
+# 3. TypeError - Tipo incompatível
+resultado = "5" + 3  # Erro: não pode somar string com int
+
+# 4. IndexError - Índice fora do range
+lista = [1, 2, 3]
+elemento = lista[10]  # Erro: índice não existe
+
+# 5. KeyError - Chave não encontrada
+dicionario = {"nome": "Ana"}
+idade = dicionario["idade"]  # Erro: chave não existe
+
+# 6. FileNotFoundError - Arquivo não encontrado
+arquivo = open("arquivo_inexistente.txt")  # Erro: arquivo não existe
+                </div>
+                
+                <h3>🎯 Por que Exceções Acontecem?</h3>
+                <ul>
+                    <li><strong>Entrada do usuário:</strong> Dados inválidos ou inesperados</li>
+                    <li><strong>Recursos externos:</strong> Arquivos, banco de dados, rede</li>
+                    <li><strong>Lógica de programação:</strong> Erros no código</li>
+                    <li><strong>Limites do sistema:</strong> Memória, processamento</li>
+                </ul>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Sem Tratamento</h4>
+                    <p>Quando uma exceção não é tratada, o programa <strong>para completamente</strong> e mostra uma mensagem de erro técnica que pode confundir o usuário.</p>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Com Tratamento</h4>
+                    <p>Com tratamento adequado, o programa pode:</p>
+                    <ul>
+                        <li>Continuar executando normalmente</li>
+                        <li>Mostrar mensagens amigáveis ao usuário</li>
+                        <li>Registrar o erro para análise posterior</li>
+                        <li>Tomar ações corretivas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

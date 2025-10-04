@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-010: Tratamento de Exceções - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-010: Tratamento de Exceções</h1>
+            <p>Torne seus programas mais robustos e confiáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide3">
+                <h2><i class="fas fa-shield-alt"></i> Try-Except - Capturando Exceções</h2>
+                <h3>🔍 Sintaxe Básica</h3>
+<p>Use <code>try-except</code> para capturar e tratar exceções:</p>
+<div class="code-block">
+# Sintaxe básica
+try:
+    # código que pode gerar erro
+    numero = int(input("Digite um número: "))
+except ValueError:
+    # código executado se houver erro
+    print("Erro: Digite apenas números!")
+</div>
+
+<h3>📝 Exemplo Completo</h3>
+<div class="code-block">
+# Calculadora segura
+try:
+    num1 = float(input("Número 1: "))
+    num2 = float(input("Número 2: "))
+    resultado = num1 / num2
+    print(f"Resultado: {resultado}")
+except ValueError:
+    print("Erro: Digite apenas números válidos!")
+except ZeroDivisionError:
+    print("Erro: Não é possível dividir por zero!")
+except Exception as e:
+    print(f"Erro inesperado: {e}")
+</div>
+
+<div class="info">
+<h4><i class="fas fa-lightbulb"></i> Dicas Importantes</h4>
+<ul>
+<li><strong>Sempre</strong> capture exceções específicas antes das genéricas</li>
+<li><strong>Use Exception</strong> como último recurso para erros inesperados</li>
+<li><strong>Evite</strong> capturar todas as exceções sem necessidade</li>
+</ul>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

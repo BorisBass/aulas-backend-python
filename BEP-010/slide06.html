@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-010: Tratamento de Exceções - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-010: Tratamento de Exceções</h1>
+            <p>Torne seus programas mais robustos e confiáveis</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+            <div class="slide active" id="slide6">
+                <h2><i class="fas fa-arrow-up"></i> Raise - Lançando Exceções</h2>
+                <h3>🔍 O que é Raise?</h3>
+                <p>Use <code>raise</code> para lançar exceções manualmente:</p>
+                <div class="code-block">
+# Lançar exceção
+def dividir(a, b):
+    if b == 0:
+        raise ZeroDivisionError("Não pode dividir por zero!")
+    return a / b
+
+try:
+    resultado = dividir(10, 0)
+except ZeroDivisionError as e:
+    print(f"Erro: {e}")
+                </div>
+                <h3>📝 Exemplos Práticos</h3>
+                <div class="code-block">
+# Validação de idade
+def validar_idade(idade):
+    if idade < 0:
+        raise ValueError("Idade não pode ser negativa!")
+    if idade > 150:
+        raise ValueError("Idade inválida!")
+    return True
+
+try:
+    validar_idade(-5)
+except ValueError as e:
+    print(f"Erro: {e}")
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

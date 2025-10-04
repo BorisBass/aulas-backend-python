@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-010: Tratamento de Exceções - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-010: Tratamento de Exceções</h1>
+            <p>Torne seus programas mais robustos e confiáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide5">
+                <h2><i class="fas fa-broom"></i> Finally - Limpeza e Finalização</h2>
+                <h3>🔍 Bloco Finally</h3>
+<p>O bloco <code>finally</code> <strong>sempre</strong> é executado, com ou sem exceção:</p>
+<div class="code-block">
+# Sintaxe com finally
+try:
+    arquivo = open("dados.txt", "r")
+    conteudo = arquivo.read()
+except FileNotFoundError:
+    print("Erro: Arquivo não encontrado!")
+finally:
+    arquivo.close()  # Sempre fecha o arquivo
+    print("Limpeza realizada!")
+</div>
+
+<h3>📝 Quando Usar Finally</h3>
+<ul>
+<li><strong>Fechar arquivos:</strong> Garantir que recursos sejam liberados</li>
+<li><strong>Limpar recursos:</strong> Liberar memória, conexões</li>
+<li><strong>Registro de logs:</strong> Sempre registrar o que aconteceu</li>
+</ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

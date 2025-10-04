@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-005: Estruturas de Repetição - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-005: Estruturas de Repetição</h1>
+            <p>for e while em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide3">
+                <h2><i class="fas fa-question"></i> Loop while</h2>
+                
+                <h3>🔄 Sintaxe do while</h3>
+                <p>O loop while repete um bloco enquanto uma condição for verdadeira:</p>
+                
+                <div class="code-block">
+# Sintaxe básica do while
+while condição:
+    # código repetido
+    print("Executando...")
+    # IMPORTANTE: modificar a condição para evitar loop infinito
+                </div>
+                
+                <h3>📝 Exemplos Práticos</h3>
+                <div class="code-block">
+# Contador simples
+contador = 1
+while contador <= 5:
+    print(f"Contagem: {contador}")
+    contador += 1  # Incrementa o contador
+
+# Validação de entrada
+senha = ""
+while senha != "123456":
+    senha = input("Digite a senha: ")
+    if senha != "123456":
+        print("Senha incorreta! Tente novamente.")
+
+print("Acesso liberado!")
+                </div>
+                
+                <h3>🎯 Exemplo: Menu Interativo</h3>
+                <div class="code-block">
+# Menu de opções
+opcao = 0
+while opcao != 4:
+    print("
+=== MENU ===")
+    print("1. Calcular soma")
+    print("2. Calcular produto")
+    print("3. Verificar par/ímpar")
+    print("4. Sair")
+    
+    opcao = int(input("Escolha uma opção: "))
+    
+    if opcao == 1:
+        a = int(input("Número 1: "))
+        b = int(input("Número 2: "))
+        print(f"Soma: {a + b}")
+    elif opcao == 2:
+        a = int(input("Número 1: "))
+        b = int(input("Número 2: "))
+        print(f"Produto: {a * b}")
+    elif opcao == 3:
+        num = int(input("Número: "))
+        if num % 2 == 0:
+            print(f"{num} é par")
+        else:
+            print(f"{num} é ímpar")
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Cuidado!</h4>
+                    <p>Evite loops infinitos! Sempre modifique a condição dentro do while!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

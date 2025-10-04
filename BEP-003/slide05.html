@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-003: Operadores em Python - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-003: Operadores em Python</h1>
+            <p>Aritméticos, Relacionais e Lógicos</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide5">
+                <h2><i class="fas fa-sort"></i> Precedência de Operadores</h2>
+                
+                <h3>📋 Ordem de Execução</h3>
+                <p>Python executa operadores em uma ordem específica (precedência):</p>
+                
+                <div class="code-block">
+# Exemplo de precedência
+resultado = 2 + 3 * 4  # = 14 (não 20!)
+print(f"2 + 3 * 4 = {resultado}")
+
+# Use parênteses para controlar a ordem
+resultado = (2 + 3) * 4  # = 20
+print(f"(2 + 3) * 4 = {resultado}")
+                </div>
+                
+                <h3>📊 Tabela de Precedência</h3>
+                <table class="code-table">
+                    <tr><th>Prioridade</th><th>Operadores</th><th>Descrição</th></tr>
+                    <tr><td>1</td><td>()</td><td>Parênteses</td></tr>
+                    <tr><td>2</td><td>**</td><td>Potência</td></tr>
+                    <tr><td>3</td><td>*, /, //, %</td><td>Multiplicação, divisão</td></tr>
+                    <tr><td>4</td><td>+, -</td><td>Soma, subtração</td></tr>
+                    <tr><td>5</td><td>&lt;, &gt;, &lt;=, &gt;=, ==, !=</td><td>Relacionais</td></tr>
+                    <tr><td>6</td><td>not</td><td>Não lógico</td></tr>
+                    <tr><td>7</td><td>and</td><td>E lógico</td></tr>
+                    <tr><td>8</td><td>or</td><td>OU lógico</td></tr>
+                </table>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático</h5>
+                    <div class="code-block">
+# Cálculo de média ponderada
+nota1 = 8.5
+nota2 = 7.0
+peso1 = 2
+peso2 = 3
+
+# Sem parênteses (incorreto)
+media_errada = nota1 * peso1 + nota2 * peso2 / peso1 + peso2
+
+# Com parênteses (correto)
+media_correta = (nota1 * peso1 + nota2 * peso2) / (peso1 + peso2)
+
+print(f"Média correta: {media_correta:.2f}")
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Dica</h4>
+                    <p>Quando em dúvida, use parênteses! Torna o código mais claro e evita erros.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

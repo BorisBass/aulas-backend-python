@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-001: Introdução ao Python - Slide 09</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-001: Introdução ao Python</h1>
+            <p>Seu primeiro contato com a linguagem Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+            <div class="slide active" id="slide9">
+                <h2><i class="fas fa-keyboard"></i> Entrada de Dados</h2>
+                <h3>⌨️ Função input()</h3>
+<p>A função <code>input()</code> lê texto digitado pelo usuário.</p>
+<div class="code-block">
+# Entrada de texto
+nome = input("Digite seu nome: ")
+print(f"Olá, {nome}!")
+
+# Entrada de número (conversão de tipo)
+idade = int(input("Digite sua idade: "))
+altura = float(input("Digite sua altura (m): "))
+print(f"Idade: {idade}, Altura: {altura}")
+</div>
+<h3>🔄 Conversão de Tipos</h3>
+<ul>
+  <li><strong>int()</strong>: para inteiros</li>
+  <li><strong>float()</strong>: para decimais</li>
+  <li><strong>str()</strong>: para string</li>
+  <li><strong>bool()</strong>: para booleano</li>
+</ul>
+<div class="example">
+  <h5>💡 Exemplo Prático</h5>
+  <div class="code-block">
+# Calculadora de IMC
+print("=== Calculadora de IMC ===")
+peso = float(input("Peso (kg): "))
+altura = float(input("Altura (m): "))
+imc = peso / (altura ** 2)
+print(f"Seu IMC é: {imc:.2f}")
+  </div>
+</div>
+<div class="info">
+  <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+  <p>input() sempre retorna string. Converta para o tipo correto quando necessário.</p>
+</div>
+            </div>
+        </div>
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

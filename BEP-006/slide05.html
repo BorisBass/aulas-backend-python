@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-006: Trabalhando com Listas - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-006: Trabalhando com Listas</h1>
+            <p>Manipule coleções de dados</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide5">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                
+                <h3>🎯 Exercício 1: Lista de Compras</h3>
+                <p>Crie um sistema de lista de compras interativo.</p>
+                <div class="code-block">
+# Lista de compras
+compras = []
+print("=== LISTA DE COMPRAS ===")
+
+while True:
+    print("
+Opções:")
+    print("1. Adicionar item")
+    print("2. Remover item")
+    print("3. Listar itens")
+    print("4. Sair")
+    
+    opcao = input("Escolha uma opção: ")
+    
+    if opcao == "1":
+        item = input("Digite o item: ")
+        compras.append(item)
+        print(f"'{item}' adicionado à lista!")
+    
+    elif opcao == "2":
+        if compras:
+            print("Itens na lista:")
+            for i, item in enumerate(compras):
+                print(f"{i}: {item}")
+            try:
+                indice = int(input("Índice do item para remover: "))
+                item_removido = compras.pop(indice)
+                print(f"'{item_removido}' removido da lista!")
+            except (ValueError, IndexError):
+                print("Índice inválido!")
+        else:
+            print("Lista vazia!")
+    
+    elif opcao == "3":
+        if compras:
+            print("
+Itens na lista:")
+            for i, item in enumerate(compras):
+                print(f"{i}: {item}")
+        else:
+            print("Lista vazia!")
+    
+    elif opcao == "4":
+        print("Saindo...")
+        break
+    
+    else:
+        print("Opção inválida!")
+                </div>
+                
+                <h3>🎯 Exercício 2: Análise de Notas</h3>
+                <p>Analise uma lista de notas e calcule estatísticas.</p>
+                <div class="code-block">
+# Análise de notas
+notas = []
+print("Digite as notas (digite -1 para parar):")
+
+while True:
+    try:
+        nota = float(input("Nota: "))
+        if nota == -1:
+            break
+        if 0 <= nota <= 10:
+            notas.append(nota)
+        else:
+            print("Nota deve estar entre 0 e 10!")
+    except ValueError:
+        print("Digite um número válido!")
+
+if notas:
+    print(f"
+=== ANÁLISE DE NOTAS ===")
+    print(f"Notas: {notas}")
+    print(f"Quantidade: {len(notas)}")
+    print(f"Maior nota: {max(notas)}")
+    print(f"Menor nota: {min(notas)}")
+    print(f"Média: {sum(notas)/len(notas):.2f}")
+    
+    # Contar aprovações
+    aprovados = sum(1 for nota in notas if nota >= 7)
+    print(f"Aprovados: {aprovados} ({aprovados/len(notas)*100:.1f}%)")
+else:
+    print("Nenhuma nota válida foi digitada!")
+                </div>
+                
+                <h3>🎯 Exercício 3: Busca em Lista</h3>
+                <p>Implemente um sistema de busca em lista.</p>
+                <div class="code-block">
+# Sistema de busca
+nomes = ["Ana", "Bruno", "Carlos", "Diana", "Eduardo"]
+
+print("Lista de nomes:", nomes)
+nome_busca = input("Digite um nome para buscar: ")
+
+if nome_busca in nomes:
+    indice = nomes.index(nome_busca)
+    print(f"'{nome_busca}' encontrado no índice {indice}")
+else:
+    print(f"'{nome_busca}' não encontrado na lista!")
+    
+    # Sugerir nomes similares
+    sugestoes = [nome for nome in nomes if nome_busca.lower() in nome.lower()]
+    if sugestoes:
+        print(f"Nomes similares: {sugestoes}")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Teste seus programas com diferentes cenários: listas vazias, elementos duplicados, etc.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

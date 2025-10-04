@@ -1,0 +1,37 @@
+Python é uma linguagem de programação de alto nível, interpretada e de propósito geral.
+
+Características principais:
+- Sintaxe simples e legível
+- Multiplataforma (Windows, Mac, Linux)
+- Orientada a objetos
+- Grande comunidade de desenvolvedores
+
+Aplicações:
+1. Desenvolvimento Web (Django, Flask)
+2. Ciência de Dados (Pandas, NumPy)
+3. Inteligência Artificial (TensorFlow, PyTorch)
+4. Automação de tarefas
+5. Análise de dados
+
+Python foi criado por Guido van Rossum em 1991.
+O nome "Python" vem do grupo de comédia britânico "Monty Python's Flying Circus".
+
+Versões importantes:
+- Python 2.0 (2000) - última versão da série 2
+- Python 3.0 (2008) - versão atual, com melhorias significativas
+
+Filosofia Python (PEP 20):
+"Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Readability counts."
+
+Python é amplamente usado por empresas como:
+- Google (YouTube, Google Search)
+- Netflix (recomendações)
+- Instagram (backend)
+- Spotify (análise de música)
+- NASA (análise de dados espaciais)
+
+A linguagem continua evoluindo com novas versões sendo lançadas regularmente.

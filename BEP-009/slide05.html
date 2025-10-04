@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide5">
+                <h2><i class="fas fa-code-branch"></i> Métodos split() e join()</h2>
+                <h3>✂️ split() - Dividir String</h3>
+<p>Divide uma string em uma lista de substrings</p>
+
+<div class="code-block">
+# Dividir por espaços (padrão)
+frase = "Python é uma linguagem incrível"
+palavras = frase.split()
+print(palavras)  # ['Python', 'é', 'uma', 'linguagem', 'incrível']
+
+# Dividir por caractere específico
+data = "15/03/2025"
+partes = data.split("/")
+print(partes)  # ['15', '03', '2025']
+</div>
+
+<h3>🔗 join() - Juntar Lista</h3>
+<p>Une elementos de uma lista em uma string</p>
+
+<div class="code-block">
+# Juntar lista em string
+palavras = ["Python", "é", "incrível"]
+frase = " ".join(palavras)
+print(frase)  # Python é incrível
+
+# Juntar com separador específico
+numeros = ["1", "2", "3", "4"]
+linha = "-".join(numeros)
+print(linha)  # 1-2-3-4
+</div>
+
+<h3>🎯 Aplicação Prática</h3>
+<div class="example">
+<h5>💡 Processamento de Texto</h5>
+<div class="code-block">
+# Contar palavras em um texto
+texto = input("Digite um texto: ")
+palavras = texto.split()
+numero_palavras = len(palavras)
+print(f"O texto tem {numero_palavras} palavras")
+
+# Inverter ordem das palavras
+palavras_invertidas = " ".join(reversed(palavras))
+print(f"Texto invertido: {palavras_invertidas}")
+</div>
+</div>
+
+<div class="warning">
+<h4><i class="fas fa-exclamation-triangle"></i> Dica</h4>
+<p>split() e join() são muito úteis para processar dados separados por delimitadores!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

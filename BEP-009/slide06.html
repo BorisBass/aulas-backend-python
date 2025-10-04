@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide6">
+                <h2><i class="fas fa-magic"></i> Formatação com f-strings</h2>
+                <h3>✨ f-strings (Python 3.6+)</h3>
+<p>Formatação moderna e intuitiva de strings</p>
+
+<div class="code-block">
+# F-strings básicas
+nome = "João"
+idade = 25
+print(f"Olá, {nome}! Você tem {idade} anos.")
+
+# F-strings com expressões
+a = 10
+b = 20
+print(f"A soma de {a} + {b} = {a + b}")
+</div>
+
+<h3>🎯 Formatação de Números</h3>
+<div class="code-block">
+# Formatação de decimais
+preco = 19.99
+print(f"Preço: R$ {preco:.2f}")  # Preço: R$ 19.99
+
+# Formatação de inteiros
+numero = 42
+print(f"Número: {numero:03d}")  # Número: 042
+
+# Formatação de percentual
+taxa = 0.15
+print(f"Taxa: {taxa:.1%}")  # Taxa: 15.0%
+</div>
+
+<h3>📊 Alinhamento e Preenchimento</h3>
+<div class="code-block">
+# Alinhamento à esquerda
+texto = "Python"
+print(f"'{texto:<10}'")  # 'Python    '
+
+# Alinhamento à direita
+print(f"'{texto:>10}'")  # '    Python'
+
+# Centralizado
+print(f"'{texto:^10}'")  # '  Python  '
+
+# Com preenchimento
+print(f"'{texto:*^10}'")  # '**Python**'
+</div>
+
+<div class="info">
+<h4><i class="fas fa-lightbulb"></i> Dica</h4>
+<p>f-strings são a forma mais moderna e eficiente de formatar strings em Python!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

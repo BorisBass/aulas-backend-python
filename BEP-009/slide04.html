@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide4">
+                <h2><i class="fas fa-cut"></i> Método strip()</h2>
+                <h3>✂️ strip() - Remover Espaços</h3>
+<p>Remove espaços em branco do início e fim da string</p>
+
+<div class="code-block">
+# Remover espaços
+texto = "  Python é incrível  "
+texto_limpo = texto.strip()
+print(f"'{texto_limpo}'")  # 'Python é incrível'
+
+# Comparação com e sem strip
+nome1 = "João"
+nome2 = "  João  "
+print(nome1 == nome2)        # False
+print(nome1 == nome2.strip()) # True
+</div>
+
+<h3>🔧 Variações do strip()</h3>
+<ul>
+<li><strong>strip():</strong> Remove espaços dos dois lados</li>
+<li><strong>lstrip():</strong> Remove espaços da esquerda</li>
+<li><strong>rstrip():</strong> Remove espaços da direita</li>
+</ul>
+
+<div class="code-block">
+texto = "  Python  "
+print(f"'{texto.strip()}'")   # 'Python'
+print(f"'{texto.lstrip()}'")  # 'Python  '
+print(f"'{texto.rstrip()}'")  # '  Python'
+</div>
+
+<h3>🎯 Aplicação Prática</h3>
+<div class="example">
+<h5>💡 Validação de Entrada</h5>
+<div class="code-block">
+# Limpar entrada do usuário
+email = input("Digite seu email: ").strip()
+senha = input("Digite sua senha: ").strip()
+
+if email and senha:
+    print("Dados válidos!")
+else:
+    print("Por favor, preencha todos os campos!")
+</div>
+</div>
+
+<div class="info">
+<h4><i class="fas fa-lightbulb"></i> Dica</h4>
+<p>Sempre use strip() ao processar entrada do usuário para evitar problemas com espaços extras!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

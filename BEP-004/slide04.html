@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-004: Estruturas Condicionais - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-004: Estruturas Condicionais</h1>
+            <p>if, elif, else em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide4">
+                <h2><i class="fas fa-list"></i> Estrutura if-elif-else</h2>
+                
+                <h3>🔀 Múltiplas Condições</h3>
+                <p>O if-elif-else permite verificar várias condições em sequência:</p>
+                
+                <div class="code-block">
+# Sintaxe do if-elif-else
+if condição1:
+    # código se condição1 for True
+    print("Primeira condição!")
+elif condição2:
+    # código se condição2 for True
+    print("Segunda condição!")
+elif condição3:
+    # código se condição3 for True
+    print("Terceira condição!")
+else:
+    # código se todas forem False
+    print("Nenhuma condição!")
+                </div>
+                
+                <h3>📝 Exemplo: Sistema de Notas</h3>
+                <div class="code-block">
+# Sistema de classificação
+nota = float(input("Digite sua nota: "))
+
+if nota >= 9.0:
+    print("Excelente! Nota A")
+elif nota >= 8.0:
+    print("Muito bom! Nota B")
+elif nota >= 7.0:
+    print("Bom! Nota C")
+elif nota >= 6.0:
+    print("Regular! Nota D")
+else:
+    print("Precisa melhorar! Nota F")
+                </div>
+                
+                <h3>🎯 Exemplo: Verificação de Idade</h3>
+                <div class="code-block">
+# Categorias de idade
+idade = int(input("Digite sua idade: "))
+
+if idade < 12:
+    print("Criança")
+elif idade < 18:
+    print("Adolescente")
+elif idade < 60:
+    print("Adulto")
+else:
+    print("Idoso")
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Atenção!</h4>
+                    <p>Python executa apenas o PRIMEIRO bloco verdadeiro. Os demais são ignorados!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

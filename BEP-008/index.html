@@ -4,411 +4,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEP-008: Funções em Python</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #4B8BBE 0%, #85929d 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
-            font-weight: 700;
-        }
-        
-        .header p {
-            font-size: 1.2rem;
-            margin: 0;
-            opacity: 0.9;
-        }
-        
-        .content {
-            padding: 40px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section h2 {
-            color: #1A365D;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #4299E1;
-            padding-bottom: 10px;
-        }
-        
-        .slides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .slide-card {
-            background: #F7FAFC;
-            border: 2px solid #E2E8F0;
-            border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .slide-card:hover {
-            border-color: #4299E1;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.2);
-        }
-        
-        .slide-number {
-            background: #4299E1;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        
-        .slide-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1A365D;
-            margin-bottom: 10px;
-        }
-        
-        .slide-description {
-            color: #4A5568;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        
-        .files-section {
-            background: #F7FAFC;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        
-        .file-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .file-item {
-            background: white;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .file-item:hover {
-            border-color: #4299E1;
-            box-shadow: 0 2px 8px rgba(66, 153, 225, 0.1);
-        }
-        
-        .file-icon {
-            color: #4299E1;
-            margin-right: 12px;
-            font-size: 1.2rem;
-        }
-        
-        .file-name {
-            font-weight: 500;
-            color: #1A365D;
-        }
-        
-        .start-button {
-            background: linear-gradient(135deg, #4299E1 0%, #3182CE 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        
-        .start-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.3);
-        }
-        
-        .footer {
-            background: #1A365D;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-        }
-        
-        .objectives-section {
-            background: linear-gradient(135deg, #EBF8FF 0%, #BEE3F8 100%);
-            border: 2px solid #3182CE;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .comparison-item {
-            background: white;
-            border: 2px solid #E2E8F0;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .comparison-item.basicas {
-            border-color: #38B2AC;
-            background: linear-gradient(135deg, #E6FFFA 0%, #B2F5EA 100%);
-        }
-        
-        .comparison-item.avancadas {
-            border-color: #9F7AEA;
-            background: linear-gradient(135deg, #FAF5FF 0%, #E9D8FD 100%);
-        }
-        
-        .comparison-item h3 {
-            color: #1A365D;
-            margin-bottom: 15px;
-        }
-    </style>
+    <link rel="stylesheet" href="../index-bep.css">
+    
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1><i class="fab fa-python"></i> BEP-008: Funções em Python</h1>
-            <p>Organize seu código em blocos reutilizáveis e modulares</p>
+            <p>Organize seu código em blocos reutilizáveis</p>
+        </div>
+
+        <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
+            <a href="../index.html" style="background:#2D3748;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;">🏠 Índice geral</a>
         </div>
         
         <div class="content">
             <div class="objectives-section">
                 <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
-                <p><strong>Objetivo Geral:</strong> Dominar o conceito de funções em Python para criar código mais organizado, reutilizável e modular.</p>
-                
-                <div class="comparison-grid">
-                    <div class="comparison-item basicas">
-                        <h3><i class="fas fa-cogs"></i> Funções Básicas</h3>
-                        <ul style="text-align: left;">
-                            <li>Definição e sintaxe</li>
-                            <li>Parâmetros e argumentos</li>
-                            <li>Retorno de valores</li>
-                            <li>Escopo de variáveis</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="comparison-item avancadas">
-                        <h3><i class="fas fa-code-branch"></i> Aplicações Práticas</h3>
-                        <ul style="text-align: left;">
-                            <li>Funções com listas e dicionários</li>
-                            <li>Integração com estruturas de controle</li>
-                            <li>Projeto integrador</li>
-                            <li>Boas práticas de programação</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <p><strong>Metodologia:</strong> Aula expositiva e aplicação de exercícios práticos no Google Colab.</p>
+                <p>Entender e aplicar funções com parâmetros e retorno.</p>
             </div>
             
             <div class="section">
                 <h2><i class="fas fa-presentation"></i> Slides da Aula</h2>
                 <div class="slides-grid">
-                    <div class="slide-card" onclick="window.open('slide01.html', '_blank')">
+                    
+                    <div class="slide-card" onclick="window.open('slide01.html','_blank')">
                         <div class="slide-number">01</div>
                         <div class="slide-title">Título e Introdução</div>
-                        <div class="slide-description">Apresentação do tema e importância das funções</div>
+                        <div class="slide-description">Clique para abrir o slide 01</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide02.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide02.html','_blank')">
                         <div class="slide-number">02</div>
                         <div class="slide-title">O que são Funções?</div>
-                        <div class="slide-description">Conceito, analogias e exemplos do cotidiano</div>
+                        <div class="slide-description">Clique para abrir o slide 02</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide03.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide03.html','_blank')">
                         <div class="slide-number">03</div>
                         <div class="slide-title">Vantagens das Funções</div>
-                        <div class="slide-description">Reutilização, organização e manutenibilidade</div>
+                        <div class="slide-description">Clique para abrir o slide 03</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide04.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide04.html','_blank')">
                         <div class="slide-number">04</div>
                         <div class="slide-title">Sintaxe Básica</div>
-                        <div class="slide-description">def, nome, parâmetros e corpo da função</div>
+                        <div class="slide-description">Clique para abrir o slide 04</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide05.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide05.html','_blank')">
                         <div class="slide-number">05</div>
                         <div class="slide-title">Parâmetros e Argumentos</div>
-                        <div class="slide-description">Diferença entre parâmetros e argumentos</div>
+                        <div class="slide-description">Clique para abrir o slide 05</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide06.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide06.html','_blank')">
                         <div class="slide-number">06</div>
                         <div class="slide-title">Tipos de Parâmetros</div>
-                        <div class="slide-description">Posicionais, nomeados e valores padrão</div>
+                        <div class="slide-description">Clique para abrir o slide 06</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide07.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide07.html','_blank')">
                         <div class="slide-number">07</div>
                         <div class="slide-title">Retorno de Valores</div>
-                        <div class="slide-description">return, múltiplos valores e None</div>
+                        <div class="slide-description">Clique para abrir o slide 07</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide08.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide08.html','_blank')">
                         <div class="slide-number">08</div>
                         <div class="slide-title">Escopo de Variáveis</div>
-                        <div class="slide-description">Local, global e nonlocal</div>
+                        <div class="slide-description">Clique para abrir o slide 08</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide09.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide09.html','_blank')">
                         <div class="slide-number">09</div>
                         <div class="slide-title">Funções com Listas</div>
-                        <div class="slide-description">Passagem por referência e modificação</div>
+                        <div class="slide-description">Clique para abrir o slide 09</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide10.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide10.html','_blank')">
                         <div class="slide-number">10</div>
                         <div class="slide-title">Funções com Dicionários</div>
-                        <div class="slide-description">Manipulação de estruturas chave-valor</div>
+                        <div class="slide-description">Clique para abrir o slide 10</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide11.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide11.html','_blank')">
                         <div class="slide-number">11</div>
                         <div class="slide-title">Funções com Condicionais</div>
-                        <div class="slide-description">Lógica condicional dentro de funções</div>
+                        <div class="slide-description">Clique para abrir o slide 11</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide12.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide12.html','_blank')">
                         <div class="slide-number">12</div>
                         <div class="slide-title">Funções com Repetição</div>
-                        <div class="slide-description">Loops e iteração em funções</div>
+                        <div class="slide-description">Clique para abrir o slide 12</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide13.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide13.html','_blank')">
                         <div class="slide-number">13</div>
                         <div class="slide-title">Projeto Integrador: Calculadora</div>
-                        <div class="slide-description">Aplicação prática de todos os conceitos</div>
+                        <div class="slide-description">Clique para abrir o slide 13</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide14.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide14.html','_blank')">
                         <div class="slide-number">14</div>
                         <div class="slide-title">Boas Práticas</div>
-                        <div class="slide-description">Nomenclatura, documentação e organização</div>
+                        <div class="slide-description">Clique para abrir o slide 14</div>
                     </div>
-                    
-                    <div class="slide-card" onclick="window.open('slide15.html', '_blank')">
+
+                    <div class="slide-card" onclick="window.open('slide15.html','_blank')">
                         <div class="slide-number">15</div>
                         <div class="slide-title">Resumo e Próximos Passos</div>
-                        <div class="slide-description">Revisão completa e orientações para continuar</div>
+                        <div class="slide-description">Clique para abrir o slide 15</div>
                     </div>
                 </div>
-                
                 <a href="slide01.html" class="start-button">
                     <i class="fas fa-play"></i> Iniciar Apresentação
                 </a>
             </div>
-            
-            <div class="section">
-                <h2><i class="fas fa-folder-open"></i> Arquivos de Apoio</h2>
-                <div class="files-section">
-                    <div class="file-list">
-                        <div class="file-item">
-                            <i class="fas fa-code file-icon"></i>
-                            <div class="file-name">exercicios_funcoes_colab.py</div>
-                        </div>
-                        
-                        <div class="file-item">
-                            <i class="fas fa-file-alt file-icon"></i>
-                            <div class="file-name">plano_aula_funcoes.md</div>
-                        </div>
-                        
-                        <div class="file-item">
-                            <i class="fas fa-palette file-icon"></i>
-                            <div class="file-name">style.css</div>
-                        </div>
-                        
-                        <div class="file-item">
-                            <i class="fas fa-cogs file-icon"></i>
-                            <div class="file-name">script.js</div>
-                        </div>
-                        
-                        <div class="file-item">
-                            <i class="fas fa-book file-icon"></i>
-                            <div class="file-name">README.md</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2><i class="fas fa-info-circle"></i> Informações da Aula</h2>
-                <div style="background: #F7FAFC; padding: 20px; border-radius: 10px;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                        <div>
-                            <h3 style="color: #1A365D; margin-bottom: 10px;"><i class="fas fa-clock"></i> Duração</h3>
-                            <p>2 horas (120 minutos)</p>
-                        </div>
-                        <div>
-                            <h3 style="color: #1A365D; margin-bottom: 10px;"><i class="fas fa-users"></i> Nível</h3>
-                            <p>Intermediário</p>
-                        </div>
-                        <div>
-                            <h3 style="color: #1A365D; margin-bottom: 10px;"><i class="fas fa-chalkboard-teacher"></i> Metodologia</h3>
-                            <p>Aula expositiva + Exercícios</p>
-                        </div>
-                        <div>
-                            <h3 style="color: #1A365D; margin-bottom: 10px;"><i class="fas fa-laptop-code"></i> Ferramentas</h3>
-                            <p>Google Colab, Python</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         
         <div class="footer">
-            <p>&copy; 2025 - Conteúdo Educacional sobre Funções em Python</p>
-            <p>Desenvolvido para fins educacionais - IFBA CEPEDI</p>
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
 </body>

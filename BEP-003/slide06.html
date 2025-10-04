@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-003: Operadores em Python - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-003: Operadores em Python</h1>
+            <p>Aritméticos, Relacionais e Lógicos</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide6">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                
+                <h3>🎯 Exercício 1: Calculadora Avançada</h3>
+                <p>Calcule a média de 3 notas com pesos diferentes.</p>
+                <div class="code-block">
+nota1 = float(input("Nota 1: "))
+nota2 = float(input("Nota 2: "))
+nota3 = float(input("Nota 3: "))
+
+# Média simples
+media_simples = (nota1 + nota2 + nota3) / 3
+
+# Média ponderada (pesos: 2, 3, 5)
+media_ponderada = (nota1 * 2 + nota2 * 3 + nota3 * 5) / 10
+
+print(f"Média simples: {media_simples:.2f}")
+print(f"Média ponderada: {media_ponderada:.2f}")
+                </div>
+                
+                <h3>🎯 Exercício 2: Verificação de Aprovação</h3>
+                <p>Verifique se um aluno foi aprovado (média >= 7.0).</p>
+                <div class="code-block">
+nota1 = float(input("Nota 1: "))
+nota2 = float(input("Nota 2: "))
+nota3 = float(input("Nota 3: "))
+
+media = (nota1 + nota2 + nota3) / 3
+
+if media >= 7.0:
+    print(f"Aprovado! Média: {media:.2f}")
+else:
+    print(f"Reprovado! Média: {media:.2f}")
+                </div>
+                
+                <h3>🎯 Exercício 3: Calculadora de IMC</h3>
+                <p>Calcule o Índice de Massa Corporal.</p>
+                <div class="code-block">
+peso = float(input("Peso (kg): "))
+altura = float(input("Altura (m): "))
+
+imc = peso / (altura ** 2)
+
+print(f"IMC: {imc:.2f}")
+
+if imc < 18.5:
+    print("Abaixo do peso")
+elif imc < 25:
+    print("Peso normal")
+elif imc < 30:
+    print("Sobrepeso")
+else:
+    print("Obesidade")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Teste seus programas com diferentes valores para garantir que funcionam corretamente!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 12</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos - Parte 2</h2>
+                <h3>🎯 Exercício 4: Formatação de CPF</h3>
+<p>Crie um programa que formate um CPF no padrão XXX.XXX.XXX-XX.</p>
+
+<div class="code-block">
+# Sua solução aqui
+cpf = input("Digite o CPF (apenas números): ").strip()
+
+if len(cpf) == 11 and cpf.isdigit():
+    cpf_formatado = f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+    print(f"CPF formatado: {cpf_formatado}")
+else:
+    print("CPF inválido!")
+</div>
+
+<h3>🎯 Exercício 5: Contador de Vogais</h3>
+<p>Crie um programa que conte o número de vogais em um texto.</p>
+
+<div class="code-block">
+# Sua solução aqui
+texto = input("Digite um texto: ").lower()
+vogais = "aeiou"
+contador = 0
+
+for letra in texto:
+    if letra in vogais:
+        contador += 1
+
+print(f"Número de vogais: {contador}")
+</div>
+
+                <h3>🎯 Exercício 6: Gerador de Senha</h3>
+                <p>Crie um programa que gere uma senha aleatória com letras e números.</p>
+
+                <div class="code-block">
+# Sua solução aqui
+import random
+import string
+
+tamanho = int(input("Digite o tamanho da senha: "))
+caracteres = string.ascii_letters + string.digits
+senha = ''.join(random.choice(caracteres) for _ in range(tamanho))
+print(f"Senha gerada: {senha}")
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Explicação dos Módulos e Funções</h4>
+                    <ul>
+                        <li><strong>string.ascii_letters:</strong> Contém todas as letras (a-z, A-Z)</li>
+                        <li><strong>string.digits:</strong> Contém todos os dígitos (0-9)</li>
+                        <li><strong>random.choice():</strong> Escolhe um elemento aleatório de uma lista</li>
+                    </ul>
+                </div>
+
+                <div class="example">
+                    <h5>💡 Explicação da Linha Complexa</h5>
+                    <p><strong>senha = ''.join(random.choice(caracteres) for _ in range(tamanho))</strong></p>
+                    
+                    <h4>🔍 Quebrando a linha em partes:</h4>
+                    <div class="code-block">
+# 1. range(tamanho) - cria uma sequência de números
+# Exemplo: range(5) = [0, 1, 2, 3, 4]
+
+# 2. for _ in range(tamanho) - loop que executa 'tamanho' vezes
+# O _ significa "não me importo com o valor da variável"
+
+# 3. random.choice(caracteres) - escolhe um caractere aleatório
+# Executado a cada iteração do loop
+
+# 4. Lista de compreensão completa:
+# [random.choice(caracteres) for _ in range(tamanho)]
+# Resultado: ['A', 'b', '3', 'X', '9'] (exemplo para tamanho=5)
+
+# 5. ''.join() - junta todos os elementos da lista em uma string
+# ''.join(['A', 'b', '3', 'X', '9']) = "Ab3X9"
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Versão Mais Simples (para entender)</h4>
+                    <div class="code-block">
+# Versão passo a passo (mais fácil de entender)
+import random
+import string
+
+tamanho = int(input("Digite o tamanho da senha: "))
+caracteres = string.ascii_letters + string.digits
+senha = ""
+
+for i in range(tamanho):
+    caractere_aleatorio = random.choice(caracteres)
+    senha += caractere_aleatorio
+
+print(f"Senha gerada: {senha}")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

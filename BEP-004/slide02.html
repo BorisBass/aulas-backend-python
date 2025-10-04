@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-004: Estruturas Condicionais - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-004: Estruturas Condicionais</h1>
+            <p>if, elif, else em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide2">
+                <h2><i class="fas fa-question"></i> Estrutura if Básica</h2>
+                
+                <h3>🔍 Sintaxe do if</h3>
+                <p>A estrutura if executa um bloco de código apenas se a condição for verdadeira:</p>
+                
+                <div class="code-block">
+# Sintaxe básica do if
+if condição:
+    # código executado se condição for True
+    print("Condição verdadeira!")
+                </div>
+                
+                <h3>📝 Exemplo Prático</h3>
+                <div class="code-block">
+# Verificação de idade
+idade = int(input("Digite sua idade: "))
+
+if idade >= 18:
+    print("Você é maior de idade!")
+    print("Pode votar e dirigir!")
+
+print("Programa continuou...")
+                </div>
+                
+                <h3>⚠️ Regras Importantes</h3>
+                <ul>
+                    <li><strong>Dois pontos (:):</strong> Sempre após a condição</li>
+                    <li><strong>Indentação:</strong> 4 espaços ou 1 tab</li>
+                    <li><strong>Bloco:</strong> Todo código indentado pertence ao if</li>
+                </ul>
+                
+                <div class="example">
+                    <h5>💡 Exemplo: Verificação de Nota</h5>
+                    <div class="code-block">
+nota = float(input("Digite sua nota: "))
+
+if nota >= 7.0:
+    print("Parabéns! Você foi aprovado!")
+    print("Continue assim!")
+
+print("Fim do programa")
+                    </div>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Cuidado!</h4>
+                    <p>Não esqueça os dois pontos (:) após a condição e a indentação correta!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

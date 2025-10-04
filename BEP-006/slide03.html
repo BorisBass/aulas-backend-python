@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-006: Trabalhando com Listas - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-006: Trabalhando com Listas</h1>
+            <p>Manipule coleções de dados</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide3">
+                <h2><i class="fas fa-tools"></i> Métodos de Listas</h2>
+                
+                <h3>➕ Adicionando Elementos</h3>
+                <div class="code-block">
+# append(): adiciona no final
+lista = [1, 2, 3]
+lista.append(4)
+print(f"Após append: {lista}")  # [1, 2, 3, 4]
+
+# insert(): adiciona em posição específica
+lista.insert(1, 10)
+print(f"Após insert: {lista}")  # [1, 10, 2, 3, 4]
+
+# extend(): adiciona múltiplos elementos
+lista.extend([5, 6, 7])
+print(f"Após extend: {lista}")  # [1, 10, 2, 3, 4, 5, 6, 7]
+                </div>
+                
+                <h3>➖ Removendo Elementos</h3>
+                <div class="code-block">
+# remove(): remove primeira ocorrência
+lista = [1, 2, 3, 2, 4]
+lista.remove(2)
+print(f"Após remove: {lista}")  # [1, 3, 2, 4]
+
+# pop(): remove e retorna elemento
+lista = [1, 2, 3, 4, 5]
+elemento = lista.pop()  # Remove último
+print(f"Elemento removido: {elemento}")  # 5
+print(f"Lista após pop: {lista}")  # [1, 2, 3, 4]
+
+# pop(índice): remove elemento específico
+elemento = lista.pop(1)  # Remove índice 1
+print(f"Elemento removido: {elemento}")  # 2
+print(f"Lista após pop(1): {lista}")  # [1, 3, 4]
+                </div>
+                
+                <h3>🔍 Outros Métodos Úteis</h3>
+                <div class="code-block">
+# count(): conta ocorrências
+lista = [1, 2, 2, 3, 2, 4]
+print(f"Quantidade de 2: {lista.count(2)}")  # 3
+
+# index(): encontra índice
+lista = ["a", "b", "c", "d"]
+print(f"Índice de 'c': {lista.index('c')}")  # 2
+
+# sort(): ordena a lista
+lista = [3, 1, 4, 1, 5]
+lista.sort()
+print(f"Lista ordenada: {lista}")  # [1, 1, 3, 4, 5]
+
+# reverse(): inverte a lista
+lista.reverse()
+print(f"Lista invertida: {lista}")  # [5, 4, 3, 1, 1]
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Atenção!</h4>
+                    <p>Alguns métodos modificam a lista original. Use copy() se quiser preservar a original!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

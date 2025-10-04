@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 09</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide9">
+                <h2><i class="fas fa-search"></i> Busca e Substituição</h2>
+                <h3>🔍 Método find()</h3>
+<p>Encontra a posição de uma substring na string</p>
+
+<div class="code-block">
+# Buscar substring
+texto = "Python é incrível"
+posicao = texto.find("incrível")
+print(posicao)  # 10
+
+# Buscar com início
+posicao = texto.find("é", 5)
+print(posicao)  # 7
+
+# Substring não encontrada
+posicao = texto.find("Java")
+print(posicao)  # -1
+</div>
+
+<h3>🔄 Método replace()</h3>
+<p>Substitui uma substring por outra</p>
+
+<div class="code-block">
+# Substituição simples
+texto = "Python é incrível"
+novo_texto = texto.replace("incrível", "fantástico")
+print(novo_texto)  # Python é fantástico
+
+# Substituição múltipla
+texto = "Java é bom, mas Python é melhor"
+novo_texto = texto.replace("Java", "C++").replace("Python", "JavaScript")
+print(novo_texto)  # C++ é bom, mas JavaScript é melhor
+</div>
+
+<h3>🎯 Aplicação Prática</h3>
+<div class="example">
+<h5>💡 Limpeza de Texto</h5>
+<div class="code-block">
+# Limpar texto de entrada
+texto = input("Digite um texto: ")
+texto_limpo = texto.strip().lower()
+# Remove todos os espaços duplos
+while "  " in texto_limpo:
+    texto_limpo = texto_limpo.replace("  ", " ")
+
+print(f"Texto original: '{texto}'")
+print(f"Texto limpo: '{texto_limpo}'")
+</div>
+</div>
+
+<div class="info">
+<h4><i class="fas fa-lightbulb"></i> Dica</h4>
+<p>Use find() para verificar se uma substring existe antes de usar replace()!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

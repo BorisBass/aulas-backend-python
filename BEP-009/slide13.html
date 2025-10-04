@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 13</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide13">
+                <h2><i class="fas fa-rocket"></i> Aplicações Avançadas</h2>
+                <h3>📊 Processamento de Dados</h3>
+<p>Manipulação de grandes volumes de texto</p>
+
+                <div class="code-block">
+# Processar arquivo de texto
+def processar_arquivo(nome_arquivo):
+    with open(nome_arquivo, 'r', encoding='utf-8') as arquivo:
+        conteudo = arquivo.read()
+    
+    # Estatísticas básicas
+    linhas = conteudo.split('\n')
+    palavras = conteudo.split()
+    
+    print(f"Linhas: {len(linhas)}")
+    print(f"Palavras: {len(palavras)}")
+    print(f"Caracteres: {len(conteudo)}")
+    
+    # Palavra mais frequente
+    contador = {}
+    for palavra in palavras:
+        palavra = palavra.lower().strip('.,!?')
+        contador[palavra] = contador.get(palavra, 0) + 1
+    
+    palavra_mais_frequente = max(contador, key=contador.get)
+    print(f"Palavra mais frequente: {palavra_mais_frequente}")
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Explicação da função processar_arquivo()</h4>
+                    <ul>
+                        <li><strong>with open():</strong> Abre arquivo de forma segura (fecha automaticamente)</li>
+                        <li><strong>encoding='utf-8':</strong> Suporta acentos e caracteres especiais</li>
+                        <li><strong>split('\n'):</strong> Divide texto em linhas (quebras de linha)</li>
+                        <li><strong>split():</strong> Divide texto em palavras (espaços como separador)</li>
+                        <li><strong>strip('.,!?'):</strong> Remove pontuação das palavras</li>
+                        <li><strong>contador.get():</strong> Retorna 0 se chave não existir</li>
+                        <li><strong>max(contador, key=contador.get):</strong> Encontra chave com maior valor</li>
+                    </ul>
+                </div>
+
+<h3>🔍 Análise de Texto</h3>
+                <div class="code-block">
+# Analisar sentimento básico
+def analisar_sentimento(texto):
+    palavras_positivas = ['bom', 'ótimo', 'excelente', 'maravilhoso']
+    palavras_negativas = ['ruim', 'terrível', 'horrível', 'péssimo']
+    
+    texto_lower = texto.lower()
+    positivas = sum(1 for palavra in palavras_positivas if palavra in texto_lower)
+    negativas = sum(1 for palavra in palavras_negativas if palavra in texto_lower)
+    
+    if positivas > negativas:
+        return "Positivo"
+    elif negativas > positivas:
+        return "Negativo"
+    else:
+        return "Neutro"
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Explicação da função analisar_sentimento()</h4>
+                    <ul>
+                        <li><strong>texto.lower():</strong> Converte para minúsculas (busca case-insensitive)</li>
+                        <li><strong>sum(1 for palavra in lista if condição):</strong> Conta quantas palavras da lista estão no texto</li>
+                        <li><strong>Lista de compreensão:</strong> Gera 1 para cada palavra encontrada, 0 para não encontrada</li>
+                        <li><strong>Comparação simples:</strong> Mais palavras positivas = sentimento positivo</li>
+                        <li><strong>Análise básica:</strong> Versão simplificada de análise de sentimento</li>
+                    </ul>
+                </div>
+
+<h3>🎯 Aplicação: Sistema de Busca</h3>
+                <div class="code-block">
+# Sistema de busca simples
+def buscar_texto(texto, termo):
+    texto_lower = texto.lower()
+    termo_lower = termo.lower()
+    
+    if termo_lower in texto_lower:
+        posicao = texto_lower.find(termo_lower)
+        return f"Termo encontrado na posição {posicao}"
+    else:
+        return "Termo não encontrado"
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Explicação da função buscar_texto()</h4>
+                    <ul>
+                        <li><strong>texto.lower() e termo.lower():</strong> Busca case-insensitive (ignora maiúsculas/minúsculas)</li>
+                        <li><strong>in operador:</strong> Verifica se termo existe no texto (retorna True/False)</li>
+                        <li><strong>find():</strong> Retorna posição da primeira ocorrência (ou -1 se não encontrar)</li>
+                        <li><strong>Busca simples:</strong> Encontra apenas a primeira ocorrência</li>
+                        <li><strong>Retorno informativo:</strong> Mostra posição exata onde foi encontrado</li>
+                    </ul>
+                </div>
+
+                <div class="example">
+                    <h5>💡 Exemplo de uso das funções</h5>
+                    <div class="code-block">
+# Exemplo de uso
+texto = "Python é uma linguagem excelente para programação!"
+
+# Análise de sentimento
+sentimento = analisar_sentimento(texto)
+print(f"Sentimento: {sentimento}")  # Positivo
+
+# Busca de texto
+resultado = buscar_texto(texto, "Python")
+print(resultado)  # Termo encontrado na posição 0
+
+# Processar arquivo
+processar_arquivo("exemplo_texto.txt")
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

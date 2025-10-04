@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 14</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide14">
+                <h2><i class="fas fa-star"></i> Boas Práticas</h2>
+                <h3>💡 Dicas para Manipulação de Strings</h3>
+<ul>
+<li><strong>Use f-strings:</strong> Mais legível e eficiente</li>
+<li><strong>Valide entrada:</strong> Sempre use strip() e validações</li>
+<li><strong>Trate erros:</strong> Verifique se strings existem antes de usar</li>
+<li><strong>Seja consistente:</strong> Use o mesmo estilo em todo o código</li>
+</ul>
+
+<h3>🔧 Performance</h3>
+<div class="code-block">
+# ✅ Bom - Use f-strings
+nome = "João"
+idade = 25
+print(f"Olá, {nome}! Você tem {idade} anos.")
+
+# ❌ Ruim - Concatenação com +
+print("Olá, " + nome + "! Você tem " + str(idade) + " anos.")
+</div>
+
+<h3>🛡️ Segurança</h3>
+<div class="code-block">
+# Validação de entrada
+def validar_entrada(texto):
+    if not texto or not texto.strip():
+        return False
+    
+    # Remover caracteres perigosos
+    texto_limpo = texto.strip()
+    
+    # Verificar tamanho
+    if len(texto_limpo) > 1000:
+        return False
+    
+    return True
+</div>
+
+<h3>📚 Recursos Úteis</h3>
+<ul>
+<li><strong>Documentação Python:</strong> docs.python.org/3/library/string.html</li>
+<li><strong>Regex:</strong> Para padrões complexos de texto</li>
+<li><strong>Unicode:</strong> Para caracteres especiais</li>
+<li><strong>Encoding:</strong> Para diferentes codificações</li>
+</ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

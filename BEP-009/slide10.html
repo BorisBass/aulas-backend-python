@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 10</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-check-circle"></i> Validação de Strings</h2>
+                <h3>✅ Métodos de Validação</h3>
+<p>Verificar características de strings</p>
+
+<div class="code-block">
+# Verificar se é alfabético
+texto1 = "Python"
+texto2 = "Python123"
+print(texto1.isalpha())  # True
+print(texto2.isalpha())  # False
+
+# Verificar se é numérico
+numero1 = "123"
+numero2 = "12.3"
+print(numero1.isdigit())  # True
+print(numero2.isdigit())  # False
+</div>
+
+<h3>🔍 Métodos de Verificação</h3>
+<ul>
+<li><strong>isalpha():</strong> Apenas letras</li>
+<li><strong>isdigit():</strong> Apenas dígitos</li>
+<li><strong>isalnum():</strong> Letras e números</li>
+<li><strong>isspace():</strong> Apenas espaços</li>
+<li><strong>islower():</strong> Apenas minúsculas</li>
+<li><strong>isupper():</strong> Apenas maiúsculas</li>
+</ul>
+
+<div class="code-block">
+# Exemplos de validação
+texto = "Python123"
+print(f"É alfanumérico: {texto.isalnum()}")  # True
+print(f"É alfabético: {texto.isalpha()}")    # False
+print(f"É numérico: {texto.isdigit()}")      # False
+</div>
+
+<h3>🎯 Aplicação Prática</h3>
+<div class="example">
+<h5>💡 Validador de Senha</h5>
+<div class="code-block">
+# Validar senha
+senha = input("Digite sua senha: ")
+
+if len(senha) < 8:
+    print("Senha deve ter pelo menos 8 caracteres")
+elif not any(c.isupper() for c in senha):
+    print("Senha deve ter pelo menos uma letra maiúscula")
+elif not any(c.islower() for c in senha):
+    print("Senha deve ter pelo menos uma letra minúscula")
+elif not any(c.isdigit() for c in senha):
+    print("Senha deve ter pelo menos um número")
+else:
+    print("Senha válida!")
+</div>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

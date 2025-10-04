@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-006: Trabalhando com Listas - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-006: Trabalhando com Listas</h1>
+            <p>Manipule coleções de dados</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide4">
+                <h2><i class="fas fa-calculator"></i> Operações com Listas</h2>
+                
+                <h3>🔗 Concatenação e Repetição</h3>
+                <div class="code-block">
+# Concatenação (+)
+lista1 = [1, 2, 3]
+lista2 = [4, 5, 6]
+lista_combinada = lista1 + lista2
+print(f"Concatenação: {lista_combinada}")  # [1, 2, 3, 4, 5, 6]
+
+# Repetição (*)
+lista_repetida = [1, 2] * 3
+print(f"Repetição: {lista_repetida}")  # [1, 2, 1, 2, 1, 2]
+
+# Adicionar lista a outra
+lista1.extend(lista2)
+print(f"Lista1 após extend: {lista1}")  # [1, 2, 3, 4, 5, 6]
+                </div>
+                
+                <h3>📊 Funções Úteis</h3>
+                <div class="code-block">
+# len(): tamanho da lista
+lista = [1, 2, 3, 4, 5]
+print(f"Tamanho: {len(lista)}")  # 5
+
+# max() e min(): maior e menor valor
+numeros = [3, 1, 4, 1, 5, 9, 2]
+print(f"Maior: {max(numeros)}")  # 9
+print(f"Menor: {min(numeros)}")  # 1
+print(f"Soma: {sum(numeros)}")   # 25
+
+# in: verificar se elemento existe
+lista = ["a", "b", "c"]
+print(f"'b' está na lista: {'b' in lista}")  # True
+print(f"'d' está na lista: {'d' in lista}")  # False
+                </div>
+                
+                <h3>🔄 Iterando sobre Listas</h3>
+                <div class="code-block">
+# Usando for
+frutas = ["maçã", "banana", "laranja"]
+
+print("Frutas disponíveis:")
+for fruta in frutas:
+    print(f"- {fruta}")
+
+# Usando enumerate (índice + valor)
+print("
+Frutas com índice:")
+for i, fruta in enumerate(frutas):
+    print(f"{i}: {fruta}")
+
+# Usando range com len
+print("
+Frutas com range:")
+for i in range(len(frutas)):
+    print(f"{i}: {frutas[i]}")
+                </div>
+                
+                <div class="example">
+                    <h5>💡 Exemplo Prático: Lista de Notas</h5>
+                    <div class="code-block">
+# Sistema de notas
+notas = []
+print("Digite as notas (digite -1 para parar):")
+
+while True:
+    nota = float(input("Nota: "))
+    if nota == -1:
+        break
+    notas.append(nota)
+
+if notas:
+    print(f"
+Notas: {notas}")
+    print(f"Quantidade: {len(notas)}")
+    print(f"Maior nota: {max(notas)}")
+    print(f"Menor nota: {min(notas)}")
+    print(f"Média: {sum(notas)/len(notas):.2f}")
+else:
+    print("Nenhuma nota foi digitada!")
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Use enumerate() quando precisar do índice e do valor ao mesmo tempo!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

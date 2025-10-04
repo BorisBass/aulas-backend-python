@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide2">
+                <h2><i class="fas fa-keyboard"></i> Operações Básicas com Strings</h2>
+                <h3>🔤 Concatenação de Strings</h3>
+<p>Juntar duas ou mais strings usando o operador +</p>
+
+<div class="code-block">
+# Concatenação simples
+nome = "João"
+sobrenome = "Silva"
+nome_completo = nome + " " + sobrenome
+print(nome_completo)  # João Silva
+
+# Concatenação com variáveis
+saudacao = "Olá, " + nome + "!"
+print(saudacao)  # Olá, João!
+</div>
+
+<h3>🔄 Repetição de Strings</h3>
+<p>Repetir uma string usando o operador *</p>
+
+<div class="code-block">
+# Repetir string
+linha = "-" * 20
+print(linha)  # --------------------
+
+# Repetir com variável
+quantidade = 5
+asteriscos = "*" * quantidade
+print(asteriscos)  # *****
+</div>
+
+<h3>📍 Indexação e Fatiamento</h3>
+<p>Acessar caracteres individuais e partes da string</p>
+
+<div class="code-block">
+texto = "Python"
+
+# Acessar caracteres
+print(texto[0])    # P
+print(texto[-1])   # n
+
+# Fatiamento
+print(texto[0:3])  # Pyt
+print(texto[2:])   # thon
+print(texto[:4])   # Pyth
+</div>
+
+<div class="info">
+<h4><i class="fas fa-lightbulb"></i> Dica</h4>
+<p>Strings em Python são indexadas começando do 0. Use índices negativos para acessar do final!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

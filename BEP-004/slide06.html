@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-004: Estruturas Condicionais - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-004: Estruturas Condicionais</h1>
+            <p>if, elif, else em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+                        <div class="slide active" id="slide6">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                
+                <h3>🎯 Exercício 1: Calculadora de IMC</h3>
+                <p>Calcule o IMC e classifique o resultado.</p>
+                <div class="code-block">
+peso = float(input("Peso (kg): "))
+altura = float(input("Altura (m): "))
+
+imc = peso / (altura ** 2)
+
+print(f"IMC: {imc:.2f}")
+
+if imc < 18.5:
+    print("Abaixo do peso")
+elif imc < 25:
+    print("Peso normal")
+elif imc < 30:
+    print("Sobrepeso")
+else:
+    print("Obesidade")
+                </div>
+                
+                <h3>🎯 Exercício 2: Sistema de Notas</h3>
+                <p>Calcule a média e determine se foi aprovado.</p>
+                <div class="code-block">
+nota1 = float(input("Nota 1: "))
+nota2 = float(input("Nota 2: "))
+nota3 = float(input("Nota 3: "))
+
+media = (nota1 + nota2 + nota3) / 3
+
+print(f"Média: {media:.2f}")
+
+if media >= 9.0:
+    print("Conceito: A - Excelente!")
+elif media >= 8.0:
+    print("Conceito: B - Muito bom!")
+elif media >= 7.0:
+    print("Conceito: C - Aprovado!")
+elif media >= 6.0:
+    print("Conceito: D - Recuperação!")
+else:
+    print("Conceito: F - Reprovado!")
+                </div>
+                
+                <h3>🎯 Exercício 3: Verificação de Acesso</h3>
+                <p>Verifique se o usuário pode acessar o sistema.</p>
+                <div class="code-block">
+idade = int(input("Idade: "))
+tem_cartao = input("Tem cartão? (s/n): ").lower()
+
+if idade >= 18:
+    if tem_cartao == "s":
+        print("Acesso liberado!")
+    else:
+        print("Necessário cartão para acesso")
+else:
+    print("Acesso negado - menor de idade")
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Teste seus programas com diferentes valores para garantir que funcionam em todos os casos!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

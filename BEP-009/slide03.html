@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide3">
+                <h2><i class="fas fa-font"></i> Métodos lower() e upper()</h2>
+                <h3>🔤 lower() - Minúsculas</h3>
+<p>Converte todos os caracteres para minúsculas</p>
+
+<div class="code-block">
+texto = "PYTHON É INCRÍVEL"
+texto_minusculo = texto.lower()
+print(texto_minusculo)  # python é incrível
+
+# Aplicação prática
+nome = input("Digite seu nome: ")
+nome_minusculo = nome.lower()
+print(f"Olá, {nome_minusculo}!")
+</div>
+
+<h3>🔤 upper() - Maiúsculas</h3>
+<p>Converte todos os caracteres para maiúsculas</p>
+
+<div class="code-block">
+texto = "python é incrível"
+texto_maiusculo = texto.upper()
+print(texto_maiusculo)  # PYTHON É INCRÍVEL
+
+# Aplicação prática
+resposta = input("Digite 'sim' ou 'não': ")
+if resposta.upper() == "SIM":
+    print("Você confirmou!")
+</div>
+
+<h3>🎯 Aplicações Práticas</h3>
+<div class="example">
+<h5>💡 Sistema de Login</h5>
+<div class="code-block">
+# Verificar login (case insensitive)
+usuario_cadastrado = "admin"
+senha_cadastrada = "123456"
+
+usuario = input("Usuário: ")
+senha = input("Senha: ")
+
+if usuario.lower() == usuario_cadastrado.lower():
+    print("Usuário correto!")
+else:
+    print("Usuário incorreto!")
+</div>
+</div>
+
+<div class="warning">
+<h4><i class="fas fa-exclamation-triangle"></i> Dica</h4>
+<p>Use lower() ou upper() para comparações que não devem ser sensíveis a maiúsculas/minúsculas!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

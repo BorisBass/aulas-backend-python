@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 11</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos - Parte 1</h2>
+                <h3>🎯 Exercício 1: Contador de Caracteres</h3>
+<p>Crie um programa que conte o número de caracteres, palavras e linhas em um texto.</p>
+
+<div class="code-block">
+# Sua solução aqui
+texto = input("Digite um texto: ")
+
+# Contar caracteres
+caracteres = len(texto)
+print(f"Número de caracteres: {caracteres}")
+
+# Contar palavras
+palavras = len(texto.split())
+print(f"Número de palavras: {palavras}")
+
+# Contar linhas
+linhas = len(texto.split('
+'))
+print(f"Número de linhas: {linhas}")
+</div>
+
+<h3>🎯 Exercício 2: Inversor de Texto</h3>
+<p>Crie um programa que inverta uma string.</p>
+
+<div class="code-block">
+# Sua solução aqui
+texto = input("Digite um texto: ")
+texto_invertido = texto[::-1]
+print(f"Texto invertido: {texto_invertido}")
+
+# Alternativa usando loop
+texto_invertido2 = ""
+for i in range(len(texto) - 1, -1, -1):
+    texto_invertido2 += texto[i]
+print(f"Texto invertido (loop): {texto_invertido2}")
+</div>
+
+<h3>🎯 Exercício 3: Validador de Email</h3>
+<p>Crie um programa que valide se um email tem formato correto.</p>
+
+<div class="code-block">
+# Sua solução aqui
+email = input("Digite seu email: ").strip().lower()
+
+if "@" in email and "." in email:
+    print("Email válido!")
+else:
+    print("Email inválido!")
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

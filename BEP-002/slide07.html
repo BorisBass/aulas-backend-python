@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-002: Variáveis e Tipos de Dados - Slide 07</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-002: Variáveis e Tipos de Dados</h1>
+            <p>Armazene e manipule dados em Python</p>
+        </div>
+        <div class="nav"></div>
+        <div class="content">
+            <div class="slide active" id="slide7">
+                <h2><i class="fas fa-keyboard"></i> Entrada de Dados (input)</h2>
+                <h3>⌨️ Lendo dados</h3>
+<div class="code-block">
+nome = input("Seu nome: ")
+idade = int(input("Sua idade: "))
+print(f"Olá, {nome}! Você tem {idade} anos.")
+</div>
+<h3>🧮 Exemplo: IMC</h3>
+<div class="code-block">
+peso = float(input("Peso (kg): "))
+altura = float(input("Altura (m): "))
+imc = peso / (altura ** 2)
+print(f"IMC: {imc:.2f}")
+</div>
+            </div>
+        </div>
+        <div class="footer"><img src="../Rodape.png" alt="Rodapé"></div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

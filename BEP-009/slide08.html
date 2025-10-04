@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-009: Manipulação de Strings - Slide 08</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h1>
+            <p>Trabalhe com textos de maneira eficiente</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide8">
+                <h2><i class="fas fa-percentage"></i> Formatação com %</h2>
+                <h3>📊 Formatação com % (Estilo C)</h3>
+<p>Formatação clássica usando o operador %</p>
+
+<div class="code-block">
+# Formatação básica
+nome = "João"
+idade = 25
+print("Olá, %s! Você tem %d anos." % (nome, idade))
+
+# Formatação de decimais
+preco = 19.99
+print("Preço: R$ %.2f" % preco)
+</div>
+
+<h3>🔤 Especificadores de Formato</h3>
+<ul>
+<li><strong>%s:</strong> String</li>
+<li><strong>%d:</strong> Inteiro</li>
+<li><strong>%f:</strong> Decimal</li>
+<li><strong>%e:</strong> Notação científica</li>
+<li><strong>%x:</strong> Hexadecimal</li>
+</ul>
+
+<div class="code-block">
+# Diferentes tipos
+numero = 42
+decimal = 3.14159
+texto = "Python"
+
+print("Inteiro: %d" % numero)
+print("Decimal: %.2f" % decimal)
+print("String: %s" % texto)
+print("Hexadecimal: %x" % numero)  # 2a
+</div>
+
+<h3>📏 Formatação com Largura</h3>
+<div class="code-block">
+# Largura fixa
+texto = "Python"
+print("'%10s'" % texto)    # '    Python'
+print("'%-10s'" % texto)   # 'Python    '
+
+# Decimal com largura
+numero = 3.14159
+print("'%8.2f'" % numero)  # '    3.14'
+</div>
+
+<div class="warning">
+<h4><i class="fas fa-exclamation-triangle"></i> Dica</h4>
+<p>Embora funcional, a formatação com % é considerada legada. Prefira f-strings ou format()!</p>
+</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
