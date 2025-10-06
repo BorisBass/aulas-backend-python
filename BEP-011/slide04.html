@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-011: Introdução a Banco de Dados Relacionais - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-011: Introdução a Banco de Dados Relacionais</h1>
+            <p>Conceitos fundamentais de bancos de dados relacionais</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-key"></i> Chaves Primárias e Estrangeiras</h2>
+                <div class="info">
+                    <h3><i class="fas fa-key"></i> Chaves Primárias (Primary Key)</h3>
+                    <p>Uma <strong>chave primária</strong> é um campo (ou conjunto de campos) que identifica <strong>unicamente</strong> cada linha de uma tabela.</p>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-id-card"></i> Exemplo: Chave Primária</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr style="background: #4299E1; color: white;">
+                            <th style="border: 1px solid #ddd; padding: 10px; background: #2D3748;">🔑 ID</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Nome</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Email</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px; background: #f0f8ff;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">João Silva</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">joao@email.com</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px; background: #f0f8ff;">2</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Maria Santos</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">maria@email.com</td>
+                        </tr>
+                    </table>
+                    <p><strong>ID</strong> é a chave primária - cada cliente tem um ID único!</p>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-link"></i> Chaves Estrangeiras (Foreign Key)</h4>
+                    <p>Uma <strong>chave estrangeira</strong> é um campo que referencia a chave primária de <strong>outra tabela</strong>.</p>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-sitemap"></i> Exemplo: Relacionamento entre Tabelas</h4>
+                    <div style="display: flex; gap: 20px; margin: 20px 0;">
+                        <div style="flex: 1;">
+                            <h5>📋 Tabela: Clientes</h5>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                <tr style="background: #4299E1; color: white;">
+                                    <th style="border: 1px solid #ddd; padding: 8px; background: #2D3748;">🔑 ID</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Nome</th>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px; background: #f0f8ff;">1</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">João</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px; background: #f0f8ff;">2</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Maria</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div style="flex: 1;">
+                            <h5>🛒 Tabela: Pedidos</h5>
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                                <tr style="background: #4299E1; color: white;">
+                                    <th style="border: 1px solid #ddd; padding: 8px; background: #2D3748;">🔑 ID</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px; background: #E53E3E;">🔗 Cliente_ID</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Produto</th>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px; background: #f0f8ff;">101</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px; background: #ffe6e6;">1</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Notebook</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px; background: #f0f8ff;">102</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px; background: #ffe6e6;">2</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Mouse</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <p><strong>Cliente_ID</strong> é a chave estrangeira - conecta pedidos aos clientes!</p>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Regras das Chaves</h4>
+                    <ul>
+                        <li><strong>Chave Primária:</strong> Única, não nula, imutável</li>
+                        <li><strong>Chave Estrangeira:</strong> Deve existir na tabela referenciada</li>
+                        <li><strong>Integridade:</strong> Impede dados órfãos</li>
+                        <li><strong>Relacionamentos:</strong> Conecta tabelas logicamente</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-lightbulb"></i> Por que usar Chaves?</h4>
+                    <ul>
+                        <li>✅ <strong>Identificação única:</strong> Cada registro é único</li>
+                        <li>✅ <strong>Relacionamentos:</strong> Conecta dados entre tabelas</li>
+                        <li>✅ <strong>Integridade:</strong> Dados consistentes</li>
+                        <li>✅ <strong>Performance:</strong> Busca mais rápida</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

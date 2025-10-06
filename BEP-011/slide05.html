@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-011: Introdução a Banco de Dados Relacionais - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-011: Introdução a Banco de Dados Relacionais</h1>
+            <p>Conceitos fundamentais de bancos de dados relacionais</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-project-diagram"></i> Modelo Entidade-Relacionamento (ER)</h2>
+                <div class="info">
+                    <h3><i class="fas fa-project-diagram"></i> O que é o Modelo ER?</h3>
+                    <p>O <strong>Modelo Entidade-Relacionamento</strong> é uma representação gráfica que mostra como as entidades (tabelas) se relacionam em um banco de dados.</p>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-cube"></i> Conceitos Fundamentais</h4>
+                    <ul>
+                        <li><strong>Entidade:</strong> Objeto do mundo real (Cliente, Produto, Pedido)</li>
+                        <li><strong>Atributo:</strong> Característica da entidade (Nome, Preço, Data)</li>
+                        <li><strong>Relacionamento:</strong> Conexão entre entidades</li>
+                        <li><strong>Cardinalidade:</strong> Quantos registros se relacionam</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-sitemap"></i> Exemplo: Sistema de E-commerce</h4>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; border: 2px solid #4299E1; padding: 15px; margin: 10px; border-radius: 8px; background: #f0f8ff;">
+                            <h5>👤 CLIENTE</h5>
+                            <ul style="text-align: left; margin: 0;">
+                                <li>ID (PK)</li>
+                                <li>Nome</li>
+                                <li>Email</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="display: inline-block; margin: 10px; font-size: 1.5em; color: #4299E1;">
+                            <i class="fas fa-arrows-alt-h"></i>
+                        </div>
+                        
+                        <div style="display: inline-block; border: 2px solid #E53E3E; padding: 15px; margin: 10px; border-radius: 8px; background: #ffe6e6;">
+                            <h5>🛒 PEDIDO</h5>
+                            <ul style="text-align: left; margin: 0;">
+                                <li>ID (PK)</li>
+                                <li>Cliente_ID (FK)</li>
+                                <li>Data</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="display: inline-block; margin: 10px; font-size: 1.5em; color: #E53E3E;">
+                            <i class="fas fa-arrows-alt-h"></i>
+                        </div>
+                        
+                        <div style="display: inline-block; border: 2px solid #38A169; padding: 15px; margin: 10px; border-radius: 8px; background: #e6ffe6;">
+                            <h5>📦 PRODUTO</h5>
+                            <ul style="text-align: left; margin: 0;">
+                                <li>ID (PK)</li>
+                                <li>Nome</li>
+                                <li>Preço</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-link"></i> Tipos de Relacionamentos</h4>
+                    <ul>
+                        <li><strong>1:1 (Um para Um):</strong> Um cliente tem uma conta</li>
+                        <li><strong>1:N (Um para Muitos):</strong> Um cliente faz vários pedidos</li>
+                        <li><strong>N:N (Muitos para Muitos):</strong> Um pedido tem vários produtos</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-chart-line"></i> Cardinalidades</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr style="background: #f8f9fa;">
+                            <th style="border: 1px solid #ddd; padding: 10px;">Símbolo</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Significado</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>1</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Exatamente um</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente tem um CPF</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>0..1</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Zero ou um</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente pode ter um endereço</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>1..*</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Um ou muitos</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente faz pelo menos um pedido</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>0..*</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Zero ou muitos</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente pode fazer vários pedidos</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-lightbulb"></i> Vantagens do Modelo ER</h4>
+                    <ul>
+                        <li>✅ <strong>Visualização:</strong> Fácil de entender</li>
+                        <li>✅ <strong>Comunicação:</strong> Cliente e desenvolvedor falam a mesma linguagem</li>
+                        <li>✅ <strong>Planejamento:</strong> Evita erros de design</li>
+                        <li>✅ <strong>Documentação:</strong> Registra a estrutura do sistema</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

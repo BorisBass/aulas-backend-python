@@ -200,6 +200,104 @@
             margin-top: 20px;
         }
         
+        /* Módulo 2 - Carrossel */
+        .module-section {
+            margin: 40px 0;
+        }
+        
+        .module-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2D3748;
+        }
+        
+        .module-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .module-title p {
+            font-size: 1.1rem;
+            color: #718096;
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 20px;
+        }
+        
+        .carousel-card {
+            flex: 0 0 300px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            border: 1px solid #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .carousel-btn {
+            background: #4299E1;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-btn:hover {
+            background: #3182CE;
+            transform: scale(1.1);
+        }
+        
+        .carousel-btn:disabled {
+            background: #CBD5E0;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .carousel-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #CBD5E0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background: #4299E1;
+            transform: scale(1.2);
+        }
+        
         @media (max-width: 768px) {
             .bep-grid {
                 grid-template-columns: 1fr;
@@ -211,6 +309,10 @@
             
             .content {
                 padding: 20px;
+            }
+            
+            .carousel-card {
+                flex: 0 0 280px;
             }
         }
         /* Footer image consistent and centered like slides, larger */
@@ -256,185 +358,357 @@
                 </div>
             </div>
             
-            <div class="bep-grid">
-                <div class="bep-card" href="BEP-001/index.html">
-                    <h3><i class="fas fa-play-circle"></i> BEP-001: Introdução ao Python</h3>
-                    <p>Seu primeiro contato com a linguagem Python. Aprenda conceitos básicos, 
-                    configure o ambiente de desenvolvimento e escreva seus primeiros programas.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 12 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Primeiro programa "Hello World"</li>
-                        <li><i class="fas fa-check"></i> Sintaxe básica e comentários</li>
-                        <li><i class="fas fa-check"></i> Variáveis simples e entrada de dados</li>
-                    </ul>
-                    
-                    <a href="BEP-001/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-001
-                    </a>
+            <!-- Módulo 1 - Lógica de Programação com Python -->
+            <div class="module-section">
+                <div class="module-title">
+                    <h2><i class="fas fa-code"></i> Módulo 1 - Lógica de Programação com Python</h2>
+                    <p>10 aulas fundamentais para aprender programação com Python</p>
                 </div>
                 
-                <div class="bep-card" href="BEP-002/index.html">
-                    <h3><i class="fas fa-tag"></i> BEP-002: Variáveis e Tipos de Dados</h3>
-                    <p>Armazene e manipule dados em Python. Aprenda sobre diferentes tipos de dados, 
-                    operações básicas e conversão entre tipos.</p>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper" id="carouselWrapper1">
+                        <!-- BEP-001: Introdução ao Python -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-001: Introdução ao Python</h3>
+                            <p>Seu primeiro contato com a linguagem Python. Aprenda conceitos básicos, 
+                            configure o ambiente de desenvolvimento e escreva seus primeiros programas.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 12 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Primeiro programa "Hello World"</li>
+                                <li><i class="fas fa-check"></i> Sintaxe básica e comentários</li>
+                                <li><i class="fas fa-check"></i> Variáveis simples e entrada de dados</li>
+                            </ul>
+                            
+                            <a href="BEP-001/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-001
+                            </a>
+                        </div>
+                
+                        <!-- BEP-002: Variáveis e Tipos de Dados -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-002: Variáveis e Tipos de Dados</h3>
+                            <p>Armazene e manipule dados em Python. Aprenda sobre diferentes tipos de dados, 
+                            operações básicas e conversão entre tipos.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 15 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Tipos: int, float, str, bool</li>
+                                <li><i class="fas fa-check"></i> Operações com números e strings</li>
+                                <li><i class="fas fa-check"></i> Conversão de tipos</li>
+                            </ul>
+                            
+                            <a href="BEP-002/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-002
+                            </a>
+                        </div>
+                
+                        <!-- BEP-003: Operadores em Python -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-003: Operadores em Python</h3>
+                            <p>Domine operadores aritméticos, relacionais e lógicos em Python. Aprenda a 
+                            realizar cálculos e comparações de forma eficiente.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 7 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Operadores aritméticos</li>
+                                <li><i class="fas fa-check"></i> Operadores relacionais</li>
+                                <li><i class="fas fa-check"></i> Operadores lógicos</li>
+                            </ul>
+                            
+                            <a href="BEP-003/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-003
+                            </a>
+                        </div>
+                
+                        <!-- BEP-004: Estruturas Condicionais -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-004: Estruturas Condicionais</h3>
+                            <p>Controle o fluxo do seu programa com if, elif e else. Aprenda a criar 
+                            lógica condicional e tomar decisões baseadas em dados.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 7 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> if, elif, else</li>
+                                <li><i class="fas fa-check"></i> Operadores de comparação</li>
+                                <li><i class="fas fa-check"></i> Estruturas aninhadas</li>
+                            </ul>
+                            
+                            <a href="BEP-004/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-004
+                            </a>
+                        </div>
+                
+                        <!-- BEP-005: Estruturas de Repetição -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-005: Estruturas de Repetição</h3>
+                            <p>Automatize tarefas repetitivas com loops for e while. Aprenda a criar 
+                            programas que executam ações múltiplas vezes de forma eficiente.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 7 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Loops for e while</li>
+                                <li><i class="fas fa-check"></i> range() e enumerate()</li>
+                                <li><i class="fas fa-check"></i> Controle de fluxo</li>
+                            </ul>
+                            
+                            <a href="BEP-005/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-005
+                            </a>
+                        </div>
+                
+                        <!-- BEP-006: Trabalhando com Listas -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-006: Trabalhando com Listas</h3>
+                            <p>Manipule coleções de dados com listas em Python. Aprenda a criar, 
+                            modificar e processar listas de forma eficiente.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 6 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Criação e manipulação</li>
+                                <li><i class="fas fa-check"></i> Métodos: append, insert, remove</li>
+                                <li><i class="fas fa-check"></i> Fatiamento e indexação</li>
+                            </ul>
+                            
+                            <a href="BEP-006/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-006
+                            </a>
+                        </div>
+                
+                        <!-- BEP-007: Tuplas e Dicionários -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-007: Tuplas e Dicionários</h3>
+                            <p>Conheça outras estruturas de dados fundamentais em Python - tuplas e dicionários. 
+                            Aprenda a criar, manipular e utilizar essas estruturas em seus programas.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 19 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Métodos e operações</li>
+                                <li><i class="fas fa-check"></i> Aplicações práticas</li>
+                                <li><i class="fas fa-check"></i> Material de apoio completo</li>
+                            </ul>
+                            
+                            <a href="BEP-007/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-007
+                            </a>
+                        </div>
+                
+                        <!-- BEP-008: Funções em Python -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-008: Funções em Python</h3>
+                            <p>Organize seu código em blocos reutilizáveis e modulares. Aprenda a criar funções 
+                            eficientes e aplicar boas práticas de programação.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 15 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Parâmetros e argumentos</li>
+                                <li><i class="fas fa-check"></i> Escopo de variáveis</li>
+                                <li><i class="fas fa-check"></i> Projeto integrador</li>
+                            </ul>
+                            
+                            <a href="BEP-008/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-008
+                            </a>
+                        </div>
+                
+                        <!-- BEP-009: Manipulação de Strings -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-009: Manipulação de Strings</h3>
+                            <p>Trabalhe com textos de maneira eficiente. Aprenda operações básicas com strings, 
+                            métodos úteis como lower(), upper(), strip(), split(), join() e formatação de strings.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 15 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Operações básicas com strings</li>
+                                <li><i class="fas fa-check"></i> Métodos úteis: lower(), upper(), strip()</li>
+                                <li><i class="fas fa-check"></i> Split(), join() e formatação</li>
+                            </ul>
+                            
+                            <a href="BEP-009/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-009
+                            </a>
+                        </div>
+                
+                        <!-- BEP-010: Tratamento de Exceções -->
+                        <div class="carousel-card">
+                            <h3><i class="fab fa-python"></i> BEP-010: Tratamento de Exceções</h3>
+                            <p>Torne seus programas mais robustos e confiáveis. Aprenda a lidar com erros e 
+                            exceções de forma profissional usando try, except, finally e raise.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 07 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
+                                <li><i class="fas fa-check"></i> Try, except, finally, raise</li>
+                                <li><i class="fas fa-check"></i> Tipos de exceções comuns</li>
+                                <li><i class="fas fa-check"></i> Boas práticas e debugging</li>
+                            </ul>
+                            
+                            <a href="BEP-010/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-010
+                            </a>
+                        </div>
+                    </div>
                     
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 15 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Tipos: int, float, str, bool</li>
-                        <li><i class="fas fa-check"></i> Operações com números e strings</li>
-                        <li><i class="fas fa-check"></i> Conversão de tipos</li>
-                    </ul>
+                    <div class="carousel-nav">
+                        <button class="carousel-btn" id="prevBtn1" onclick="moveCarousel1(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn" id="nextBtn1" onclick="moveCarousel1(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                     
-                    <a href="BEP-002/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-002
-                    </a>
+                    <div class="carousel-indicators" id="carouselIndicators1">
+                        <!-- Indicadores serão gerados dinamicamente -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Módulo 2 - Noções de Banco de Dados -->
+            <div class="module-section">
+                <div class="module-title">
+                    <h2><i class="fas fa-database"></i> Módulo 2 - Noções de Banco de Dados</h2>
+                    <p>6 aulas para aprender conceitos fundamentais de banco de dados</p>
                 </div>
                 
-                <div class="bep-card" href="BEP-003/index.html">
-                    <h3><i class="fas fa-calculator"></i> BEP-003: Operadores em Python</h3>
-                    <p>Domine operadores aritméticos, relacionais e lógicos em Python. Aprenda a 
-                    realizar cálculos e comparações de forma eficiente.</p>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper" id="carouselWrapper">
+                        <!-- BEP-011: Introdução a Banco de Dados Relacionais -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-database"></i> BEP-011: Introdução a Banco de Dados Relacionais</h3>
+                            <p>Conceitos fundamentais de bancos de dados relacionais. Aprenda sobre tabelas, 
+                            chaves primárias, chaves estrangeiras e modelo entidade-relacionamento.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 8 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos</li>
+                                <li><i class="fas fa-check"></i> Conceitos de BD relacional</li>
+                                <li><i class="fas fa-check"></i> Tabelas, linhas e colunas</li>
+                                <li><i class="fas fa-check"></i> Chaves primárias e estrangeiras</li>
+                            </ul>
+                            
+                            <a href="BEP-011/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-011
+                            </a>
+                        </div>
+                        
+                        <!-- BEP-012: Introdução a SQL - Comandos Básicos -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-database"></i> BEP-012: Introdução a SQL - Comandos Básicos</h3>
+                            <p>Domine os comandos SQL essenciais. Aprenda SELECT para consultas e INSERT 
+                            para inserção de dados com filtros WHERE, ORDER BY e LIMIT.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 10 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos</li>
+                                <li><i class="fas fa-check"></i> Comando SELECT</li>
+                                <li><i class="fas fa-check"></i> Filtros WHERE, ORDER BY</li>
+                                <li><i class="fas fa-check"></i> Inserção com INSERT INTO</li>
+                            </ul>
+                            
+                            <a href="BEP-012/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-012
+                            </a>
+                        </div>
+                        
+                        <!-- BEP-013: Comandos de Atualização e Remoção -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-database"></i> BEP-013: Comandos de Atualização e Remoção</h3>
+                            <p>Capacite-se para modificar e remover dados. Aprenda UPDATE para atualizar 
+                            registros e DELETE para remoção com cláusula WHERE.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 8 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos</li>
+                                <li><i class="fas fa-check"></i> Comando UPDATE</li>
+                                <li><i class="fas fa-check"></i> Comando DELETE</li>
+                                <li><i class="fas fa-check"></i> Boas práticas e cuidados</li>
+                            </ul>
+                            
+                            <a href="BEP-013/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-013
+                            </a>
+                        </div>
+                        
+                        <!-- BEP-014: Modelagem e Normalização de Dados -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-database"></i> BEP-014: Modelagem e Normalização de Dados</h3>
+                            <p>Estruture dados de forma eficiente. Aprenda modelagem de dados, 
+                            normalização (1ª, 2ª e 3ª formas normais) e boas práticas.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 10 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos</li>
+                                <li><i class="fas fa-check"></i> Modelagem de dados</li>
+                                <li><i class="fas fa-check"></i> Normalização 1ª, 2ª e 3ª formas</li>
+                                <li><i class="fas fa-check"></i> Performance e integridade</li>
+                            </ul>
+                            
+                            <a href="BEP-014/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-014
+                            </a>
+                        </div>
+                        
+                        <!-- BEP-015: Joins e Consultas Avançadas -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-database"></i> BEP-015: Joins e Consultas Avançadas</h3>
+                            <p>Integre dados de múltiplas tabelas. Aprenda INNER JOIN, LEFT JOIN, 
+                            RIGHT JOIN, subconsultas e agrupamento com GROUP BY.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 12 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos</li>
+                                <li><i class="fas fa-check"></i> INNER, LEFT, RIGHT JOIN</li>
+                                <li><i class="fas fa-check"></i> Subconsultas</li>
+                                <li><i class="fas fa-check"></i> ORDER BY e GROUP BY</li>
+                            </ul>
+                            
+                            <a href="BEP-015/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-015
+                            </a>
+                        </div>
+                        
+                        <!-- BEP-016: Conectando a Banco de Dados -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h3>
+                            <p>Integre linguagens de programação com bancos de dados. Aprenda sobre 
+                            bancos embarcados e biblioteca SQLite3 para criação e consultas.</p>
+                            
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> 10 slides interativos</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos</li>
+                                <li><i class="fas fa-check"></i> Banco de dados embarcado</li>
+                                <li><i class="fas fa-check"></i> Biblioteca SQLite3</li>
+                                <li><i class="fas fa-check"></i> Criação de tabelas via código</li>
+                            </ul>
+                            
+                            <a href="BEP-016/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-016
+                            </a>
+                        </div>
+                    </div>
                     
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 7 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Operadores aritméticos</li>
-                        <li><i class="fas fa-check"></i> Operadores relacionais</li>
-                        <li><i class="fas fa-check"></i> Operadores lógicos</li>
-                    </ul>
+                    <div class="carousel-nav">
+                        <button class="carousel-btn" id="prevBtn" onclick="moveCarousel(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn" id="nextBtn" onclick="moveCarousel(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                     
-                    <a href="BEP-003/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-003
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-004/index.html">
-                    <h3><i class="fas fa-code-branch"></i> BEP-004: Estruturas Condicionais</h3>
-                    <p>Controle o fluxo do seu programa com if, elif e else. Aprenda a criar 
-                    lógica condicional e tomar decisões baseadas em dados.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 7 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> if, elif, else</li>
-                        <li><i class="fas fa-check"></i> Operadores de comparação</li>
-                        <li><i class="fas fa-check"></i> Estruturas aninhadas</li>
-                    </ul>
-                    
-                    <a href="BEP-004/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-004
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-005/index.html">
-                    <h3><i class="fas fa-sync-alt"></i> BEP-005: Estruturas de Repetição</h3>
-                    <p>Automatize tarefas repetitivas com loops for e while. Aprenda a criar 
-                    programas que executam ações múltiplas vezes de forma eficiente.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 7 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Loops for e while</li>
-                        <li><i class="fas fa-check"></i> range() e enumerate()</li>
-                        <li><i class="fas fa-check"></i> Controle de fluxo</li>
-                    </ul>
-                    
-                    <a href="BEP-005/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-005
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-006/index.html">
-                    <h3><i class="fas fa-list"></i> BEP-006: Trabalhando com Listas</h3>
-                    <p>Manipule coleções de dados com listas em Python. Aprenda a criar, 
-                    modificar e processar listas de forma eficiente.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 6 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Criação e manipulação</li>
-                        <li><i class="fas fa-check"></i> Métodos: append, insert, remove</li>
-                        <li><i class="fas fa-check"></i> Fatiamento e indexação</li>
-                    </ul>
-                    
-                    <a href="BEP-006/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-006
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-007/index.html">
-                    <h3><i class="fas fa-book"></i> BEP-007: Tuplas e Dicionários</h3>
-                    <p>Conheça outras estruturas de dados fundamentais em Python - tuplas e dicionários. 
-                    Aprenda a criar, manipular e utilizar essas estruturas em seus programas.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 19 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Métodos e operações</li>
-                        <li><i class="fas fa-check"></i> Aplicações práticas</li>
-                        <li><i class="fas fa-check"></i> Material de apoio completo</li>
-                    </ul>
-                    
-                    <a href="BEP-007/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-007
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-008/index.html">
-                    <h3><i class="fas fa-cogs"></i> BEP-008: Funções em Python</h3>
-                    <p>Organize seu código em blocos reutilizáveis e modulares. Aprenda a criar funções 
-                    eficientes e aplicar boas práticas de programação.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 15 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Parâmetros e argumentos</li>
-                        <li><i class="fas fa-check"></i> Escopo de variáveis</li>
-                        <li><i class="fas fa-check"></i> Projeto integrador</li>
-                    </ul>
-                    
-                    <a href="BEP-008/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-008
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-009/index.html">
-                    <h3><i class="fas fa-font"></i> BEP-009: Manipulação de Strings</h3>
-                    <p>Trabalhe com textos de maneira eficiente. Aprenda operações básicas com strings, 
-                    métodos úteis como lower(), upper(), strip(), split(), join() e formatação de strings.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 15 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Operações básicas com strings</li>
-                        <li><i class="fas fa-check"></i> Métodos úteis: lower(), upper(), strip()</li>
-                        <li><i class="fas fa-check"></i> Split(), join() e formatação</li>
-                    </ul>
-                    
-                    <a href="BEP-009/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-009
-                    </a>
-                </div>
-                
-                <div class="bep-card" href="BEP-010/index.html">
-                    <h3><i class="fas fa-shield-alt"></i> BEP-010: Tratamento de Exceções</h3>
-                    <p>Torne seus programas mais robustos e confiáveis. Aprenda a lidar com erros e 
-                    exceções de forma profissional usando try, except, finally e raise.</p>
-                    
-                    <ul class="features">
-                        <li><i class="fas fa-check"></i> 07 slides interativos</li>
-                        <li><i class="fas fa-check"></i> Exercícios práticos no Google Colab</li>
-                        <li><i class="fas fa-check"></i> Try, except, finally, raise</li>
-                        <li><i class="fas fa-check"></i> Tipos de exceções comuns</li>
-                        <li><i class="fas fa-check"></i> Boas práticas e debugging</li>
-                    </ul>
-                    
-                    <a href="BEP-010/index.html" class="access-button">
-                        <i class="fas fa-play"></i> Acessar BEP-010
-                    </a>
+                    <div class="carousel-indicators" id="carouselIndicators">
+                        <!-- Indicadores serão gerados dinamicamente -->
+                    </div>
                 </div>
             </div>
             
@@ -471,5 +745,118 @@
      
 
     </div>
+    
+    <script>
+        // Carrosséis dos Módulos
+        let currentSlide1 = 0; // Módulo 1
+        let currentSlide2 = 0; // Módulo 2
+        const totalSlides1 = 10; // Módulo 1
+        const totalSlides2 = 6;  // Módulo 2
+        const slideWidth = 320; // 300px + 20px gap
+        
+        // Módulo 1 - Lógica de Programação
+        function moveCarousel1(direction) {
+            const wrapper = document.getElementById('carouselWrapper1');
+            const maxSlide = totalSlides1 - 3; // Mostra 3 cards por vez
+            
+            currentSlide1 += direction;
+            
+            // Limitar slides
+            if (currentSlide1 < 0) currentSlide1 = 0;
+            if (currentSlide1 > maxSlide) currentSlide1 = maxSlide;
+            
+            // Mover carrossel
+            wrapper.style.transform = `translateX(-${currentSlide1 * slideWidth}px)`;
+            
+            // Atualizar botões
+            updateCarouselButtons1();
+            updateIndicators1();
+        }
+        
+        function updateCarouselButtons1() {
+            const prevBtn = document.getElementById('prevBtn1');
+            const nextBtn = document.getElementById('nextBtn1');
+            const maxSlide = totalSlides1 - 3;
+            
+            prevBtn.disabled = currentSlide1 === 0;
+            nextBtn.disabled = currentSlide1 >= maxSlide;
+        }
+        
+        function updateIndicators1() {
+            const indicators = document.getElementById('carouselIndicators1');
+            indicators.innerHTML = '';
+            
+            for (let i = 0; i < totalSlides1 - 2; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = `carousel-indicator ${i === currentSlide1 ? 'active' : ''}`;
+                indicator.onclick = () => goToSlide1(i);
+                indicators.appendChild(indicator);
+            }
+        }
+        
+        function goToSlide1(slide) {
+            currentSlide1 = slide;
+            const wrapper = document.getElementById('carouselWrapper1');
+            wrapper.style.transform = `translateX(-${currentSlide1 * slideWidth}px)`;
+            updateCarouselButtons1();
+            updateIndicators1();
+        }
+        
+        // Módulo 2 - Banco de Dados
+        function moveCarousel(direction) {
+            const wrapper = document.getElementById('carouselWrapper');
+            const maxSlide = totalSlides2 - 3; // Mostra 3 cards por vez
+            
+            currentSlide2 += direction;
+            
+            // Limitar slides
+            if (currentSlide2 < 0) currentSlide2 = 0;
+            if (currentSlide2 > maxSlide) currentSlide2 = maxSlide;
+            
+            // Mover carrossel
+            wrapper.style.transform = `translateX(-${currentSlide2 * slideWidth}px)`;
+            
+            // Atualizar botões
+            updateCarouselButtons();
+            updateIndicators();
+        }
+        
+        function updateCarouselButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const maxSlide = totalSlides2 - 3;
+            
+            prevBtn.disabled = currentSlide2 === 0;
+            nextBtn.disabled = currentSlide2 >= maxSlide;
+        }
+        
+        function updateIndicators() {
+            const indicators = document.getElementById('carouselIndicators');
+            indicators.innerHTML = '';
+            
+            for (let i = 0; i < totalSlides2 - 2; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = `carousel-indicator ${i === currentSlide2 ? 'active' : ''}`;
+                indicator.onclick = () => goToSlide(i);
+                indicators.appendChild(indicator);
+            }
+        }
+        
+        function goToSlide(slide) {
+            currentSlide2 = slide;
+            const wrapper = document.getElementById('carouselWrapper');
+            wrapper.style.transform = `translateX(-${currentSlide2 * slideWidth}px)`;
+            updateCarouselButtons();
+            updateIndicators();
+        }
+        
+        // Inicializar carrosséis
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCarouselButtons1();
+            updateIndicators1();
+            updateCarouselButtons();
+            updateIndicators();
+        });
+    </script>
 </body>
 </html>

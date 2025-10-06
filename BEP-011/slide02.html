@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-011: Introdução a Banco de Dados Relacionais - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-011: Introdução a Banco de Dados Relacionais</h1>
+            <p>Conceitos fundamentais de bancos de dados relacionais</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-balance-scale"></i> Bancos Relacionais vs Não Relacionais</h2>
+                <div class="info">
+                    <h3><i class="fas fa-balance-scale"></i> Tipos de Bancos de Dados</h3>
+                    <p>Existem dois tipos principais de bancos de dados:</p>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-table"></i> Bancos Relacionais (SQL)</h4>
+                    <ul>
+                        <li><strong>Estrutura:</strong> Dados organizados em tabelas</li>
+                        <li><strong>Relacionamentos:</strong> Tabelas conectadas por chaves</li>
+                        <li><strong>Consistência:</strong> Dados sempre válidos</li>
+                        <li><strong>Exemplos:</strong> MySQL, PostgreSQL, SQLite</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-cube"></i> Bancos Não Relacionais (NoSQL)</h4>
+                    <ul>
+                        <li><strong>Estrutura:</strong> Dados em documentos, grafos, chave-valor</li>
+                        <li><strong>Flexibilidade:</strong> Estrutura pode variar</li>
+                        <li><strong>Escalabilidade:</strong> Crescimento horizontal</li>
+                        <li><strong>Exemplos:</strong> MongoDB, Redis, Neo4j</li>
+                    </ul>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-chart-bar"></i> Comparação Prática</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr style="background: #f8f9fa;">
+                            <th style="border: 1px solid #ddd; padding: 10px;">Característica</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Relacional</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Não Relacional</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Estrutura</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Tabelas fixas</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Flexível</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Consistência</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Alta</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Variável</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Escalabilidade</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Vertical</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Horizontal</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Uso</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Sistemas tradicionais</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Big Data, IoT</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-info-circle"></i> Quando usar cada tipo?</h4>
+                    <p><strong>Relacional:</strong> Sistemas bancários, e-commerce, CRM</p>
+                    <p><strong>Não Relacional:</strong> Redes sociais, IoT, análise de dados</p>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-graduation-cap"></i> Foco do Curso</h4>
+                    <p>Neste curso, focaremos em <strong>bancos relacionais</strong> porque:</p>
+                    <ul>
+                        <li>✅ Mais utilizados no mercado</li>
+                        <li>✅ Base para aprender outros tipos</li>
+                        <li>✅ Excelente para iniciantes</li>
+                        <li>✅ Padrão da indústria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

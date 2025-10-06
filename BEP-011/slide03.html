@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-011: Introdução a Banco de Dados Relacionais - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-011: Introdução a Banco de Dados Relacionais</h1>
+            <p>Conceitos fundamentais de bancos de dados relacionais</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-table"></i> Conceitos Básicos - Tabelas e Estruturas</h2>
+                <div class="info">
+                    <h3><i class="fas fa-table"></i> Estrutura de uma Tabela</h3>
+                    <p>Uma <strong>tabela</strong> é como uma planilha, mas com regras mais rígidas:</p>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-users"></i> Exemplo: Tabela de Clientes</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr style="background: #4299E1; color: white;">
+                            <th style="border: 1px solid #ddd; padding: 10px;">ID</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Nome</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Email</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Telefone</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;">1</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">João Silva</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">joao@email.com</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">(71) 99999-9999</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;">2</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Maria Santos</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">maria@email.com</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">(71) 88888-8888</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="info">
+                    <h4><i class="fas fa-list"></i> Componentes de uma Tabela</h4>
+                    <ul>
+                        <li><strong>Coluna (Campo):</strong> Cada tipo de informação (Nome, Email, etc.)</li>
+                        <li><strong>Linha (Registro):</strong> Cada pessoa/objeto (João, Maria, etc.)</li>
+                        <li><strong>Célula:</strong> Intersecção de linha e coluna</li>
+                        <li><strong>Esquema:</strong> Estrutura da tabela (nomes das colunas)</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-tags"></i> Tipos de Dados Comuns</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                        <tr style="background: #f8f9fa;">
+                            <th style="border: 1px solid #ddd; padding: 10px;">Tipo</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Descrição</th>
+                            <th style="border: 1px solid #ddd; padding: 10px;">Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>INT</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Números inteiros</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">1, 25, 100</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>VARCHAR</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Texto variável</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">"João Silva"</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>DATE</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Data</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">2025-01-03</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>BOOLEAN</strong></td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">Verdadeiro/Falso</td>
+                            <td style="border: 1px solid #ddd; padding: 10px;">TRUE, FALSE</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Regras Importantes</h4>
+                    <ul>
+                        <li><strong>Consistência:</strong> Todas as linhas têm as mesmas colunas</li>
+                        <li><strong>Tipos:</strong> Cada coluna tem um tipo específico</li>
+                        <li><strong>Ordem:</strong> As colunas têm ordem fixa</li>
+                        <li><strong>Nomes:</strong> Colunas têm nomes únicos</li>
+                    </ul>
+                </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-lightbulb"></i> Analogia com Planilha</h4>
+                    <p>Uma tabela de banco de dados é como uma planilha, mas:</p>
+                    <ul>
+                        <li>✅ <strong>Mais rígida:</strong> Não pode misturar tipos na mesma coluna</li>
+                        <li>✅ <strong>Mais segura:</strong> Validação automática dos dados</li>
+                        <li>✅ <strong>Mais eficiente:</strong> Busca e ordenação mais rápida</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
