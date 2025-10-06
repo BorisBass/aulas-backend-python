@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-010: Tratamento de Exceções - Slide 07</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-010: Tratamento de Exceções</h1>
+            <p>Torne seus programas mais robustos e confiáveis</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide7">
+                <h2><i class="fas fa-broom"></i> Finally - Limpeza e Finalização</h2>
+                <h3>🔍 Bloco Finally</h3>
+                <p>O bloco <code>finally</code> <strong>sempre</strong> é executado, com ou sem exceção:</p>
+                
+                <div class="code-block">
+# Sintaxe com finally
+try:
+    arquivo = open("dados.txt", "r")
+    conteudo = arquivo.read()
+    print("Arquivo lido com sucesso!")
+except FileNotFoundError:
+    print("Erro: Arquivo não encontrado!")
+except Exception as e:
+    print(f"Erro inesperado: {e}")
+finally:
+    arquivo.close()  # Sempre fecha o arquivo
+    print("Limpeza realizada!")
+                </div>
+
+                <h3>📝 Quando Usar Finally</h3>
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Casos de Uso do Finally</h4>
+                    <ul>
+                        <li><strong>Fechar arquivos:</strong> Garantir que recursos sejam liberados</li>
+                        <li><strong>Limpar recursos:</strong> Liberar memória, conexões</li>
+                        <li><strong>Registro de logs:</strong> Sempre registrar o que aconteceu</li>
+                        <li><strong>Limpeza de dados:</strong> Resetar variáveis temporárias</li>
+                    </ul>
+                </div>
+
+                <h3>🔧 Exemplos Práticos</h3>
+                <div class="code-block">
+# 1. Gerenciamento de arquivos
+try:
+    arquivo = open("dados.txt", "w")
+    arquivo.write("Dados importantes")
+except IOError:
+    print("Erro ao escrever arquivo")
+finally:
+    if 'arquivo' in locals():
+        arquivo.close()
+    print("Arquivo fechado com segurança")
+
+# 2. Conexão com banco de dados
+try:
+    conexao = conectar_banco()
+    dados = buscar_dados(conexao)
+    print("Dados carregados!")
+except DatabaseError:
+    print("Erro no banco de dados")
+finally:
+    if 'conexao' in locals():
+        conexao.close()
+    print("Conexão encerrada")
+
+# 3. Processamento com limpeza
+try:
+    lista_temporaria = []
+    for item in dados:
+        lista_temporaria.append(processar(item))
+    print("Processamento concluído!")
+except Exception as e:
+    print(f"Erro no processamento: {e}")
+finally:
+    lista_temporaria.clear()  # Limpa a lista
+    print("Memória liberada")
+                </div>
+
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Dica Importante</h4>
+                    <p>O <code>finally</code> é executado <strong>sempre</strong>, mesmo se houver <code>return</code> no bloco <code>try</code> ou <code>except</code>!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+
+
+

@@ -18,9 +18,24 @@
             <div class="slide active" id="slide6">
                 <h2><i class="fas fa-arrow-up"></i> Raise - Lançando Exceções</h2>
                 <h3>🔍 O que é Raise?</h3>
-                <p>Use <code>raise</code> para lançar exceções manualmente:</p>
+                <p>Use <code>raise</code> para <strong>criar e lançar exceções manualmente</strong> quando algo não está correto:</p>
+                
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Por que usar raise?</h4>
+                    <ul>
+                        <li><strong>Validação:</strong> Verificar se dados estão corretos</li>
+                        <li><strong>Controle:</strong> Forçar parada em condições específicas</li>
+                        <li><strong>Clareza:</strong> Mensagens de erro personalizadas</li>
+                        <li><strong>Robustez:</strong> Evitar comportamentos inesperados</li>
+                    </ul>
+                </div>
+
+                <h3>📝 Sintaxe do Raise</h3>
                 <div class="code-block">
-# Lançar exceção
+# Sintaxe básica
+raise TipoExcecao("Mensagem de erro")
+
+# Exemplo simples
 def dividir(a, b):
     if b == 0:
         raise ZeroDivisionError("Não pode dividir por zero!")
@@ -31,9 +46,10 @@ try:
 except ZeroDivisionError as e:
     print(f"Erro: {e}")
                 </div>
-                <h3>📝 Exemplos Práticos</h3>
+
+                <h3>🔧 Exemplos Práticos</h3>
                 <div class="code-block">
-# Validação de idade
+# 1. Validação de idade
 def validar_idade(idade):
     if idade < 0:
         raise ValueError("Idade não pode ser negativa!")
@@ -41,10 +57,24 @@ def validar_idade(idade):
         raise ValueError("Idade inválida!")
     return True
 
-try:
-    validar_idade(-5)
-except ValueError as e:
-    print(f"Erro: {e}")
+# 2. Validação de email
+def validar_email(email):
+    if "@" not in email:
+        raise ValueError("Email deve conter @")
+    if "." not in email:
+        raise ValueError("Email deve conter domínio")
+    return True
+
+# 3. Validação de arquivo
+def abrir_arquivo(nome):
+    if not nome.endswith('.txt'):
+        raise ValueError("Apenas arquivos .txt são permitidos!")
+    return open(nome, 'r')
+                </div>
+
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Dica Importante</h4>
+                    <p><strong>raise</strong> é usado para <em>criar</em> exceções, enquanto <strong>try-except</strong> é usado para <em>capturar</em> exceções!</p>
                 </div>
             </div>
         </div>

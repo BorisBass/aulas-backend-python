@@ -220,14 +220,14 @@ function getTotalSlides() {
     const slideCounts = {
         'BEP-001': 12,
         'BEP-002': 15,
-        'BEP-003': 15,
-        'BEP-004': 12,
-        'BEP-005': 10,
-        'BEP-006': 19,
+        'BEP-003': 7,
+        'BEP-004': 7,
+        'BEP-005': 7,
+        'BEP-006': 6,
         'BEP-007': 19,
         'BEP-008': 15,
         'BEP-009': 15,
-        'BEP-010': 6
+        'BEP-010': 7
     };
     
     // Detectar a pasta atual usando múltiplos métodos

@@ -20,27 +20,100 @@
         
         <div class="content">
             <div class="slide active" id="slide5">
-                <h2><i class="fas fa-broom"></i> Finally - Limpeza e Finalização</h2>
-                <h3>🔍 Bloco Finally</h3>
-<p>O bloco <code>finally</code> <strong>sempre</strong> é executado, com ou sem exceção:</p>
-<div class="code-block">
-# Sintaxe com finally
+                <h2><i class="fas fa-list"></i> Exceções Comuns em Python</h2>
+                <h3>🔍 Principais Tipos de Exceções</h3>
+                <p>Conheça as exceções mais comuns e quando elas ocorrem:</p>
+                
+                <div class="code-block">
+# 1. ValueError - Valor inválido
 try:
-    arquivo = open("dados.txt", "r")
-    conteudo = arquivo.read()
-except FileNotFoundError:
-    print("Erro: Arquivo não encontrado!")
-finally:
-    arquivo.close()  # Sempre fecha o arquivo
-    print("Limpeza realizada!")
-</div>
+    numero = int("abc")  # Erro!
+except ValueError:
+    print("Erro: Valor inválido para conversão")
 
-<h3>📝 Quando Usar Finally</h3>
-<ul>
-<li><strong>Fechar arquivos:</strong> Garantir que recursos sejam liberados</li>
-<li><strong>Limpar recursos:</strong> Liberar memória, conexões</li>
-<li><strong>Registro de logs:</strong> Sempre registrar o que aconteceu</li>
-</ul>
+# 2. TypeError - Tipo incorreto
+try:
+    resultado = "texto" + 5  # Erro!
+except TypeError:
+    print("Erro: Não é possível somar string com número")
+
+# 3. ZeroDivisionError - Divisão por zero
+try:
+    resultado = 10 / 0  # Erro!
+except ZeroDivisionError:
+    print("Erro: Divisão por zero")
+
+# 4. IndexError - Índice fora do range
+try:
+    lista = [1, 2, 3]
+    elemento = lista[10]  # Erro!
+except IndexError:
+    print("Erro: Índice fora do range")
+
+# 5. KeyError - Chave não encontrada
+try:
+    dicionario = {"nome": "João"}
+    valor = dicionario["idade"]  # Erro!
+except KeyError:
+    print("Erro: Chave não encontrada no dicionário")
+                </div>
+
+                <h3>📋 Lista Completa de Exceções Comuns</h3>
+                <div class="info">
+                    <h4><i class="fas fa-exclamation-circle"></i> Exceções por Categoria</h4>
+                    <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                        <tr style="background: #f0f0f0;">
+                            <th style="border: 1px solid #ddd; padding: 8px;">Exceção</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Quando Ocorre</th>
+                            <th style="border: 1px solid #ddd; padding: 8px;">Exemplo</th>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>ValueError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Valor inválido</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>int("abc")</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>TypeError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Tipo incorreto</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>"texto" + 5</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>ZeroDivisionError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Divisão por zero</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>10 / 0</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>IndexError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Índice inválido</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>lista[10]</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>KeyError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Chave não encontrada</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>dict["chave"]</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>FileNotFoundError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Arquivo não encontrado</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>open("arquivo.txt")</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>NameError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Variável não definida</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>print(variavel)</code></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>AttributeError</code></td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Atributo não existe</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;"><code>lista.append()</code></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="warning">
+                    <h4><i class="fas fa-lightbulb"></i> Dica de Boa Prática</h4>
+                    <p>Sempre capture exceções <strong>específicas</strong> antes das genéricas. Use <code>Exception</code> apenas como último recurso!</p>
+                </div>
             </div>
         </div>
         
