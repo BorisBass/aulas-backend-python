@@ -117,6 +117,31 @@
                         <li>✅ <strong>Performance:</strong> Busca mais rápida</li>
                     </ul>
                 </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-exchange-alt"></i> Integridade referencial (ações)</h4>
+                    <p>Ao definir FKs, podemos escolher o que acontece em updates/deletes na tabela pai:</p>
+                    <ul>
+                        <li><strong>ON DELETE RESTRICT</strong>: impede remover pai com filhos (padrão).</li>
+                        <li><strong>ON DELETE CASCADE</strong>: remove filhos automaticamente.</li>
+                        <li><strong>ON DELETE SET NULL</strong>: define FK como NULL.</li>
+                        <li><strong>ON UPDATE CASCADE</strong>: propaga mudanças de PK.</li>
+                    </ul>
+                </div>
+
+                <div class="example">
+                    <h4><i class="fas fa-code"></i> Exemplo com ON DELETE/UPDATE</h4>
+                    <pre><code>CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY,
+    cliente_id INT,
+    produto TEXT NOT NULL,
+    FOREIGN KEY (cliente_id)
+        REFERENCES clientes(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+</code></pre>
+                </div>
             </div>
         </div>
     </div>

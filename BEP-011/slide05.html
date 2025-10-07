@@ -115,6 +115,42 @@
                         </tr>
                     </table>
                 </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-route"></i> Do ER para o modelo relacional</h4>
+                    <ul>
+                        <li><strong>Entidade</strong> → vira <strong>tabela</strong>.</li>
+                        <li><strong>Atributo</strong> → vira <strong>coluna</strong> (com tipo/constraints).</li>
+                        <li><strong>Relacionamento 1:N</strong> → FK na tabela do lado N.</li>
+                        <li><strong>Relacionamento N:N</strong> → <strong>tabela associativa</strong> com duas FKs.</li>
+                    </ul>
+                </div>
+
+                <div class="example">
+                    <h4><i class="fas fa-code"></i> Exemplo: N:N com tabela associativa</h4>
+                    <pre><code>CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    data DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    preco DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE pedido_itens (
+    pedido_id INT NOT NULL,
+    produto_id INT NOT NULL,
+    quantidade INT DEFAULT 1,
+    PRIMARY KEY (pedido_id, produto_id),
+    FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
+    FOREIGN KEY (produto_id) REFERENCES produtos(id)
+);
+</code></pre>
+                </div>
                 
                 <div class="warning">
                     <h4><i class="fas fa-lightbulb"></i> Vantagens do Modelo ER</h4>

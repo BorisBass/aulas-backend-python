@@ -90,6 +90,36 @@
                         </tr>
                     </table>
                 </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-shield-alt"></i> Constraints essenciais</h4>
+                    <ul>
+                        <li><strong>NOT NULL</strong>: impede valores ausentes.</li>
+                        <li><strong>UNIQUE</strong>: evita duplicidade (ex.: emails).</li>
+                        <li><strong>CHECK</strong>: valida regra (ex.: idade &gt;= 0).</li>
+                        <li><strong>DEFAULT</strong>: valor padrão (ex.: created_at CURRENT_TIMESTAMP).</li>
+                    </ul>
+                </div>
+
+                <div class="example">
+                    <h4><i class="fas fa-code"></i> Exemplo de schema (SQL)</h4>
+                    <pre><code>CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(120) UNIQUE,
+    idade INT CHECK (idade &gt;= 0)
+);
+
+CREATE TABLE pedidos (
+    id INTEGER PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    produto VARCHAR(100) NOT NULL,
+    valor DECIMAL(10,2) CHECK (valor &gt;= 0),
+    data DATE DEFAULT CURRENT_DATE,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+</code></pre>
+                </div>
                 
                 <div class="warning">
                     <h4><i class="fas fa-exclamation-triangle"></i> Regras Importantes</h4>
