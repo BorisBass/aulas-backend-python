@@ -152,6 +152,84 @@
                         </ul>
                     </div>
                 </div>
+                
+                <div class="example">
+                    <h4><i class="fas fa-laptop-code"></i> Laboratório prático (online)</h4>
+                    <p>Vamos fazer um teste <strong>rápido e gratuito</strong> em uma ferramenta online. Você pode escolher:</p>
+                    <ul>
+                        <li>🔹 <a href="https://colab.research.google.com/#create=true" target="_blank" rel="noreferrer noopener"><strong>Google Colab</strong> (Python + SQLite)</a> — recomendado</li>
+                        <li>🔹 <a href="https://sqliteonline.com/" target="_blank" rel="noreferrer noopener"><strong>SQLiteOnline</strong></a> — roda SQL direto no navegador</li>
+                        <li>🔹 <a href="https://dbfiddle.uk/?rdbms=sqlite_3.44" target="_blank" rel="noreferrer noopener"><strong>DB Fiddle (SQLite)</strong></a> — ótimo para exemplos pequenos</li>
+                    </ul>
+                    <div class="info">
+                        <h5>Passo a passo no Google Colab</h5>
+                        <ol>
+                            <li>Abra o link do Colab acima (cria um notebook novo).</li>
+                            <li>Copie e execute os blocos de código abaixo, na ordem.</li>
+                            <li>Observe os resultados no output de cada célula.</li>
+                        </ol>
+                    </div>
+                    <div class="info">
+                        <h5>1) Criar banco e tabela (SQLite via Python)</h5>
+                        <pre><code>import sqlite3
+
+# cria (ou abre) um banco em memória: ideal para testes
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
+
+# cria a tabela Clientes
+cursor.execute(
+    """
+    CREATE TABLE clientes (
+        id INTEGER PRIMARY KEY,
+        nome TEXT NOT NULL,
+        email TEXT UNIQUE,
+        idade INTEGER
+    );
+    """
+)
+
+connection.commit()
+print("Tabela criada!")
+</code></pre>
+                    </div>
+                    <div class="info">
+                        <h5>2) Inserir alguns registros</h5>
+                        <pre><code>dados = [
+    (1, "Ana Silva", "ana@example.com", 25),
+    (2, "Carlos Santos", "carlos@example.com", 30),
+    (3, "João Souza", "joao@example.com", 22),
+]
+
+cursor.executemany(
+    "INSERT INTO clientes (id, nome, email, idade) VALUES (?, ?, ?, ?);",
+    dados,
+)
+connection.commit()
+print("Registros inseridos!")
+</code></pre>
+                    </div>
+                    <div class="info">
+                        <h5>3) Fazer consultas simples (prévia da próxima aula)</h5>
+                        <pre><code># listar todos os clientes
+for row in cursor.execute("SELECT id, nome, email, idade FROM clientes;"):
+    print(row)
+
+# filtrar por idade &gt;= 25
+print("\nMaiores ou iguais a 25:")
+for row in cursor.execute("SELECT nome, idade FROM clientes WHERE idade &gt;= 25;"):
+    print(row)
+</code></pre>
+                        <p style="margin-top: 10px;">Essas consultas são apenas uma <strong>prévia</strong> do que veremos em profundidade na <strong>BEP-012</strong>.</p>
+                    </div>
+                    <div class="warning">
+                        <h5>Dica</h5>
+                        <ul>
+                            <li>Se preferir não usar Python, teste os mesmos comandos SQL em <strong>SQLiteOnline</strong> ou <strong>DB Fiddle</strong>.</li>
+                            <li>No Colab, você pode salvar o notebook no Google Drive para reutilizar.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
