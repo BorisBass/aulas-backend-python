@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-011: Introdução a Banco de Dados Relacionais - Slide 10</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-011: Introdução a Banco de Dados Relacionais</h1>
+            <p>Conceitos fundamentais de bancos de dados relacionais</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-link"></i> Exercícios de Interpretação de Relacionamentos</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Objetivo</h3>
+                    <p>Identificar relacionamentos entre tabelas, reconhecer chaves primárias e estrangeiras, e interpretar cardinalidades.</p>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-link"></i> Exercício 1: Sistema de Biblioteca</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> Tabela: Usuarios</h4>
+                            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 0.9em;">
+                                <thead>
+                                    <tr style="background-color: #4CAF50; color: white;">
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">ID_Usuario</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">Nome</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #E8F5E8; font-weight: bold;">1</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">João</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">joao@email.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #E8F5E8; font-weight: bold;">2</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">Maria</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">maria@email.com</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-book"></i> Tabela: Livros</h4>
+                            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 0.9em;">
+                                <thead>
+                                    <tr style="background-color: #2196F3; color: white;">
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">ID_Livro</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">Titulo</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">Autor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #E3F2FD; font-weight: bold;">101</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">Python para Iniciantes</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">Silva</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #E3F2FD; font-weight: bold;">102</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">Banco de Dados</td>
+                                        <td style="border: 1px solid #333; padding: 8px;">Santos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exchange-alt"></i> Tabela: Emprestimos</h4>
+                            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 0.9em;">
+                                <thead>
+                                    <tr style="background-color: #FF9800; color: white;">
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">ID_Emprestimo</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">ID_Usuario</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">ID_Livro</th>
+                                        <th style="border: 1px solid #333; padding: 8px; text-align: center;">Data_Emprestimo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center;">201</td>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #FFF3E0; font-weight: bold;">1</td>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #FFF3E0; font-weight: bold;">101</td>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center;">2024-01-15</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center;">202</td>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #FFF3E0; font-weight: bold;">2</td>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center; background-color: #FFF3E0; font-weight: bold;">102</td>
+                                        <td style="border: 1px solid #333; padding: 8px; text-align: center;">2024-01-20</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-question-circle"></i> Perguntas:</h4>
+                            <ol>
+                                <li>Qual é a chave primária de cada tabela?</li>
+                                <li>Quais são as chaves estrangeiras na tabela Emprestimos?</li>
+                                <li>Que tipo de relacionamento existe entre Usuarios e Emprestimos?</li>
+                                <li>Que tipo de relacionamento existe entre Livros e Emprestimos?</li>
+                                <li>Qual é a cardinalidade geral do sistema?</li>
+                            </ol>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-check-circle"></i> Respostas:</h4>
+                            <ol>
+                                <li><strong>ID_Usuario, ID_Livro, ID_Emprestimo</strong></li>
+                                <li><strong>ID_Usuario e ID_Livro</strong></li>
+                                <li><strong>1:N</strong> (Um usuário pode ter vários empréstimos)</li>
+                                <li><strong>1:N</strong> (Um livro pode ser emprestado várias vezes)</li>
+                                <li><strong>N:N</strong> (Usuários ↔ Livros através de Emprestimos)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-link"></i> Exercício 2: Sistema de Vendas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> Tabela: Clientes</h4>
+                            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 0.8em;">
+                                <thead>
+                                    <tr style="background-color: #4CAF50; color: white;">
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">ID_Cliente</th>
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">Nome</th>
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">Cidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center; background-color: #E8F5E8; font-weight: bold;">1</td>
+                                        <td style="border: 1px solid #333; padding: 6px;">Ana</td>
+                                        <td style="border: 1px solid #333; padding: 6px;">Salvador</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center; background-color: #E8F5E8; font-weight: bold;">2</td>
+                                        <td style="border: 1px solid #333; padding: 6px;">Carlos</td>
+                                        <td style="border: 1px solid #333; padding: 6px;">Feira</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shopping-cart"></i> Tabela: Pedidos</h4>
+                            <table style="width: 100%; border-collapse: collapse; border: 2px solid #333; font-size: 0.8em;">
+                                <thead>
+                                    <tr style="background-color: #FF9800; color: white;">
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">ID_Pedido</th>
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">ID_Cliente</th>
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">Data</th>
+                                        <th style="border: 1px solid #333; padding: 6px; text-align: center;">Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">301</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center; background-color: #FFF3E0; font-weight: bold;">1</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">2024-01-10</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">150.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">302</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center; background-color: #FFF3E0; font-weight: bold;">1</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">2024-01-15</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">200.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">303</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center; background-color: #FFF3E0; font-weight: bold;">2</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">2024-01-20</td>
+                                        <td style="border: 1px solid #333; padding: 6px; text-align: center;">100.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-question-circle"></i> Perguntas:</h4>
+                            <ol>
+                                <li>Qual cliente fez mais pedidos?</li>
+                                <li>Qual é o valor total dos pedidos da Ana?</li>
+                                <li>Que tipo de relacionamento existe entre Clientes e Pedidos?</li>
+                                <li>Quantos pedidos foram feitos em janeiro de 2024?</li>
+                                <li>Qual é a chave estrangeira na tabela Pedidos?</li>
+                            </ol>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-check-circle"></i> Respostas:</h4>
+                            <ol>
+                                <li><strong>Ana</strong> (2 pedidos)</li>
+                                <li><strong>R$ 350,00</strong> (150 + 200)</li>
+                                <li><strong>1:N</strong> (Um cliente pode fazer vários pedidos)</li>
+                                <li><strong>3 pedidos</strong></li>
+                                <li><strong>ID_Cliente</strong></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-link"></i> Exercício 3: Sistema Escolar</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                            <div style="width: 80px; height: 50px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; font-size: 0.8em;">
+                                ALUNO
+                            </div>
+                            <div style="width: 60px; height: 30px; border: 3px solid #9C27B0; background-color: #F3E5F5; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #7B1FA2; font-size: 0.7em;">
+                                FAZ
+                            </div>
+                            <div style="width: 80px; height: 50px; border: 3px solid #2196F3; background-color: #E3F2FD; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1976D2; font-size: 0.8em;">
+                                CURSO
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <span style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                            <span style="margin: 0 10px; font-size: 1.5em;">↔️</span>
+                            <span style="background-color: #2196F3; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-question-circle"></i> Perguntas:</h4>
+                            <ol>
+                                <li>Que tipo de relacionamento é mostrado no diagrama?</li>
+                                <li>Um aluno pode fazer quantos cursos?</li>
+                                <li>Um curso pode ter quantos alunos?</li>
+                                <li>Que tabela seria necessária para implementar este relacionamento?</li>
+                                <li>Como seria a estrutura dessa tabela intermediária?</li>
+                            </ol>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-check-circle"></i> Respostas:</h4>
+                            <ol>
+                                <li><strong>N:N (Muitos para Muitos)</strong></li>
+                                <li><strong>Vários cursos</strong></li>
+                                <li><strong>Vários alunos</strong></li>
+                                <li><strong>Tabela de Matrículas</strong></li>
+                                <li><strong>ID_Matricula, ID_Aluno, ID_Curso, Data_Matricula</strong></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas para Interpretar Relacionamentos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> Chaves</h4>
+                            <ul>
+                                <li>Identifique a chave primária</li>
+                                <li>Localize as chaves estrangeiras</li>
+                                <li>Verifique as referências</li>
+                                <li>Analise a integridade</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-sitemap"></i> Cardinalidades</h4>
+                            <ul>
+                                <li>Conte quantos registros se relacionam</li>
+                                <li>Identifique padrões 1:1, 1:N, N:N</li>
+                                <li>Analise tabelas intermediárias</li>
+                                <li>Verifique a lógica do negócio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Resumo do que Aprendemos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> Chaves</h4>
+                            <p>Identificar primárias e estrangeiras</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-sitemap"></i> Relacionamentos</h4>
+                            <p>Interpretar cardinalidades e conexões</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-table"></i> Estrutura</h4>
+                            <p>Entender como tabelas se conectam</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-011: Introdução a Banco de Dados Relacionais</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

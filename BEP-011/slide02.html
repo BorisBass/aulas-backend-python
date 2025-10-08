@@ -20,98 +20,190 @@
         
         <div class="content">
             <div class="slide active" id="slide02">
-                <h2><i class="fas fa-balance-scale"></i> Bancos Relacionais vs Não Relacionais</h2>
-                <div class="info">
-                    <h3><i class="fas fa-balance-scale"></i> Tipos de Bancos de Dados</h3>
-                    <p>Existem dois tipos principais de bancos de dados:</p>
-                </div>
-                
-                <div class="example">
-                    <h4><i class="fas fa-table"></i> Bancos Relacionais (SQL)</h4>
-                    <ul>
-                        <li><strong>Estrutura:</strong> Dados organizados em tabelas</li>
-                        <li><strong>Relacionamentos:</strong> Tabelas conectadas por chaves</li>
-                        <li><strong>Consistência:</strong> Dados sempre válidos</li>
-                        <li><strong>Exemplos:</strong> MySQL, PostgreSQL, SQLite</li>
-                    </ul>
-                </div>
-                
-                <div class="example">
-                    <h4><i class="fas fa-cube"></i> Bancos Não Relacionais (NoSQL)</h4>
-                    <ul>
-                        <li><strong>Estrutura:</strong> Dados em documentos, grafos, chave-valor</li>
-                        <li><strong>Flexibilidade:</strong> Estrutura pode variar</li>
-                        <li><strong>Escalabilidade:</strong> Crescimento horizontal</li>
-                        <li><strong>Exemplos:</strong> MongoDB, Redis, Neo4j</li>
-                    </ul>
-                </div>
+                <h2><i class="fas fa-balance-scale"></i> Banco de Dados Relacional vs Não Relacional</h2>
                 
                 <div class="info">
-                    <h4><i class="fas fa-chart-bar"></i> Comparação Prática</h4>
-                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                        <tr style="background: #f8f9fa;">
-                            <th style="border: 1px solid #ddd; padding: 10px;">Característica</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">Relacional</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">Não Relacional</th>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Estrutura</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Tabelas fixas</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Flexível</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Consistência</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Alta</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Variável</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Escalabilidade</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Vertical</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Horizontal</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Uso</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Sistemas tradicionais</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Big Data, IoT</td>
-                        </tr>
-                    </table>
+                    <h3><i class="fas fa-lightbulb"></i> Dois Tipos Principais</h3>
+                    <p>Existem duas grandes categorias de bancos de dados, cada uma com suas características e aplicações específicas.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-table"></i> Banco de Dados Relacional</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-sitemap"></i> Estrutura</h4>
+                            <p>Dados organizados em <strong>tabelas</strong> com linhas e colunas bem definidas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-link"></i> Relacionamentos</h4>
+                            <p>Tabelas conectadas através de <strong>chaves</strong> (primárias e estrangeiras)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-ruler"></i> Esquema Fixo</h4>
+                            <p>Estrutura pré-definida e consistente</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-language"></i> Linguagem</h4>
+                            <p>Usa <strong>SQL</strong> (Structured Query Language)</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="example">
-                    <h4><i class="fas fa-clipboard-check"></i> Situações do mundo real</h4>
-                    <ul>
-                        <li><strong>E-commerce:</strong> relacional para pedidos/estoque; NoSQL para cache e sessões.</li>
-                        <li><strong>Analytics:</strong> NoSQL para ingestão massiva; relacional para relatórios consistentes.</li>
-                        <li><strong>Chat/app móvel:</strong> NoSQL para mensagens; relacional para billing/assinaturas.</li>
-                    </ul>
+                    <h3><i class="fas fa-table"></i> Exemplo Visual: Banco Relacional</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-users"></i> Tabela: Clientes</h4>
+                            <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                                <tr style="background-color: #f0f0f0;">
+                                    <th style="border: 1px solid #ddd; padding: 8px;">ID</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Nome</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">João</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">joao@email.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Maria</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">maria@email.com</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shopping-cart"></i> Tabela: Pedidos</h4>
+                            <table style="width: 100%; border-collapse: collapse; margin: 10px 0;">
+                                <tr style="background-color: #f0f0f0;">
+                                    <th style="border: 1px solid #ddd; padding: 8px;">ID</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Cliente_ID</th>
+                                    <th style="border: 1px solid #ddd; padding: 8px;">Produto</th>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">101</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Notebook</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">102</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+                                    <td style="border: 1px solid #ddd; padding: 8px;">Mouse</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <p><strong>Relacionamento:</strong> Cliente_ID na tabela Pedidos conecta com ID na tabela Clientes</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cube"></i> Banco de Dados Não Relacional (NoSQL)</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-shapes"></i> Estrutura Flexível</h4>
+                            <p>Dados em formatos variados: documentos, chave-valor, grafos</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-expand-arrows-alt"></i> Escalabilidade</h4>
+                            <p>Fácil expansão horizontal (mais servidores)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-magic"></i> Esquema Dinâmico</h4>
+                            <p>Estrutura pode mudar conforme necessário</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-bolt"></i> Performance</h4>
+                            <p>Otimizado para grandes volumes de dados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-cube"></i> Exemplo Visual: Banco Não Relacional</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-file-alt"></i> Documento JSON</h4>
+                            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace;">
+                                {<br>
+                                &nbsp;&nbsp;"_id": "1",<br>
+                                &nbsp;&nbsp;"nome": "João",<br>
+                                &nbsp;&nbsp;"email": "joao@email.com",<br>
+                                &nbsp;&nbsp;"pedidos": [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"produto": "Notebook",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"data": "2024-01-15"<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;]<br>
+                                }
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> Chave-Valor</h4>
+                            <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                                <p><strong>Chave:</strong> "usuario:123"</p>
+                                <p><strong>Valor:</strong> "João Silva, joao@email.com"</p>
+                                <br>
+                                <p><strong>Chave:</strong> "produto:456"</p>
+                                <p><strong>Valor:</strong> "Notebook Dell, R$ 2.500"</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="warning">
-                    <h4><i class="fas fa-question-circle"></i> Perguntas guiadas</h4>
-                    <ul>
-                        <li>Quais dados do seu projeto exigem integridade estrita (PK/FK)?</li>
-                        <li>Existe parte do seu domínio que variará muito de estrutura?</li>
-                        <li>Qual consulta crítica não pode falhar nem retornar dados inconsistentes?</li>
-                    </ul>
+                    <h3><i class="fas fa-balance-scale"></i> Comparação Rápida</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-table"></i> Relacional</h4>
+                            <ul>
+                                <li>✅ Estrutura consistente</li>
+                                <li>✅ Relacionamentos claros</li>
+                                <li>✅ Padrão SQL</li>
+                                <li>❌ Menos flexível</li>
+                                <li>❌ Escalabilidade limitada</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cube"></i> Não Relacional</h4>
+                            <ul>
+                                <li>✅ Muito flexível</li>
+                                <li>✅ Escalabilidade alta</li>
+                                <li>✅ Performance otimizada</li>
+                                <li>❌ Menos padronizado</li>
+                                <li>❌ Relacionamentos complexos</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="warning">
-                    <h4><i class="fas fa-info-circle"></i> Quando usar cada tipo?</h4>
-                    <p><strong>Relacional:</strong> Sistemas bancários, e-commerce, CRM</p>
-                    <p><strong>Não Relacional:</strong> Redes sociais, IoT, análise de dados</p>
-                </div>
-                
-                <div class="example">
-                    <h4><i class="fas fa-graduation-cap"></i> Foco do Curso</h4>
-                    <p>Neste curso, focaremos em <strong>bancos relacionais</strong> porque:</p>
-                    <ul>
-                        <li>✅ Mais utilizados no mercado</li>
-                        <li>✅ Base para aprender outros tipos</li>
-                        <li>✅ Excelente para iniciantes</li>
-                        <li>✅ Padrão da indústria</li>
-                    </ul>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Quando Usar Cada Um?</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-table"></i> Use Relacional Para:</h4>
+                            <ul>
+                                <li>Sistemas financeiros</li>
+                                <li>E-commerce tradicional</li>
+                                <li>Sistemas com relacionamentos complexos</li>
+                                <li>Aplicações que precisam de consistência</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cube"></i> Use Não Relacional Para:</h4>
+                            <ul>
+                                <li>Redes sociais</li>
+                                <li>Sistemas de IoT</li>
+                                <li>Análise de big data</li>
+                                <li>Aplicações que crescem rapidamente</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-011: Introdução a Banco de Dados Relacionais</p>
         </div>
     </div>
     

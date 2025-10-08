@@ -21,147 +21,229 @@
         <div class="content">
             <div class="slide active" id="slide05">
                 <h2><i class="fas fa-project-diagram"></i> Modelo Entidade-Relacionamento (ER)</h2>
+                
                 <div class="info">
-                    <h3><i class="fas fa-project-diagram"></i> O que é o Modelo ER?</h3>
-                    <p>O <strong>Modelo Entidade-Relacionamento</strong> é uma representação gráfica que mostra como as entidades (tabelas) se relacionam em um banco de dados.</p>
+                    <h3><i class="fas fa-lightbulb"></i> O que é o Modelo ER?</h3>
+                    <p>O <strong>Modelo Entidade-Relacionamento</strong> é uma ferramenta visual para representar a estrutura e os relacionamentos de um banco de dados de forma gráfica e intuitiva.</p>
                 </div>
-                
-                <div class="example">
-                    <h4><i class="fas fa-cube"></i> Conceitos Fundamentais</h4>
-                    <ul>
-                        <li><strong>Entidade:</strong> Objeto do mundo real (Cliente, Produto, Pedido)</li>
-                        <li><strong>Atributo:</strong> Característica da entidade (Nome, Preço, Data)</li>
-                        <li><strong>Relacionamento:</strong> Conexão entre entidades</li>
-                        <li><strong>Cardinalidade:</strong> Quantos registros se relacionam</li>
-                    </ul>
-                </div>
-                
-                <div class="example">
-                    <h4><i class="fas fa-sitemap"></i> Exemplo: Sistema de E-commerce</h4>
-                    <div style="text-align: center; margin: 20px 0;">
-                        <div style="display: inline-block; border: 2px solid #4299E1; padding: 15px; margin: 10px; border-radius: 8px; background: #f0f8ff;">
-                            <h5>👤 CLIENTE</h5>
-                            <ul style="text-align: left; margin: 0;">
-                                <li>ID (PK)</li>
-                                <li>Nome</li>
-                                <li>Email</li>
-                            </ul>
+
+                <div class="info">
+                    <h3><i class="fas fa-cube"></i> Entidade (Entity)</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-tag"></i> Definição</h4>
+                            <p>Uma <strong>entidade</strong> representa um objeto, pessoa, lugar ou conceito do mundo real</p>
                         </div>
-                        
-                        <div style="display: inline-block; margin: 10px; font-size: 1.5em; color: #4299E1;">
-                            <i class="fas fa-arrows-alt-h"></i>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shapes"></i> Símbolo</h4>
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div style="display: inline-block; width: 120px; height: 80px; border: 3px solid #333; background-color: #E3F2FD; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                    ENTIDADE
+                                </div>
+                            </div>
                         </div>
-                        
-                        <div style="display: inline-block; border: 2px solid #E53E3E; padding: 15px; margin: 10px; border-radius: 8px; background: #ffe6e6;">
-                            <h5>🛒 PEDIDO</h5>
-                            <ul style="text-align: left; margin: 0;">
-                                <li>ID (PK)</li>
-                                <li>Cliente_ID (FK)</li>
-                                <li>Data</li>
-                            </ul>
-                        </div>
-                        
-                        <div style="display: inline-block; margin: 10px; font-size: 1.5em; color: #E53E3E;">
-                            <i class="fas fa-arrows-alt-h"></i>
-                        </div>
-                        
-                        <div style="display: inline-block; border: 2px solid #38A169; padding: 15px; margin: 10px; border-radius: 8px; background: #e6ffe6;">
-                            <h5>📦 PRODUTO</h5>
-                            <ul style="text-align: left; margin: 0;">
-                                <li>ID (PK)</li>
-                                <li>Nome</li>
-                                <li>Preço</li>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Exemplos</h4>
+                            <ul>
+                                <li>Cliente</li>
+                                <li>Produto</li>
+                                <li>Funcionário</li>
+                                <li>Departamento</li>
+                                <li>Pedido</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
-                <div class="info">
-                    <h4><i class="fas fa-link"></i> Tipos de Relacionamentos</h4>
-                    <ul>
-                        <li><strong>1:1 (Um para Um):</strong> Um cliente tem uma conta</li>
-                        <li><strong>1:N (Um para Muitos):</strong> Um cliente faz vários pedidos</li>
-                        <li><strong>N:N (Muitos para Muitos):</strong> Um pedido tem vários produtos</li>
-                    </ul>
-                </div>
-                
+
                 <div class="example">
-                    <h4><i class="fas fa-chart-line"></i> Cardinalidades</h4>
-                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                        <tr style="background: #f8f9fa;">
-                            <th style="border: 1px solid #ddd; padding: 10px;">Símbolo</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">Significado</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">Exemplo</th>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>1</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Exatamente um</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente tem um CPF</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>0..1</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Zero ou um</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente pode ter um endereço</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>1..*</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Um ou muitos</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente faz pelo menos um pedido</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>0..*</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Zero ou muitos</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Um cliente pode fazer vários pedidos</td>
-                        </tr>
-                    </table>
+                    <h3><i class="fas fa-cube"></i> Exemplo Visual: Entidades</h3>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0;">
+                        <div style="text-align: center; margin: 10px;">
+                            <div style="width: 100px; height: 60px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32;">
+                                CLIENTE
+                            </div>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Pessoa que compra</p>
+                        </div>
+                        <div style="text-align: center; margin: 10px;">
+                            <div style="width: 100px; height: 60px; border: 3px solid #2196F3; background-color: #E3F2FD; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1976D2;">
+                                PRODUTO
+                            </div>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Item vendido</p>
+                        </div>
+                        <div style="text-align: center; margin: 10px;">
+                            <div style="width: 100px; height: 60px; border: 3px solid #FF9800; background-color: #FFF3E0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #F57C00;">
+                                PEDIDO
+                            </div>
+                            <p style="margin-top: 5px; font-size: 0.9em;">Compra realizada</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="info">
-                    <h4><i class="fas fa-route"></i> Do ER para o modelo relacional</h4>
-                    <ul>
-                        <li><strong>Entidade</strong> → vira <strong>tabela</strong>.</li>
-                        <li><strong>Atributo</strong> → vira <strong>coluna</strong> (com tipo/constraints).</li>
-                        <li><strong>Relacionamento 1:N</strong> → FK na tabela do lado N.</li>
-                        <li><strong>Relacionamento N:N</strong> → <strong>tabela associativa</strong> com duas FKs.</li>
-                    </ul>
+                    <h3><i class="fas fa-link"></i> Relacionamento (Relationship)</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-tag"></i> Definição</h4>
+                            <p>Um <strong>relacionamento</strong> representa uma associação entre duas ou mais entidades</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shapes"></i> Símbolo</h4>
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div style="display: inline-block; width: 120px; height: 60px; border: 3px solid #333; background-color: #F3E5F5; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                    RELACIONAMENTO
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Exemplos</h4>
+                            <ul>
+                                <li>Cliente FAZ Pedido</li>
+                                <li>Pedido CONTÉM Produto</li>
+                                <li>Funcionário TRABALHA_EM Departamento</li>
+                                <li>Aluno FREQUENTA Curso</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="example">
-                    <h4><i class="fas fa-code"></i> Exemplo: N:N com tabela associativa</h4>
-                    <pre><code>CREATE TABLE pedidos (
-    id INTEGER PRIMARY KEY,
-    cliente_id INT NOT NULL,
-    data DATE DEFAULT CURRENT_DATE,
-    FOREIGN KEY (cliente_id) REFERENCES clientes(id)
-);
-
-CREATE TABLE produtos (
-    id INTEGER PRIMARY KEY,
-    nome TEXT NOT NULL,
-    preco DECIMAL(10,2) NOT NULL
-);
-
-CREATE TABLE pedido_itens (
-    pedido_id INT NOT NULL,
-    produto_id INT NOT NULL,
-    quantidade INT DEFAULT 1,
-    PRIMARY KEY (pedido_id, produto_id),
-    FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE,
-    FOREIGN KEY (produto_id) REFERENCES produtos(id)
-);
-</code></pre>
+                    <h3><i class="fas fa-link"></i> Exemplo Visual: Relacionamentos</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px;">
+                            <div style="width: 80px; height: 50px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; font-size: 0.9em;">
+                                CLIENTE
+                            </div>
+                            <div style="width: 100px; height: 40px; border: 3px solid #9C27B0; background-color: #F3E5F5; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #7B1FA2; font-size: 0.8em;">
+                                FAZ
+                            </div>
+                            <div style="width: 80px; height: 50px; border: 3px solid #FF9800; background-color: #FFF3E0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #F57C00; font-size: 0.9em;">
+                                PEDIDO
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px; font-weight: bold; color: #7B1FA2;">Um CLIENTE FAZ um PEDIDO</p>
+                    </div>
                 </div>
-                
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Atributo (Attribute)</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-tag"></i> Definição</h4>
+                            <p>Um <strong>atributo</strong> é uma propriedade ou característica de uma entidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shapes"></i> Símbolo</h4>
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div style="display: inline-block; width: 80px; height: 40px; border: 2px solid #333; background-color: #E8F5E8; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8em;">
+                                    Atributo
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Exemplos</h4>
+                            <ul>
+                                <li>Cliente: nome, email, telefone</li>
+                                <li>Produto: nome, preço, categoria</li>
+                                <li>Pedido: data, valor, status</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-list"></i> Exemplo Visual: Atributos</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; width: 120px; height: 80px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; margin-bottom: 10px;">
+                            CLIENTE
+                        </div>
+                        <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                            <div style="width: 60px; height: 30px; border: 2px solid #333; background-color: #E8F5E8; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: bold;">
+                                Nome
+                            </div>
+                            <div style="width: 60px; height: 30px; border: 2px solid #333; background-color: #E8F5E8; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: bold;">
+                                Email
+                            </div>
+                            <div style="width: 60px; height: 30px; border: 2px solid #333; background-color: #E8F5E8; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: bold;">
+                                Telefone
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-key"></i> Chave Primária no Modelo ER</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-tag"></i> Definição</h4>
+                            <p>Atributo que identifica unicamente cada instância de uma entidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shapes"></i> Símbolo</h4>
+                            <div style="text-align: center; margin: 10px 0;">
+                                <div style="display: inline-block; width: 80px; height: 40px; border: 2px solid #333; background-color: #FFEB3B; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8em;">
+                                    🔑 ID
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Exemplos</h4>
+                            <ul>
+                                <li>Cliente: ID_Cliente</li>
+                                <li>Produto: ID_Produto</li>
+                                <li>Pedido: ID_Pedido</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="warning">
-                    <h4><i class="fas fa-lightbulb"></i> Vantagens do Modelo ER</h4>
-                    <ul>
-                        <li>✅ <strong>Visualização:</strong> Fácil de entender</li>
-                        <li>✅ <strong>Comunicação:</strong> Cliente e desenvolvedor falam a mesma linguagem</li>
-                        <li>✅ <strong>Planejamento:</strong> Evita erros de design</li>
-                        <li>✅ <strong>Documentação:</strong> Registra a estrutura do sistema</li>
-                    </ul>
+                    <h3><i class="fas fa-lightbulb"></i> Vantagens do Modelo ER</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-eye"></i> Visualização</h4>
+                            <p>Representa o banco de dados de forma gráfica e intuitiva</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-comments"></i> Comunicação</h4>
+                            <p>Facilita a comunicação entre desenvolvedores e usuários</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tools"></i> Planejamento</h4>
+                            <p>Ajuda no planejamento e design do banco de dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-bug"></i> Validação</h4>
+                            <p>Permite identificar problemas antes da implementação</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Resumo dos Elementos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-cube"></i> Entidade</h4>
+                            <p>Objeto do mundo real (retângulo)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-link"></i> Relacionamento</h4>
+                            <p>Associação entre entidades (losango)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Atributo</h4>
+                            <p>Propriedade da entidade (elipse)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> Chave Primária</h4>
+                            <p>Identificador único (sublinhado)</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-011: Introdução a Banco de Dados Relacionais</p>
         </div>
     </div>
     

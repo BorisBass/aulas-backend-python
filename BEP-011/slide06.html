@@ -20,116 +20,201 @@
         
         <div class="content">
             <div class="slide active" id="slide06">
-                <h2><i class="fas fa-cogs"></i> Sistemas Gerenciadores de BD (SGBD)</h2>
+                <h2><i class="fas fa-sitemap"></i> Cardinalidades no Modelo ER</h2>
+                
                 <div class="info">
-                    <h3><i class="fas fa-cogs"></i> O que é um SGBD?</h3>
-                    <p>Um <strong>Sistema Gerenciador de Banco de Dados (SGBD)</strong> é um software que gerencia o armazenamento, recuperação e segurança dos dados.</p>
+                    <h3><i class="fas fa-lightbulb"></i> O que é Cardinalidade?</h3>
+                    <p>A <strong>cardinalidade</strong> define quantas instâncias de uma entidade podem se relacionar com quantas instâncias de outra entidade.</p>
                 </div>
-                
-                <div class="example">
-                    <h4><i class="fas fa-tools"></i> Funções de um SGBD</h4>
-                    <ul>
-                        <li><strong>Armazenamento:</strong> Salva dados de forma organizada</li>
-                        <li><strong>Recuperação:</strong> Busca dados rapidamente</li>
-                        <li><strong>Segurança:</strong> Controla acesso aos dados</li>
-                        <li><strong>Integridade:</strong> Mantém dados consistentes</li>
-                        <li><strong>Backup:</strong> Cria cópias de segurança</li>
-                    </ul>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Tipos de Cardinalidade</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-equals"></i> 1:1 (Um para Um)</h4>
+                            <p>Cada instância de uma entidade se relaciona com apenas uma instância da outra entidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrow-right"></i> 1:N (Um para Muitos)</h4>
+                            <p>Uma instância de uma entidade se relaciona com várias instâncias da outra entidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrows-alt"></i> N:N (Muitos para Muitos)</h4>
+                            <p>Várias instâncias de uma entidade se relacionam com várias instâncias da outra entidade</p>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div class="example">
-                    <h4><i class="fas fa-star"></i> SGBDs Populares</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0;">
-                        <div style="border: 2px solid #00758F; padding: 15px; border-radius: 8px; background: #f0f8ff;">
-                            <h5><i class="fas fa-database" style="color: #00758F;"></i> MySQL</h5>
+                    <h3><i class="fas fa-equals"></i> Cardinalidade 1:1 (Um para Um)</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                            <div style="width: 100px; height: 60px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; font-size: 0.9em;">
+                                PESSOA
+                            </div>
+                            <div style="width: 80px; height: 40px; border: 3px solid #9C27B0; background-color: #F3E5F5; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #7B1FA2; font-size: 0.8em;">
+                                POSSUI
+                            </div>
+                            <div style="width: 100px; height: 60px; border: 3px solid #2196F3; background-color: #E3F2FD; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1976D2; font-size: 0.9em;">
+                                CPF
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <span style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">1</span>
+                            <span style="margin: 0 10px; font-size: 1.5em;">↔️</span>
+                            <span style="background-color: #2196F3; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">1</span>
+                        </div>
+                        <p style="margin-top: 15px; font-weight: bold; color: #7B1FA2;">Uma PESSOA possui apenas um CPF<br>Um CPF pertence apenas a uma PESSOA</p>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-arrow-right"></i> Cardinalidade 1:N (Um para Muitos)</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                            <div style="width: 100px; height: 60px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; font-size: 0.9em;">
+                                CLIENTE
+                            </div>
+                            <div style="width: 80px; height: 40px; border: 3px solid #9C27B0; background-color: #F3E5F5; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #7B1FA2; font-size: 0.8em;">
+                                FAZ
+                            </div>
+                            <div style="width: 100px; height: 60px; border: 3px solid #FF9800; background-color: #FFF3E0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #F57C00; font-size: 0.9em;">
+                                PEDIDO
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <span style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">1</span>
+                            <span style="margin: 0 10px; font-size: 1.5em;">→</span>
+                            <span style="background-color: #FF9800; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                        </div>
+                        <p style="margin-top: 15px; font-weight: bold; color: #7B1FA2;">Um CLIENTE pode fazer vários PEDIDOS<br>Um PEDIDO pertence apenas a um CLIENTE</p>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-arrows-alt"></i> Cardinalidade N:N (Muitos para Muitos)</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                            <div style="width: 100px; height: 60px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; font-size: 0.9em;">
+                                ALUNO
+                            </div>
+                            <div style="width: 80px; height: 40px; border: 3px solid #9C27B0; background-color: #F3E5F5; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #7B1FA2; font-size: 0.8em;">
+                                FREQUENTA
+                            </div>
+                            <div style="width: 100px; height: 60px; border: 3px solid #2196F3; background-color: #E3F2FD; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1976D2; font-size: 0.9em;">
+                                CURSO
+                            </div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <span style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                            <span style="margin: 0 10px; font-size: 1.5em;">↔️</span>
+                            <span style="background-color: #2196F3; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                        </div>
+                        <p style="margin-top: 15px; font-weight: bold; color: #7B1FA2;">Um ALUNO pode frequentar vários CURSOS<br>Um CURSO pode ter vários ALUNOS</p>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Exemplos do Mundo Real</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-equals"></i> 1:1 - Exemplos</h4>
                             <ul>
-                                <li>✅ Gratuito e open source</li>
-                                <li>✅ Muito popular</li>
-                                <li>✅ Boa performance</li>
-                                <li>✅ Fácil de usar</li>
+                                <li>Pessoa ↔ CPF</li>
+                                <li>Funcionário ↔ Carteira de Trabalho</li>
+                                <li>Carro ↔ Placa</li>
+                                <li>Conta Bancária ↔ Cartão</li>
                             </ul>
                         </div>
-                        
-                        <div style="border: 2px solid #336791; padding: 15px; border-radius: 8px; background: #f0f8ff;">
-                            <h5><i class="fas fa-database" style="color: #336791;"></i> PostgreSQL</h5>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrow-right"></i> 1:N - Exemplos</h4>
                             <ul>
-                                <li>✅ Muito robusto</li>
-                                <li>✅ Recursos avançados</li>
-                                <li>✅ Gratuito</li>
-                                <li>✅ Padrão SQL completo</li>
+                                <li>Cliente → Pedidos</li>
+                                <li>Departamento → Funcionários</li>
+                                <li>Autor → Livros</li>
+                                <li>Mãe → Filhos</li>
                             </ul>
                         </div>
-                        
-                        <div style="border: 2px solid #003B57; padding: 15px; border-radius: 8px; background: #f0f8ff;">
-                            <h5><i class="fas fa-database" style="color: #003B57;"></i> SQLite</h5>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrows-alt"></i> N:N - Exemplos</h4>
                             <ul>
-                                <li>✅ Muito leve</li>
-                                <li>✅ Arquivo único</li>
-                                <li>✅ Sem servidor</li>
-                                <li>✅ Ideal para iniciantes</li>
+                                <li>Alunos ↔ Cursos</li>
+                                <li>Médicos ↔ Pacientes</li>
+                                <li>Livros ↔ Autores</li>
+                                <li>Filmes ↔ Atores</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
-                <div class="info">
-                    <h4><i class="fas fa-chart-bar"></i> Comparação de SGBDs</h4>
-                    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                        <tr style="background: #f8f9fa;">
-                            <th style="border: 1px solid #ddd; padding: 10px;">Característica</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">MySQL</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">PostgreSQL</th>
-                            <th style="border: 1px solid #ddd; padding: 10px;">SQLite</th>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Complexidade</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Média</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Alta</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Baixa</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Performance</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Excelente</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Excelente</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Boa</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Uso</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Web, aplicações</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Aplicações complexas</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Aplicações simples</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #ddd; padding: 10px;"><strong>Instalação</strong></td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Servidor</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Servidor</td>
-                            <td style="border: 1px solid #ddd; padding: 10px;">Arquivo</td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <div class="warning">
-                    <h4><i class="fas fa-graduation-cap"></i> Para Iniciantes</h4>
-                    <p><strong>Recomendação:</strong> Comece com <strong>SQLite</strong> (em Colab) e avance para <strong>PostgreSQL</strong> quando precisar de recursos avançados (tipos, extensões).</p>
-                </div>
-                
+
                 <div class="example">
-                    <h4><i class="fas fa-laptop-code"></i> Mini prática adicional (Colab)</h4>
-                    <p>Importe um CSV e consulte:</p>
-                    <pre><code>import pandas as pd
-import sqlite3
+                    <h3><i class="fas fa-table"></i> Exemplo Prático: Sistema Escolar</h3>
+                    <div style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0;">
+                        <div style="text-align: center; margin: 10px;">
+                            <div style="width: 80px; height: 50px; border: 3px solid #4CAF50; background-color: #E8F5E8; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #2E7D32; font-size: 0.8em;">
+                                ALUNO
+                            </div>
+                            <p style="margin-top: 5px; font-size: 0.8em;">João, Maria, Pedro</p>
+                        </div>
+                        <div style="text-align: center; margin: 10px;">
+                            <div style="width: 80px; height: 50px; border: 3px solid #2196F3; background-color: #E3F2FD; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1976D2; font-size: 0.8em;">
+                                CURSO
+                            </div>
+                            <p style="margin-top: 5px; font-size: 0.8em;">Python, Java, SQL</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0;">
+                        <span style="background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                        <span style="margin: 0 10px; font-size: 1.5em;">↔️</span>
+                        <span style="background-color: #2196F3; color: white; padding: 5px 10px; border-radius: 15px; font-weight: bold;">N</span>
+                    </div>
+                    <p style="text-align: center; font-weight: bold; color: #7B1FA2;">João pode fazer Python e Java<br>Maria pode fazer Python e SQL<br>Pedro pode fazer Java e SQL</p>
+                </div>
 
-connection = sqlite3.connect(":memory:")
-cursor = connection.cursor()
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importância das Cardinalidades</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Design do Banco</h4>
+                            <p>Define como as tabelas serão criadas e relacionadas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield-alt"></i> Integridade</h4>
+                            <p>Garante a consistência dos dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Consultas</h4>
+                            <p>Influencia como as consultas serão escritas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cogs"></i> Performance</h4>
+                            <p>Afeta a performance das operações</p>
+                        </div>
+                    </div>
+                </div>
 
-pd.read_csv("https://raw.githubusercontent.com/BorisBass/aulas-backend-python/main/BEP-011/dados_clientes.csv") \
-  .to_sql("clientes", connection, index=False, if_exists="replace")
-
-for row in cursor.execute("SELECT nome, idade FROM clientes WHERE idade &gt;= 25 ORDER BY idade DESC;"):
-    print(row)
-</code></pre>
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Resumo das Cardinalidades</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-equals"></i> 1:1</h4>
+                            <p>Relacionamento único entre duas entidades</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrow-right"></i> 1:N</h4>
+                            <p>Uma entidade se relaciona com várias da outra</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrows-alt"></i> N:N</h4>
+                            <p>Várias entidades se relacionam com várias da outra</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-011: Introdução a Banco de Dados Relacionais</p>
         </div>
     </div>
     
