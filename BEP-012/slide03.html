@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEP-012: SQL — Slide 03</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1><i class="fas fa-project-diagram"></i> Esquema e Tipos Essenciais</h1>
+    <p>Affinities do SQLite, datas/horários e valores monetários</p>
+  </div>
+
+  <div class="nav"></div>
+
+  <div class="content">
+    <div class="slide active" id="slide03">
+      <!-- Nota do instrutor: Explique affinities (INTEGER, REAL, TEXT, BLOB, NUMERIC) e diferenças vs tipos “fortes”. Reforce DECIMAL(10,2) em Postgres/MySQL p/ dinheiro. -->
+      <div class="info">
+        <h3><i class="fas fa-database"></i> Modelo de exemplo</h3>
+        <pre><code class="language-sql">CREATE TABLE clientes (
+  id INTEGER PRIMARY KEY,
+  nome TEXT NOT NULL,
+  email TEXT UNIQUE
+);
+
+CREATE TABLE pedidos (
+  id INTEGER PRIMARY KEY,
+  cliente_id INTEGER NOT NULL,
+  valor_total REAL NOT NULL, -- Postgres/MySQL: DECIMAL(10,2)
+  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);</code></pre>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <h4><i class="fas fa-clock"></i> Datas/Horários</h4>
+          <p>Armazene UTC quando aplicável; converta na borda. Em SQLite, TIMESTAMP é texto/real/integer conforme affinity.</p>
+        </div>
+        <div class="info-item">
+          <h4><i class="fas fa-money-bill"></i> Monetário</h4>
+          <p>Use DECIMAL(10,2) em Postgres/MySQL. Em SQLite, REAL com cuidado a arredondamentos.</p>
+        </div>
+        <div class="info-item">
+          <h4><i class="fas fa-ban"></i> NULL ≠ ''</h4>
+          <p>Trate NULL como ausência de valor. WHERE e agregações mudam com NULL.</p>
+        </div>
+        <div class="info-item">
+          <h4><i class="fas fa-check"></i> Integridade</h4>
+          <p>PK, FK, UNIQUE, CHECK e DEFAULT reduzem erros na aplicação.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><p>BEP-012</p></div>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

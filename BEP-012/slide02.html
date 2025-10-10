@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-012: Introdução a SQL – Comandos Básicos - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
+            <p>SELECT, INSERT e comandos básicos de estrutura</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-hammer"></i> Comandos CREATE, ALTER e DROP</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> DDL - Data Definition Language</h3>
+                    <p>Os comandos <strong>CREATE</strong>, <strong>ALTER</strong> e <strong>DROP</strong> são usados para gerenciar a estrutura do banco de dados (tabelas, colunas, etc.).</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-plus"></i> CREATE - Criar Tabelas</h3>
+                    <p>O comando <strong>CREATE TABLE</strong> é usado para criar novas tabelas no banco de dados.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Criar uma tabela de clientes
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    email TEXT,
+    telefone TEXT,
+    cidade TEXT
+);</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Exemplo Visual: Tabela Criada</h3>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">telefone</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="text-align: center; font-style: italic; color: #666;">Tabela criada e pronta para receber dados</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-edit"></i> ALTER - Modificar Tabelas</h3>
+                    <p>O comando <strong>ALTER TABLE</strong> é usado para modificar a estrutura de uma tabela existente.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Adicionar uma nova coluna
+ALTER TABLE clientes ADD COLUMN data_cadastro DATE;
+
+-- Renomear uma coluna (SQLite não suporta, mas outros SGBDs sim)
+ALTER TABLE clientes RENAME COLUMN telefone TO telefone_contato;
+
+-- Remover uma coluna (SQLite não suporta, mas outros SGBDs sim)
+ALTER TABLE clientes DROP COLUMN telefone;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Exemplo Visual: Tabela Modificada</h3>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">telefone</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center; background-color: #2E7D32;">data_cadastro</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666; background-color: #E8F5E8;">(vazio)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="text-align: center; font-style: italic; color: #666;">Nova coluna "data_cadastro" adicionada</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-trash"></i> DROP - Excluir Tabelas</h3>
+                    <p>O comando <strong>DROP TABLE</strong> é usado para excluir uma tabela completamente do banco de dados.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Excluir uma tabela
+DROP TABLE clientes;
+
+-- Excluir uma tabela (se existir)
+DROP TABLE IF EXISTS clientes;</code></pre>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados Importantes</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-trash"></i> DROP TABLE</h4>
+                            <p><strong>ATENÇÃO:</strong> Exclui a tabela e todos os dados permanentemente!</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-edit"></i> ALTER TABLE</h4>
+                            <p>Algumas modificações podem afetar dados existentes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-save"></i> Backup</h4>
+                            <p>Sempre faça backup antes de alterações importantes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> Teste</h4>
+                            <p>Teste os comandos em ambiente de desenvolvimento primeiro</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Tipos de Dados Básicos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-hashtag"></i> INTEGER</h4>
+                            <p>Números inteiros (1, 2, 100, -5)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-font"></i> TEXT</h4>
+                            <p>Texto (nomes, descrições)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar"></i> DATE</h4>
+                            <p>Datas (2024-01-15)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-dollar-sign"></i> REAL</h4>
+                            <p>Números decimais (10.50, 99.99)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-lightbulb"></i> Exemplo Completo</h3>
+                    <div class="code-block">
+                        <pre><code>-- 1. Criar tabela
+CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    preco REAL,
+    estoque INTEGER
+);
+
+-- 2. Adicionar coluna
+ALTER TABLE produtos ADD COLUMN categoria TEXT;
+
+-- 3. Excluir tabela (cuidado!)
+DROP TABLE produtos;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Resumo</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-plus"></i> CREATE</h4>
+                            <p>Cria novas tabelas e estruturas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-edit"></i> ALTER</h4>
+                            <p>Modifica estruturas existentes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-trash"></i> DROP</h4>
+                            <p>Exclui estruturas permanentemente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-012: Introdução a SQL – Comandos Básicos</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEP-012: SQL — Slide 10</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1><i class="fas fa-clipboard-check"></i> Exercícios: INSERT</h1>
+    <p>Testando constraints e atomicidade</p>
+  </div>
+
+  <div class="nav"></div>
+
+  <div class="content">
+    <div class="slide active" id="slide10">
+      <!-- Nota do instrutor: Provoque erro de FK de propósito, explique a mensagem, mostre logs. Demonstre transação com rollback. -->
+      <div class="info">
+        <h3><i class="fas fa-list-ol"></i> Tarefas</h3>
+        <ol>
+          <li>Insira 3 clientes (misture email NULL e não NULL).</li>
+          <li>Insira 2 pedidos para um cliente existente.</li>
+          <li>Tente inserir pedido com cliente_id inexistente (observe o erro).</li>
+          <li>Transação: 2 INSERTs em pedidos e depois ROLLBACK (verifique ausência dos registros).</li>
+        </ol>
+      </div>
+
+      <div class="example">
+        <h3><i class="fas fa-code"></i> Exemplos base</h3>
+        <pre><code class="language-sql">INSERT INTO clientes (nome, email) VALUES
+('Isabela Ponte', 'isa@example.com'),
+('João Pedro', 'joaop@example.com'),
+('Kelly Dias', NULL);
+
+-- Violação de FK (espera erro)
+INSERT INTO pedidos (cliente_id, valor_total) VALUES (9999, 10.00);
+
+-- Transação
+BEGIN;
+INSERT INTO pedidos (cliente_id, valor_total) VALUES (1, 888.00);
+INSERT INTO pedidos (cliente_id, valor_total) VALUES (1, 250.00);
+ROLLBACK;</code></pre>
+      </div>
+
+      <div class="warning">
+        <h3><i class="fas fa-check-circle"></i> Checklist</h3>
+        <ul>
+          <li>NOT NULL, UNIQUE e FK respeitados.</li>
+          <li>Strings corretas (aspas simples), NULL não é ''.</li>
+          <li>Transação confere atomicidade e consistência.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><p>BEP-012</p></div>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

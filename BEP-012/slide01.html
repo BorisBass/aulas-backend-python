@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-012: Introdução a SQL – Comandos Básicos - Slide 01</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
+            <p>SELECT, INSERT e comandos básicos de estrutura</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-language"></i> O que é SQL?</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Definição</h3>
+                    <p><strong>SQL</strong> (Structured Query Language) é a linguagem padrão para trabalhar com bancos de dados relacionais. É uma linguagem declarativa que permite:</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Principais Funções do SQL</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Consultar Dados</h4>
+                            <p>Buscar informações nas tabelas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-plus"></i> Inserir Dados</h4>
+                            <p>Adicionar novos registros</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-edit"></i> Modificar Dados</h4>
+                            <p>Alterar informações existentes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-trash"></i> Remover Dados</h4>
+                            <p>Excluir registros</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Exemplo Prático</h3>
+                    <p>Imagine que você tem uma tabela de clientes:</p>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Cidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Feira de Santana</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>Com SQL você pode:</p>
+                    <ul>
+                        <li><strong>Buscar:</strong> "Mostre todos os clientes de Salvador"</li>
+                        <li><strong>Adicionar:</strong> "Insira um novo cliente"</li>
+                        <li><strong>Modificar:</strong> "Altere o email do João"</li>
+                        <li><strong>Remover:</strong> "Exclua o cliente ID 2"</li>
+                    </ul>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cogs"></i> Tipos de Comandos SQL</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-hammer"></i> DDL</h4>
+                            <p><strong>Data Definition Language</strong><br>CREATE, ALTER, DROP<br>(Criar, alterar, excluir estruturas)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> DML</h4>
+                            <p><strong>Data Manipulation Language</strong><br>SELECT, INSERT, UPDATE, DELETE<br>(Consultar e modificar dados)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-code"></i> Exemplo de Comando SQL</h3>
+                    <div class="code-block">
+                        <pre><code>-- Buscar todos os clientes
+SELECT * FROM clientes;
+
+-- Buscar apenas nome e email
+SELECT nome, email FROM clientes;
+
+-- Buscar clientes de Salvador
+SELECT nome, email FROM clientes 
+WHERE cidade = 'Salvador';</code></pre>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Características do SQL</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-globe"></i> Padrão</h4>
+                            <p>Funciona na maioria dos bancos de dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-comment"></i> Declarativo</h4>
+                            <p>Você diz o que quer, não como fazer</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-book"></i> Fácil de Aprender</h4>
+                            <p>Sintaxe simples e intuitiva</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield-alt"></i> Seguro</h4>
+                            <p>Controle de acesso e integridade</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Resumo</h3>
+                    <p>SQL é a linguagem que permite:</p>
+                    <ul>
+                        <li>✅ <strong>Consultar</strong> dados (SELECT)</li>
+                        <li>✅ <strong>Inserir</strong> dados (INSERT)</li>
+                        <li>✅ <strong>Modificar</strong> dados (UPDATE)</li>
+                        <li>✅ <strong>Excluir</strong> dados (DELETE)</li>
+                        <li>✅ <strong>Criar</strong> estruturas (CREATE)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-012: Introdução a SQL – Comandos Básicos</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
