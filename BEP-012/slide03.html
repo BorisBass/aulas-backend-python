@@ -1,63 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BEP-012: SQL — Slide 03</title>
-  <link rel="stylesheet" href="../style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-012: Introdução a SQL – Comandos Básicos - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <h1><i class="fas fa-project-diagram"></i> Esquema e Tipos Essenciais</h1>
-    <p>Affinities do SQLite, datas/horários e valores monetários</p>
-  </div>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
+            <p>Comandos CREATE, ALTER e DROP</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-hammer"></i> Comandos CREATE, ALTER e DROP</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> DDL - Data Definition Language</h3>
+                    <p>Os comandos <strong>CREATE</strong>, <strong>ALTER</strong> e <strong>DROP</strong> são usados para gerenciar a estrutura do banco de dados (schemas, tabelas, colunas, etc.).</p>
+                </div>
 
-  <div class="nav"></div>
+                <div class="info">
+                    <h3><i class="fas fa-database"></i> CREATE SCHEMA - Criar Esquema</h3>
+                    <p>O comando <strong>CREATE SCHEMA</strong> é usado para criar um novo esquema (namespace) no banco de dados.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Criar um esquema para o projeto
+CREATE SCHEMA loja;
 
-  <div class="content">
-    <div class="slide active" id="slide03">
-      <!-- Nota do instrutor: Explique affinities (INTEGER, REAL, TEXT, BLOB, NUMERIC) e diferenças vs tipos “fortes”. Reforce DECIMAL(10,2) em Postgres/MySQL p/ dinheiro. -->
-      <div class="info">
-        <h3><i class="fas fa-database"></i> Modelo de exemplo</h3>
-        <pre><code class="language-sql">CREATE TABLE clientes (
-  id INTEGER PRIMARY KEY,
-  nome TEXT NOT NULL,
-  email TEXT UNIQUE
-);
+-- Usar o esquema criado
+USE loja;</code></pre>
+                    </div>
+                </div>
 
-CREATE TABLE pedidos (
-  id INTEGER PRIMARY KEY,
-  cliente_id INTEGER NOT NULL,
-  valor_total REAL NOT NULL, -- Postgres/MySQL: DECIMAL(10,2)
-  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+                <div class="info">
+                    <h3><i class="fas fa-edit"></i> ALTER SCHEMA - Modificar Esquema</h3>
+                    <p>O comando <strong>ALTER SCHEMA</strong> permite modificar propriedades de um esquema existente.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Renomear um esquema
+ALTER SCHEMA loja RENAME TO ecommerce;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-trash"></i> DROP SCHEMA - Excluir Esquema</h3>
+                    <p>O comando <strong>DROP SCHEMA</strong> remove completamente um esquema e todos os seus objetos.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Excluir um esquema (CUIDADO: remove todos os objetos!)
+DROP SCHEMA loja CASCADE;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-table"></i> CREATE TABLE - Criar Tabelas</h3>
+                    <p>O comando <strong>CREATE TABLE</strong> é usado para criar novas tabelas no banco de dados.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Criar uma tabela de clientes
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY,
+    nome TEXT NOT NULL,
+    email TEXT,
+    telefone TEXT,
+    cidade TEXT
 );</code></pre>
-      </div>
+                    </div>
+                </div>
 
-      <div class="info-grid">
-        <div class="info-item">
-          <h4><i class="fas fa-clock"></i> Datas/Horários</h4>
-          <p>Armazene UTC quando aplicável; converta na borda. Em SQLite, TIMESTAMP é texto/real/integer conforme affinity.</p>
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Exemplo Visual: Tabela Criada</h3>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">telefone</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-edit"></i> ALTER TABLE - Modificar Tabelas</h3>
+                    <p>O comando <strong>ALTER TABLE</strong> permite modificar a estrutura de uma tabela existente.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Adicionar uma nova coluna
+ALTER TABLE loja.clientes ADD COLUMN data_cadastro DATE;
+
+-- Remover uma coluna (SQLite não suporta DROP COLUMN diretamente)
+-- Em outros SGBDs: ALTER TABLE loja.clientes DROP COLUMN telefone;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-trash"></i> DROP TABLE - Excluir Tabelas</h3>
+                    <p>O comando <strong>DROP TABLE</strong> remove completamente uma tabela e todos os seus dados.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Excluir uma tabela (CUIDADO: remove todos os dados!)
+DROP TABLE loja.clientes;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                    <ul>
+                        <li><strong>SCHEMA:</strong> Organiza objetos do banco (tabelas, views, etc.)</li>
+                        <li><strong>CREATE:</strong> Cria novas estruturas (schemas, tabelas, índices, etc.)</li>
+                        <li><strong>ALTER:</strong> Modifica estruturas existentes</li>
+                        <li><strong>DROP:</strong> Remove estruturas completamente</li>
+                        <li><strong>Cuidado:</strong> DROP remove dados permanentemente!</li>
+                        <li><strong>Hierarquia:</strong> SCHEMA → TABLE → COLUMNS</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="info-item">
-          <h4><i class="fas fa-money-bill"></i> Monetário</h4>
-          <p>Use DECIMAL(10,2) em Postgres/MySQL. Em SQLite, REAL com cuidado a arredondamentos.</p>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
         </div>
-        <div class="info-item">
-          <h4><i class="fas fa-ban"></i> NULL ≠ ''</h4>
-          <p>Trate NULL como ausência de valor. WHERE e agregações mudam com NULL.</p>
-        </div>
-        <div class="info-item">
-          <h4><i class="fas fa-check"></i> Integridade</h4>
-          <p>PK, FK, UNIQUE, CHECK e DEFAULT reduzem erros na aplicação.</p>
-        </div>
-      </div>
     </div>
-  </div>
-
-  <div class="footer"><p>BEP-012</p></div>
-</div>
-<script src="../script.js"></script>
+    
+    <script src="../script.js"></script>
 </body>
 </html>

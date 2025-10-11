@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
-            <p>SELECT, INSERT e comandos básicos de estrutura</p>
+            <p>Tipos de Dados em SQL</p>
         </div>
         
         <div class="nav">
@@ -20,199 +20,89 @@
         
         <div class="content">
             <div class="slide active" id="slide02">
-                <h2><i class="fas fa-hammer"></i> Comandos CREATE, ALTER e DROP</h2>
+                <h2><i class="fas fa-database"></i> Tipos de Dados em SQL</h2>
                 
                 <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> DDL - Data Definition Language</h3>
-                    <p>Os comandos <strong>CREATE</strong>, <strong>ALTER</strong> e <strong>DROP</strong> são usados para gerenciar a estrutura do banco de dados (tabelas, colunas, etc.).</p>
+                    <h3><i class="fas fa-lightbulb"></i> Tipos de Dados Básicos</h3>
+                    <p>Os tipos de dados definem que tipo de informação pode ser armazenada em cada coluna da tabela.</p>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-plus"></i> CREATE - Criar Tabelas</h3>
-                    <p>O comando <strong>CREATE TABLE</strong> é usado para criar novas tabelas no banco de dados.</p>
+                    <h3><i class="fas fa-hashtag"></i> INTEGER - Números Inteiros</h3>
+                    <p>Armazena números inteiros (positivos, negativos ou zero).</p>
                     
                     <div class="code-block">
-                        <pre><code>-- Criar uma tabela de clientes
-CREATE TABLE clientes (
-    id INTEGER PRIMARY KEY,
-    nome TEXT NOT NULL,
-    email TEXT,
-    telefone TEXT,
-    cidade TEXT
+                        <pre><code>-- Exemplos de INTEGER
+id INTEGER PRIMARY KEY,        -- 1, 2, 3, 100, -5
+idade INTEGER,                 -- 25, 30, 18
+quantidade INTEGER             -- 0, 1, 10, 1000</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-font"></i> TEXT - Texto</h3>
+                    <p>Armazena texto de qualquer tamanho (nomes, descrições, etc.).</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Exemplos de TEXT
+nome TEXT NOT NULL,            -- "João Silva"
+email TEXT,                    -- "joao@email.com"
+descricao TEXT                 -- "Produto de alta qualidade"</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-dollar-sign"></i> REAL - Números Decimais</h3>
+                    <p>Armazena números com casas decimais (preços, medidas, etc.).</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Exemplos de REAL
+preco REAL,                    -- 25.99, 100.50, 0.99
+peso REAL,                     -- 1.5, 2.75, 0.25
+altura REAL                    -- 1.75, 0.50, 2.10</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-calendar"></i> DATE - Datas</h3>
+                    <p>Armazena datas no formato YYYY-MM-DD.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Exemplos de DATE
+data_nascimento DATE,          -- "1990-05-15"
+data_cadastro DATE,            -- "2024-01-20"
+data_vencimento DATE           -- "2024-12-31"</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Exemplo: Tabela com Diferentes Tipos</h3>
+                    <div class="code-block">
+                        <pre><code>CREATE TABLE produtos (
+    id INTEGER PRIMARY KEY,           -- Número inteiro
+    nome TEXT NOT NULL,               -- Texto
+    preco REAL,                       -- Número decimal
+    data_lancamento DATE,             -- Data
+    ativo INTEGER                     -- 1 (sim) ou 0 (não)
 );</code></pre>
                     </div>
                 </div>
 
-                <div class="example">
-                    <h3><i class="fas fa-table"></i> Exemplo Visual: Tabela Criada</h3>
-                    <div style="overflow-x: auto; margin: 20px 0;">
-                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
-                            <thead>
-                                <tr style="background-color: #4CAF50; color: white;">
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">telefone</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p style="text-align: center; font-style: italic; color: #666;">Tabela criada e pronta para receber dados</p>
-                </div>
-
                 <div class="info">
-                    <h3><i class="fas fa-edit"></i> ALTER - Modificar Tabelas</h3>
-                    <p>O comando <strong>ALTER TABLE</strong> é usado para modificar a estrutura de uma tabela existente.</p>
-                    
-                    <div class="code-block">
-                        <pre><code>-- Adicionar uma nova coluna
-ALTER TABLE clientes ADD COLUMN data_cadastro DATE;
-
--- Renomear uma coluna (SQLite não suporta, mas outros SGBDs sim)
-ALTER TABLE clientes RENAME COLUMN telefone TO telefone_contato;
-
--- Remover uma coluna (SQLite não suporta, mas outros SGBDs sim)
-ALTER TABLE clientes DROP COLUMN telefone;</code></pre>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-table"></i> Exemplo Visual: Tabela Modificada</h3>
-                    <div style="overflow-x: auto; margin: 20px 0;">
-                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
-                            <thead>
-                                <tr style="background-color: #4CAF50; color: white;">
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">telefone</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center; background-color: #2E7D32;">data_cadastro</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666; background-color: #E8F5E8;">(vazio)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p style="text-align: center; font-style: italic; color: #666;">Nova coluna "data_cadastro" adicionada</p>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-trash"></i> DROP - Excluir Tabelas</h3>
-                    <p>O comando <strong>DROP TABLE</strong> é usado para excluir uma tabela completamente do banco de dados.</p>
-                    
-                    <div class="code-block">
-                        <pre><code>-- Excluir uma tabela
-DROP TABLE clientes;
-
--- Excluir uma tabela (se existir)
-DROP TABLE IF EXISTS clientes;</code></pre>
-                    </div>
-                </div>
-
-                <div class="warning">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados Importantes</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-trash"></i> DROP TABLE</h4>
-                            <p><strong>ATENÇÃO:</strong> Exclui a tabela e todos os dados permanentemente!</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-edit"></i> ALTER TABLE</h4>
-                            <p>Algumas modificações podem afetar dados existentes</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-save"></i> Backup</h4>
-                            <p>Sempre faça backup antes de alterações importantes</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-check"></i> Teste</h4>
-                            <p>Teste os comandos em ambiente de desenvolvimento primeiro</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-list"></i> Tipos de Dados Básicos</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-hashtag"></i> INTEGER</h4>
-                            <p>Números inteiros (1, 2, 100, -5)</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-font"></i> TEXT</h4>
-                            <p>Texto (nomes, descrições)</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-calendar"></i> DATE</h4>
-                            <p>Datas (2024-01-15)</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-dollar-sign"></i> REAL</h4>
-                            <p>Números decimais (10.50, 99.99)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-lightbulb"></i> Exemplo Completo</h3>
-                    <div class="code-block">
-                        <pre><code>-- 1. Criar tabela
-CREATE TABLE produtos (
-    id INTEGER PRIMARY KEY,
-    nome TEXT NOT NULL,
-    preco REAL,
-    estoque INTEGER
-);
-
--- 2. Adicionar coluna
-ALTER TABLE produtos ADD COLUMN categoria TEXT;
-
--- 3. Excluir tabela (cuidado!)
-DROP TABLE produtos;</code></pre>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-check-circle"></i> Resumo</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-plus"></i> CREATE</h4>
-                            <p>Cria novas tabelas e estruturas</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-edit"></i> ALTER</h4>
-                            <p>Modifica estruturas existentes</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-trash"></i> DROP</h4>
-                            <p>Exclui estruturas permanentemente</p>
-                        </div>
-                    </div>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                    <ul>
+                        <li><strong>INTEGER:</strong> Para números inteiros (contadores, IDs)</li>
+                        <li><strong>TEXT:</strong> Para qualquer texto (nomes, descrições)</li>
+                        <li><strong>REAL:</strong> Para números decimais (preços, medidas)</li>
+                        <li><strong>DATE:</strong> Para datas (nascimento, cadastro)</li>
+                        <li><strong>NOT NULL:</strong> Campo obrigatório (não pode ficar vazio)</li>
+                    </ul>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>BEP-012: Introdução a SQL – Comandos Básicos</p>
+            <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
     

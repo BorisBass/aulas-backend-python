@@ -1,62 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BEP-012: SQL — Slide 09</title>
-  <link rel="stylesheet" href="../style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-012: Introdução a SQL – Comandos Básicos - Slide 09</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <h1><i class="fas fa-tasks"></i> Exercícios: SELECT</h1>
-    <p>Aquecimento → Intermediário → Desafio</p>
-  </div>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
+            <p>Exercícios: SELECT</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-tasks"></i> Exercícios: SELECT</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Exercícios Práticos</h3>
+                    <p>Vamos praticar consultas SELECT com diferentes níveis de dificuldade.</p>
+                </div>
 
-  <div class="nav"></div>
+                <div class="info">
+                    <h3><i class="fas fa-fire"></i> Exercício 1: Básico</h3>
+                    <p><strong>Tarefa:</strong> Liste todos os clientes com nome e email.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua solução aqui:
+SELECT nome, email FROM clientes;</code></pre>
+                    </div>
+                </div>
 
-  <div class="content">
-    <div class="slide active" id="slide09">
-      <!-- Nota do instrutor: Dê 5-7 minutos por bloco. Circule pela sala, peça para verbalizarem raciocínio. -->
-      <div class="info">
-        <h3><i class="fas fa-fire"></i> Aquecimento</h3>
-        <ol>
-          <li>Liste id, nome, email dos 5 primeiros clientes.</li>
-          <li>Selecione clientes cujo nome começa com 'A', ordenando por nome.</li>
-        </ol>
-        <pre><code class="language-sql">SELECT id, nome, email FROM clientes ORDER BY id LIMIT 5;
-SELECT id, nome FROM clientes WHERE nome LIKE 'A%' ORDER BY nome ASC;</code></pre>
-      </div>
+                <div class="info">
+                    <h3><i class="fas fa-search"></i> Exercício 2: Com Filtro</h3>
+                    <p><strong>Tarefa:</strong> Mostre apenas os clientes de Salvador.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua solução aqui:
+SELECT nome, email, cidade FROM clientes WHERE cidade = 'Salvador';</code></pre>
+                    </div>
+                </div>
 
-      <div class="info">
-        <h3><i class="fas fa-mountain"></i> Intermediário</h3>
-        <ol>
-          <li>Pedidos com valor_total entre 50 e 200, ordenados desc.</li>
-          <li>Clientes com email não nulo, paginando (LIMIT 5 OFFSET 5).</li>
-        </ol>
-        <pre><code class="language-sql">SELECT id, cliente_id, valor_total FROM pedidos
-WHERE valor_total BETWEEN 50 AND 200
-ORDER BY valor_total DESC;
+                <div class="info">
+                    <h3><i class="fas fa-sort"></i> Exercício 3: Com Ordenação</h3>
+                    <p><strong>Tarefa:</strong> Liste os produtos ordenados por preço (mais caro primeiro).</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua solução aqui:
+SELECT nome, preco FROM produtos ORDER BY preco DESC;</code></pre>
+                    </div>
+                </div>
 
-SELECT id, nome FROM clientes
-WHERE email IS NOT NULL
-ORDER BY nome ASC, id ASC
-LIMIT 5 OFFSET 5;</code></pre>
-      </div>
+                <div class="info">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 4: Com Limite</h3>
+                    <p><strong>Tarefa:</strong> Mostre apenas os 3 primeiros clientes.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua solução aqui:
+SELECT nome, email FROM clientes LIMIT 3;</code></pre>
+                    </div>
+                </div>
 
-      <div class="example">
-        <h3><i class="fas fa-bolt"></i> Desafio</h3>
-        <p>Crie coluna derivada “faixa” por CASE (>=200 alto, senão baixo) e ordene por valor_total desc.</p>
-        <pre><code class="language-sql">SELECT id, valor_total,
-CASE WHEN valor_total >= 200 THEN 'alto' ELSE 'baixo' END AS faixa
-FROM pedidos
-ORDER BY valor_total DESC;</code></pre>
-      </div>
+                <div class="info">
+                    <h3><i class="fas fa-filter"></i> Exercício 5: Combinado</h3>
+                    <p><strong>Tarefa:</strong> Mostre produtos com preço menor que 200, ordenados por nome.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua solução aqui:
+SELECT nome, preco FROM produtos 
+WHERE preco < 200 
+ORDER BY nome;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Dicas</h3>
+                    <ul>
+                        <li><strong>Leia com atenção:</strong> Entenda o que cada exercício pede</li>
+                        <li><strong>Teste:</strong> Execute cada consulta e veja o resultado</li>
+                        <li><strong>Experimente:</strong> Modifique os filtros e veja as mudanças</li>
+                        <li><strong>Pratique:</strong> Crie suas próprias consultas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
     </div>
-  </div>
-
-  <div class="footer"><p>BEP-012</p></div>
-</div>
-<script src="../script.js"></script>
+    
+    <script src="../script.js"></script>
 </body>
 </html>

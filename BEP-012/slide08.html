@@ -1,54 +1,111 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BEP-012: SQL — Slide 08</title>
-  <link rel="stylesheet" href="../style.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-012: Introdução a SQL – Comandos Básicos - Slide 08</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-  <div class="header">
-    <h1><i class="fas fa-shield-alt"></i> Boas Práticas</h1>
-    <p>NULL, strings, datas, segurança e transações</p>
-  </div>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
+            <p>Boas Práticas em SQL</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-shield-alt"></i> Boas Práticas em SQL</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Por que seguir boas práticas?</h3>
+                    <p>As boas práticas ajudam a escrever código SQL mais limpo, seguro e eficiente.</p>
+                </div>
 
-  <div class="nav"></div>
+                <div class="info">
+                    <h3><i class="fas fa-quote-right"></i> 1. Nomes Descritivos</h3>
+                    <p>Use nomes claros e descritivos para tabelas e colunas.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- ✅ Bom
+CREATE TABLE clientes (
+    id INTEGER PRIMARY KEY,
+    nome_completo TEXT NOT NULL,
+    email_contato TEXT
+);
 
-  <div class="content">
-    <div class="slide active" id="slide08">
-      <!-- Nota do instrutor: Traga exemplos de bug por comparar NULL com '='. Fale sobre parametrização e princípio do menor privilégio. -->
-      <div class="info-grid">
-        <div class="info-item">
-          <h4><i class="fas fa-ban"></i> NULL semântica</h4>
-          <p>Use IS NULL/IS NOT NULL. Strings vazias não são NULL.</p>
-        </div>
-        <div class="info-item">
-          <h4><i class="fas fa-quote-right"></i> Strings</h4>
-          <p>Aspas simples, encoding consistente e normalização (trim).</p>
-        </div>
-        <div class="info-item">
-          <h4><i class="fas fa-clock"></i> Datas</h4>
-          <p>Preferir UTC no banco; converter em bordas (API/Frontend) se necessário.</p>
-        </div>
-        <div class="info-item">
-          <h4><i class="fas fa-lock"></i> Segurança</h4>
-          <p>Queries parametrizadas, usuários com privilégios mínimos, logs sem dados sensíveis.</p>
-        </div>
-      </div>
+-- ❌ Evitar
+CREATE TABLE c (
+    i INTEGER PRIMARY KEY,
+    n TEXT,
+    e TEXT
+);</code></pre>
+                    </div>
+                </div>
 
-      <div class="example">
-        <h3><i class="fas fa-random"></i> Transações</h3>
-        <pre><code class="language-sql">BEGIN;
-INSERT INTO pedidos (cliente_id, valor_total) VALUES (1, 100.00);
-INSERT INTO pedidos (cliente_id, valor_total) VALUES (1, 250.00);
-COMMIT; -- ou ROLLBACK em erro</code></pre>
-      </div>
+                <div class="info">
+                    <h3><i class="fas fa-ban"></i> 2. Tratamento de NULL</h3>
+                    <p>NULL representa ausência de valor. Use IS NULL/IS NOT NULL para comparar.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- ✅ Correto
+SELECT * FROM clientes WHERE email IS NULL;
+SELECT * FROM clientes WHERE email IS NOT NULL;
+
+-- ❌ Incorreto
+SELECT * FROM clientes WHERE email = NULL;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-quote-left"></i> 3. Aspas Simples</h3>
+                    <p>Use aspas simples para strings em SQL.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- ✅ Correto
+INSERT INTO clientes (nome, cidade) VALUES ('João Silva', 'Salvador');
+
+-- ❌ Incorreto
+INSERT INTO clientes (nome, cidade) VALUES ("João Silva", "Salvador");</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> 4. SELECT Específico</h3>
+                    <p>Selecione apenas as colunas que você precisa.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- ✅ Bom (mais rápido)
+SELECT nome, email FROM clientes;
+
+-- ❌ Evitar (mais lento)
+SELECT * FROM clientes;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Resumo das Boas Práticas</h3>
+                    <ul>
+                        <li><strong>Nomes claros:</strong> Use nomes descritivos para tabelas e colunas</li>
+                        <li><strong>NULL correto:</strong> Use IS NULL/IS NOT NULL para comparar</li>
+                        <li><strong>Aspas simples:</strong> Use ' ' para strings, não " "</li>
+                        <li><strong>SELECT específico:</strong> Selecione apenas colunas necessárias</li>
+                        <li><strong>Comentários:</strong> Use -- para explicar código complexo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
     </div>
-  </div>
-
-  <div class="footer"><p>BEP-012</p></div>
-</div>
-<script src="../script.js"></script>
+    
+    <script src="../script.js"></script>
 </body>
 </html>

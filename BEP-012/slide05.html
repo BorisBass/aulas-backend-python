@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
-            <p>SELECT, INSERT e comandos básicos de estrutura</p>
+            <p>Comando SELECT - Seleção de Dados</p>
         </div>
         
         <div class="nav">
@@ -20,27 +20,24 @@
         
         <div class="content">
             <div class="slide active" id="slide05">
-                <h2><i class="fas fa-filter"></i> Filtros: WHERE, ORDER BY e LIMIT</h2>
+                <h2><i class="fas fa-search"></i> Comando SELECT - Seleção de Dados</h2>
                 
                 <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> Refinando Consultas</h3>
-                    <p>Os comandos <strong>WHERE</strong>, <strong>ORDER BY</strong> e <strong>LIMIT</strong> permitem filtrar, ordenar e limitar os resultados das consultas.</p>
+                    <h3><i class="fas fa-lightbulb"></i> O que é o SELECT?</h3>
+                    <p>O comando <strong>SELECT</strong> é usado para consultar e recuperar dados de uma ou mais tabelas. É o comando mais usado em SQL.</p>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-search"></i> WHERE - Filtrar Dados</h3>
-                    <p>O comando <strong>WHERE</strong> é usado para filtrar registros que atendem a uma condição específica.</p>
-                    
+                    <h3><i class="fas fa-list"></i> Sintaxe Básica do SELECT</h3>
                     <div class="code-block">
-                        <pre><code>-- Sintaxe básica
-SELECT colunas
-FROM tabela
-WHERE condição;</code></pre>
+                        <pre><code>SELECT coluna1, coluna2, coluna3
+FROM nome_da_tabela;</code></pre>
                     </div>
                 </div>
 
                 <div class="example">
-                    <h3><i class="fas fa-table"></i> Exemplo: Tabela de Clientes</h3>
+                    <h3><i class="fas fa-table"></i> Exemplo Prático</h3>
+                    <p>Imagine uma tabela de clientes:</p>
                     <div style="overflow-x: auto; margin: 20px 0;">
                         <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
                             <thead>
@@ -49,37 +46,26 @@ WHERE condição;</code></pre>
                                     <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
                                     <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
                                     <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">idade</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background-color: #f9f9f9;">
+                                <tr style="background-color: #e8f5e8;">
                                     <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">25</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Feira de Santana</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">30</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">joao@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Salvador</td>
                                 </tr>
                                 <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Pedro Costa</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">pedro@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">22</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">maria@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Feira de Santana</td>
                                 </tr>
-                                <tr>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">4</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Ana Lima</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">ana@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Vitória da Conquista</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">28</td>
+                                <tr style="background-color: #e8f5e8;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Pedro Costa</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">pedro@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Salvador</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -87,194 +73,65 @@ WHERE condição;</code></pre>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-code"></i> Exemplos de WHERE</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-equals"></i> Igualdade</h4>
-                            <div class="code-block">
-                                <pre><code>-- Clientes de Salvador
-SELECT nome, email 
-FROM clientes 
-WHERE cidade = 'Salvador';</code></pre>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-greater-than"></i> Maior que</h4>
-                            <div class="code-block">
-                                <pre><code>-- Clientes com mais de 25 anos
-SELECT nome, idade 
-FROM clientes 
-WHERE idade > 25;</code></pre>
-                            </div>
-                        </div>
+                    <h3><i class="fas fa-asterisk"></i> SELECT * - Todas as Colunas</h3>
+                    <div class="code-block">
+                        <pre><code>-- Selecionar todas as colunas
+SELECT * FROM clientes;</code></pre>
                     </div>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-sort"></i> ORDER BY - Ordenar Dados</h3>
-                    <p>O comando <strong>ORDER BY</strong> é usado para ordenar os resultados por uma ou mais colunas.</p>
-                    
+                    <h3><i class="fas fa-list"></i> SELECT Específico - Colunas Escolhidas</h3>
                     <div class="code-block">
-                        <pre><code>-- Ordenar por nome (A-Z)
-SELECT nome, cidade 
-FROM clientes 
-ORDER BY nome;
-
--- Ordenar por idade (maior para menor)
-SELECT nome, idade 
-FROM clientes 
-ORDER BY idade DESC;</code></pre>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-list-ol"></i> LIMIT - Limitar Resultados</h3>
-                    <p>O comando <strong>LIMIT</strong> é usado para limitar o número de registros retornados.</p>
-                    
-                    <div class="code-block">
-                        <pre><code>-- Mostrar apenas os 3 primeiros clientes
-SELECT nome, cidade 
-FROM clientes 
-LIMIT 3;
-
--- Mostrar os 2 clientes mais velhos
-SELECT nome, idade 
-FROM clientes 
-ORDER BY idade DESC 
-LIMIT 2;</code></pre>
+                        <pre><code>-- Selecionar apenas nome e email
+SELECT nome, email FROM clientes;</code></pre>
                     </div>
                 </div>
 
                 <div class="example">
-                    <h3><i class="fas fa-eye"></i> Resultados dos Exemplos</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-equals"></i> WHERE cidade = 'Salvador'</h4>
-                            <div style="overflow-x: auto; margin: 10px 0;">
-                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 0.9em;">
-                                    <thead>
-                                        <tr style="background-color: #E3F2FD;">
-                                            <th style="border: 1px solid #333; padding: 8px;">nome</th>
-                                            <th style="border: 1px solid #333; padding: 8px;">email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">João Silva</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">joao@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">Pedro Costa</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">pedro@email.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-sort"></i> ORDER BY idade DESC LIMIT 2</h4>
-                            <div style="overflow-x: auto; margin: 10px 0;">
-                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 0.9em;">
-                                    <thead>
-                                        <tr style="background-color: #E8F5E8;">
-                                            <th style="border: 1px solid #333; padding: 8px;">nome</th>
-                                            <th style="border: 1px solid #333; padding: 8px;">idade</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">Maria Santos</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">30</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">Ana Lima</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">28</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <h3><i class="fas fa-table"></i> Resultado do SELECT</h3>
+                    <p>Resultado da consulta <code>SELECT nome, email FROM clientes;</code>:</p>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #2196F3; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #e3f2fd;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">joao@email.com</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">maria@email.com</td>
+                                </tr>
+                                <tr style="background-color: #e3f2fd;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Pedro Costa</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">pedro@email.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-code"></i> Combinando Comandos</h3>
-                    <div class="code-block">
-                        <pre><code>-- Clientes de Salvador, ordenados por nome, limitado a 2
-SELECT nome, email, cidade
-FROM clientes
-WHERE cidade = 'Salvador'
-ORDER BY nome
-LIMIT 2;</code></pre>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> Operadores de Comparação</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-equals"></i> =</h4>
-                            <p>Igual a</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-not-equal"></i> != ou &lt;&gt;</h4>
-                            <p>Diferente de</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-greater-than"></i> &gt;</h4>
-                            <p>Maior que</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-less-than"></i> &lt;</h4>
-                            <p>Menor que</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="warning">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Dicas Importantes</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-quote-left"></i> Texto</h4>
-                            <p>Use aspas simples para texto: 'Salvador'</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-sort"></i> Ordem</h4>
-                            <p>ASC = crescente (padrão), DESC = decrescente</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-list-ol"></i> LIMIT</h4>
-                            <p>Sempre no final da consulta</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-filter"></i> WHERE</h4>
-                            <p>Vem depois do FROM, antes do ORDER BY</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-check-circle"></i> Resumo</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-filter"></i> WHERE</h4>
-                            <p>Filtra registros por condições</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-sort"></i> ORDER BY</h4>
-                            <p>Ordena os resultados</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-list-ol"></i> LIMIT</h4>
-                            <p>Limita o número de registros</p>
-                        </div>
-                    </div>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                    <ul>
+                        <li><strong>SELECT *:</strong> Retorna todas as colunas da tabela</li>
+                        <li><strong>SELECT coluna1, coluna2:</strong> Retorna apenas as colunas especificadas</li>
+                        <li><strong>FROM:</strong> Especifica de qual tabela buscar os dados</li>
+                        <li><strong>Ordem:</strong> Os dados são retornados na ordem que estão na tabela</li>
+                        <li><strong>Performance:</strong> SELECT específico é mais rápido que SELECT *</li>
+                    </ul>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>BEP-012: Introdução a SQL – Comandos Básicos</p>
+            <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
     

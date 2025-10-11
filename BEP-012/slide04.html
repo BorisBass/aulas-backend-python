@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
-            <p>SELECT, INSERT e comandos básicos de estrutura</p>
+            <p>Comando INSERT - Inserir Dados</p>
         </div>
         
         <div class="nav">
@@ -20,24 +20,24 @@
         
         <div class="content">
             <div class="slide active" id="slide04">
-                <h2><i class="fas fa-search"></i> Comando SELECT - Seleção de Dados</h2>
+                <h2><i class="fas fa-plus"></i> Comando INSERT - Inserir Dados</h2>
                 
                 <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> O que é o SELECT?</h3>
-                    <p>O comando <strong>SELECT</strong> é usado para consultar e recuperar dados de uma ou mais tabelas. É o comando mais usado em SQL.</p>
+                    <h3><i class="fas fa-lightbulb"></i> O que é o INSERT?</h3>
+                    <p>O comando <strong>INSERT</strong> é usado para adicionar novos registros (linhas) em uma tabela do banco de dados.</p>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-list"></i> Sintaxe Básica do SELECT</h3>
+                    <h3><i class="fas fa-list"></i> Sintaxe Básica do INSERT</h3>
                     <div class="code-block">
-                        <pre><code>SELECT coluna1, coluna2, coluna3
-FROM nome_da_tabela;</code></pre>
+                        <pre><code>INSERT INTO nome_da_tabela (coluna1, coluna2, coluna3)
+VALUES (valor1, valor2, valor3);</code></pre>
                     </div>
                 </div>
 
                 <div class="example">
-                    <h3><i class="fas fa-table"></i> Exemplo Prático</h3>
-                    <p>Imagine uma tabela de clientes:</p>
+                    <h3><i class="fas fa-table"></i> Exemplo: Tabela de Clientes</h3>
+                    <p>Imagine uma tabela de clientes vazia:</p>
                     <div style="overflow-x: auto; margin: 20px 0;">
                         <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
                             <thead>
@@ -50,22 +50,10 @@ FROM nome_da_tabela;</code></pre>
                             </thead>
                             <tbody>
                                 <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Feira de Santana</td>
-                                </tr>
-                                <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Pedro Costa</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">pedro@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,166 +61,63 @@ FROM nome_da_tabela;</code></pre>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-code"></i> Exemplos de SELECT</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-list"></i> Selecionar Todas as Colunas</h4>
-                            <div class="code-block">
-                                <pre><code>SELECT * FROM clientes;</code></pre>
-                            </div>
-                            <p>Retorna todas as colunas e registros</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-columns"></i> Selecionar Colunas Específicas</h4>
-                            <div class="code-block">
-                                <pre><code>SELECT nome, email FROM clientes;</code></pre>
-                            </div>
-                            <p>Retorna apenas nome e email</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-eye"></i> Resultado dos Exemplos</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-list"></i> SELECT * FROM clientes;</h4>
-                            <div style="overflow-x: auto; margin: 10px 0;">
-                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 0.9em;">
-                                    <thead>
-                                        <tr style="background-color: #E3F2FD;">
-                                            <th style="border: 1px solid #333; padding: 8px;">id</th>
-                                            <th style="border: 1px solid #333; padding: 8px;">nome</th>
-                                            <th style="border: 1px solid #333; padding: 8px;">email</th>
-                                            <th style="border: 1px solid #333; padding: 8px;">cidade</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">1</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">João Silva</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">joao@email.com</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">Salvador</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">2</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">Maria Santos</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">maria@email.com</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">Feira de Santana</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">3</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">Pedro Costa</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">pedro@email.com</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">Salvador</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-columns"></i> SELECT nome, email FROM clientes;</h4>
-                            <div style="overflow-x: auto; margin: 10px 0;">
-                                <table style="width: 100%; border-collapse: collapse; border: 1px solid #333; font-size: 0.9em;">
-                                    <thead>
-                                        <tr style="background-color: #E8F5E8;">
-                                            <th style="border: 1px solid #333; padding: 8px;">nome</th>
-                                            <th style="border: 1px solid #333; padding: 8px;">email</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">João Silva</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">joao@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">Maria Santos</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">maria@email.com</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #333; padding: 8px;">Pedro Costa</td>
-                                            <td style="border: 1px solid #333; padding: 8px;">pedro@email.com</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> Dicas Importantes</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-asterisk"></i> SELECT *</h4>
-                            <p>Retorna todas as colunas. Use com cuidado em tabelas grandes.</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-columns"></i> Colunas Específicas</h4>
-                            <p>Selecione apenas as colunas que você precisa.</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-table"></i> FROM</h4>
-                            <p>Sempre especifique a tabela de onde virão os dados.</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-semicolon"></i> Ponto e Vírgula</h4>
-                            <p>Termine sempre os comandos SQL com ponto e vírgula (;).</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-code"></i> Mais Exemplos</h3>
+                    <h3><i class="fas fa-plus-circle"></i> Inserir um Cliente</h3>
                     <div class="code-block">
-                        <pre><code>-- Selecionar apenas uma coluna
-SELECT nome FROM clientes;
-
--- Selecionar duas colunas
-SELECT nome, cidade FROM clientes;
-
--- Selecionar com espaçamento (mais legível)
-SELECT 
-    nome,
-    email,
-    cidade
-FROM clientes;</code></pre>
+                        <pre><code>INSERT INTO clientes (nome, email, cidade)
+VALUES ('João Silva', 'joao@email.com', 'Salvador');</code></pre>
                     </div>
                 </div>
 
-                <div class="warning">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-asterisk"></i> SELECT *</h4>
-                            <p>Pode ser lento em tabelas com muitas colunas</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-spell-check"></i> Nomes</h4>
-                            <p>Nomes de colunas são sensíveis a maiúsculas/minúsculas</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-table"></i> Tabela</h4>
-                            <p>A tabela deve existir no banco de dados</p>
-                        </div>
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Resultado: Tabela com Dados</h3>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #e8f5e8;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">joao@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Salvador</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-check-circle"></i> Resumo</h3>
-                    <p>O comando SELECT permite:</p>
+                    <h3><i class="fas fa-list-ol"></i> Inserir Múltiplos Registros</h3>
+                    <div class="code-block">
+                        <pre><code>INSERT INTO clientes (nome, email, cidade)
+VALUES 
+    ('Maria Santos', 'maria@email.com', 'Feira de Santana'),
+    ('Pedro Costa', 'pedro@email.com', 'Salvador'),
+    ('Ana Lima', 'ana@email.com', 'Vitória da Conquista');</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
                     <ul>
-                        <li>✅ <strong>Consultar</strong> dados de tabelas</li>
-                        <li>✅ <strong>Selecionar</strong> todas as colunas (*)</li>
-                        <li>✅ <strong>Escolher</strong> colunas específicas</li>
-                        <li>✅ <strong>Recuperar</strong> informações do banco</li>
+                        <li><strong>INSERT INTO:</strong> Especifica a tabela onde inserir</li>
+                        <li><strong>Colunas:</strong> Lista as colunas que receberão valores</li>
+                        <li><strong>VALUES:</strong> Lista os valores correspondentes</li>
+                        <li><strong>Ordem:</strong> Os valores devem estar na mesma ordem das colunas</li>
+                        <li><strong>Tipos:</strong> Os valores devem ser compatíveis com os tipos das colunas</li>
                     </ul>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>BEP-012: Introdução a SQL – Comandos Básicos</p>
+            <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
     

@@ -11,7 +11,7 @@
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
-            <p>SELECT, INSERT e comandos básicos de estrutura</p>
+            <p>Filtros: WHERE, ORDER BY e LIMIT</p>
         </div>
         
         <div class="nav">
@@ -20,24 +20,27 @@
         
         <div class="content">
             <div class="slide active" id="slide06">
-                <h2><i class="fas fa-plus"></i> Comando INSERT - Inserir Dados</h2>
+                <h2><i class="fas fa-filter"></i> Filtros: WHERE, ORDER BY e LIMIT</h2>
                 
                 <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> O que é o INSERT?</h3>
-                    <p>O comando <strong>INSERT</strong> é usado para adicionar novos registros (linhas) em uma tabela do banco de dados.</p>
+                    <h3><i class="fas fa-lightbulb"></i> Refinando Consultas</h3>
+                    <p>Os comandos <strong>WHERE</strong>, <strong>ORDER BY</strong> e <strong>LIMIT</strong> permitem filtrar, ordenar e limitar os resultados das consultas.</p>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-list"></i> Sintaxe Básica do INSERT</h3>
+                    <h3><i class="fas fa-search"></i> WHERE - Filtrar Dados</h3>
+                    <p>O comando <strong>WHERE</strong> é usado para filtrar registros que atendem a uma condição específica.</p>
+                    
                     <div class="code-block">
-                        <pre><code>INSERT INTO nome_da_tabela (coluna1, coluna2, coluna3)
-VALUES (valor1, valor2, valor3);</code></pre>
+                        <pre><code>-- Sintaxe básica
+SELECT colunas
+FROM tabela
+WHERE condição;</code></pre>
                     </div>
                 </div>
 
                 <div class="example">
                     <h3><i class="fas fa-table"></i> Exemplo: Tabela de Clientes</h3>
-                    <p>Imagine uma tabela de clientes vazia:</p>
                     <div style="overflow-x: auto; margin: 20px 0;">
                         <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
                             <thead>
@@ -49,98 +52,23 @@ VALUES (valor1, valor2, valor3);</code></pre>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #666;">(vazio)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-plus"></i> Inserir um Registro</h3>
-                    <div class="code-block">
-                        <pre><code>-- Inserir um novo cliente
-INSERT INTO clientes (nome, email, cidade)
-VALUES ('João Silva', 'joao@email.com', 'Salvador');</code></pre>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-eye"></i> Resultado: Tabela com Dados</h3>
-                    <div style="overflow-x: auto; margin: 20px 0;">
-                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
-                            <thead>
-                                <tr style="background-color: #4CAF50; color: white;">
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="background-color: #f9f9f9;">
+                                <tr style="background-color: #e8f5e8;">
                                     <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">joao@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Salvador</td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p style="text-align: center; font-style: italic; color: #666;">Cliente inserido com sucesso!</p>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-list"></i> Inserir Múltiplos Registros</h3>
-                    <div class="code-block">
-                        <pre><code>-- Inserir vários clientes de uma vez
-INSERT INTO clientes (nome, email, cidade) VALUES
-('Maria Santos', 'maria@email.com', 'Feira de Santana'),
-('Pedro Costa', 'pedro@email.com', 'Salvador'),
-('Ana Lima', 'ana@email.com', 'Vitória da Conquista');</code></pre>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-eye"></i> Resultado: Tabela com Múltiplos Dados</h3>
-                    <div style="overflow-x: auto; margin: 20px 0;">
-                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
-                            <thead>
-                                <tr style="background-color: #4CAF50; color: white;">
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">id</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">nome</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">email</th>
-                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">cidade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
                                 <tr style="background-color: #f9f9f9;">
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
-                                </tr>
-                                <tr>
                                     <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Feira de Santana</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">maria@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Feira de Santana</td>
                                 </tr>
-                                <tr style="background-color: #f9f9f9;">
+                                <tr style="background-color: #e8f5e8;">
                                     <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Pedro Costa</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">pedro@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Salvador</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">4</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Ana Lima</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">ana@email.com</td>
-                                    <td style="border: 1px solid #333; padding: 12px;">Vitória da Conquista</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Pedro Costa</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">pedro@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">Salvador</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -148,77 +76,74 @@ INSERT INTO clientes (nome, email, cidade) VALUES
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-lightbulb"></i> Regras Importantes</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-quote-left"></i> Aspas</h4>
-                            <p>Use aspas simples para texto: 'João Silva'</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-hashtag"></i> Números</h4>
-                            <p>Números não precisam de aspas: 25, 100.50</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-list"></i> Ordem</h4>
-                            <p>A ordem dos valores deve seguir a ordem das colunas</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-exclamation"></i> NOT NULL</h4>
-                            <p>Colunas marcadas como NOT NULL são obrigatórias</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="example">
-                    <h3><i class="fas fa-code"></i> Mais Exemplos</h3>
+                    <h3><i class="fas fa-equals"></i> Exemplos de WHERE</h3>
                     <div class="code-block">
-                        <pre><code>-- Inserir apenas nome e cidade (email pode ser NULL)
-INSERT INTO clientes (nome, cidade)
-VALUES ('Carlos Oliveira', 'Camaçari');
+                        <pre><code>-- Clientes de Salvador
+SELECT * FROM clientes WHERE cidade = 'Salvador';
 
--- Inserir com ID específico (se a coluna permitir)
-INSERT INTO clientes (id, nome, email, cidade)
-VALUES (10, 'Lucia Ferreira', 'lucia@email.com', 'Ilhéus');</code></pre>
-                    </div>
-                </div>
+-- Cliente com ID específico
+SELECT * FROM clientes WHERE id = 2;
 
-                <div class="warning">
-                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados</h3>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <h4><i class="fas fa-key"></i> Chave Primária</h4>
-                            <p>IDs são gerados automaticamente (AUTO_INCREMENT)</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-quote-left"></i> Aspas</h4>
-                            <p>Não esqueça as aspas em textos</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-list"></i> Colunas</h4>
-                            <p>Verifique se as colunas existem na tabela</p>
-                        </div>
-                        <div class="info-item">
-                            <h4><i class="fas fa-save"></i> Commit</h4>
-                            <p>As alterações são salvas automaticamente</p>
-                        </div>
+-- Clientes com nome que contém 'João'
+SELECT * FROM clientes WHERE nome LIKE '%João%';</code></pre>
                     </div>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-check-circle"></i> Resumo</h3>
-                    <p>O comando INSERT permite:</p>
+                    <h3><i class="fas fa-sort"></i> ORDER BY - Ordenar Dados</h3>
+                    <p>O comando <strong>ORDER BY</strong> é usado para ordenar os resultados por uma ou mais colunas.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Ordenar por nome (A-Z)
+SELECT * FROM clientes ORDER BY nome;
+
+-- Ordenar por nome (Z-A)
+SELECT * FROM clientes ORDER BY nome DESC;
+
+-- Ordenar por cidade, depois por nome
+SELECT * FROM clientes ORDER BY cidade, nome;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list-ol"></i> LIMIT - Limitar Resultados</h3>
+                    <p>O comando <strong>LIMIT</strong> é usado para limitar o número de registros retornados.</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Mostrar apenas os 2 primeiros clientes
+SELECT * FROM clientes LIMIT 2;
+
+-- Mostrar os 3 primeiros clientes ordenados por nome
+SELECT * FROM clientes ORDER BY nome LIMIT 3;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-table"></i> Exemplo Combinado</h3>
+                    <div class="code-block">
+                        <pre><code>-- Clientes de Salvador, ordenados por nome, limitado a 2
+SELECT nome, email FROM clientes 
+WHERE cidade = 'Salvador' 
+ORDER BY nome 
+LIMIT 2;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
                     <ul>
-                        <li>✅ <strong>Adicionar</strong> novos registros</li>
-                        <li>✅ <strong>Inserir</strong> um registro por vez</li>
-                        <li>✅ <strong>Inserir</strong> múltiplos registros</li>
-                        <li>✅ <strong>Especificar</strong> quais colunas preencher</li>
+                        <li><strong>WHERE:</strong> Filtra registros por condições</li>
+                        <li><strong>ORDER BY:</strong> Ordena os resultados (ASC = crescente, DESC = decrescente)</li>
+                        <li><strong>LIMIT:</strong> Limita o número de registros retornados</li>
+                        <li><strong>Ordem:</strong> WHERE → ORDER BY → LIMIT</li>
+                        <li><strong>Operadores:</strong> =, !=, <, >, <=, >=, LIKE</li>
                     </ul>
                 </div>
             </div>
         </div>
         
         <div class="footer">
-            <p>BEP-012: Introdução a SQL – Comandos Básicos</p>
+            <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
     

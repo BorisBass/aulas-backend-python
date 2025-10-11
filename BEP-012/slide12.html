@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-012: Introdução a SQL – Comandos Básicos - Slide 12</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-012: Introdução a SQL – Comandos Básicos</h1>
+            <p>CRUD Completo em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-laptop-code"></i> Sistema de Cadastro em Python</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-info-circle"></i> O que vamos criar?</h3>
+                    <p><strong>Sistema de Cadastro</strong> com funcionalidades de Create (Criar) e Read (Ler) usando os comandos SQL que já aprendemos.</p>
+                    <p><strong>Prática:</strong> Vamos criar um sistema de cadastro de clientes com menu interativo usando INSERT e SELECT.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cog"></i> 1. Configuração e Funções Auxiliares</h3>
+                    <p><strong>Conceito:</strong> Primeiro vamos configurar o banco e criar funções auxiliares para o sistema.</p>
+                    <p><strong>Prática:</strong> Configuração inicial e funções para conectar ao banco e exibir menus.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 1: Configuração</h4>
+                    <div class="code-container">
+                        <pre><code>import sqlite3
+import os
+
+def conectar_banco():
+    """Conecta ao banco de dados"""
+    try:
+        conn = sqlite3.connect('clientes.db')
+        cursor = conn.cursor()
+        
+        # Criar tabela se não existir
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS clientes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nome TEXT NOT NULL,
+                email TEXT UNIQUE,
+                telefone TEXT,
+                cidade TEXT,
+                data_cadastro DATE DEFAULT CURRENT_DATE
+            )
+        ''')
+        conn.commit()
+        print("✅ Banco de dados conectado e tabela criada!")
+        return conn, cursor
+    except sqlite3.Error as e:
+        print(f"❌ Erro ao conectar: {e}")
+        return None, None
+
+def exibir_menu():
+    """Exibe o menu principal"""
+    print("\n" + "="*50)
+    print("🏪 SISTEMA DE CADASTRO DE CLIENTES")
+    print("="*50)
+    print("1. 📝 Cadastrar novo cliente")
+    print("2. 📋 Listar todos os clientes")
+    print("3. 🔍 Buscar cliente por nome")
+    print("4. 📊 Estatísticas")
+    print("0. 🚪 Sair")
+    print("="*50)</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-plus"></i> 2. CREATE - Cadastrar Cliente</h3>
+                    <p><strong>Conceito:</strong> Função para inserir novos clientes no banco de dados.</p>
+                    <p><strong>Prática:</strong> Validação de dados e inserção com tratamento de erros.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 2: Cadastrar Cliente</h4>
+                    <div class="code-container">
+                        <pre><code>def cadastrar_cliente(cursor, conn):
+    """Cadastra um novo cliente"""
+    try:
+        print("\n📝 CADASTRO DE NOVO CLIENTE")
+        print("-" * 30)
+        
+        nome = input("Nome completo: ").strip()
+        if not nome:
+            print("❌ Nome é obrigatório!")
+            return
+        
+        email = input("Email: ").strip()
+        telefone = input("Telefone: ").strip()
+        cidade = input("Cidade: ").strip()
+        
+        # Inserir no banco
+        cursor.execute('''
+            INSERT INTO clientes (nome, email, telefone, cidade)
+            VALUES (?, ?, ?, ?)
+        ''', (nome, email, telefone, cidade))
+        
+        conn.commit()
+        print(f"✅ Cliente '{nome}' cadastrado com sucesso!")
+        
+    except sqlite3.IntegrityError:
+        print("❌ Erro: Email já cadastrado!")
+    except sqlite3.Error as e:
+        print(f"❌ Erro no banco: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> 3. READ - Listar Clientes</h3>
+                    <p><strong>Conceito:</strong> Função para exibir todos os clientes cadastrados.</p>
+                    <p><strong>Prática:</strong> Consulta SELECT com formatação de saída.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 3: Listar Clientes</h4>
+                    <div class="code-container">
+                        <pre><code>def listar_clientes(cursor):
+    """Lista todos os clientes"""
+    try:
+        cursor.execute("SELECT * FROM clientes ORDER BY nome")
+        clientes = cursor.fetchall()
+        
+        if not clientes:
+            print("📭 Nenhum cliente cadastrado!")
+            return
+        
+        print(f"\n📋 LISTA DE CLIENTES ({len(clientes)} cadastrados)")
+        print("-" * 80)
+        print(f"{'ID':<3} {'Nome':<25} {'Email':<25} {'Cidade':<15} {'Data'}")
+        print("-" * 80)
+        
+        for cliente in clientes:
+            id_cliente, nome, email, telefone, cidade, data = cliente
+            email_display = email if email else "Não informado"
+            cidade_display = cidade if cidade else "Não informado"
+            print(f"{id_cliente:<3} {nome:<25} {email_display:<25} {cidade_display:<15} {data}")
+            
+    except sqlite3.Error as e:
+        print(f"❌ Erro ao listar clientes: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-search"></i> 4. READ - Buscar Cliente</h3>
+                    <p><strong>Conceito:</strong> Função para buscar clientes por nome usando LIKE.</p>
+                    <p><strong>Prática:</strong> Consulta com filtro e tratamento de resultados vazios.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 4: Buscar Cliente</h4>
+                    <div class="code-container">
+                        <pre><code>def buscar_cliente(cursor):
+    """Busca cliente por nome"""
+    try:
+        nome_busca = input("\n🔍 Digite o nome para buscar: ").strip()
+        if not nome_busca:
+            print("❌ Digite um nome para buscar!")
+            return
+        
+        cursor.execute("SELECT * FROM clientes WHERE nome LIKE ? ORDER BY nome", 
+                      (f"%{nome_busca}%",))
+        clientes = cursor.fetchall()
+        
+        if not clientes:
+            print(f"📭 Nenhum cliente encontrado com '{nome_busca}'")
+            return
+        
+        print(f"\n🔍 RESULTADO DA BUSCA por '{nome_busca}' ({len(clientes)} encontrados)")
+        print("-" * 80)
+        print(f"{'ID':<3} {'Nome':<25} {'Email':<25} {'Cidade':<15} {'Data'}")
+        print("-" * 80)
+        
+        for cliente in clientes:
+            id_cliente, nome, email, telefone, cidade, data = cliente
+            email_display = email if email else "Não informado"
+            cidade_display = cidade if cidade else "Não informado"
+            print(f"{id_cliente:<3} {nome:<25} {email_display:<25} {cidade_display:<15} {data}")
+            
+    except sqlite3.Error as e:
+        print(f"❌ Erro ao buscar cliente: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-chart-bar"></i> 5. Estatísticas</h3>
+                    <p><strong>Conceito:</strong> Função para mostrar estatísticas do banco de dados.</p>
+                    <p><strong>Prática:</strong> Consultas agregadas com COUNT e GROUP BY.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 5: Estatísticas</h4>
+                    <div class="code-container">
+                        <pre><code>def mostrar_estatisticas(cursor):
+    """Mostra estatísticas do banco"""
+    try:
+        print("\n📊 ESTATÍSTICAS DO SISTEMA")
+        print("-" * 30)
+        
+        # Total de clientes
+        cursor.execute("SELECT COUNT(*) FROM clientes")
+        total = cursor.fetchone()[0]
+        print(f"👥 Total de clientes: {total}")
+        
+        # Clientes por cidade
+        cursor.execute('''
+            SELECT cidade, COUNT(*) as quantidade 
+            FROM clientes 
+            WHERE cidade IS NOT NULL AND cidade != ''
+            GROUP BY cidade 
+            ORDER BY quantidade DESC
+        ''')
+        cidades = cursor.fetchall()
+        
+        if cidades:
+            print(f"\n🏙️ Clientes por cidade:")
+            for cidade, qtd in cidades:
+                print(f"  {cidade}: {qtd} cliente(s)")
+        
+        # Clientes cadastrados hoje
+        cursor.execute("SELECT COUNT(*) FROM clientes WHERE data_cadastro = DATE('now')")
+        hoje = cursor.fetchone()[0]
+        print(f"\n📅 Cadastrados hoje: {hoje}")
+        
+    except sqlite3.Error as e:
+        print(f"❌ Erro ao gerar estatísticas: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> 6. Programa Principal</h3>
+                    <p><strong>Conceito:</strong> Loop principal que executa o menu e chama as funções.</p>
+                    <p><strong>Prática:</strong> Menu interativo com tratamento de opções inválidas.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 6: Programa Principal</h4>
+                    <div class="code-container">
+                        <pre><code>def main():
+    """Função principal do programa"""
+    print("🚀 Iniciando Sistema de Cadastro de Clientes...")
+    
+    # Conectar ao banco
+    conn, cursor = conectar_banco()
+    if not conn:
+        print("❌ Não foi possível conectar ao banco. Encerrando...")
+        return
+    
+    try:
+        while True:
+            exibir_menu()
+            opcao = input("👉 Escolha uma opção: ").strip()
+            
+            if opcao == '1':
+                cadastrar_cliente(cursor, conn)
+            elif opcao == '2':
+                listar_clientes(cursor)
+            elif opcao == '3':
+                buscar_cliente(cursor)
+            elif opcao == '4':
+                mostrar_estatisticas(cursor)
+            elif opcao == '0':
+                print("\n👋 Obrigado por usar o sistema! Até logo!")
+                break
+            else:
+                print("❌ Opção inválida! Tente novamente.")
+            
+            input("\n⏸️ Pressione Enter para continuar...")
+    
+    except KeyboardInterrupt:
+        print("\n\n👋 Programa interrompido pelo usuário.")
+    except Exception as e:
+        print(f"\n❌ Erro inesperado: {e}")
+    finally:
+        # Sempre fechar a conexão
+        if conn:
+            conn.close()
+            print("🔒 Conexão com banco fechada.")
+
+# Executar o programa
+if __name__ == "__main__":
+    main()</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Como Usar</h3>
+                    <ol>
+                        <li><strong>Execute a célula 1:</strong> Configuração e funções auxiliares</li>
+                        <li><strong>Execute as células 2-5:</strong> Definição das funções de cadastro e consulta</li>
+                        <li><strong>Execute a célula 6:</strong> Inicia o programa principal</li>
+                        <li><strong>Use o menu:</strong> Escolha as opções para testar o sistema</li>
+                        <li><strong>Teste as funcionalidades:</strong> Cadastrar, listar, buscar e ver estatísticas</li>
+                    </ol>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Conceitos Aplicados</h3>
+                    <ul>
+                        <li><strong>CREATE e READ:</strong> INSERT para cadastrar e SELECT para consultar</li>
+                        <li><strong>Tratamento de Erros:</strong> Try/except para SQLite e exceções gerais</li>
+                        <li><strong>Validação de Dados:</strong> Verificação de entrada do usuário</li>
+                        <li><strong>Menu Interativo:</strong> Loop com opções do usuário</li>
+                        <li><strong>Consultas SQL:</strong> SELECT, INSERT, COUNT, GROUP BY, LIKE</li>
+                        <li><strong>Transações:</strong> Commit para salvar alterações</li>
+                        <li><strong>Programação Estruturada:</strong> Funções organizadas e reutilizáveis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
