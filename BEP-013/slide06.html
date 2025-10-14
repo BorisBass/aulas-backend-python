@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-013: Comandos de Atualização e Remoção - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+            <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-exclamation-triangle"></i> Cuidados com UPDATE e DELETE</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Por que ter cuidado?</h3>
+                    <p>Os comandos UPDATE e DELETE são <strong>irreversíveis</strong> na maioria dos casos. Uma operação mal executada pode resultar em perda permanente de dados importantes.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-skull-crossbones"></i> Principais Riscos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-times"></i> Sem WHERE</h4>
+                            <p>Altera/remove TODOS os registros</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-bug"></i> WHERE Incorreto</h4>
+                            <p>Altera/remove registros errados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-link"></i> Chaves Estrangeiras</h4>
+                            <p>Pode quebrar relacionamentos</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-history"></i> Sem Backup</h4>
+                            <p>Dados perdidos para sempre</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-shield-alt"></i> Regras de Ouro</h3>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- REGRA 1: SEMPRE use WHERE</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes <span class="keyword">SET</span> email = <span class="string">'novo@email.com'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> id = <span class="number">1</span>; <span class="comment">-- ✅ CORRETO</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- ❌ PERIGOSO: UPDATE clientes SET email = 'novo@email.com';</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-eye"></i> Verificação Dupla</h3>
+                    <p><strong>SEMPRE teste com SELECT antes de UPDATE/DELETE:</strong></p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- 1. Verificar quantos registros serão afetados</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cidade = <span class="string">'Salvador'</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 2. Ver os registros específicos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> id, nome, cidade <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cidade = <span class="string">'Salvador'</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 3. Se estiver correto, executar UPDATE</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SET</span> categoria = <span class="string">'VIP'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cidade = <span class="string">'Salvador'</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-save"></i> Backup e Transações</h3>
+                    <p>Para operações críticas, use transações:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Iniciar transação</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">BEGIN</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Executar operação</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes <span class="keyword">SET</span> status = <span class="string">'inativo'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> ultima_compra < <span class="string">'2020-01-01'</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Se estiver tudo OK, confirmar</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">COMMIT</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Se houver problema, desfazer</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">ROLLBACK</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-link"></i> Cuidado com Chaves Estrangeiras</h3>
+                    <p>Ao deletar registros, verifique se não há dependências:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Verificar se cliente tem pedidos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> pedidos
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cliente_id = <span class="number">5</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Se retornar 0, pode deletar o cliente</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> clientes <span class="keyword">WHERE</span> id = <span class="number">5</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-info-circle"></i> Dicas Importantes</h3>
+                    <ul>
+                        <li><strong>Teste em ambiente de desenvolvimento</strong> antes de executar em produção</li>
+                        <li><strong>Faça backup</strong> antes de operações em massa</li>
+                        <li><strong>Use LIMIT</strong> em operações grandes para processar em lotes</li>
+                        <li><strong>Documente</strong> as operações importantes</li>
+                        <li><strong>Tenha um plano de rollback</strong> sempre</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

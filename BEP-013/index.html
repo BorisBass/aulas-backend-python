@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEP-013: Comandos de Atualização e Remoção</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../index-bep.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+      <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+    </div>
+
+    <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
+      <a href="../index.html" style="background:#2D3748;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;">🏠 Índice geral</a>
+    </div>
+
+    <div class="content">
+      <div class="objectives-section">
+        <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
+        <ul>
+          <li>Entender como atualizar registros existentes com UPDATE.</li>
+          <li>Dominar a cláusula WHERE para seleção precisa de registros.</li>
+          <li>Aprender a remover dados com o comando DELETE.</li>
+          <li>Conhecer cuidados e boas práticas para evitar perda de dados.</li>
+          <li>Completar exercícios da BEP-012 com UPDATE e DELETE.</li>
+          <li>Praticar operações seguras de modificação de dados.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-presentation"></i> Slides da Aula</h2>
+        <div class="slides-grid">
+          <div class="slide-card" onclick="window.open('slide01.html','_blank')">
+            <div class="slide-number">01</div>
+            <div class="slide-title">Introdução ao UPDATE e DELETE</div>
+            <div class="slide-description">Conceitos básicos de modificação de dados</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide02.html','_blank')">
+            <div class="slide-number">02</div>
+            <div class="slide-title">Comando UPDATE</div>
+            <div class="slide-description">Sintaxe e exemplos de atualização</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide03.html','_blank')">
+            <div class="slide-number">03</div>
+            <div class="slide-title">Cláusula WHERE em UPDATE</div>
+            <div class="slide-description">Seleção precisa de registros para atualizar</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide04.html','_blank')">
+            <div class="slide-number">04</div>
+            <div class="slide-title">Comando DELETE</div>
+            <div class="slide-description">Sintaxe e exemplos de remoção</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide05.html','_blank')">
+            <div class="slide-number">05</div>
+            <div class="slide-title">Cláusula WHERE em DELETE</div>
+            <div class="slide-description">Seleção segura de registros para remover</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide06.html','_blank')">
+            <div class="slide-number">06</div>
+            <div class="slide-title">Cuidados com UPDATE e DELETE</div>
+            <div class="slide-description">Prevenção de perda de dados</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide07.html','_blank')">
+            <div class="slide-number">07</div>
+            <div class="slide-title">Boas Práticas</div>
+            <div class="slide-description">Dicas importantes para operações seguras</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide08.html','_blank')">
+            <div class="slide-number">08</div>
+            <div class="slide-title">Exercícios: UPDATE</div>
+            <div class="slide-description">Prática com atualização de dados</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide09.html','_blank')">
+            <div class="slide-number">09</div>
+            <div class="slide-title">Exercícios: DELETE</div>
+            <div class="slide-description">Prática com remoção de dados</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide10.html','_blank')">
+            <div class="slide-number">10</div>
+            <div class="slide-title">Exercícios Combinados</div>
+            <div class="slide-description">UPDATE, DELETE e SELECT juntos</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide11.html','_blank')">
+            <div class="slide-number">11</div>
+            <div class="slide-title">Prática no Google Colab</div>
+            <div class="slide-description">Código completo para copiar e colar</div>
+          </div>
+          <div class="slide-card" onclick="window.open('slide12.html','_blank')">
+            <div class="slide-number">12</div>
+            <div class="slide-title">Sistema CRUD Completo</div>
+            <div class="slide-description">CREATE, READ, UPDATE, DELETE em Python</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><i class="fas fa-file-alt"></i> Arquivos Complementares</h2>
+        <div class="files-grid">
+          <div class="file-card" onclick="window.open('PRATICA_COLAB.ipynb','_blank')">
+            <i class="fas fa-code"></i>
+            <h3>Prática no Colab</h3>
+            <p>Notebook com exercícios práticos</p>
+          </div>
+          <div class="file-card" onclick="window.open('EXERCICIOS_COMPLEMENTARES.md','_blank')">
+            <i class="fas fa-tasks"></i>
+            <h3>Exercícios Complementares</h3>
+            <p>Lista de exercícios para BEP-012</p>
+          </div>
+          <div class="file-card" onclick="window.open('BOAS_PRATICAS_UPDATE_DELETE.md','_blank')">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Boas Práticas</h3>
+            <p>Guia de segurança para UPDATE e DELETE</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <p>&copy; 2025 - Conteúdo Educacional</p>
+      <p>IFBA CEPEDI</p>
+      <img src="../Rodape.png" alt="Rodapé">
+    </div>
+  </div>
+</body>
+</html>

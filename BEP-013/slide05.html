@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-013: Comandos de Atualização e Remoção - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+            <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-filter"></i> Cláusula WHERE em DELETE</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> WHERE é CRÍTICO no DELETE</h3>
+                    <p>No comando DELETE, a cláusula WHERE é ainda mais importante que no UPDATE. Sem ela, você pode perder TODOS os dados da tabela de uma vez!</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-search"></i> Condições Comuns em DELETE</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-id-card"></i> Por ID</h4>
+                            <p>WHERE id = 5</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar"></i> Por Data</h4>
+                            <p>WHERE data < '2020-01-01'</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-ban"></i> Por NULL</h4>
+                            <p>WHERE campo IS NULL</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Por Lista</h4>
+                            <p>WHERE id IN (1,2,3)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Exemplos Práticos</h3>
+                    
+                    <h4><i class="fas fa-user-times"></i> Remover por ID específico:</h4>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Remover cliente específico</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> id = <span class="number">15</span>;
+                        </div>
+                    </div>
+
+                    <h4><i class="fas fa-calendar-times"></i> Remover registros antigos:</h4>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Remover logs antigos (mais de 1 ano)</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> logs
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> data_log < <span class="string">'2023-01-01'</span>;
+                        </div>
+                    </div>
+
+                    <h4><i class="fas fa-ban"></i> Remover registros inválidos:</h4>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Remover produtos sem preço</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> produtos
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> preco <span class="keyword">IS NULL</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">OR</span> preco <= <span class="number">0</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cogs"></i> Condições Múltiplas</h3>
+                    <p>Combine condições para ser mais específico:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Remover pedidos cancelados de 2020</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> pedidos
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> status = <span class="string">'cancelado'</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;<span class="keyword">AND</span> data_pedido < <span class="string">'2021-01-01'</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-shield-alt"></i> Processo Seguro de DELETE</h3>
+                    <p><strong>SEMPRE siga estes passos:</strong></p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-eye"></i> 1. Verificar</h4>
+                            <p>SELECT para ver o que será deletado</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-save"></i> 2. Backup</h4>
+                            <p>Fazer backup se necessário</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-trash"></i> 3. Executar</h4>
+                            <p>DELETE com WHERE específico</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> 4. Confirmar</h4>
+                            <p>Verificar se funcionou corretamente</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Exemplo de Processo Seguro</h3>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- PASSO 1: Verificar o que será deletado</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> telefone <span class="keyword">IS NULL</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Resultado: 3 registros serão deletados</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- PASSO 2: Ver os registros específicos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> id, nome <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> telefone <span class="keyword">IS NULL</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- PASSO 3: Executar DELETE</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> telefone <span class="keyword">IS NULL</span>;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

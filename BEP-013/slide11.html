@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-013: Comandos de Atualização e Remoção - Slide 11</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+            <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-code"></i> Prática no Google Colab</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> O que vamos praticar?</h3>
+                    <p>Vamos criar um ambiente completo para praticar UPDATE e DELETE com SQLite3 no Google Colab. Você poderá copiar e colar o código diretamente.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-database"></i> Configuração Inicial</h3>
+                    <p>Primeiro, vamos configurar o ambiente e criar as tabelas de exemplo:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># Configuração inicial</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">import</span> sqlite3
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Conectar ao banco em memória</span>
+                        </div>
+                        <div class="code-line">
+                            conn = sqlite3.connect(<span class="string">':memory:'</span>)
+                        </div>
+                        <div class="code-line">
+                            cursor = conn.cursor()
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-table"></i> Criar Tabelas de Exemplo</h3>
+                    <p>Vamos criar tabelas com dados realistas para praticar:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># Criar tabela de clientes</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">'''</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">CREATE TABLE clientes (</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    id INTEGER PRIMARY KEY,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    nome TEXT NOT NULL,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    email TEXT UNIQUE,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    telefone TEXT,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    cidade TEXT,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    idade INTEGER,</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    categoria TEXT DEFAULT 'Normal',</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">    data_cadastro DATE DEFAULT CURRENT_DATE</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="string">)'''</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-plus"></i> Inserir Dados de Exemplo</h3>
+                    <p>Vamos inserir dados para praticar UPDATE e DELETE:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># Inserir clientes de exemplo</span>
+                        </div>
+                        <div class="code-line">
+                            clientes_exemplo = [
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">1</span>, <span class="string">'João Silva'</span>, <span class="string">'joao@email.com'</span>, <span class="string">'(71) 99999-1111'</span>, <span class="string">'Salvador'</span>, <span class="number">30</span>, <span class="string">'Normal'</span>),
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">2</span>, <span class="string">'Maria Santos'</span>, <span class="string">'maria@email.com'</span>, <span class="string">'(71) 99999-2222'</span>, <span class="string">'Feira de Santana'</span>, <span class="number">25</span>, <span class="string">'Premium'</span>),
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">3</span>, <span class="string">'Pedro Costa'</span>, <span class="string">'pedro@email.com'</span>, <span class="keyword">None</span>, <span class="string">'Salvador'</span>, <span class="number">35</span>, <span class="string">'Normal'</span>),
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">4</span>, <span class="string">'Ana Oliveira'</span>, <span class="string">'ana@email.com'</span>, <span class="string">'(71) 99999-4444'</span>, <span class="string">'Camaçari'</span>, <span class="number">28</span>, <span class="string">'VIP'</span>),
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">5</span>, <span class="string">'Carlos Lima'</span>, <span class="string">'carlos@email.com'</span>, <span class="string">'(71) 99999-5555'</span>, <span class="string">'Salvador'</span>, <span class="number">22</span>, <span class="string">'Normal'</span>)
+                        </div>
+                        <div class="code-line">
+                            ]
+                        </div>
+                        <div class="code-line">
+                            cursor.executemany(<span class="string">'INSERT INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?)'</span>, clientes_exemplo)
+                        </div>
+                        <div class="code-line">
+                            conn.commit()
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-edit"></i> Praticar UPDATE</h3>
+                    <p>Vamos praticar diferentes tipos de UPDATE:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># 1. UPDATE simples - atualizar telefone</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Verificar antes</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT id, nome, telefone FROM clientes WHERE id = 3"</span>)
+                        </div>
+                        <div class="code-line">
+                            print(<span class="string">"Antes:"</span>, cursor.fetchone())
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Executar UPDATE</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"UPDATE clientes SET telefone = '(71) 99999-3333' WHERE id = 3"</span>)
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Verificar depois</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT id, nome, telefone FROM clientes WHERE id = 3"</span>)
+                        </div>
+                        <div class="code-line">
+                            print(<span class="string">"Depois:"</span>, cursor.fetchone())
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cogs"></i> UPDATE com Múltiplas Condições</h3>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># 2. UPDATE com múltiplas condições</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Atualizar categoria de clientes de Salvador com mais de 25 anos</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT COUNT(*) FROM clientes WHERE cidade = 'Salvador' AND idade > 25"</span>)
+                        </div>
+                        <div class="code-line">
+                            print(<span class="string">"Clientes que serão atualizados:"</span>, cursor.fetchone()[<span class="number">0</span>])
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"UPDATE clientes SET categoria = 'VIP' WHERE cidade = 'Salvador' AND idade > 25"</span>)
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Verificar resultado</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT nome, cidade, idade, categoria FROM clientes WHERE cidade = 'Salvador'"</span>)
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">for</span> row <span class="keyword">in</span> cursor.fetchall():
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;print(row)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-trash"></i> Praticar DELETE</h3>
+                    <p>Vamos praticar DELETE de forma segura:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># 3. DELETE seguro - remover clientes sem telefone</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Verificar quantos serão removidos</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT COUNT(*) FROM clientes WHERE telefone IS NULL"</span>)
+                        </div>
+                        <div class="code-line">
+                            print(<span class="string">"Clientes sem telefone:"</span>, cursor.fetchone()[<span class="number">0</span>])
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Ver quais serão removidos</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT id, nome FROM clientes WHERE telefone IS NULL"</span>)
+                        </div>
+                        <div class="code-line">
+                            print(<span class="string">"Serão removidos:"</span>, cursor.fetchall())
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Executar DELETE</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"DELETE FROM clientes WHERE telefone IS NULL"</span>)
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Verificar resultado</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT COUNT(*) FROM clientes"</span>)
+                        </div>
+                        <div class="code-line">
+                            print(<span class="string">"Clientes restantes:"</span>, cursor.fetchone()[<span class="number">0</span>])
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-shield-alt"></i> Transações Seguras</h3>
+                    <p>Vamos praticar operações com transações:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># 4. Operação com transação</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">try</span>:
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(<span class="string">"BEGIN"</span>)
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Atualizar idade de todos os clientes</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(<span class="string">"UPDATE clientes SET idade = idade + 1"</span>)
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Verificar se está correto</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(<span class="string">"SELECT nome, idade FROM clientes LIMIT 3"</span>)
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Idades atualizadas:"</span>, cursor.fetchall())
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Confirmar transação</span>
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(<span class="string">"COMMIT"</span>)
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Transação confirmada!"</span>)
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">except</span> <span class="keyword">Exception</span> <span class="keyword">as</span> e:
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cursor.execute(<span class="string">"ROLLBACK"</span>)
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f"Erro: {e}. Transação desfeita."</span>)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-chart-bar"></i> Visualizar Resultados</h3>
+                    <p>Vamos ver os resultados finais:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment"># Visualizar todos os clientes</span>
+                        </div>
+                        <div class="code-line">
+                            cursor.execute(<span class="string">"SELECT * FROM clientes"</span>)
+                        </div>
+                        <div class="code-line">
+                            df = pd.DataFrame(cursor.fetchall(), columns=[<span class="string">'ID'</span>, <span class="string">'Nome'</span>, <span class="string">'Email'</span>, <span class="string">'Telefone'</span>, <span class="string">'Cidade'</span>, <span class="string">'Idade'</span>, <span class="string">'Categoria'</span>, <span class="string">'Data_Cadastro'</span>])
+                        </div>
+                        <div class="code-line">
+                            print(df)
+                        </div>
+                        <div class="code-line">
+                            <span class="comment"># Fechar conexão</span>
+                        </div>
+                        <div class="code-line">
+                            conn.close()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

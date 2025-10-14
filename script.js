@@ -216,6 +216,10 @@ function getTotalSlides() {
     const currentPath = window.location.pathname;
     const currentUrl = window.location.href;
     
+    console.log('=== DEBUG getTotalSlides ===');
+    console.log('currentPath:', currentPath);
+    console.log('currentUrl:', currentUrl);
+    
     // Mapear cada aula para seu número de slides
     const slideCounts = {
         'BEP-001': 12,
@@ -229,7 +233,8 @@ function getTotalSlides() {
         'BEP-009': 15,
         'BEP-010': 7,
         'BEP-011': 10,
-        'BEP-012': 10
+        'BEP-012': 12,
+        'BEP-013': 12
     };
     
     // Detectar a pasta atual usando múltiplos métodos
@@ -246,6 +251,18 @@ function getTotalSlides() {
         if (title.includes(folder)) {
             console.log(`Detectada pasta pelo título: ${folder}, slides: ${count}`);
             return count;
+        }
+    }
+    
+    // Tentar detectar pelo header da página
+    const header = document.querySelector('.header h1');
+    if (header) {
+        const headerText = header.textContent;
+        for (const [folder, count] of Object.entries(slideCounts)) {
+            if (headerText.includes(folder)) {
+                console.log(`Detectada pasta pelo header: ${folder}, slides: ${count}`);
+                return count;
+            }
         }
     }
     

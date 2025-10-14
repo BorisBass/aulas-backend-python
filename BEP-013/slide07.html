@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-013: Comandos de Atualização e Remoção - Slide 07</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+            <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-star"></i> Boas Práticas</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Por que seguir boas práticas?</h3>
+                    <p>As boas práticas em UPDATE e DELETE são essenciais para manter a integridade dos dados e evitar perdas acidentais. Elas garantem operações seguras e previsíveis.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Checklist de Segurança</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-filter"></i> WHERE Obrigatório</h4>
+                            <p>Sempre especificar quais registros</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-eye"></i> Verificar Primeiro</h4>
+                            <p>SELECT antes de UPDATE/DELETE</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-save"></i> Backup</h4>
+                            <p>Fazer backup antes de operações críticas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cogs"></i> Transações</h4>
+                            <p>Usar BEGIN/COMMIT/ROLLBACK</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-code"></i> Padrões de Código</h3>
+                    
+                    <h4><i class="fas fa-edit"></i> UPDATE Padrão:</h4>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- 1. Verificar registros que serão afetados</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> id, nome, email <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cidade = <span class="string">'Salvador'</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 2. Executar UPDATE</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SET</span> categoria = <span class="string">'VIP'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cidade = <span class="string">'Salvador'</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 3. Verificar resultado</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> categoria = <span class="string">'VIP'</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-trash"></i> DELETE Padrão:</h3>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- 1. Contar registros que serão deletados</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> logs
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> data_log < <span class="string">'2023-01-01'</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 2. Ver alguns exemplos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> logs
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> data_log < <span class="string">'2023-01-01'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">LIMIT</span> <span class="number">5</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 3. Executar DELETE</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> logs
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> data_log < <span class="string">'2023-01-01'</span>;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cogs"></i> Operações em Lote</h3>
+                    <p>Para grandes volumes de dados, processe em lotes:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Processar 1000 registros por vez</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> logs
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> data_log < <span class="string">'2023-01-01'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">LIMIT</span> <span class="number">1000</span>;
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Repetir até não haver mais registros</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-shield-alt"></i> Validações Importantes</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> Verificar Dependências</h4>
+                            <p>Antes de deletar, verificar se há registros relacionados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar"></i> Validar Datas</h4>
+                            <p>Confirmar se as datas estão corretas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-id-card"></i> Confirmar IDs</h4>
+                            <p>Verificar se os IDs existem na tabela</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-link"></i> Testar Relacionamentos</h4>
+                            <p>Verificar integridade referencial</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-info-circle"></i> Dicas Finais</h3>
+                    <ul>
+                        <li><strong>Use nomes descritivos</strong> para variáveis e comentários</li>
+                        <li><strong>Teste em ambiente de desenvolvimento</strong> primeiro</li>
+                        <li><strong>Documente operações importantes</strong> para referência futura</li>
+                        <li><strong>Monitore performance</strong> em operações grandes</li>
+                        <li><strong>Tenha sempre um plano B</strong> para recuperação</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEP-012: SQL – Slide 03</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1><i class="fas fa-project-diagram"></i> Esquema de Exemplo</h1>
+    <p>Tabelas clientes e pedidos</p>
+  </div>
+
+  <div class="nav"></div>
+
+  <div class="content">
+    <div class="slide active" id="slide03">
+      <div class="info">
+        <h3><i class="fas fa-table"></i> Modelagem mínima</h3>
+        <pre><code class="language-sql">CREATE TABLE clientes (
+  id INTEGER PRIMARY KEY,
+  nome TEXT NOT NULL,
+  email TEXT UNIQUE
+);
+
+CREATE TABLE pedidos (
+  id INTEGER PRIMARY KEY,
+  cliente_id INTEGER NOT NULL,
+  valor_total REAL NOT NULL,
+  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id)
+);
+</code></pre>
+      </div>
+
+      <div class="example">
+        <h3><i class="fas fa-info-circle"></i> Observações</h3>
+        <ul>
+          <li>PKs inteiras simplificam joins e índices.</li>
+          <li>FOREIGN KEY garante integridade referencial.</li>
+          <li>DEFAULTs ajudam na consistência (timestamps, flags).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><p>BEP-012</p></div>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

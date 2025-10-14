@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEP-012: SQL – Slide 02</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1><i class="fas fa-database"></i> DDL: CREATE, ALTER, DROP</h1>
+    <p>Definição e evolução do esquema relacional</p>
+  </div>
+
+  <div class="nav"></div>
+
+  <div class="content">
+    <div class="slide active" id="slide02">
+      <div class="info">
+        <h3><i class="fas fa-plus-square"></i> CREATE</h3>
+        <pre><code class="language-sql">CREATE TABLE clientes (
+  id INTEGER PRIMARY KEY,
+  nome TEXT NOT NULL,
+  email TEXT UNIQUE,
+  criado_em DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+      </div>
+
+      <div class="info">
+        <h3><i class="fas fa-exchange-alt"></i> ALTER</h3>
+        <pre><code class="language-sql">-- Adicionando coluna
+ALTER TABLE clientes ADD COLUMN ativo INTEGER DEFAULT 1;
+
+-- Renomeando tabela (SQLite 3.25+)
+ALTER TABLE clientes RENAME TO clientes_v2;
+</code></pre>
+      </div>
+
+      <div class="warning">
+        <h3><i class="fas fa-trash"></i> DROP</h3>
+        <pre><code class="language-sql">DROP TABLE IF EXISTS clientes_v2;</code></pre>
+        <p><strong>Atenção:</strong> DROP é destrutivo. Sempre faça backup e confirme escopo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><p>BEP-012</p></div>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

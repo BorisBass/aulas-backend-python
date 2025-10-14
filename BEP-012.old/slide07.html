@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BEP-012: SQL – Slide 07</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1><i class="fas fa-terminal"></i> Prática com SQLite</h1>
+    <p>CLI, .schema, headers e execução</p>
+  </div>
+
+  <div class="nav"></div>
+
+  <div class="content">
+    <div class="slide active" id="slide07">
+      <div class="info">
+        <h3><i class="fas fa-plug"></i> Iniciando</h3>
+        <pre><code class="language-bash">sqlite3 aula.db
+.mode box
+.headers on
+.read setup.sql   -- opcional: arquivo com CREATE/INSERT</code></pre>
+      </div>
+
+      <div class="info">
+        <h3><i class="fas fa-code"></i> Consultando</h3>
+        <pre><code class="language-sql">.schema
+SELECT id, nome FROM clientes LIMIT 10;
+SELECT * FROM pedidos ORDER BY criado_em DESC LIMIT 5;</code></pre>
+      </div>
+
+      <div class="example">
+        <h3><i class="fas fa-eye"></i> Dica</h3>
+        <p>Use <code>.mode column</code> ou <code>.mode box</code> para legibilidade. <code>.tables</code> lista as tabelas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><p>BEP-012</p></div>
+</div>
+<script src="../script.js"></script>
+</body>
+</html>

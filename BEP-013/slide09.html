@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-013: Comandos de Atualização e Remoção - Slide 09</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+            <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-trash"></i> Exercícios: DELETE</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Contexto dos Exercícios</h3>
+                    <p>Vamos usar as tabelas <strong>clientes</strong> e <strong>pedidos</strong>:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="keyword">CREATE TABLE</span> pedidos (
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;id <span class="keyword">INTEGER PRIMARY KEY</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;cliente_id <span class="keyword">INTEGER</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;produto <span class="keyword">TEXT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;valor <span class="keyword">REAL</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;data_pedido <span class="keyword">DATE</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;status <span class="keyword">TEXT</span>
+                        </div>
+                        <div class="code-line">
+                            );
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Exercício 1: Remoção por ID</h3>
+                    <p><strong>Objetivo:</strong> Remover o cliente com ID 5 (verificar se não tem pedidos primeiro)</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Seu código aqui:</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 1. Verificar se cliente tem pedidos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 2. Se não tiver, deletar cliente</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- 3. Verificar resultado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Exercício 2: Remoção por Condição</h3>
+                    <p><strong>Objetivo:</strong> Remover todos os clientes sem telefone</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Condição: telefone IS NULL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Exercício 3: Remoção por Data</h3>
+                    <p><strong>Objetivo:</strong> Remover pedidos antigos (anteriores a 2020)</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Condição: data_pedido < '2020-01-01'</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Exercício 4: Remoção por Status</h3>
+                    <p><strong>Objetivo:</strong> Remover todos os pedidos cancelados</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Condição: status = 'cancelado'</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Exercício 5: Remoção com Múltiplas Condições</h3>
+                    <p><strong>Objetivo:</strong> Remover pedidos cancelados de 2019</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Condições:</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- - status = 'cancelado'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- - data_pedido BETWEEN '2019-01-01' AND '2019-12-31'</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Exercício 6: Remoção Segura em Lote</h3>
+                    <p><strong>Objetivo:</strong> Remover logs antigos processando 100 por vez</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Usar LIMIT para processar em lotes</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="comment">-- Repetir até não haver mais registros</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check"></i> Soluções dos Exercícios</h3>
+                    <details>
+                        <summary>Clique para ver as soluções</summary>
+                        <div class="code-block">
+                            <div class="code-line">
+                                <span class="comment">-- Exercício 1:</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> cliente_id = <span class="number">5</span>;
+                            </div>
+                            <div class="code-line">
+                                <span class="keyword">DELETE FROM</span> clientes <span class="keyword">WHERE</span> id = <span class="number">5</span>;
+                            </div>
+                            <div class="code-line">
+                                <span class="comment">-- Exercício 2:</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> telefone <span class="keyword">IS NULL</span>;
+                            </div>
+                            <div class="code-line">
+                                <span class="keyword">DELETE FROM</span> clientes <span class="keyword">WHERE</span> telefone <span class="keyword">IS NULL</span>;
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
