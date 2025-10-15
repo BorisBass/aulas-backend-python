@@ -123,14 +123,19 @@ body {
     margin: 15px 0;
     font-family: 'Courier New', monospace;
     font-size: 14px;
-    line-height: 1.4;
+    line-height: 1.2;
     overflow-x: auto;
     border-left: 4px solid #4B8BBE;
-    white-space: pre;
     tab-size: 4;
     -moz-tab-size: 4;
     -o-tab-size: 4;
+}
 
+.code-line {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+    display: block;
 }
 
 .code-inline {

@@ -13,20 +13,16 @@
             <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
             <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
         </div>
-        
         <div class="nav">
             <!-- Navegação será inserida via JavaScript -->
         </div>
-        
         <div class="content">
             <div class="slide active" id="slide11">
                 <h2><i class="fas fa-code"></i> Prática no Google Colab</h2>
-                
                 <div class="info">
                     <h3><i class="fas fa-lightbulb"></i> O que vamos praticar?</h3>
                     <p>Vamos criar um ambiente completo para praticar UPDATE e DELETE com SQLite3 no Google Colab. Você poderá copiar e colar o código diretamente.</p>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-database"></i> Configuração Inicial</h3>
                     <p>Primeiro, vamos configurar o ambiente e criar as tabelas de exemplo:</p>
@@ -38,9 +34,6 @@
                             <span class="keyword">import</span> sqlite3
                         </div>
                         <div class="code-line">
-                            <span class="keyword">import</span> pandas <span class="keyword">as</span> pd
-                        </div>
-                        <div class="code-line">
                             <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta
                         </div>
                         <div class="code-line">
@@ -49,12 +42,9 @@
                         <div class="code-line">
                             conn = sqlite3.connect(<span class="string">':memory:'</span>)
                         </div>
-                        <div class="code-line">
-                            cursor = conn.cursor()
-                        </div>
+                        <div class="code-line">cursor = conn.cursor()</div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-table"></i> Criar Tabelas de Exemplo</h3>
                     <p>Vamos criar tabelas com dados realistas para praticar:</p>
@@ -97,7 +87,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-plus"></i> Inserir Dados de Exemplo</h3>
                     <p>Vamos inserir dados para praticar UPDATE e DELETE:</p>
@@ -105,9 +94,7 @@
                         <div class="code-line">
                             <span class="comment"># Inserir clientes de exemplo</span>
                         </div>
-                        <div class="code-line">
-                            clientes_exemplo = [
-                        </div>
+                        <div class="code-line">clientes_exemplo = [</div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">1</span>, <span class="string">'João Silva'</span>, <span class="string">'joao@email.com'</span>, <span class="string">'(71) 99999-1111'</span>, <span class="string">'Salvador'</span>, <span class="number">30</span>, <span class="string">'Normal'</span>),
                         </div>
@@ -123,18 +110,13 @@
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;(<span class="number">5</span>, <span class="string">'Carlos Lima'</span>, <span class="string">'carlos@email.com'</span>, <span class="string">'(71) 99999-5555'</span>, <span class="string">'Salvador'</span>, <span class="number">22</span>, <span class="string">'Normal'</span>)
                         </div>
-                        <div class="code-line">
-                            ]
-                        </div>
+                        <div class="code-line">]</div>
                         <div class="code-line">
                             cursor.executemany(<span class="string">'INSERT INTO clientes VALUES (?, ?, ?, ?, ?, ?, ?)'</span>, clientes_exemplo)
                         </div>
-                        <div class="code-line">
-                            conn.commit()
-                        </div>
+                        <div class="code-line">conn.commit()</div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-edit"></i> Praticar UPDATE</h3>
                     <p>Vamos praticar diferentes tipos de UPDATE:</p>
@@ -168,7 +150,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-cogs"></i> UPDATE com Múltiplas Condições</h3>
                     <div class="code-block">
@@ -196,12 +177,9 @@
                         <div class="code-line">
                             <span class="keyword">for</span> row <span class="keyword">in</span> cursor.fetchall():
                         </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;print(row)
-                        </div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;print(row)</div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-trash"></i> Praticar DELETE</h3>
                     <p>Vamos praticar DELETE de forma segura:</p>
@@ -244,7 +222,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-shield-alt"></i> Transações Seguras</h3>
                     <p>Vamos praticar operações com transações:</p>
@@ -293,7 +270,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-chart-bar"></i> Visualizar Resultados</h3>
                     <p>Vamos ver os resultados finais:</p>
@@ -305,29 +281,28 @@
                             cursor.execute(<span class="string">"SELECT * FROM clientes"</span>)
                         </div>
                         <div class="code-line">
-                            df = pd.DataFrame(cursor.fetchall(), columns=[<span class="string">'ID'</span>, <span class="string">'Nome'</span>, <span class="string">'Email'</span>, <span class="string">'Telefone'</span>, <span class="string">'Cidade'</span>, <span class="string">'Idade'</span>, <span class="string">'Categoria'</span>, <span class="string">'Data_Cadastro'</span>])
+                            clientes = cursor.fetchall()
                         </div>
                         <div class="code-line">
-                            print(df)
+                            <span class="keyword">for</span> cliente <span class="keyword">in</span> clientes:
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f"ID: {cliente[0]}, Nome: {cliente[1]}, Email: {cliente[2]}, Cidade: {cliente[4]}"</span>)
                         </div>
                         <div class="code-line">
                             <span class="comment"># Fechar conexão</span>
                         </div>
-                        <div class="code-line">
-                            conn.close()
-                        </div>
+                        <div class="code-line">conn.close()</div>
                     </div>
                 </div>
             </div>
         </div>
-        
         <div class="footer">
             <p>&copy; 2025 - Conteúdo Educacional</p>
             <p>IFBA CEPEDI</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
-    
     <script src="../script.js"></script>
 </body>
 </html>

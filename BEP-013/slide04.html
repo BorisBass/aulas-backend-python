@@ -13,20 +13,16 @@
             <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
             <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
         </div>
-        
         <div class="nav">
             <!-- Navegação será inserida via JavaScript -->
         </div>
-        
         <div class="content">
             <div class="slide active" id="slide04">
                 <h2><i class="fas fa-trash"></i> Comando DELETE</h2>
-                
                 <div class="info">
                     <h3><i class="fas fa-lightbulb"></i> O que é o DELETE?</h3>
                     <p>O comando <strong>DELETE</strong> é usado para remover registros de uma tabela. É uma operação <strong>irreversível</strong> - uma vez deletado, o dado é perdido permanentemente (a menos que você tenha backup).</p>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-code"></i> Sintaxe Básica</h3>
                     <div class="code-block">
@@ -38,7 +34,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-list"></i> Componentes do DELETE</h3>
                     <div class="info-grid">
@@ -52,10 +47,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exemplos Práticos</h3>
-                    
                     <h4><i class="fas fa-user-times"></i> Remover cliente específico:</h4>
                     <div class="code-block">
                         <div class="code-line">
@@ -68,7 +61,6 @@
                             <span class="keyword">WHERE</span> id = <span class="number">10</span>;
                         </div>
                     </div>
-
                     <h4><i class="fas fa-calendar-times"></i> Remover registros antigos:</h4>
                     <div class="code-block">
                         <div class="code-line">
@@ -81,7 +73,6 @@
                             <span class="keyword">WHERE</span> data_pedido < <span class="string">'2021-01-01'</span>;
                         </div>
                     </div>
-
                     <h4><i class="fas fa-ban"></i> Remover registros com valor NULL:</h4>
                     <div class="code-block">
                         <div class="code-line">
@@ -95,7 +86,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-exclamation-triangle"></i> CUIDADO EXTREMO!</h3>
                     <p><strong>DELETE é PERIGOSO!</strong> Sem WHERE, você remove TODOS os registros:</p>
@@ -111,7 +101,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-shield-alt"></i> Proteção: Sempre Verifique Primeiro</h3>
                     <p><strong>NUNCA execute DELETE sem testar com SELECT:</strong></p>
@@ -136,7 +125,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-info-circle"></i> Diferença: DELETE vs DROP</h3>
                     <div class="info-grid">
@@ -154,14 +142,12 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer">
             <p>&copy; 2025 - Conteúdo Educacional</p>
             <p>IFBA CEPEDI</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
-    
     <script src="../script.js"></script>
 </body>
 </html>

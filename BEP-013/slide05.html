@@ -13,20 +13,16 @@
             <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
             <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
         </div>
-        
         <div class="nav">
             <!-- Navegação será inserida via JavaScript -->
         </div>
-        
         <div class="content">
             <div class="slide active" id="slide05">
                 <h2><i class="fas fa-filter"></i> Cláusula WHERE em DELETE</h2>
-                
                 <div class="info">
                     <h3><i class="fas fa-lightbulb"></i> WHERE é CRÍTICO no DELETE</h3>
                     <p>No comando DELETE, a cláusula WHERE é ainda mais importante que no UPDATE. Sem ela, você pode perder TODOS os dados da tabela de uma vez!</p>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-search"></i> Condições Comuns em DELETE</h3>
                     <div class="info-grid">
@@ -48,10 +44,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exemplos Práticos</h3>
-                    
                     <h4><i class="fas fa-user-times"></i> Remover por ID específico:</h4>
                     <div class="code-block">
                         <div class="code-line">
@@ -64,7 +58,6 @@
                             <span class="keyword">WHERE</span> id = <span class="number">15</span>;
                         </div>
                     </div>
-
                     <h4><i class="fas fa-calendar-times"></i> Remover registros antigos:</h4>
                     <div class="code-block">
                         <div class="code-line">
@@ -77,7 +70,6 @@
                             <span class="keyword">WHERE</span> data_log < <span class="string">'2023-01-01'</span>;
                         </div>
                     </div>
-
                     <h4><i class="fas fa-ban"></i> Remover registros inválidos:</h4>
                     <div class="code-block">
                         <div class="code-line">
@@ -94,7 +86,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-cogs"></i> Condições Múltiplas</h3>
                     <p>Combine condições para ser mais específico:</p>
@@ -113,7 +104,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-shield-alt"></i> Processo Seguro de DELETE</h3>
                     <p><strong>SEMPRE siga estes passos:</strong></p>
@@ -136,7 +126,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-exclamation-triangle"></i> Exemplo de Processo Seguro</h3>
                     <div class="code-block">
@@ -174,14 +163,12 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer">
             <p>&copy; 2025 - Conteúdo Educacional</p>
             <p>IFBA CEPEDI</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
-    
     <script src="../script.js"></script>
 </body>
 </html>

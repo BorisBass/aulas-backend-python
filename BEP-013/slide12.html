@@ -11,30 +11,25 @@
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
-            <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
+            <p>CRUD Completo em Python</p>
         </div>
-        
         <div class="nav">
             <!-- Navegação será inserida via JavaScript -->
         </div>
-        
         <div class="content">
             <div class="slide active" id="slide12">
                 <h2><i class="fas fa-cogs"></i> Sistema CRUD Completo</h2>
                 
                 <div class="info">
                     <h3><i class="fas fa-lightbulb"></i> Sistema de Gerenciamento de Clientes</h3>
-                    <p>Vamos criar um sistema completo em Python que implementa todas as operações CRUD (Create, Read, Update, Delete) com SQLite3. Este sistema demonstra como usar UPDATE e DELETE em um contexto real.</p>
+                    <p>Vamos criar um sistema completo em Python que implementa todas as operações CRUD (Create, Read, Update, Delete) com SQLite3.</p>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-code"></i> Código Completo do Sistema</h3>
+                    <h3><i class="fas fa-code"></i> Código Completo</h3>
                     <div class="code-block">
                         <div class="code-line">
                             <span class="keyword">import</span> sqlite3
-                        </div>
-                        <div class="code-line">
-                            <span class="keyword">import</span> os
                         </div>
                         <div class="code-line">
                             <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
@@ -57,12 +52,6 @@
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">self</span>.criar_tabela()
                         </div>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-database"></i> Métodos de Conexão e Criação</h3>
-                    <div class="code-block">
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">conectar</span>(<span class="parameter">self</span>):
                         </div>
@@ -114,12 +103,6 @@
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">self</span>.conn.commit()
                         </div>
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-plus"></i> Operações CREATE e READ</h3>
-                    <div class="code-block">
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">adicionar_cliente</span>(<span class="parameter">self</span>, <span class="parameter">nome</span>, <span class="parameter">email</span>, <span class="parameter">telefone</span>, <span class="parameter">cidade</span>, <span class="parameter">idade</span>):
                         </div>
@@ -155,17 +138,9 @@
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="parameter">self</span>.cursor.fetchall()
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-edit"></i> Operações UPDATE</h3>
-                    <div class="code-block">
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">atualizar_cliente</span>(<span class="parameter">self</span>, <span class="parameter">cliente_id</span>, <span class="parameter">campo</span>, <span class="parameter">novo_valor</span>):
                         </div>
                         <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Verificar se cliente existe</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">atualizar_cliente</span>(<span class="parameter">self</span>, <span class="parameter">cliente_id</span>, <span class="parameter">campo</span>, <span class="parameter">novo_valor</span>):
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">self</span>.cursor.execute(<span class="string">"SELECT nome FROM clientes WHERE id = ?"</span>, (cliente_id,))
@@ -180,9 +155,6 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>
                         </div>
                         <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Executar UPDATE</span>
-                        </div>
-                        <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">self</span>.cursor.execute(<span class="string">f"UPDATE clientes SET {campo} = ? WHERE id = ?"</span>, (novo_valor, cliente_id))
                         </div>
                         <div class="code-line">
@@ -190,17 +162,9 @@
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f"Cliente {cliente_id} atualizado com sucesso!"</span>)
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-trash"></i> Operações DELETE</h3>
-                    <div class="code-block">
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">remover_cliente</span>(<span class="parameter">self</span>, <span class="parameter">cliente_id</span>):
                         </div>
                         <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Verificar se cliente existe</span>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">remover_cliente</span>(<span class="parameter">self</span>, <span class="parameter">cliente_id</span>):
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">self</span>.cursor.execute(<span class="string">"SELECT nome FROM clientes WHERE id = ?"</span>, (cliente_id,))
@@ -216,9 +180,6 @@
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Confirmar remoção</span>
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirmacao = input(<span class="string">f"Tem certeza que deseja remover {cliente[0]}? (s/n): "</span>)
@@ -240,29 +201,6 @@
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Operação cancelada."</span>)
-                    </div>
-                </div>
-
-                <div class="info">
-                    <h3><i class="fas fa-search"></i> Métodos de Busca</h3>
-                    <div class="code-block">
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">buscar_cliente</span>(<span class="parameter">self</span>, <span class="parameter">termo</span>):
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="parameter">self</span>.cursor.execute(<span class="string">'''</span>
-                        </div>
-                        <div class="code-line">
-                            <span class="string">                SELECT * FROM clientes</span>
-                        </div>
-                        <div class="code-line">
-                            <span class="string">                WHERE nome LIKE ? OR email LIKE ? OR cidade LIKE ?'''</span>, 
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="string">f'%{termo}%'</span>, <span class="string">f'%{termo}%'</span>, <span class="string">f'%{termo}%'</span>))
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="parameter">self</span>.cursor.fetchall()
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">def</span> <span class="function-name">fechar_conexao</span>(<span class="parameter">self</span>):
@@ -301,9 +239,6 @@
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"4. Remover cliente"</span>)
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"5. Buscar cliente"</span>)
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"0. Sair"</span>)
@@ -351,7 +286,8 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> cliente <span class="keyword">in</span> clientes:
                         </div>
                         <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f"ID: {cliente[0]}, Nome: {cliente[1]}, Email: {cliente[2]}, Cidade: {cliente[4]}"</span>)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f"ID: {cliente[0]}, Nome: {cliente[1]}, Email: {cliente[2]}"</span>)
+                        </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span> opcao == <span class="string">'3'</span>:
                         </div>
@@ -359,7 +295,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cliente_id = int(input(<span class="string">"ID do cliente: "</span>))
                         </div>
                         <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;campo = input(<span class="string">"Campo a atualizar (nome/email/telefone/cidade/idade/categoria): "</span>)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;campo = input(<span class="string">"Campo a atualizar: "</span>)
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;novo_valor = input(<span class="string">"Novo valor: "</span>)
@@ -377,26 +313,10 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gerenciador.remover_cliente(cliente_id)
                         </div>
                         <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">elif</span> opcao == <span class="string">'5'</span>:
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;termo = input(<span class="string">"Termo de busca: "</span>)
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resultados = gerenciador.buscar_cliente(termo)
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> cliente <span class="keyword">in</span> resultados:
-                        </div>
-                        <div class="code-line">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">f"ID: {cliente[0]}, Nome: {cliente[1]}, Email: {cliente[2]}"</span>)
-                        <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span>:
                         </div>
                         <div class="code-line">
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Opção inválida!"</span>)
-                        <div class="code-line">
-                            <span class="comment"># Executar o programa</span>
                         </div>
                         <div class="code-line">
                             <span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
@@ -419,14 +339,12 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer">
             <p>&copy; 2025 - Conteúdo Educacional</p>
             <p>IFBA CEPEDI</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
-    
     <script src="../script.js"></script>
 </body>
 </html>

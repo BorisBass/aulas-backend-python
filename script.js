@@ -234,7 +234,7 @@ function getTotalSlides() {
         'BEP-010': 7,
         'BEP-011': 10,
         'BEP-012': 12,
-        'BEP-013': 12
+        'BEP-013': 13
     };
     
     // Detectar a pasta atual usando múltiplos métodos

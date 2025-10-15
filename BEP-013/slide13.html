@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-013: Comandos de Atualização e Remoção - Slide 13</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
+            <p>CRUD Completo - Extensão da BEP-012</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide13">
+                <h2><i class="fas fa-cogs"></i> CRUD Completo - Extensão da BEP-012</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-info-circle"></i> O que vamos fazer?</h3>
+                    <p>Vamos <strong>estender</strong> o sistema de cadastro da BEP-012 adicionando as funcionalidades de <strong>UPDATE</strong> e <strong>DELETE</strong>, completando assim o CRUD (Create, Read, Update, Delete).</p>
+                    <p><strong>Base:</strong> Usaremos o mesmo sistema da BEP-012 e adicionaremos as novas funcionalidades.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-edit"></i> 7. UPDATE - Atualizar Cliente</h3>
+                    <p><strong>Conceito:</strong> Função para atualizar informações de clientes existentes.</p>
+                    <p><strong>Prática:</strong> Validação de ID e atualização segura com WHERE.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 7: Atualizar Cliente</h4>
+                    <div class="code-container">
+                        <pre><code>def atualizar_cliente(cursor, conn):
+    """Atualiza informações de um cliente"""
+    try:
+        print("\n✏️ ATUALIZAR CLIENTE")
+        print("-" * 30)
+        
+        # Listar clientes para facilitar a escolha
+        cursor.execute("SELECT id, nome FROM clientes ORDER BY nome")
+        clientes = cursor.fetchall()
+        
+        if not clientes:
+            print("📭 Nenhum cliente cadastrado!")
+            return
+        
+        print("👥 Clientes disponíveis:")
+        for id_cliente, nome in clientes:
+            print(f"  {id_cliente} - {nome}")
+        
+        # Solicitar ID do cliente
+        try:
+            cliente_id = int(input("\n👉 Digite o ID do cliente: "))
+        except ValueError:
+            print("❌ ID deve ser um número!")
+            return
+        
+        # Verificar se cliente existe
+        cursor.execute("SELECT * FROM clientes WHERE id = ?", (cliente_id,))
+        cliente = cursor.fetchone()
+        
+        if not cliente:
+            print("❌ Cliente não encontrado!")
+            return
+        
+        # Mostrar dados atuais
+        print(f"\n📋 Dados atuais do cliente {cliente[1]}:")
+        print(f"  Nome: {cliente[1]}")
+        print(f"  Email: {cliente[2] if cliente[2] else 'Não informado'}")
+        print(f"  Telefone: {cliente[3] if cliente[3] else 'Não informado'}")
+        print(f"  Cidade: {cliente[4] if cliente[4] else 'Não informado'}")
+        
+        # Solicitar novos dados
+        print("\n✏️ Digite os novos dados (pressione Enter para manter o atual):")
+        
+        novo_nome = input(f"Nome [{cliente[1]}]: ").strip()
+        if not novo_nome:
+            novo_nome = cliente[1]
+        
+        novo_email = input(f"Email [{cliente[2] if cliente[2] else 'vazio'}]: ").strip()
+        if not novo_email:
+            novo_email = cliente[2]
+        
+        novo_telefone = input(f"Telefone [{cliente[3] if cliente[3] else 'vazio'}]: ").strip()
+        if not novo_telefone:
+            novo_telefone = cliente[3]
+        
+        novo_cidade = input(f"Cidade [{cliente[4] if cliente[4] else 'vazio'}]: ").strip()
+        if not novo_cidade:
+            novo_cidade = cliente[4]
+        
+        # Atualizar no banco
+        cursor.execute('''
+            UPDATE clientes 
+            SET nome = ?, email = ?, telefone = ?, cidade = ?
+            WHERE id = ?
+        ''', (novo_nome, novo_email, novo_telefone, novo_cidade, cliente_id))
+        
+        conn.commit()
+        print(f"✅ Cliente '{novo_nome}' atualizado com sucesso!")
+        
+    except sqlite3.IntegrityError:
+        print("❌ Erro: Email já cadastrado em outro cliente!")
+    except sqlite3.Error as e:
+        print(f"❌ Erro no banco: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-trash"></i> 8. DELETE - Remover Cliente</h3>
+                    <p><strong>Conceito:</strong> Função para remover clientes com confirmação de segurança.</p>
+                    <p><strong>Prática:</strong> Verificação de dependências e confirmação antes de remover.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 8: Remover Cliente</h4>
+                    <div class="code-container">
+                        <pre><code>def remover_cliente(cursor, conn):
+    """Remove um cliente do banco"""
+    try:
+        print("\n🗑️ REMOVER CLIENTE")
+        print("-" * 30)
+        
+        # Listar clientes para facilitar a escolha
+        cursor.execute("SELECT id, nome FROM clientes ORDER BY nome")
+        clientes = cursor.fetchall()
+        
+        if not clientes:
+            print("📭 Nenhum cliente cadastrado!")
+            return
+        
+        print("👥 Clientes disponíveis:")
+        for id_cliente, nome in clientes:
+            print(f"  {id_cliente} - {nome}")
+        
+        # Solicitar ID do cliente
+        try:
+            cliente_id = int(input("\n👉 Digite o ID do cliente a remover: "))
+        except ValueError:
+            print("❌ ID deve ser um número!")
+            return
+        
+        # Verificar se cliente existe
+        cursor.execute("SELECT * FROM clientes WHERE id = ?", (cliente_id,))
+        cliente = cursor.fetchone()
+        
+        if not cliente:
+            print("❌ Cliente não encontrado!")
+            return
+        
+        # Mostrar dados do cliente
+        print(f"\n📋 Dados do cliente a ser removido:")
+        print(f"  ID: {cliente[0]}")
+        print(f"  Nome: {cliente[1]}")
+        print(f"  Email: {cliente[2] if cliente[2] else 'Não informado'}")
+        print(f"  Telefone: {cliente[3] if cliente[3] else 'Não informado'}")
+        print(f"  Cidade: {cliente[4] if cliente[4] else 'Não informado'}")
+        print(f"  Data de cadastro: {cliente[5]}")
+        
+        # Verificar se tem pedidos (se a tabela existir)
+        try:
+            cursor.execute("SELECT COUNT(*) FROM pedidos WHERE cliente_id = ?", (cliente_id,))
+            pedidos_count = cursor.fetchone()[0]
+            if pedidos_count > 0:
+                print(f"\n⚠️ ATENÇÃO: Este cliente tem {pedidos_count} pedido(s) associado(s)!")
+                print("   Remover o cliente pode causar inconsistências nos dados.")
+        except sqlite3.Error:
+            # Tabela pedidos não existe, continuar normalmente
+            pass
+        
+        # Confirmação de segurança
+        print(f"\n⚠️ ATENÇÃO: Esta ação é IRREVERSÍVEL!")
+        confirmacao = input(f"Tem certeza que deseja remover '{cliente[1]}'? (digite 'SIM' para confirmar): ")
+        
+        if confirmacao.upper() == 'SIM':
+            # Executar remoção
+            cursor.execute("DELETE FROM clientes WHERE id = ?", (cliente_id,))
+            conn.commit()
+            print(f"✅ Cliente '{cliente[1]}' removido com sucesso!")
+        else:
+            print("❌ Operação cancelada pelo usuário.")
+        
+    except sqlite3.Error as e:
+        print(f"❌ Erro no banco: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cogs"></i> 9. Menu Atualizado</h3>
+                    <p><strong>Conceito:</strong> Atualizar o menu principal para incluir as novas opções.</p>
+                    <p><strong>Prática:</strong> Adicionar opções 5 e 6 para UPDATE e DELETE.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Célula 9: Menu Atualizado</h4>
+                    <div class="code-container">
+                        <pre><code>def exibir_menu_completo():
+    """Exibe o menu principal completo com CRUD"""
+    print("\n" + "="*50)
+    print("🏪 SISTEMA DE CADASTRO DE CLIENTES - CRUD COMPLETO")
+    print("="*50)
+    print("1. 📝 Cadastrar novo cliente (CREATE)")
+    print("2. 📋 Listar todos os clientes (READ)")
+    print("3. 🔍 Buscar cliente por nome (READ)")
+    print("4. 📊 Estatísticas (READ)")
+    print("5. ✏️ Atualizar cliente (UPDATE)")
+    print("6. 🗑️ Remover cliente (DELETE)")
+    print("0. 🚪 Sair")
+    print("="*50)
+
+def main_completo():
+    """Função principal do programa com CRUD completo"""
+    print("🚀 Iniciando Sistema de Cadastro de Clientes - CRUD Completo...")
+    
+    # Conectar ao banco
+    conn, cursor = conectar_banco()
+    if not conn:
+        print("❌ Não foi possível conectar ao banco. Encerrando...")
+        return
+    
+    try:
+        while True:
+            exibir_menu_completo()
+            opcao = input("👉 Escolha uma opção: ").strip()
+            
+            if opcao == '1':
+                cadastrar_cliente(cursor, conn)
+            elif opcao == '2':
+                listar_clientes(cursor)
+            elif opcao == '3':
+                buscar_cliente(cursor)
+            elif opcao == '4':
+                mostrar_estatisticas(cursor)
+            elif opcao == '5':
+                atualizar_cliente(cursor, conn)
+            elif opcao == '6':
+                remover_cliente(cursor, conn)
+            elif opcao == '0':
+                print("\n👋 Obrigado por usar o sistema! Até logo!")
+                break
+            else:
+                print("❌ Opção inválida! Tente novamente.")
+            
+            input("\n⏸️ Pressione Enter para continuar...")
+    
+    except KeyboardInterrupt:
+        print("\n\n👋 Programa interrompido pelo usuário.")
+    except Exception as e:
+        print(f"\n❌ Erro inesperado: {e}")
+    finally:
+        # Sempre fechar a conexão
+        if conn:
+            conn.close()
+            print("🔒 Conexão com banco fechada.")
+
+# Executar o programa completo
+if __name__ == "__main__":
+    main_completo()</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Como Usar o Sistema Completo</h3>
+                    <ol>
+                        <li><strong>Execute as células 1-6 da BEP-012:</strong> Configuração e funções básicas</li>
+                        <li><strong>Execute a célula 7:</strong> Função de atualizar cliente</li>
+                        <li><strong>Execute a célula 8:</strong> Função de remover cliente</li>
+                        <li><strong>Execute a célula 9:</strong> Menu atualizado e programa principal</li>
+                        <li><strong>Teste todas as funcionalidades:</strong> CREATE, READ, UPDATE, DELETE</li>
+                    </ol>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Conceitos Aplicados - CRUD Completo</h3>
+                    <ul>
+                        <li><strong>CREATE:</strong> INSERT para cadastrar novos clientes</li>
+                        <li><strong>READ:</strong> SELECT para listar, buscar e gerar estatísticas</li>
+                        <li><strong>UPDATE:</strong> UPDATE com WHERE para modificar dados existentes</li>
+                        <li><strong>DELETE:</strong> DELETE com WHERE para remover registros</li>
+                        <li><strong>Validação de Dados:</strong> Verificação de entrada e existência de registros</li>
+                        <li><strong>Confirmação de Segurança:</strong> Proteção contra remoções acidentais</li>
+                        <li><strong>Tratamento de Erros:</strong> Try/except para todas as operações</li>
+                        <li><strong>Transações:</strong> Commit para salvar alterações</li>
+                        <li><strong>Interface Amigável:</strong> Menu interativo e mensagens claras</li>
+                        <li><strong>Verificação de Dependências:</strong> Checagem antes de remover</li>
+                    </ul>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-shield-alt"></i> Boas Práticas Implementadas</h3>
+                    <ul>
+                        <li><strong>SEMPRE usar WHERE:</strong> Todas as operações UPDATE e DELETE têm WHERE</li>
+                        <li><strong>Verificar antes de modificar:</strong> SELECT antes de UPDATE/DELETE</li>
+                        <li><strong>Confirmação de segurança:</strong> Usuário deve confirmar remoções</li>
+                        <li><strong>Tratamento de erros:</strong> Try/except em todas as operações</li>
+                        <li><strong>Validação de entrada:</strong> Verificação de dados do usuário</li>
+                        <li><strong>Transações seguras:</strong> Commit apenas após validação</li>
+                        <li><strong>Mensagens claras:</strong> Feedback para o usuário</li>
+                        <li><strong>Verificação de dependências:</strong> Checagem de relacionamentos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

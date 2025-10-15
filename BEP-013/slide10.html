@@ -13,20 +13,183 @@
             <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
             <p>UPDATE, DELETE e boas práticas para modificação de dados</p>
         </div>
-        
         <div class="nav">
             <!-- Navegação será inserida via JavaScript -->
         </div>
-        
         <div class="content">
             <div class="slide active" id="slide10">
                 <h2><i class="fas fa-cogs"></i> Exercícios Combinados</h2>
-                
                 <div class="info">
                     <h3><i class="fas fa-lightbulb"></i> Cenário Completo</h3>
                     <p>Vamos trabalhar com um sistema de e-commerce que tem as tabelas <strong>clientes</strong>, <strong>produtos</strong> e <strong>pedidos</strong>. Você precisa realizar operações que combinam SELECT, UPDATE e DELETE.</p>
                 </div>
-
+                <div class="info">
+                    <h3><i class="fas fa-database"></i> Preparação do Ambiente</h3>
+                    <p>Primeiro, vamos criar as tabelas e inserir dados de exemplo:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- 1. Criar tabelas</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">CREATE TABLE</span> clientes (
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;id <span class="keyword">INTEGER PRIMARY KEY AUTOINCREMENT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;nome <span class="keyword">TEXT NOT NULL</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;email <span class="keyword">TEXT UNIQUE</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;telefone <span class="keyword">TEXT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cidade <span class="keyword">TEXT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;idade <span class="keyword">INTEGER</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;categoria <span class="keyword">TEXT DEFAULT</span> <span class="string">'Normal'</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;data_cadastro <span class="keyword">DATE DEFAULT</span> <span class="function">CURRENT_DATE</span>
+                        </div>
+                        <div class="code-line">);</div>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="keyword">CREATE TABLE</span> produtos (
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;id <span class="keyword">INTEGER PRIMARY KEY AUTOINCREMENT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;nome <span class="keyword">TEXT NOT NULL</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;preco <span class="keyword">REAL</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;categoria <span class="keyword">TEXT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;estoque <span class="keyword">INTEGER DEFAULT</span> <span class="number">0</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;data_cadastro <span class="keyword">DATE DEFAULT</span> <span class="function">CURRENT_DATE</span>
+                        </div>
+                        <div class="code-line">);</div>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="keyword">CREATE TABLE</span> pedidos (
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;id <span class="keyword">INTEGER PRIMARY KEY AUTOINCREMENT</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;cliente_id <span class="keyword">INTEGER</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;produto_id <span class="keyword">INTEGER</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;quantidade <span class="keyword">INTEGER</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;valor_total <span class="keyword">REAL</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;data_pedido <span class="keyword">DATE</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;status <span class="keyword">TEXT DEFAULT</span> <span class="string">'pendente'</span>,
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">FOREIGN KEY</span> (cliente_id) <span class="keyword">REFERENCES</span> clientes(id),
+                        </div>
+                        <div class="code-line">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">FOREIGN KEY</span> (produto_id) <span class="keyword">REFERENCES</span> produtos(id)
+                        </div>
+                        <div class="code-line">);</div>
+                    </div>
+                </div>
+                <div class="info">
+                    <h3><i class="fas fa-plus"></i> Inserir Dados de Exemplo</h3>
+                    <p>Vamos inserir dados para praticar:</p>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Inserir clientes</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">INSERT INTO</span> clientes (nome, email, telefone, cidade, idade, categoria) <span class="keyword">VALUES</span>
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'João Silva'</span>, <span class="string">'joao@email.com'</span>, <span class="string">'(71) 99999-1111'</span>, <span class="string">'Salvador'</span>, <span class="number">30</span>, <span class="string">'Normal'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Maria Santos'</span>, <span class="string">'maria@email.com'</span>, <span class="string">'(71) 99999-2222'</span>, <span class="string">'Feira de Santana'</span>, <span class="number">25</span>, <span class="string">'Premium'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Pedro Costa'</span>, <span class="string">'pedro@email.com'</span>, <span class="keyword">NULL</span>, <span class="string">'Salvador'</span>, <span class="number">35</span>, <span class="string">'Normal'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Ana Oliveira'</span>, <span class="string">'ana@email.com'</span>, <span class="string">'(71) 99999-4444'</span>, <span class="string">'Camaçari'</span>, <span class="number">28</span>, <span class="string">'VIP'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Carlos Lima'</span>, <span class="string">'carlos@email.com'</span>, <span class="string">'(71) 99999-5555'</span>, <span class="string">'Salvador'</span>, <span class="number">22</span>, <span class="string">'Normal'</span>);
+                        </div>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Inserir produtos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">INSERT INTO</span> produtos (nome, preco, categoria, estoque) <span class="keyword">VALUES</span>
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Notebook Dell'</span>, <span class="number">2500.00</span>, <span class="string">'Informática'</span>, <span class="number">10</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Mouse Logitech'</span>, <span class="number">50.00</span>, <span class="string">'Informática'</span>, <span class="number">25</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Teclado Mecânico'</span>, <span class="number">120.00</span>, <span class="string">'Informática'</span>, <span class="number">15</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Monitor Samsung'</span>, <span class="number">800.00</span>, <span class="string">'Informática'</span>, <span class="number">8</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="string">'Smartphone iPhone'</span>, <span class="number">1800.00</span>, <span class="string">'Telefonia'</span>, <span class="number">3</span>);
+                        </div>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-line">
+                            <span class="comment">-- Inserir pedidos</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">INSERT INTO</span> pedidos (cliente_id, produto_id, quantidade, valor_total, data_pedido, status) <span class="keyword">VALUES</span>
+                        </div>
+                        <div class="code-line">
+                            (<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2500.00</span>, <span class="string">'2024-01-15'</span>, <span class="string">'entregue'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="number">2</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">100.00</span>, <span class="string">'2024-01-20'</span>, <span class="string">'entregue'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="number">1</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">120.00</span>, <span class="string">'2024-02-01'</span>, <span class="string">'pendente'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="number">3</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">800.00</span>, <span class="string">'2023-12-10'</span>, <span class="string">'cancelado'</span>),
+                        </div>
+                        <div class="code-line">
+                            (<span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">1800.00</span>, <span class="string">'2024-01-10'</span>, <span class="string">'entregue'</span>);
+                        </div>
+                    </div>
+                </div>
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exercício 1: Análise e Atualização</h3>
                     <p><strong>Objetivo:</strong> Identificar clientes inativos e atualizar sua categoria</p>
@@ -35,14 +198,28 @@
                             <span class="comment">-- 1. Encontrar clientes sem pedidos nos últimos 6 meses</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> id <span class="keyword">NOT IN</span> (<span class="keyword">SELECT</span> cliente_id <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> data_pedido > date(<span class="string">'now'</span>, <span class="string">'-6 months'</span>));
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Atualizar categoria para 'Inativo'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes <span class="keyword">SET</span> categoria = <span class="string">'Inativo'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> id <span class="keyword">NOT IN</span> (<span class="keyword">SELECT</span> cliente_id <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> data_pedido > date(<span class="string">'now'</span>, <span class="string">'-6 months'</span>));
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Verificar quantos foram atualizados</span>
                         </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> categoria = <span class="string">'Inativo'</span>;
+                        </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exercício 2: Limpeza de Dados</h3>
                     <p><strong>Objetivo:</strong> Limpar dados inconsistentes</p>
@@ -51,14 +228,22 @@
                             <span class="comment">-- 1. Encontrar produtos sem preço ou com preço zero</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> produtos <span class="keyword">WHERE</span> preco <span class="keyword">IS NULL</span> <span class="keyword">OR</span> preco = <span class="number">0</span>;
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Atualizar preço para NULL</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> produtos <span class="keyword">SET</span> preco = <span class="keyword">NULL</span> <span class="keyword">WHERE</span> preco = <span class="number">0</span>;
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Remover produtos sem preço há mais de 1 ano</span>
                         </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> produtos <span class="keyword">WHERE</span> preco <span class="keyword">IS NULL</span> <span class="keyword">AND</span> data_cadastro < date(<span class="string">'now'</span>, <span class="string">'-1 year'</span>);
+                        </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exercício 3: Manutenção de Pedidos</h3>
                     <p><strong>Objetivo:</strong> Gerenciar pedidos antigos</p>
@@ -67,14 +252,25 @@
                             <span class="comment">-- 1. Atualizar status de pedidos antigos para 'Arquivado'</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">UPDATE</span> pedidos <span class="keyword">SET</span> status = <span class="string">'Arquivado'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> data_pedido < date(<span class="string">'now'</span>, <span class="string">'-2 years'</span>);
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Remover pedidos cancelados de 2018</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> pedidos <span class="keyword">WHERE</span> status = <span class="string">'cancelado'</span> <span class="keyword">AND</span> data_pedido < <span class="string">'2019-01-01'</span>;
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Verificar resultado final</span>
                         </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> status, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> pedidos <span class="keyword">GROUP BY</span> status;
+                        </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exercício 4: Migração de Dados</h3>
                     <p><strong>Objetivo:</strong> Migrar dados de uma estrutura antiga</p>
@@ -83,14 +279,25 @@
                             <span class="comment">-- 1. Encontrar clientes com telefone no formato antigo</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> telefone <span class="keyword">LIKE</span> <span class="string">'71%'</span>;
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Atualizar formato do telefone</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes <span class="keyword">SET</span> telefone = <span class="string">'(71) '</span> || telefone
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> telefone <span class="keyword">LIKE</span> <span class="string">'71%'</span>;
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Remover clientes duplicados (mesmo email)</span>
                         </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> clientes <span class="keyword">WHERE</span> id <span class="keyword">NOT IN</span> (<span class="keyword">SELECT</span> <span class="function">MIN</span>(id) <span class="keyword">FROM</span> clientes <span class="keyword">GROUP BY</span> email);
+                        </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-play"></i> Exercício 5: Relatório e Ação</h3>
                     <p><strong>Objetivo:</strong> Gerar relatório e tomar ações baseadas nele</p>
@@ -99,14 +306,25 @@
                             <span class="comment">-- 1. Contar clientes por cidade</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">SELECT</span> cidade, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> clientes <span class="keyword">GROUP BY</span> cidade;
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Atualizar categoria para 'Premium' em cidades com +100 clientes</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes <span class="keyword">SET</span> categoria = <span class="string">'Premium'</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">WHERE</span> cidade <span class="keyword">IN</span> (<span class="keyword">SELECT</span> cidade <span class="keyword">FROM</span> clientes <span class="keyword">GROUP BY</span> cidade <span class="keyword">HAVING</span> <span class="function">COUNT</span>(*) > <span class="number">100</span>);
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Remover clientes de cidades com menos de 5 clientes</span>
                         </div>
+                        <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> clientes <span class="keyword">WHERE</span> cidade <span class="keyword">IN</span> (<span class="keyword">SELECT</span> cidade <span class="keyword">FROM</span> clientes <span class="keyword">GROUP BY</span> cidade <span class="keyword">HAVING</span> <span class="function">COUNT</span>(*) < <span class="number">5</span>);
+                        </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-shield-alt"></i> Exercício 6: Operação Segura</h3>
                     <p><strong>Objetivo:</strong> Realizar operação crítica com segurança</p>
@@ -115,17 +333,31 @@
                             <span class="comment">-- 1. Fazer backup dos dados que serão alterados</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">CREATE TABLE</span> backup_produtos <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> produtos;
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Usar transação (BEGIN/COMMIT/ROLLBACK)</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">BEGIN</span>;
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Atualizar preços de produtos com aumento de 10%</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">UPDATE</span> produtos <span class="keyword">SET</span> preco = preco * <span class="number">1.1</span>;
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 4. Verificar se tudo está correto antes de confirmar</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> <span class="function">AVG</span>(preco) <span class="keyword">FROM</span> produtos;
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">COMMIT</span>; <span class="comment">-- ou ROLLBACK; se houver problema</span>
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-trophy"></i> Desafio Final</h3>
                     <p><strong>Objetivo:</strong> Implementar sistema de limpeza automática</p>
@@ -137,17 +369,28 @@
                             <span class="comment">-- 1. Identifica dados inconsistentes</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">SELECT</span> <span class="string">'Clientes sem pedidos'</span>, <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> id <span class="keyword">NOT IN</span> (<span class="keyword">SELECT</span> cliente_id <span class="keyword">FROM</span> pedidos);
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 2. Corrige automaticamente quando possível</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">UPDATE</span> clientes <span class="keyword">SET</span> categoria = <span class="string">'Inativo'</span> <span class="keyword">WHERE</span> id <span class="keyword">NOT IN</span> (<span class="keyword">SELECT</span> cliente_id <span class="keyword">FROM</span> pedidos);
                         </div>
                         <div class="code-line">
                             <span class="comment">-- 3. Remove dados obsoletos</span>
                         </div>
                         <div class="code-line">
+                            <span class="keyword">DELETE FROM</span> pedidos <span class="keyword">WHERE</span> data_pedido < date(<span class="string">'now'</span>, <span class="string">'-5 years'</span>);
+                        </div>
+                        <div class="code-line">
                             <span class="comment">-- 4. Gera relatório das ações realizadas</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="keyword">SELECT</span> <span class="string">'Limpeza concluída'</span>, datetime(<span class="string">'now'</span>) <span class="keyword">AS</span> data_limpeza;
                         </div>
                     </div>
                 </div>
-
                 <div class="info">
                     <h3><i class="fas fa-check"></i> Dicas para Resolver</h3>
                     <ul>
@@ -160,14 +403,12 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer">
             <p>&copy; 2025 - Conteúdo Educacional</p>
             <p>IFBA CEPEDI</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
-    
     <script src="../script.js"></script>
 </body>
 </html>
