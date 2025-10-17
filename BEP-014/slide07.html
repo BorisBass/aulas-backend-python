@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-014: Modelagem e Normalização de Dados - Slide 07</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-014: Modelagem e Normalização de Dados</h1>
+            <p>Estruturando dados de forma eficiente para evitar redundância e inconsistência</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-check-circle"></i> Soluções dos Exercícios</h2>
+                
+                <div class="example">
+                    <h3><i class="fas fa-book"></i> Solução Exercício 1: Sistema de Biblioteca</h3>
+                    <p><strong>Problemas identificados:</strong></p>
+                    <ul>
+                        <li>Dependências parciais: Usuario_Nome, Usuario_Email dependem apenas de Emprestimo_ID</li>
+                        <li>Dependências parciais: Livro_Titulo, Livro_Autor, Livro_Categoria dependem apenas de Emprestimo_ID</li>
+                        <li>Dependências transitivas: Livro_Categoria depende de Livro_Titulo</li>
+                    </ul>
+                    
+                    <h4><i class="fas fa-table"></i> Tabelas Normalizadas (3FN):</h4>
+                    
+                    <h5>USUARIOS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Usuario_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Ana Costa</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">ana@email.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>LIVROS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Livro_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Titulo</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Autor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Categoria_ID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Python para Iniciantes</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Banco de Dados</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Pedro Lima</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>CATEGORIAS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Categoria_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Programação</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>EMPRESTIMOS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Emprestimo_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Usuario_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Livro_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data_Emprestimo</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data_Devolucao</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-10</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-24</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-12</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-26</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-29</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-shopping-cart"></i> Solução Exercício 2: Sistema de Vendas</h3>
+                    <p><strong>Problemas identificados:</strong></p>
+                    <ul>
+                        <li>Chave primária: (Venda_ID, Produto_ID)</li>
+                        <li>Dependências parciais: Cliente_Nome, Cliente_Telefone dependem apenas de Cliente_ID</li>
+                        <li>Dependências parciais: Produto_Nome, Preco_Unitario dependem apenas de Produto_ID</li>
+                        <li>Dependências parciais: Categoria_Nome depende apenas de Categoria_ID</li>
+                        <li>Dependências transitivas: Categoria_Nome depende de Produto_ID através de Categoria_ID</li>
+                    </ul>
+                    
+                    <h4><i class="fas fa-table"></i> Tabelas Normalizadas (3FN):</h4>
+                    
+                    <h5>CLIENTES</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Cliente_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Telefone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">101</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">(71) 99999-1111</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">102</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">(75) 88888-2222</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>CATEGORIAS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Categoria_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">301</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Eletrônicos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>PRODUTOS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Produto_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Categoria_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Preco_Unitario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">201</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Notebook Dell</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">301</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 2.500</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">202</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Mouse Logitech</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">301</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>VENDAS</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Venda_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Cliente_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data_Venda</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">101</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">102</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-16</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5>ITENS_VENDA</h5>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Venda_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Produto_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">201</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">202</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">201</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-check"></i> Benefícios Alcançados</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-copy"></i> Eliminação de Redundância</h4>
+                            <p>Dados únicos em cada tabela</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield-alt"></i> Integridade Garantida</h4>
+                            <p>Consistência dos dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tachometer-alt"></i> Performance Otimizada</h4>
+                            <p>Consultas mais eficientes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tools"></i> Manutenção Simplificada</h4>
+                            <p>Alterações em um local só</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Próximo Passo</h3>
+                    <p>Agora que dominamos a normalização, vamos fazer um <strong>resumo</strong> de tudo que aprendemos e ver como aplicar esses conceitos em projetos reais.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

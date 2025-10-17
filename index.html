@@ -817,7 +817,9 @@
             const indicators = document.getElementById('carouselIndicators1');
             indicators.innerHTML = '';
             
-            for (let i = 0; i < totalSlides1 - 2; i++) {
+            // Mostra 3 cards por vez, então precisamos de indicadores para as posições possíveis
+            const maxSlide = totalSlides1 - 3;
+            for (let i = 0; i <= maxSlide; i++) {
                 const indicator = document.createElement('div');
                 indicator.className = `carousel-indicator ${i === currentSlide1 ? 'active' : ''}`;
                 indicator.onclick = () => goToSlide1(i);
@@ -865,7 +867,9 @@
             const indicators = document.getElementById('carouselIndicators');
             indicators.innerHTML = '';
             
-            for (let i = 0; i < totalSlides2 - 2; i++) {
+            // Mostra 3 cards por vez, então precisamos de indicadores para as posições possíveis
+            const maxSlide = totalSlides2 - 3;
+            for (let i = 0; i <= maxSlide; i++) {
                 const indicator = document.createElement('div');
                 indicator.className = `carousel-indicator ${i === currentSlide2 ? 'active' : ''}`;
                 indicator.onclick = () => goToSlide(i);

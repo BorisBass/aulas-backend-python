@@ -234,7 +234,10 @@ function getTotalSlides() {
         'BEP-010': 7,
         'BEP-011': 10,
         'BEP-012': 12,
-        'BEP-013': 13
+        'BEP-013': 13,
+        'BEP-014': 8,
+        'BEP-015': 12,
+        'BEP-016': 10
     };
     
     // Detectar a pasta atual usando múltiplos métodos

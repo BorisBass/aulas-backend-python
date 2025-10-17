@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-014: Modelagem e Normalização de Dados - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-014: Modelagem e Normalização de Dados</h1>
+            <p>Estruturando dados de forma eficiente para evitar redundância e inconsistência</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-tachometer-alt"></i> Impacto da Modelagem na Performance e Integridade</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Por que a Modelagem é Importante?</h3>
+                    <p>A qualidade da modelagem de dados tem impacto direto em:</p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+                            <p>Velocidade das consultas e operações</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield-alt"></i> Integridade</h4>
+                            <p>Consistência e confiabilidade dos dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tools"></i> Manutenibilidade</h4>
+                            <p>Facilidade de manutenção e evolução</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-dollar-sign"></i> Custos</h4>
+                            <p>Economia de recursos e armazenamento</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-chart-line"></i> Impacto na Performance</h3>
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h4><i class="fas fa-times-circle"></i> Modelagem Ruim</h4>
+                            <ul>
+                                <li><strong>Consultas lentas:</strong> Muitos dados para processar</li>
+                                <li><strong>Índices ineficientes:</strong> Dados duplicados</li>
+                                <li><strong>Joins complexos:</strong> Múltiplas tabelas desnecessárias</li>
+                                <li><strong>Bloqueios frequentes:</strong> Conflitos de acesso</li>
+                                <li><strong>Uso excessivo de memória:</strong> Dados redundantes</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4><i class="fas fa-check-circle"></i> Modelagem Boa</h4>
+                            <ul>
+                                <li><strong>Consultas rápidas:</strong> Dados organizados</li>
+                                <li><strong>Índices eficientes:</strong> Estrutura otimizada</li>
+                                <li><strong>Joins simples:</strong> Relacionamentos claros</li>
+                                <li><strong>Menos bloqueios:</strong> Acesso otimizado</li>
+                                <li><strong>Uso eficiente de memória:</strong> Sem redundância</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-shield-alt"></i> Impacto na Integridade dos Dados</h3>
+                    <div class="comparison">
+                        <div class="comparison-item">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Problemas de Integridade</h4>
+                            <ul>
+                                <li><strong>Dados inconsistentes:</strong> Informações divergentes</li>
+                                <li><strong>Anomalias de inserção:</strong> Dados obrigatórios ausentes</li>
+                                <li><strong>Anomalias de atualização:</strong> Esquecer atualizações</li>
+                                <li><strong>Anomalias de exclusão:</strong> Perda de dados importantes</li>
+                                <li><strong>Violação de regras:</strong> Dados inválidos</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4><i class="fas fa-check"></i> Integridade Garantida</h4>
+                            <ul>
+                                <li><strong>Dados consistentes:</strong> Informações únicas</li>
+                                <li><strong>Inserções seguras:</strong> Validação automática</li>
+                                <li><strong>Atualizações controladas:</strong> Mudanças em um local</li>
+                                <li><strong>Exclusões seguras:</strong> Sem perda de dados</li>
+                                <li><strong>Regras respeitadas:</strong> Validação automática</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-database"></i> Exemplo Prático: Sistema de E-commerce</h3>
+                    <p>Vamos comparar duas abordagens para um sistema de vendas:</p>
+                    
+                    <h4><i class="fas fa-times-circle"></i> Abordagem Ruim (Não Normalizada)</h4>
+                    <div class="code-block">
+                        <pre><code>-- Tabela única com todos os dados
+CREATE TABLE vendas_ruim (
+    venda_id INT,
+    cliente_nome VARCHAR(100),
+    cliente_email VARCHAR(100),
+    produto_nome VARCHAR(100),
+    produto_categoria VARCHAR(50),
+    produto_preco DECIMAL(10,2),
+    quantidade INT,
+    data_venda DATE
+);
+
+-- Problemas:
+-- 1. Dados do cliente repetidos em cada venda
+-- 2. Dados do produto repetidos em cada venda
+-- 3. Difícil de manter consistência
+-- 4. Consultas lentas
+-- 5. Risco de inconsistência</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-check-circle"></i> Abordagem Boa (Normalizada)</h4>
+                    <div class="code-block">
+                        <pre><code>-- Tabelas separadas e relacionadas
+CREATE TABLE clientes (
+    cliente_id INT PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100)
+);
+
+CREATE TABLE produtos (
+    produto_id INT PRIMARY KEY,
+    nome VARCHAR(100),
+    categoria VARCHAR(50),
+    preco DECIMAL(10,2)
+);
+
+CREATE TABLE vendas (
+    venda_id INT PRIMARY KEY,
+    cliente_id INT,
+    data_venda DATE,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(cliente_id)
+);
+
+CREATE TABLE itens_venda (
+    venda_id INT,
+    produto_id INT,
+    quantidade INT,
+    PRIMARY KEY (venda_id, produto_id),
+    FOREIGN KEY (venda_id) REFERENCES vendas(venda_id),
+    FOREIGN KEY (produto_id) REFERENCES produtos(produto_id)
+);
+
+-- Benefícios:
+-- 1. Dados únicos e consistentes
+-- 2. Fácil manutenção
+-- 3. Consultas eficientes
+-- 4. Integridade garantida
+-- 5. Escalabilidade</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-chart-bar"></i> Métricas de Performance</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-clock"></i> Tempo de Consulta</h4>
+                            <p>Modelagem boa: 50-80% mais rápida</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-hdd"></i> Uso de Armazenamento</h4>
+                            <p>Modelagem boa: 30-60% menos espaço</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-memory"></i> Uso de Memória</h4>
+                            <p>Modelagem boa: 40-70% menos RAM</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cpu"></i> Processamento</h4>
+                            <p>Modelagem boa: 60-90% menos CPU</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Quando NÃO Normalizar?</h3>
+                    <p>Em alguns casos específicos, a normalização pode não ser a melhor opção:</p>
+                    <ul>
+                        <li><strong>Data Warehouses:</strong> Dados históricos para análise</li>
+                        <li><strong>Relatórios complexos:</strong> Quando performance é crítica</li>
+                        <li><strong>Sistemas legados:</strong> Migração gradual necessária</li>
+                        <li><strong>Dados temporários:</strong> Cache ou logs</li>
+                    </ul>
+                    <p><strong>Regra:</strong> Normalize para operações (CRUD), desnormalize para relatórios (READ).</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Próximo Passo</h3>
+                    <p>Agora que entendemos o impacto da modelagem, vamos praticar com <strong>exercícios</strong> para identificar problemas de normalização e aplicar as formas normais em casos reais.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

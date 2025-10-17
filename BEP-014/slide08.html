@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-014: Modelagem e Normalização de Dados - Slide 08</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-014: Modelagem e Normalização de Dados</h1>
+            <p>Estruturando dados de forma eficiente para evitar redundância e inconsistência</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-clipboard-list"></i> Resumo e Conclusão</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> O que Aprendemos Hoje?</h3>
+                    <p>Nesta aula, exploramos os conceitos fundamentais de <strong>modelagem e normalização de dados</strong>, essenciais para criar bancos de dados eficientes e confiáveis.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list-ol"></i> As Três Formas Normais</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-list-ol"></i> 1ª Forma Normal (1FN)</h4>
+                            <ul>
+                                <li>Valores atômicos</li>
+                                <li>Sem grupos repetitivos</li>
+                                <li>Cada célula = um valor</li>
+                                <li>Base para as outras formas</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list-ol"></i> 2ª Forma Normal (2FN)</h4>
+                            <ul>
+                                <li>Já está na 1FN</li>
+                                <li>Elimina dependências parciais</li>
+                                <li>Atributos dependem da chave completa</li>
+                                <li>Reduz redundância</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list-ol"></i> 3ª Forma Normal (3FN)</h4>
+                            <ul>
+                                <li>Já está na 2FN</li>
+                                <li>Elimina dependências transitivas</li>
+                                <li>Atributos dependem diretamente da chave</li>
+                                <li>Máxima normalização</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-cogs"></i> Processo de Normalização</h3>
+                    <div class="code-block">
+                        <div class="code-line"><span class="keyword">1.</span> Identificar a chave primária</div>
+                        <div class="code-line"><span class="keyword">2.</span> Aplicar 1FN - Eliminar grupos repetitivos</div>
+                        <div class="code-line"><span class="keyword">3.</span> Aplicar 2FN - Eliminar dependências parciais</div>
+                        <div class="code-line"><span class="keyword">4.</span> Aplicar 3FN - Eliminar dependências transitivas</div>
+                        <div class="code-line"><span class="keyword">5.</span> Verificar integridade e performance</div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-chart-line"></i> Benefícios da Normalização</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-copy"></i> Eliminação de Redundância</h4>
+                            <p>Dados únicos e consistentes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield-alt"></i> Integridade dos Dados</h4>
+                            <p>Consistência e confiabilidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tachometer-alt"></i> Performance Otimizada</h4>
+                            <p>Consultas mais rápidas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tools"></i> Facilidade de Manutenção</h4>
+                            <p>Alterações simplificadas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Quando NÃO Normalizar?</h3>
+                    <p>Em alguns casos específicos, a desnormalização pode ser necessária:</p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-chart-bar"></i> Data Warehouses</h4>
+                            <p>Dados históricos para análise</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-file-alt"></i> Relatórios Complexos</h4>
+                            <p>Quando performance é crítica</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-clock"></i> Cache Temporário</h4>
+                            <p>Dados de sessão ou temporários</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-history"></i> Sistemas Legados</h4>
+                            <p>Migração gradual necessária</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-lightbulb"></i> Boas Práticas</h3>
+                    <ul>
+                        <li><strong>Sempre comece pela 1FN:</strong> É a base para todas as outras</li>
+                        <li><strong>Identifique as dependências:</strong> Mapeie todas as relações</li>
+                        <li><strong>Pense na performance:</strong> Balance normalização vs velocidade</li>
+                        <li><strong>Documente suas decisões:</strong> Registre o raciocínio</li>
+                        <li><strong>Teste com dados reais:</strong> Valide com cenários práticos</li>
+                        <li><strong>Considere o futuro:</strong> Pense em expansões</li>
+                    </ul>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-link"></i> Conexão com Outras Aulas</h3>
+                    <p>Os conceitos de normalização se conectam diretamente com:</p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> BEP-011</h4>
+                            <p>Conceitos de banco de dados relacionais</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> BEP-012/013</h4>
+                            <p>Comandos SQL (SELECT, INSERT, UPDATE, DELETE)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-project-diagram"></i> BEP-015</h4>
+                            <p>Joins e consultas avançadas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-code"></i> BEP-016</h4>
+                            <p>Conectando Python com banco de dados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-trophy"></i> Conquistas da Aula</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> Conceitos Dominados</h4>
+                            <p>1FN, 2FN, 3FN e suas aplicações</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-tools"></i> Habilidades Desenvolvidas</h4>
+                            <p>Identificar e resolver problemas de normalização</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-lightbulb"></i> Pensamento Crítico</h4>
+                            <p>Analisar trade-offs entre normalização e performance</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-rocket"></i> Próximos Passos</h4>
+                            <p>Pronto para consultas avançadas e joins</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Próxima Aula: BEP-015</h3>
+                    <p>Na próxima aula, vamos aprender sobre <strong>Joins e Consultas Avançadas</strong>, onde aplicaremos os conceitos de normalização para integrar dados de múltiplas tabelas de forma eficiente.</p>
+                    <div class="code-block">
+                        <div class="code-line"><span class="keyword">Tópicos:</span> INNER JOIN, LEFT JOIN, RIGHT JOIN</div>
+                        <div class="code-line"><span class="keyword">Conteúdo:</span> Subconsultas, ORDER BY, GROUP BY</div>
+                        <div class="code-line"><span class="keyword">Foco:</span> Integrar dados de múltiplas tabelas</div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-graduation-cap"></i> Exercício Final</h3>
+                    <p><strong>Desafio:</strong> Projete um sistema de e-commerce normalizado considerando:</p>
+                    <ul>
+                        <li>Clientes com endereços</li>
+                        <li>Produtos com categorias e fornecedores</li>
+                        <li>Pedidos com múltiplos itens</li>
+                        <li>Pagamentos e entregas</li>
+                    </ul>
+                    <p><strong>Objetivo:</strong> Aplicar todas as formas normais e justificar suas decisões de modelagem.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
