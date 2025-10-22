@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-015: Joins e Consultas Avançadas - Slide 01</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-015: Joins e Consultas Avançadas</h1>
+            <p>Integrando dados de múltiplas tabelas com INNER JOIN, LEFT JOIN, RIGHT JOIN e subconsultas</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-lightbulb"></i> Introdução aos Joins</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-question-circle"></i> O que são Joins?</h3>
+                    <p><strong>JOIN</strong> é uma operação que combina dados de duas ou mais tabelas baseado em uma condição de relacionamento. É como "conectar" tabelas para obter informações mais completas.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Por que Precisamos de Joins?</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Dados Relacionados</h4>
+                            <p>Informações estão espalhadas em várias tabelas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Consultas Completas</h4>
+                            <p>Obter dados de múltiplas fontes em uma única consulta</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chart-line"></i> Relatórios Ricos</h4>
+                            <p>Criar visões integradas dos dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cogs"></i> Eficiência</h4>
+                            <p>Uma consulta em vez de várias</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-database"></i> Exemplo: Sistema de E-commerce</h3>
+                    <p>Imagine que você tem dados separados em tabelas diferentes:</p>
+                    
+                    <h4><i class="fas fa-table"></i> Tabela: CLIENTES</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Tabela: PEDIDOS</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #4CAF50; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Cliente_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">101</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 150</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">102</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-16</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 200</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Problema sem JOIN</h3>
+                    <p>Para obter informações completas, você precisaria fazer <strong>duas consultas separadas</strong>:</p>
+                    <div class="code-block">
+                        <pre><code>-- 1ª Consulta: Buscar pedidos
+SELECT * FROM pedidos WHERE cliente_id = 1;
+
+-- 2ª Consulta: Buscar dados do cliente
+SELECT nome, email FROM clientes WHERE id = 1;</code></pre>
+                    </div>
+                    <p><strong>Problemas:</strong></p>
+                    <ul>
+                        <li>❌ <strong>Duas consultas</strong> em vez de uma</li>
+                        <li>❌ <strong>Dados separados</strong> que precisam ser combinados no código</li>
+                        <li>❌ <strong>Performance</strong> pior com múltiplas consultas</li>
+                        <li>❌ <strong>Complexidade</strong> maior na aplicação</li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-check"></i> Solução com JOIN</h3>
+                    <p>Com JOIN, você obtém <strong>todos os dados em uma única consulta</strong>:</p>
+                    <div class="code-block">
+                        <pre><code>-- Uma única consulta com JOIN
+SELECT 
+    c.nome,
+    c.email,
+    p.data,
+    p.valor
+FROM clientes c
+INNER JOIN pedidos p ON c.id = p.cliente_id
+WHERE c.id = 1;</code></pre>
+                    </div>
+                    <p><strong>Resultado:</strong></p>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 150</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Tipos de JOIN que Estudaremos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-link"></i> INNER JOIN</h4>
+                            <p>Retorna apenas registros que têm correspondência em ambas as tabelas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrow-left"></i> LEFT JOIN</h4>
+                            <p>Retorna todos os registros da tabela da esquerda e correspondências da direita</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrow-right"></i> RIGHT JOIN</h4>
+                            <p>Retorna todos os registros da tabela da direita e correspondências da esquerda</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Subconsultas</h4>
+                            <p>Consultas dentro de outras consultas para filtros complexos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-play"></i> Próximos Passos</h3>
+                    <p>Vamos começar aprendendo o <strong>INNER JOIN</strong>, que é o tipo mais comum e fundamental para entender como conectar tabelas.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

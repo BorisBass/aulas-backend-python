@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-015: Joins e Consultas Avançadas - Slide 07</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-015: Joins e Consultas Avançadas</h1>
+            <p>Exercícios Práticos - Aplicando Joins e Consultas Avançadas</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Cenário: Sistema de Biblioteca</h3>
+                    <p>Vamos praticar com um sistema de biblioteca que tem as seguintes tabelas:</p>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-database"></i> Estrutura das Tabelas</h3>
+                    
+                    <h4><i class="fas fa-table"></i> Tabela: LIVROS</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #3498db; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Título</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Autor_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Categoria_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Ano</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Preço</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Python para Iniciantes</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2023</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 50</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Banco de Dados</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2024</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 60</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Algoritmos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2022</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 45</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">4</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">História do Brasil</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2021</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 35</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Tabela: AUTORES</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #e74c3c; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nacionalidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileiro</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileira</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Carlos Lima</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileiro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Tabela: CATEGORIAS</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Programação</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Algoritmos</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">História</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3><i class="fas fa-pencil-alt"></i> Exercício 1: INNER JOIN</h3>
+                    <p><strong>Objetivo:</strong> Mostrar livros com informações do autor e categoria</p>
+                    <p><strong>Resultado esperado:</strong> Título, Autor, Categoria, Ano, Preço</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua consulta aqui
+SELECT 
+    l.titulo,
+    a.nome as autor,
+    c.nome as categoria,
+    l.ano,
+    l.preco
+FROM livros l
+INNER JOIN autores a ON l.autor_id = a.id
+INNER JOIN categorias c ON l.categoria_id = c.id;</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3><i class="fas fa-pencil-alt"></i> Exercício 2: LEFT JOIN</h3>
+                    <p><strong>Objetivo:</strong> Mostrar TODOS os autores, mesmo os sem livros</p>
+                    <p><strong>Resultado esperado:</strong> Nome do autor, Nacionalidade, Título (NULL se não tiver)</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua consulta aqui
+SELECT 
+    a.nome as autor,
+    a.nacionalidade,
+    l.titulo
+FROM autores a
+LEFT JOIN livros l ON a.id = l.autor_id;</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3><i class="fas fa-pencil-alt"></i> Exercício 3: Subconsulta</h3>
+                    <p><strong>Objetivo:</strong> Encontrar livros com preço acima da média</p>
+                    <p><strong>Resultado esperado:</strong> Título, Preço, Autor</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua consulta aqui
+SELECT 
+    l.titulo,
+    l.preco,
+    a.nome as autor
+FROM livros l
+INNER JOIN autores a ON l.autor_id = a.id
+WHERE l.preco > (
+    SELECT AVG(preco) 
+    FROM livros
+);</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3><i class="fas fa-pencil-alt"></i> Exercício 4: GROUP BY</h3>
+                    <p><strong>Objetivo:</strong> Calcular estatísticas por categoria</p>
+                    <p><strong>Resultado esperado:</strong> Categoria, Total de livros, Preço médio, Preço total</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua consulta aqui
+SELECT 
+    c.nome as categoria,
+    COUNT(*) as total_livros,
+    AVG(l.preco) as preco_medio,
+    SUM(l.preco) as preco_total
+FROM livros l
+INNER JOIN categorias c ON l.categoria_id = c.id
+GROUP BY c.nome;</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3><i class="fas fa-pencil-alt"></i> Exercício 5: ORDER BY</h3>
+                    <p><strong>Objetivo:</strong> Mostrar livros ordenados por preço (maior para menor)</p>
+                    <p><strong>Resultado esperado:</strong> Título, Preço, Autor (ordenado por preço)</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua consulta aqui
+SELECT 
+    l.titulo,
+    l.preco,
+    a.nome as autor
+FROM livros l
+INNER JOIN autores a ON l.autor_id = a.id
+ORDER BY l.preco DESC;</code></pre>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3><i class="fas fa-pencil-alt"></i> Exercício 6: Combinado</h3>
+                    <p><strong>Objetivo:</strong> Mostrar autores com mais livros, ordenados por quantidade</p>
+                    <p><strong>Resultado esperado:</strong> Autor, Quantidade de livros, Preço médio</p>
+                    
+                    <div class="code-block">
+                        <pre><code>-- Sua consulta aqui
+SELECT 
+    a.nome as autor,
+    COUNT(*) as quantidade_livros,
+    AVG(l.preco) as preco_medio
+FROM autores a
+INNER JOIN livros l ON a.id = l.autor_id
+GROUP BY a.nome
+ORDER BY quantidade_livros DESC;</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas para Resolver</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Analise o Problema</h4>
+                            <p>Identifique quais tabelas e colunas você precisa</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-link"></i> Escolha o JOIN</h4>
+                            <p>INNER, LEFT ou RIGHT? Depende do que você quer mostrar</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-calculator"></i> Use Funções</h4>
+                            <p>COUNT, SUM, AVG para cálculos e agrupamentos</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-sort"></i> Ordene Resultados</h4>
+                            <p>ORDER BY para organizar os dados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-check"></i> Soluções dos Exercícios</h3>
+                    <p><strong>Clique nos exercícios acima para ver as soluções!</strong></p>
+                    <p>Lembre-se: existem várias formas de resolver cada exercício. O importante é entender a lógica e praticar!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

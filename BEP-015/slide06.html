@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-015: Joins e Consultas Avançadas - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-015: Joins e Consultas Avançadas</h1>
+            <p>ORDER BY e GROUP BY - Ordenação e agrupamento de dados</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-sort"></i> ORDER BY e GROUP BY</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-question-circle"></i> O que são ORDER BY e GROUP BY?</h3>
+                    <p><strong>ORDER BY</strong> ordena os resultados da consulta em uma ordem específica (crescente ou decrescente).</p>
+                    <p><strong>GROUP BY</strong> agrupa registros com valores iguais e permite fazer cálculos (somas, médias, contagens) em cada grupo.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Conceito Visual</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #3498db; border-radius: 10px; background-color: #ecf0f1;">
+                            <h4 style="color: #2c3e50; margin: 0;">ORDER BY</h4>
+                            <p style="margin: 5px 0;">Organiza dados</p>
+                            <p style="margin: 5px 0; font-size: 0.9em;">A → Z, 1 → 9</p>
+                        </div>
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #e74c3c; border-radius: 10px; background-color: #fadbd8;">
+                            <h4 style="color: #2c3e50; margin: 0;">GROUP BY</h4>
+                            <p style="margin: 5px 0;">Agrupa dados</p>
+                            <p style="margin: 5px 0; font-size: 0.9em;">Soma, Média, Conta</p>
+                        </div>
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #27ae60; border-radius: 10px; background-color: #d5f4e6;">
+                            <h4 style="color: #2c3e50; margin: 0;"><strong>Resultado</strong></h4>
+                            <p style="margin: 5px 0; color: #27ae60; font-weight: bold;">Dados Organizados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-database"></i> Exemplo Prático: Sistema de Vendas</h3>
+                    <p><strong>Cenário:</strong> Queremos analisar vendas por vendedor</p>
+                    
+                    <h4><i class="fas fa-table"></i> Tabela: VENDAS</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #3498db; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Vendedor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Produto</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Notebook</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 2000</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Mouse</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 50</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-16</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Teclado</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 100</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-17</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">4</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Monitor</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 800</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-18</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">5</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Mouse</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 50</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-19</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-code"></i> Sintaxe do ORDER BY</h3>
+                    <div class="code-block">
+                        <pre><code>SELECT coluna1, coluna2
+FROM tabela
+ORDER BY coluna1 ASC;   -- Crescente (padrão)
+ORDER BY coluna1 DESC;  -- Decrescente</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Ordenar Vendas por Valor</h3>
+                    <p><strong>Objetivo:</strong> Mostrar vendas ordenadas por valor (maior para menor)</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT vendedor, produto, valor, data
+FROM vendas
+ORDER BY valor DESC;</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Resultado:</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Vendedor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Produto</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Notebook</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #27ae60; font-weight: bold;">R$ 2000</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Monitor</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #27ae60; font-weight: bold;">R$ 800</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-18</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Teclado</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #27ae60; font-weight: bold;">R$ 100</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-17</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Mouse</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #27ae60; font-weight: bold;">R$ 50</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-16</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Mouse</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #27ae60; font-weight: bold;">R$ 50</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-19</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-code"></i> Sintaxe do GROUP BY</h3>
+                    <div class="code-block">
+                        <pre><code>SELECT coluna_agrupamento, 
+       COUNT(*) as total,
+       SUM(coluna_valor) as soma,
+       AVG(coluna_valor) as media
+FROM tabela
+GROUP BY coluna_agrupamento;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Vendas por Vendedor</h3>
+                    <p><strong>Objetivo:</strong> Calcular total de vendas por vendedor</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT 
+    vendedor,
+    COUNT(*) as total_vendas,
+    SUM(valor) as valor_total,
+    AVG(valor) as valor_medio
+FROM vendas
+GROUP BY vendedor;</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Resultado:</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #9b59b6; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Vendedor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Total Vendas</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor Total</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor Médio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">João</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #9b59b6; font-weight: bold;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #9b59b6; font-weight: bold;">R$ 2150</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #9b59b6; font-weight: bold;">R$ 716,67</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #9b59b6; font-weight: bold;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #9b59b6; font-weight: bold;">R$ 850</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #9b59b6; font-weight: bold;">R$ 425,00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Combinando ORDER BY e GROUP BY</h3>
+                    <p><strong>Objetivo:</strong> Mostrar vendedores ordenados por valor total (maior para menor)</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT 
+    vendedor,
+    COUNT(*) as total_vendas,
+    SUM(valor) as valor_total
+FROM vendas
+GROUP BY vendedor
+ORDER BY valor_total DESC;</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Resultado:</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #e67e22; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Vendedor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Total Vendas</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;"><strong>João</strong></td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #e67e22; font-weight: bold;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #e67e22; font-weight: bold;">R$ 2150</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px;"><strong>Maria</strong></td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #e67e22; font-weight: bold;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center; color: #e67e22; font-weight: bold;">R$ 850</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Funções de Agregação</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-calculator"></i> COUNT()</h4>
+                            <p>Conta o número de registros</p>
+                            <div class="code-block">
+                                <pre><code>COUNT(*) -- Conta todos os registros</code></pre>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-plus"></i> SUM()</h4>
+                            <p>Soma os valores de uma coluna</p>
+                            <div class="code-block">
+                                <pre><code>SUM(valor) -- Soma todos os valores</code></pre>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chart-line"></i> AVG()</h4>
+                            <p>Calcula a média dos valores</p>
+                            <div class="code-block">
+                                <pre><code>AVG(valor) -- Média dos valores</code></pre>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-arrow-up"></i> MAX() / MIN()</h4>
+                            <p>Maior e menor valor</p>
+                            <div class="code-block">
+                                <pre><code>MAX(valor) -- Maior valor
+MIN(valor) -- Menor valor</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Regras Importantes do GROUP BY</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> O que pode estar no SELECT</h4>
+                            <ul>
+                                <li>Colunas do GROUP BY</li>
+                                <li>Funções de agregação</li>
+                                <li>Expressões calculadas</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-times"></i> O que NÃO pode estar no SELECT</h4>
+                            <ul>
+                                <li>Colunas não agrupadas</li>
+                                <li>Valores individuais</li>
+                                <li>Colunas sem função</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-lightbulb"></i> Dica Importante</h3>
+                    <p><strong>ORDER BY e GROUP BY</strong> são fundamentais para:</p>
+                    <ul>
+                        <li>📊 <strong>Relatórios</strong> - organizar e resumir dados</li>
+                        <li>📈 <strong>Análises</strong> - identificar padrões e tendências</li>
+                        <li>🎯 <strong>Rankings</strong> - ordenar por performance</li>
+                        <li>📋 <strong>Resumos</strong> - agrupar e calcular totais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

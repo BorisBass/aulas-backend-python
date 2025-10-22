@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-015: Joins e Consultas Avançadas - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-015: Joins e Consultas Avançadas</h1>
+            <p>INNER JOIN - Conectando tabelas com correspondências</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-link"></i> INNER JOIN</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-question-circle"></i> O que é INNER JOIN?</h3>
+                    <p><strong>INNER JOIN</strong> retorna apenas os registros que têm <strong>correspondência em ambas as tabelas</strong>. É como uma "interseção" entre duas tabelas.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Conceito Visual</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #3498db; border-radius: 10px; background-color: #ecf0f1;">
+                            <h4 style="color: #2c3e50; margin: 0;">Tabela A</h4>
+                            <p style="margin: 5px 0;">Registros: 1, 2, 3</p>
+                        </div>
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #e74c3c; border-radius: 10px; background-color: #fadbd8;">
+                            <h4 style="color: #2c3e50; margin: 0;">Tabela B</h4>
+                            <p style="margin: 5px 0;">Registros: 2, 3, 4</p>
+                        </div>
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #27ae60; border-radius: 10px; background-color: #d5f4e6;">
+                            <h4 style="color: #2c3e50; margin: 0;"><strong>INNER JOIN</strong></h4>
+                            <p style="margin: 5px 0; color: #27ae60; font-weight: bold;">Resultado: 2, 3</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: #7f8c8d; font-style: italic;">Apenas registros que existem em AMBAS as tabelas</p>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-database"></i> Exemplo Prático: Sistema de Biblioteca</h3>
+                    
+                    <h4><i class="fas fa-table"></i> Tabela: LIVROS</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #3498db; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Título</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Autor_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Ano</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Python para Iniciantes</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2023</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Banco de Dados</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2024</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Algoritmos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2022</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Tabela: AUTORES</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #e74c3c; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nacionalidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileiro</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileira</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Carlos Lima</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileiro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-code"></i> Sintaxe do INNER JOIN</h3>
+                    <div class="code-block">
+                        <pre><code>SELECT 
+    tabela1.coluna1,
+    tabela1.coluna2,
+    tabela2.coluna1,
+    tabela2.coluna2
+FROM tabela1
+INNER JOIN tabela2 ON tabela1.chave_estrangeira = tabela2.chave_primaria;</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Livros com Autores</h3>
+                    <p><strong>Objetivo:</strong> Mostrar livros com informações dos autores</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT 
+    l.titulo,
+    l.ano,
+    a.nome as autor,
+    a.nacionalidade
+FROM livros l
+INNER JOIN autores a ON l.autor_id = a.id;</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Resultado:</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Título</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Ano</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Autor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nacionalidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">Python para Iniciantes</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2023</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileiro</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px;">Banco de Dados</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2024</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileira</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">Algoritmos</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2022</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Brasileiro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante: Registros que NÃO Aparecem</h3>
+                    <p>Note que <strong>Carlos Lima (ID: 3)</strong> não aparece no resultado porque:</p>
+                    <ul>
+                        <li>✅ Ele existe na tabela <strong>AUTORES</strong></li>
+                        <li>❌ Mas NÃO existe nenhum livro com <strong>autor_id = 3</strong></li>
+                        <li>🔍 <strong>INNER JOIN</strong> só mostra registros que têm correspondência em AMBAS as tabelas</li>
+                    </ul>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Características do INNER JOIN</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> Vantagens</h4>
+                            <ul>
+                                <li>Dados sempre relacionados</li>
+                                <li>Performance boa</li>
+                                <li>Resultado limpo</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Limitações</h4>
+                            <ul>
+                                <li>Pode "perder" registros</li>
+                                <li>Não mostra dados órfãos</li>
+                                <li>Pode não ser o que você quer</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-lightbulb"></i> Dica Importante</h3>
+                    <p>Use <strong>INNER JOIN</strong> quando você quer apenas registros que têm correspondência em ambas as tabelas. Se você quiser ver TODOS os registros de uma tabela (mesmo sem correspondência), use <strong>LEFT JOIN</strong> ou <strong>RIGHT JOIN</strong>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>

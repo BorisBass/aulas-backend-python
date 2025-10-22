@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-015: Joins e Consultas Avançadas - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-015: Joins e Consultas Avançadas</h1>
+            <p>Subconsultas - Consultas dentro de outras consultas</p>
+        </div>
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-search"></i> Subconsultas</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-question-circle"></i> O que são Subconsultas?</h3>
+                    <p><strong>Subconsultas</strong> são consultas SQL que ficam <strong>dentro de outras consultas</strong>. Elas permitem fazer filtros complexos e obter dados baseados em resultados de outras consultas.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Conceito Visual</h3>
+                    <div style="text-align: center; margin: 20px 0;">
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #3498db; border-radius: 10px; background-color: #ecf0f1;">
+                            <h4 style="color: #2c3e50; margin: 0;">Consulta Principal</h4>
+                            <p style="margin: 5px 0;">SELECT * FROM tabela</p>
+                        </div>
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #e74c3c; border-radius: 10px; background-color: #fadbd8;">
+                            <h4 style="color: #2c3e50; margin: 0;">Subconsulta</h4>
+                            <p style="margin: 5px 0;">WHERE id IN (SELECT...)</p>
+                        </div>
+                        <div style="display: inline-block; margin: 10px; padding: 20px; border: 3px solid #27ae60; border-radius: 10px; background-color: #d5f4e6;">
+                            <h4 style="color: #2c3e50; margin: 0;"><strong>Resultado</strong></h4>
+                            <p style="margin: 5px 0; color: #27ae60; font-weight: bold;">Dados Filtrados</p>
+                        </div>
+                    </div>
+                    <p style="text-align: center; color: #7f8c8d; font-style: italic;">A subconsulta é executada primeiro e seu resultado é usado na consulta principal</p>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-database"></i> Exemplo Prático: Sistema de E-commerce</h3>
+                    <p><strong>Cenário:</strong> Queremos encontrar clientes que fizeram pedidos acima de R$ 200</p>
+                    
+                    <h4><i class="fas fa-table"></i> Tabela: CLIENTES</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #3498db; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">Carlos Lima</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">carlos@email.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Tabela: PEDIDOS</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #e74c3c; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Cliente_ID</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Valor</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">101</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 150</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-15</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">102</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">2</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 250</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-16</td>
+                                </tr>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">103</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">1</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 300</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-17</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">104</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">3</td>
+                                    <td style="border: 1px solid #333; padding: 12px; text-align: center;">R$ 100</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">2025-01-18</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-code"></i> Sintaxe das Subconsultas</h3>
+                    <div class="code-block">
+                        <pre><code>SELECT coluna1, coluna2
+FROM tabela1
+WHERE coluna IN (SELECT coluna FROM tabela2 WHERE condição);</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Clientes com Pedidos Acima de R$ 200</h3>
+                    <p><strong>Objetivo:</strong> Encontrar clientes que fizeram pedidos acima de R$ 200</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT nome, email
+FROM clientes
+WHERE id IN (
+    SELECT cliente_id 
+    FROM pedidos 
+    WHERE valor > 200
+);</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Resultado:</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #27ae60; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f9f9f9;">
+                                    <td style="border: 1px solid #333; padding: 12px;">João Silva</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">joao@email.com</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid #333; padding: 12px;">Maria Santos</td>
+                                    <td style="border: 1px solid #333; padding: 12px;">maria@email.com</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Tipos de Subconsultas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Subconsulta com IN</h4>
+                            <p>Verifica se um valor está em uma lista de resultados</p>
+                            <div class="code-block">
+                                <pre><code>WHERE id IN (SELECT id FROM tabela)</code></pre>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-equals"></i> Subconsulta com =</h4>
+                            <p>Compara com um único valor</p>
+                            <div class="code-block">
+                                <pre><code>WHERE id = (SELECT MAX(id) FROM tabela)</code></pre>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-greater-than"></i> Subconsulta com ></h4>
+                            <p>Compara com um valor calculado</p>
+                            <div class="code-block">
+                                <pre><code>WHERE valor > (SELECT AVG(valor) FROM tabela)</code></pre>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Subconsulta com EXISTS</h4>
+                            <p>Verifica se existe pelo menos um registro</p>
+                            <div class="code-block">
+                                <pre><code>WHERE EXISTS (SELECT 1 FROM tabela WHERE condição)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Clientes com Pedidos Acima da Média</h3>
+                    <p><strong>Objetivo:</strong> Encontrar clientes que fizeram pedidos acima do valor médio</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT nome, email
+FROM clientes
+WHERE id IN (
+    SELECT cliente_id 
+    FROM pedidos 
+    WHERE valor > (
+        SELECT AVG(valor) 
+        FROM pedidos
+    )
+);</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-calculator"></i> Cálculo da Média:</h4>
+                    <p>Média dos pedidos: (150 + 250 + 300 + 100) ÷ 4 = <strong>R$ 200</strong></p>
+                    <p>Pedidos acima da média: R$ 250 e R$ 300</p>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exemplo Prático: Clientes que NUNCA Fizeram Pedidos</h3>
+                    <p><strong>Objetivo:</strong> Encontrar clientes que não têm pedidos</p>
+                    
+                    <div class="code-block">
+                        <pre><code>SELECT nome, email
+FROM clientes
+WHERE id NOT IN (
+    SELECT cliente_id 
+    FROM pedidos 
+    WHERE cliente_id IS NOT NULL
+);</code></pre>
+                    </div>
+
+                    <h4><i class="fas fa-table"></i> Resultado:</h4>
+                    <div style="overflow-x: auto; margin: 20px 0;">
+                        <table style="width: 100%; border-collapse: collapse; border: 2px solid #333;">
+                            <thead>
+                                <tr style="background-color: #dc3545; color: white;">
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Nome</th>
+                                    <th style="border: 1px solid #333; padding: 12px; text-align: center;">Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #f8d7da;">
+                                    <td style="border: 1px solid #333; padding: 12px;"><strong>Carlos Lima</strong></td>
+                                    <td style="border: 1px solid #333; padding: 12px;"><strong>carlos@email.com</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados com Subconsultas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-clock"></i> Performance</h4>
+                            <p>Subconsultas podem ser lentas em tabelas grandes</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exclamation-triangle"></i> NULL Values</h4>
+                            <p>Use IS NOT NULL para evitar problemas</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-code"></i> Legibilidade</h4>
+                            <p>Às vezes JOIN é mais claro que subconsulta</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cogs"></i> Alternativas</h4>
+                            <p>Considere usar JOIN quando possível</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3><i class="fas fa-lightbulb"></i> Dica Importante</h3>
+                    <p><strong>Subconsultas são poderosas</strong> para filtros complexos, mas:</p>
+                    <ul>
+                        <li>🔍 <strong>Use quando</strong> você precisa de filtros baseados em cálculos</li>
+                        <li>⚡ <strong>Considere JOIN</strong> para melhor performance</li>
+                        <li>🧹 <strong>Mantenha simples</strong> para facilitar manutenção</li>
+                        <li>📊 <strong>Teste performance</strong> em dados reais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    <script src="../script.js"></script>
+</body>
+</html>
