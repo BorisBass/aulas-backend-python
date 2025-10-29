@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-016: Conectando a Banco de Dados - Slide 02</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Biblioteca SQLite3 - Instalação e Uso Básico</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-download"></i> Biblioteca SQLite3</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> O que é SQLite3?</h3>
+                    <p><strong>SQLite3</strong> é uma biblioteca Python que permite conectar e trabalhar com bancos de dados SQLite. É uma biblioteca <strong>nativa</strong> do Python, ou seja, já vem instalada!</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Verificação de Instalação</h3>
+                    <p>Para verificar se o SQLite3 está disponível, execute:</p>
+                    <div class="code-block">
+                        <h4><i class="fas fa-code"></i> Verificar SQLite3</h4>
+                        <div class="code-container">
+                            <pre><code>import sqlite3
+print(sqlite3.version)
+print(sqlite3.sqlite_version)</code></pre>
+                        </div>
+                    </div>
+                    <p><strong>Resultado esperado:</strong> Versão da biblioteca Python e versão do SQLite</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-plug"></i> Conectando ao Banco</h3>
+                    <p><strong>Conceito:</strong> Para trabalhar com SQLite, primeiro precisamos estabelecer uma conexão.</p>
+                    
+                    <div class="code-block">
+                        <h4><i class="fas fa-code"></i> Conexão Básica</h4>
+                        <div class="code-container">
+                            <pre><code>import sqlite3
+
+# Conectar ao banco (cria se não existir)
+conn = sqlite3.connect('meu_banco.db')
+print("✅ Conectado ao banco de dados!")
+
+# Criar cursor para executar comandos
+cursor = conn.cursor()
+print("✅ Cursor criado!")
+
+# Fechar conexão
+conn.close()
+print("🔒 Conexão fechada!")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-database"></i> Criando Tabelas</h3>
+                    <p><strong>Conceito:</strong> Tabelas são estruturas que organizam os dados em linhas e colunas.</p>
+                    
+                    <div class="code-block">
+                        <h4><i class="fas fa-code"></i> Criar Tabela de Alunos</h4>
+                        <div class="code-container">
+                            <pre><code>import sqlite3
+
+# Conectar ao banco
+conn = sqlite3.connect('escola.db')
+cursor = conn.cursor()
+
+# Criar tabela
+cursor.execute('''
+    CREATE TABLE alunos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        idade INTEGER,
+        curso TEXT,
+        nota REAL
+    )
+''')
+
+# Salvar alterações
+conn.commit()
+print("✅ Tabela 'alunos' criada com sucesso!")
+
+# Fechar conexão
+conn.close()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-plus"></i> Inserindo Dados</h3>
+                    <p><strong>Conceito:</strong> INSERT adiciona novos registros na tabela.</p>
+                    
+                    <div class="code-block">
+                        <h4><i class="fas fa-code"></i> Inserir Alunos</h4>
+                        <div class="code-container">
+                            <pre><code>import sqlite3
+
+# Conectar ao banco
+conn = sqlite3.connect('escola.db')
+cursor = conn.cursor()
+
+# Inserir um aluno
+cursor.execute('''
+    INSERT INTO alunos (nome, idade, curso, nota)
+    VALUES ('João Silva', 20, 'Python', 8.5)
+''')
+
+# Inserir outro aluno
+cursor.execute('''
+    INSERT INTO alunos (nome, idade, curso, nota)
+    VALUES ('Maria Santos', 22, 'Python', 9.0)
+''')
+
+# Salvar alterações
+conn.commit()
+print("✅ Alunos inseridos com sucesso!")
+
+# Fechar conexão
+conn.close()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-list"></i> Consultando Dados</h3>
+                    <p><strong>Conceito:</strong> SELECT recupera dados da tabela.</p>
+                    
+                    <div class="code-block">
+                        <h4><i class="fas fa-code"></i> Consultar Alunos</h4>
+                        <div class="code-container">
+                            <pre><code>import sqlite3
+
+# Conectar ao banco
+conn = sqlite3.connect('escola.db')
+cursor = conn.cursor()
+
+# Consultar todos os alunos
+cursor.execute("SELECT * FROM alunos")
+alunos = cursor.fetchall()
+
+print("📋 LISTA DE ALUNOS:")
+print("-" * 50)
+for aluno in alunos:
+    print(f"ID: {aluno[0]}, Nome: {aluno[1]}, Idade: {aluno[2]}, Curso: {aluno[3]}, Nota: {aluno[4]}")
+
+# Fechar conexão
+conn.close()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Pontos Importantes</h3>
+                    <ul>
+                        <li><strong>Sempre feche a conexão:</strong> Use <code>conn.close()</code> para liberar recursos</li>
+                        <li><strong>Commit as alterações:</strong> Use <code>conn.commit()</code> para salvar mudanças</li>
+                        <li><strong>Tratamento de erros:</strong> Use try/except para capturar erros</li>
+                        <li><strong>Arquivo do banco:</strong> SQLite cria um arquivo .db no diretório atual</li>
+                    </ul>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Teste Prático</h3>
+                    <ol>
+                        <li><strong>Execute o código de conexão</strong> para criar o banco</li>
+                        <li><strong>Crie a tabela alunos</strong> com os campos especificados</li>
+                        <li><strong>Insira alguns alunos</strong> com dados diferentes</li>
+                        <li><strong>Consulte os dados</strong> para verificar se foram salvos</li>
+                        <li><strong>Verifique o arquivo</strong> escola.db criado no diretório</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-016: Conectando a Banco de Dados</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

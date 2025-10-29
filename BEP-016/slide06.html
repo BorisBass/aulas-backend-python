@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-016: Conectando a Banco de Dados - Slide 06</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Resumo e Próximos Passos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-graduation-cap"></i> Resumo do Aprendizado</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> O que Aprendemos</h3>
+                    <p>Nesta aula, você aprendeu os conceitos fundamentais para conectar Python a bancos de dados:</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-database"></i> Conceitos Fundamentais</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-plug"></i> Conexão</h4>
+                            <ul>
+                                <li>sqlite3.connect()</li>
+                                <li>Criação de cursor</li>
+                                <li>Fechamento de conexão</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-table"></i> Tabelas</h4>
+                            <ul>
+                                <li>CREATE TABLE</li>
+                                <li>Tipos de dados</li>
+                                <li>Chaves primárias</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-plus"></i> Operações CRUD</h4>
+                            <ul>
+                                <li>INSERT (Create)</li>
+                                <li>SELECT (Read)</li>
+                                <li>UPDATE (Update)</li>
+                                <li>DELETE (Delete)</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield-alt"></i> Tratamento de Erros</h4>
+                            <ul>
+                                <li>Try/except</li>
+                                <li>Validação de dados</li>
+                                <li>Mensagens de erro</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-code"></i> Comandos SQL Essenciais</h3>
+                    <div class="code-block">
+                        <h4><i class="fas fa-code"></i> Comandos Básicos</h4>
+                        <div class="code-container">
+                            <pre><code># Conectar ao banco
+conn = sqlite3.connect('banco.db')
+cursor = conn.cursor()
+
+# Criar tabela
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS tabela (
+        id INTEGER PRIMARY KEY,
+        nome TEXT NOT NULL
+    )
+''')
+
+# Inserir dados
+cursor.execute('''
+    INSERT INTO tabela (nome)
+    VALUES (?)
+''', ('valor',))
+
+# Consultar dados
+cursor.execute("SELECT * FROM tabela")
+dados = cursor.fetchall()
+
+# Atualizar dados
+cursor.execute('''
+    UPDATE tabela 
+    SET nome = ? 
+    WHERE id = ?
+''', ('novo_valor', 1))
+
+# Deletar dados
+cursor.execute("DELETE FROM tabela WHERE id = ?", (1,))
+
+# Salvar alterações
+conn.commit()
+
+# Fechar conexão
+conn.close()</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-star"></i> Boas Práticas Aprendidas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-lock"></i> Segurança</h4>
+                            <ul>
+                                <li>Usar ? para parâmetros</li>
+                                <li>Validar entrada do usuário</li>
+                                <li>Tratar erros adequadamente</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cogs"></i> Eficiência</h4>
+                            <ul>
+                                <li>Sempre fechar conexões</li>
+                                <li>Usar commit() para salvar</li>
+                                <li>Preparar statements</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-code"></i> Código Limpo</h4>
+                            <ul>
+                                <li>Funções bem definidas</li>
+                                <li>Comentários explicativos</li>
+                                <li>Tratamento de erros</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-user"></i> Usabilidade</h4>
+                            <ul>
+                                <li>Menus interativos</li>
+                                <li>Mensagens claras</li>
+                                <li>Confirmações importantes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-rocket"></i> Próximos Passos</h3>
+                    <p>Agora que você domina o básico, pode explorar tópicos mais avançados:</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-arrow-right"></i> Tópicos Avançados</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Bancos Relacionais</h4>
+                            <ul>
+                                <li>MySQL</li>
+                                <li>PostgreSQL</li>
+                                <li>Oracle</li>
+                                <li>SQL Server</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-code"></i> ORMs</h4>
+                            <ul>
+                                <li>SQLAlchemy</li>
+                                <li>Django ORM</li>
+                                <li>Peewee</li>
+                                <li>SQLObject</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-cloud"></i> Bancos NoSQL</h4>
+                            <ul>
+                                <li>MongoDB</li>
+                                <li>Redis</li>
+                                <li>Cassandra</li>
+                                <li>Neo4j</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-globe"></i> Web Development</h4>
+                            <ul>
+                                <li>Flask + SQLite</li>
+                                <li>Django + PostgreSQL</li>
+                                <li>FastAPI + MySQL</li>
+                                <li>APIs RESTful</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Projetos Sugeridos</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-shopping-cart"></i> E-commerce</h4>
+                            <p>Sistema de loja online com produtos, clientes e pedidos</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-book"></i> Biblioteca</h4>
+                            <p>Sistema de empréstimo de livros com usuários e livros</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-graduation-cap"></i> Escola</h4>
+                            <p>Sistema de notas e frequência de alunos</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-hospital"></i> Clínica</h4>
+                            <p>Sistema de agendamento de consultas médicas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-trophy"></i> Parabéns!</h3>
+                    <p>Você concluiu com sucesso o módulo de <strong>Conectando a Banco de Dados</strong>!</p>
+                    <p>Agora você tem as ferramentas necessárias para:</p>
+                    <ul>
+                        <li>✅ Conectar Python a bancos de dados</li>
+                        <li>✅ Criar e gerenciar tabelas</li>
+                        <li>✅ Implementar operações CRUD</li>
+                        <li>✅ Tratar erros adequadamente</li>
+                        <li>✅ Criar sistemas completos</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Lembre-se</h3>
+                    <ul>
+                        <li><strong>Pratique sempre:</strong> A programação melhora com a prática</li>
+                        <li><strong>Faça projetos:</strong> Aplique o conhecimento em projetos reais</li>
+                        <li><strong>Continue aprendendo:</strong> A tecnologia evolui constantemente</li>
+                        <li><strong>Compartilhe conhecimento:</strong> Ensine outros e aprenda mais</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-016: Conectando a Banco de Dados</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

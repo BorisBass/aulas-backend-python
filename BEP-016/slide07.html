@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-013: Comandos de Atualização e Remoção - Slide 12</title>
+    <title>BEP-016: Conectando a Banco de Dados - Slide 07</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-edit"></i> BEP-013: Comandos de Atualização e Remoção</h1>
-            <p>CRUD Completo em Python</p>
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Sistema CRUD Completo em Python</p>
         </div>
         
         <div class="nav">
@@ -19,13 +19,13 @@
         </div>
         
         <div class="content">
-            <div class="slide active" id="slide12">
-                <h2><i class="fas fa-laptop-code"></i> Sistema de Gerenciamento de Clientes</h2>
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-laptop-code"></i> Sistema de Gerenciamento de Alunos</h2>
                 
                 <div class="info">
                     <h3><i class="fas fa-info-circle"></i> O que vamos criar?</h3>
                     <p><strong>Sistema CRUD Completo</strong> com funcionalidades de Create (Criar), Read (Ler), Update (Atualizar) e Delete (Deletar) usando SQLite3.</p>
-                    <p><strong>Prática:</strong> Vamos criar um sistema de gerenciamento de clientes com menu interativo usando todas as operações SQL.</p>
+                    <p><strong>Prática:</strong> Vamos criar um sistema de gerenciamento de alunos com menu interativo usando todas as operações SQL.</p>
                 </div>
 
                 <div class="info">
@@ -43,19 +43,17 @@ import os
 def conectar_banco():
     """Conecta ao banco de dados"""
     try:
-        conn = sqlite3.connect('clientes.db')
+        conn = sqlite3.connect('alunos.db')
         cursor = conn.cursor()
         
         # Criar tabela se não existir
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS clientes (
+            CREATE TABLE IF NOT EXISTS alunos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
-                email TEXT UNIQUE,
-                telefone TEXT,
-                cidade TEXT,
                 idade INTEGER,
-                categoria TEXT DEFAULT 'Normal',
+                curso TEXT,
+                nota REAL,
                 data_cadastro DATE DEFAULT CURRENT_DATE
             )
         ''')
@@ -69,13 +67,13 @@ def conectar_banco():
 def exibir_menu():
     """Exibe o menu principal"""
     print("\n" + "="*50)
-    print("🏪 SISTEMA DE GERENCIAMENTO DE CLIENTES")
+    print("🎓 SISTEMA DE GERENCIAMENTO DE ALUNOS")
     print("="*50)
-    print("1. 📝 Cadastrar novo cliente")
-    print("2. 📋 Listar todos os clientes")
-    print("3. 🔍 Buscar cliente por nome")
-    print("4. ✏️ Atualizar dados do cliente")
-    print("5. 🗑️ Remover cliente")
+    print("1. 📝 Cadastrar novo aluno")
+    print("2. 📋 Listar todos os alunos")
+    print("3. 🔍 Buscar aluno por nome")
+    print("4. ✏️ Atualizar dados do aluno")
+    print("5. 🗑️ Remover aluno")
     print("6. 📊 Estatísticas")
     print("0. 🚪 Sair")
     print("="*50)</code></pre>
@@ -83,28 +81,24 @@ def exibir_menu():
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-plus"></i> 2. CREATE - Cadastrar Cliente</h3>
-                    <p><strong>Conceito:</strong> Função para inserir novos clientes no banco de dados.</p>
+                    <h3><i class="fas fa-plus"></i> 2. CREATE - Cadastrar Aluno</h3>
+                    <p><strong>Conceito:</strong> Função para inserir novos alunos no banco de dados.</p>
                     <p><strong>Prática:</strong> Validação de dados e inserção com tratamento de erros.</p>
                 </div>
 
                 <div class="code-block">
-                    <h4><i class="fas fa-code"></i> Célula 2: Cadastrar Cliente</h4>
+                    <h4><i class="fas fa-code"></i> Célula 2: Cadastrar Aluno</h4>
                     <div class="code-container">
-                        <pre><code>def cadastrar_cliente(cursor, conn):
-    """Cadastra um novo cliente"""
+                        <pre><code>def cadastrar_aluno(cursor, conn):
+    """Cadastra um novo aluno"""
     try:
-        print("\n📝 CADASTRO DE NOVO CLIENTE")
+        print("\n📝 CADASTRO DE NOVO ALUNO")
         print("-" * 30)
         
         nome = input("Nome completo: ").strip()
         if not nome:
             print("❌ Nome é obrigatório!")
             return
-        
-        email = input("Email: ").strip()
-        telefone = input("Telefone: ").strip()
-        cidade = input("Cidade: ").strip()
         
         idade = input("Idade: ").strip()
         if idade:
@@ -114,21 +108,28 @@ def exibir_menu():
                 print("❌ Idade deve ser um número!")
                 return
         
-        categoria = input("Categoria (Normal/VIP): ").strip()
-        if not categoria:
-            categoria = "Normal"
+        curso = input("Curso: ").strip()
+        
+        nota = input("Nota (0-10): ").strip()
+        if nota:
+            try:
+                nota = float(nota)
+                if nota < 0 or nota > 10:
+                    print("❌ Nota deve estar entre 0 e 10!")
+                    return
+            except ValueError:
+                print("❌ Nota deve ser um número!")
+                return
         
         # Inserir no banco
         cursor.execute('''
-            INSERT INTO clientes (nome, email, telefone, cidade, idade, categoria)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ''', (nome, email, telefone, cidade, idade, categoria))
+            INSERT INTO alunos (nome, idade, curso, nota)
+            VALUES (?, ?, ?, ?)
+        ''', (nome, idade, curso, nota))
         
         conn.commit()
-        print(f"✅ Cliente '{nome}' cadastrado com sucesso!")
+        print(f"✅ Aluno '{nome}' cadastrado com sucesso!")
         
-    except sqlite3.IntegrityError:
-        print("❌ Erro: Email já cadastrado!")
     except sqlite3.Error as e:
         print(f"❌ Erro no banco: {e}")
     except Exception as e:
@@ -137,140 +138,136 @@ def exibir_menu():
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-list"></i> 3. READ - Listar Clientes</h3>
-                    <p><strong>Conceito:</strong> Função para exibir todos os clientes cadastrados.</p>
+                    <h3><i class="fas fa-list"></i> 3. READ - Listar Alunos</h3>
+                    <p><strong>Conceito:</strong> Função para exibir todos os alunos cadastrados.</p>
                     <p><strong>Prática:</strong> Consulta SELECT com formatação de saída.</p>
                 </div>
 
                 <div class="code-block">
-                    <h4><i class="fas fa-code"></i> Célula 3: Listar Clientes</h4>
+                    <h4><i class="fas fa-code"></i> Célula 3: Listar Alunos</h4>
                     <div class="code-container">
-                        <pre><code>def listar_clientes(cursor):
-    """Lista todos os clientes"""
+                        <pre><code>def listar_alunos(cursor):
+    """Lista todos os alunos"""
     try:
-        cursor.execute("SELECT * FROM clientes ORDER BY nome")
-        clientes = cursor.fetchall()
+        cursor.execute("SELECT * FROM alunos ORDER BY nome")
+        alunos = cursor.fetchall()
         
-        if not clientes:
-            print("📭 Nenhum cliente cadastrado!")
+        if not alunos:
+            print("📭 Nenhum aluno cadastrado!")
             return
         
-        print(f"\n📋 LISTA DE CLIENTES ({len(clientes)} cadastrados)")
-        print("-" * 100)
-        print(f"{'ID':<3} {'Nome':<25} {'Email':<25} {'Cidade':<15} {'Idade':<5} {'Categoria':<10} {'Data'}")
-        print("-" * 100)
+        print(f"\n📋 LISTA DE ALUNOS ({len(alunos)} cadastrados)")
+        print("-" * 90)
+        print(f"{'ID':<3} {'Nome':<25} {'Idade':<5} {'Curso':<15} {'Nota':<5} {'Data'}")
+        print("-" * 90)
         
-        for cliente in clientes:
-            id_cliente, nome, email, telefone, cidade, idade, categoria, data = cliente
-            email_display = email if email else "Não informado"
-            cidade_display = cidade if cidade else "Não informado"
+        for aluno in alunos:
+            id_aluno, nome, idade, curso, nota, data = aluno
             idade_display = idade if idade else "N/A"
-            categoria_display = categoria if categoria else "Normal"
-            print(f"{id_cliente:<3} {nome:<25} {email_display:<25} {cidade_display:<15} {idade_display:<5} {categoria_display:<10} {data}")
+            curso_display = curso if curso else "N/A"
+            nota_display = f"{nota:.1f}" if nota else "N/A"
+            print(f"{id_aluno:<3} {nome:<25} {idade_display:<5} {curso_display:<15} {nota_display:<5} {data}")
             
     except sqlite3.Error as e:
-        print(f"❌ Erro ao listar clientes: {e}")</code></pre>
+        print(f"❌ Erro ao listar alunos: {e}")</code></pre>
                     </div>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-search"></i> 4. READ - Buscar Cliente</h3>
-                    <p><strong>Conceito:</strong> Função para buscar clientes por nome usando LIKE.</p>
+                    <h3><i class="fas fa-search"></i> 4. READ - Buscar Aluno</h3>
+                    <p><strong>Conceito:</strong> Função para buscar alunos por nome usando LIKE.</p>
                     <p><strong>Prática:</strong> Consulta com filtro e tratamento de resultados vazios.</p>
                 </div>
 
                 <div class="code-block">
-                    <h4><i class="fas fa-code"></i> Célula 4: Buscar Cliente</h4>
+                    <h4><i class="fas fa-code"></i> Célula 4: Buscar Aluno</h4>
                     <div class="code-container">
-                        <pre><code>def buscar_cliente(cursor):
-    """Busca cliente por nome"""
+                        <pre><code>def buscar_aluno(cursor):
+    """Busca aluno por nome"""
     try:
         nome_busca = input("\n🔍 Digite o nome para buscar: ").strip()
         if not nome_busca:
             print("❌ Digite um nome para buscar!")
             return
         
-        cursor.execute("SELECT * FROM clientes WHERE nome LIKE ? ORDER BY nome", 
+        cursor.execute("SELECT * FROM alunos WHERE nome LIKE ? ORDER BY nome", 
                       (f"%{nome_busca}%",))
-        clientes = cursor.fetchall()
+        alunos = cursor.fetchall()
         
-        if not clientes:
-            print(f"📭 Nenhum cliente encontrado com '{nome_busca}'")
+        if not alunos:
+            print(f"📭 Nenhum aluno encontrado com '{nome_busca}'")
             return
         
-        print(f"\n🔍 RESULTADO DA BUSCA por '{nome_busca}' ({len(clientes)} encontrados)")
-        print("-" * 100)
-        print(f"{'ID':<3} {'Nome':<25} {'Email':<25} {'Cidade':<15} {'Idade':<5} {'Categoria':<10} {'Data'}")
-        print("-" * 100)
+        print(f"\n🔍 RESULTADO DA BUSCA por '{nome_busca}' ({len(alunos)} encontrados)")
+        print("-" * 90)
+        print(f"{'ID':<3} {'Nome':<25} {'Idade':<5} {'Curso':<15} {'Nota':<5} {'Data'}")
+        print("-" * 90)
         
-        for cliente in clientes:
-            id_cliente, nome, email, telefone, cidade, idade, categoria, data = cliente
-            email_display = email if email else "Não informado"
-            cidade_display = cidade if cidade else "Não informado"
+        for aluno in alunos:
+            id_aluno, nome, idade, curso, nota, data = aluno
             idade_display = idade if idade else "N/A"
-            categoria_display = categoria if categoria else "Normal"
-            print(f"{id_cliente:<3} {nome:<25} {email_display:<25} {cidade_display:<15} {idade_display:<5} {categoria_display:<10} {data}")
+            curso_display = curso if curso else "N/A"
+            nota_display = f"{nota:.1f}" if nota else "N/A"
+            print(f"{id_aluno:<3} {nome:<25} {idade_display:<5} {curso_display:<15} {nota_display:<5} {data}")
             
     except sqlite3.Error as e:
-        print(f"❌ Erro ao buscar cliente: {e}")</code></pre>
+        print(f"❌ Erro ao buscar aluno: {e}")</code></pre>
                     </div>
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-edit"></i> 5. UPDATE - Atualizar Cliente</h3>
-                    <p><strong>Conceito:</strong> Função para atualizar dados de um cliente existente.</p>
+                    <h3><i class="fas fa-edit"></i> 5. UPDATE - Atualizar Aluno</h3>
+                    <p><strong>Conceito:</strong> Função para atualizar dados de um aluno existente.</p>
                     <p><strong>Prática:</strong> Consulta por ID e atualização com validação.</p>
                 </div>
 
                 <div class="code-block">
-                    <h4><i class="fas fa-code"></i> Célula 5: Atualizar Cliente</h4>
+                    <h4><i class="fas fa-code"></i> Célula 5: Atualizar Aluno</h4>
                     <div class="code-container">
-                        <pre><code>def atualizar_cliente(cursor, conn):
-    """Atualiza dados de um cliente"""
+                        <pre><code>def atualizar_aluno(cursor, conn):
+    """Atualiza dados de um aluno"""
     try:
-        print("\n✏️ ATUALIZAR DADOS DO CLIENTE")
+        print("\n✏️ ATUALIZAR DADOS DO ALUNO")
         print("-" * 30)
         
         # Mostrar lista para facilitar escolha
-        cursor.execute("SELECT id, nome FROM clientes ORDER BY nome")
-        clientes = cursor.fetchall()
+        cursor.execute("SELECT id, nome FROM alunos ORDER BY nome")
+        alunos = cursor.fetchall()
         
-        if not clientes:
-            print("📭 Nenhum cliente cadastrado!")
+        if not alunos:
+            print("📭 Nenhum aluno cadastrado!")
             return
         
-        print("📋 Clientes disponíveis:")
-        for cliente in clientes:
-            print(f"  {cliente[0]} - {cliente[1]}")
+        print("📋 Alunos disponíveis:")
+        for aluno in alunos:
+            print(f"  {aluno[0]} - {aluno[1]}")
         
-        cliente_id = input("\nDigite o ID do cliente: ").strip()
-        if not cliente_id:
+        aluno_id = input("\nDigite o ID do aluno: ").strip()
+        if not aluno_id:
             print("❌ ID é obrigatório!")
             return
         
         try:
-            cliente_id = int(cliente_id)
+            aluno_id = int(aluno_id)
         except ValueError:
             print("❌ ID deve ser um número!")
             return
         
-        # Verificar se cliente existe
-        cursor.execute("SELECT nome FROM clientes WHERE id = ?", (cliente_id,))
-        cliente_existe = cursor.fetchone()
+        # Verificar se aluno existe
+        cursor.execute("SELECT nome FROM alunos WHERE id = ?", (aluno_id,))
+        aluno_existe = cursor.fetchone()
         
-        if not cliente_existe:
-            print("❌ Cliente não encontrado!")
+        if not aluno_existe:
+            print("❌ Aluno não encontrado!")
             return
         
-        print(f"\n📝 Atualizando dados de: {cliente_existe[0]}")
+        print(f"\n📝 Atualizando dados de: {aluno_existe[0]}")
         print("Deixe em branco para manter o valor atual")
         
         nome = input("Nome: ").strip()
-        email = input("Email: ").strip()
-        telefone = input("Telefone: ").strip()
-        cidade = input("Cidade: ").strip()
         idade = input("Idade: ").strip()
-        categoria = input("Categoria: ").strip()
+        curso = input("Curso: ").strip()
+        nota = input("Nota: ").strip()
         
         # Construir query de atualização
         campos_atualizar = []
@@ -279,18 +276,6 @@ def exibir_menu():
         if nome:
             campos_atualizar.append("nome = ?")
             valores.append(nome)
-        
-        if email:
-            campos_atualizar.append("email = ?")
-            valores.append(email)
-        
-        if telefone:
-            campos_atualizar.append("telefone = ?")
-            valores.append(telefone)
-        
-        if cidade:
-            campos_atualizar.append("cidade = ?")
-            valores.append(cidade)
         
         if idade:
             try:
@@ -301,20 +286,32 @@ def exibir_menu():
                 print("❌ Idade deve ser um número!")
                 return
         
-        if categoria:
-            campos_atualizar.append("categoria = ?")
-            valores.append(categoria)
+        if curso:
+            campos_atualizar.append("curso = ?")
+            valores.append(curso)
+        
+        if nota:
+            try:
+                nota = float(nota)
+                if nota < 0 or nota > 10:
+                    print("❌ Nota deve estar entre 0 e 10!")
+                    return
+                campos_atualizar.append("nota = ?")
+                valores.append(nota)
+            except ValueError:
+                print("❌ Nota deve ser um número!")
+                return
         
         if not campos_atualizar:
             print("❌ Nenhum campo foi alterado!")
             return
         
-        valores.append(cliente_id)
-        query = f"UPDATE clientes SET {', '.join(campos_atualizar)} WHERE id = ?"
+        valores.append(aluno_id)
+        query = f"UPDATE alunos SET {', '.join(campos_atualizar)} WHERE id = ?"
         
         cursor.execute(query, valores)
         conn.commit()
-        print(f"✅ Cliente {cliente_id} atualizado com sucesso!")
+        print(f"✅ Aluno {aluno_id} atualizado com sucesso!")
         
     except sqlite3.Error as e:
         print(f"❌ Erro no banco: {e}")
@@ -324,58 +321,58 @@ def exibir_menu():
                 </div>
 
                 <div class="info">
-                    <h3><i class="fas fa-trash"></i> 6. DELETE - Remover Cliente</h3>
-                    <p><strong>Conceito:</strong> Função para remover um cliente do banco de dados.</p>
+                    <h3><i class="fas fa-trash"></i> 6. DELETE - Remover Aluno</h3>
+                    <p><strong>Conceito:</strong> Função para remover um aluno do banco de dados.</p>
                     <p><strong>Prática:</strong> Consulta por ID e confirmação antes de deletar.</p>
                 </div>
 
                 <div class="code-block">
-                    <h4><i class="fas fa-code"></i> Célula 6: Remover Cliente</h4>
+                    <h4><i class="fas fa-code"></i> Célula 6: Remover Aluno</h4>
                     <div class="code-container">
-                        <pre><code>def remover_cliente(cursor, conn):
-    """Remove um cliente"""
+                        <pre><code>def remover_aluno(cursor, conn):
+    """Remove um aluno"""
     try:
-        print("\n🗑️ REMOVER CLIENTE")
+        print("\n🗑️ REMOVER ALUNO")
         print("-" * 30)
         
         # Mostrar lista para facilitar escolha
-        cursor.execute("SELECT id, nome FROM clientes ORDER BY nome")
-        clientes = cursor.fetchall()
+        cursor.execute("SELECT id, nome FROM alunos ORDER BY nome")
+        alunos = cursor.fetchall()
         
-        if not clientes:
-            print("📭 Nenhum cliente cadastrado!")
+        if not alunos:
+            print("📭 Nenhum aluno cadastrado!")
             return
         
-        print("📋 Clientes disponíveis:")
-        for cliente in clientes:
-            print(f"  {cliente[0]} - {cliente[1]}")
+        print("📋 Alunos disponíveis:")
+        for aluno in alunos:
+            print(f"  {aluno[0]} - {aluno[1]}")
         
-        cliente_id = input("\nDigite o ID do cliente para remover: ").strip()
-        if not cliente_id:
+        aluno_id = input("\nDigite o ID do aluno para remover: ").strip()
+        if not aluno_id:
             print("❌ ID é obrigatório!")
             return
         
         try:
-            cliente_id = int(cliente_id)
+            aluno_id = int(aluno_id)
         except ValueError:
             print("❌ ID deve ser um número!")
             return
         
-        # Verificar se cliente existe
-        cursor.execute("SELECT nome FROM clientes WHERE id = ?", (cliente_id,))
-        cliente_existe = cursor.fetchone()
+        # Verificar se aluno existe
+        cursor.execute("SELECT nome FROM alunos WHERE id = ?", (aluno_id,))
+        aluno_existe = cursor.fetchone()
         
-        if not cliente_existe:
-            print("❌ Cliente não encontrado!")
+        if not aluno_existe:
+            print("❌ Aluno não encontrado!")
             return
         
         # Confirmação
-        confirmacao = input(f"\n⚠️ Tem certeza que deseja remover '{cliente_existe[0]}'? (s/n): ").strip().lower()
+        confirmacao = input(f"\n⚠️ Tem certeza que deseja remover '{aluno_existe[0]}'? (s/n): ").strip().lower()
         
         if confirmacao == 's':
-            cursor.execute("DELETE FROM clientes WHERE id = ?", (cliente_id,))
+            cursor.execute("DELETE FROM alunos WHERE id = ?", (aluno_id,))
             conn.commit()
-            print(f"✅ Cliente '{cliente_existe[0]}' removido com sucesso!")
+            print(f"✅ Aluno '{aluno_existe[0]}' removido com sucesso!")
         else:
             print("❌ Operação cancelada.")
         
@@ -401,55 +398,46 @@ def exibir_menu():
         print("\n📊 ESTATÍSTICAS DO SISTEMA")
         print("-" * 30)
         
-        # Total de clientes
-        cursor.execute("SELECT COUNT(*) FROM clientes")
+        # Total de alunos
+        cursor.execute("SELECT COUNT(*) FROM alunos")
         total = cursor.fetchone()[0]
-        print(f"👥 Total de clientes: {total}")
+        print(f"👥 Total de alunos: {total}")
         
         if total == 0:
-            print("📭 Nenhum cliente cadastrado para estatísticas!")
+            print("📭 Nenhum aluno cadastrado para estatísticas!")
             return
         
-        # Clientes por categoria
+        # Alunos por curso
         cursor.execute('''
-            SELECT categoria, COUNT(*) as quantidade 
-            FROM clientes 
-            WHERE categoria IS NOT NULL AND categoria != ''
-            GROUP BY categoria 
+            SELECT curso, COUNT(*) as quantidade 
+            FROM alunos 
+            WHERE curso IS NOT NULL AND curso != ''
+            GROUP BY curso 
             ORDER BY quantidade DESC
         ''')
-        categorias = cursor.fetchall()
+        cursos = cursor.fetchall()
         
-        if categorias:
-            print(f"\n🏷️ Clientes por categoria:")
-            for categoria, qtd in categorias:
-                print(f"  {categoria}: {qtd} cliente(s)")
+        if cursos:
+            print(f"\n📚 Alunos por curso:")
+            for curso, qtd in cursos:
+                print(f"  {curso}: {qtd} aluno(s)")
         
-        # Clientes por cidade
-        cursor.execute('''
-            SELECT cidade, COUNT(*) as quantidade 
-            FROM clientes 
-            WHERE cidade IS NOT NULL AND cidade != ''
-            GROUP BY cidade 
-            ORDER BY quantidade DESC
-        ''')
-        cidades = cursor.fetchall()
+        # Média das notas
+        cursor.execute("SELECT AVG(nota) FROM alunos WHERE nota IS NOT NULL")
+        media = cursor.fetchone()[0]
+        if media:
+            print(f"\n📈 Média das notas: {media:.2f}")
         
-        if cidades:
-            print(f"\n🏙️ Clientes por cidade:")
-            for cidade, qtd in cidades:
-                print(f"  {cidade}: {qtd} cliente(s)")
-        
-        # Média de idade
-        cursor.execute("SELECT AVG(idade) FROM clientes WHERE idade IS NOT NULL")
-        media_idade = cursor.fetchone()[0]
-        if media_idade:
-            print(f"\n📈 Média de idade: {media_idade:.1f} anos")
-        
-        # Clientes cadastrados hoje
-        cursor.execute("SELECT COUNT(*) FROM clientes WHERE data_cadastro = DATE('now')")
+        # Alunos cadastrados hoje
+        cursor.execute("SELECT COUNT(*) FROM alunos WHERE data_cadastro = DATE('now')")
         hoje = cursor.fetchone()[0]
         print(f"\n📅 Cadastrados hoje: {hoje}")
+        
+        # Melhor nota
+        cursor.execute("SELECT MAX(nota), nome FROM alunos WHERE nota IS NOT NULL")
+        melhor = cursor.fetchone()
+        if melhor[0]:
+            print(f"\n🏆 Melhor nota: {melhor[0]:.1f} - {melhor[1]}")
         
     except sqlite3.Error as e:
         print(f"❌ Erro ao gerar estatísticas: {e}")</code></pre>
@@ -467,7 +455,7 @@ def exibir_menu():
                     <div class="code-container">
                         <pre><code>def main():
     """Função principal do programa"""
-    print("🚀 Iniciando Sistema de Gerenciamento de Clientes...")
+    print("🚀 Iniciando Sistema de Gerenciamento de Alunos...")
     
     # Conectar ao banco
     conn, cursor = conectar_banco()
@@ -481,15 +469,15 @@ def exibir_menu():
             opcao = input("👉 Escolha uma opção: ").strip()
             
             if opcao == '1':
-                cadastrar_cliente(cursor, conn)
+                cadastrar_aluno(cursor, conn)
             elif opcao == '2':
-                listar_clientes(cursor)
+                listar_alunos(cursor)
             elif opcao == '3':
-                buscar_cliente(cursor)
+                buscar_aluno(cursor)
             elif opcao == '4':
-                atualizar_cliente(cursor, conn)
+                atualizar_aluno(cursor, conn)
             elif opcao == '5':
-                remover_cliente(cursor, conn)
+                remover_aluno(cursor, conn)
             elif opcao == '6':
                 mostrar_estatisticas(cursor)
             elif opcao == '0':

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-016: Conectando a Banco de Dados - Slide 04</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Consultas Avançadas e Relacionamentos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-search"></i> Consultas Avançadas</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Consultas com Múltiplas Tabelas</h3>
+                    <p>Em sistemas reais, frequentemente precisamos trabalhar com dados de várias tabelas relacionadas. Vamos ver como fazer isso com SQLite.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-sitemap"></i> Exemplo: Sistema de Biblioteca</h3>
+                    <p>Vamos criar um sistema com duas tabelas relacionadas:</p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-book"></i> Tabela Livros</h4>
+                            <ul>
+                                <li>id (chave primária)</li>
+                                <li>titulo</li>
+                                <li>autor</li>
+                                <li>ano_publicacao</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-user"></i> Tabela Emprestimos</h4>
+                            <ul>
+                                <li>id (chave primária)</li>
+                                <li>livro_id (chave estrangeira)</li>
+                                <li>usuario</li>
+                                <li>data_emprestimo</li>
+                                <li>data_devolucao</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Criando Tabelas Relacionadas</h4>
+                    <div class="code-container">
+                        <pre><code>import sqlite3
+
+def criar_banco_biblioteca():
+    """Cria o banco da biblioteca com tabelas relacionadas"""
+    conn = sqlite3.connect('biblioteca.db')
+    cursor = conn.cursor()
+    
+    # Criar tabela de livros
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS livros (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            titulo TEXT NOT NULL,
+            autor TEXT NOT NULL,
+            ano_publicacao INTEGER,
+            disponivel BOOLEAN DEFAULT 1
+        )
+    ''')
+    
+    # Criar tabela de empréstimos
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS emprestimos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            livro_id INTEGER NOT NULL,
+            usuario TEXT NOT NULL,
+            data_emprestimo DATE DEFAULT CURRENT_DATE,
+            data_devolucao DATE,
+            FOREIGN KEY (livro_id) REFERENCES livros (id)
+        )
+    ''')
+    
+    conn.commit()
+    print("✅ Banco da biblioteca criado!")
+    
+    # Inserir dados de exemplo
+    livros_exemplo = [
+        ('Python para Iniciantes', 'João Silva', 2023),
+        ('Banco de Dados', 'Maria Santos', 2022),
+        ('Programação Web', 'Pedro Costa', 2024)
+    ]
+    
+    cursor.executemany('''
+        INSERT INTO livros (titulo, autor, ano_publicacao)
+        VALUES (?, ?, ?)
+    ''', livros_exemplo)
+    
+    conn.commit()
+    print("✅ Livros de exemplo inseridos!")
+    
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-link"></i> JOIN - Unindo Tabelas</h3>
+                    <p><strong>Conceito:</strong> JOIN permite combinar dados de duas ou mais tabelas baseado em uma relação.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Consultas com JOIN</h4>
+                    <div class="code-container">
+                        <pre><code>import sqlite3
+
+def consultas_join():
+    """Exemplos de consultas com JOIN"""
+    conn = sqlite3.connect('biblioteca.db')
+    cursor = conn.cursor()
+    
+    print("📚 LIVROS E SEUS EMPRÉSTIMOS")
+    print("-" * 60)
+    
+    # INNER JOIN - mostra apenas livros que têm empréstimos
+    cursor.execute('''
+        SELECT l.titulo, l.autor, e.usuario, e.data_emprestimo
+        FROM livros l
+        INNER JOIN emprestimos e ON l.id = e.livro_id
+        ORDER BY e.data_emprestimo DESC
+    ''')
+    
+    emprestimos = cursor.fetchall()
+    for emprestimo in emprestimos:
+        print(f"Livro: {emprestimo[0]} | Autor: {emprestimo[1]} | Usuário: {emprestimo[2]} | Data: {emprestimo[3]}")
+    
+    print("\n📖 TODOS OS LIVROS (COM OU SEM EMPRÉSTIMOS)")
+    print("-" * 60)
+    
+    # LEFT JOIN - mostra todos os livros, mesmo sem empréstimos
+    cursor.execute('''
+        SELECT l.titulo, l.autor, 
+               CASE 
+                   WHEN e.usuario IS NOT NULL THEN e.usuario
+                   ELSE 'Disponível'
+               END as status
+        FROM livros l
+        LEFT JOIN emprestimos e ON l.id = e.livro_id AND e.data_devolucao IS NULL
+        ORDER BY l.titulo
+    ''')
+    
+    livros_status = cursor.fetchall()
+    for livro in livros_status:
+        print(f"Livro: {livro[0]} | Autor: {livro[1]} | Status: {livro[2]}")
+    
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-chart-bar"></i> Consultas Agregadas</h3>
+                    <p><strong>Conceito:</strong> Funções como COUNT, SUM, AVG, MAX, MIN para análise de dados.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Estatísticas da Biblioteca</h4>
+                    <div class="code-container">
+                        <pre><code>def estatisticas_biblioteca():
+    """Gera estatísticas da biblioteca"""
+    conn = sqlite3.connect('biblioteca.db')
+    cursor = conn.cursor()
+    
+    print("📊 ESTATÍSTICAS DA BIBLIOTECA")
+    print("=" * 40)
+    
+    # Total de livros
+    cursor.execute("SELECT COUNT(*) FROM livros")
+    total_livros = cursor.fetchone()[0]
+    print(f"📚 Total de livros: {total_livros}")
+    
+    # Livros por autor
+    cursor.execute('''
+        SELECT autor, COUNT(*) as quantidade
+        FROM livros
+        GROUP BY autor
+        ORDER BY quantidade DESC
+    ''')
+    
+    autores = cursor.fetchall()
+    print(f"\n👨‍💼 Livros por autor:")
+    for autor, qtd in autores:
+        print(f"  {autor}: {qtd} livro(s)")
+    
+    # Livros mais recentes
+    cursor.execute('''
+        SELECT titulo, ano_publicacao
+        FROM livros
+        ORDER BY ano_publicacao DESC
+        LIMIT 3
+    ''')
+    
+    recentes = cursor.fetchall()
+    print(f"\n🆕 Livros mais recentes:")
+    for livro in recentes:
+        print(f"  {livro[0]} ({livro[1]})")
+    
+    # Total de empréstimos
+    cursor.execute("SELECT COUNT(*) FROM emprestimos")
+    total_emprestimos = cursor.fetchone()[0]
+    print(f"\n📖 Total de empréstimos: {total_emprestimos}")
+    
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-filter"></i> Consultas com Filtros Complexos</h3>
+                    <p><strong>Conceito:</strong> WHERE com múltiplas condições e subconsultas.</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Filtros Avançados</h4>
+                    <div class="code-container">
+                        <pre><code>def consultas_filtradas():
+    """Exemplos de consultas com filtros"""
+    conn = sqlite3.connect('biblioteca.db')
+    cursor = conn.cursor()
+    
+    print("🔍 CONSULTAS FILTRADAS")
+    print("=" * 40)
+    
+    # Livros de um autor específico
+    autor_busca = input("Digite o nome do autor: ").strip()
+    cursor.execute('''
+        SELECT titulo, ano_publicacao
+        FROM livros
+        WHERE autor LIKE ?
+        ORDER BY ano_publicacao DESC
+    ''', (f"%{autor_busca}%",))
+    
+    livros_autor = cursor.fetchall()
+    print(f"\n📚 Livros do autor '{autor_busca}':")
+    for livro in livros_autor:
+        print(f"  {livro[0]} ({livro[1]})")
+    
+    # Livros disponíveis (não emprestados)
+    cursor.execute('''
+        SELECT l.titulo, l.autor
+        FROM livros l
+        LEFT JOIN emprestimos e ON l.id = e.livro_id AND e.data_devolucao IS NULL
+        WHERE e.id IS NULL
+        ORDER BY l.titulo
+    ''')
+    
+    disponiveis = cursor.fetchall()
+    print(f"\n✅ Livros disponíveis:")
+    for livro in disponiveis:
+        print(f"  {livro[0]} - {livro[1]}")
+    
+    # Usuários que mais emprestam
+    cursor.execute('''
+        SELECT usuario, COUNT(*) as total_emprestimos
+        FROM emprestimos
+        GROUP BY usuario
+        ORDER BY total_emprestimos DESC
+        LIMIT 5
+    ''')
+    
+    usuarios_ativos = cursor.fetchall()
+    print(f"\n👥 Usuários mais ativos:")
+    for usuario, total in usuarios_ativos:
+        print(f"  {usuario}: {total} empréstimo(s)")
+    
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exercício Prático</h3>
+                    <ol>
+                        <li><strong>Crie o banco da biblioteca</strong> com as duas tabelas relacionadas</li>
+                        <li><strong>Insira dados de exemplo</strong> em ambas as tabelas</li>
+                        <li><strong>Teste consultas JOIN</strong> para unir dados das tabelas</li>
+                        <li><strong>Implemente consultas agregadas</strong> para estatísticas</li>
+                        <li><strong>Crie filtros personalizados</strong> baseados em entrada do usuário</li>
+                    </ol>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Conceitos Importantes</h3>
+                    <ul>
+                        <li><strong>Chave Estrangeira:</strong> Campo que referencia outra tabela</li>
+                        <li><strong>INNER JOIN:</strong> Apenas registros que têm correspondência</li>
+                        <li><strong>LEFT JOIN:</strong> Todos os registros da tabela à esquerda</li>
+                        <li><strong>GROUP BY:</strong> Agrupa registros para funções agregadas</li>
+                        <li><strong>ORDER BY:</strong> Ordena os resultados</li>
+                        <li><strong>LIMIT:</strong> Limita o número de resultados</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-016: Conectando a Banco de Dados</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

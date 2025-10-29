@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEP-015: Joins e Consultas Avançadas</title>
-    <link rel="stylesheet" href="../index-bep.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index-bep.css">
 </head>
 <body>
     <div class="container">
@@ -13,171 +13,75 @@
             <h1><i class="fas fa-project-diagram"></i> BEP-015: Joins e Consultas Avançadas</h1>
             <p>Integrando dados de múltiplas tabelas com INNER JOIN, LEFT JOIN, RIGHT JOIN e subconsultas</p>
         </div>
+
+        <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
+            <a href="../index.html" style="background:#2D3748;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;">🏠 Índice geral</a>
+        </div>
         
         <div class="content">
-            <div class="module-info">
-                <h2><i class="fas fa-info-circle"></i> Informações do Módulo</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h3><i class="fas fa-target"></i> Objetivo</h3>
-                        <p>Integrar dados de múltiplas tabelas usando JOINs e consultas avançadas</p>
-                    </div>
-                    <div class="info-item">
-                        <h3><i class="fas fa-list"></i> Conteúdo</h3>
-                        <p>INNER JOIN, LEFT JOIN, RIGHT JOIN, Subconsultas, ORDER BY, GROUP BY</p>
-                    </div>
-                    <div class="info-item">
-                        <h3><i class="fas fa-clock"></i> Duração</h3>
-                        <p>8 slides com exemplos práticos e exercícios</p>
-                    </div>
-                    <div class="info-item">
-                        <h3><i class="fas fa-graduation-cap"></i> Nível</h3>
-                        <p>Intermediário - Requer conhecimento básico de SQL</p>
-                    </div>
-                </div>
+            <div class="objectives-section">
+                <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
+                <ul>
+                    <li>Entender o conceito de JOINs e sua importância.</li>
+                    <li>Dominar INNER JOIN para conectar tabelas com correspondências.</li>
+                    <li>Aplicar LEFT JOIN e RIGHT JOIN para incluir registros sem correspondência.</li>
+                    <li>Utilizar subconsultas para consultas complexas.</li>
+                    <li>Implementar ORDER BY e GROUP BY para organização e agrupamento.</li>
+                    <li>Praticar com exercícios avançados de SQL.</li>
+                </ul>
             </div>
-
-            <div class="slides-section">
+            
+            <div class="section">
                 <h2><i class="fas fa-presentation"></i> Slides da Aula</h2>
                 <div class="slides-grid">
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide01.html','_blank')">
                         <div class="slide-number">01</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-lightbulb"></i> Introdução aos Joins</h3>
-                            <p>Conceitos fundamentais e por que precisamos de JOINs</p>
-                            <a href="slide01.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">Introdução aos Joins</div>
+                        <div class="slide-description">Conceitos fundamentais e por que precisamos de JOINs</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide02.html','_blank')">
                         <div class="slide-number">02</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-link"></i> INNER JOIN</h3>
-                            <p>Conectando tabelas com correspondências</p>
-                            <a href="slide02.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">INNER JOIN</div>
+                        <div class="slide-description">Conectando tabelas com correspondências</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide03.html','_blank')">
                         <div class="slide-number">03</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-arrow-left"></i> LEFT JOIN</h3>
-                            <p>Incluindo todos os registros da tabela da esquerda</p>
-                            <a href="slide03.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">LEFT JOIN</div>
+                        <div class="slide-description">Incluindo todos os registros da tabela da esquerda</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide04.html','_blank')">
                         <div class="slide-number">04</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-arrow-right"></i> RIGHT JOIN</h3>
-                            <p>Incluindo todos os registros da tabela da direita</p>
-                            <a href="slide04.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">RIGHT JOIN</div>
+                        <div class="slide-description">Incluindo todos os registros da tabela da direita</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide05.html','_blank')">
                         <div class="slide-number">05</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-search"></i> Subconsultas</h3>
-                            <p>Consultas dentro de outras consultas</p>
-                            <a href="slide05.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">Subconsultas</div>
+                        <div class="slide-description">Consultas dentro de outras consultas</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide06.html','_blank')">
                         <div class="slide-number">06</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-sort"></i> ORDER BY e GROUP BY</h3>
-                            <p>Ordenação e agrupamento de dados</p>
-                            <a href="slide06.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">ORDER BY e GROUP BY</div>
+                        <div class="slide-description">Ordenação e agrupamento de dados</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide07.html','_blank')">
                         <div class="slide-number">07</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-dumbbell"></i> Exercícios Práticos</h3>
-                            <p>Aplicando Joins e Consultas Avançadas</p>
-                            <a href="slide07.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">Exercícios Práticos</div>
+                        <div class="slide-description">Aplicando Joins e Consultas Avançadas</div>
                     </div>
                     
-                    <div class="slide-card">
+                    <div class="slide-card" onclick="window.open('slide08.html','_blank')">
                         <div class="slide-number">08</div>
-                        <div class="slide-content">
-                            <h3><i class="fas fa-check-circle"></i> Soluções e Conclusão</h3>
-                            <p>Integrando dados de múltiplas tabelas</p>
-                            <a href="slide08.html" class="slide-link">
-                                <i class="fas fa-external-link-alt"></i> Abrir Slide
-                            </a>
-                        </div>
+                        <div class="slide-title">Soluções e Conclusão</div>
+                        <div class="slide-description">Integrando dados de múltiplas tabelas</div>
                     </div>
                 </div>
-            </div>
-
-            <div class="files-section">
-                <h2><i class="fas fa-folder"></i> Arquivos Complementares</h2>
-                <div class="files-grid">
-                    <div class="file-card">
-                        <div class="file-icon">
-                            <i class="fas fa-file-code"></i>
-                        </div>
-                        <div class="file-content">
-                            <h3>Exemplos SQL</h3>
-                            <p>Scripts SQL com exemplos práticos de JOINs</p>
-                            <a href="#" class="file-link">
-                                <i class="fas fa-download"></i> Baixar
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="file-card">
-                        <div class="file-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <div class="file-content">
-                            <h3>Base de Dados</h3>
-                            <p>Script para criar as tabelas de exemplo</p>
-                            <a href="#" class="file-link">
-                                <i class="fas fa-download"></i> Baixar
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="file-card">
-                        <div class="file-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="file-content">
-                            <h3>Material de Referência</h3>
-                            <p>Documentação completa sobre JOINs</p>
-                            <a href="#" class="file-link">
-                                <i class="fas fa-download"></i> Baixar
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="navigation">
-                <a href="../index.html" class="nav-button">
-                    <i class="fas fa-home"></i> Voltar ao Índice Principal
-                </a>
             </div>
         </div>
         

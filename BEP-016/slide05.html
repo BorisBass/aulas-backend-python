@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-016: Conectando a Banco de Dados - Slide 05</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Exercícios Práticos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Exercício 1: Sistema de Produtos</h3>
+                    <p>Crie um sistema para gerenciar produtos de uma loja com as seguintes funcionalidades:</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Estrutura da Tabela</h4>
+                    <div class="code-container">
+                        <pre><code># Tabela produtos:
+# - id (INTEGER PRIMARY KEY)
+# - nome (TEXT NOT NULL)
+# - preco (REAL NOT NULL)
+# - categoria (TEXT)
+# - estoque (INTEGER DEFAULT 0)
+# - data_cadastro (DATE DEFAULT CURRENT_DATE)
+
+import sqlite3
+
+def criar_tabela_produtos():
+    """Cria a tabela de produtos"""
+    conn = sqlite3.connect('loja.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS produtos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            preco REAL NOT NULL,
+            categoria TEXT,
+            estoque INTEGER DEFAULT 0,
+            data_cadastro DATE DEFAULT CURRENT_DATE
+        )
+    ''')
+    
+    conn.commit()
+    print("✅ Tabela de produtos criada!")
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-tasks"></i> Funcionalidades a Implementar</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-plus"></i> Cadastrar Produto</h4>
+                            <ul>
+                                <li>Nome obrigatório</li>
+                                <li>Preço obrigatório</li>
+                                <li>Categoria opcional</li>
+                                <li>Estoque inicial</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-list"></i> Listar Produtos</h4>
+                            <ul>
+                                <li>Mostrar todos os produtos</li>
+                                <li>Ordenar por nome</li>
+                                <li>Formatação bonita</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-search"></i> Buscar Produto</h4>
+                            <ul>
+                                <li>Buscar por nome</li>
+                                <li>Buscar por categoria</li>
+                                <li>Mostrar resultados</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chart-bar"></i> Estatísticas</h4>
+                            <ul>
+                                <li>Total de produtos</li>
+                                <li>Produtos por categoria</li>
+                                <li>Valor total do estoque</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Exercício 2: Sistema de Contatos</h3>
+                    <p>Crie um sistema de agenda de contatos com funcionalidades avançadas:</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Estrutura Avançada</h4>
+                    <div class="code-container">
+                        <pre><code># Tabela contatos:
+# - id (INTEGER PRIMARY KEY)
+# - nome (TEXT NOT NULL)
+# - telefone (TEXT UNIQUE)
+# - email (TEXT UNIQUE)
+# - cidade (TEXT)
+# - data_nascimento (DATE)
+# - data_cadastro (TIMESTAMP DEFAULT CURRENT_TIMESTAMP)
+
+import sqlite3
+from datetime import datetime
+
+def criar_sistema_contatos():
+    """Cria o sistema de contatos"""
+    conn = sqlite3.connect('contatos.db')
+    cursor = conn.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS contatos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            telefone TEXT UNIQUE,
+            email TEXT UNIQUE,
+            cidade TEXT,
+            data_nascimento DATE,
+            data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    conn.commit()
+    print("✅ Sistema de contatos criado!")
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-star"></i> Funcionalidades Avançadas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-birthday-cake"></i> Aniversariantes</h4>
+                            <p>Mostrar contatos que fazem aniversário hoje</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-map-marker-alt"></i> Por Cidade</h4>
+                            <p>Agrupar contatos por cidade</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-calendar"></i> Recém Cadastrados</h4>
+                            <p>Mostrar contatos cadastrados na última semana</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-edit"></i> Atualização</h4>
+                            <p>Permitir editar dados dos contatos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Exercício 3: Sistema de Notas</h3>
+                    <p>Crie um sistema para gerenciar notas de alunos com múltiplas disciplinas:</p>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Estrutura com Relacionamentos</h4>
+                    <div class="code-container">
+                        <pre><code># Tabela alunos:
+# - id (INTEGER PRIMARY KEY)
+# - nome (TEXT NOT NULL)
+# - matricula (TEXT UNIQUE)
+# - curso (TEXT)
+
+# Tabela disciplinas:
+# - id (INTEGER PRIMARY KEY)
+# - nome (TEXT NOT NULL)
+# - codigo (TEXT UNIQUE)
+
+# Tabela notas:
+# - id (INTEGER PRIMARY KEY)
+# - aluno_id (INTEGER)
+# - disciplina_id (INTEGER)
+# - nota (REAL)
+# - data_avaliacao (DATE)
+
+import sqlite3
+
+def criar_sistema_notas():
+    """Cria o sistema de notas"""
+    conn = sqlite3.connect('notas.db')
+    cursor = conn.cursor()
+    
+    # Criar tabela de alunos
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS alunos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            matricula TEXT UNIQUE,
+            curso TEXT
+        )
+    ''')
+    
+    # Criar tabela de disciplinas
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS disciplinas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            codigo TEXT UNIQUE
+        )
+    ''')
+    
+    # Criar tabela de notas
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS notas (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            aluno_id INTEGER,
+            disciplina_id INTEGER,
+            nota REAL,
+            data_avaliacao DATE DEFAULT CURRENT_DATE,
+            FOREIGN KEY (aluno_id) REFERENCES alunos (id),
+            FOREIGN KEY (disciplina_id) REFERENCES disciplinas (id)
+        )
+    ''')
+    
+    conn.commit()
+    print("✅ Sistema de notas criado!")
+    conn.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-chart-line"></i> Relatórios para Implementar</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-user-graduate"></i> Boletim do Aluno</h4>
+                            <p>Mostrar todas as notas de um aluno específico</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-chart-bar"></i> Média por Disciplina</h4>
+                            <p>Calcular média de cada disciplina</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-trophy"></i> Melhores Alunos</h4>
+                            <p>Ranking dos alunos com melhores médias</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Alunos em Recuperação</h4>
+                            <p>Alunos com média abaixo de 6.0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Desafios Extras</h3>
+                    <ol>
+                        <li><strong>Backup e Restore:</strong> Criar função para fazer backup do banco</li>
+                        <li><strong>Validação Avançada:</strong> Validar CPF, email, telefone</li>
+                        <li><strong>Relatórios em PDF:</strong> Gerar relatórios formatados</li>
+                        <li><strong>Interface Gráfica:</strong> Criar interface com tkinter</li>
+                        <li><strong>Logs de Auditoria:</strong> Registrar todas as operações</li>
+                    </ol>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Dicas para os Exercícios</h3>
+                    <ul>
+                        <li><strong>Comece simples:</strong> Implemente uma funcionalidade por vez</li>
+                        <li><strong>Teste sempre:</strong> Verifique cada função antes de continuar</li>
+                        <li><strong>Trate erros:</strong> Use try/except em todas as operações</li>
+                        <li><strong>Valide dados:</strong> Verifique entrada do usuário</li>
+                        <li><strong>Documente:</strong> Comente seu código para facilitar manutenção</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-016: Conectando a Banco de Dados</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

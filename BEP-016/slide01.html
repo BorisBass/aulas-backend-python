@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-016: Conectando a Banco de Dados - Slide 01</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Integração de Python com bancos de dados</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-plug"></i> O que é Conectar a Banco de Dados?</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-lightbulb"></i> Definição</h3>
+                    <p><strong>Conectar a banco de dados</strong> significa estabelecer uma comunicação entre sua aplicação Python e um sistema de gerenciamento de banco de dados para armazenar, consultar e manipular dados de forma persistente.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-home"></i> Analogia: Biblioteca</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-book"></i> Biblioteca Física</h4>
+                            <p>Você vai até a biblioteca, pede um livro ao bibliotecário, ele busca na estante e te entrega</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Banco de Dados</h4>
+                            <p>Seu programa Python "vai" até o banco, pede dados ao sistema, ele busca no armazenamento e retorna</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-graduation-cap"></i> Exemplo Prático: Sistema de Cadastro</h3>
+                    <p>Imagine que você quer criar um sistema para cadastrar alunos:</p>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-user-plus"></i> Sem Banco de Dados</h4>
+                            <ul>
+                                <li>Dados ficam na memória</li>
+                                <li>Perdidos quando programa fecha</li>
+                                <li>Sem persistência</li>
+                                <li>Limitado a uma sessão</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Com Banco de Dados</h4>
+                            <ul>
+                                <li>Dados salvos permanentemente</li>
+                                <li>Persistem entre sessões</li>
+                                <li>Múltiplos usuários</li>
+                                <li>Consultas eficientes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-cogs"></i> Componentes da Conexão</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-code"></i> Aplicação Python</h4>
+                            <p>Seu programa que precisa dos dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-plug"></i> Driver/Connector</h4>
+                            <p>Biblioteca que faz a comunicação</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Banco de Dados</h4>
+                            <p>Sistema que armazena os dados</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exchange-alt"></i> Protocolo</h4>
+                            <p>Linguagem comum para comunicação</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Tipos de Banco de Dados</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-server"></i> Banco de Dados Servidor</h4>
+                            <ul>
+                                <li>MySQL, PostgreSQL</li>
+                                <li>Servidor separado</li>
+                                <li>Múltiplos usuários</li>
+                                <li>Mais complexo</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-file"></i> Banco de Dados Embarcado</h4>
+                            <ul>
+                                <li>SQLite</li>
+                                <li>Arquivo local</li>
+                                <li>Simples de usar</li>
+                                <li>Ideal para iniciantes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-star"></i> Por que SQLite?</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-check"></i> Vantagens</h4>
+                            <ul>
+                                <li>Já vem com Python</li>
+                                <li>Não precisa instalar servidor</li>
+                                <li>Arquivo único</li>
+                                <li>Fácil de aprender</li>
+                                <li>Perfeito para projetos pequenos</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-info-circle"></i> Características</h4>
+                            <ul>
+                                <li>Banco de dados relacional</li>
+                                <li>Suporte completo a SQL</li>
+                                <li>Transações ACID</li>
+                                <li>Zero configuração</li>
+                                <li>Cross-platform</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-016: Conectando a Banco de Dados</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

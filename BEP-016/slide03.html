@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-016: Conectando a Banco de Dados - Slide 03</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
+            <p>Tratamento de Erros e Boas Práticas</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+        
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-shield-alt"></i> Tratamento de Erros</h2>
+                
+                <div class="info">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Por que Tratar Erros?</h3>
+                    <p>Quando trabalhamos com bancos de dados, vários problemas podem ocorrer. O tratamento de erros garante que nosso programa continue funcionando mesmo quando algo dá errado.</p>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-bug"></i> Tipos de Erros Comuns</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> Erros de Conexão</h4>
+                            <ul>
+                                <li>Arquivo de banco corrompido</li>
+                                <li>Permissões insuficientes</li>
+                                <li>Disco cheio</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> Erros de Integridade</h4>
+                            <ul>
+                                <li>Email duplicado</li>
+                                <li>Chave primária repetida</li>
+                                <li>Violação de constraints</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-code"></i> Erros de SQL</h4>
+                            <ul>
+                                <li>Comando SQL inválido</li>
+                                <li>Tabela não existe</li>
+                                <li>Coluna não encontrada</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-user"></i> Erros de Entrada</h4>
+                            <ul>
+                                <li>Dados inválidos</li>
+                                <li>Campos obrigatórios vazios</li>
+                                <li>Tipos incorretos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Tratamento Básico de Erros</h4>
+                    <div class="code-container">
+                        <pre><code>import sqlite3
+
+def conectar_banco_seguro():
+    """Conecta ao banco com tratamento de erros"""
+    try:
+        conn = sqlite3.connect('exemplo.db')
+        cursor = conn.cursor()
+        print("✅ Conectado com sucesso!")
+        return conn, cursor
+    except sqlite3.Error as e:
+        print(f"❌ Erro ao conectar: {e}")
+        return None, None
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")
+        return None, None
+
+def inserir_dados_seguro(cursor, conn):
+    """Insere dados com tratamento de erros"""
+    try:
+        nome = input("Nome: ")
+        email = input("Email: ")
+        
+        # Validar dados
+        if not nome:
+            print("❌ Nome é obrigatório!")
+            return
+        
+        # Tentar inserir
+        cursor.execute('''
+            INSERT INTO usuarios (nome, email)
+            VALUES (?, ?)
+        ''', (nome, email))
+        
+        conn.commit()
+        print("✅ Dados inseridos com sucesso!")
+        
+    except sqlite3.IntegrityError:
+        print("❌ Erro: Email já existe!")
+    except sqlite3.Error as e:
+        print(f"❌ Erro no banco: {e}")
+    except ValueError as e:
+        print(f"❌ Erro de valor: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h3><i class="fas fa-check-circle"></i> Boas Práticas</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-lock"></i> Sempre Fechar Conexão</h4>
+                            <p>Use try/finally ou with statement para garantir que a conexão seja fechada</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-save"></i> Commit das Transações</h4>
+                            <p>Salve as alterações com commit() após operações de escrita</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-shield"></i> Validação de Dados</h4>
+                            <p>Verifique os dados antes de enviar para o banco</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> Prepared Statements</h4>
+                            <p>Use ? para evitar SQL injection</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <h4><i class="fas fa-code"></i> Exemplo com With Statement</h4>
+                    <div class="code-container">
+                        <pre><code>import sqlite3
+
+def exemplo_with_statement():
+    """Exemplo usando with statement"""
+    try:
+        with sqlite3.connect('exemplo.db') as conn:
+            cursor = conn.cursor()
+            
+            # Criar tabela
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS produtos (
+                    id INTEGER PRIMARY KEY,
+                    nome TEXT NOT NULL,
+                    preco REAL
+                )
+            ''')
+            
+            # Inserir dados
+            cursor.execute('''
+                INSERT INTO produtos (nome, preco)
+                VALUES (?, ?)
+            ''', ('Notebook', 2500.00))
+            
+            # Consultar dados
+            cursor.execute("SELECT * FROM produtos")
+            produtos = cursor.fetchall()
+            
+            for produto in produtos:
+                print(f"ID: {produto[0]}, Nome: {produto[1]}, Preço: R$ {produto[2]}")
+            
+            # Conexão é fechada automaticamente
+            print("✅ Operações concluídas!")
+            
+    except sqlite3.Error as e:
+        print(f"❌ Erro: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Erros Específicos do SQLite</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4><i class="fas fa-database"></i> sqlite3.Error</h4>
+                            <p>Erro geral do SQLite</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-key"></i> sqlite3.IntegrityError</h4>
+                            <p>Violação de integridade (duplicatas, etc.)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-ban"></i> sqlite3.OperationalError</h4>
+                            <p>Erro operacional (tabela não existe, etc.)</p>
+                        </div>
+                        <div class="info-item">
+                            <h4><i class="fas fa-exclamation"></i> sqlite3.DatabaseError</h4>
+                            <p>Erro relacionado ao banco de dados</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <h3><i class="fas fa-play"></i> Exercício Prático</h3>
+                    <ol>
+                        <li><strong>Crie uma função</strong> para conectar ao banco com tratamento de erros</li>
+                        <li><strong>Implemente validação</strong> para dados de entrada</li>
+                        <li><strong>Use try/except</strong> para capturar diferentes tipos de erro</li>
+                        <li><strong>Teste cenários de erro</strong> como email duplicado</li>
+                        <li><strong>Implemente finally</strong> para garantir fechamento da conexão</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>BEP-016: Conectando a Banco de Dados</p>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
