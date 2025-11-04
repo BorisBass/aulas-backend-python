@@ -743,6 +743,43 @@
                 </div>
             </div>
             
+            <!-- Módulo 3 - Programação e Orientação a Objetos -->
+            <div class="module-section">
+                <div class="module-title">
+                    <h2><i class="fas fa-cubes"></i> Módulo 3 - Programação e Orientação a Objetos</h2>
+                    <p>Introdução à POO e seus fundamentos</p>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper" id="carouselWrapper3">
+                        <!-- BEP-017: Fundamentos de Programação Orientada a Objetos (POO) -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-cube"></i> BEP-017: Fundamentos de POO</h3>
+                            <p>Conceitos essenciais de Programação Orientada a Objetos para iniciantes e
+                            sua importância na organização e reuso de código.</p>
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> O que é POO e por que usar</li>
+                                <li><i class="fas fa-check"></i> Procedural vs Orientado a Objetos</li>
+                                <li><i class="fas fa-check"></i> Conceitos: objeto, classe, atributo, método</li>
+                                <li><i class="fas fa-check"></i> Exemplos simples e explicados</li>
+                                <li><i class="fas fa-check"></i> Exercícios práticos guiados</li>
+                            </ul>
+                            <a href="BEP-017/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-017
+                            </a>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button class="carousel-btn" id="prevBtn3" onclick="moveCarousel3(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn" id="nextBtn3" onclick="moveCarousel3(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="carousel-indicators" id="carouselIndicators3"></div>
+                </div>
+            </div>
+
             <div class="info-section">
                 <h2><i class="fas fa-info-circle"></i> Como Usar</h2>
                 <p>Clique em qualquer BEP acima para acessar o material completo. Cada aula contém:</p>
@@ -781,8 +818,10 @@
         // Carrosséis dos Módulos
         let currentSlide1 = 0; // Módulo 1
         let currentSlide2 = 0; // Módulo 2
+        let currentSlide3 = 0; // Módulo 3
         const totalSlides1 = 10; // Módulo 1
         const totalSlides2 = 6;  // Módulo 2
+        const totalSlides3 = 1;  // Módulo 3
         const slideWidth = 320; // 300px + 20px gap
         
         // Módulo 1 - Lógica de Programação
@@ -891,7 +930,52 @@
             updateIndicators1();
             updateCarouselButtons();
             updateIndicators();
+            updateCarouselButtons3();
+            updateIndicators3();
         });
+
+        // Módulo 3 - Programação e Orientação a Objetos
+        function moveCarousel3(direction) {
+            const wrapper = document.getElementById('carouselWrapper3');
+            const maxSlide = totalSlides3 - 3; // Mostra 3 cards por vez (mesmo padrão)
+            
+            currentSlide3 += direction;
+            
+            if (currentSlide3 < 0) currentSlide3 = 0;
+            if (currentSlide3 > maxSlide) currentSlide3 = maxSlide;
+            
+            wrapper.style.transform = `translateX(-${currentSlide3 * slideWidth}px)`;
+            updateCarouselButtons3();
+            updateIndicators3();
+        }
+        function updateCarouselButtons3() {
+            const prevBtn = document.getElementById('prevBtn3');
+            const nextBtn = document.getElementById('nextBtn3');
+            const maxSlide = totalSlides3 - 3;
+            
+            if (prevBtn) prevBtn.disabled = currentSlide3 === 0;
+            if (nextBtn) nextBtn.disabled = currentSlide3 >= maxSlide;
+        }
+        function updateIndicators3() {
+            const indicators = document.getElementById('carouselIndicators3');
+            if (!indicators) return;
+            indicators.innerHTML = '';
+            const maxSlide = totalSlides3 - 3;
+            for (let i = 0; i <= maxSlide; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = `carousel-indicator ${i === currentSlide3 ? 'active' : ''}`;
+                indicator.onclick = () => goToSlide3(i);
+                indicators.appendChild(indicator);
+            }
+        }
+        function goToSlide3(slide) {
+            currentSlide3 = slide;
+            const wrapper = document.getElementById('carouselWrapper3');
+            if (!wrapper) return;
+            wrapper.style.transform = `translateX(-${currentSlide3 * slideWidth}px)`;
+            updateCarouselButtons3();
+            updateIndicators3();
+        }
     </script>
 </body>
 </html>

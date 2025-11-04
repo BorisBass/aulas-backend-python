@@ -42,6 +42,9 @@ env/
 .vscode/
 .idea/
 
+# Pasta de recursos auxiliares (documentação, ferramentas, etc)
+_recursos/
+
 # Arquivos de sistema
 .DS_Store
 Thumbs.db
