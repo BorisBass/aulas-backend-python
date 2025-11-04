@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-017 - Slide 04: Métodos e __init__</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cube"></i> BEP-017: Fundamentos de POO</h1>
+            <p>Introdução aos conceitos básicos de Programação Orientada a Objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-bolt"></i> Métodos e __init__</h2>
+                <p>Entendendo self, construtor e comportamento</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-hammer"></i> O que é um método?</h3>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome, matricula):
+        self.nome = nome
+        self.matricula = matricula
+
+    def apresentar(self):
+        return f"Sou {self.nome}, matrícula {self.matricula}."
+
+a = Aluno("Ana", "2025A001")
+print(a.apresentar())
+</code></pre>
+                    <p>Método é uma função da classe. Recebe <code>self</code>, que representa o próprio objeto.</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-sign-in-alt"></i> O que é __init__?</h3>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco):
+        # chamado automaticamente quando criamos o objeto
+        self.nome = nome
+        self.preco = float(preco)
+
+    def aplicar_desconto(self, percentual):
+        fator = 1 - (percentual / 100)
+        self.preco = round(self.preco * fator, 2)
+
+p = Produto("Caderno", 20)
+p.aplicar_desconto(10)
+print(p.preco)
+</code></pre>
+                    <p><code>__init__</code> é o construtor: define como iniciar o estado do objeto.</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-017: Fundamentos de POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-017 - Slide 01: Fundamentos de POO</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cube"></i> BEP-017: Fundamentos de POO</h1>
+            <p>Introdução aos conceitos básicos de Programação Orientada a Objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> O que é POO?</h2>
+                <p>Entendendo objeto, classe, atributo e método com um exemplo simples</p>
+                
+                <div class="two-col" style="margin-top: 20px;">
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Conceitos</h3>
+                    <ul>
+                        <li><strong>Objeto:</strong> entidade com estado e comportamento.</li>
+                        <li><strong>Classe:</strong> molde que define objetos.</li>
+                        <li><strong>Atributo:</strong> dado que compõe o estado do objeto.</li>
+                        <li><strong>Método:</strong> função da classe/objeto (comportamento).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Exemplo (explicado)</h3>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome      # atributo
+        self.preco = preco    # atributo
+
+    def aplicar_desconto(self, percentual):  # método
+        fator = 1 - (percentual / 100)
+        self.preco = round(self.preco * fator, 2)
+
+# uso explicado (sem novos conceitos ocultos):
+p = Produto("Caderno", 20.00)  # cria objeto a partir da classe
+print(p.nome, p.preco)
+p.aplicar_desconto(10)
+print(p.preco)
+</code></pre>
+                    <p>Acima usamos apenas o que foi definido: classe, atributos, método e criação de objeto.
+                    Nenhum recurso novo é usado sem explicação.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Procedural vs Orientado a Objetos</h3>
+                    <ul>
+                        <li><strong>Procedural:</strong> foco em funções e dados separados.</li>
+                        <li><strong>OO:</strong> dados + comportamentos agrupados em objetos, favorecendo organização e reuso.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-017: Fundamentos de POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

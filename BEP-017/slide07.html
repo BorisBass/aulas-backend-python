@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-017 - Slide 07: Exercícios extras</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cube"></i> BEP-017: Fundamentos de POO</h1>
+            <p>Introdução aos conceitos básicos de Programação Orientada a Objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios extras</h2>
+                <p>Fixação dos conceitos de classe, atributos e métodos</p>
+            <div class="card">
+                <h3>1) Classe Retangulo</h3>
+                <ol>
+                    <li>Atributos: <code>largura</code>, <code>altura</code>.</li>
+                    <li>Métodos: <code>area()</code> e <code>perimetro()</code>.</li>
+                    <li>Crie dois objetos e compare as áreas.</li>
+                </ol>
+<pre><code class="language-python">class Retangulo:
+    def __init__(self, largura, altura):
+        self.largura = float(largura)
+        self.altura = float(altura)
+
+    def area(self):
+        return self.largura * self.altura
+
+    def perimetro(self):
+        return 2 * (self.largura + self.altura)
+
+r1 = Retangulo(3, 4)
+r2 = Retangulo(5, 2)
+print(r1.area(), r1.perimetro())
+print(r2.area(), r2.perimetro())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2) Classe Livro</h3>
+                <ol>
+                    <li>Atributos: <code>titulo</code>, <code>autor</code>, <code>paginas</code>.</li>
+                    <li>Método: <code>descricao()</code> retorna string com as informações.</li>
+                </ol>
+<pre><code class="language-python">class Livro:
+    def __init__(self, titulo, autor, paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.paginas = int(paginas)
+
+    def descricao(self):
+        return f"{self.titulo} - {self.autor} ({self.paginas} págs)"
+
+l = Livro("POO Descomplicada", "Alguém", 180)
+print(l.descricao())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>3) Desafio: MediaAluno</h3>
+                <ol>
+                    <li>Atributos: <code>nome</code>, <code>notas</code> (lista de floats).</li>
+                    <li>Método: <code>media()</code> retorna média simples.</li>
+                    <li>Método: <code>situacao()</code> retorna "Aprovado" se média >= 6, senão "Recuperação".</li>
+                </ol>
+<pre><code class="language-python">class MediaAluno:
+    def __init__(self, nome, notas):
+        self.nome = nome
+        self.notas = [float(n) for n in notas]
+
+    def media(self):
+        return sum(self.notas) / len(self.notas)
+
+    def situacao(self):
+        return "Aprovado" if self.media() >= 6 else "Recuperação"
+
+m = MediaAluno("Ana", [7, 6, 8])
+print(m.media(), m.situacao())
+</code></pre>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-017: Fundamentos de POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

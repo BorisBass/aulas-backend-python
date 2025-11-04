@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-017 - Slide 06: Mini-projeto simples</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ul li { margin-bottom: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-cube"></i> BEP-017: Fundamentos de POO</h1>
+            <p>Introdução aos conceitos básicos de Programação Orientada a Objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-briefcase"></i> Mini-projeto</h2>
+                <p>ContaBancaria: depósito, saque e saldo</p>
+            <div class="card">
+                <h3>Requisitos</h3>
+                <ul>
+                    <li>Atributos: <code>titular</code> e <code>saldo</code>.</li>
+                    <li>Métodos: <code>depositar(valor)</code>, <code>sacar(valor)</code>, <code>ver_saldo()</code>.</li>
+                    <li>Sem conceitos novos além de classe, atributos e métodos.</li>
+                </ul>
+            </div>
+
+<div class="card">
+<h3>Implementação</h3>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular, saldo_inicial=0):
+        self.titular = titular
+        self.saldo = float(saldo_inicial)
+
+    def depositar(self, valor):
+        if valor &gt; 0:
+            self.saldo += valor
+        # se valor for inválido, não altera (mantemos simples e explícito)
+
+    def sacar(self, valor):
+        if 0 &lt;= valor &lt;= self.saldo:
+            self.saldo -= valor
+        # se valor maior que saldo, não altera (sem exceções aqui, por simplicidade)
+
+    def ver_saldo(self):
+        return round(self.saldo, 2)
+
+c = ContaBancaria("Ana")
+c.depositar(100)
+c.sacar(30)
+print(c.titular, c.ver_saldo())  # Ana 70.0
+</code></pre>
+</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-017: Fundamentos de POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+
