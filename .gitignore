@@ -1,0 +1,72 @@
+# Arquivos de documentação e explicação
+*.md
+README.md
+**/README.md
+
+# Scripts de ferramentas e conversão
+html_to_pdf.py
+criar_zip_web.sh
+capture_slides.sh
+verificar_ambiente.py
+AULA_00_Verificar_Ambiente.ipynb
+
+# PDFs gerados
+*.pdf
+APOSTILAO_COMPLETO.pdf
+
+# Arquivos de documentação do Office
+*.pptx
+*.docx
+*.odt
+*.zip
+
+# Arquivos temporários e cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.db
+*.sqlite
+*.sqlite3
+escola*.db
+
+# Ambiente virtual
+venv_pdf/
+venv/
+env/
+.venv/
+
+# Arquivos de configuração do IDE
+.devcontainer/
+.vscode/
+.idea/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Arquivos temporários
+temp_pdfs/
+*.tmp
+~tmp*
+
+# Notebooks Jupyter (pode remover se não quiser)
+# *.ipynb
+
+# Arquivos de imagem que não são necessários para os slides
+# (manter apenas se os slides referenciarem)
+# screenshots/
+# images/README.md
+
+# Arquivos de texto temporários
+*.txt
+!requirements.txt  # Manter requirements.txt se necessário
+
+# Outros arquivos de documentação
+Makefile
+modulo2
+
