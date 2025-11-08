@@ -39,24 +39,15 @@
                     </ul>
                 </div>
                 <div class="card">
-                    <h3><i class="fas fa-code"></i> Exemplo (explicado)</h3>
-<pre><code class="language-python">class Produto:
-    def __init__(self, nome, preco):
-        self.nome = nome      # atributo
-        self.preco = preco    # atributo
-
-    def aplicar_desconto(self, percentual):  # método
-        fator = 1 - (percentual / 100)
-        self.preco = round(self.preco * fator, 2)
-
-# uso explicado (sem novos conceitos ocultos):
-p = Produto("Caderno", 20.00)  # cria objeto a partir da classe
-print(p.nome, p.preco)
-p.aplicar_desconto(10)
-print(p.preco)
-</code></pre>
-                    <p>Acima usamos apenas o que foi definido: classe, atributos, método e criação de objeto.
-                    Nenhum recurso novo é usado sem explicação.</p>
+                    <h3><i class="fas fa-code"></i> Exemplo do Mundo Real</h3>
+                    <p>Pense em um <strong>Carro</strong>:</p>
+                    <ul>
+                        <li><strong>Classe:</strong> "Carro" (o molde/conceito)</li>
+                        <li><strong>Objeto:</strong> Um carro específico (ex: "Fusca 1980")</li>
+                        <li><strong>Atributos:</strong> cor, modelo, ano (dados do carro)</li>
+                        <li><strong>Métodos:</strong> acelerar(), frear(), ligar() (ações do carro)</li>
+                    </ul>
+                    <p style="margin-top: 12px;">Em POO, representamos entidades do mundo real como objetos no código.</p>
                 </div>
             </div>
 

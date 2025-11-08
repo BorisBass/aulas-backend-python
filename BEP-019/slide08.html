@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 08: Checklist de Revisão</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { padding: 10px; margin: 8px 0; background: #F7FAFC; border-left: 4px solid #4299E1; border-radius: 4px; }
+        .checklist li:before { content: "☐ "; font-size: 1.2em; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-check-square"></i> Checklist de Revisão</h2>
+                <p>Confirme seu domínio dos conceitos</p>
+            <div class="card">
+                <h3><i class="fas fa-list-check"></i> Você consegue:</h3>
+                <ul class="checklist">
+                    <li>Explicar o que é encapsulamento e sua importância</li>
+                    <li>Diferenciar entre atributos públicos, protegidos e privados</li>
+                    <li>Usar o prefixo <code>_</code> para atributos protected</li>
+                    <li>Usar o prefixo <code>__</code> para atributos private</li>
+                    <li>Criar métodos de instância para manipular atributos</li>
+                    <li>Implementar getters para ler atributos privados</li>
+                    <li>Implementar setters para modificar atributos privados com validação</li>
+                    <li>Proteger dados sensíveis usando encapsulamento</li>
+                    <li>Validar dados antes de modificar atributos</li>
+                    <li>Aplicar encapsulamento em classes práticas</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-graduation-cap"></i> Próximos Passos</h3>
+                <p>Após dominar estes conceitos, você estará pronto para:</p>
+                <ul>
+                    <li>Propriedades (@property) em Python</li>
+                    <li>Herança entre classes</li>
+                    <li>Polimorfismo</li>
+                    <li>Métodos de classe e estáticos</li>
+                    <li>Abstração e interfaces</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-book"></i> Dica de Estudo</h3>
+                <p>Pratique criando classes com atributos privados e métodos de acesso. Sempre pense: 
+                "Este atributo deve ser modificado diretamente ou através de um método?" Se a resposta 
+                for "através de um método", use encapsulamento!</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

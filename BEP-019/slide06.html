@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 06: Exemplo: ContaBancaria</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-piggy-bank"></i> Exemplo: ContaBancaria</h2>
+                <p>Aplicando encapsulamento em um exemplo prático</p>
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Classe Encapsulada</h3>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular, saldo_inicial=0):
+        self.titular = titular  # Público
+        self.__saldo = float(saldo_inicial)  # Privado
+    
+    # Getter
+    def get_saldo(self):
+        return self.__saldo
+    
+    # Métodos de instância para manipular saldo
+    def depositar(self, valor):
+        if valor > 0:
+            self.__saldo += valor
+            return f"Depósito de R$ {valor:.2f} realizado."
+        return "Valor inválido para depósito."
+    
+    def sacar(self, valor):
+        if valor > 0 and valor <= self.__saldo:
+            self.__saldo -= valor
+            return f"Saque de R$ {valor:.2f} realizado."
+        return "Saldo insuficiente ou valor inválido."
+    
+    def transferir(self, outra_conta, valor):
+        if self.sacar(valor) != "Saldo insuficiente ou valor inválido.":
+            outra_conta.depositar(valor)
+            return f"Transferência de R$ {valor:.2f} realizada."
+        return "Transferência não realizada."
+
+# Uso
+conta1 = ContaBancaria("Ana", 1000)
+conta2 = ContaBancaria("Bruno", 500)
+
+print(conta1.get_saldo())
+conta1.depositar(200)
+conta1.sacar(100)
+conta1.transferir(conta2, 150)
+print(f"Ana: R$ {conta1.get_saldo():.2f}")
+print(f"Bruno: R$ {conta2.get_saldo():.2f}")
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-shield-check"></i> Proteções Implementadas</h3>
+                <ul>
+                    <li><strong>Saldo privado:</strong> Não pode ser modificado diretamente</li>
+                    <li><strong>Validação:</strong> Valores negativos são rejeitados</li>
+                    <li><strong>Controle:</strong> Apenas métodos específicos podem alterar o saldo</li>
+                    <li><strong>Segurança:</strong> Impossível ter saldo negativo por erro</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

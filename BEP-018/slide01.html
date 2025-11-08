@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 01: Definição de Classes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-file-code"></i> Definição de Classes</h2>
+                <p>Entendendo a sintaxe e estrutura básica de uma classe</p>
+                
+                <div class="two-col" style="margin-top: 20px;">
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Sintaxe Básica</h3>
+                    <p>Uma classe em Python é definida usando a palavra-chave <code>class</code>:</p>
+<pre><code class="language-python">class NomeDaClasse:
+    # atributos e métodos aqui
+    pass
+</code></pre>
+                    <ul style="margin-top: 12px;">
+                        <li>Começa com <code>class</code></li>
+                        <li>Nome em PascalCase (primeira letra maiúscula)</li>
+                        <li>Dois pontos (<code>:</code>) após o nome</li>
+                        <li>Conteúdo indentado</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Exemplo Simples</h3>
+<pre><code class="language-python">class Pessoa:
+    pass
+
+# Classe vazia (ainda sem funcionalidade)
+p1 = Pessoa()
+print(type(p1))  # <class '__main__.Pessoa'>
+</code></pre>
+                    <p style="margin-top: 12px;">Mesmo sem atributos ou métodos, já podemos criar objetos (instâncias) da classe.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Por que usar classes?</h3>
+                    <ul>
+                        <li><strong>Organização:</strong> Agrupa dados e comportamentos relacionados</li>
+                        <li><strong>Reutilização:</strong> Cria múltiplos objetos com a mesma estrutura</li>
+                        <li><strong>Abstração:</strong> Representa entidades do mundo real no código</li>
+                        <li><strong>Manutenção:</strong> Facilita a organização e modificação do código</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 02: Método Construtor __init__</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-hammer"></i> Método Construtor __init__</h2>
+                <p>Inicializando objetos com atributos</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-sign-in-alt"></i> O que é __init__?</h3>
+                    <p>O método <code>__init__</code> é chamado automaticamente quando criamos um objeto.</p>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+
+p = Pessoa("Ana", 25)
+# __init__ é chamado automaticamente
+</code></pre>
+                    <ul style="margin-top: 12px;">
+                        <li><code>self</code> representa o objeto sendo criado</li>
+                        <li>Parâmetros após <code>self</code> são obrigatórios na criação</li>
+                        <li>Atributos são definidos com <code>self.atributo</code></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-cog"></i> Atributos de Instância</h3>
+                    <p>Atributos definidos no <code>__init__</code> pertencem a cada objeto:</p>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = float(preco)
+
+p1 = Produto("Caderno", 20.00)
+p2 = Produto("Caneta", 2.50)
+
+print(p1.nome, p1.preco)  # Caderno 20.0
+print(p2.nome, p2.preco)  # Caneta 2.5
+</code></pre>
+                    <p style="margin-top: 12px;">Cada objeto tem seus próprios valores para os atributos.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante sobre __init__</h3>
+                    <ul>
+                        <li><strong>Não retorna valor:</strong> <code>__init__</code> não deve retornar nada (ou retornar <code>None</code>)</li>
+                        <li><strong>Obrigatório self:</strong> O primeiro parâmetro sempre é <code>self</code></li>
+                        <li><strong>Chamado automaticamente:</strong> Não chamamos <code>__init__</code> diretamente</li>
+                        <li><strong>Valores padrão:</strong> Podemos usar valores padrão nos parâmetros</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

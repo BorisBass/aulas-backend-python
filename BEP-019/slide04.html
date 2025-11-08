@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 04: Métodos de Instância</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-cog"></i> Métodos de Instância</h2>
+                <p>Criando métodos para manipular atributos</p>
+            <div class="card">
+                <h3><i class="fas fa-info-circle"></i> O que são Métodos de Instância?</h3>
+                <p>Métodos que operam sobre uma instância específica do objeto. Eles recebem <code>self</code> 
+                como primeiro parâmetro e podem acessar e modificar os atributos da instância.</p>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Exemplo: Manipulando Atributos</h3>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular, saldo_inicial=0):
+        self.__saldo = saldo_inicial  # Privado
+        self.titular = titular
+    
+    # Método para ler o saldo
+    def obter_saldo(self):
+        return self.__saldo
+    
+    # Método para modificar o saldo (com validação)
+    def depositar(self, valor):
+        if valor > 0:
+            self.__saldo += valor
+            return f"Depósito de R$ {valor:.2f} realizado."
+        return "Valor inválido!"
+    
+    def sacar(self, valor):
+        if valor > 0 and valor <= self.__saldo:
+            self.__saldo -= valor
+            return f"Saque de R$ {valor:.2f} realizado."
+        return "Saldo insuficiente!"
+
+conta = ContaBancaria("Ana", 1000)
+print(conta.obter_saldo())  # ✅ Via método
+print(conta.depositar(500))
+print(conta.sacar(200))
+print(conta.obter_saldo())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-check-circle"></i> Vantagens</h3>
+                <ul>
+                    <li><strong>Controle:</strong> Validação antes de modificar atributos</li>
+                    <li><strong>Segurança:</strong> Atributos privados não são acessados diretamente</li>
+                    <li><strong>Flexibilidade:</strong> Pode mudar implementação sem afetar quem usa</li>
+                    <li><strong>Manutenibilidade:</strong> Lógica centralizada nos métodos</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

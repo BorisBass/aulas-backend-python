@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 03: Atributos Privados</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-lock"></i> Atributos Privados</h2>
+                <p>Usando _ e __ para proteger atributos</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-shield-alt"></i> Protected (_)</h3>
+                    <p>Convenção para indicar "não acesse diretamente":</p>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular):
+        self._saldo = 0  # Protected
+        self.titular = titular
+
+conta = ContaBancaria("Ana")
+print(conta._saldo)  # ⚠️ Funciona, mas não é recomendado
+</code></pre>
+                    <p style="margin-top: 12px;">É uma convenção, não bloqueia o acesso.</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lock"></i> Private (__)</h3>
+                    <p>Bloqueia acesso direto (name mangling):</p>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular):
+        self.__saldo = 0  # Private
+        self.titular = titular
+
+conta = ContaBancaria("Ana")
+print(conta.__saldo)  # ❌ AttributeError
+# Python renomeia para _ContaBancaria__saldo
+</code></pre>
+                    <p style="margin-top: 12px;">Python renomeia internamente para evitar acesso direto.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Exemplo Prático</h3>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome  # Público
+        self._preco = preco  # Protected
+        self.__estoque = 0  # Private
+    
+    def ver_estoque(self):
+        return self.__estoque  # Acesso interno OK
+
+p = Produto("Notebook", 2500)
+print(p.nome)  # ✅ OK
+print(p._preco)  # ⚠️ Funciona, mas não recomendado
+print(p.__estoque)  # ❌ Erro!
+print(p.ver_estoque())  # ✅ OK (via método)
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

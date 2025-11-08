@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 03: Instanciação de Objetos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-magic"></i> Instanciação de Objetos</h2>
+                <p>Criando objetos a partir de classes</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-play"></i> Como Instanciar</h3>
+                    <p>Para criar um objeto, chamamos a classe como se fosse uma função:</p>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome, matricula):
+        self.nome = nome
+        self.matricula = matricula
+
+# Instanciação (criação do objeto)
+aluno1 = Aluno("Ana", "2025A001")
+aluno2 = Aluno("Bruno", "2025A002")
+
+print(aluno1.nome)  # Ana
+print(aluno2.nome)  # Bruno
+</code></pre>
+                    <p style="margin-top: 12px;">Cada chamada cria um novo objeto independente.</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-users"></i> Múltiplas Instâncias</h3>
+                    <p>Podemos criar quantos objetos quisermos da mesma classe:</p>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+
+# Criando vários produtos
+p1 = Produto("Caderno", 20.00)
+p2 = Produto("Caneta", 2.50)
+p3 = Produto("Borracha", 1.00)
+
+# Cada um é um objeto diferente
+print(p1.nome, p2.nome, p3.nome)
+</code></pre>
+                    <p style="margin-top: 12px;">Todos compartilham a mesma estrutura, mas têm valores diferentes.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-key"></i> Passo a Passo da Instanciação</h3>
+                    <ol>
+                        <li>Python cria um novo objeto vazio</li>
+                        <li>Chama automaticamente o método <code>__init__</code></li>
+                        <li>Os parâmetros passados são atribuídos aos atributos do objeto</li>
+                        <li>O objeto é retornado e pode ser armazenado em uma variável</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

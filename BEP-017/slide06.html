@@ -29,10 +29,16 @@
                 <p>ContaBancaria: depósito, saque e saldo</p>
             <div class="card">
                 <h3>Requisitos</h3>
+                <p>Vamos criar uma classe simples para representar uma conta bancária:</p>
                 <ul>
-                    <li>Atributos: <code>titular</code> e <code>saldo</code>.</li>
-                    <li>Métodos: <code>depositar(valor)</code>, <code>sacar(valor)</code>, <code>ver_saldo()</code>.</li>
-                    <li>Sem conceitos novos além de classe, atributos e métodos.</li>
+                    <li><strong>Atributos:</strong> <code>titular</code> (nome) e <code>saldo</code> (valor)</li>
+                    <li><strong>Métodos:</strong> 
+                        <ul>
+                            <li><code>depositar(valor)</code> - adiciona dinheiro</li>
+                            <li><code>sacar(valor)</code> - retira dinheiro</li>
+                            <li><code>ver_saldo()</code> - mostra o saldo atual</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
 
@@ -44,23 +50,23 @@
         self.saldo = float(saldo_inicial)
 
     def depositar(self, valor):
-        if valor &gt; 0:
+        if valor > 0:
             self.saldo += valor
-        # se valor for inválido, não altera (mantemos simples e explícito)
 
     def sacar(self, valor):
-        if 0 &lt;= valor &lt;= self.saldo:
+        if 0 <= valor <= self.saldo:
             self.saldo -= valor
-        # se valor maior que saldo, não altera (sem exceções aqui, por simplicidade)
 
     def ver_saldo(self):
         return round(self.saldo, 2)
 
-c = ContaBancaria("Ana")
-c.depositar(100)
-c.sacar(30)
-print(c.titular, c.ver_saldo())  # Ana 70.0
+# Criando e usando objetos
+conta_ana = ContaBancaria("Ana")
+conta_ana.depositar(100)
+conta_ana.sacar(30)
+print(f"{conta_ana.titular}: R$ {conta_ana.ver_saldo():.2f}")
 </code></pre>
+<p style="margin-top: 12px;">Este exemplo mostra como POO organiza dados (titular, saldo) e comportamentos (depositar, sacar) juntos.</p>
 </div>
             </div>
         </div>

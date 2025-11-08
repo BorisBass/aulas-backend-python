@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 06: Exercícios Práticos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Criação de classes: Retangulo, Livro e Aluno</p>
+            <div class="card">
+                <h3>1) Classe Retangulo</h3>
+                <ol>
+                    <li>Crie a classe <code>Retangulo</code> com atributos <code>largura</code> e <code>altura</code>.</li>
+                    <li>Adicione o método <code>area()</code> que retorna a área do retângulo.</li>
+                    <li>Adicione o método <code>perimetro()</code> que retorna o perímetro.</li>
+                    <li>Crie dois objetos e compare as áreas.</li>
+                </ol>
+<pre><code class="language-python">class Retangulo:
+    def __init__(self, largura, altura):
+        self.largura = float(largura)
+        self.altura = float(altura)
+    
+    def area(self):
+        return self.largura * self.altura
+    
+    def perimetro(self):
+        return 2 * (self.largura + self.altura)
+
+r1 = Retangulo(5, 3)
+r2 = Retangulo(4, 4)
+print(f"Área r1: {r1.area()}, Perímetro: {r1.perimetro()}")
+print(f"Área r2: {r2.area()}, Perímetro: {r2.perimetro()}")
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2) Classe Livro</h3>
+                <ol>
+                    <li>Crie a classe <code>Livro</code> com atributos <code>titulo</code>, <code>autor</code> e <code>paginas</code>.</li>
+                    <li>Adicione o método <code>descricao()</code> que retorna uma string formatada.</li>
+                    <li>Crie três objetos de livros diferentes.</li>
+                </ol>
+<pre><code class="language-python">class Livro:
+    def __init__(self, titulo, autor, paginas):
+        self.titulo = titulo
+        self.autor = autor
+        self.paginas = int(paginas)
+    
+    def descricao(self):
+        return f"'{self.titulo}' por {self.autor} ({self.paginas} páginas)"
+
+l1 = Livro("Python para Iniciantes", "João Silva", 200)
+l2 = Livro("POO Avançada", "Maria Santos", 350)
+print(l1.descricao())
+print(l2.descricao())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>3) Classe Aluno</h3>
+                <ol>
+                    <li>Crie a classe <code>Aluno</code> com atributos <code>nome</code> e <code>notas</code> (lista).</li>
+                    <li>Adicione o método <code>media()</code> que calcula a média das notas.</li>
+                    <li>Adicione o método <code>situacao()</code> que retorna "Aprovado" se média >= 6, senão "Reprovado".</li>
+                </ol>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome, notas):
+        self.nome = nome
+        self.notas = [float(n) for n in notas]
+    
+    def media(self):
+        return sum(self.notas) / len(self.notas)
+    
+    def situacao(self):
+        media = self.media()
+        return "Aprovado" if media >= 6 else "Reprovado"
+
+a1 = Aluno("Ana", [7, 8, 6, 9])
+a2 = Aluno("Bruno", [5, 4, 6, 5])
+print(f"{a1.nome}: Média {a1.media():.1f} - {a1.situacao()}")
+print(f"{a2.nome}: Média {a2.media():.1f} - {a2.situacao()}")
+</code></pre>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 05: Exemplo: Carro</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-car"></i> Exemplo: Carro</h2>
+                <p>Prática com múltiplos atributos e métodos</p>
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Classe Funcionario - Múltiplos Atributos</h3>
+<pre><code class="language-python">class Funcionario:
+    def __init__(self, nome, cargo, salario_base):
+        self.nome = nome
+        self.cargo = cargo
+        self.salario_base = float(salario_base)
+        self.horas_extras = 0  # Atributo inicializado com zero
+    
+    def adicionar_horas_extras(self, horas):
+        self.horas_extras += horas
+    
+    def calcular_salario_total(self):
+        valor_hora_extra = self.salario_base / 160 * 1.5
+        return self.salario_base + (self.horas_extras * valor_hora_extra)
+    
+    def resumo(self):
+        return f"{self.nome} ({self.cargo}): R$ {self.calcular_salario_total():.2f}"
+
+# Criando múltiplos objetos
+func1 = Funcionario("Maria", "Desenvolvedora", 5000)
+func2 = Funcionario("João", "Analista", 4000)
+
+func1.adicionar_horas_extras(10)
+func2.adicionar_horas_extras(5)
+
+print(func1.resumo())
+print(func2.resumo())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-check-circle"></i> Pontos Importantes</h3>
+                <ul>
+                    <li><strong>Atributos no __init__:</strong> Podemos definir atributos com valores padrão</li>
+                    <li><strong>Múltiplos atributos:</strong> A classe pode ter quantos atributos forem necessários</li>
+                    <li><strong>Métodos modificadores:</strong> Métodos podem alterar o estado do objeto</li>
+                    <li><strong>Métodos informativos:</strong> Métodos podem retornar informações sobre o objeto</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

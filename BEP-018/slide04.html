@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 04: Exemplo Completo: Pessoa</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-user"></i> Exemplo Completo: Pessoa</h2>
+                <p>Classe completa com construtor e métodos</p>
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Classe Estudante - Exemplo Completo</h3>
+<pre><code class="language-python">class Estudante:
+    def __init__(self, nome, matricula, curso):
+        self.nome = nome
+        self.matricula = matricula
+        self.curso = curso
+        self.notas = []  # Lista vazia inicialmente
+    
+    def adicionar_nota(self, nota):
+        self.notas.append(float(nota))
+    
+    def calcular_media(self):
+        if len(self.notas) > 0:
+            return sum(self.notas) / len(self.notas)
+        return 0.0
+    
+    def situacao(self):
+        media = self.calcular_media()
+        if media >= 7.0:
+            return "Aprovado"
+        elif media >= 5.0:
+            return "Recuperação"
+        else:
+            return "Reprovado"
+
+# Criando e usando objetos
+est1 = Estudante("Ana", "2025A001", "Python")
+est1.adicionar_nota(8.5)
+est1.adicionar_nota(7.0)
+est1.adicionar_nota(9.0)
+
+print(f"{est1.nome}: Média {est1.calcular_media():.1f} - {est1.situacao()}")
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-lightbulb"></i> Análise do Código</h3>
+                <ul>
+                    <li><strong>__init__:</strong> Inicializa os atributos <code>nome</code>, <code>matricula</code>, <code>curso</code> e <code>notas</code> (lista vazia)</li>
+                    <li><strong>adicionar_nota():</strong> Método que adiciona notas à lista</li>
+                    <li><strong>calcular_media():</strong> Método que calcula e retorna a média das notas</li>
+                    <li><strong>situacao():</strong> Método que usa a média para determinar a situação do estudante</li>
+                    <li><strong>Instanciação:</strong> Criamos um objeto e usamos métodos para manipular seus dados</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

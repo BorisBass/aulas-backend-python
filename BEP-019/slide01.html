@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 01: O que é Encapsulamento?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> O que é Encapsulamento?</h2>
+                <p>Definição e importância do encapsulamento</p>
+                
+                <div class="two-col" style="margin-top: 20px;">
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Definição</h3>
+                    <p><strong>Encapsulamento</strong> é o princípio de ocultar os detalhes internos de implementação 
+                    de uma classe e expor apenas o que é necessário através de uma interface controlada.</p>
+                    <ul style="margin-top: 12px;">
+                        <li>Protege dados sensíveis</li>
+                        <li>Controla como os dados são acessados</li>
+                        <li>Facilita manutenção do código</li>
+                        <li>Previne modificações indevidas</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Problema sem Encapsulamento</h3>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular, saldo):
+        self.titular = titular
+        self.saldo = saldo  # Acesso direto!
+
+conta = ContaBancaria("Ana", 1000)
+conta.saldo = -500  # ❌ Problema! Saldo negativo
+conta.saldo = "erro"  # ❌ Problema! Tipo errado
+</code></pre>
+                    <p style="margin-top: 12px;">Sem proteção, qualquer um pode modificar os dados de forma incorreta.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-check-circle"></i> Benefícios do Encapsulamento</h3>
+                    <ul>
+                        <li><strong>Segurança:</strong> Dados protegidos contra acesso indevido</li>
+                        <li><strong>Validação:</strong> Controle sobre valores aceitos</li>
+                        <li><strong>Flexibilidade:</strong> Pode mudar implementação interna sem afetar quem usa</li>
+                        <li><strong>Manutenibilidade:</strong> Código mais organizado e fácil de manter</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

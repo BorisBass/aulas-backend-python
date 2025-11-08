@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 02: Modificadores de Acesso</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        table th, table td { padding: 10px; text-align: left; border: 1px solid #E2E8F0; }
+        table th { background: #F7FAFC; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-lock"></i> Modificadores de Acesso</h2>
+                <p>Public, private e protected em Python</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-globe"></i> Public (Público)</h3>
+                    <p>Atributos e métodos acessíveis de qualquer lugar:</p>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome):
+        self.nome = nome  # Público
+
+p = Pessoa("Ana")
+print(p.nome)  # ✅ Acesso direto permitido
+</code></pre>
+                    <p style="margin-top: 12px;">Em Python, por padrão, tudo é público (sem prefixo).</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lock"></i> Private (Privado)</h3>
+                    <p>Atributos e métodos acessíveis apenas dentro da classe:</p>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome):
+        self.__nome = nome  # Privado (__)
+
+p = Pessoa("Ana")
+print(p.__nome)  # ❌ Erro! Acesso negado
+</code></pre>
+                    <p style="margin-top: 12px;">Usa prefixo <code>__</code> (dois underscores).</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-shield-alt"></i> Protected (Protegido)</h3>
+                <p>Atributos e métodos acessíveis na classe e subclasses:</p>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome):
+        self._nome = nome  # Protegido (_)
+
+p = Pessoa("Ana")
+print(p._nome)  # ⚠️ Funciona, mas é convenção não acessar
+</code></pre>
+                <p style="margin-top: 12px;">Usa prefixo <code>_</code> (um underscore). É uma convenção, não bloqueia acesso.</p>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-table"></i> Resumo dos Modificadores</h3>
+                <table>
+                    <tr>
+                        <th>Modificador</th>
+                        <th>Prefix</th>
+                        <th>Acesso</th>
+                        <th>Exemplo</th>
+                    </tr>
+                    <tr>
+                        <td>Public</td>
+                        <td>Nenhum</td>
+                        <td>Qualquer lugar</td>
+                        <td><code>self.nome</code></td>
+                    </tr>
+                    <tr>
+                        <td>Protected</td>
+                        <td><code>_</code></td>
+                        <td>Classe e subclasses</td>
+                        <td><code>self._nome</code></td>
+                    </tr>
+                    <tr>
+                        <td>Private</td>
+                        <td><code>__</code></td>
+                        <td>Apenas na classe</td>
+                        <td><code>self.__nome</code></td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

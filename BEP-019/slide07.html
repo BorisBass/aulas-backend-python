@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 07: Exercícios Práticos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Prática com classes encapsuladas</p>
+            <div class="card">
+                <h3>1) Classe Aluno Encapsulada</h3>
+                <ol>
+                    <li>Crie a classe <code>Aluno</code> com atributo privado <code>__nota</code>.</li>
+                    <li>Implemente getter <code>get_nota()</code> e setter <code>set_nota()</code> com validação (0-10).</li>
+                    <li>Adicione método <code>aprovado()</code> que retorna True se nota >= 6.</li>
+                </ol>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome, nota):
+        self.nome = nome
+        self.__nota = 0
+        self.set_nota(nota)
+    
+    def get_nota(self):
+        return self.__nota
+    
+    def set_nota(self, nota):
+        if 0 <= nota <= 10:
+            self.__nota = nota
+        else:
+            raise ValueError("Nota deve estar entre 0 e 10")
+    
+    def aprovado(self):
+        return self.__nota >= 6
+
+a = Aluno("Ana", 7.5)
+print(a.get_nota(), a.aprovado())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2) Classe Produto Encapsulada</h3>
+                <ol>
+                    <li>Crie a classe <code>Produto</code> com <code>__preco</code> e <code>__estoque</code> privados.</li>
+                    <li>Implemente getters e setters para ambos os atributos.</li>
+                    <li>Valide: preço > 0 e estoque >= 0.</li>
+                    <li>Adicione método <code>vender(quantidade)</code> que reduz estoque.</li>
+                </ol>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco, estoque):
+        self.nome = nome
+        self.__preco = 0
+        self.__estoque = 0
+        self.set_preco(preco)
+        self.set_estoque(estoque)
+    
+    def get_preco(self):
+        return self.__preco
+    
+    def set_preco(self, preco):
+        if preco > 0:
+            self.__preco = float(preco)
+        else:
+            raise ValueError("Preço deve ser maior que zero")
+    
+    def get_estoque(self):
+        return self.__estoque
+    
+    def set_estoque(self, estoque):
+        if estoque >= 0:
+            self.__estoque = int(estoque)
+        else:
+            raise ValueError("Estoque não pode ser negativo")
+    
+    def vender(self, quantidade):
+        if quantidade > 0 and quantidade <= self.__estoque:
+            self.__estoque -= quantidade
+            return f"Venda de {quantidade} unidade(s) realizada."
+        return "Estoque insuficiente."
+
+p = Produto("Notebook", 2500, 10)
+print(p.get_preco(), p.get_estoque())
+p.vender(3)
+print(p.get_estoque())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>3) Classe Pessoa com Idade Protegida</h3>
+                <ol>
+                    <li>Crie a classe <code>Pessoa</code> com <code>_idade</code> (protected).</li>
+                    <li>Implemente getter e setter com validação (idade >= 0).</li>
+                    <li>Adicione método <code>fazer_aniversario()</code> que incrementa a idade.</li>
+                </ol>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self._idade = 0
+        self.set_idade(idade)
+    
+    def get_idade(self):
+        return self._idade
+    
+    def set_idade(self, idade):
+        if idade >= 0:
+            self._idade = int(idade)
+        else:
+            raise ValueError("Idade não pode ser negativa")
+    
+    def fazer_aniversario(self):
+        self._idade += 1
+        return f"{self.nome} fez aniversário! Agora tem {self._idade} anos."
+
+p = Pessoa("Ana", 25)
+print(p.get_idade())
+print(p.fazer_aniversario())
+</code></pre>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

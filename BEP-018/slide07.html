@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-018 - Slide 07: Exercícios Avançados</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-018: Criando e Instanciando Classes</h1>
+            <p>Implementar e utilizar classes em Python</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-rocket"></i> Exercícios Avançados</h2>
+                <p>Desafios com ContaBancaria e Produto</p>
+            <div class="card">
+                <h3>1) Classe ContaBancaria</h3>
+                <ol>
+                    <li>Crie a classe <code>ContaBancaria</code> com atributos <code>titular</code> e <code>saldo</code> (inicial 0).</li>
+                    <li>Adicione o método <code>depositar(valor)</code> que aumenta o saldo.</li>
+                    <li>Adicione o método <code>sacar(valor)</code> que diminui o saldo (só se houver saldo suficiente).</li>
+                    <li>Adicione o método <code>ver_saldo()</code> que retorna o saldo atual.</li>
+                </ol>
+<pre><code class="language-python">class ContaBancaria:
+    def __init__(self, titular, saldo_inicial=0):
+        self.titular = titular
+        self.saldo = float(saldo_inicial)
+    
+    def depositar(self, valor):
+        if valor > 0:
+            self.saldo += valor
+            return f"Depósito de R$ {valor:.2f} realizado."
+        return "Valor inválido para depósito."
+    
+    def sacar(self, valor):
+        if valor > 0 and valor <= self.saldo:
+            self.saldo -= valor
+            return f"Saque de R$ {valor:.2f} realizado."
+        return "Saldo insuficiente ou valor inválido."
+    
+    def ver_saldo(self):
+        return f"Saldo atual: R$ {self.saldo:.2f}"
+
+conta = ContaBancaria("Ana")
+print(conta.depositar(100))
+print(conta.sacar(30))
+print(conta.ver_saldo())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2) Classe Produto</h3>
+                <ol>
+                    <li>Crie a classe <code>Produto</code> com atributos <code>nome</code>, <code>preco</code> e <code>estoque</code>.</li>
+                    <li>Adicione o método <code>aplicar_desconto(percentual)</code> que reduz o preço.</li>
+                    <li>Adicione o método <code>vender(quantidade)</code> que reduz o estoque (só se houver estoque suficiente).</li>
+                    <li>Adicione o método <code>repor(quantidade)</code> que aumenta o estoque.</li>
+                </ol>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco, estoque):
+        self.nome = nome
+        self.preco = float(preco)
+        self.estoque = int(estoque)
+    
+    def aplicar_desconto(self, percentual):
+        fator = 1 - (percentual / 100)
+        self.preco = round(self.preco * fator, 2)
+        return f"Desconto aplicado. Novo preço: R$ {self.preco:.2f}"
+    
+    def vender(self, quantidade):
+        if quantidade > 0 and quantidade <= self.estoque:
+            self.estoque -= quantidade
+            return f"Venda de {quantidade} unidade(s) realizada(s). Estoque: {self.estoque}"
+        return "Estoque insuficiente ou quantidade inválida."
+    
+    def repor(self, quantidade):
+        if quantidade > 0:
+            self.estoque += quantidade
+            return f"Reposição de {quantidade} unidade(s). Estoque: {self.estoque}"
+        return "Quantidade inválida."
+
+p = Produto("Notebook", 2500.00, 10)
+print(p.aplicar_desconto(10))
+print(p.vender(3))
+print(p.repor(5))
+</code></pre>
+            </div>
+        </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-018: Criando e Instanciando Classes</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
