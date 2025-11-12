@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 09: Exemplo: Veiculos e Subclasses</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-car"></i> Exemplo: Veiculos e Subclasses</h2>
+                <p>Sistema completo com herança e polimorfismo</p>
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Sistema Completo de Veículos</h3>
+<pre><code class="language-python">class Veiculo:
+    def __init__(self, marca, modelo, ano):
+        self.marca = marca
+        self.modelo = modelo
+        self.ano = ano
+        self.velocidade = 0
+        self.ligado = False
+    
+    def ligar(self):
+        self.ligado = True
+        return f"{self.modelo} ligado"
+    
+    def desligar(self):
+        self.ligado = False
+        self.velocidade = 0
+        return f"{self.modelo} desligado"
+    
+    def acelerar(self, incremento=10):
+        if self.ligado:
+            self.velocidade += incremento
+            return f"{self.modelo} acelerou para {self.velocidade} km/h"
+        return f"{self.modelo} precisa estar ligado"
+    
+    def frear(self):
+        self.velocidade = max(0, self.velocidade - 10)
+        return f"{self.modelo} freou para {self.velocidade} km/h"
+    
+    def informacoes(self):
+        return f"{self.marca} {self.modelo} ({self.ano}) - {self.velocidade} km/h"
+
+class Carro(Veiculo):
+    def __init__(self, marca, modelo, ano, portas):
+        super().__init__(marca, modelo, ano)
+        self.portas = portas
+    
+    def acelerar(self, incremento=15):  # Polimorfismo
+        if self.ligado:
+            self.velocidade += incremento
+            return f"{self.modelo} acelerou suavemente para {self.velocidade} km/h"
+        return f"{self.modelo} precisa estar ligado"
+    
+    def abrir_porta(self, numero):
+        return f"Porta {numero} do {self.modelo} aberta"
+
+class Moto(Veiculo):
+    def __init__(self, marca, modelo, ano, cilindradas):
+        super().__init__(marca, modelo, ano)
+        self.cilindradas = cilindradas
+    
+    def acelerar(self, incremento=25):  # Polimorfismo
+        if self.ligado:
+            self.velocidade += incremento
+            return f"{self.modelo} acelerou rapidamente para {self.velocidade} km/h"
+        return f"{self.modelo} precisa estar ligado"
+    
+    def empinar(self):
+        if self.velocidade > 30:
+            return f"{self.modelo} empinando!"
+        return "Velocidade insuficiente para empinar"
+
+class Caminhao(Veiculo):
+    def __init__(self, marca, modelo, ano, capacidade_carga):
+        super().__init__(marca, modelo, ano)
+        self.capacidade_carga = capacidade_carga
+        self.carga_atual = 0
+    
+    def acelerar(self, incremento=5):  # Polimorfismo: acelera mais devagar
+        if self.ligado:
+            self.velocidade += incremento
+            return f"{self.modelo} acelerou lentamente para {self.velocidade} km/h"
+        return f"{self.modelo} precisa estar ligado"
+    
+    def carregar(self, peso):
+        if self.carga_atual + peso <= self.capacidade_carga:
+            self.carga_atual += peso
+            return f"{self.modelo} carregou {peso} kg"
+        return "Capacidade de carga excedida"
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-magic"></i> Demonstração de Polimorfismo</h3>
+<pre><code class="language-python"># Criando diferentes veículos
+veiculos = [
+    Carro("Toyota", "Corolla", 2023, 4),
+    Moto("Honda", "CB600", 2022, 600),
+    Caminhao("Volvo", "FH", 2021, 10000)
+]
+
+# Ligando todos
+for veiculo in veiculos:
+    print(veiculo.ligar())
+
+# Acelerando todos (comportamento diferente!)
+for veiculo in veiculos:
+    print(veiculo.acelerar())
+    print(veiculo.acelerar())
+    print()
+
+# Saída mostra que cada tipo acelera de forma diferente:
+# Corolla acelerou suavemente para 15 km/h
+# CB600 acelerou rapidamente para 25 km/h
+# FH acelerou lentamente para 5 km/h
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-check-circle"></i> Análise do Exemplo</h3>
+                <ul>
+                    <li><strong>Herança:</strong> Todas as subclasses herdam atributos e métodos de Veiculo</li>
+                    <li><strong>Polimorfismo:</strong> O método <code>acelerar()</code> se comporta diferente em cada tipo</li>
+                    <li><strong>Extensão:</strong> Cada subclasse adiciona métodos específicos (abrir_porta, empinar, carregar)</li>
+                    <li><strong>Reutilização:</strong> Código comum (ligar, desligar, frear) definido uma vez</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

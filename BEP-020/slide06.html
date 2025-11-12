@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 06: Sobrescrita de Métodos (Override)</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-edit"></i> Sobrescrita de Métodos (Override)</h2>
+                <p>Personalizando comportamentos nas subclasses</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> O que é Override?</h3>
+                    <p><strong>Sobrescrita (Override)</strong> é quando uma subclasse redefine um método herdado da classe pai.</p>
+                    <ul style="margin-top: 12px;">
+                        <li>A subclasse cria um método com o mesmo nome</li>
+                        <li>O método da subclasse substitui o da classe pai</li>
+                        <li>Permite personalizar comportamento</li>
+                        <li>Mantém a mesma assinatura (nome e parâmetros)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Exemplo Simples</h3>
+<pre><code class="language-python">class Animal:
+    def fazer_som(self):
+        return "Fazendo algum som..."
+
+class Cachorro(Animal):
+    def fazer_som(self):  # Sobrescreve o método
+        return "Au au!"
+
+class Gato(Animal):
+    def fazer_som(self):  # Sobrescreve o método
+        return "Miau!"
+
+c = Cachorro()
+g = Gato()
+print(c.fazer_som())  # "Au au!"
+print(g.fazer_som())  # "Miau!"
+</code></pre>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-code"></i> Exemplo Completo: Extendendo e Sobrescrevendo</h3>
+<pre><code class="language-python">class Veiculo:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+        self.velocidade = 0
+    
+    def acelerar(self, incremento=10):
+        self.velocidade += incremento
+        return f"{self.modelo} acelerou para {self.velocidade} km/h"
+    
+    def frear(self):
+        self.velocidade = max(0, self.velocidade - 10)
+        return f"{self.modelo} freou para {self.velocidade} km/h"
+    
+    def informacoes(self):
+        return f"{self.marca} {self.modelo} - {self.velocidade} km/h"
+
+class Carro(Veiculo):
+    def __init__(self, marca, modelo, portas):
+        super().__init__(marca, modelo)
+        self.portas = portas
+    
+    def acelerar(self, incremento=15):  # Sobrescreve: acelera mais rápido
+        self.velocidade += incremento
+        return f"{self.modelo} acelerou rapidamente para {self.velocidade} km/h"
+    
+    def informacoes(self):  # Sobrescreve: adiciona informação sobre portas
+        info_base = super().informacoes()
+        return f"{info_base} - {self.portas} portas"
+
+class Moto(Veiculo):
+    def __init__(self, marca, modelo, cilindradas):
+        super().__init__(marca, modelo)
+        self.cilindradas = cilindradas
+    
+    def acelerar(self, incremento=20):  # Sobrescreve: acelera ainda mais
+        self.velocidade += incremento
+        return f"{self.modelo} acelerou muito rápido para {self.velocidade} km/h"
+
+# Uso
+carro = Carro("Toyota", "Corolla", 4)
+moto = Moto("Honda", "CB600", 600)
+
+print(carro.acelerar())  # Usa versão sobrescrita
+print(moto.acelerar())   # Usa versão sobrescrita
+print(carro.informacoes())  # Versão estendida
+</code></pre>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-lightbulb"></i> Quando Sobrescrever?</h3>
+                <ul>
+                    <li><strong>Comportamento diferente:</strong> Quando a subclasse precisa de comportamento específico</li>
+                    <li><strong>Extensão:</strong> Quando quer adicionar funcionalidade além da classe pai (usando super())</li>
+                    <li><strong>Otimização:</strong> Quando a subclasse pode implementar de forma mais eficiente</li>
+                    <li><strong>Especialização:</strong> Quando a subclasse representa um caso específico</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

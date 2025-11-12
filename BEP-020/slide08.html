@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 08: Exemplo: Polimorfismo com Formas</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-shapes"></i> Exemplo: Polimorfismo com Formas</h2>
+                <p>Aplicação prática de polimorfismo</p>
+            <div class="card">
+                <h3><i class="fas fa-code"></i> Hierarquia de Formas</h3>
+<pre><code class="language-python">class Forma:
+    def __init__(self, nome):
+        self.nome = nome
+    
+    def calcular_area(self):
+        return 0  # Método genérico
+    
+    def calcular_perimetro(self):
+        return 0  # Método genérico
+    
+    def descrever(self):
+        return f"Forma: {self.nome}"
+
+class Retangulo(Forma):
+    def __init__(self, largura, altura):
+        super().__init__("Retângulo")
+        self.largura = largura
+        self.altura = altura
+    
+    def calcular_area(self):  # Polimorfismo
+        return self.largura * self.altura
+    
+    def calcular_perimetro(self):  # Polimorfismo
+        return 2 * (self.largura + self.altura)
+
+class Circulo(Forma):
+    def __init__(self, raio):
+        super().__init__("Círculo")
+        self.raio = raio
+    
+    def calcular_area(self):  # Polimorfismo
+        import math
+        return math.pi * self.raio ** 2
+    
+    def calcular_perimetro(self):  # Polimorfismo
+        import math
+        return 2 * math.pi * self.raio
+
+class Triangulo(Forma):
+    def __init__(self, base, altura, lado1, lado2, lado3):
+        super().__init__("Triângulo")
+        self.base = base
+        self.altura = altura
+        self.lado1 = lado1
+        self.lado2 = lado2
+        self.lado3 = lado3
+    
+    def calcular_area(self):  # Polimorfismo
+        return (self.base * self.altura) / 2
+    
+    def calcular_perimetro(self):  # Polimorfismo
+        return self.lado1 + self.lado2 + self.lado3
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-magic"></i> Polimorfismo em Ação</h3>
+<pre><code class="language-python"># Criando diferentes formas
+formas = [
+    Retangulo(5, 3),
+    Circulo(4),
+    Triangulo(6, 4, 3, 4, 5)
+]
+
+# Tratando todas de forma uniforme
+for forma in formas:
+    print(f"{forma.descrever()}")
+    print(f"  Área: {forma.calcular_area():.2f}")
+    print(f"  Perímetro: {forma.calcular_perimetro():.2f}")
+    print()
+
+# Saída:
+# Forma: Retângulo
+#   Área: 15.00
+#   Perímetro: 16.00
+#
+# Forma: Círculo
+#   Área: 50.27
+#   Perímetro: 25.13
+#
+# Forma: Triângulo
+#   Área: 12.00
+#   Perímetro: 12.00
+</code></pre>
+                <p style="margin-top: 12px;"><strong>O poder do polimorfismo:</strong> O mesmo código funciona para qualquer tipo de forma, 
+                sem precisar verificar qual tipo é cada objeto!</p>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-lightbulb"></i> Função Genérica com Polimorfismo</h3>
+<pre><code class="language-python">def comparar_formas(forma1, forma2):
+    """Compara duas formas qualquer usando polimorfismo"""
+    area1 = forma1.calcular_area()
+    area2 = forma2.calcular_area()
+    
+    if area1 > area2:
+        return f"{forma1.nome} é maior que {forma2.nome}"
+    elif area2 > area1:
+        return f"{forma2.nome} é maior que {forma1.nome}"
+    else:
+        return "As formas têm a mesma área"
+
+# Funciona com qualquer combinação!
+ret = Retangulo(5, 3)
+circ = Circulo(4)
+print(comparar_formas(ret, circ))
+</code></pre>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 05: Acessando Métodos da Classe Pai</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-arrow-up"></i> Acessando Métodos da Classe Pai</h2>
+                <p>Usando super() para chamar métodos herdados</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-question-circle"></i> O que é super()?</h3>
+                    <p><code>super()</code> é uma função especial que retorna uma referência à classe pai (superclasse).</p>
+                    <ul style="margin-top: 12px;">
+                        <li>Permite acessar métodos da classe pai</li>
+                        <li>Usado principalmente no <code>__init__</code></li>
+                        <li>Evita duplicar código</li>
+                        <li>Garante que a inicialização da classe pai aconteça</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Sintaxe</h3>
+<pre><code class="language-python">class Pai:
+    def __init__(self, atributo_pai):
+        self.atributo_pai = atributo_pai
+
+class Filha(Pai):
+    def __init__(self, atributo_pai, atributo_filha):
+        super().__init__(atributo_pai)
+        self.atributo_filha = atributo_filha
+</code></pre>
+                    <p style="margin-top: 12px;"><code>super().__init__()</code> chama o construtor da classe pai.</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-code"></i> Exemplo Completo</h3>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+    
+    def apresentar(self):
+        return f"Sou {self.nome}, tenho {self.idade} anos"
+
+class Estudante(Pessoa):
+    def __init__(self, nome, idade, matricula):
+        super().__init__(nome, idade)  # Chama __init__ da classe Pai
+        self.matricula = matricula
+    
+    def apresentar(self):
+        # Chama o método da classe pai e adiciona informação
+        info_pai = super().apresentar()
+        return f"{info_pai} e minha matrícula é {self.matricula}"
+
+# Uso
+est = Estudante("Ana", 20, "2025A001")
+print(est.nome)  # Herdado de Pessoa
+print(est.idade)  # Herdado de Pessoa
+print(est.matricula)  # Próprio de Estudante
+print(est.apresentar())  # Método sobrescrito
+</code></pre>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-exclamation-triangle"></i> Importante sobre super()</h3>
+                <ul>
+                    <li><strong>No __init__:</strong> Sempre chame <code>super().__init__()</code> antes de inicializar atributos próprios</li>
+                    <li><strong>Em outros métodos:</strong> Use <code>super().metodo()</code> para chamar versão da classe pai</li>
+                    <li><strong>Ordem importa:</strong> Chame super() primeiro para garantir que a classe pai seja inicializada corretamente</li>
+                    <li><strong>Python 3:</strong> <code>super()</code> funciona automaticamente, não precisa passar argumentos</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

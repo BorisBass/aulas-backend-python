@@ -27,14 +27,15 @@
                 <h2><i class="fas fa-piggy-bank"></i> Exemplo: ContaBancaria</h2>
                 <p>Aplicando encapsulamento em um exemplo prático</p>
             <div class="card">
-                <h3><i class="fas fa-code"></i> Classe Encapsulada</h3>
+                <h3><i class="fas fa-code"></i> Classe Encapsulada com @property</h3>
 <pre><code class="language-python">class ContaBancaria:
     def __init__(self, titular, saldo_inicial=0):
         self.titular = titular  # Público
         self.__saldo = float(saldo_inicial)  # Privado
     
-    # Getter
-    def get_saldo(self):
+    @property
+    def saldo(self):
+        """Getter: acessa saldo como atributo"""
         return self.__saldo
     
     # Métodos de instância para manipular saldo
@@ -56,16 +57,16 @@
             return f"Transferência de R$ {valor:.2f} realizada."
         return "Transferência não realizada."
 
-# Uso
+# Uso elegante com @property
 conta1 = ContaBancaria("Ana", 1000)
 conta2 = ContaBancaria("Bruno", 500)
 
-print(conta1.get_saldo())
+print(f"Saldo: R$ {conta1.saldo:.2f}")  # Acesso direto como atributo
 conta1.depositar(200)
 conta1.sacar(100)
 conta1.transferir(conta2, 150)
-print(f"Ana: R$ {conta1.get_saldo():.2f}")
-print(f"Bruno: R$ {conta2.get_saldo():.2f}")
+print(f"Ana: R$ {conta1.saldo:.2f}")  # Sintaxe limpa
+print(f"Bruno: R$ {conta2.saldo:.2f}")
 </code></pre>
             </div>
 

@@ -28,24 +28,26 @@
                 <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
                 <p>Prática com classes encapsuladas</p>
             <div class="card">
-                <h3>1) Classe Aluno Encapsulada</h3>
+                <h3>1) Classe Aluno Encapsulada (com @property)</h3>
                 <ol>
                     <li>Crie a classe <code>Aluno</code> com atributo privado <code>__nota</code>.</li>
-                    <li>Implemente getter <code>get_nota()</code> e setter <code>set_nota()</code> com validação (0-10).</li>
+                    <li>Implemente <code>@property</code> e <code>@nota.setter</code> com validação (0-10).</li>
                     <li>Adicione método <code>aprovado()</code> que retorna True se nota >= 6.</li>
                 </ol>
 <pre><code class="language-python">class Aluno:
     def __init__(self, nome, nota):
         self.nome = nome
         self.__nota = 0
-        self.set_nota(nota)
+        self.nota = nota  # Usa o setter
     
-    def get_nota(self):
+    @property
+    def nota(self):
         return self.__nota
     
-    def set_nota(self, nota):
-        if 0 <= nota <= 10:
-            self.__nota = nota
+    @nota.setter
+    def nota(self, valor):
+        if 0 <= valor <= 10:
+            self.__nota = valor
         else:
             raise ValueError("Nota deve estar entre 0 e 10")
     
@@ -53,15 +55,17 @@
         return self.__nota >= 6
 
 a = Aluno("Ana", 7.5)
-print(a.get_nota(), a.aprovado())
+print(f"Nota: {a.nota}, Aprovado: {a.aprovado()}")  # Sintaxe elegante
+a.nota = 8.0  # Atribuição direta com validação
+print(f"Nova nota: {a.nota}")
 </code></pre>
             </div>
 
             <div class="card">
-                <h3>2) Classe Produto Encapsulada</h3>
+                <h3>2) Classe Produto Encapsulada (com @property)</h3>
                 <ol>
                     <li>Crie a classe <code>Produto</code> com <code>__preco</code> e <code>__estoque</code> privados.</li>
-                    <li>Implemente getters e setters para ambos os atributos.</li>
+                    <li>Implemente <code>@property</code> e setters para ambos os atributos.</li>
                     <li>Valide: preço > 0 e estoque >= 0.</li>
                     <li>Adicione método <code>vender(quantidade)</code> que reduz estoque.</li>
                 </ol>
@@ -70,24 +74,28 @@ print(a.get_nota(), a.aprovado())
         self.nome = nome
         self.__preco = 0
         self.__estoque = 0
-        self.set_preco(preco)
-        self.set_estoque(estoque)
+        self.preco = preco  # Usa o setter
+        self.estoque = estoque  # Usa o setter
     
-    def get_preco(self):
+    @property
+    def preco(self):
         return self.__preco
     
-    def set_preco(self, preco):
-        if preco > 0:
-            self.__preco = float(preco)
+    @preco.setter
+    def preco(self, valor):
+        if valor > 0:
+            self.__preco = float(valor)
         else:
             raise ValueError("Preço deve ser maior que zero")
     
-    def get_estoque(self):
+    @property
+    def estoque(self):
         return self.__estoque
     
-    def set_estoque(self, estoque):
-        if estoque >= 0:
-            self.__estoque = int(estoque)
+    @estoque.setter
+    def estoque(self, valor):
+        if valor >= 0:
+            self.__estoque = int(valor)
         else:
             raise ValueError("Estoque não pode ser negativo")
     
@@ -98,40 +106,42 @@ print(a.get_nota(), a.aprovado())
         return "Estoque insuficiente."
 
 p = Produto("Notebook", 2500, 10)
-print(p.get_preco(), p.get_estoque())
+print(f"Preço: R$ {p.preco:.2f}, Estoque: {p.estoque}")  # Sintaxe elegante
 p.vender(3)
-print(p.get_estoque())
+print(f"Estoque após venda: {p.estoque}")
 </code></pre>
             </div>
 
             <div class="card">
-                <h3>3) Classe Pessoa com Idade Protegida</h3>
+                <h3>3) Classe Pessoa com Idade (com @property)</h3>
                 <ol>
-                    <li>Crie a classe <code>Pessoa</code> com <code>_idade</code> (protected).</li>
-                    <li>Implemente getter e setter com validação (idade >= 0).</li>
+                    <li>Crie a classe <code>Pessoa</code> com <code>__idade</code> (private).</li>
+                    <li>Implemente <code>@property</code> e <code>@idade.setter</code> com validação (idade >= 0).</li>
                     <li>Adicione método <code>fazer_aniversario()</code> que incrementa a idade.</li>
                 </ol>
 <pre><code class="language-python">class Pessoa:
     def __init__(self, nome, idade):
         self.nome = nome
-        self._idade = 0
-        self.set_idade(idade)
+        self.__idade = 0
+        self.idade = idade  # Usa o setter
     
-    def get_idade(self):
-        return self._idade
+    @property
+    def idade(self):
+        return self.__idade
     
-    def set_idade(self, idade):
-        if idade >= 0:
-            self._idade = int(idade)
+    @idade.setter
+    def idade(self, valor):
+        if valor >= 0:
+            self.__idade = int(valor)
         else:
             raise ValueError("Idade não pode ser negativa")
     
     def fazer_aniversario(self):
-        self._idade += 1
-        return f"{self.nome} fez aniversário! Agora tem {self._idade} anos."
+        self.idade += 1  # Usa o setter automaticamente
+        return f"{self.nome} fez aniversário! Agora tem {self.idade} anos."
 
 p = Pessoa("Ana", 25)
-print(p.get_idade())
+print(f"Idade: {p.idade} anos")  # Sintaxe elegante
 print(p.fazer_aniversario())
 </code></pre>
             </div>

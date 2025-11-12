@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 12: Checklist de Revisão</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { padding: 10px; margin: 8px 0; background: #F7FAFC; border-left: 4px solid #4299E1; border-radius: 4px; }
+        .checklist li:before { content: "☐ "; font-size: 1.2em; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-check-square"></i> Checklist de Revisão</h2>
+                <p>Confirme seu domínio dos conceitos</p>
+            <div class="card">
+                <h3><i class="fas fa-list-check"></i> Você consegue:</h3>
+                <ul class="checklist">
+                    <li>Explicar o que é herança e suas vantagens</li>
+                    <li>Criar uma classe pai (superclasse) com atributos e métodos comuns</li>
+                    <li>Criar subclasses que herdam de uma classe pai</li>
+                    <li>Usar <code>super()</code> para acessar métodos da classe pai</li>
+                    <li>Usar <code>super().__init__()</code> no construtor da subclasse</li>
+                    <li>Sobrescrever métodos herdados (override)</li>
+                    <li>Explicar o que é polimorfismo</li>
+                    <li>Reconhecer polimorfismo em código</li>
+                    <li>Criar código que usa polimorfismo para tratar objetos diferentes uniformemente</li>
+                    <li>Identificar quando usar herança vs composição</li>
+                    <li>Projetar hierarquias de classes apropriadas</li>
+                    <li>Aplicar herança e polimorfismo em exercícios práticos</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-graduation-cap"></i> Próximos Passos</h3>
+                <p>Após dominar estes conceitos, você estará pronto para:</p>
+                <ul>
+                    <li>Herança múltipla (múltiplas classes pai)</li>
+                    <li>Classes abstratas e métodos abstratos</li>
+                    <li>Interfaces e protocolos</li>
+                    <li>Métodos de classe e métodos estáticos</li>
+                    <li>Design Patterns (padrões de projeto)</li>
+                    <li>Frameworks e bibliotecas que usam herança extensivamente</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3><i class="fas fa-book"></i> Dica de Estudo</h3>
+                <p>Pratique criando hierarquias de classes para entidades do seu dia a dia. Pense em relações 
+                "é um": um Carro É UM Veiculo, um Cachorro É UM Animal, um Gerente É UM Funcionario. 
+                Quanto mais você praticar, mais natural se tornará identificar oportunidades de usar herança 
+                e polimorfismo!</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

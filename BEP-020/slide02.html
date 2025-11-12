@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 02: Vantagens da Herança</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .vantagem { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-check-circle"></i> Vantagens da Herança</h2>
+                <p>Reutilização de código e organização</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> Principais Vantagens</h3>
+                    
+                    <div class="vantagem">
+                        <h4><i class="fas fa-code"></i> 1. Reutilização de Código</h4>
+                        <p>Evita duplicação. Atributos e métodos comuns são definidos uma vez na classe pai e 
+                        herdados por todas as subclasses.</p>
+                    </div>
+                    
+                    <div class="vantagem">
+                        <h4><i class="fas fa-sitemap"></i> 2. Organização Hierárquica</h4>
+                        <p>Cria uma estrutura lógica e organizada. Facilita entender relacionamentos entre classes 
+                        e a hierarquia do sistema.</p>
+                    </div>
+                    
+                    <div class="vantagem">
+                        <h4><i class="fas fa-tools"></i> 3. Facilita Manutenção</h4>
+                        <p>Mudanças na classe pai se propagam automaticamente para todas as subclasses. 
+                        Corrigir um bug uma vez beneficia toda a hierarquia.</p>
+                    </div>
+                    
+                    <div class="vantagem">
+                        <h4><i class="fas fa-expand-arrows-alt"></i> 4. Extensibilidade</h4>
+                        <p>Fácil adicionar novas funcionalidades. Crie novas subclasses sem modificar a classe pai, 
+                        seguindo o princípio "aberto para extensão, fechado para modificação".</p>
+                    </div>
+                    
+                    <div class="vantagem">
+                        <h4><i class="fas fa-shield-alt"></i> 5. Consistência</h4>
+                        <p>Garante que todas as subclasses sigam o mesmo padrão. Comportamentos comuns são 
+                        padronizados na classe pai.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Quando Usar Herança?</h3>
+                    <ul>
+                        <li><strong>Relacionamento "é um":</strong> Se você pode dizer "Carro É UM Veiculo", use herança</li>
+                        <li><strong>Código compartilhado:</strong> Quando várias classes têm muito código em comum</li>
+                        <li><strong>Hierarquia natural:</strong> Quando existe uma relação hierárquica clara entre classes</li>
+                        <li><strong>Extensão futura:</strong> Quando você prevê que precisará criar variações da classe</li>
+                    </ul>
+                    <p style="margin-top: 12px;"><strong>Não use herança:</strong> Apenas para reutilizar código sem relação conceitual. 
+                    Prefira composição nesses casos.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

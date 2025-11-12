@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 10: Exercícios Práticos I</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos I</h2>
+                <p>Criando hierarquias de classes</p>
+            <div class="card">
+                <h3>1) Hierarquia de Funcionários</h3>
+                <ol>
+                    <li>Crie a classe <code>Funcionario</code> com atributos <code>nome</code>, <code>salario</code> e método <code>calcular_salario()</code>.</li>
+                    <li>Crie a subclasse <code>Gerente</code> que herda de Funcionario e adiciona bônus de 20%.</li>
+                    <li>Crie a subclasse <code>Vendedor</code> que herda de Funcionario e adiciona comissão baseada em vendas.</li>
+                    <li>Sobrescreva <code>calcular_salario()</code> em cada subclasse.</li>
+                </ol>
+<pre><code class="language-python">class Funcionario:
+    def __init__(self, nome, salario_base):
+        self.nome = nome
+        self.salario_base = salario_base
+    
+    def calcular_salario(self):
+        return self.salario_base
+
+class Gerente(Funcionario):
+    def __init__(self, nome, salario_base):
+        super().__init__(nome, salario_base)
+    
+    def calcular_salario(self):
+        return self.salario_base * 1.20  # 20% de bônus
+
+class Vendedor(Funcionario):
+    def __init__(self, nome, salario_base):
+        super().__init__(nome, salario_base)
+        self.vendas = 0
+    
+    def adicionar_venda(self, valor):
+        self.vendas += valor
+    
+    def calcular_salario(self):
+        comissao = self.vendas * 0.10  # 10% de comissão
+        return self.salario_base + comissao
+
+# Teste
+gerente = Gerente("Maria", 5000)
+vendedor = Vendedor("João", 2000)
+vendedor.adicionar_venda(10000)
+
+print(f"{gerente.nome}: R$ {gerente.calcular_salario():.2f}")
+print(f"{vendedor.nome}: R$ {vendedor.calcular_salario():.2f}")
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2) Hierarquia de Contas Bancárias</h3>
+                <ol>
+                    <li>Crie a classe <code>Conta</code> com <code>titular</code>, <code>saldo</code>, métodos <code>depositar()</code> e <code>sacar()</code>.</li>
+                    <li>Crie <code>ContaCorrente</code> que herda de Conta e cobra taxa de 2% em cada saque.</li>
+                    <li>Crie <code>ContaPoupanca</code> que herda de Conta e adiciona método <code>aplicar_juros()</code>.</li>
+                    <li>Sobrescreva <code>sacar()</code> em ContaCorrente para aplicar a taxa.</li>
+                </ol>
+<pre><code class="language-python">class Conta:
+    def __init__(self, titular, saldo_inicial=0):
+        self.titular = titular
+        self.saldo = saldo_inicial
+    
+    def depositar(self, valor):
+        if valor > 0:
+            self.saldo += valor
+    
+    def sacar(self, valor):
+        if valor > 0 and valor <= self.saldo:
+            self.saldo -= valor
+            return True
+        return False
+
+class ContaCorrente(Conta):
+    def sacar(self, valor):
+        taxa = valor * 0.02  # 2% de taxa
+        valor_total = valor + taxa
+        if valor_total <= self.saldo:
+            self.saldo -= valor_total
+            return True
+        return False
+
+class ContaPoupanca(Conta):
+    def aplicar_juros(self, taxa=0.5):
+        juros = self.saldo * (taxa / 100)
+        self.saldo += juros
+        return juros
+</code></pre>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

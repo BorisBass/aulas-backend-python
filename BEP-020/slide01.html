@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 01: O que é Herança?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> O que é Herança?</h2>
+                <p>Conceito fundamental e analogia do mundo real</p>
+                
+                <div class="two-col" style="margin-top: 20px;">
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Definição</h3>
+                    <p><strong>Herança</strong> é um mecanismo que permite criar uma nova classe baseada em uma classe existente.</p>
+                    <ul style="margin-top: 12px;">
+                        <li><strong>Classe Pai (Superclasse):</strong> A classe original que é herdada</li>
+                        <li><strong>Classe Filha (Subclasse):</strong> A nova classe que herda da classe pai</li>
+                        <li><strong>Herança:</strong> A subclasse "herda" todos os atributos e métodos da superclasse</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Analogia do Mundo Real</h3>
+                    <p>Pense em <strong>Veículos</strong>:</p>
+                    <ul>
+                        <li><strong>Veiculo</strong> (classe pai): características comuns a todos</li>
+                        <li><strong>Carro</strong> (subclasse): herda de Veiculo + características próprias</li>
+                        <li><strong>Moto</strong> (subclasse): herda de Veiculo + características próprias</li>
+                        <li><strong>Caminhao</strong> (subclasse): herda de Veiculo + características próprias</li>
+                    </ul>
+                    <p style="margin-top: 12px;">Todos são veículos, mas cada um tem particularidades.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo Conceitual</h3>
+                    <p>Sem herança (repetição de código):</p>
+<pre><code class="language-python">class Carro:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+        self.rodas = 4  # Repetido
+    
+    def acelerar(self):
+        return "Acelerando..."  # Repetido
+
+class Moto:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+        self.rodas = 2  # Repetido
+    
+    def acelerar(self):
+        return "Acelerando..."  # Repetido
+</code></pre>
+                    <p style="margin-top: 12px;">Com herança (código reutilizado):</p>
+<pre><code class="language-python">class Veiculo:  # Classe pai
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+    
+    def acelerar(self):
+        return "Acelerando..."
+
+class Carro(Veiculo):  # Herda de Veiculo
+    def __init__(self, marca, modelo):
+        super().__init__(marca, modelo)
+        self.rodas = 4
+
+class Moto(Veiculo):  # Herda de Veiculo
+    def __init__(self, marca, modelo):
+        super().__init__(marca, modelo)
+        self.rodas = 2
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

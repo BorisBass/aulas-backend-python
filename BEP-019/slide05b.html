@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-019 - Slide 05b: @property - Forma Pythônica</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .comparison { background: #F7FAFC; border-left: 4px solid #4299E1; padding: 15px; margin: 15px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-019: Encapsulamento e Métodos de Instância</h1>
+            <p>Protegendo dados e criando métodos para manipulação de objetos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide05b">
+                <h2><i class="fas fa-star"></i> @property: Forma Pythônica</h2>
+                <p>Decorador elegante para getters e setters</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-question-circle"></i> O que é @property?</h3>
+                    <p><code>@property</code> é um <strong>decorador</strong> que permite acessar métodos como se fossem atributos.</p>
+                    <ul style="margin-top: 12px;">
+                        <li>Forma elegante e pythônica</li>
+                        <li>Mantém encapsulamento</li>
+                        <li>Sintaxe mais limpa</li>
+                        <li>Usa atributos como se fossem públicos</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Por que usar @property?</h3>
+                    <p>Em vez de:</p>
+                    <code>pessoa.get_nome()</code>
+                    <p style="margin-top: 12px;">Você pode usar:</p>
+                    <code>pessoa.nome</code>
+                    <p style="margin-top: 12px;">Mas ainda mantém validação e controle!</p>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-code"></i> Comparação: Métodos vs @property</h3>
+                <div class="comparison">
+                    <h4>❌ Forma Tradicional (getters/setters)</h4>
+<pre><code class="language-python">class Produto:
+    def __init__(self, preco):
+        self.__preco = preco
+    
+    def get_preco(self):
+        return self.__preco
+    
+    def set_preco(self, valor):
+        if valor > 0:
+            self.__preco = valor
+        else:
+            raise ValueError("Preço inválido")
+
+p = Produto(100)
+print(p.get_preco())  # Precisa usar get_()
+p.set_preco(150)      # Precisa usar set_()
+</code></pre>
+                </div>
+                
+                <div class="comparison" style="border-left-color: #38A169; margin-top: 15px;">
+                    <h4>✅ Forma Pythônica (@property)</h4>
+<pre><code class="language-python">class Produto:
+    def __init__(self, preco):
+        self.__preco = preco
+    
+    @property
+    def preco(self):
+        return self.__preco
+    
+    @preco.setter
+    def preco(self, valor):
+        if valor > 0:
+            self.__preco = valor
+        else:
+            raise ValueError("Preço inválido")
+
+p = Produto(100)
+print(p.preco)  # Acesso direto como atributo!
+p.preco = 150   # Atribuição direta como atributo!
+</code></pre>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-info-circle"></i> Como Funciona</h3>
+                <ul>
+                    <li><strong>@property:</strong> Transforma um método em um "getter" (leitura)</li>
+                    <li><strong>@atributo.setter:</strong> Transforma um método em um "setter" (escrita)</li>
+                    <li><strong>Sintaxe:</strong> Use o mesmo nome para getter e setter</li>
+                    <li><strong>Uso:</strong> Acesse como atributo normal, mas com validação por trás</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+                <h3><i class="fas fa-code"></i> Exemplo Completo com @property</h3>
+<pre><code class="language-python">class Pessoa:
+    def __init__(self, nome, idade):
+        self.__nome = nome
+        self.__idade = 0
+        self.idade = idade  # Usa o setter na inicialização
+    
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, valor):
+        if isinstance(valor, str) and len(valor) > 0:
+            self.__nome = valor
+        else:
+            raise ValueError("Nome deve ser uma string não vazia")
+    
+    @property
+    def idade(self):
+        return self.__idade
+    
+    @idade.setter
+    def idade(self, valor):
+        if isinstance(valor, int) and valor >= 0:
+            self.__idade = valor
+        else:
+            raise ValueError("Idade deve ser um inteiro não negativo")
+
+# Uso elegante!
+p = Pessoa("Ana", 25)
+print(p.nome)    # Acesso direto
+print(p.idade)   # Acesso direto
+p.idade = 26     # Atribuição direta (com validação)
+p.nome = "Ana Silva"  # Atribuição direta (com validação)
+</code></pre>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-019: Encapsulamento e Métodos de Instância</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

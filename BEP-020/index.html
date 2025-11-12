@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020: Herança e Polimorfismo</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index-bep.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+
+        <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
+            <a href="../index.html" style="background:#2D3748;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;">🏠 Índice geral</a>
+        </div>
+        
+        <div class="content">
+            <div class="objectives-section">
+                <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
+                <ul>
+                    <li>Compreender o conceito de herança e suas vantagens</li>
+                    <li>Aprender a criar classes pai (superclasses) e subclasses (classes filhas)</li>
+                    <li>Dominar a sobrescrita de métodos (override)</li>
+                    <li>Entender polimorfismo e como métodos se comportam diferentemente conforme o objeto</li>
+                    <li>Praticar reutilização e extensão de código através de exercícios práticos</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-presentation"></i> Slides da Aula</h2>
+                <div class="slides-grid">
+                    <div class="slide-card" onclick="window.open('slide01.html','_blank')">
+                        <div class="slide-number">01</div>
+                        <div class="slide-title">O que é Herança?</div>
+                        <div class="slide-description">Conceito fundamental e analogia do mundo real</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide02.html','_blank')">
+                        <div class="slide-number">02</div>
+                        <div class="slide-title">Vantagens da Herança</div>
+                        <div class="slide-description">Reutilização de código e organização</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide03.html','_blank')">
+                        <div class="slide-number">03</div>
+                        <div class="slide-title">Sintaxe de Herança</div>
+                        <div class="slide-description">Como criar classes pai e subclasses em Python</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide04.html','_blank')">
+                        <div class="slide-number">04</div>
+                        <div class="slide-title">Exemplo: Animal e Subclasses</div>
+                        <div class="slide-description">Primeiro exemplo prático de herança</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide05.html','_blank')">
+                        <div class="slide-number">05</div>
+                        <div class="slide-title">Acessando Métodos da Classe Pai</div>
+                        <div class="slide-description">Usando super() para chamar métodos herdados</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide06.html','_blank')">
+                        <div class="slide-number">06</div>
+                        <div class="slide-title">Sobrescrita de Métodos (Override)</div>
+                        <div class="slide-description">Personalizando comportamentos nas subclasses</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide07.html','_blank')">
+                        <div class="slide-number">07</div>
+                        <div class="slide-title">O que é Polimorfismo?</div>
+                        <div class="slide-description">Métodos com comportamentos diferentes</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide08.html','_blank')">
+                        <div class="slide-number">08</div>
+                        <div class="slide-title">Exemplo: Polimorfismo com Formas</div>
+                        <div class="slide-description">Aplicação prática de polimorfismo</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide09.html','_blank')">
+                        <div class="slide-number">09</div>
+                        <div class="slide-title">Exemplo: Veiculos e Subclasses</div>
+                        <div class="slide-description">Sistema completo com herança e polimorfismo</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide10.html','_blank')">
+                        <div class="slide-number">10</div>
+                        <div class="slide-title">Exercícios Práticos I</div>
+                        <div class="slide-description">Criando hierarquias de classes</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide11.html','_blank')">
+                        <div class="slide-number">11</div>
+                        <div class="slide-title">Exercícios Práticos II</div>
+                        <div class="slide-description">Aplicando herança e polimorfismo</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide12.html','_blank')">
+                        <div class="slide-number">12</div>
+                        <div class="slide-title">Checklist de Revisão</div>
+                        <div class="slide-description">Confirme seu domínio dos conceitos</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-info-circle"></i> Sobre esta Aula</h2>
+                <p>Esta aula aprofunda os conceitos de Programação Orientada a Objetos, introduzindo herança 
+                e polimorfismo como mecanismos poderosos para reutilização e extensão de código. Os alunos 
+                aprenderão a criar hierarquias de classes, reutilizar código através de herança, personalizar 
+                comportamentos com sobrescrita de métodos e aplicar polimorfismo para criar código mais flexível. 
+                A metodologia combina explicação teórica detalhada com exemplos práticos progressivos e exercícios 
+                que consolidam o aprendizado.</p>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-download"></i> Recursos Adicionais</h2>
+                <div class="files-grid">
+                    <div class="file-card" onclick="window.open('BEP-020-Pratica.ipynb','_blank')">
+                        <i class="fas fa-file-code"></i>
+                        <h3>Notebook Colab</h3>
+                        <p>BEP-020-Pratica.ipynb</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+
+

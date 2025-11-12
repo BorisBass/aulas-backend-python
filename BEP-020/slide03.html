@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 03: Sintaxe de Herança</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-code"></i> Sintaxe de Herança</h2>
+                <p>Como criar classes pai e subclasses em Python</p>
+            <div class="two-col">
+                <div class="card">
+                    <h3><i class="fas fa-file-code"></i> Sintaxe Básica</h3>
+                    <p>Para criar uma subclasse, coloque o nome da classe pai entre parênteses:</p>
+<pre><code class="language-python">class ClassePai:
+    # atributos e métodos da classe pai
+    pass
+
+class ClasseFilha(ClassePai):
+    # atributos e métodos da classe filha
+    # herda tudo da ClassePai
+    pass
+</code></pre>
+                    <p style="margin-top: 12px;">A classe filha herda <strong>todos</strong> os atributos e métodos da classe pai.</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-play"></i> Exemplo Simples</h3>
+<pre><code class="language-python">class Animal:
+    def __init__(self, nome):
+        self.nome = nome
+    
+    def fazer_som(self):
+        return "Fazendo algum som..."
+
+class Cachorro(Animal):
+    def latir(self):
+        return f"{self.nome}: Au au!"
+
+# Uso
+c = Cachorro("Rex")
+print(c.nome)  # Herdado de Animal
+print(c.fazer_som())  # Herdado de Animal
+print(c.latir())  # Próprio de Cachorro
+</code></pre>
+                    <p style="margin-top: 12px;">Cachorro herda <code>nome</code> e <code>fazer_som()</code> de Animal.</p>
+                </div>
+            </div>
+
+                <div class="card" style="margin-top:16px;">
+                    <h3><i class="fas fa-info-circle"></i> Pontos Importantes</h3>
+                    <ul>
+                        <li><strong>Herança simples:</strong> Python suporta herança múltipla, mas começamos com herança simples</li>
+                        <li><strong>Herança automática:</strong> Todos os métodos e atributos são herdados automaticamente</li>
+                        <li><strong>Extensão:</strong> A subclasse pode adicionar novos métodos e atributos</li>
+                        <li><strong>Modificação:</strong> A subclasse pode sobrescrever métodos da classe pai (veremos depois)</li>
+                        <li><strong>super():</strong> Usado para acessar métodos da classe pai (veremos no próximo slide)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

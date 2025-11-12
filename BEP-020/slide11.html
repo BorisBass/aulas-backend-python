@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-020 - Slide 11: Exercícios Práticos II</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
+            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos II</h2>
+                <p>Aplicando herança e polimorfismo</p>
+            <div class="card">
+                <h3>3) Sistema de Notificações (Polimorfismo)</h3>
+                <ol>
+                    <li>Crie a classe <code>Notificacao</code> com método <code>enviar()</code>.</li>
+                    <li>Crie subclasses: <code>Email</code>, <code>SMS</code>, <code>Push</code>.</li>
+                    <li>Cada subclasse sobrescreve <code>enviar()</code> com comportamento específico.</li>
+                    <li>Demonstre polimorfismo enviando todas as notificações de forma uniforme.</li>
+                </ol>
+<pre><code class="language-python">class Notificacao:
+    def __init__(self, destinatario, mensagem):
+        self.destinatario = destinatario
+        self.mensagem = mensagem
+    
+    def enviar(self):
+        return "Enviando notificação..."
+
+class Email(Notificacao):
+    def enviar(self):
+        return f"Email enviado para {self.destinatario}: {self.mensagem}"
+
+class SMS(Notificacao):
+    def enviar(self):
+        return f"SMS enviado para {self.destinatario}: {self.mensagem}"
+
+class Push(Notificacao):
+    def enviar(self):
+        return f"Push notification enviada para {self.destinatario}: {self.mensagem}"
+
+# Polimorfismo
+notificacoes = [
+    Email("ana@email.com", "Olá!"),
+    SMS("11999999999", "Olá!"),
+    Push("user123", "Olá!")
+]
+
+for notif in notificacoes:
+    print(notif.enviar())
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>4) Hierarquia de Produtos</h3>
+                <ol>
+                    <li>Crie a classe <code>Produto</code> com <code>nome</code>, <code>preco</code> e método <code>calcular_desconto()</code>.</li>
+                    <li>Crie <code>ProdutoEletronico</code> com desconto de 10%.</li>
+                    <li>Crie <code>ProdutoAlimenticio</code> com desconto de 5%.</li>
+                    <li>Crie <code>ProdutoVestuario</code> com desconto de 15%.</li>
+                    <li>Demonstre polimorfismo calculando descontos de uma lista de produtos.</li>
+                </ol>
+<pre><code class="language-python">class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+    
+    def calcular_desconto(self):
+        return 0  # Sem desconto padrão
+    
+    def preco_final(self):
+        desconto = self.calcular_desconto()
+        return self.preco - desconto
+
+class ProdutoEletronico(Produto):
+    def calcular_desconto(self):
+        return self.preco * 0.10
+
+class ProdutoAlimenticio(Produto):
+    def calcular_desconto(self):
+        return self.preco * 0.05
+
+class ProdutoVestuario(Produto):
+    def calcular_desconto(self):
+        return self.preco * 0.15
+
+# Polimorfismo
+produtos = [
+    ProdutoEletronico("Notebook", 3000),
+    ProdutoAlimenticio("Arroz", 20),
+    ProdutoVestuario("Camiseta", 50)
+]
+
+for produto in produtos:
+    print(f"{produto.nome}: R$ {produto.preco_final():.2f}")
+</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>5) Desafio: Sistema de Pagamento</h3>
+                <ol>
+                    <li>Crie a classe <code>Pagamento</code> com método <code>processar(valor)</code>.</li>
+                    <li>Crie subclasses: <code>CartaoCredito</code>, <code>Boleto</code>, <code>Pix</code>.</li>
+                    <li>Cada forma de pagamento processa de forma diferente (com taxas diferentes).</li>
+                    <li>Crie uma função que processa qualquer tipo de pagamento usando polimorfismo.</li>
+                </ol>
+            </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-020: Herança e Polimorfismo</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+
