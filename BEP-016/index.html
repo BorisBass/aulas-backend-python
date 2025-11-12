@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEP-016: Conectando a Banco de Dados</title>
-    <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index-bep.css">
 </head>
 <body>
     <div class="container">
@@ -13,27 +13,14 @@
             <h1><i class="fas fa-database"></i> BEP-016: Conectando a Banco de Dados</h1>
             <p>Integração de Python com bancos de dados</p>
         </div>
-        
-        <div class="nav">
-            <ul>
-                <li><a href="slide01.html"><i class="fas fa-play"></i> Slide 01</a></li>
-                <li><a href="slide02.html"><i class="fas fa-play"></i> Slide 02</a></li>
-                <li><a href="slide03.html"><i class="fas fa-play"></i> Slide 03</a></li>
-                <li><a href="slide04.html"><i class="fas fa-play"></i> Slide 04</a></li>
-                <li><a href="slide05.html"><i class="fas fa-play"></i> Slide 05</a></li>
-                <li><a href="slide06.html"><i class="fas fa-play"></i> Slide 06</a></li>
-                <li><a href="slide12.html"><i class="fas fa-code"></i> CRUD Completo</a></li>
-            </ul>
+
+        <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
+            <a href="../index.html" style="background:#2D3748;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;">🏠 Índice geral</a>
         </div>
         
         <div class="content">
-            <div class="info">
-                <h3><i class="fas fa-info-circle"></i> Sobre esta Aula</h3>
-                <p>Esta aula introduz os alunos à integração de linguagens de programação com bancos de dados, focando especificamente no uso da biblioteca SQLite3 do Python.</p>
-            </div>
-
-            <div class="info">
-                <h3><i class="fas fa-target"></i> Objetivos</h3>
+            <div class="objectives-section">
+                <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
                 <ul>
                     <li>Compreender o conceito de banco de dados embarcado</li>
                     <li>Conhecer a biblioteca SQLite3 e seu uso básico</li>
@@ -42,145 +29,79 @@
                     <li>Desenvolver sistemas com persistência de dados</li>
                 </ul>
             </div>
-
-            <div class="info">
-                <h3><i class="fas fa-list"></i> Conteúdo Programático</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h4><i class="fas fa-database"></i> Slide 01</h4>
-                        <p>Conceito de banco de dados embarcado e introdução ao SQLite</p>
+            
+            <div class="section">
+                <h2><i class="fas fa-presentation"></i> Slides da Aula</h2>
+                <div class="slides-grid">
+                    <div class="slide-card" onclick="window.open('slide01.html','_blank')">
+                        <div class="slide-number">01</div>
+                        <div class="slide-title">O que é Conectar a Banco de Dados?</div>
+                        <div class="slide-description">Conceito de banco de dados embarcado e introdução ao SQLite</div>
                     </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-plug"></i> Slide 02</h4>
-                        <p>Biblioteca SQLite3 - instalação e uso básico</p>
+                    
+                    <div class="slide-card" onclick="window.open('slide02.html','_blank')">
+                        <div class="slide-number">02</div>
+                        <div class="slide-title">Biblioteca SQLite3</div>
+                        <div class="slide-description">Instalação e uso básico da biblioteca SQLite3</div>
                     </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-shield-alt"></i> Slide 03</h4>
-                        <p>Tratamento de erros e boas práticas</p>
+                    
+                    <div class="slide-card" onclick="window.open('slide03.html','_blank')">
+                        <div class="slide-number">03</div>
+                        <div class="slide-title">Tratamento de Erros</div>
+                        <div class="slide-description">Tratamento de erros e boas práticas</div>
                     </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-search"></i> Slide 04</h4>
-                        <p>Consultas avançadas e relacionamentos</p>
+                    
+                    <div class="slide-card" onclick="window.open('slide04.html','_blank')">
+                        <div class="slide-number">04</div>
+                        <div class="slide-title">Consultas Avançadas</div>
+                        <div class="slide-description">Consultas avançadas e relacionamentos</div>
                     </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-dumbbell"></i> Slide 05</h4>
-                        <p>Exercícios práticos e projetos</p>
+                    
+                    <div class="slide-card" onclick="window.open('slide05.html','_blank')">
+                        <div class="slide-number">05</div>
+                        <div class="slide-title">Exercícios Práticos</div>
+                        <div class="slide-description">Prática com exercícios progressivos e projetos</div>
                     </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-graduation-cap"></i> Slide 06</h4>
-                        <p>Resumo e próximos passos</p>
+                    
+                    <div class="slide-card" onclick="window.open('slide06.html','_blank')">
+                        <div class="slide-number">06</div>
+                        <div class="slide-title">Resumo do Aprendizado</div>
+                        <div class="slide-description">Resumo e próximos passos</div>
                     </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-code"></i> Slide 12</h4>
-                        <p>Sistema CRUD completo em Python</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info">
-                <h3><i class="fas fa-cogs"></i> Metodologia</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h4><i class="fas fa-chalkboard-teacher"></i> Aula Expositiva</h4>
-                        <p>Explicação dos conceitos teóricos e demonstração prática</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-laptop-code"></i> Aplicação de Exercícios</h4>
-                        <p>Prática com exercícios progressivos e projetos</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-users"></i> Trabalho em Grupo</h4>
-                        <p>Desenvolvimento de projetos colaborativos</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-question-circle"></i> Resolução de Dúvidas</h4>
-                        <p>Suporte individual e em grupo</p>
+                    
+                    <div class="slide-card" onclick="window.open('slide07.html','_blank')">
+                        <div class="slide-number">07</div>
+                        <div class="slide-title">Sistema de Gerenciamento de Alunos</div>
+                        <div class="slide-description">Sistema CRUD completo em Python</div>
                     </div>
                 </div>
             </div>
-
-            <div class="info">
-                <h3><i class="fas fa-tools"></i> Ferramentas Utilizadas</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h4><i class="fas fa-python"></i> Python</h4>
-                        <p>Linguagem de programação principal</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-database"></i> SQLite3</h4>
-                        <p>Biblioteca para banco de dados embarcado</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-code"></i> SQL</h4>
-                        <p>Linguagem para consultas ao banco</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-terminal"></i> Terminal</h4>
-                        <p>Execução dos programas Python</p>
-                    </div>
-                </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-info-circle"></i> Sobre esta Aula</h2>
+                <p>Esta aula introduz os alunos à integração de linguagens de programação com bancos de dados, 
+                focando especificamente no uso da biblioteca SQLite3 do Python. Os alunos aprenderão a criar 
+                tabelas, inserir e consultar dados, implementar operações CRUD completas e desenvolver sistemas 
+                com persistência de dados.</p>
             </div>
-
-            <div class="info">
-                <h3><i class="fas fa-star"></i> Destaques da Aula</h3>
-                <ul>
-                    <li><strong>Sistema CRUD Completo:</strong> Implementação de todas as operações básicas</li>
-                    <li><strong>Tratamento de Erros:</strong> Boas práticas para lidar com exceções</li>
-                    <li><strong>Validação de Dados:</strong> Verificação de entrada do usuário</li>
-                    <li><strong>Menu Interativo:</strong> Interface amigável para o usuário</li>
-                    <li><strong>Projetos Práticos:</strong> Aplicação em cenários reais</li>
-                </ul>
-            </div>
-
-            <div class="example">
-                <h3><i class="fas fa-play"></i> Como Usar</h3>
-                <ol>
-                    <li><strong>Navegue pelos slides:</strong> Use o menu acima para acessar cada slide</li>
-                    <li><strong>Siga a ordem:</strong> Recomenda-se seguir a sequência dos slides</li>
-                    <li><strong>Pratique o código:</strong> Execute os exemplos em seu ambiente</li>
-                    <li><strong>Faça os exercícios:</strong> Aplique o conhecimento adquirido</li>
-                    <li><strong>Desenvolva projetos:</strong> Crie seus próprios sistemas</li>
-                </ol>
-            </div>
-
-            <div class="warning">
-                <h3><i class="fas fa-exclamation-triangle"></i> Pré-requisitos</h3>
-                <ul>
-                    <li>Conhecimento básico de Python</li>
-                    <li>Compreensão de estruturas de dados</li>
-                    <li>Familiaridade com funções e loops</li>
-                    <li>Conhecimento básico de SQL (recomendado)</li>
-                </ul>
-            </div>
-
-            <div class="info">
-                <h3><i class="fas fa-download"></i> Recursos Adicionais</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <h4><i class="fas fa-book"></i> Documentação</h4>
-                        <p>SQLite3 Python Documentation</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-code"></i> Exemplos</h4>
-                        <p>Códigos completos para download</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-question"></i> Exercícios</h4>
-                        <p>Lista de exercícios práticos</p>
-                    </div>
-                    <div class="info-item">
-                        <h4><i class="fas fa-project-diagram"></i> Projetos</h4>
-                        <p>Ideias de projetos para prática</p>
+            
+            <div class="section">
+                <h2><i class="fas fa-download"></i> Recursos Adicionais</h2>
+                <div class="files-grid">
+                    <div class="file-card" onclick="window.open('README.md','_blank')">
+                        <i class="fas fa-file-alt"></i>
+                        <h3>Documentação</h3>
+                        <p>README.md</p>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
-    
-    <script src="../script.js"></script>
 </body>
 </html>

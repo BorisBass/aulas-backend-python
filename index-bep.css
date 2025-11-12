@@ -22,5 +22,17 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #66
 .file-card i { font-size: 2rem; color: #38B2AC; margin-bottom: 15px; }
 .file-card h3 { color: #1A365D; margin-bottom: 10px; font-size: 1.1rem; }
 .file-card p { color: #4A5568; font-size: .9rem; margin: 0; }
+
+/* Recursos e Materiais - Cards de Links */
+.resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+.resource-card { background: linear-gradient(135deg, #F7FAFC 0%, #EDF2F7 100%); border: 2px solid #E2E8F0; border-radius: 12px; padding: 20px; transition: all .3s ease; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 15px; color: inherit; }
+.resource-card:hover { border-color: #4299E1; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(66,153,225,.25); }
+.resource-icon { background: linear-gradient(135deg, #4299E1 0%, #3182CE 100%); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.resource-icon i { font-size: 1.5rem; color: white; }
+.resource-content { flex: 1; }
+.resource-content h3 { color: #1A365D; margin: 0 0 5px 0; font-size: 1.1rem; font-weight: 600; }
+.resource-content p { color: #4A5568; margin: 0; font-size: .9rem; }
+.resource-arrow { color: #4299E1; font-size: 1.2rem; opacity: 0.6; transition: all .3s ease; }
+.resource-card:hover .resource-arrow { opacity: 1; transform: translateX(5px); }
 .footer img { display:block; margin:12px auto 0 auto; width: 80%; height: auto; }
 @media (max-width: 768px) { .content { padding: 20px; } .header h1 { font-size: 2rem; } }

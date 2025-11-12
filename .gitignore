@@ -57,6 +57,10 @@ temp_pdfs/
 *.tmp
 ~tmp*
 
+# Arquivos temporários do Insync (OneDrive sync)
+*.insyncdl
+.~*
+
 # Notebooks Jupyter (pode remover se não quiser)
 # *.ipynb
 
