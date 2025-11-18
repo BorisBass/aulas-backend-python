@@ -24,7 +24,7 @@
                 
                 <h3>🔍 Métodos de Acesso</h3>
                 <div class="code-block">
-pessoa = {
+                    <pre><code>pessoa = {
     "nome": "Ana Silva",
     "idade": 28,
     "profissao": "Designer",
@@ -43,12 +43,12 @@ telefone_default = pessoa.get("telefone", "Não informado")
 
 print(f"Nome: {nome}")
 print(f"Telefone: {telefone}")  # None
-print(f"Telefone: {telefone_default}")  # Não informado
+print(f"Telefone: {telefone_default}")  # Não informado</code></pre>
                 </div>
                 
                 <h3>🛡️ Acesso Seguro</h3>
                 <div class="code-block">
-# Comparação entre acesso direto e get()
+                    <pre><code># Comparação entre acesso direto e get()
 dados = {"nome": "João", "idade": 25}
 
 # Acesso direto - pode gerar erro
@@ -63,12 +63,12 @@ if "profissao" in dados:
     profissao = dados["profissao"]
 else:
     profissao = "Não informado"
-print(f"Profissão: {profissao}")
+print(f"Profissão: {profissao}")</code></pre>
                 </div>
                 
                 <h3>🔑 Iterando sobre Dicionários</h3>
                 <div class="code-block">
-contato = {
+                    <pre><code>contato = {
     "nome": "Maria",
     "telefone": "99999-8888",
     "email": "maria@email.com",
@@ -93,12 +93,12 @@ for chave, valor in contato.items():
 # Iterando diretamente (sobre chaves)
 print("\nIteração direta:")
 for chave in contato:
-    print(f"  {chave}: {contato[chave]}")
+    print(f"  {chave}: {contato[chave]}")</code></pre>
                 </div>
                 
                 <h3>📊 Acesso a Dados Aninhados</h3>
                 <div class="code-block">
-# Dicionário aninhado
+                    <pre><code># Dicionário aninhado
 empresa = {
     "nome": "TechCorp",
     "funcionarios": {
@@ -127,12 +127,12 @@ print(f"Salário do João: R$ {joao_salario}")
 # Iterando sobre funcionários
 print("\nFuncionários:")
 for nome, dados in empresa["funcionarios"].items():
-    print(f"  {nome.title()}: {dados['cargo']} - R$ {dados['salario']}")
+    print(f"  {nome.title()}: {dados['cargo']} - R$ {dados['salario']}")</code></pre>
                 </div>
                 
                 <h3>🔍 Verificações e Testes</h3>
                 <div class="code-block">
-dados = {"a": 1, "b": 2, "c": 3}
+                    <pre><code>dados = {"a": 1, "b": 2, "c": 3}
 
 # Verificando existência de chaves
 print(f"'a' existe: {'a' in dados}")      # True
@@ -146,13 +146,13 @@ print(f"Valor 4 existe: {4 in dados.values()}")  # False
 print(f"('a', 1) existe: {('a', 1) in dados.items()}")  # True
 
 # Usando not in
-print(f"'d' não existe: {'d' not in dados}")  # True
+print(f"'d' não existe: {'d' not in dados}")  # True</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Usuários</h5>
                     <div class="code-block">
-# Sistema de usuários
+                    <pre><code># Sistema de usuários
 usuarios = {
     "admin": {
         "senha": "123456",
@@ -189,8 +189,8 @@ if usuario in usuarios:
 print("\nTodos os usuários:")
 for nome, dados in usuarios.items():
     status = "Ativo" if dados["ativo"] else "Inativo"
-    print(f"  {nome}: {dados['nivel']} - {status}")
-                    </div>
+    print(f"  {nome}: {dados['nivel']} - {status}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="info">

@@ -24,7 +24,7 @@
                 
                 <h3>🏋️ Exercício 1: Dados Pessoais</h3>
                 <div class="code-block">
-# Crie uma tupla com seus dados pessoais
+                    <pre><code># Crie uma tupla com seus dados pessoais
 # (nome, idade, profissão, cidade)
 # Acesse cada elemento e exiba as informações
 
@@ -44,12 +44,12 @@ print(f"Cidade: {cidade}")
 
 # Desempacotamento
 nome, idade, profissao, cidade = dados_pessoais
-print(f"Desempacotamento: {nome} tem {idade} anos")
+print(f"Desempacotamento: {nome} tem {idade} anos")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 2: Coordenadas Geográficas</h3>
                 <div class="code-block">
-# Crie tuplas representando coordenadas de cidades
+                    <pre><code># Crie tuplas representando coordenadas de cidades
 # Calcule a distância entre duas cidades
 
 # Solução:
@@ -66,12 +66,12 @@ print(f"Distância Salvador-SP: {distancia:.2f} graus")
 
 # Criando tupla de resultado
 resultado = (distancia, "graus")
-print(f"Resultado: {resultado}")
+print(f"Resultado: {resultado}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 3: Sistema de Notas</h3>
                 <div class="code-block">
-# Crie uma tupla com notas de um aluno
+                    <pre><code># Crie uma tupla com notas de um aluno
 # Calcule a média e determine se foi aprovado
 
 # Solução:
@@ -91,12 +91,12 @@ print(f"Status: {status}")
 # Usando funções built-in
 print(f"Maior nota: {max(notas)}")
 print(f"Menor nota: {min(notas)}")
-print(f"Total de notas: {len(notas)}")
+print(f"Total de notas: {len(notas)}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 4: Análise de Dados</h3>
                 <div class="code-block">
-# Crie uma tupla com dados de vendas mensais
+                    <pre><code># Crie uma tupla com dados de vendas mensais
 # Analise os dados e encontre o melhor mês
 
 # Solução:
@@ -119,12 +119,12 @@ print(f"Média: R$ {media_vendas:.2f}")
 
 # Usando zip para combinar dados
 dados_combinados = list(zip(meses, vendas))
-print(f"Dados combinados: {dados_combinados}")
+print(f"Dados combinados: {dados_combinados}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 5: Sistema de Pontuação</h3>
                 <div class="code-block">
-# Crie um sistema de pontuação para um jogo
+                    <pre><code># Crie um sistema de pontuação para um jogo
 # Calcule estatísticas dos jogadores
 
 # Solução:
@@ -150,12 +150,12 @@ print(f"Posição do 300: {pos_300}")
 
 # Criando tupla de estatísticas
 estatisticas = (total_pontos, pontuacao_maxima, pontuacao_minima, media_pontos)
-print(f"Estatísticas: {estatisticas}")
+print(f"Estatísticas: {estatisticas}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 6: Tupla Aninhada</h3>
                 <div class="code-block">
-# Crie uma tupla contendo outras tuplas
+                    <pre><code># Crie uma tupla contendo outras tuplas
 # Represente pontos em um plano cartesiano
 
 # Solução:
@@ -185,13 +185,13 @@ maior_distancia = max(distancias)
 indice_maior = distancias.index(maior_distancia)
 ponto_mais_distante = pontos[indice_maior]
 
-print(f"Ponto mais distante: {ponto_mais_distante} (distância: {maior_distancia:.2f})")
+print(f"Ponto mais distante: {ponto_mais_distante} (distância: {maior_distancia:.2f})")</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Coordenadas</h5>
                     <div class="code-block">
-# Sistema de coordenadas para um jogo
+                    <pre><code># Sistema de coordenadas para um jogo
 coordenadas_jogo = (
     (0, 0),    # Spawn
     (10, 5),   # Checkpoint 1
@@ -208,8 +208,8 @@ for i in range(1, len(coordenadas_jogo)):
     distancia = ((x2 - x1)**2 + (y2 - y1)**2)**0.5
     distancia_total += distancia
 
-print(f"Distância total do percurso: {distancia_total:.2f} unidades")
-                    </div>
+print(f"Distância total do percurso: {distancia_total:.2f} unidades")</code></pre>
+                </div>
                 </div>
                 
                 <div class="info">

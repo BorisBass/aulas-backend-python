@@ -23,8 +23,9 @@
                     <h3><i class="fas fa-database"></i> Preparação do Ambiente</h3>
                     <p>Primeiro, vamos criar a tabela e inserir dados de exemplo:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Criar tabela</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">CREATE TABLE</span> clientes (
@@ -53,8 +54,9 @@
                         <div class="code-line">);</div>
                     </div>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 2. Inserir dados de exemplo</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">INSERT INTO</span> clientes (nome, email, telefone, cidade, idade, categoria) <span class="keyword">VALUES</span>
@@ -80,8 +82,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 1: Atualização Simples</h3>
                     <p><strong>Objetivo:</strong> Atualizar o email do cliente com ID 3 para "novo.email@exemplo.com"</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar o cliente atual</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> id = <span class="number">3</span>;
@@ -104,8 +107,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 2: Múltiplas Colunas</h3>
                     <p><strong>Objetivo:</strong> Atualizar telefone e categoria do cliente "João Silva"</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar cliente atual</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> nome = <span class="string">'João Silva'</span>;
@@ -134,8 +138,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 3: Atualização Condicional</h3>
                     <p><strong>Objetivo:</strong> Atualizar categoria para "VIP" de todos os clientes de Salvador com mais de 25 anos</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar quantos serão afetados</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> cidade = <span class="string">'Salvador'</span> <span class="keyword">AND</span> idade > <span class="number">25</span>;
@@ -167,8 +172,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 4: Atualização com Cálculo</h3>
                     <p><strong>Objetivo:</strong> Aumentar a idade de todos os clientes em 1 ano</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar idades atuais</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> nome, idade <span class="keyword">FROM</span> clientes;
@@ -191,8 +197,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 5: Atualização com LIKE</h3>
                     <p><strong>Objetivo:</strong> Atualizar categoria para "Especial" de todos os clientes cujo nome começa com "Maria"</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar clientes que serão afetados</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> nome <span class="keyword">LIKE</span> <span class="string">'Maria%'</span>;
@@ -219,8 +226,9 @@
                     <details>
                         <summary>Clique para ver as soluções</summary>
                         <div class="code-block">
-                            <div class="code-line">
+                    <pre><code>                            <div class="code-line">
                                 <span class="comment">-- Exercício 1:</span>
+                    </code></pre>
                             </div>
                             <div class="code-line">
                                 <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> id = <span class="number">3</span>;

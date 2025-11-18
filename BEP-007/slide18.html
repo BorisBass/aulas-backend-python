@@ -24,7 +24,7 @@
                 
                 <h3>🔄 Combinando Tuplas e Dicionários</h3>
                 <div class="code-block">
-# Sistema de coordenadas de cidades com informações adicionais
+                    <pre><code># Sistema de coordenadas de cidades com informações adicionais
 cidades = {
     "Salvador": {
         "coordenadas": (-12.9714, -38.5014),
@@ -54,12 +54,12 @@ for cidade, dados in cidades.items():
 salvador = cidades["Salvador"]["coordenadas"]
 sp = cidades["São Paulo"]["coordenadas"]
 distancia = ((salvador[0] - sp[0])**2 + (salvador[1] - sp[1])**2)**0.5
-print(f"Distância Salvador-SP: {distancia:.2f} graus")
+print(f"Distância Salvador-SP: {distancia:.2f} graus")</code></pre>
                 </div>
                 
                 <h3>🏆 Sistema de Competição</h3>
                 <div class="code-block">
-# Sistema de competição esportiva
+                    <pre><code># Sistema de competição esportiva
 competicao = {
     "equipe_a": {
         "jogadores": ("João", "Maria", "Pedro", "Ana"),
@@ -101,12 +101,12 @@ for equipe, dados in competicao.items():
 
 # Equipe vencedora
 equipe_vencedora = max(competicao, key=lambda x: sum(competicao[x]["pontuacoes"]))
-print(f"\nEquipe vencedora: {equipe_vencedora.upper()}")
+print(f"\nEquipe vencedora: {equipe_vencedora.upper()}")</code></pre>
                 </div>
                 
                 <h3>📊 Sistema de Análise de Dados</h3>
                 <div class="code-block">
-# Sistema de análise de vendas por região
+                    <pre><code># Sistema de análise de vendas por região
 vendas_regionais = {
     "norte": {
         "cidades": ("Manaus", "Belém", "Boa Vista"),
@@ -149,12 +149,12 @@ print(f"\nTotal geral: R$ {total_geral:,}")
 
 # Melhor região
 melhor_regiao = max(vendas_regionais, key=lambda x: sum(vendas_regionais[x]["vendas_mensais"]))
-print(f"Melhor região: {melhor_regiao.upper()}")
+print(f"Melhor região: {melhor_regiao.upper()}")</code></pre>
                 </div>
                 
                 <h3>🎓 Sistema Acadêmico</h3>
                 <div class="code-block">
-# Sistema acadêmico com múltiplas disciplinas
+                    <pre><code># Sistema acadêmico com múltiplas disciplinas
 alunos = {
     "Ana Silva": {
         "matricula": "2024001",
@@ -204,13 +204,13 @@ for aluno, dados in alunos.items():
     todas_medias.append(media_aluno)
 
 media_turma = sum(todas_medias) / len(todas_medias)
-print(f"\nMédia da turma: {media_turma:.2f}")
+print(f"\nMédia da turma: {media_turma:.2f}")</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de E-commerce</h5>
                     <div class="code-block">
-# Sistema de e-commerce com produtos e avaliações
+                    <pre><code># Sistema de e-commerce com produtos e avaliações
 produtos = {
     "notebook_gamer": {
         "categoria": "Eletrônicos",
@@ -244,8 +244,8 @@ for produto, dados in produtos.items():
     total_vendas = sum(vendas)
     receita = total_vendas * dados['preco']
     print(f"  Vendas: {total_vendas} unidades")
-    print(f"  Receita: R$ {receita:,.2f}")
-                    </div>
+    print(f"  Receita: R$ {receita:,.2f}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="info">

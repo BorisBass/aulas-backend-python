@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 03: O que é Composição?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .caracteristica { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-puzzle-piece"></i> O que é Composição?</h2>
+                <p>Conceito e características da composição</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Definição</h3>
+                    <p><strong>Composição</strong> é um relacionamento onde um objeto é <strong>parte</strong> de outro objeto. 
+                    O objeto "parte" <strong>não pode existir</strong> sem o objeto "todo".</p>
+                    <p style="margin-top: 12px;">É uma relação de <strong>"tem um"</strong> onde o objeto parte é <strong>criado e destruído</strong> 
+                    junto com o objeto todo.</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> Características da Composição</h3>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 1. Dependência Forte</h4>
+                        <p>O objeto "parte" <strong>não pode existir</strong> sem o objeto "todo". 
+                        Se o objeto todo é destruído, a parte também é.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 2. Criação Conjunta</h4>
+                        <p>O objeto parte é geralmente <strong>criado dentro</strong> do construtor do objeto todo, 
+                        ou recebido como parâmetro obrigatório.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 3. Relação "Parte de"</h4>
+                        <p>Expressa como <strong>"é parte de"</strong> ou <strong>"compõe"</strong>. 
+                        Exemplo: "Motor é parte de Carro" ou "Página compõe Livro".</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 4. Propriedade</h4>
+                        <p>O objeto todo é <strong>dono</strong> do objeto parte. A parte não pode ser 
+                        compartilhada entre múltiplos objetos todo.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Analogia do Mundo Real</h3>
+                    <div class="two-col">
+                        <div>
+                            <h4>Exemplo 1: Carro e Motor</h4>
+                            <ul>
+                                <li>Um <strong>Motor</strong> é parte de um <strong>Carro</strong></li>
+                                <li>O motor não existe sem o carro</li>
+                                <li>Se o carro é destruído, o motor também é</li>
+                                <li>É uma relação <strong>forte</strong></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Exemplo 2: Livro e Páginas</h4>
+                            <ul>
+                                <li><strong>Páginas</strong> compõem um <strong>Livro</strong></li>
+                                <li>As páginas não existem sem o livro</li>
+                                <li>Se o livro é destruído, as páginas também são</li>
+                                <li>É uma relação <strong>permanente</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Implementação em Python</h3>
+                    <p>Composição é implementada criando o objeto parte <strong>dentro</strong> do objeto todo:</p>
+<pre><code class="language-python">class Motor:
+    def __init__(self, potencia):
+        self.potencia = potencia
+    
+    def ligar(self):
+        return f"Motor {self.potencia}CV ligado!"
+
+class Carro:
+    def __init__(self, marca, modelo, potencia_motor):
+        self.marca = marca
+        self.modelo = modelo
+        # Composição: Motor é criado DENTRO do Carro
+        self.motor = Motor(potencia_motor)  # Motor não existe sem Carro!
+    
+    def ligar(self):
+        return self.motor.ligar()
+
+# Criar carro (motor é criado automaticamente)
+carro = Carro("Toyota", "Corolla", 150)
+print(carro.ligar())  # Motor 150CV ligado!
+
+# O motor não pode existir separadamente
+# Se o carro for destruído, o motor também é</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante: Composição vs Associação</h3>
+                    <p><strong>Pergunta-chave:</strong> O objeto parte pode existir sem o objeto todo?</p>
+                    <ul>
+                        <li><strong>NÃO</strong> → É <strong>Composição</strong> (Motor não existe sem Carro)</li>
+                        <li><strong>SIM</strong> → É <strong>Associação</strong> (Aluno pode existir sem Curso)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

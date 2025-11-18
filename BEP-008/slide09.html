@@ -25,7 +25,7 @@
                 <h3>📊 Processando Listas</h3>
                 <p>Funções podem receber listas como parâmetros e retornar listas processadas.</p>
                 <div class="code-block">
-# Função para calcular média de uma lista
+                    <pre><code># Função para calcular média de uma lista
 def calcular_media_lista(notas):
     if len(notas) == 0:
         return 0
@@ -48,13 +48,13 @@ maior = encontrar_maior(notas)
 
 print(f"Notas: {notas}")
 print(f"Média: {media:.2f}")
-print(f"Maior: {maior}")
+print(f"Maior: {maior}")</code></pre>
                 </div>
                 
                 <h3>🔄 Modificando Listas</h3>
                 <p>Funções podem modificar listas passadas como parâmetros.</p>
                 <div class="code-block">
-# Função para adicionar elemento à lista
+                    <pre><code># Função para adicionar elemento à lista
 def adicionar_elemento(lista, elemento):
     lista.append(elemento)
     print(f"Elemento {elemento} adicionado")
@@ -75,13 +75,13 @@ adicionar_elemento(numeros, 6)
 print(f"Após adicionar: {numeros}")
 
 remover_elemento(numeros, 3)
-print(f"Após remover: {numeros}")
+print(f"Após remover: {numeros}")</code></pre>
                 </div>
                 
                 <h3>📋 Criando Novas Listas</h3>
                 <p>Funções podem criar e retornar novas listas.</p>
                 <div class="code-block">
-# Função para criar lista de pares
+                    <pre><code># Função para criar lista de pares
 def criar_lista_pares(numeros):
     pares = []
     for numero in numeros:
@@ -103,12 +103,12 @@ duplicados = duplicar_lista(numeros)
 
 print(f"Números: {numeros}")
 print(f"Pares: {pares}")
-print(f"Duplicados: {duplicados}")
+print(f"Duplicados: {duplicados}")</code></pre>
                 </div>
                 
                 <h3>🔍 Buscando em Listas</h3>
                 <div class="code-block">
-# Função para buscar elemento
+                    <pre><code># Função para buscar elemento
 def buscar_elemento(lista, elemento):
     for i, item in enumerate(lista):
         if item == elemento:
@@ -130,12 +130,12 @@ quantidade = contar_ocorrencias(frutas, "maçã")
 
 print(f"Frutas: {frutas}")
 print(f"Posição da maçã: {posicao}")
-print(f"Quantidade de maçãs: {quantidade}")
+print(f"Quantidade de maçãs: {quantidade}")</code></pre>
                 </div>
                 
                 <h3>📊 Estatísticas de Listas</h3>
                 <div class="code-block">
-# Função para calcular estatísticas
+                    <pre><code># Função para calcular estatísticas
 def calcular_estatisticas(numeros):
     if len(numeros) == 0:
         return None
@@ -163,12 +163,12 @@ if stats:
     print(f"Média: {stats['media']:.2f}")
     print(f"Maior: {stats['maior']}")
     print(f"Menor: {stats['menor']}")
-    print(f"Tamanho: {stats['tamanho']}")
+    print(f"Tamanho: {stats['tamanho']}")</code></pre>
                 </div>
                 
                 <h3>🔄 Ordenando Listas</h3>
                 <div class="code-block">
-# Função para ordenar lista (crescente)
+                    <pre><code># Função para ordenar lista (crescente)
 def ordenar_crescente(lista):
     lista_ordenada = lista.copy()  # Cria uma cópia
     lista_ordenada.sort()
@@ -187,7 +187,7 @@ decrescente = ordenar_decrescente(numeros)
 
 print(f"Original: {numeros}")
 print(f"Crescente: {crescente}")
-print(f"Decrescente: {decrescente}")
+print(f"Decrescente: {decrescente}")</code></pre>
                 </div>
                 
                 <div class="info">
@@ -203,7 +203,7 @@ print(f"Decrescente: {decrescente}")
                 <div class="example">
                     <h5>💡 Exemplo Prático</h5>
                     <div class="code-block">
-# Sistema de notas de alunos
+                    <pre><code># Sistema de notas de alunos
 def processar_notas_aluno(nome, notas):
     if len(notas) == 0:
         return f"{nome}: Sem notas"
@@ -235,8 +235,8 @@ print(f"Status: {aluno1['status']}")
 
 print(f"\nAluno: {aluno2['nome']}")
 print(f"Média: {aluno2['media']:.2f}")
-print(f"Status: {aluno2['status']}")
-                    </div>
+print(f"Status: {aluno2['status']}")</code></pre>
+                </div>
                 </div>
             </div>
         </div>

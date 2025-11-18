@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 12: Resumo e Checklist</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        .resumo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 16px; margin: 12px 0; border-radius: 4px; }
+        .checklist { background: #F0FFF4; border-left: 4px solid #38A169; padding: 16px; margin: 12px 0; border-radius: 4px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .associacao { background: #EBF8FF; border: 2px solid #3182CE; border-radius: 12px; padding: 18px; }
+        .composicao { background: #F0FFF4; border: 2px solid #38A169; border-radius: 12px; padding: 18px; }
+        ul li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-check-square"></i> Resumo e Checklist</h2>
+                <p>Confirme seu domínio dos conceitos</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> Resumo dos Conceitos</h3>
+                    
+                    <div class="comparacao">
+                        <div class="associacao">
+                            <h4><i class="fas fa-link"></i> Associação</h4>
+                            <ul>
+                                <li>Relação <strong>flexível</strong></li>
+                                <li>Objetos <strong>independentes</strong></li>
+                                <li>Podem existir <strong>separadamente</strong></li>
+                                <li>Relação pode ser <strong>criada/removida</strong></li>
+                                <li>Implementação: <strong>referências</strong></li>
+                                <li>Exemplo: Aluno ↔ Curso</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="composicao">
+                            <h4><i class="fas fa-puzzle-piece"></i> Composição</h4>
+                            <ul>
+                                <li>Relação <strong>forte</strong></li>
+                                <li>Objeto parte <strong>depende</strong> do todo</li>
+                                <li>Parte <strong>não existe</strong> sem o todo</li>
+                                <li>Relação <strong>permanente</strong></li>
+                                <li>Implementação: <strong>criação dentro</strong></li>
+                                <li>Exemplo: Motor → Carro</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-question-circle"></i> Pergunta-Chave</h3>
+                    <div class="resumo">
+                        <p><strong>"O objeto parte pode existir sem o objeto todo?"</strong></p>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>SIM</strong> → Use <strong>Associação</strong></li>
+                            <li><strong>NÃO</strong> → Use <strong>Composição</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-square"></i> Checklist de Aprendizado</h3>
+                    <div class="checklist">
+                        <h4>Conceitos Fundamentais</h4>
+                        <ul>
+                            <li>☐ Entendo a diferença entre associação e composição</li>
+                            <li>☐ Sei quando usar cada tipo de relação</li>
+                            <li>☐ Compreendo a pergunta-chave para decidir</li>
+                            <li>☐ Entendo que objetos precisam se relacionar</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 16px;">Implementação</h4>
+                        <ul>
+                            <li>☐ Sei implementar associação usando referências</li>
+                            <li>☐ Sei implementar composição criando objetos dentro</li>
+                            <li>☐ Sei criar associações múltiplas (1 para muitos, muitos para muitos)</li>
+                            <li>☐ Sei criar associações bidirecionais</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 16px;">Aplicação Prática</h4>
+                        <ul>
+                            <li>☐ Consigo identificar relações em sistemas reais</li>
+                            <li>☐ Consigo modelar sistemas usando associação e composição</li>
+                            <li>☐ Consigo criar métodos para gerenciar relações</li>
+                            <li>☐ Consigo resolver exercícios práticos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Boas Práticas</h3>
+                    <ul>
+                        <li>✅ <strong>Sempre faça a pergunta-chave</strong> antes de decidir o tipo de relação</li>
+                        <li>✅ <strong>Use composição</strong> quando o objeto parte não faz sentido sozinho</li>
+                        <li>✅ <strong>Use associação</strong> quando os objetos podem existir independentemente</li>
+                        <li>✅ <strong>Crie métodos</strong> para gerenciar relações (não acesse diretamente)</li>
+                        <li>✅ <strong>Mantenha relações bidirecionais</strong> sincronizadas</li>
+                        <li>✅ <strong>Documente</strong> as relações no código</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-arrow-right"></i> Próximos Passos</h3>
+                    <ul>
+                        <li>📚 Pratique criando mais sistemas com relações</li>
+                        <li>📚 Estude padrões de design que usam associação e composição</li>
+                        <li>📚 Aprenda sobre agregação (tipo intermediário)</li>
+                        <li>📚 Explore diagramas UML para representar relações</li>
+                        <li>📚 Continue desenvolvendo projetos que usem POO</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-star"></i> Conclusão</h3>
+                    <p>Você agora entende como objetos se relacionam em sistemas orientados a objetos! 
+                    Associação e composição são ferramentas poderosas para modelar sistemas complexos de forma 
+                    organizada e realista. Continue praticando e aplicando esses conceitos em seus projetos!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

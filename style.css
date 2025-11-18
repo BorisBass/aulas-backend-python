@@ -123,12 +123,38 @@ body {
     margin: 15px 0;
     font-family: 'Courier New', monospace;
     font-size: 14px;
-    line-height: 1.2;
+    line-height: 1.6;
     overflow-x: auto;
     border-left: 4px solid #4B8BBE;
     tab-size: 4;
     -moz-tab-size: 4;
     -o-tab-size: 4;
+}
+
+.code-block pre {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
+    word-wrap: normal;
+    overflow-x: auto;
+}
+
+.code-block code {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    white-space: pre;
+    word-wrap: normal;
 }
 
 .code-line {

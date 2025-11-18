@@ -24,7 +24,7 @@
                 
                 <h3>🏗️ Anatomia de um Dicionário</h3>
                 <div class="code-block">
-# Estrutura: {chave1: valor1, chave2: valor2, ...}
+                    <pre><code># Estrutura: {chave1: valor1, chave2: valor2, ...}
 contato = {
     "nome": "Ana Costa",           # chave: "nome", valor: "Ana Costa"
     "idade": 28,                   # chave: "idade", valor: 28
@@ -35,12 +35,12 @@ contato = {
 # Visualizando a estrutura
 print("Chaves:", contato.keys())     # dict_keys(['nome', 'idade', 'telefone', 'email'])
 print("Valores:", contato.values())  # dict_values(['Ana Costa', 28, '(71) 99999-7777', 'ana@email.com'])
-print("Items:", contato.items())     # dict_items([('nome', 'Ana Costa'), ('idade', 28), ...])
+print("Items:", contato.items())     # dict_items([('nome', 'Ana Costa'), ('idade', 28), ...])</code></pre>
                 </div>
                 
                 <h3>🔑 Tipos de Chaves</h3>
                 <div class="code-block">
-# Chaves podem ser de diferentes tipos
+                    <pre><code># Chaves podem ser de diferentes tipos
 dicionario_misto = {
     "string": "valor1",           # String
     42: "valor2",                 # Número inteiro
@@ -56,12 +56,12 @@ dicionario_misto = {
 print(dicionario_misto["string"])    # valor1
 print(dicionario_misto[42])          # valor2
 print(dicionario_misto[True])        # valor4
-print(dicionario_misto[(1, 2, 3)])   # valor5
+print(dicionario_misto[(1, 2, 3)])   # valor5</code></pre>
                 </div>
                 
                 <h3>📊 Tipos de Valores</h3>
                 <div class="code-block">
-# Valores podem ser de qualquer tipo
+                    <pre><code># Valores podem ser de qualquer tipo
 dicionario_valores = {
     "string": "texto",
     "numero": 42,
@@ -77,12 +77,12 @@ dicionario_valores = {
 print(dicionario_valores["string"])        # texto
 print(dicionario_valores["lista"])         # [1, 2, 3]
 print(dicionario_valores["dicionario"])    # {'nested': 'value'}
-print(dicionario_valores["dicionario"]["nested"])  # value
+print(dicionario_valores["dicionario"]["nested"])  # value</code></pre>
                 </div>
                 
                 <h3>🔄 Dicionários Aninhados</h3>
                 <div class="code-block">
-# Dicionário dentro de dicionário
+                    <pre><code># Dicionário dentro de dicionário
 empresa = {
     "nome": "TechCorp",
     "funcionarios": {
@@ -107,12 +107,12 @@ empresa = {
 # Acessando dados aninhados
 print(f"Empresa: {empresa['nome']}")
 print(f"João - Cargo: {empresa['funcionarios']['joao']['cargo']}")
-print(f"Endereço: {empresa['endereco']['rua']}")
+print(f"Endereço: {empresa['endereco']['rua']}")</code></pre>
                 </div>
                 
                 <h3>📏 Tamanho e Verificações</h3>
                 <div class="code-block">
-dados = {"a": 1, "b": 2, "c": 3}
+                    <pre><code>dados = {"a": 1, "b": 2, "c": 3}
 
 # Tamanho do dicionário
 print(f"Tamanho: {len(dados)}")  # 3
@@ -126,13 +126,13 @@ print(f"Valor 2 existe: {2 in dados.values()}")  # True
 print(f"Valor 4 existe: {4 in dados.values()}")  # False
 
 # Verificar se item existe
-print(f"('a', 1) existe: {('a', 1) in dados.items()}")  # True
+print(f"('a', 1) existe: {('a', 1) in dados.items()}")  # True</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Notas</h5>
                     <div class="code-block">
-# Sistema de notas de alunos
+                    <pre><code># Sistema de notas de alunos
 notas_alunos = {
     "Ana": {
         "matematica": [8.5, 7.0, 9.2],
@@ -152,8 +152,8 @@ materia = "matematica"
 notas = notas_alunos[aluno][materia]
 media = sum(notas) / len(notas)
 
-print(f"{aluno} - {materia.title()}: {media:.2f}")
-                    </div>
+print(f"{aluno} - {materia.title()}: {media:.2f}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="info">

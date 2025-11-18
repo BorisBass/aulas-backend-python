@@ -48,8 +48,9 @@
                     <h3><i class="fas fa-code"></i> Padrões de Código</h3>
                     <h4><i class="fas fa-edit"></i> UPDATE Padrão:</h4>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar registros que serão afetados</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> id, nome, email <span class="keyword">FROM</span> clientes
@@ -83,8 +84,9 @@
                 <div class="info">
                     <h3><i class="fas fa-trash"></i> DELETE Padrão:</h3>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Contar registros que serão deletados</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> logs
@@ -119,8 +121,9 @@
                     <h3><i class="fas fa-cogs"></i> Operações em Lote</h3>
                     <p>Para grandes volumes de dados, processe em lotes:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- Processar 1000 registros por vez</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">DELETE FROM</span> logs

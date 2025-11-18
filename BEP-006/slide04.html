@@ -20,7 +20,7 @@
                 
                 <h3>🔗 Concatenação e Repetição</h3>
                 <div class="code-block">
-# Concatenação (+)
+                    <pre><code># Concatenação (+)
 lista1 = [1, 2, 3]
 lista2 = [4, 5, 6]
 lista_combinada = lista1 + lista2
@@ -32,12 +32,12 @@ print(f"Repetição: {lista_repetida}")  # [1, 2, 1, 2, 1, 2]
 
 # Adicionar lista a outra
 lista1.extend(lista2)
-print(f"Lista1 após extend: {lista1}")  # [1, 2, 3, 4, 5, 6]
+print(f"Lista1 após extend: {lista1}")  # [1, 2, 3, 4, 5, 6]</code></pre>
                 </div>
                 
                 <h3>📊 Funções Úteis</h3>
                 <div class="code-block">
-# len(): tamanho da lista
+                    <pre><code># len(): tamanho da lista
 lista = [1, 2, 3, 4, 5]
 print(f"Tamanho: {len(lista)}")  # 5
 
@@ -50,12 +50,12 @@ print(f"Soma: {sum(numeros)}")   # 25
 # in: verificar se elemento existe
 lista = ["a", "b", "c"]
 print(f"'b' está na lista: {'b' in lista}")  # True
-print(f"'d' está na lista: {'d' in lista}")  # False
+print(f"'d' está na lista: {'d' in lista}")  # False</code></pre>
                 </div>
                 
                 <h3>🔄 Iterando sobre Listas</h3>
                 <div class="code-block">
-# Usando for
+                    <pre><code># Usando for
 frutas = ["maçã", "banana", "laranja"]
 
 print("Frutas disponíveis:")
@@ -63,22 +63,20 @@ for fruta in frutas:
     print(f"- {fruta}")
 
 # Usando enumerate (índice + valor)
-print("
-Frutas com índice:")
+print("\nFrutas com índice:")
 for i, fruta in enumerate(frutas):
     print(f"{i}: {fruta}")
 
 # Usando range com len
-print("
-Frutas com range:")
+print("\nFrutas com range:")
 for i in range(len(frutas)):
-    print(f"{i}: {frutas[i]}")
+    print(f"{i}: {frutas[i]}")</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo Prático: Lista de Notas</h5>
                     <div class="code-block">
-# Sistema de notas
+                        <pre><code># Sistema de notas
 notas = []
 print("Digite as notas (digite -1 para parar):")
 
@@ -89,14 +87,13 @@ while True:
     notas.append(nota)
 
 if notas:
-    print(f"
-Notas: {notas}")
+    print(f"\nNotas: {notas}")
     print(f"Quantidade: {len(notas)}")
     print(f"Maior nota: {max(notas)}")
     print(f"Menor nota: {min(notas)}")
     print(f"Média: {sum(notas)/len(notas):.2f}")
 else:
-    print("Nenhuma nota foi digitada!")
+    print("Nenhuma nota foi digitada!")</code></pre>
                     </div>
                 </div>
                 

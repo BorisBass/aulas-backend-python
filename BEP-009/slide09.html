@@ -25,7 +25,7 @@
 <p>Encontra a posição de uma substring na string</p>
 
 <div class="code-block">
-# Buscar substring
+                    <pre><code># Buscar substring
 texto = "Python é incrível"
 posicao = texto.find("incrível")
 print(posicao)  # 10
@@ -36,14 +36,14 @@ print(posicao)  # 7
 
 # Substring não encontrada
 posicao = texto.find("Java")
-print(posicao)  # -1
-</div>
+print(posicao)  # -1</code></pre>
+                </div>
 
 <h3>🔄 Método replace()</h3>
 <p>Substitui uma substring por outra</p>
 
 <div class="code-block">
-# Substituição simples
+                    <pre><code># Substituição simples
 texto = "Python é incrível"
 novo_texto = texto.replace("incrível", "fantástico")
 print(novo_texto)  # Python é fantástico
@@ -51,14 +51,14 @@ print(novo_texto)  # Python é fantástico
 # Substituição múltipla
 texto = "Java é bom, mas Python é melhor"
 novo_texto = texto.replace("Java", "C++").replace("Python", "JavaScript")
-print(novo_texto)  # C++ é bom, mas JavaScript é melhor
-</div>
+print(novo_texto)  # C++ é bom, mas JavaScript é melhor</code></pre>
+                </div>
 
 <h3>🎯 Aplicação Prática</h3>
 <div class="example">
 <h5>💡 Limpeza de Texto</h5>
 <div class="code-block">
-# Limpar texto de entrada
+                    <pre><code># Limpar texto de entrada
 texto = input("Digite um texto: ")
 texto_limpo = texto.strip().lower()
 # Remove todos os espaços duplos
@@ -66,8 +66,8 @@ while "  " in texto_limpo:
     texto_limpo = texto_limpo.replace("  ", " ")
 
 print(f"Texto original: '{texto}'")
-print(f"Texto limpo: '{texto_limpo}'")
-</div>
+print(f"Texto limpo: '{texto_limpo}'")</code></pre>
+                </div>
 </div>
 
 <div class="info">

@@ -24,7 +24,7 @@
                 
                 <h3>🏗️ Métodos de Criação</h3>
                 <div class="code-block">
-# 1. Dicionário vazio
+                    <pre><code># 1. Dicionário vazio
 dicio_vazio = {}
 dicio_vazio2 = dict()
 
@@ -46,12 +46,12 @@ dicio_pares = dict(pares)
 chaves = ["nome", "idade", "cidade"]
 valores = ["João", 25, "Salvador"]
 dicio_zip = dict(zip(chaves, valores))
-print(dicio_zip)  # {'nome': 'João', 'idade': 25, 'cidade': 'Salvador'}
+print(dicio_zip)  # {'nome': 'João', 'idade': 25, 'cidade': 'Salvador'}</code></pre>
                 </div>
                 
                 <h3>🎯 Dictionary Comprehension</h3>
                 <div class="code-block">
-# Criando dicionário com comprehension
+                    <pre><code># Criando dicionário com comprehension
 # Sintaxe: {chave: valor for item in iterável}
 
 # Quadrados dos números
@@ -70,12 +70,12 @@ print(iniciais)  # {'Ana': 'A', 'Bruno': 'B', 'Carla': 'C'}
 # Transformando lista em dicionário
 notas = [8.5, 7.0, 9.2, 6.8]
 notas_dict = {f"prova_{i+1}": nota for i, nota in enumerate(notas)}
-print(notas_dict)  # {'prova_1': 8.5, 'prova_2': 7.0, 'prova_3': 9.2, 'prova_4': 6.8}
+print(notas_dict)  # {'prova_1': 8.5, 'prova_2': 7.0, 'prova_3': 9.2, 'prova_4': 6.8}</code></pre>
                 </div>
                 
                 <h3>🔄 Criação Dinâmica</h3>
                 <div class="code-block">
-# Criando dicionário dinamicamente
+                    <pre><code># Criando dicionário dinamicamente
 contatos = {}
 
 # Adicionando contatos um por um
@@ -91,12 +91,12 @@ novos_contatos = {
     "Bruno": {"telefone": "99999-5555", "email": "bruno@email.com"}
 }
 contatos.update(novos_contatos)
-print(contatos)
+print(contatos)</code></pre>
                 </div>
                 
                 <h3>📊 Dicionários com Dados Estruturados</h3>
                 <div class="code-block">
-# Criando dicionário com dados estruturados
+                    <pre><code># Criando dicionário com dados estruturados
 produtos = {
     "notebook": {
         "preco": 2500.00,
@@ -124,13 +124,13 @@ produtos = {
 produto = "notebook"
 print(f"{produto.title()}:")
 print(f"  Preço: R$ {produtos[produto]['preco']:.2f}")
-print(f"  Processador: {produtos[produto]['especificacoes']['processador']}")
+print(f"  Processador: {produtos[produto]['especificacoes']['processador']}")</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Configuração</h5>
                     <div class="code-block">
-# Sistema de configuração de aplicação
+                    <pre><code># Sistema de configuração de aplicação
 config = {
     "database": {
         "host": "localhost",
@@ -155,8 +155,8 @@ config = {
 # Acessando configurações
 db_config = config["database"]
 print(f"Banco: {db_config['host']}:{db_config['port']}")
-print(f"Debug: {config['server']['debug']}")
-                    </div>
+print(f"Debug: {config['server']['debug']}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="warning">

@@ -32,7 +32,7 @@
 
                 <h3>📝 Sintaxe do Raise</h3>
                 <div class="code-block">
-# Sintaxe básica
+                    <pre><code># Sintaxe básica
 raise TipoExcecao("Mensagem de erro")
 
 # Exemplo simples
@@ -44,19 +44,18 @@ def dividir(a, b):
 try:
     resultado = dividir(10, 0)
 except ZeroDivisionError as e:
-    print(f"Erro: {e}")
+    print(f"Erro: {e}")</code></pre>
                 </div>
 
                 <h3>🔧 Exemplos Práticos</h3>
                 <div class="code-block">
-# 1. Validação de idade
+                    <pre><code># 1. Validação de idade
 def validar_idade(idade):
     if idade < 0:
         raise ValueError("Idade não pode ser negativa!")
     if idade > 150:
         raise ValueError("Idade inválida!")
     return True
-
 # 2. Validação de email
 def validar_email(email):
     if "@" not in email:
@@ -64,12 +63,12 @@ def validar_email(email):
     if "." not in email:
         raise ValueError("Email deve conter domínio")
     return True
-
 # 3. Validação de arquivo
 def abrir_arquivo(nome):
     if not nome.endswith('.txt'):
         raise ValueError("Apenas arquivos .txt são permitidos!")
     return open(nome, 'r')
+                    </code></pre>
                 </div>
 
                 <div class="warning">

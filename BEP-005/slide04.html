@@ -22,7 +22,7 @@
                 <p>Podemos controlar o fluxo dos loops com break e continue:</p>
                 
                 <div class="code-block">
-# break: para o loop completamente
+                    <pre><code># break: para o loop completamente
 for i in range(10):
     if i == 5:
         break  # Para aqui
@@ -32,12 +32,12 @@ for i in range(10):
 for i in range(10):
     if i % 2 == 0:
         continue  # Pula números pares
-    print(f"Ímpar: {i}")
+    print(f"Ímpar: {i}")</code></pre>
                 </div>
                 
                 <h3>📝 Exemplo: Busca de Número</h3>
                 <div class="code-block">
-# Buscar um número específico
+                    <pre><code># Buscar um número específico
 numeros = [1, 3, 5, 7, 9, 11, 13, 15]
 numero_busca = int(input("Digite um número para buscar: "))
 
@@ -49,25 +49,24 @@ for num in numeros:
         break  # Para a busca
 
 if not encontrado:
-    print(f"Número {numero_busca} não encontrado!")
+    print(f"Número {numero_busca} não encontrado!")</code></pre>
                 </div>
                 
                 <h3>🎯 Exemplo: Números Ímpares</h3>
                 <div class="code-block">
-# Mostrar apenas números ímpares
+                    <pre><code># Mostrar apenas números ímpares
 print("Números ímpares de 1 a 20:")
 for i in range(1, 21):
     if i % 2 == 0:
         continue  # Pula números pares
-    print(f"Ímpar: {i}")
+    print(f"Ímpar: {i}")</code></pre>
                 </div>
                 
                 <h3>🔍 Exemplo: Validação com Limite</h3>
                 <div class="code-block">
-# Tentativas limitadas de login
+                    <pre><code># Tentativas limitadas de login
 tentativas = 0
 max_tentativas = 3
-
 while tentativas < max_tentativas:
     senha = input("Digite a senha: ")
     if senha == "123456":
@@ -79,6 +78,7 @@ while tentativas < max_tentativas:
             print(f"Senha incorreta! Tentativas restantes: {max_tentativas - tentativas}")
         else:
             print("Conta bloqueada!")
+                    </code></pre>
                 </div>
                 
                 <div class="info">

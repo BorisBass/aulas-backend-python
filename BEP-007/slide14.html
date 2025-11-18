@@ -24,7 +24,7 @@
                 
                 <h3>🔧 Métodos Principais</h3>
                 <div class="code-block">
-# Dicionário para demonstração
+                    <pre><code># Dicionário para demonstração
 pessoa = {
     "nome": "Ana Silva",
     "idade": 28,
@@ -47,12 +47,12 @@ print("Items:", list(itens))  # [('nome', 'Ana Silva'), ('idade', 28), ...]
 # 4. get() - acesso seguro
 nome = pessoa.get("nome", "Não informado")
 telefone = pessoa.get("telefone", "Não informado")
-print(f"Nome: {nome}, Telefone: {telefone}")
+print(f"Nome: {nome}, Telefone: {telefone}")</code></pre>
                 </div>
                 
                 <h3>📊 Verificações e Cópias</h3>
                 <div class="code-block">
-# Dicionário para teste
+                    <pre><code># Dicionário para teste
 dados = {"a": 1, "b": 2, "c": 3, "d": 4}
 
 # 1. in / not in - verificação de existência
@@ -67,12 +67,12 @@ print(f"É lista: {isinstance(dados, list)}")       # False
 # 3. copy() - cópia do dicionário
 copia = dados.copy()
 print(f"Cópia: {copia}")
-print(f"São o mesmo objeto: {dados is copia}")  # False
+print(f"São o mesmo objeto: {dados is copia}")  # False</code></pre>
                 </div>
                 
                 <h3>🔄 Métodos de Modificação</h3>
                 <div class="code-block">
-# Dicionário inicial
+                    <pre><code># Dicionário inicial
 contato = {"nome": "João", "idade": 25}
 
 # 1. update() - atualização em lote
@@ -93,12 +93,12 @@ print("Após pop('idade'):", contato)
 # 4. popitem() - remove e retorna item arbitrário
 item = contato.popitem()
 print(f"Item removido: {item}")
-print("Após popitem():", contato)
+print("Após popitem():", contato)</code></pre>
                 </div>
                 
                 <h3>🔍 Busca Simples</h3>
                 <div class="code-block">
-# Dicionário com dados simples
+                    <pre><code># Dicionário com dados simples
 notas = {
     "Ana": 8.5,
     "Bruno": 6.8,
@@ -118,13 +118,13 @@ print(f"Nota da Elena: {nota_elena}")
 
 # 3. Verificando se valor existe
 print(f"Nota 8.5 existe: {8.5 in notas.values()}")  # True
-print(f"Nota 10.0 existe: {10.0 in notas.values()}")  # False
+print(f"Nota 10.0 existe: {10.0 in notas.values()}")  # False</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Contatos</h5>
                     <div class="code-block">
-# Sistema de contatos simples
+                    <pre><code># Sistema de contatos simples
 contatos = {
     "Ana": "99999-1111",
     "Bruno": "99999-2222",
@@ -146,8 +146,8 @@ print("Contatos restantes:", contatos)
 
 # Fazendo cópia para backup
 backup_contatos = contatos.copy()
-print("Backup criado:", backup_contatos)
-                    </div>
+print("Backup criado:", backup_contatos)</code></pre>
+                </div>
                 </div>
                 
                 <div class="info">

@@ -27,7 +27,7 @@
                 
                 <h3>🔧 Funções Básicas</h3>
                 <div class="code-block">
-# Funções de operação básica
+                    <pre><code># Funções de operação básica
 def somar(a, b):
     return a + b
 
@@ -48,36 +48,34 @@ print(f"5 + 3 = {somar(5, 3)}")
 print(f"10 - 4 = {subtrair(10, 4)}")
 print(f"6 * 7 = {multiplicar(6, 7)}")
 print(f"15 / 3 = {dividir(15, 3)}")
-print(f"10 / 0 = {dividir(10, 0)}")
+print(f"10 / 0 = {dividir(10, 0)}")</code></pre>
                 </div>
                 
                 <h3>📊 Funções Avançadas</h3>
                 <div class="code-block">
-# Função para calcular potência
+                    <pre><code># Função para calcular potência
 def calcular_potencia(base, expoente):
     return base ** expoente
-
 # Função para calcular raiz quadrada
 def calcular_raiz_quadrada(numero):
     if numero < 0:
         return None  # Raiz de número negativo
     return numero ** 0.5
-
 # Função para calcular porcentagem
 def calcular_porcentagem(valor, percentual):
     return (valor * percentual) / 100
-
 # Testando as funções
 print("\nTestando operações avançadas:")
 print(f"2^8 = {calcular_potencia(2, 8)}")
 print(f"√16 = {calcular_raiz_quadrada(16)}")
 print(f"√(-4) = {calcular_raiz_quadrada(-4)}")
 print(f"20% de 150 = {calcular_porcentagem(150, 20)}")
+                    </code></pre>
                 </div>
                 
                 <h3>🧮 Função Calculadora Principal</h3>
                 <div class="code-block">
-# Função principal da calculadora
+                    <pre><code># Função principal da calculadora
 def calculadora(num1, num2, operacao):
     if operacao == "+":
         return somar(num1, num2)
@@ -109,12 +107,12 @@ for num1, num2, op in operacoes:
     if resultado is not None:
         print(f"{num1} {op} {num2} = {resultado}")
     else:
-        print(f"{num1} {op} {num2} = erro (operação inválida ou divisão por zero)")
+        print(f"{num1} {op} {num2} = erro (operação inválida ou divisão por zero)")</code></pre>
                 </div>
                 
                 <h3>📋 Função de Menu</h3>
                 <div class="code-block">
-# Função para mostrar menu
+                    <pre><code># Função para mostrar menu
 def mostrar_menu():
     print("\n" + "="*40)
     print("CALCULADORA PYTHON")
@@ -140,12 +138,12 @@ def obter_operacao():
 # Testando as funções
 mostrar_menu()
 operacoes = obter_operacao()
-print(f"Operações disponíveis: {operacoes}")
+print(f"Operações disponíveis: {operacoes}")</code></pre>
                 </div>
                 
                 <h3>🎮 Função de Interface</h3>
                 <div class="code-block">
-# Função para obter números
+                    <pre><code># Função para obter números
 def obter_numeros():
     try:
         num1 = float(input("Digite o primeiro número: "))
@@ -188,12 +186,12 @@ def processar_operacao(operacao):
         valor = float(input("Digite o valor: "))
         percentual = float(input("Digite o percentual: "))
         resultado = calcular_porcentagem(valor, percentual)
-        print(f"Resultado: {resultado}")
+        print(f"Resultado: {resultado}")</code></pre>
                 </div>
                 
                 <h3>🔄 Função Principal</h3>
                 <div class="code-block">
-# Função principal do programa
+                    <pre><code># Função principal do programa
 def executar_calculadora():
     while True:
         mostrar_menu()
@@ -216,7 +214,7 @@ def executar_calculadora():
         input("\nPressione Enter para continuar...")
 
 # Executar a calculadora
-# executar_calculadora()  # Descomente para executar
+# executar_calculadora()  # Descomente para executar</code></pre>
                 </div>
                 
                 <div class="info">
@@ -232,7 +230,7 @@ def executar_calculadora():
                 <div class="example">
                     <h5>💡 Exemplo de Uso</h5>
                     <div class="code-block">
-# Exemplo de uso das funções
+                    <pre><code># Exemplo de uso das funções
 print("Exemplo de uso da calculadora:")
 print(f"Soma: {calculadora(10, 5, '+')}")
 print(f"Subtração: {calculadora(10, 5, '-')}")
@@ -240,8 +238,8 @@ print(f"Multiplicação: {calculadora(10, 5, '*')}")
 print(f"Divisão: {calculadora(10, 5, '/')}")
 print(f"Potência: {calculadora(2, 3, '^')}")
 print(f"Raiz quadrada: {calcular_raiz_quadrada(25)}")
-print(f"Porcentagem: {calcular_porcentagem(200, 15)}")
-                    </div>
+print(f"Porcentagem: {calcular_porcentagem(200, 15)}")</code></pre>
+                </div>
                 </div>
             </div>
         </div>

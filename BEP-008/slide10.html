@@ -25,7 +25,7 @@
                 <h3>📊 Processando Dicionários</h3>
                 <p>Funções podem receber dicionários como parâmetros e retornar dados processados.</p>
                 <div class="code-block">
-# Função para calcular média de notas em dicionário
+                    <pre><code># Função para calcular média de notas em dicionário
 def calcular_media_aluno(notas):
     if len(notas) == 0:
         return 0
@@ -54,12 +54,12 @@ aprovado, media_final = verificar_aprovacao(notas_joao)
 
 print(f"Notas: {notas_joao}")
 print(f"Média: {media:.2f}")
-print(f"Aprovado: {aprovado}")
+print(f"Aprovado: {aprovado}")</code></pre>
                 </div>
                 
                 <h3>🔍 Buscando em Dicionários</h3>
                 <div class="code-block">
-# Função para buscar informação
+                    <pre><code># Função para buscar informação
 def buscar_informacao(pessoa, campo):
     if campo in pessoa:
         return pessoa[campo]
@@ -86,12 +86,12 @@ tem_telefone = verificar_chave(pessoa, "telefone")
 print(f"Nome: {nome}")
 print(f"Telefone: {telefone}")
 print(f"Tem idade: {tem_idade}")
-print(f"Tem telefone: {tem_telefone}")
+print(f"Tem telefone: {tem_telefone}")</code></pre>
                 </div>
                 
                 <h3>➕ Adicionando ao Dicionário</h3>
                 <div class="code-block">
-# Função para adicionar informação
+                    <pre><code># Função para adicionar informação
 def adicionar_informacao(pessoa, campo, valor):
     pessoa[campo] = valor
     print(f"Adicionado: {campo} = {valor}")
@@ -113,12 +113,12 @@ adicionar_informacao(pessoa, "cidade", "São Paulo")
 print(f"Após adicionar cidade: {pessoa}")
 
 atualizar_informacoes(pessoa, {"profissao": "Engenheira", "salario": 5000})
-print(f"Após atualizar: {pessoa}")
+print(f"Após atualizar: {pessoa}")</code></pre>
                 </div>
                 
                 <h3>📊 Estatísticas de Dicionários</h3>
                 <div class="code-block">
-# Função para calcular estatísticas de vendas
+                    <pre><code># Função para calcular estatísticas de vendas
 def calcular_estatisticas_vendas(vendas):
     if len(vendas) == 0:
         return None
@@ -155,12 +155,12 @@ if stats:
     print(f"Média: R$ {stats['media']:.2f}")
     print(f"Maior venda: R$ {stats['maior_venda']}")
     print(f"Menor venda: R$ {stats['menor_venda']}")
-    print(f"Melhor mês: {stats['melhor_mes']}")
+    print(f"Melhor mês: {stats['melhor_mes']}")</code></pre>
                 </div>
                 
                 <h3>🔄 Modificando Dicionários</h3>
                 <div class="code-block">
-# Função para remover informação
+                    <pre><code># Função para remover informação
 def remover_informacao(dicionario, chave):
     if chave in dicionario:
         valor_removido = dicionario.pop(chave)
@@ -192,12 +192,12 @@ removido = remover_informacao(pessoa, "telefone")
 print(f"Após tentar remover telefone: {pessoa}")
 
 limpar_dicionario(pessoa)
-print(f"Após limpar: {pessoa}")
+print(f"Após limpar: {pessoa}")</code></pre>
                 </div>
                 
                 <h3>📋 Criando Novos Dicionários</h3>
                 <div class="code-block">
-# Função para criar dicionário de contatos
+                    <pre><code># Função para criar dicionário de contatos
 def criar_contato(nome, telefone, email):
     return {
         "nome": nome,
@@ -220,7 +220,7 @@ print(f"Contato criado: {contato}")
 vendas = {"produto1": 100, "produto2": 50, "produto3": 150, "produto4": 75}
 vendas_altas = filtrar_por_valor(vendas, 100)
 print(f"Vendas originais: {vendas}")
-print(f"Vendas altas (>=100): {vendas_altas}")
+print(f"Vendas altas (>=100): {vendas_altas}")</code></pre>
                 </div>
                 
                 <div class="info">
@@ -236,22 +236,19 @@ print(f"Vendas altas (>=100): {vendas_altas}")
                 <div class="example">
                     <h5>💡 Exemplo Prático</h5>
                     <div class="code-block">
-# Sistema de inventário
+                    <pre><code># Sistema de inventário
 def processar_produto(produto):
     if "preco" not in produto or "estoque" not in produto:
         return "Produto incompleto"
-    
     preco = produto["preco"]
     estoque = produto["estoque"]
     valor_total = preco * estoque
-    
     if estoque < 10:
         status = "Estoque baixo"
     elif estoque > 100:
         status = "Estoque alto"
     else:
         status = "Estoque normal"
-    
     return {
         "nome": produto.get("nome", "Sem nome"),
         "valor_total": valor_total,
@@ -259,25 +256,22 @@ def processar_produto(produto):
         "preco": preco,
         "estoque": estoque
     }
-
 # Testando a função
 produto1 = {
     "nome": "Notebook",
     "preco": 2500,
     "estoque": 5
 }
-
 produto2 = {
     "nome": "Mouse",
     "preco": 50,
     "estoque": 150
 }
-
 resultado1 = processar_produto(produto1)
 resultado2 = processar_produto(produto2)
-
 print(f"Produto 1: {resultado1}")
 print(f"Produto 2: {resultado2}")
+                    </code></pre>
                     </div>
                 </div>
             </div>

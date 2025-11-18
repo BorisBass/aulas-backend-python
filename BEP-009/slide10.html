@@ -25,7 +25,7 @@
 <p>Verificar características de strings</p>
 
 <div class="code-block">
-# Verificar se é alfabético
+                    <pre><code># Verificar se é alfabético
 texto1 = "Python"
 texto2 = "Python123"
 print(texto1.isalpha())  # True
@@ -35,8 +35,8 @@ print(texto2.isalpha())  # False
 numero1 = "123"
 numero2 = "12.3"
 print(numero1.isdigit())  # True
-print(numero2.isdigit())  # False
-</div>
+print(numero2.isdigit())  # False</code></pre>
+                </div>
 
 <h3>🔍 Métodos de Verificação</h3>
 <ul>
@@ -49,20 +49,19 @@ print(numero2.isdigit())  # False
 </ul>
 
 <div class="code-block">
-# Exemplos de validação
+                    <pre><code># Exemplos de validação
 texto = "Python123"
 print(f"É alfanumérico: {texto.isalnum()}")  # True
 print(f"É alfabético: {texto.isalpha()}")    # False
-print(f"É numérico: {texto.isdigit()}")      # False
-</div>
+print(f"É numérico: {texto.isdigit()}")      # False</code></pre>
+                </div>
 
 <h3>🎯 Aplicação Prática</h3>
 <div class="example">
 <h5>💡 Validador de Senha</h5>
 <div class="code-block">
-# Validar senha
+                    <pre><code># Validar senha
 senha = input("Digite sua senha: ")
-
 if len(senha) < 8:
     print("Senha deve ter pelo menos 8 caracteres")
 elif not any(c.isupper() for c in senha):
@@ -73,6 +72,7 @@ elif not any(c.isdigit() for c in senha):
     print("Senha deve ter pelo menos um número")
 else:
     print("Senha válida!")
+                    </code></pre>
 </div>
 </div>
             </div>

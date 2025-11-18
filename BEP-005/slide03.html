@@ -22,34 +22,33 @@
                 <p>O loop while repete um bloco enquanto uma condição for verdadeira:</p>
                 
                 <div class="code-block">
-# Sintaxe básica do while
+                    <pre><code># Sintaxe básica do while
 while condição:
     # código repetido
     print("Executando...")
-    # IMPORTANTE: modificar a condição para evitar loop infinito
+    # IMPORTANTE: modificar a condição para evitar loop infinito</code></pre>
                 </div>
                 
                 <h3>📝 Exemplos Práticos</h3>
                 <div class="code-block">
-# Contador simples
+                    <pre><code># Contador simples
 contador = 1
 while contador <= 5:
     print(f"Contagem: {contador}")
     contador += 1  # Incrementa o contador
-
 # Validação de entrada
 senha = ""
 while senha != "123456":
     senha = input("Digite a senha: ")
     if senha != "123456":
         print("Senha incorreta! Tente novamente.")
-
 print("Acesso liberado!")
+                    </code></pre>
                 </div>
                 
                 <h3>🎯 Exemplo: Menu Interativo</h3>
                 <div class="code-block">
-# Menu de opções
+                    <pre><code># Menu de opções
 opcao = 0
 while opcao != 4:
     print("
@@ -74,7 +73,7 @@ while opcao != 4:
         if num % 2 == 0:
             print(f"{num} é par")
         else:
-            print(f"{num} é ímpar")
+            print(f"{num} é ímpar")</code></pre>
                 </div>
                 
                 <div class="warning">

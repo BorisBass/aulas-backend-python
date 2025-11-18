@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 07: Exemplo Completo - Sistema de Biblioteca</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .destaque { background: #FFF5E1; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-book"></i> Exemplo Completo: Sistema de Biblioteca</h2>
+                <p>Aplicando associação e composição juntas</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Cenário</h3>
+                    <p>Vamos modelar um sistema de biblioteca com:</p>
+                    <ul>
+                        <li><strong>Livro:</strong> Tem páginas (Composição) e pode ser emprestado a leitores (Associação)</li>
+                        <li><strong>Página:</strong> É parte de um livro (Composição)</li>
+                        <li><strong>Leitor:</strong> Pode pegar livros emprestados (Associação)</li>
+                        <li><strong>Biblioteca:</strong> Contém livros (Associação)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Implementação Completa</h3>
+<pre><code class="language-python"># ===== COMPOSIÇÃO: Página é parte de Livro =====
+class Pagina:
+    def __init__(self, numero, conteudo):
+        self.numero = numero
+        self.conteudo = conteudo
+    
+    def __str__(self):
+        return f"Página {self.numero}: {self.conteudo[:50]}..."
+
+class Livro:
+    def __init__(self, titulo, autor, paginas_conteudo):
+        self.titulo = titulo
+        self.autor = autor
+        # COMPOSIÇÃO: Páginas são criadas DENTRO do Livro
+        self.paginas = []
+        for i, conteudo in enumerate(paginas_conteudo, 1):
+            self.paginas.append(Pagina(i, conteudo))
+        # Páginas não existem sem o livro!
+        self.emprestado = False
+        self.leitor = None  # ASSOCIAÇÃO: referência ao Leitor
+    
+    def emprestar(self, leitor):
+        """ASSOCIAÇÃO: Cria relação com Leitor"""
+        if self.emprestado:
+            print(f"Livro já está emprestado para {self.leitor.nome}")
+        else:
+            self.emprestado = True
+            self.leitor = leitor  # Associação criada!
+            leitor.livros_emprestados.append(self)  # Associação bidirecional
+            print(f"'{self.titulo}' emprestado para {leitor.nome}")
+    
+    def devolver(self):
+        """Remove associação com Leitor"""
+        if self.emprestado:
+            leitor_anterior = self.leitor.nome
+            self.leitor.livros_emprestados.remove(self)
+            self.leitor = None
+            self.emprestado = False
+            print(f"'{self.titulo}' devolvido por {leitor_anterior}")
+        else:
+            print("Livro não está emprestado")
+    
+    def info(self):
+        print(f"Livro: {self.titulo} - {self.autor}")
+        print(f"Páginas: {len(self.paginas)}")
+        if self.emprestado:
+            print(f"Emprestado para: {self.leitor.nome}")
+        else:
+            print("Disponível")
+
+# ===== ASSOCIAÇÃO: Leitor usa Livro =====
+class Leitor:
+    def __init__(self, nome, cpf):
+        self.nome = nome
+        self.cpf = cpf
+        self.livros_emprestados = []  # Associação: lista de Livros
+    
+    def pegar_emprestado(self, livro):
+        """Cria associação com Livro"""
+        livro.emprestar(self)
+    
+    def devolver_livro(self, livro):
+        """Remove associação com Livro"""
+        livro.devolver()
+    
+    def listar_livros(self):
+        if self.livros_emprestados:
+            print(f"\n{self.nome} tem os seguintes livros:")
+            for livro in self.livros_emprestados:
+                print(f"  - {livro.titulo}")
+        else:
+            print(f"{self.nome} não tem livros emprestados")
+
+# ===== ASSOCIAÇÃO: Biblioteca contém Livros =====
+class Biblioteca:
+    def __init__(self, nome):
+        self.nome = nome
+        self.livros = []  # Associação: lista de Livros
+    
+    def adicionar_livro(self, livro):
+        """Cria associação com Livro"""
+        self.livros.append(livro)
+        print(f"Livro '{livro.titulo}' adicionado à biblioteca")
+    
+    def listar_livros(self):
+        print(f"\nLivros na {self.nome}:")
+        for livro in self.livros:
+            status = "Emprestado" if livro.emprestado else "Disponível"
+            print(f"  - {livro.titulo} ({status})")
+
+# ===== USO =====
+
+# Criar livro (páginas são criadas automaticamente - COMPOSIÇÃO)
+livro1 = Livro("Python para Iniciantes", "João Silva", 
+               ["Introdução ao Python", "Variáveis e Tipos", "Estruturas de Controle"])
+livro2 = Livro("POO em Python", "Maria Santos",
+               ["Classes e Objetos", "Herança", "Polimorfismo"])
+
+# Criar leitores (objetos independentes)
+leitor1 = Leitor("Pedro", "123.456.789-00")
+leitor2 = Leitor("Ana", "987.654.321-00")
+
+# Criar biblioteca
+biblioteca = Biblioteca("Biblioteca Central")
+
+# Adicionar livros à biblioteca (ASSOCIAÇÃO)
+biblioteca.adicionar_livro(livro1)
+biblioteca.adicionar_livro(livro2)
+
+# Leitor pega livro emprestado (ASSOCIAÇÃO)
+leitor1.pegar_emprestado(livro1)
+# 'Python para Iniciantes' emprestado para Pedro
+
+leitor2.pegar_emprestado(livro2)
+# 'POO em Python' emprestado para Ana
+
+# Listar informações
+biblioteca.listar_livros()
+leitor1.listar_livros()
+leitor2.listar_livros()
+
+# Devolver livro (remove associação)
+leitor1.devolver_livro(livro1)
+# 'Python para Iniciantes' devolvido por Pedro</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Relações Identificadas</h3>
+                    <div class="destaque">
+                        <h4>Composição:</h4>
+                        <ul>
+                            <li><strong>Livro → Páginas:</strong> Páginas são criadas dentro do livro e não existem sem ele</li>
+                        </ul>
+                    </div>
+                    <div class="destaque" style="background: #EBF8FF; border-color: #3182CE;">
+                        <h4>Associação:</h4>
+                        <ul>
+                            <li><strong>Leitor ↔ Livro:</strong> Leitor pode pegar livros emprestados (relação flexível)</li>
+                            <li><strong>Biblioteca ↔ Livro:</strong> Biblioteca contém livros (relação flexível)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

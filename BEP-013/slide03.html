@@ -48,8 +48,9 @@
                     <h3><i class="fas fa-play"></i> Exemplos Práticos</h3>
                     <h4><i class="fas fa-user"></i> Atualizar por ID específico:</h4>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="keyword">UPDATE</span> clientes
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SET</span> telefone = <span class="string">'(71) 99999-8888'</span>
@@ -60,8 +61,9 @@
                     </div>
                     <h4><i class="fas fa-map-marker-alt"></i> Atualizar por cidade:</h4>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="keyword">UPDATE</span> clientes
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SET</span> cidade = <span class="string">'Salvador'</span>
@@ -72,8 +74,9 @@
                     </div>
                     <h4><i class="fas fa-calendar"></i> Atualizar por data:</h4>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="keyword">UPDATE</span> produtos
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SET</span> preco = preco * <span class="number">1.1</span>
@@ -87,8 +90,9 @@
                     <h3><i class="fas fa-cogs"></i> Condições Múltiplas</h3>
                     <p>Podemos combinar várias condições usando AND e OR:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- Atualizar clientes de Salvador com mais de 25 anos</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">UPDATE</span> clientes
@@ -108,8 +112,9 @@
                     <h3><i class="fas fa-exclamation-triangle"></i> Verificação Antes de Atualizar</h3>
                     <p><strong>Sempre teste sua condição WHERE com SELECT primeiro:</strong></p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Primeiro, veja quais registros serão afetados</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> clientes

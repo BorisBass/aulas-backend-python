@@ -25,7 +25,7 @@
                 <h3>🔍 Conceito de Escopo</h3>
                 <p>O <strong>escopo</strong> define onde uma variável pode ser acessada no código.</p>
                 <div class="code-block">
-# Variável global
+                    <pre><code># Variável global
 nome_global = "João"
 
 def minha_funcao():
@@ -37,13 +37,13 @@ def minha_funcao():
 # Chamando a função
 minha_funcao()
 print(f"Fora da função - Global: {nome_global}")
-# print(f"Fora da função - Local: {nome_local}")  # Erro! Variável local não existe aqui
+# print(f"Fora da função - Local: {nome_local}")  # Erro! Variável local não existe aqui</code></pre>
                 </div>
                 
                 <h3>🌍 Variáveis Globais</h3>
                 <p>Variáveis definidas fora de qualquer função. Podem ser acessadas de qualquer lugar.</p>
                 <div class="code-block">
-# Variáveis globais
+                    <pre><code># Variáveis globais
 contador = 0
 nome = "Python"
 
@@ -59,13 +59,13 @@ def mostrar_nome():
 incrementar()
 incrementar()
 mostrar_nome()
-print(f"Contador final: {contador}")
+print(f"Contador final: {contador}")</code></pre>
                 </div>
                 
                 <h3>🏠 Variáveis Locais</h3>
                 <p>Variáveis definidas dentro de uma função. Só existem dentro da função.</p>
                 <div class="code-block">
-def calcular_media(nota1, nota2, nota3):
+                    <pre><code>def calcular_media(nota1, nota2, nota3):
     # Variáveis locais
     soma = nota1 + nota2 + nota3
     media = soma / 3
@@ -78,7 +78,7 @@ resultado = calcular_media(8, 9, 7)
 print(f"Resultado: {resultado}")
 
 # As variáveis 'soma' e 'media' não existem aqui
-# print(soma)  # Erro! Variável local não existe
+# print(soma)  # Erro! Variável local não existe</code></pre>
                 </div>
                 
                 <h3>🔄 Regra LEGB</h3>
@@ -91,7 +91,7 @@ print(f"Resultado: {resultado}")
                 </ul>
                 
                 <div class="code-block">
-# Variável global
+                    <pre><code># Variável global
 nome = "Global"
 
 def funcao_externa():
@@ -105,12 +105,12 @@ def funcao_externa():
     print(f"Externa: {nome}")
 
 funcao_externa()
-print(f"Global: {nome}")
+print(f"Global: {nome}")</code></pre>
                 </div>
                 
                 <h3>⚠️ Modificando Variáveis Globais</h3>
                 <div class="code-block">
-# Variável global
+                    <pre><code># Variável global
 contador = 0
 
 def incrementar_global():
@@ -128,12 +128,12 @@ print(f"Contador inicial: {contador}")
 incrementar_global()
 print(f"Contador após global: {contador}")
 incrementar_local()
-print(f"Contador após local: {contador}")
+print(f"Contador após local: {contador}")</code></pre>
                 </div>
                 
                 <h3>🎯 Boas Práticas</h3>
                 <div class="code-block">
-# ✅ Boa prática: Usar parâmetros em vez de variáveis globais
+                    <pre><code># ✅ Boa prática: Usar parâmetros em vez de variáveis globais
 def calcular_media(notas):
     return sum(notas) / len(notas)
 
@@ -151,7 +151,7 @@ def incrementar_mal():
 
 # ✅ Melhor: Passar valores como parâmetros
 def incrementar_bem(valor):
-    return valor + 1
+    return valor + 1</code></pre>
                 </div>
                 
                 <div class="warning">
@@ -167,7 +167,7 @@ def incrementar_bem(valor):
                 <div class="example">
                     <h5>💡 Exemplo Prático</h5>
                     <div class="code-block">
-# Sistema de contagem de vendas
+                    <pre><code># Sistema de contagem de vendas
 vendas_total = 0  # Variável global
 
 def registrar_venda(valor):
@@ -183,8 +183,8 @@ def mostrar_total():
 registrar_venda(100)
 registrar_venda(50)
 registrar_venda(75)
-mostrar_total()
-                    </div>
+mostrar_total()</code></pre>
+                </div>
                 </div>
             </div>
         </div>

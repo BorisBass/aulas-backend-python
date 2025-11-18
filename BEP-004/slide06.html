@@ -21,13 +21,10 @@
                 <h3>🎯 Exercício 1: Calculadora de IMC</h3>
                 <p>Calcule o IMC e classifique o resultado.</p>
                 <div class="code-block">
-peso = float(input("Peso (kg): "))
+                    <pre><code>peso = float(input("Peso (kg): "))
 altura = float(input("Altura (m): "))
-
 imc = peso / (altura ** 2)
-
 print(f"IMC: {imc:.2f}")
-
 if imc < 18.5:
     print("Abaixo do peso")
 elif imc < 25:
@@ -36,12 +33,13 @@ elif imc < 30:
     print("Sobrepeso")
 else:
     print("Obesidade")
+                    </code></pre>
                 </div>
                 
                 <h3>🎯 Exercício 2: Sistema de Notas</h3>
                 <p>Calcule a média e determine se foi aprovado.</p>
                 <div class="code-block">
-nota1 = float(input("Nota 1: "))
+                    <pre><code>nota1 = float(input("Nota 1: "))
 nota2 = float(input("Nota 2: "))
 nota3 = float(input("Nota 3: "))
 
@@ -58,13 +56,13 @@ elif media >= 7.0:
 elif media >= 6.0:
     print("Conceito: D - Recuperação!")
 else:
-    print("Conceito: F - Reprovado!")
+    print("Conceito: F - Reprovado!")</code></pre>
                 </div>
                 
                 <h3>🎯 Exercício 3: Verificação de Acesso</h3>
                 <p>Verifique se o usuário pode acessar o sistema.</p>
                 <div class="code-block">
-idade = int(input("Idade: "))
+                    <pre><code>idade = int(input("Idade: "))
 tem_cartao = input("Tem cartão? (s/n): ").lower()
 
 if idade >= 18:
@@ -73,7 +71,7 @@ if idade >= 18:
     else:
         print("Necessário cartão para acesso")
 else:
-    print("Acesso negado - menor de idade")
+    print("Acesso negado - menor de idade")</code></pre>
                 </div>
                 
                 <div class="info">

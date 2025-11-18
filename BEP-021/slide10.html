@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 10: Exercícios Práticos I</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 12px; }
+        .exercicio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 16px; margin: 12px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos I</h2>
+                <p>Criando relações entre objetos</p>
+                
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 1: Sistema de Conta Bancária</h3>
+                        <ol>
+                            <li>Crie a classe <code>ContaBancaria</code> com atributos <code>numero</code>, <code>saldo</code> e <code>titular</code>.</li>
+                            <li>Crie a classe <code>Cliente</code> com atributos <code>nome</code> e <code>cpf</code>.</li>
+                            <li>Estabeleça uma <strong>associação</strong> entre Cliente e ContaBancaria.</li>
+                            <li>Um cliente pode ter várias contas bancárias.</li>
+                            <li>Implemente métodos para criar conta, listar contas do cliente e mostrar saldo.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 2: Sistema de Computador</h3>
+                        <ol>
+                            <li>Crie a classe <code>Processador</code> com atributos <code>marca</code> e <code>velocidade</code>.</li>
+                            <li>Crie a classe <code>Memoria</code> com atributos <code>capacidade</code> e <code>tipo</code>.</li>
+                            <li>Crie a classe <code>Computador</code> que possui um Processador e uma Memoria.</li>
+                            <li>Use <strong>composição</strong> para relacionar Computador com Processador e Memoria.</li>
+                            <li>O processador e a memória devem ser criados dentro do construtor do Computador.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 3: Sistema de Escola</h3>
+                        <ol>
+                            <li>Crie a classe <code>Aluno</code> com atributos <code>nome</code> e <code>matricula</code>.</li>
+                            <li>Crie a classe <code>Disciplina</code> com atributos <code>nome</code> e <code>codigo</code>.</li>
+                            <li>Crie a classe <code>Professor</code> com atributos <code>nome</code> e <code>especialidade</code>.</li>
+                            <li>Estabeleça <strong>associações</strong>:
+                                <ul>
+                                    <li>Aluno pode estar em várias Disciplinas</li>
+                                    <li>Professor pode lecionar várias Disciplinas</li>
+                                    <li>Disciplina pode ter vários Alunos e um Professor</li>
+                                </ul>
+                            </li>
+                            <li>Implemente métodos para matricular aluno, atribuir professor e listar alunos de uma disciplina.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas</h3>
+                    <ul>
+                        <li>Para <strong>associação</strong>, use listas ou referências simples</li>
+                        <li>Para <strong>composição</strong>, crie o objeto parte dentro do construtor do objeto todo</li>
+                        <li>Pense na pergunta-chave: "O objeto parte pode existir sem o objeto todo?"</li>
+                        <li>Use métodos para criar e gerenciar as relações</li>
+                        <li>Implemente métodos para mostrar informações das relações</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

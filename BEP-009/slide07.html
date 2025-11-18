@@ -25,29 +25,29 @@
 <p>Formatação de strings usando o método format()</p>
 
 <div class="code-block">
-# Formatação posicional
+                    <pre><code># Formatação posicional
 nome = "Maria"
 idade = 30
 print("Olá, {}! Você tem {} anos.".format(nome, idade))
 
 # Formatação com índices
 print("Olá, {0}! Você tem {1} anos.".format(nome, idade))
-print("Idade: {1}, Nome: {0}".format(nome, idade))
-</div>
+print("Idade: {1}, Nome: {0}".format(nome, idade))</code></pre>
+                </div>
 
 <h3>🏷️ Formatação com Nomes</h3>
 <div class="code-block">
-# Formatação com nomes
+                    <pre><code># Formatação com nomes
 print("Olá, {nome}! Você tem {idade} anos.".format(nome="João", idade=25))
 
 # Com dicionário
 dados = {"nome": "Ana", "idade": 28}
-print("Olá, {nome}! Você tem {idade} anos.".format(**dados))
-</div>
+print("Olá, {nome}! Você tem {idade} anos.".format(**dados))</code></pre>
+                </div>
 
 <h3>📊 Formatação de Números</h3>
 <div class="code-block">
-# Formatação de decimais
+                    <pre><code># Formatação de decimais
 preco = 19.99
 print("Preço: R$ {:.2f}".format(preco))
 
@@ -57,13 +57,13 @@ print("Número: {:,}".format(numero))  # 1,000,000
 
 # Formatação de percentual
 taxa = 0.15
-print("Taxa: {:.1%}".format(taxa))
-</div>
+print("Taxa: {:.1%}".format(taxa))</code></pre>
+                </div>
 
 <div class="example">
 <h5>💡 Exemplo Prático</h5>
 <div class="code-block">
-# Relatório de vendas
+                    <pre><code># Relatório de vendas
 vendas = [
     {"produto": "Notebook", "quantidade": 5, "preco": 2500.00},
     {"produto": "Mouse", "quantidade": 10, "preco": 25.50}
@@ -76,8 +76,8 @@ for item in vendas:
         quantidade=item["quantidade"],
         preco=item["preco"],
         total=total
-    ))
-</div>
+    ))</code></pre>
+                </div>
 </div>
             </div>
         </div>

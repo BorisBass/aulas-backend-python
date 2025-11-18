@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 08: Tipos de Associação</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .tipo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-sitemap"></i> Tipos de Associação</h2>
+                <p>Associação simples, múltipla e bidirecional</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> 1. Associação Simples (1 para 1)</h3>
+                    <div class="tipo">
+                        <p>Um objeto se associa a <strong>um único</strong> objeto de outro tipo.</p>
+                        <p><strong>Exemplo:</strong> Aluno tem um Curso</p>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome):
+        self.nome = nome
+        self.curso = None  # 1 para 1
+
+aluno = Aluno("João")
+aluno.curso = Curso("Python")  # Um aluno, um curso</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> 2. Associação Múltipla (1 para Muitos)</h3>
+                    <div class="tipo">
+                        <p>Um objeto se associa a <strong>múltiplos</strong> objetos de outro tipo.</p>
+                        <p><strong>Exemplo:</strong> Professor leciona várias Disciplinas</p>
+<pre><code class="language-python">class Professor:
+    def __init__(self, nome):
+        self.nome = nome
+        self.disciplinas = []  # 1 para muitos
+
+professor = Professor("Maria")
+professor.disciplinas.append(Disciplina("Python"))
+professor.disciplinas.append(Disciplina("Java"))
+# Um professor, várias disciplinas</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> 3. Associação Múltipla (Muitos para Muitos)</h3>
+                    <div class="tipo">
+                        <p>Múltiplos objetos se associam a múltiplos objetos.</p>
+                        <p><strong>Exemplo:</strong> Alunos podem estar em vários Cursos, e Cursos têm vários Alunos</p>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome):
+        self.nome = nome
+        self.cursos = []  # Muitos cursos
+
+class Curso:
+    def __init__(self, nome):
+        self.nome = nome
+        self.alunos = []  # Muitos alunos
+
+aluno1 = Aluno("João")
+aluno2 = Aluno("Maria")
+curso1 = Curso("Python")
+curso2 = Curso("Java")
+
+# Aluno em múltiplos cursos
+aluno1.cursos.append(curso1)
+aluno1.cursos.append(curso2)
+
+# Curso com múltiplos alunos
+curso1.alunos.append(aluno1)
+curso1.alunos.append(aluno2)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> 4. Associação Bidirecional</h3>
+                    <div class="tipo">
+                        <p>Ambos os objetos mantêm referência um ao outro.</p>
+                        <p><strong>Exemplo:</strong> Aluno conhece seu Curso, e Curso conhece seus Alunos</p>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome):
+        self.nome = nome
+        self.curso = None
+    
+    def matricular(self, curso):
+        self.curso = curso
+        curso.alunos.append(self)  # Bidirecional!
+
+class Curso:
+    def __init__(self, nome):
+        self.nome = nome
+        self.alunos = []  # Conhece seus alunos
+
+aluno = Aluno("João")
+curso = Curso("Python")
+aluno.matricular(curso)
+
+# Agora:
+# aluno.curso aponta para curso
+# curso.alunos contém aluno</code></pre>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Exemplo Completo: Associação Múltipla Bidirecional</h3>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome):
+        self.nome = nome
+        self.cursos = []  # Múltiplos cursos
+    
+    def matricular(self, curso):
+        if curso not in self.cursos:
+            self.cursos.append(curso)
+            curso.adicionar_aluno(self)  # Bidirecional
+    
+    def desmatricular(self, curso):
+        if curso in self.cursos:
+            self.cursos.remove(curso)
+            curso.remover_aluno(self)  # Bidirecional
+
+class Curso:
+    def __init__(self, nome):
+        self.nome = nome
+        self.alunos = []  # Múltiplos alunos
+    
+    def adicionar_aluno(self, aluno):
+        if aluno not in self.alunos:
+            self.alunos.append(aluno)
+    
+    def remover_aluno(self, aluno):
+        if aluno in self.alunos:
+            self.alunos.remove(aluno)
+
+# Uso
+aluno1 = Aluno("João")
+aluno2 = Aluno("Maria")
+curso1 = Curso("Python")
+curso2 = Curso("Java")
+
+aluno1.matricular(curso1)  # João em Python
+aluno1.matricular(curso2)  # João em Java
+aluno2.matricular(curso1)  # Maria em Python
+
+# Relações bidirecionais mantidas automaticamente!</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

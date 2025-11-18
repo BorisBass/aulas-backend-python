@@ -26,8 +26,9 @@
                 <div class="info">
                     <h3><i class="fas fa-code"></i> Sintaxe Básica</h3>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="keyword">UPDATE</span> nome_da_tabela
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SET</span> coluna1 = novo_valor1, coluna2 = novo_valor2
@@ -58,8 +59,9 @@
                     <h3><i class="fas fa-play"></i> Exemplo Prático</h3>
                     <p>Vamos atualizar o email de um cliente específico:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- Atualizar email do cliente com ID 1</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">UPDATE</span> clientes
@@ -76,8 +78,9 @@
                     <h3><i class="fas fa-cogs"></i> Múltiplas Colunas</h3>
                     <p>Podemos atualizar várias colunas ao mesmo tempo:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="keyword">UPDATE</span> clientes
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SET</span> email = <span class="string">'novo@email.com'</span>,
@@ -94,8 +97,9 @@
                     <h3><i class="fas fa-exclamation-triangle"></i> Cuidado Importante!</h3>
                     <p><strong>SEMPRE use WHERE</strong> no UPDATE! Sem a cláusula WHERE, TODOS os registros da tabela serão atualizados:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- PERIGOSO! Atualiza TODOS os clientes</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">UPDATE</span> clientes

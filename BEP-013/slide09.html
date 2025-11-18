@@ -23,8 +23,9 @@
                     <h3><i class="fas fa-database"></i> Preparação do Ambiente</h3>
                     <p>Primeiro, vamos criar as tabelas e inserir dados de exemplo:</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Criar tabela clientes</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">CREATE TABLE</span> clientes (
@@ -53,8 +54,9 @@
                         <div class="code-line">);</div>
                     </div>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 2. Criar tabela pedidos</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">CREATE TABLE</span> pedidos (
@@ -83,8 +85,9 @@
                         <div class="code-line">);</div>
                     </div>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 3. Inserir dados de exemplo</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">INSERT INTO</span> clientes (nome, email, telefone, cidade, idade, categoria) <span class="keyword">VALUES</span>
@@ -106,8 +109,9 @@
                         </div>
                     </div>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="keyword">INSERT INTO</span> pedidos (cliente_id, produto, valor, data_pedido, status) <span class="keyword">VALUES</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             (<span class="number">1</span>, <span class="string">'Notebook Dell'</span>, <span class="number">2500.00</span>, <span class="string">'2024-01-15'</span>, <span class="string">'entregue'</span>),
@@ -133,8 +137,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 1: Remoção por ID</h3>
                     <p><strong>Objetivo:</strong> Remover o cliente com ID 5 (verificar se não tem pedidos primeiro)</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar se cliente tem pedidos</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> cliente_id = <span class="number">5</span>;
@@ -157,8 +162,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 2: Remoção por Condição</h3>
                     <p><strong>Objetivo:</strong> Remover todos os clientes sem telefone</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar quantos clientes serão removidos</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> clientes <span class="keyword">WHERE</span> telefone <span class="keyword">IS NULL</span>;
@@ -187,8 +193,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 3: Remoção por Data</h3>
                     <p><strong>Objetivo:</strong> Remover pedidos antigos (anteriores a 2020)</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar quantos pedidos serão removidos</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> data_pedido < <span class="string">'2020-01-01'</span>;
@@ -217,8 +224,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 4: Remoção por Status</h3>
                     <p><strong>Objetivo:</strong> Remover todos os pedidos cancelados</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar quantos pedidos cancelados existem</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> status = <span class="string">'cancelado'</span>;
@@ -247,8 +255,9 @@
                     <h3><i class="fas fa-play"></i> Exercício 5: Remoção com Múltiplas Condições</h3>
                     <p><strong>Objetivo:</strong> Remover pedidos cancelados de 2019</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- 1. Verificar quantos pedidos serão removidos</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="keyword">SELECT</span> <span class="function">COUNT</span>(*) <span class="keyword">FROM</span> pedidos 
@@ -286,8 +295,9 @@
                     <h3><i class="fas fa-exclamation-triangle"></i> Exercício 6: Remoção Segura em Lote</h3>
                     <p><strong>Objetivo:</strong> Remover logs antigos processando 100 por vez</p>
                     <div class="code-block">
-                        <div class="code-line">
+                    <pre><code>                        <div class="code-line">
                             <span class="comment">-- Usar LIMIT para processar em lotes</span>
+                    </code></pre>
                         </div>
                         <div class="code-line">
                             <span class="comment">-- Repetir até não haver mais registros</span>
@@ -299,8 +309,9 @@
                     <details>
                         <summary>Clique para ver as soluções</summary>
                         <div class="code-block">
-                            <div class="code-line">
+                    <pre><code>                            <div class="code-line">
                                 <span class="comment">-- Exercício 1:</span>
+                    </code></pre>
                             </div>
                             <div class="code-line">
                                 <span class="keyword">SELECT</span> COUNT(*) <span class="keyword">FROM</span> pedidos <span class="keyword">WHERE</span> cliente_id = <span class="number">5</span>;

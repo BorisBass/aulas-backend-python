@@ -21,7 +21,7 @@
                 <h3>🎯 Exercício 1: Lista de Compras</h3>
                 <p>Crie um sistema de lista de compras interativo.</p>
                 <div class="code-block">
-# Lista de compras
+                    <pre><code># Lista de compras
 compras = []
 print("=== LISTA DE COMPRAS ===")
 
@@ -68,16 +68,15 @@ Itens na lista:")
         break
     
     else:
-        print("Opção inválida!")
+        print("Opção inválida!")</code></pre>
                 </div>
                 
                 <h3>🎯 Exercício 2: Análise de Notas</h3>
                 <p>Analise uma lista de notas e calcule estatísticas.</p>
                 <div class="code-block">
-# Análise de notas
+                    <pre><code># Análise de notas
 notas = []
 print("Digite as notas (digite -1 para parar):")
-
 while True:
     try:
         nota = float(input("Nota: "))
@@ -89,7 +88,6 @@ while True:
             print("Nota deve estar entre 0 e 10!")
     except ValueError:
         print("Digite um número válido!")
-
 if notas:
     print(f"
 === ANÁLISE DE NOTAS ===")
@@ -98,18 +96,18 @@ if notas:
     print(f"Maior nota: {max(notas)}")
     print(f"Menor nota: {min(notas)}")
     print(f"Média: {sum(notas)/len(notas):.2f}")
-    
     # Contar aprovações
     aprovados = sum(1 for nota in notas if nota >= 7)
     print(f"Aprovados: {aprovados} ({aprovados/len(notas)*100:.1f}%)")
 else:
     print("Nenhuma nota válida foi digitada!")
+                    </code></pre>
                 </div>
                 
                 <h3>🎯 Exercício 3: Busca em Lista</h3>
                 <p>Implemente um sistema de busca em lista.</p>
                 <div class="code-block">
-# Sistema de busca
+                    <pre><code># Sistema de busca
 nomes = ["Ana", "Bruno", "Carlos", "Diana", "Eduardo"]
 
 print("Lista de nomes:", nomes)
@@ -124,7 +122,7 @@ else:
     # Sugerir nomes similares
     sugestoes = [nome for nome in nomes if nome_busca.lower() in nome.lower()]
     if sugestoes:
-        print(f"Nomes similares: {sugestoes}")
+        print(f"Nomes similares: {sugestoes}")</code></pre>
                 </div>
                 
                 <div class="info">

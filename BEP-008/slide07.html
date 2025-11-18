@@ -25,7 +25,7 @@
                 <h3>🔄 Comando return</h3>
                 <p>O comando <strong>return</strong> envia um valor de volta para quem chamou a função.</p>
                 <div class="code-block">
-# Função sem return (retorna None)
+                    <pre><code># Função sem return (retorna None)
 def cumprimentar():
     print("Olá, mundo!")
 
@@ -36,12 +36,12 @@ def obter_saudacao():
 # Testando as funções
 cumprimentar()  # Imprime: Olá, mundo!
 mensagem = obter_saudacao()  # Retorna: "Olá, mundo!"
-print(mensagem)
+print(mensagem)</code></pre>
                 </div>
                 
                 <h3>📊 Tipos de Retorno</h3>
                 <div class="code-block">
-# Retornando números
+                    <pre><code># Retornando números
 def calcular_quadrado(numero):
     return numero * numero
 
@@ -66,12 +66,12 @@ pares = criar_lista_pares()
 print(f"Quadrado: {quadrado}")
 print(f"Nome: {nome}")
 print(f"É par: {par}")
-print(f"Pares: {pares}")
+print(f"Pares: {pares}")</code></pre>
                 </div>
                 
                 <h3>🎯 Múltiplos Returns</h3>
                 <div class="code-block">
-# Função com múltiplos returns
+                    <pre><code># Função com múltiplos returns
 def verificar_idade(idade):
     if idade < 0:
         return "Idade inválida"
@@ -83,18 +83,18 @@ def verificar_idade(idade):
         return "Adulto"
     else:
         return "Idoso"
-
 # Testando diferentes idades
 print(verificar_idade(5))    # Criança
 print(verificar_idade(15))  # Adolescente
 print(verificar_idade(25))  # Adulto
 print(verificar_idade(65))  # Idoso
 print(verificar_idade(-1))  # Idade inválida
+                    </code></pre>
                 </div>
                 
                 <h3>📦 Retornando Múltiplos Valores</h3>
                 <div class="code-block">
-# Função que retorna múltiplos valores
+                    <pre><code># Função que retorna múltiplos valores
 def calcular_estatisticas(numeros):
     soma = sum(numeros)
     media = soma / len(numeros)
@@ -110,12 +110,12 @@ print(f"Lista: {lista}")
 print(f"Soma: {soma}")
 print(f"Média: {media:.2f}")
 print(f"Maior: {maior}")
-print(f"Menor: {menor}")
+print(f"Menor: {menor}")</code></pre>
                 </div>
                 
                 <h3>⚠️ Funções sem Return</h3>
                 <div class="code-block">
-# Função sem return (retorna None)
+                    <pre><code># Função sem return (retorna None)
 def mostrar_informacoes():
     print("Nome: João Silva")
     print("Idade: 25 anos")
@@ -131,12 +131,12 @@ resultado1 = mostrar_informacoes()
 resultado2 = processar_dados()
 
 print(f"Resultado 1: {resultado1}")  # None
-print(f"Resultado 2: {resultado2}")  # None
+print(f"Resultado 2: {resultado2}")  # None</code></pre>
                 </div>
                 
                 <h3>🔄 Usando Valores Retornados</h3>
                 <div class="code-block">
-# Função que calcula e retorna
+                    <pre><code># Função que calcula e retorna
 def calcular_media(nota1, nota2, nota3):
     return (nota1 + nota2 + nota3) / 3
 
@@ -152,7 +152,7 @@ print(f"Nova média: {nova_media:.2f}")
 if media >= 7.0:
     print("Aprovado!")
 else:
-    print("Reprovado!")
+    print("Reprovado!")</code></pre>
                 </div>
                 
                 <div class="info">
@@ -168,7 +168,7 @@ else:
                 <div class="example">
                     <h5>💡 Exemplo Prático</h5>
                     <div class="code-block">
-# Função para verificar aprovação
+                    <pre><code># Função para verificar aprovação
 def verificar_aprovacao(nota1, nota2, nota3):
     media = (nota1 + nota2 + nota3) / 3
     if media >= 7.0:
@@ -181,8 +181,8 @@ aprovado, media = verificar_aprovacao(8.5, 7.0, 9.2)
 if aprovado:
     print(f"Aprovado com média {media:.2f}")
 else:
-    print(f"Reprovado com média {media:.2f}")
-                    </div>
+    print(f"Reprovado com média {media:.2f}")</code></pre>
+                </div>
                 </div>
             </div>
         </div>

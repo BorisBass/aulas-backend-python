@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 06: Exemplo - Composição (Carro e Motor)</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .destaque { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-code"></i> Exemplo: Composição - Carro e Motor</h2>
+                <p>Primeiro exemplo prático de composição</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Cenário</h3>
+                    <p>Vamos modelar um sistema onde:</p>
+                    <ul>
+                        <li>Um <strong>Carro</strong> possui um <strong>Motor</strong></li>
+                        <li>O motor não pode existir sem o carro</li>
+                        <li>O motor é criado quando o carro é criado</li>
+                        <li>Se o carro é destruído, o motor também é</li>
+                    </ul>
+                    <div class="destaque">
+                        <strong>Pergunta-chave:</strong> Motor pode existir sem Carro? <strong>NÃO</strong> → É <strong>Composição</strong>!
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Implementação Completa</h3>
+<pre><code class="language-python">class Motor:
+    def __init__(self, potencia, tipo_combustivel):
+        self.potencia = potencia  # em CV
+        self.tipo_combustivel = tipo_combustivel
+        self.ligado = False
+    
+    def ligar(self):
+        if not self.ligado:
+            self.ligado = True
+            return f"Motor {self.potencia}CV ({self.tipo_combustivel}) ligado!"
+        return "Motor já está ligado!"
+    
+    def desligar(self):
+        if self.ligado:
+            self.ligado = False
+            return "Motor desligado!"
+        return "Motor já está desligado!"
+    
+    def __str__(self):
+        return f"Motor {self.potencia}CV - {self.tipo_combustivel}"
+
+class Carro:
+    def __init__(self, marca, modelo, potencia_motor, tipo_combustivel):
+        self.marca = marca
+        self.modelo = modelo
+        # COMPOSIÇÃO: Motor é criado DENTRO do Carro
+        self.motor = Motor(potencia_motor, tipo_combustivel)
+        # Motor não pode existir sem Carro!
+    
+    def ligar(self):
+        """Liga o carro (que liga o motor)"""
+        return self.motor.ligar()
+    
+    def desligar(self):
+        """Desliga o carro (que desliga o motor)"""
+        return self.motor.desligar()
+    
+    def info(self):
+        """Mostra informações do carro"""
+        print(f"Carro: {self.marca} {self.modelo}")
+        print(f"Motor: {self.motor}")
+        print(f"Status: {'Ligado' if self.motor.ligado else 'Desligado'}")
+
+# ===== USO =====
+
+# Criar carro (motor é criado automaticamente)
+carro1 = Carro("Toyota", "Corolla", 150, "Flex")
+carro2 = Carro("Honda", "Civic", 180, "Gasolina")
+
+# O motor já existe como parte do carro
+carro1.info()
+# Carro: Toyota Corolla
+# Motor: Motor 150CV - Flex
+# Status: Desligado
+
+# Ligar o carro (que liga o motor)
+print(carro1.ligar())
+# Motor 150CV (Flex) ligado!
+
+# Acessar o motor diretamente
+print(carro1.motor.potencia)  # 150
+print(carro1.motor.tipo_combustivel)  # Flex
+
+# Motor não pode existir separadamente
+# Se tentarmos criar um motor sozinho:
+# motor_solo = Motor(200, "Diesel")  # Técnicamente possível,
+# mas conceitualmente errado! Motor deveria ser parte de algo.
+
+# Se o carro for destruído (del carro1),
+# o motor também é destruído automaticamente</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Características Observadas</h3>
+                    <ul>
+                        <li>✅ <strong>Motor criado dentro do Carro:</strong> O motor é instanciado no construtor do carro</li>
+                        <li>✅ <strong>Dependência forte:</strong> O motor não pode existir sem o carro</li>
+                        <li>✅ <strong>Ciclo de vida conjunto:</strong> Se o carro é destruído, o motor também é</li>
+                        <li>✅ <strong>Propriedade:</strong> O carro é dono do motor</li>
+                        <li>✅ <strong>Relação permanente:</strong> Não podemos "desmatricular" o motor do carro</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante</h3>
+                    <p>Em Python, tecnicamente você <strong>pode</strong> criar um Motor separadamente:</p>
+<pre><code class="language-python">motor_solo = Motor(200, "Diesel")  # Funciona tecnicamente</code></pre>
+                    <p>Mas <strong>conceitualmente</strong>, isso não faz sentido no contexto de composição. 
+                    O motor deveria sempre ser parte de algo (carro, caminhão, etc.).</p>
+                    <p style="margin-top: 12px;"><strong>Dica:</strong> A composição é mais sobre <strong>design conceitual</strong> 
+                    do que sobre restrições técnicas da linguagem.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

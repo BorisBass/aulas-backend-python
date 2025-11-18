@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 09: Exemplo - Sistema de E-commerce</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+        .destaque { background: #FFF5E1; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-shopping-cart"></i> Exemplo: Sistema de E-commerce</h2>
+                <p>Modelagem completa com múltiplas relações</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Cenário</h3>
+                    <p>Vamos modelar um sistema de e-commerce com:</p>
+                    <ul>
+                        <li><strong>Produto:</strong> Tem itens (Composição) e pode estar em pedidos (Associação)</li>
+                        <li><strong>Item:</strong> É parte de um produto (Composição)</li>
+                        <li><strong>Cliente:</strong> Pode fazer pedidos (Associação)</li>
+                        <li><strong>Pedido:</strong> Contém produtos (Associação) e tem endereço (Composição)</li>
+                        <li><strong>Endereco:</strong> É parte de um pedido (Composição)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Implementação</h3>
+<pre><code class="language-python"># ===== COMPOSIÇÃO: Item é parte de Produto =====
+class Item:
+    def __init__(self, nome, quantidade):
+        self.nome = nome
+        self.quantidade = quantidade
+
+class Produto:
+    def __init__(self, nome, preco, itens_info):
+        self.nome = nome
+        self.preco = preco
+        # COMPOSIÇÃO: Itens são criados dentro do Produto
+        self.itens = [Item(nome, qtd) for nome, qtd in itens_info]
+    
+    def __str__(self):
+        return f"{self.nome} - R$ {self.preco:.2f}"
+
+# ===== COMPOSIÇÃO: Endereco é parte de Pedido =====
+class Endereco:
+    def __init__(self, rua, numero, cidade):
+        self.rua = rua
+        self.numero = numero
+        self.cidade = cidade
+    
+    def __str__(self):
+        return f"{self.rua}, {self.numero} - {self.cidade}"
+
+# ===== ASSOCIAÇÃO: Pedido contém Produtos =====
+class Pedido:
+    def __init__(self, numero, endereco_info):
+        self.numero = numero
+        # COMPOSIÇÃO: Endereco é criado dentro do Pedido
+        self.endereco = Endereco(*endereco_info)
+        self.produtos = []  # ASSOCIAÇÃO: lista de Produtos
+        self.cliente = None  # ASSOCIAÇÃO: referência ao Cliente
+    
+    def adicionar_produto(self, produto, quantidade):
+        """Cria associação com Produto"""
+        self.produtos.append((produto, quantidade))
+    
+    def calcular_total(self):
+        total = sum(produto.preco * qtd for produto, qtd in self.produtos)
+        return total
+    
+    def info(self):
+        print(f"Pedido #{self.numero}")
+        print(f"Endereço: {self.endereco}")
+        if self.cliente:
+            print(f"Cliente: {self.cliente.nome}")
+        print("Produtos:")
+        for produto, qtd in self.produtos:
+            print(f"  - {produto.nome} x{qtd} = R$ {produto.preco * qtd:.2f}")
+        print(f"Total: R$ {self.calcular_total():.2f}")
+
+# ===== ASSOCIAÇÃO: Cliente faz Pedidos =====
+class Cliente:
+    def __init__(self, nome, email):
+        self.nome = nome
+        self.email = email
+        self.pedidos = []  # ASSOCIAÇÃO: lista de Pedidos
+    
+    def fazer_pedido(self, pedido):
+        """Cria associação com Pedido"""
+        pedido.cliente = self  # Bidirecional
+        self.pedidos.append(pedido)
+        print(f"Pedido #{pedido.numero} criado para {self.nome}")
+    
+    def listar_pedidos(self):
+        print(f"\nPedidos de {self.nome}:")
+        for pedido in self.pedidos:
+            print(f"  Pedido #{pedido.numero} - Total: R$ {pedido.calcular_total():.2f}")
+
+# ===== USO =====
+
+# Criar produtos (itens são criados automaticamente - COMPOSIÇÃO)
+produto1 = Produto("Notebook", 2500.00, [("Tela", 1), ("Teclado", 1), ("Bateria", 1)])
+produto2 = Produto("Mouse", 50.00, [("Botão esquerdo", 1), ("Botão direito", 1)])
+
+# Criar cliente
+cliente = Cliente("João Silva", "joao@email.com")
+
+# Criar pedido (endereco é criado automaticamente - COMPOSIÇÃO)
+pedido1 = Pedido(1001, ("Rua A", 123, "Salvador"))
+pedido1.adicionar_produto(produto1, 1)  # ASSOCIAÇÃO
+pedido1.adicionar_produto(produto2, 2)   # ASSOCIAÇÃO
+
+# Cliente faz pedido (ASSOCIAÇÃO)
+cliente.fazer_pedido(pedido1)
+
+# Mostrar informações
+pedido1.info()
+cliente.listar_pedidos()</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Relações Identificadas</h3>
+                    <div class="destaque">
+                        <h4>Composição:</h4>
+                        <ul>
+                            <li><strong>Produto → Itens:</strong> Itens são criados dentro do produto</li>
+                            <li><strong>Pedido → Endereco:</strong> Endereco é criado dentro do pedido</li>
+                        </ul>
+                    </div>
+                    <div style="background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px;">
+                        <h4>Associação:</h4>
+                        <ul>
+                            <li><strong>Pedido ↔ Produtos:</strong> Pedido contém produtos (múltiplos)</li>
+                            <li><strong>Cliente ↔ Pedidos:</strong> Cliente faz pedidos (múltiplos, bidirecional)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

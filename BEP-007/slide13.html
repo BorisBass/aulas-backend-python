@@ -24,7 +24,7 @@
                 
                 <h3>🗑️ Métodos de Remoção</h3>
                 <div class="code-block">
-# Dicionário inicial
+                    <pre><code># Dicionário inicial
 contato = {
     "nome": "João Silva",
     "telefone": "(71) 99999-1111",
@@ -50,13 +50,13 @@ print(f"Cidade removida: {cidade_removida}")
 
 # Tentativa de remover chave inexistente com valor padrão
 estado_removido = contato.pop("estado", "Não informado")
-print(f"Estado removido: {estado_removido}")
+print(f"Estado removido: {estado_removido}")</code></pre>
                 </div>
                 
                 <h3>🔄 Método popitem()</h3>
                 <p><strong>popitem():</strong> Remove e retorna o último item inserido no dicionário (LIFO - Last In, First Out)</p>
                 <div class="code-block">
-# Dicionário para teste
+                    <pre><code># Dicionário para teste
 dados = {
     "a": 1,
     "b": 2,
@@ -95,12 +95,12 @@ print("\n--- Removendo todos os itens ---")
 while dados_teste:
     item = dados_teste.popitem()
     print(f"Removido: {item}")
-print("Dicionário vazio:", dados_teste)
+print("Dicionário vazio:", dados_teste)</code></pre>
                 </div>
                 
                 <h3>🧹 Limpeza Completa</h3>
                 <div class="code-block">
-# Dicionário para limpeza
+                    <pre><code># Dicionário para limpeza
 inventario = {
     "produto1": {"preco": 100, "estoque": 10},
     "produto2": {"preco": 200, "estoque": 5},
@@ -116,12 +116,12 @@ print(f"Tamanho após clear(): {len(inventario)}")
 
 # Verificando se está vazio
 print(f"Está vazio: {not inventario}")
-print(f"Está vazio: {len(inventario) == 0}")
+print(f"Está vazio: {len(inventario) == 0}")</code></pre>
                 </div>
                 
                 <h3>🔍 Remoção Condicional</h3>
                 <div class="code-block">
-# Sistema de usuários
+                    <pre><code># Sistema de usuários
 usuarios = {
     "admin": {"ativo": True, "nivel": "administrador"},
     "user1": {"ativo": False, "nivel": "usuario"},
@@ -151,21 +151,19 @@ for usuario, dados in usuarios.items():
         print(f"Mantendo administrador: {usuario}")
 
 usuarios = usuarios_finais
-print("Usuários finais:", usuarios)
+print("Usuários finais:", usuarios)</code></pre>
                 </div>
                 
                 <h3>📊 Remoção em Lote</h3>
                 <div class="code-block">
-# Sistema de notas
+                    <pre><code># Sistema de notas
 notas = {
     "Ana": [8.5, 7.0, 9.2, 6.8],
     "Bruno": [6.8, 8.0, 7.5, 5.0],
     "Carla": [9.0, 8.5, 9.5, 8.0],
     "Diego": [7.2, 6.5, 8.0, 7.5]
 }
-
 print("Notas originais:", notas)
-
 # Removendo alunos com média menor que 7.0
 alunos_aprovados = {}
 for aluno, lista_notas in notas.items():
@@ -174,10 +172,8 @@ for aluno, lista_notas in notas.items():
         alunos_aprovados[aluno] = lista_notas
     else:
         print(f"Removendo aluno reprovado: {aluno} (média: {media:.2f})")
-
 notas = alunos_aprovados
 print("Alunos aprovados:", notas)
-
 # Removendo a menor nota de cada aluno
 for aluno in notas:
     if len(notas[aluno]) > 1:
@@ -186,17 +182,16 @@ for aluno in notas:
         for nota in notas[aluno]:
             if nota < menor_nota:
                 menor_nota = nota
-        
         notas[aluno].remove(menor_nota)
         print(f"Removida menor nota de {aluno}: {menor_nota}")
-
 print("Notas após remoção da menor:", notas)
+                    </code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Cache</h5>
                     <div class="code-block">
-# Sistema de cache com TTL (Time To Live)
+                    <pre><code># Sistema de cache com TTL (Time To Live)
 cache = {
     "usuario_123": {"dados": "info", "timestamp": 1000},
     "usuario_456": {"dados": "info", "timestamp": 2000},
@@ -222,8 +217,8 @@ print(f"Cache após limpeza: {cache}")
 
 # Adicionando novo item ao cache
 cache["usuario_999"] = {"dados": "nova_info", "timestamp": 2500}
-print("Cache com novo item:", cache)
-                    </div>
+print("Cache com novo item:", cache)</code></pre>
+                </div>
                 </div>
                 
                 <div class="warning">

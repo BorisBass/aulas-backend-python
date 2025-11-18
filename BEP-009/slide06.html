@@ -25,7 +25,7 @@
 <p>Formatação moderna e intuitiva de strings</p>
 
 <div class="code-block">
-# F-strings básicas
+                    <pre><code># F-strings básicas
 nome = "João"
 idade = 25
 print(f"Olá, {nome}! Você tem {idade} anos.")
@@ -33,12 +33,12 @@ print(f"Olá, {nome}! Você tem {idade} anos.")
 # F-strings com expressões
 a = 10
 b = 20
-print(f"A soma de {a} + {b} = {a + b}")
-</div>
+print(f"A soma de {a} + {b} = {a + b}")</code></pre>
+                </div>
 
 <h3>🎯 Formatação de Números</h3>
 <div class="code-block">
-# Formatação de decimais
+                    <pre><code># Formatação de decimais
 preco = 19.99
 print(f"Preço: R$ {preco:.2f}")  # Preço: R$ 19.99
 
@@ -48,23 +48,21 @@ print(f"Número: {numero:03d}")  # Número: 042
 
 # Formatação de percentual
 taxa = 0.15
-print(f"Taxa: {taxa:.1%}")  # Taxa: 15.0%
-</div>
+print(f"Taxa: {taxa:.1%}")  # Taxa: 15.0%</code></pre>
+                </div>
 
 <h3>📊 Alinhamento e Preenchimento</h3>
 <div class="code-block">
-# Alinhamento à esquerda
+                    <pre><code># Alinhamento à esquerda
 texto = "Python"
 print(f"'{texto:<10}'")  # 'Python    '
-
 # Alinhamento à direita
 print(f"'{texto:>10}'")  # '    Python'
-
 # Centralizado
 print(f"'{texto:^10}'")  # '  Python  '
-
 # Com preenchimento
 print(f"'{texto:*^10}'")  # '**Python**'
+                    </code></pre>
 </div>
 
 <div class="info">

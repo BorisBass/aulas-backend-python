@@ -22,41 +22,41 @@
                 <p>Podemos colocar loops dentro de outros loops:</p>
                 
                 <div class="code-block">
-# Exemplo: Tabuada completa
+                    <pre><code># Exemplo: Tabuada completa
 for i in range(1, 6):  # Loop externo
     print(f"
 Tabuada do {i}:")
     for j in range(1, 11):  # Loop interno
         resultado = i * j
-        print(f"{i} x {j} = {resultado}")
+        print(f"{i} x {j} = {resultado}")</code></pre>
                 </div>
                 
                 <h3>📝 Exemplo: Padrão de Asteriscos</h3>
                 <div class="code-block">
-# Desenhar um retângulo de asteriscos
+                    <pre><code># Desenhar um retângulo de asteriscos
 linhas = int(input("Número de linhas: "))
 colunas = int(input("Número de colunas: "))
 
 for i in range(linhas):
     for j in range(colunas):
         print("*", end="")
-    print()  # Nova linha
+    print()  # Nova linha</code></pre>
                 </div>
                 
                 <h3>🎯 Exemplo: Triângulo de Números</h3>
                 <div class="code-block">
-# Triângulo de números
+                    <pre><code># Triângulo de números
 altura = int(input("Altura do triângulo: "))
 
 for i in range(1, altura + 1):
     for j in range(1, i + 1):
         print(j, end=" ")
-    print()  # Nova linha
+    print()  # Nova linha</code></pre>
                 </div>
                 
                 <h3>🔍 Exemplo: Busca em Matriz</h3>
                 <div class="code-block">
-# Buscar um número em uma matriz
+                    <pre><code># Buscar um número em uma matriz
 matriz = [
     [1, 2, 3],
     [4, 5, 6],
@@ -76,7 +76,7 @@ for i in range(len(matriz)):
         break
 
 if not encontrado:
-    print(f"Número {numero_busca} não encontrado!")
+    print(f"Número {numero_busca} não encontrado!")</code></pre>
                 </div>
                 
                 <div class="warning">

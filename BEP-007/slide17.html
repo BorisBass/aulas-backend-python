@@ -24,7 +24,7 @@
                 
                 <h3>🏋️ Exercício 1: Agenda Telefônica</h3>
                 <div class="code-block">
-# Crie uma agenda telefônica usando dicionários
+                    <pre><code># Crie uma agenda telefônica usando dicionários
 # Adicione, busque e atualize contatos
 
 # Solução:
@@ -51,12 +51,12 @@ print(f"Telefone do João atualizado: {agenda['João']['telefone']}")
 
 # Listando todos os contatos
 for nome, dados in agenda.items():
-    print(f"{nome}: {dados['telefone']} - {dados['email']}")
+    print(f"{nome}: {dados['telefone']} - {dados['email']}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 2: Sistema de Notas</h3>
                 <div class="code-block">
-# Crie um sistema de notas usando dicionários
+                    <pre><code># Crie um sistema de notas usando dicionários
 # Calcule médias e determine status dos alunos
 
 # Solução:
@@ -83,12 +83,12 @@ print(f"Melhor aluno: {melhor_aluno}")
 
 # Adicionando nova nota
 notas_alunos["Ana"].append(8.8)
-print(f"Ana com nova nota: {notas_alunos['Ana']}")
+print(f"Ana com nova nota: {notas_alunos['Ana']}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 3: Inventário de Produtos</h3>
                 <div class="code-block">
-# Crie um sistema de inventário com dicionários
+                    <pre><code># Crie um sistema de inventário com dicionários
 # Gerencie produtos, preços e estoque
 
 # Solução:
@@ -119,12 +119,12 @@ for produto, dados in inventario.items():
         categorias[categoria] = []
     categorias[categoria].append(produto)
 
-print("Produtos por categoria:", categorias)
+print("Produtos por categoria:", categorias)</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 4: Sistema de Vendas</h3>
                 <div class="code-block">
-# Crie um sistema de vendas mensais
+                    <pre><code># Crie um sistema de vendas mensais
 # Analise dados e gere relatórios
 
 # Solução:
@@ -158,12 +158,12 @@ for i in range(1, len(meses)):
     mes_atual = meses[i]
     mes_anterior = meses[i-1]
     crescimento = vendas[mes_atual] - vendas[mes_anterior]
-    print(f"Crescimento de {mes_anterior} para {mes_atual}: R$ {crescimento}")
+    print(f"Crescimento de {mes_anterior} para {mes_atual}: R$ {crescimento}")</code></pre>
                 </div>
                 
                 <h3>🏋️ Exercício 5: Sistema de Login</h3>
                 <div class="code-block">
-# Crie um sistema de login com usuários e senhas
+                    <pre><code># Crie um sistema de login com usuários e senhas
 # Implemente autenticação e níveis de acesso
 
 # Solução:
@@ -196,13 +196,13 @@ testes = [
 for usuario, senha in testes:
     resultado, info = verificar_login(usuario, senha)
     status = "Sucesso" if resultado else "Falha"
-    print(f"Login '{usuario}': {status} - {info}")
+    print(f"Login '{usuario}': {status} - {info}")</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Configuração</h5>
                     <div class="code-block">
-# Sistema de configuração de aplicação
+                    <pre><code># Sistema de configuração de aplicação
 config = {
     "database": {
         "host": "localhost",
@@ -233,8 +233,8 @@ print("Configuração atualizada:")
 for secao, configuracoes in config.items():
     print(f"{secao}:")
     for chave, valor in configuracoes.items():
-        print(f"  {chave}: {valor}")
-                    </div>
+        print(f"  {chave}: {valor}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="warning">

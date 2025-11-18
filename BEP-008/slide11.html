@@ -25,13 +25,12 @@
                 <h3>🔍 Validação de Dados</h3>
                 <p>Funções podem usar estruturas condicionais para validar dados e tomar decisões.</p>
                 <div class="code-block">
-# Função para verificar se um número é par
+                    <pre><code># Função para verificar se um número é par
 def verificar_par(numero):
     if numero % 2 == 0:
         return True
     else:
         return False
-
 # Função para classificar idade
 def classificar_idade(idade):
     if idade < 0:
@@ -44,18 +43,18 @@ def classificar_idade(idade):
         return "Adulto"
     else:
         return "Idoso"
-
 # Testando as funções
 print(f"8 é par? {verificar_par(8)}")
 print(f"7 é par? {verificar_par(7)}")
 print(f"Idade 5: {classificar_idade(5)}")
 print(f"Idade 25: {classificar_idade(25)}")
 print(f"Idade 65: {classificar_idade(65)}")
+                    </code></pre>
                 </div>
                 
                 <h3>💰 Cálculos Condicionais</h3>
                 <div class="code-block">
-# Função para calcular desconto
+                    <pre><code># Função para calcular desconto
 def calcular_desconto(valor, tipo_cliente):
     if tipo_cliente == "vip":
         desconto = 0.20  # 20%
@@ -80,12 +79,12 @@ compras = [
 
 for valor, tipo in compras:
     valor_final, desconto = calcular_desconto(valor, tipo)
-    print(f"R$ {valor} ({tipo}): R$ {valor_final:.2f} (desconto: R$ {desconto:.2f})")
+    print(f"R$ {valor} ({tipo}): R$ {valor_final:.2f} (desconto: R$ {desconto:.2f})")</code></pre>
                 </div>
                 
                 <h3>📊 Verificação de Aprovação</h3>
                 <div class="code-block">
-# Função para verificar aprovação
+                    <pre><code># Função para verificar aprovação
 def verificar_aprovacao(nota1, nota2, nota3):
     media = (nota1 + nota2 + nota3) / 3
     
@@ -115,12 +114,12 @@ alunos = [
 for i, (n1, n2, n3) in enumerate(alunos, 1):
     aprovado, media, conceito = verificar_aprovacao(n1, n2, n3)
     status = "Aprovado" if aprovado else "Reprovado"
-    print(f"Aluno {i}: {status} - Média: {media:.2f} - Conceito: {conceito}")
+    print(f"Aluno {i}: {status} - Média: {media:.2f} - Conceito: {conceito}")</code></pre>
                 </div>
                 
                 <h3>🔐 Validação de Acesso</h3>
                 <div class="code-block">
-# Função para verificar acesso
+                    <pre><code># Função para verificar acesso
 def verificar_acesso(idade, tem_cartao):
     if idade < 18:
         return False, "Menor de idade"
@@ -128,7 +127,6 @@ def verificar_acesso(idade, tem_cartao):
         return False, "Sem cartão"
     else:
         return True, "Acesso liberado"
-
 # Testando a função
 usuarios = [
     (20, True),
@@ -136,15 +134,15 @@ usuarios = [
     (25, False),
     (30, True)
 ]
-
 for idade, cartao in usuarios:
     acesso, mensagem = verificar_acesso(idade, cartao)
     print(f"Idade: {idade}, Cartão: {cartao} - {mensagem}")
+                    </code></pre>
                 </div>
                 
                 <h3>📈 Classificação de Performance</h3>
                 <div class="code-block">
-# Função para classificar performance
+                    <pre><code># Função para classificar performance
 def classificar_performance(vendas, meta):
     if vendas >= meta * 1.5:
         return "Excelente", "Bônus máximo"
@@ -168,32 +166,27 @@ vendedores = [
 
 for vendas, meta in vendedores:
     performance, bonus = classificar_performance(vendas, meta)
-    print(f"Vendas: R$ {vendas}, Meta: R$ {meta} - {performance} - {bonus}")
+    print(f"Vendas: R$ {vendas}, Meta: R$ {meta} - {performance} - {bonus}")</code></pre>
                 </div>
                 
                 <h3>🎯 Validação de Formulário</h3>
                 <div class="code-block">
-# Função para validar formulário
+                    <pre><code># Função para validar formulário
 def validar_formulario(nome, email, idade):
     erros = []
-    
     # Validar nome
     if len(nome) < 2:
         erros.append("Nome muito curto")
-    
     # Validar email
     if "@" not in email:
         erros.append("Email inválido")
-    
     # Validar idade
     if idade < 0 or idade > 120:
         erros.append("Idade inválida")
-    
     if len(erros) == 0:
         return True, "Formulário válido"
     else:
         return False, erros
-
 # Testando a função
 formularios = [
     ("João", "joao@email.com", 25),
@@ -201,13 +194,13 @@ formularios = [
     ("Maria", "maria@email.com", -5),
     ("Pedro", "pedro@email.com", 30)
 ]
-
 for nome, email, idade in formularios:
     valido, resultado = validar_formulario(nome, email, idade)
     if valido:
         print(f"✅ {resultado}")
     else:
         print(f"❌ Erros: {resultado}")
+                    </code></pre>
                 </div>
                 
                 <div class="info">
@@ -223,14 +216,12 @@ for nome, email, idade in formularios:
                 <div class="example">
                     <h5>💡 Exemplo Prático</h5>
                     <div class="code-block">
-# Sistema de empréstimo
+                    <pre><code># Sistema de empréstimo
 def avaliar_emprestimo(renda, idade, score):
     if idade < 18 or idade > 65:
         return False, "Idade fora do permitido"
-    
     if renda < 1000:
         return False, "Renda insuficiente"
-    
     if score < 300:
         return False, "Score muito baixo"
     elif score < 600:
@@ -239,7 +230,6 @@ def avaliar_emprestimo(renda, idade, score):
         return True, "Empréstimo aprovado com juros médios"
     else:
         return True, "Empréstimo aprovado com juros baixos"
-
 # Testando a função
 solicitantes = [
     (2000, 25, 750),
@@ -248,10 +238,10 @@ solicitantes = [
     (1500, 35, 300),
     (2500, 40, 850)
 ]
-
 for renda, idade, score in solicitantes:
     aprovado, mensagem = avaliar_emprestimo(renda, idade, score)
     print(f"Renda: R$ {renda}, Idade: {idade}, Score: {score} - {mensagem}")
+                    </code></pre>
                     </div>
                 </div>
             </div>

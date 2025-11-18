@@ -29,7 +29,7 @@
                 
                 <h3>🔑 Conceito Chave-Valor</h3>
                 <div class="code-block">
-# Estrutura básica: chave : valor
+                    <pre><code># Estrutura básica: chave : valor
 contato = {
     "nome": "João Silva",
     "idade": 25,
@@ -40,7 +40,7 @@ contato = {
 # Acessando valores através das chaves
 print(contato["nome"])      # João Silva
 print(contato["idade"])     # 25
-print(contato["telefone"])  # (71) 99999-8888
+print(contato["telefone"])  # (71) 99999-8888</code></pre>
                 </div>
                 
                 <h3>✨ Características dos Dicionários</h3>
@@ -78,7 +78,7 @@ print(contato["telefone"])  # (71) 99999-8888
                 
                 <h3>🏗️ Formas de Criar Dicionários</h3>
                 <div class="code-block">
-# 1. Dicionário vazio
+                    <pre><code># 1. Dicionário vazio
 dicio_vazio = {}
 dicio_vazio2 = dict()
 
@@ -98,7 +98,7 @@ dicio_pares = dict(pares)
 
 # 5. Comprehension
 quadrados = {x: x**2 for x in range(1, 6)}
-print(quadrados)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+print(quadrados)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</code></pre>
                 </div>
                 
                 <h3>🎯 Casos de Uso dos Dicionários</h3>
@@ -129,7 +129,7 @@ print(quadrados)  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Inventário</h5>
                     <div class="code-block">
-# Inventário de uma loja
+                    <pre><code># Inventário de uma loja
 inventario = {
     "notebook": {
         "preco": 2500.00,
@@ -154,8 +154,8 @@ info = inventario[produto]
 print(f"{produto.title()}:")
 print(f"  Preço: R$ {info['preco']:.2f}")
 print(f"  Estoque: {info['estoque']} unidades")
-print(f"  Categoria: {info['categoria']}")
-                    </div>
+print(f"  Categoria: {info['categoria']}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="info">

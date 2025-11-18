@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 02: O que é Associação?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .caracteristica { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-link"></i> O que é Associação?</h2>
+                <p>Conceito e características da associação</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Definição</h3>
+                    <p><strong>Associação</strong> é um relacionamento entre duas classes onde os objetos são 
+                    <strong>independentes</strong> e podem existir separadamente.</p>
+                    <p style="margin-top: 12px;">É uma relação de <strong>"usa"</strong> ou <strong>"tem referência a"</strong>.</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> Características da Associação</h3>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 1. Independência</h4>
+                        <p>Os objetos podem existir <strong>separadamente</strong>. A destruição de um não 
+                        necessariamente destrói o outro.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 2. Relação Flexível</h4>
+                        <p>A relação pode ser <strong>criada, modificada ou removida</strong> durante a execução 
+                        do programa.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 3. Múltiplas Relações</h4>
+                        <p>Um objeto pode estar associado a <strong>múltiplos objetos</strong> do mesmo tipo 
+                        ou de tipos diferentes.</p>
+                    </div>
+                    
+                    <div class="caracteristica">
+                        <h4><i class="fas fa-check"></i> 4. Relação "Tem um"</h4>
+                        <p>Geralmente expressa como <strong>"tem um"</strong> ou <strong>"usa"</strong>. 
+                        Exemplo: "Aluno tem um Curso" ou "Professor usa Sala".</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Analogia do Mundo Real</h3>
+                    <div class="two-col">
+                        <div>
+                            <h4>Exemplo 1: Aluno e Curso</h4>
+                            <ul>
+                                <li>Um <strong>Aluno</strong> pode estar matriculado em um <strong>Curso</strong></li>
+                                <li>O aluno pode existir sem estar em um curso</li>
+                                <li>O curso pode existir sem alunos</li>
+                                <li>É uma relação <strong>flexível</strong></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>Exemplo 2: Professor e Disciplina</h4>
+                            <ul>
+                                <li>Um <strong>Professor</strong> pode lecionar várias <strong>Disciplinas</strong></li>
+                                <li>Uma disciplina pode ter vários professores</li>
+                                <li>Ambos podem existir independentemente</li>
+                                <li>É uma relação <strong>múltipla</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Implementação em Python</h3>
+                    <p>Associação é implementada através de <strong>referências</strong> entre objetos:</p>
+<pre><code class="language-python">class Aluno:
+    def __init__(self, nome):
+        self.nome = nome
+        self.curso = None  # Referência ao objeto Curso
+    
+    def matricular(self, curso):
+        self.curso = curso  # Associação criada!
+        print(f"{self.nome} matriculado em {curso.nome}")
+
+class Curso:
+    def __init__(self, nome):
+        self.nome = nome
+
+# Criar objetos independentes
+aluno = Aluno("João")
+curso = Curso("Python")
+
+# Criar associação
+aluno.matricular(curso)  # João matriculado em Python
+
+# Objetos ainda são independentes
+# Podemos remover a associação:
+aluno.curso = None  # Associação removida, mas objetos ainda existem</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

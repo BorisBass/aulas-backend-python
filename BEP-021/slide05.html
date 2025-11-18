@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 05: Exemplo - Associação (Aluno e Curso)</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .destaque { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-code"></i> Exemplo: Associação - Aluno e Curso</h2>
+                <p>Primeiro exemplo prático de associação</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-info-circle"></i> Cenário</h3>
+                    <p>Vamos modelar um sistema onde:</p>
+                    <ul>
+                        <li>Um <strong>Aluno</strong> pode estar matriculado em um <strong>Curso</strong></li>
+                        <li>Um aluno pode existir sem estar em um curso</li>
+                        <li>Um curso pode existir sem alunos</li>
+                        <li>A relação pode ser criada, modificada ou removida</li>
+                    </ul>
+                    <div class="destaque">
+                        <strong>Pergunta-chave:</strong> Aluno pode existir sem Curso? <strong>SIM</strong> → É <strong>Associação</strong>!
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Implementação Completa</h3>
+<pre><code class="language-python">class Curso:
+    def __init__(self, nome, codigo):
+        self.nome = nome
+        self.codigo = codigo
+    
+    def __str__(self):
+        return f"{self.nome} ({self.codigo})"
+
+class Aluno:
+    def __init__(self, nome, matricula):
+        self.nome = nome
+        self.matricula = matricula
+        self.curso = None  # Associação: referência ao Curso
+    
+    def matricular(self, curso):
+        """Cria associação com um curso"""
+        if self.curso is not None:
+            print(f"{self.nome} já está matriculado em {self.curso.nome}")
+        else:
+            self.curso = curso  # Associação criada!
+            print(f"{self.nome} matriculado em {curso.nome}")
+    
+    def desmatricular(self):
+        """Remove associação com o curso"""
+        if self.curso is not None:
+            curso_anterior = self.curso.nome
+            self.curso = None  # Associação removida!
+            print(f"{self.nome} desmatriculado de {curso_anterior}")
+        else:
+            print(f"{self.nome} não está matriculado em nenhum curso")
+    
+    def info(self):
+        """Mostra informações do aluno"""
+        print(f"Aluno: {self.nome} (Matrícula: {self.matricula})")
+        if self.curso:
+            print(f"Curso: {self.curso}")
+        else:
+            print("Curso: Não matriculado")
+
+# ===== USO =====
+
+# Criar objetos independentes
+curso_python = Curso("Python para Iniciantes", "PYT001")
+curso_java = Curso("Java Avançado", "JAV002")
+
+aluno1 = Aluno("João Silva", "2024001")
+aluno2 = Aluno("Maria Santos", "2024002")
+
+# Criar associações
+aluno1.matricular(curso_python)
+# João Silva matriculado em Python para Iniciantes (PYT001)
+
+aluno2.matricular(curso_java)
+# Maria Santos matriculado em Java Avançado (JAV002)
+
+# Mostrar informações
+aluno1.info()
+# Aluno: João Silva (Matrícula: 2024001)
+# Curso: Python para Iniciantes (PYT001)
+
+# Modificar associação (trocar de curso)
+aluno1.desmatricular()
+# João Silva desmatriculado de Python para Iniciantes (PYT001)
+
+aluno1.matricular(curso_java)
+# João Silva matriculado em Java Avançado (JAV002)
+
+# Objetos ainda existem independentemente
+print(curso_python)  # Python para Iniciantes (PYT001)
+print(aluno2.nome)   # Maria Santos</code></pre>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Características Observadas</h3>
+                    <ul>
+                        <li>✅ <strong>Objetos criados separadamente:</strong> Aluno e Curso são criados independentemente</li>
+                        <li>✅ <strong>Associação criada depois:</strong> A relação é estabelecida através do método <code>matricular()</code></li>
+                        <li>✅ <strong>Associação pode ser removida:</strong> O método <code>desmatricular()</code> remove a relação</li>
+                        <li>✅ <strong>Objetos continuam existindo:</strong> Mesmo sem associação, os objetos ainda existem</li>
+                        <li>✅ <strong>Relação flexível:</strong> Um aluno pode trocar de curso facilmente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

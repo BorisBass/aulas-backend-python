@@ -25,7 +25,7 @@
                 <p>O bloco <code>finally</code> <strong>sempre</strong> é executado, com ou sem exceção:</p>
                 
                 <div class="code-block">
-# Sintaxe com finally
+                    <pre><code># Sintaxe com finally
 try:
     arquivo = open("dados.txt", "r")
     conteudo = arquivo.read()
@@ -36,7 +36,7 @@ except Exception as e:
     print(f"Erro inesperado: {e}")
 finally:
     arquivo.close()  # Sempre fecha o arquivo
-    print("Limpeza realizada!")
+    print("Limpeza realizada!")</code></pre>
                 </div>
 
                 <h3>📝 Quando Usar Finally</h3>
@@ -52,7 +52,7 @@ finally:
 
                 <h3>🔧 Exemplos Práticos</h3>
                 <div class="code-block">
-# 1. Gerenciamento de arquivos
+                    <pre><code># 1. Gerenciamento de arquivos
 try:
     arquivo = open("dados.txt", "w")
     arquivo.write("Dados importantes")
@@ -85,7 +85,7 @@ except Exception as e:
     print(f"Erro no processamento: {e}")
 finally:
     lista_temporaria.clear()  # Limpa a lista
-    print("Memória liberada")
+    print("Memória liberada")</code></pre>
                 </div>
 
                 <div class="warning">

@@ -24,18 +24,18 @@
                 <h3>🔍 Sintaxe Básica</h3>
 <p>Use <code>try-except</code> para capturar e tratar exceções:</p>
 <div class="code-block">
-# Sintaxe básica
+                    <pre><code># Sintaxe básica
 try:
     # código que pode gerar erro
     numero = int(input("Digite um número: "))
 except ValueError:
     # código executado se houver erro
-    print("Erro: Digite apenas números!")
-</div>
+    print("Erro: Digite apenas números!")</code></pre>
+                </div>
 
 <h3>📝 Exemplo Completo</h3>
 <div class="code-block">
-# Calculadora segura
+                    <pre><code># Calculadora segura
 try:
     num1 = float(input("Número 1: "))
     num2 = float(input("Número 2: "))
@@ -46,8 +46,8 @@ except ValueError:
 except ZeroDivisionError:
     print("Erro: Não é possível dividir por zero!")
 except Exception as e:
-    print(f"Erro inesperado: {e}")
-</div>
+    print(f"Erro inesperado: {e}")</code></pre>
+                </div>
 
 <div class="info">
 <h4><i class="fas fa-lightbulb"></i> Dicas Importantes</h4>

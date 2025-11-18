@@ -29,29 +29,29 @@
                 </ul>
                 
                 <div class="code-block">
-# Parâmetro (na definição)
+                    <pre><code># Parâmetro (na definição)
 def cumprimentar(nome):  # 'nome' é o parâmetro
     print(f"Olá, {nome}!")
 
 # Argumento (na chamada)
 cumprimentar("João")  # "João" é o argumento
-cumprimentar("Maria")  # "Maria" é o argumento
+cumprimentar("Maria")  # "Maria" é o argumento</code></pre>
                 </div>
                 
                 <h3>📝 Sintaxe com Parâmetros</h3>
                 <div class="code-block">
-def nome_da_funcao(parametro1, parametro2):
+                    <pre><code>def nome_da_funcao(parametro1, parametro2):
     # Código da função
     print(f"Parâmetro 1: {parametro1}")
     print(f"Parâmetro 2: {parametro2}")
 
 # Chamada da função
-nome_da_funcao("valor1", "valor2")
+nome_da_funcao("valor1", "valor2")</code></pre>
                 </div>
                 
                 <h3>🎯 Exemplos Práticos</h3>
                 <div class="code-block">
-# Função com um parâmetro
+                    <pre><code># Função com um parâmetro
 def cumprimentar_pessoa(nome):
     print(f"Olá, {nome}!")
 
@@ -69,12 +69,12 @@ def mostrar_pessoa(nome, idade, cidade):
 # Chamando as funções
 cumprimentar_pessoa("Ana")
 somar_numeros(5, 3)
-mostrar_pessoa("João", 25, "Salvador")
+mostrar_pessoa("João", 25, "Salvador")</code></pre>
                 </div>
                 
                 <h3>⚠️ Erros Comuns</h3>
                 <div class="code-block">
-# ❌ Erro: Número incorreto de argumentos
+                    <pre><code># ❌ Erro: Número incorreto de argumentos
 def somar(a, b):
     return a + b
 
@@ -82,12 +82,12 @@ somar(5)  # Erro! Precisa de 2 argumentos
 somar(5, 3, 2)  # Erro! Muitos argumentos
 
 # ✅ Correto
-somar(5, 3)  # 2 argumentos para 2 parâmetros
+somar(5, 3)  # 2 argumentos para 2 parâmetros</code></pre>
                 </div>
                 
                 <h3>🔄 Ordem dos Parâmetros</h3>
                 <div class="code-block">
-# Função com parâmetros em ordem específica
+                    <pre><code># Função com parâmetros em ordem específica
 def calcular_media(nota1, nota2, nota3):
     return (nota1 + nota2 + nota3) / 3
 
@@ -106,7 +106,7 @@ def criar_pessoa(nome, idade, cidade):
 pessoa1 = criar_pessoa("João", 25, "Salvador")
 pessoa2 = criar_pessoa("Salvador", 25, "João")  # Resultado diferente!
 print(pessoa1)  # João, 25 anos, de Salvador
-print(pessoa2)  # Salvador, 25 anos, de João
+print(pessoa2)  # Salvador, 25 anos, de João</code></pre>
                 </div>
                 
                 <div class="info">
@@ -122,7 +122,7 @@ print(pessoa2)  # Salvador, 25 anos, de João
                 <div class="example">
                     <h5>💡 Exemplo Prático</h5>
                     <div class="code-block">
-# Função para calcular área de retângulo
+                    <pre><code># Função para calcular área de retângulo
 def calcular_area_retangulo(largura, altura):
     area = largura * altura
     print(f"Área do retângulo: {area}")
@@ -130,8 +130,8 @@ def calcular_area_retangulo(largura, altura):
 # Diferentes retângulos
 calcular_area_retangulo(5, 3)    # 15
 calcular_area_retangulo(10, 7)   # 70
-calcular_area_retangulo(4, 4)     # 16 (quadrado)
-                    </div>
+calcular_area_retangulo(4, 4)     # 16 (quadrado)</code></pre>
+                </div>
                 </div>
             </div>
         </div>

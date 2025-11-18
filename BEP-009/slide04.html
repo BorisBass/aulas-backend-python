@@ -25,7 +25,7 @@
 <p>Remove espaços em branco do início e fim da string</p>
 
 <div class="code-block">
-# Remover espaços
+                    <pre><code># Remover espaços
 texto = "  Python é incrível  "
 texto_limpo = texto.strip()
 print(f"'{texto_limpo}'")  # 'Python é incrível'
@@ -34,8 +34,8 @@ print(f"'{texto_limpo}'")  # 'Python é incrível'
 nome1 = "João"
 nome2 = "  João  "
 print(nome1 == nome2)        # False
-print(nome1 == nome2.strip()) # True
-</div>
+print(nome1 == nome2.strip()) # True</code></pre>
+                </div>
 
 <h3>🔧 Variações do strip()</h3>
 <ul>
@@ -45,25 +45,25 @@ print(nome1 == nome2.strip()) # True
 </ul>
 
 <div class="code-block">
-texto = "  Python  "
+                    <pre><code>texto = "  Python  "
 print(f"'{texto.strip()}'")   # 'Python'
 print(f"'{texto.lstrip()}'")  # 'Python  '
-print(f"'{texto.rstrip()}'")  # '  Python'
-</div>
+print(f"'{texto.rstrip()}'")  # '  Python'</code></pre>
+                </div>
 
 <h3>🎯 Aplicação Prática</h3>
 <div class="example">
 <h5>💡 Validação de Entrada</h5>
 <div class="code-block">
-# Limpar entrada do usuário
+                    <pre><code># Limpar entrada do usuário
 email = input("Digite seu email: ").strip()
 senha = input("Digite sua senha: ").strip()
 
 if email and senha:
     print("Dados válidos!")
 else:
-    print("Por favor, preencha todos os campos!")
-</div>
+    print("Por favor, preencha todos os campos!")</code></pre>
+                </div>
 </div>
 
 <div class="info">

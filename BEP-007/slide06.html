@@ -24,7 +24,7 @@
                 
                 <h3>🏗️ Formas de Criar Tuplas</h3>
                 <div class="code-block">
-# 1. Tupla vazia
+                    <pre><code># 1. Tupla vazia
 tupla_vazia = ()
 print(tupla_vazia)  # ()
 
@@ -43,12 +43,12 @@ print(numeros)  # (1, 2, 3, 4, 5)
 # 5. Usando tuple()
 lista = [1, 2, 3]
 tupla_da_lista = tuple(lista)
-print(tupla_da_lista)  # (1, 2, 3)
+print(tupla_da_lista)  # (1, 2, 3)</code></pre>
                 </div>
                 
                 <h3>🔍 Acesso aos Elementos</h3>
                 <div class="code-block">
-dados = ("João", 25, "Engenheiro", "Salvador")
+                    <pre><code>dados = ("João", 25, "Engenheiro", "Salvador")
 
 # Acesso por índice positivo
 nome = dados[0]        # "João"
@@ -61,12 +61,12 @@ ultimo = dados[-1]     # "Salvador"
 penultimo = dados[-2]  # "Engenheiro"
 
 print(f"Nome: {nome}, Idade: {idade}")
-print(f"Último elemento: {ultimo}")
+print(f"Último elemento: {ultimo}")</code></pre>
                 </div>
                 
                 <h3>✂️ Fatiamento (Slicing)</h3>
                 <div class="code-block">
-numeros = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+                    <pre><code>numeros = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 
 # Fatiamento básico
 primeiros = numeros[:3]    # (0, 1, 2)
@@ -80,12 +80,12 @@ invertida = numeros[::-1]  # (9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 
 print(f"Primeiros 3: {primeiros}")
 print(f"Pares: {pares}")
-print(f"Invertida: {invertida}")
+print(f"Invertida: {invertida}")</code></pre>
                 </div>
                 
                 <h3>📦 Desempacotamento</h3>
                 <div class="code-block">
-# Desempacotamento simples
+                    <pre><code># Desempacotamento simples
 coordenadas = (10, 20)
 x, y = coordenadas
 print(f"X: {x}, Y: {y}")  # X: 10, Y: 20
@@ -99,13 +99,13 @@ print(f"{nome} tem {idade} anos e é {profissao} em {cidade}")
 primeiro, *meio, ultimo = (1, 2, 3, 4, 5)
 print(f"Primeiro: {primeiro}")  # 1
 print(f"Meio: {meio}")          # [2, 3, 4]
-print(f"Último: {ultimo}")      # 5
+print(f"Último: {ultimo}")      # 5</code></pre>
                 </div>
                 
                 <div class="example">
                     <h5>💡 Exemplo: Sistema de Coordenadas</h5>
                     <div class="code-block">
-# Pontos em um plano cartesiano
+                    <pre><code># Pontos em um plano cartesiano
 ponto_a = (3, 4)
 ponto_b = (6, 8)
 
@@ -119,8 +119,8 @@ print(f"Distância entre pontos: {distancia:.2f}")
 
 # Criando tupla de resultado
 resultado = (distancia, "unidades")
-print(f"Resultado: {resultado}")
-                    </div>
+print(f"Resultado: {resultado}")</code></pre>
+                </div>
                 </div>
                 
                 <div class="warning">

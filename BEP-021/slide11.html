@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 11: Exercícios Práticos II</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        ol li { margin-bottom: 12px; }
+        .exercicio { background: #F0FFF4; border-left: 4px solid #38A169; padding: 16px; margin: 12px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos II</h2>
+                <p>Modelagem completa de sistemas</p>
+                
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 4: Sistema de Restaurante</h3>
+                        <ol>
+                            <li>Crie a classe <code>Ingrediente</code> com atributos <code>nome</code> e <code>quantidade</code>.</li>
+                            <li>Crie a classe <code>Prato</code> que possui vários Ingredientes (use <strong>composição</strong>).</li>
+                            <li>Crie a classe <code>Cliente</code> com atributos <code>nome</code> e <code>telefone</code>.</li>
+                            <li>Crie a classe <code>Pedido</code> que contém Pratos (use <strong>associação</strong>).</li>
+                            <li>Estabeleça <strong>associação</strong> entre Cliente e Pedido.</li>
+                            <li>Implemente métodos para calcular total do pedido e listar ingredientes de um prato.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 5: Sistema de Hotel</h3>
+                        <ol>
+                            <li>Crie a classe <code>Cama</code> com atributos <code>tipo</code> e <code>tamanho</code>.</li>
+                            <li>Crie a classe <code>Quarto</code> que possui uma Cama (use <strong>composição</strong>).</li>
+                            <li>Crie a classe <code>Hospede</code> com atributos <code>nome</code> e <code>documento</code>.</li>
+                            <li>Crie a classe <code>Reserva</code> que relaciona Hospede e Quarto (use <strong>associação</strong>).</li>
+                            <li>Um hospede pode ter várias reservas, e um quarto pode ter várias reservas (muitos para muitos).</li>
+                            <li>Implemente métodos para fazer reserva, cancelar reserva e listar reservas de um hospede.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 6: Sistema de Rede Social</h3>
+                        <ol>
+                            <li>Crie a classe <code>Post</code> com atributos <code>conteudo</code> e <code>data</code>.</li>
+                            <li>Crie a classe <code>Comentario</code> que é parte de um Post (use <strong>composição</strong>).</li>
+                            <li>Crie a classe <code>Usuario</code> com atributos <code>nome</code> e <code>email</code>.</li>
+                            <li>Estabeleça <strong>associações</strong>:
+                                <ul>
+                                    <li>Usuario pode criar vários Posts</li>
+                                    <li>Usuario pode seguir outros Usuarios (muitos para muitos)</li>
+                                    <li>Post pertence a um Usuario</li>
+                                </ul>
+                            </li>
+                            <li>Implemente métodos para criar post, adicionar comentário, seguir usuário e listar posts de um usuário.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Checklist para Resolver</h3>
+                    <ul>
+                        <li>✅ Identifique quais relações são composição e quais são associação</li>
+                        <li>✅ Use a pergunta-chave: "Pode existir sem?"</li>
+                        <li>✅ Implemente composição criando objetos dentro do construtor</li>
+                        <li>✅ Implemente associação usando listas ou referências</li>
+                        <li>✅ Crie métodos para gerenciar as relações</li>
+                        <li>✅ Teste criando objetos e estabelecendo relações</li>
+                        <li>✅ Verifique se as relações funcionam corretamente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-021 - Slide 04: Diferença - Associação vs Composição</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .associacao { background: #EBF8FF; border: 2px solid #3182CE; border-radius: 12px; padding: 18px; }
+        .composicao { background: #F0FFF4; border: 2px solid #38A169; border-radius: 12px; padding: 18px; }
+        .tabela { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .tabela th, .tabela td { border: 1px solid #E2E8F0; padding: 12px; text-align: left; }
+        .tabela th { background: #4B8BBE; color: white; }
+        .tabela tr:nth-child(even) { background: #F7FAFC; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-project-diagram"></i> BEP-021: Composição e Associação entre Objetos</h1>
+            <p>Criando relações entre objetos para modelar sistemas complexos</p>
+        </div>
+        
+        <div class="nav">
+            <!-- Navegação será inserida via JavaScript -->
+        </div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-balance-scale"></i> Diferença: Associação vs Composição</h2>
+                <p>Comparação detalhada e quando usar cada uma</p>
+                
+                <div class="comparacao">
+                    <div class="associacao">
+                        <h3><i class="fas fa-link"></i> Associação</h3>
+                        <ul>
+                            <li><strong>Relação:</strong> "Tem um" (flexível)</li>
+                            <li><strong>Independência:</strong> Objetos são independentes</li>
+                            <li><strong>Existência:</strong> Podem existir separadamente</li>
+                            <li><strong>Criação:</strong> Objetos criados separadamente</li>
+                            <li><strong>Destruição:</strong> Um pode ser destruído sem afetar o outro</li>
+                            <li><strong>Exemplo:</strong> Aluno ↔ Curso</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="composicao">
+                        <h3><i class="fas fa-puzzle-piece"></i> Composição</h3>
+                        <ul>
+                            <li><strong>Relação:</strong> "É parte de" (forte)</li>
+                            <li><strong>Dependência:</strong> Objeto parte depende do todo</li>
+                            <li><strong>Existência:</strong> Parte não existe sem o todo</li>
+                            <li><strong>Criação:</strong> Parte criada dentro do todo</li>
+                            <li><strong>Destruição:</strong> Se o todo é destruído, a parte também é</li>
+                            <li><strong>Exemplo:</strong> Motor → Carro</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-table"></i> Tabela Comparativa</h3>
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>Associação</th>
+                                <th>Composição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Força da relação</strong></td>
+                                <td>Fraca (flexível)</td>
+                                <td>Forte (permanente)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Independência</strong></td>
+                                <td>✅ Objetos independentes</td>
+                                <td>❌ Parte depende do todo</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Criação</strong></td>
+                                <td>Separada</td>
+                                <td>Conjunta (dentro do todo)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Destruição</strong></td>
+                                <td>Independente</td>
+                                <td>Conjunta (se todo é destruído)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compartilhamento</strong></td>
+                                <td>✅ Pode ser compartilhado</td>
+                                <td>❌ Não pode ser compartilhado</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pergunta-chave</strong></td>
+                                <td>"Pode existir sem?" → SIM</td>
+                                <td>"Pode existir sem?" → NÃO</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-question-circle"></i> Como Decidir?</h3>
+                    <p>Faça a <strong>pergunta-chave</strong>:</p>
+                    <div style="background: #FFF5E1; border-left: 4px solid #D69E2E; padding: 16px; margin: 12px 0; border-radius: 4px;">
+                        <p><strong>"O objeto parte pode existir sem o objeto todo?"</strong></p>
+                        <ul style="margin-top: 12px;">
+                            <li><strong>SIM</strong> → Use <strong>Associação</strong></li>
+                            <li><strong>NÃO</strong> → Use <strong>Composição</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4>Exemplos de Decisão:</h4>
+                        <ul>
+                            <li><strong>Aluno e Curso:</strong> Aluno pode existir sem curso? SIM → <strong>Associação</strong></li>
+                            <li><strong>Carro e Motor:</strong> Motor pode existir sem carro? NÃO → <strong>Composição</strong></li>
+                            <li><strong>Professor e Disciplina:</strong> Professor pode existir sem disciplina? SIM → <strong>Associação</strong></li>
+                            <li><strong>Livro e Página:</strong> Página pode existir sem livro? NÃO → <strong>Composição</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Comparação de Código</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4>Associação (Aluno ↔ Curso)</h4>
+<pre><code class="language-python"># Objetos criados separadamente
+aluno = Aluno("João")
+curso = Curso("Python")
+
+# Associação criada depois
+aluno.curso = curso
+
+# Podem existir separadamente
+aluno.curso = None  # OK!
+# aluno e curso ainda existem</code></pre>
+                        </div>
+                        <div>
+                            <h4>Composição (Carro → Motor)</h4>
+<pre><code class="language-python"># Motor criado DENTRO do Carro
+carro = Carro("Toyota", 150)
+# carro.motor já existe!
+
+# Motor não pode existir sozinho
+# Se carro for destruído,
+# motor também é destruído</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-021: Composição e Associação entre Objetos</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
