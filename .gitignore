@@ -64,6 +64,11 @@ temp_pdfs/
 *.insyncdl
 .~*
 
+# Arquivos duplicados (cópias acidentais)
+* (2).*
+* (2).html
+* (2).png
+
 # Notebooks Jupyter (pode remover se não quiser)
 # *.ipynb
 
