@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 02: Try-Except Básico</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-code"></i> Try-Except Básico</h2>
+                <p>Sintaxe e uso básico do try-except</p>
+                
+                <h3>📝 Sintaxe Básica</h3>
+                <div class="code-block">
+                    <pre><code>try:
+    # Código que pode gerar exceção
+    resultado = 10 / 0
+except:
+    # Código executado se exceção ocorrer
+    print("Erro ocorreu!")</code></pre>
+                </div>
+
+                <h3>🔍 Capturando Exceções Específicas</h3>
+                <div class="code-block">
+                    <pre><code>try:
+    numero = int(input("Digite um número: "))
+    resultado = 10 / numero
+except ValueError:
+    print("❌ Erro: Valor inválido! Digite um número.")
+except ZeroDivisionError:
+    print("❌ Erro: Não é possível dividir por zero!")
+except Exception as e:
+    print(f"❌ Erro inesperado: {e}")</code></pre>
+                </div>
+
+                <h3>📊 Exceções Comuns em Python</h3>
+                <table class="code-table">
+                    <tr><th>Exceção</th><th>Quando Ocorre</th><th>Exemplo</th></tr>
+                    <tr><td><code>ValueError</code></td><td>Valor inválido</td><td><code>int("abc")</code></td></tr>
+                    <tr><td><code>ZeroDivisionError</code></td><td>Divisão por zero</td><td><code>10 / 0</code></td></tr>
+                    <tr><td><code>IndexError</code></td><td>Índice inválido</td><td><code>lista[10]</code> (lista tem 3 itens)</td></tr>
+                    <tr><td><code>KeyError</code></td><td>Chave não existe</td><td><code>dict["chave_inexistente"]</code></td></tr>
+                    <tr><td><code>TypeError</code></td><td>Tipo incorreto</td><td><code>"texto" + 5</code></td></tr>
+                    <tr><td><code>FileNotFoundError</code></td><td>Arquivo não encontrado</td><td><code>open("inexistente.txt")</code></td></tr>
+                    <tr><td><code>AttributeError</code></td><td>Atributo não existe</td><td><code>objeto.metodo_inexistente()</code></td></tr>
+                </table>
+
+                <div class="example">
+                    <h5>💡 Exemplo Prático: Calculadora Segura</h5>
+                    <div class="code-block">
+                        <pre><code>def calcular(operacao, a, b):
+    try:
+        if operacao == '+':
+            return a + b
+        elif operacao == '-':
+            return a - b
+        elif operacao == '*':
+            return a * b
+        elif operacao == '/':
+            return a / b
+        else:
+            raise ValueError("Operação inválida!")
+    except ZeroDivisionError:
+        print("❌ Erro: Divisão por zero não permitida!")
+        return None
+    except TypeError:
+        print("❌ Erro: Valores devem ser numéricos!")
+        return None
+    except Exception as e:
+        print(f"❌ Erro: {e}")
+        return None
+
+# Testes
+print(calcular('+', 10, 5))    # 15
+print(calcular('/', 10, 0))    # Erro tratado
+print(calcular('*', "a", 5))   # Erro tratado</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Sempre capture exceções específicas primeiro, depois use <code>Exception</code> como 
+                    "pega-tudo" para erros inesperados!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

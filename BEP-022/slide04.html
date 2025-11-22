@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 04: Exceções Customizadas</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-tools"></i> Exceções Customizadas</h2>
+                <p>Por que criar exceções próprias?</p>
+                
+                <div class="two-col" style="margin-top: 20px;">
+                    <div class="card">
+                        <h3><i class="fas fa-question-circle"></i> Por que Criar?</h3>
+                        <p>Às vezes, as exceções padrão do Python não são suficientes para expressar 
+                        erros específicos do nosso domínio.</p>
+                        <div class="exemplo" style="margin-top: 12px;">
+                            <strong>Vantagens:</strong>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Mensagens mais claras</li>
+                                <li>✅ Erros específicos do domínio</li>
+                                <li>✅ Melhor organização</li>
+                                <li>✅ Facilita tratamento</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-lightbulb"></i> Quando Usar?</h3>
+                        <p>Use exceções customizadas quando:</p>
+                        <ul>
+                            <li>Erros específicos do seu sistema</li>
+                            <li>Precisa de informações adicionais</li>
+                            <li>Quer categorizar erros</li>
+                            <li>Melhorar legibilidade do código</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>📝 Exemplo: Problema com Exceções Padrão</h3>
+                <div class="code-block">
+                    <pre><code>class ContaBancaria:
+    def sacar(self, valor):
+        if valor > self.saldo:
+            raise ValueError("Saldo insuficiente!")
+        # Mas ValueError também pode ser usado para outros erros...
+        # Como diferenciar?</code></pre>
+                </div>
+
+                <h3>✅ Solução: Exceção Customizada</h3>
+                <div class="code-block">
+                    <pre><code># Exceção customizada
+class SaldoInsuficienteError(Exception):
+    """Exceção lançada quando saldo é insuficiente"""
+    pass
+
+class ContaBancaria:
+    def sacar(self, valor):
+        if valor > self.saldo:
+            raise SaldoInsuficienteError(
+                f"Saldo insuficiente! Disponível: R$ {self.saldo:.2f}"
+            )
+        self.saldo -= valor
+
+# Agora é mais claro!
+try:
+    conta.sacar(1000)
+except SaldoInsuficienteError as e:
+    print(f"❌ Erro bancário: {e}")
+except ValueError as e:
+    print(f"❌ Erro de valor: {e}")</code></pre>
+                </div>
+
+                <h3>🎯 Exemplos de Exceções Customizadas</h3>
+                <div class="two-col" style="margin-top: 12px;">
+                    <div class="exemplo">
+                        <h4>💳 Sistema Bancário</h4>
+                        <ul>
+                            <li><code>SaldoInsuficienteError</code></li>
+                            <li><code>ContaNaoEncontradaError</code></li>
+                            <li><code>LimiteExcedidoError</code></li>
+                        </ul>
+                    </div>
+                    <div class="exemplo">
+                        <h4>🛒 E-commerce</h4>
+                        <ul>
+                            <li><code>ProdutoIndisponivelError</code></li>
+                            <li><code>EstoqueInsuficienteError</code></li>
+                            <li><code>DescontoInvalidoError</code></li>
+                        </ul>
+                    </div>
+                    <div class="exemplo">
+                        <h4>👤 Sistema de Usuários</h4>
+                        <ul>
+                            <li><code>UsuarioNaoEncontradoError</code></li>
+                            <li><code>SenhaInvalidaError</code></li>
+                            <li><code>EmailJaCadastradoError</code></li>
+                        </ul>
+                    </div>
+                    <div class="exemplo">
+                        <h4>📚 Sistema Educacional</h4>
+                        <ul>
+                            <li><code>AlunoNaoMatriculadoError</code></li>
+                            <li><code>NotaInvalidaError</code></li>
+                            <li><code>TurmaLotadaError</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-check-circle"></i> Convenção de Nomenclatura</h4>
+                    <p>Sempre termine o nome da exceção customizada com <strong>"Error"</strong> ou 
+                    <strong>"Exception"</strong> para seguir as convenções do Python e facilitar 
+                    a identificação.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

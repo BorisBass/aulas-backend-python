@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 10: Exercícios Práticos I</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        .exercicio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 16px; margin: 12px 0; border-radius: 4px; }
+        ol li { margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos I</h2>
+                <p>Tratamento básico de exceções</p>
+                
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 1: Calculadora Segura</h3>
+                        <ol>
+                            <li>Crie a classe <code>Calculadora</code> com métodos <code>somar()</code>, 
+                            <code>subtrair()</code>, <code>multiplicar()</code> e <code>dividir()</code>.</li>
+                            <li>Implemente tratamento de exceções para:
+                                <ul>
+                                    <li>Divisão por zero</li>
+                                    <li>Valores não numéricos</li>
+                                    <li>Operações inválidas</li>
+                                </ul>
+                            </li>
+                            <li>Retorne mensagens claras para o usuário.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 2: Validador de Dados</h3>
+                        <ol>
+                            <li>Crie a classe <code>Validador</code> com métodos:
+                                <ul>
+                                    <li><code>validar_idade()</code> - deve ser entre 0 e 150</li>
+                                    <li><code>validar_email()</code> - deve conter @ e domínio</li>
+                                    <li><code>validar_telefone()</code> - deve ter pelo menos 10 dígitos</li>
+                                </ul>
+                            </li>
+                            <li>Use try-except para tratar valores inválidos.</li>
+                            <li>Retorne True/False ou lance exceções apropriadas.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 3: Gerenciador de Arquivos</h3>
+                        <ol>
+                            <li>Crie a classe <code>GerenciadorArquivo</code> com métodos:
+                                <ul>
+                                    <li><code>ler_arquivo()</code> - lê conteúdo do arquivo</li>
+                                    <li><code>escrever_arquivo()</code> - escreve no arquivo</li>
+                                    <li><code>copiar_arquivo()</code> - copia arquivo</li>
+                                </ul>
+                            </li>
+                            <li>Trate exceções:
+                                <ul>
+                                    <li>FileNotFoundError</li>
+                                    <li>PermissionError</li>
+                                    <li>IOError</li>
+                                </ul>
+                            </li>
+                            <li>Use <code>finally</code> para garantir que arquivos sejam fechados.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas</h3>
+                    <ul>
+                        <li>Use exceções específicas (ValueError, ZeroDivisionError, etc.)</li>
+                        <li>Ordene os except do mais específico para o mais genérico</li>
+                        <li>Retorne valores apropriados (True/False, None, ou dados)</li>
+                        <li>Use finally para limpeza de recursos</li>
+                        <li>Mensagens de erro devem ser claras e amigáveis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

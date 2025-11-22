@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-020: Herança e Polimorfismo</title>
+    <title>BEP-022: Tratamento de Exceções em POO</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../index-bep.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-sitemap"></i> BEP-020: Herança e Polimorfismo</h1>
-            <p>Reutilização e extensão de código através de herança e polimorfismo</p>
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em Programação Orientada a Objetos</h1>
+            <p>Melhorando a segurança e robustez do código</p>
         </div>
 
         <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
@@ -22,11 +22,11 @@
             <div class="objectives-section">
                 <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
                 <ul>
-                    <li>Compreender o conceito de herança e suas vantagens</li>
-                    <li>Aprender a criar classes pai (superclasses) e subclasses (classes filhas)</li>
-                    <li>Dominar a sobrescrita de métodos (override)</li>
-                    <li>Entender polimorfismo e como métodos se comportam diferentemente conforme o objeto</li>
-                    <li>Praticar reutilização e extensão de código através de exercícios práticos</li>
+                    <li>Compreender o conceito de exceções e tratamento de erros</li>
+                    <li>Aprender a criar exceções customizadas em Python</li>
+                    <li>Dominar o uso de try-except dentro de classes</li>
+                    <li>Entender como melhorar a robustez do código com tratamento de exceções</li>
+                    <li>Praticar tratamento de exceções com exercícios práticos</li>
                 </ul>
             </div>
             
@@ -35,73 +35,73 @@
                 <div class="slides-grid">
                     <div class="slide-card" onclick="window.open('slide01.html','_blank')">
                         <div class="slide-number">01</div>
-                        <div class="slide-title">O que é Herança?</div>
-                        <div class="slide-description">Conceito fundamental e analogia do mundo real</div>
+                        <div class="slide-title">Introdução: O que são Exceções?</div>
+                        <div class="slide-description">Conceito e importância do tratamento de exceções</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide02.html','_blank')">
                         <div class="slide-number">02</div>
-                        <div class="slide-title">Vantagens da Herança</div>
-                        <div class="slide-description">Reutilização de código e organização</div>
+                        <div class="slide-title">Try-Except Básico</div>
+                        <div class="slide-description">Sintaxe e uso básico do try-except</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide03.html','_blank')">
                         <div class="slide-number">03</div>
-                        <div class="slide-title">Sintaxe de Herança</div>
-                        <div class="slide-description">Como criar classes pai e subclasses em Python</div>
+                        <div class="slide-title">Try-Except Dentro de Classes</div>
+                        <div class="slide-description">Tratamento de exceções em métodos de classes</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide04.html','_blank')">
                         <div class="slide-number">04</div>
-                        <div class="slide-title">Exemplo: Animal e Subclasses</div>
-                        <div class="slide-description">Primeiro exemplo prático de herança</div>
+                        <div class="slide-title">Exceções Customizadas</div>
+                        <div class="slide-description">Por que criar exceções próprias?</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide05.html','_blank')">
                         <div class="slide-number">05</div>
-                        <div class="slide-title">Acessando Métodos da Classe Pai</div>
-                        <div class="slide-description">Usando super() para chamar métodos herdados</div>
+                        <div class="slide-title">Criando Exceções Customizadas</div>
+                        <div class="slide-description">Como criar suas próprias exceções</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide06.html','_blank')">
                         <div class="slide-number">06</div>
-                        <div class="slide-title">Sobrescrita de Métodos (Override)</div>
-                        <div class="slide-description">Personalizando comportamentos nas subclasses</div>
+                        <div class="slide-title">Hierarquia de Exceções</div>
+                        <div class="slide-description">Múltiplos except e ordem de captura</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide07.html','_blank')">
                         <div class="slide-number">07</div>
-                        <div class="slide-title">O que é Polimorfismo?</div>
-                        <div class="slide-description">Métodos com comportamentos diferentes</div>
+                        <div class="slide-title">Finally e Else</div>
+                        <div class="slide-description">Blocos finally e else no tratamento de exceções</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide08.html','_blank')">
                         <div class="slide-number">08</div>
-                        <div class="slide-title">Exemplo: Polimorfismo com Formas</div>
-                        <div class="slide-description">Aplicação prática de polimorfismo</div>
+                        <div class="slide-title">Exemplo Completo: Sistema Bancário</div>
+                        <div class="slide-description">Aplicando tratamento de exceções em um sistema real</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide09.html','_blank')">
                         <div class="slide-number">09</div>
-                        <div class="slide-title">Exemplo: Veiculos e Subclasses</div>
-                        <div class="slide-description">Sistema completo com herança e polimorfismo</div>
+                        <div class="slide-title">Boas Práticas</div>
+                        <div class="slide-description">Dicas e melhores práticas para tratamento de exceções</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide10.html','_blank')">
                         <div class="slide-number">10</div>
                         <div class="slide-title">Exercícios Práticos I</div>
-                        <div class="slide-description">Criando hierarquias de classes</div>
+                        <div class="slide-description">Tratamento básico de exceções</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide11.html','_blank')">
                         <div class="slide-number">11</div>
                         <div class="slide-title">Exercícios Práticos II</div>
-                        <div class="slide-description">Aplicando herança e polimorfismo</div>
+                        <div class="slide-description">Exceções customizadas e sistemas completos</div>
                     </div>
                     
                     <div class="slide-card" onclick="window.open('slide12.html','_blank')">
                         <div class="slide-number">12</div>
-                        <div class="slide-title">Checklist de Revisão</div>
+                        <div class="slide-title">Resumo e Checklist</div>
                         <div class="slide-description">Confirme seu domínio dos conceitos</div>
                     </div>
                 </div>
@@ -109,23 +109,12 @@
             
             <div class="section">
                 <h2><i class="fas fa-info-circle"></i> Sobre esta Aula</h2>
-                <p>Esta aula aprofunda os conceitos de Programação Orientada a Objetos, introduzindo herança 
-                e polimorfismo como mecanismos poderosos para reutilização e extensão de código. Os alunos 
-                aprenderão a criar hierarquias de classes, reutilizar código através de herança, personalizar 
-                comportamentos com sobrescrita de métodos e aplicar polimorfismo para criar código mais flexível. 
-                A metodologia combina explicação teórica detalhada com exemplos práticos progressivos e exercícios 
-                que consolidam o aprendizado.</p>
-            </div>
-            
-            <div class="section">
-                <h2><i class="fas fa-download"></i> Recursos Adicionais</h2>
-                <div class="files-grid">
-                    <div class="file-card" onclick="window.open('BEP-020-Pratica.ipynb','_blank')">
-                        <i class="fas fa-file-code"></i>
-                        <h3>Notebook Colab</h3>
-                        <p>BEP-020-Pratica.ipynb</p>
-                    </div>
-                </div>
+                <p>Esta aula aborda o tratamento de exceções em Programação Orientada a Objetos, focando em como 
+                tornar o código mais seguro e robusto através do tratamento adequado de erros. Os alunos aprenderão 
+                a criar exceções customizadas, usar try-except dentro de classes, e aplicar boas práticas para 
+                tratamento de erros. A metodologia combina explicação teórica detalhada com exemplos práticos 
+                progressivos e exercícios que consolidam o aprendizado, permitindo criar sistemas mais confiáveis 
+                e profissionais.</p>
             </div>
         </div>
         
@@ -137,10 +126,5 @@
     </div>
 </body>
 </html>
-
-
-
-
-
 
 

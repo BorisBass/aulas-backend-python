@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 01: Introdução - O que são Exceções?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> Introdução: O que são Exceções?</h2>
+                <p>Conceito e importância do tratamento de exceções</p>
+                
+                <div class="two-col" style="margin-top: 20px;">
+                    <div class="card">
+                        <h3><i class="fas fa-info-circle"></i> Definição</h3>
+                        <p><strong>Exceção</strong> é um evento que ocorre durante a execução de um programa e 
+                        interrompe o fluxo normal de instruções.</p>
+                        <div class="exemplo" style="margin-top: 12px;">
+                            <strong>Exemplos comuns:</strong>
+                            <ul style="margin-top: 8px;">
+                                <li>Dividir por zero</li>
+                                <li>Acessar índice inválido em lista</li>
+                                <li>Abrir arquivo que não existe</li>
+                                <li>Converter string para número inválido</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-exclamation-triangle"></i> O Problema</h3>
+                        <p>Sem tratamento, exceções <strong>interrompem o programa</strong> e mostram mensagens 
+                        confusas para o usuário.</p>
+                        <div class="problema" style="margin-top: 12px;">
+                            <strong>Exemplo sem tratamento:</strong>
+                            <pre style="background: #1A202C; color: #E2E8F0; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 12px;">numero = int(input("Digite um número: "))
+# Se digitar "abc" → ValueError!
+# Programa para e mostra erro técnico</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> A Solução: Tratamento de Exceções</h3>
+                    <p>Com tratamento adequado, podemos:</p>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="exemplo">
+                            <h4>✅ Capturar erros</h4>
+                            <p>Interceptar exceções antes que interrompam o programa</p>
+                        </div>
+                        <div class="exemplo">
+                            <h4>✅ Tratar adequadamente</h4>
+                            <p>Executar código alternativo quando erro ocorre</p>
+                        </div>
+                        <div class="exemplo">
+                            <h4>✅ Informar o usuário</h4>
+                            <p>Mostrar mensagens claras e amigáveis</p>
+                        </div>
+                        <div class="exemplo">
+                            <h4>✅ Manter o programa rodando</h4>
+                            <p>Continuar execução mesmo após erros</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Sem Tratamento</h3>
+                    <div class="code-block">
+                        <pre><code># Programa sem tratamento de exceções
+def dividir(a, b):
+    return a / b
+
+# Se b for 0, programa para com erro!
+resultado = dividir(10, 0)
+print(resultado)  # Nunca será executado</code></pre>
+                    </div>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>Saída:</strong> <code>ZeroDivisionError: division by zero</code>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Com Tratamento</h3>
+                    <div class="code-block">
+                        <pre><code># Programa com tratamento de exceções
+def dividir(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        print("❌ Erro: Não é possível dividir por zero!")
+        return None
+
+# Agora o programa continua mesmo com erro!
+resultado = dividir(10, 0)
+if resultado:
+    print(f"Resultado: {resultado}")</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Saída:</strong> <code>❌ Erro: Não é possível dividir por zero!</code>
+                        <p>Programa continua executando normalmente!</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Benefícios do Tratamento</h3>
+                    <ul>
+                        <li>✅ <strong>Robustez:</strong> Programa não quebra facilmente</li>
+                        <li>✅ <strong>Experiência do usuário:</strong> Mensagens claras e amigáveis</li>
+                        <li>✅ <strong>Debugging:</strong> Mais fácil identificar e corrigir problemas</li>
+                        <li>✅ <strong>Profissionalismo:</strong> Código mais maduro e confiável</li>
+                        <li>✅ <strong>Segurança:</strong> Previne falhas que podem ser exploradas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

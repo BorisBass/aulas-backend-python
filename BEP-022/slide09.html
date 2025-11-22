@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 09: Boas Práticas</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .boa-pratica { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .mau-exemplo { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-check-circle"></i> Boas Práticas</h2>
+                <p>Dicas e melhores práticas para tratamento de exceções</p>
+                
+                <h3>✅ 1. Seja Específico</h3>
+                <div class="two-col" style="margin-top: 12px;">
+                    <div class="mau-exemplo">
+                        <h4>❌ Evite</h4>
+                        <div class="code-block" style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 6px; font-size: 12px;">
+                            <pre><code>try:
+    # código
+except:  # Muito genérico!
+    print("Erro!")</code></pre>
+                        </div>
+                    </div>
+                    <div class="boa-pratica">
+                        <h4>✅ Prefira</h4>
+                        <div class="code-block" style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 6px; font-size: 12px;">
+                            <pre><code>try:
+    # código
+except ValueError:
+    print("Erro de valor!")
+except ZeroDivisionError:
+    print("Divisão por zero!")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>✅ 2. Ordene do Específico para o Genérico</h3>
+                <div class="boa-pratica">
+                    <div class="code-block">
+                        <pre><code>try:
+    # código
+except SaldoInsuficienteError:  # Mais específica
+    pass
+except ErroBancario:             # Mais genérica
+    pass
+except Exception:                # Mais genérica ainda
+    pass</code></pre>
+                    </div>
+                </div>
+
+                <h3>✅ 3. Use Exceções Customizadas</h3>
+                <div class="boa-pratica">
+                    <p>Crie exceções específicas para seu domínio:</p>
+                    <div class="code-block">
+                        <pre><code>class SaldoInsuficienteError(Exception):
+    """Erro quando saldo é insuficiente"""
+    pass
+
+# Mais claro que ValueError genérico!</code></pre>
+                    </div>
+                </div>
+
+                <h3>✅ 4. Não Ignore Exceções Silenciosamente</h3>
+                <div class="two-col" style="margin-top: 12px;">
+                    <div class="mau-exemplo">
+                        <h4>❌ Evite</h4>
+                        <div class="code-block" style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 6px; font-size: 12px;">
+                            <pre><code>try:
+    arquivo.read()
+except:
+    pass  # Ignora erro silenciosamente!</code></pre>
+                        </div>
+                    </div>
+                    <div class="boa-pratica">
+                        <h4>✅ Prefira</h4>
+                        <div class="code-block" style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 6px; font-size: 12px;">
+                            <pre><code>try:
+    arquivo.read()
+except FileNotFoundError as e:
+    print(f"Erro: {e}")
+    # Ou log, ou relance, mas não ignore!</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>✅ 5. Use Finally para Limpeza</h3>
+                <div class="boa-pratica">
+                    <div class="code-block">
+                        <pre><code>try:
+    arquivo = open("dados.txt", "r")
+    # processar...
+except FileNotFoundError:
+    print("Arquivo não encontrado!")
+finally:
+    if 'arquivo' in locals():
+        arquivo.close()  # Sempre fecha!</code></pre>
+                    </div>
+                </div>
+
+                <h3>✅ 6. Adicione Informações Úteis</h3>
+                <div class="boa-pratica">
+                    <div class="code-block">
+                        <pre><code>class SaldoInsuficienteError(Exception):
+    def __init__(self, saldo, valor):
+        self.saldo = saldo
+        self.valor = valor
+        super().__init__(
+            f"Saldo insuficiente! "
+            f"Disponível: R$ {saldo:.2f}, "
+            f"Solicitado: R$ {valor:.2f}"
+        )</code></pre>
+                    </div>
+                </div>
+
+                <h3>✅ 7. Documente Exceções</h3>
+                <div class="boa-pratica">
+                    <div class="code-block">
+                        <pre><code>def sacar(self, valor):
+    """
+    Saca um valor da conta.
+    
+    Raises:
+        ValorInvalidoError: Se valor for <= 0
+        SaldoInsuficienteError: Se saldo for insuficiente
+    """
+    if valor <= 0:
+        raise ValorInvalidoError(valor)
+    # ...</code></pre>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Resumo</h4>
+                    <ul>
+                        <li>✅ Seja específico nas exceções</li>
+                        <li>✅ Ordene do específico para o genérico</li>
+                        <li>✅ Use exceções customizadas</li>
+                        <li>✅ Não ignore erros silenciosamente</li>
+                        <li>✅ Use finally para limpeza</li>
+                        <li>✅ Adicione informações úteis</li>
+                        <li>✅ Documente as exceções</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

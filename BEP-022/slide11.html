@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 11: Exercícios Práticos II</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        .exercicio { background: #F0FFF4; border-left: 4px solid #38A169; padding: 16px; margin: 12px 0; border-radius: 4px; }
+        ol li { margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos II</h2>
+                <p>Exceções customizadas e sistemas completos</p>
+                
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 4: Sistema Bancário com Exceções Customizadas</h3>
+                        <ol>
+                            <li>Crie exceções customizadas:
+                                <ul>
+                                    <li><code>SaldoInsuficienteError</code></li>
+                                    <li><code>ValorInvalidoError</code></li>
+                                    <li><code>ContaNaoEncontradaError</code></li>
+                                </ul>
+                            </li>
+                            <li>Crie a classe <code>ContaBancaria</code> com métodos que lançam essas exceções.</li>
+                            <li>Implemente tratamento adequado em cada método.</li>
+                            <li>Crie uma hierarquia de exceções (exceção base + específicas).</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 5: Sistema de E-commerce</h3>
+                        <ol>
+                            <li>Crie exceções customizadas:
+                                <ul>
+                                    <li><code>ProdutoIndisponivelError</code></li>
+                                    <li><code>EstoqueInsuficienteError</code></li>
+                                    <li><code>DescontoInvalidoError</code></li>
+                                </ul>
+                            </li>
+                            <li>Crie a classe <code>Produto</code> e <code>Carrinho</code>.</li>
+                            <li>Implemente métodos que validam e lançam exceções apropriadas.</li>
+                            <li>Trate exceções ao adicionar produtos ao carrinho e calcular total.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="exercicio">
+                        <h3>Exercício 6: Sistema de Usuários</h3>
+                        <ol>
+                            <li>Crie exceções customizadas:
+                                <ul>
+                                    <li><code>EmailInvalidoError</code></li>
+                                    <li><code>SenhaFracaError</code></li>
+                                    <li><code>UsuarioNaoEncontradoError</code></li>
+                                    <li><code>EmailJaCadastradoError</code></li>
+                                </ul>
+                            </li>
+                            <li>Crie a classe <code>Usuario</code> e <code>SistemaUsuarios</code>.</li>
+                            <li>Implemente validações que lançam exceções apropriadas.</li>
+                            <li>Use try-except ao cadastrar, buscar e autenticar usuários.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-circle"></i> Checklist para Resolver</h3>
+                    <ul>
+                        <li>✅ Crie exceções customizadas com nomes descritivos</li>
+                        <li>✅ Adicione informações úteis nas exceções</li>
+                        <li>✅ Crie hierarquia de exceções quando apropriado</li>
+                        <li>✅ Use try-except em métodos que podem falhar</li>
+                        <li>✅ Ordene except do específico para o genérico</li>
+                        <li>✅ Use finally para limpeza quando necessário</li>
+                        <li>✅ Teste todos os cenários de erro</li>
+                        <li>✅ Mensagens de erro devem ser claras</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

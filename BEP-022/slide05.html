@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 05: Criando Exceções Customizadas</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-code"></i> Criando Exceções Customizadas</h2>
+                <p>Como criar suas próprias exceções</p>
+                
+                <h3>📝 Forma Simples</h3>
+                <div class="code-block">
+                    <pre><code># Herdar de Exception
+class MinhaExcecao(Exception):
+    pass
+
+# Usar
+raise MinhaExcecao("Mensagem de erro")</code></pre>
+                </div>
+
+                <h3>💡 Forma Completa (Recomendada)</h3>
+                <div class="code-block">
+                    <pre><code>class SaldoInsuficienteError(Exception):
+    """Exceção lançada quando saldo é insuficiente"""
+    
+    def __init__(self, saldo_atual, valor_solicitado):
+        self.saldo_atual = saldo_atual
+        self.valor_solicitado = valor_solicitado
+        self.mensagem = (
+            f"Saldo insuficiente! "
+            f"Disponível: R$ {saldo_atual:.2f}, "
+            f"Solicitado: R$ {valor_solicitado:.2f}"
+        )
+        super().__init__(self.mensagem)
+
+# Uso
+try:
+    raise SaldoInsuficienteError(100, 500)
+except SaldoInsuficienteError as e:
+    print(f"❌ {e}")
+    print(f"   Saldo atual: R$ {e.saldo_atual:.2f}")
+    print(f"   Valor solicitado: R$ {e.valor_solicitado:.2f}")</code></pre>
+                </div>
+
+                <h3>🏗️ Exemplo Completo: Sistema Bancário</h3>
+                <div class="code-block">
+                    <pre><code># Exceções customizadas
+class SaldoInsuficienteError(Exception):
+    """Erro quando saldo é insuficiente"""
+    def __init__(self, saldo, valor):
+        self.saldo = saldo
+        self.valor = valor
+        super().__init__(f"Saldo insuficiente! Disponível: R$ {saldo:.2f}")
+
+class ValorInvalidoError(Exception):
+    """Erro quando valor é inválido"""
+    def __init__(self, valor):
+        self.valor = valor
+        super().__init__(f"Valor inválido: {valor}")
+
+class ContaNaoEncontradaError(Exception):
+    """Erro quando conta não é encontrada"""
+    pass
+
+# Classe usando as exceções
+class ContaBancaria:
+    def __init__(self, numero, saldo_inicial=0):
+        self.numero = numero
+        self.saldo = saldo_inicial
+    
+    def sacar(self, valor):
+        if valor <= 0:
+            raise ValorInvalidoError(valor)
+        if valor > self.saldo:
+            raise SaldoInsuficienteError(self.saldo, valor)
+        self.saldo -= valor
+        return True
+    
+    def depositar(self, valor):
+        if valor <= 0:
+            raise ValorInvalidoError(valor)
+        self.saldo += valor
+        return True
+
+# Uso
+conta = ContaBancaria("001", 1000)
+
+try:
+    conta.sacar(1500)
+except SaldoInsuficienteError as e:
+    print(f"❌ {e}")
+except ValorInvalidoError as e:
+    print(f"❌ {e}")
+except Exception as e:
+    print(f"❌ Erro inesperado: {e}")</code></pre>
+                </div>
+
+                <h3>🎯 Exemplo: Sistema de Validação</h3>
+                <div class="code-block">
+                    <pre><code>class EmailInvalidoError(Exception):
+    """Erro quando email é inválido"""
+    def __init__(self, email):
+        self.email = email
+        super().__init__(f"Email inválido: {email}")
+
+class SenhaFracaError(Exception):
+    """Erro quando senha é muito fraca"""
+    def __init__(self, motivo):
+        self.motivo = motivo
+        super().__init__(f"Senha fraca: {motivo}")
+
+class Usuario:
+    def __init__(self, email, senha):
+        self.validar_email(email)
+        self.validar_senha(senha)
+        self.email = email
+        self.senha = senha
+    
+    def validar_email(self, email):
+        if '@' not in email:
+            raise EmailInvalidoError(email)
+        if '.' not in email.split('@')[1]:
+            raise EmailInvalidoError(email)
+    
+    def validar_senha(self, senha):
+        if len(senha) < 8:
+            raise SenhaFracaError("Senha deve ter pelo menos 8 caracteres")
+        if not any(c.isdigit() for c in senha):
+            raise SenhaFracaError("Senha deve conter pelo menos um número")
+
+# Uso
+try:
+    usuario = Usuario("ana@email.com", "senha123")
+except EmailInvalidoError as e:
+    print(f"❌ {e}")
+except SenhaFracaError as e:
+    print(f"❌ {e}")</code></pre>
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Adicione informações úteis nos atributos da exceção para facilitar o tratamento 
+                    e debugging. Isso torna as exceções mais informativas e úteis!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

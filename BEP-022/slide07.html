@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 07: Finally e Else</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-cogs"></i> Finally e Else</h2>
+                <p>Blocos finally e else no tratamento de exceções</p>
+                
+                <h3>🔧 Bloco Finally</h3>
+                <p>O bloco <code>finally</code> é <strong>sempre executado</strong>, independente de 
+                exceção ocorrer ou não. Útil para limpeza de recursos.</p>
+                <div class="code-block">
+                    <pre><code>try:
+    arquivo = open("dados.txt", "r")
+    conteudo = arquivo.read()
+    # Processar conteúdo...
+except FileNotFoundError:
+    print("❌ Arquivo não encontrado!")
+finally:
+    # SEMPRE executa, mesmo se houver erro
+    arquivo.close()  # Garante que arquivo será fechado
+    print("✅ Arquivo fechado")
+
+# Exemplo com classe
+class GerenciadorArquivo:
+    def __init__(self, nome_arquivo):
+        self.nome_arquivo = nome_arquivo
+        self.arquivo = None
+    
+    def ler(self):
+        try:
+            self.arquivo = open(self.nome_arquivo, "r")
+            return self.arquivo.read()
+        except FileNotFoundError:
+            print(f"❌ Arquivo {self.nome_arquivo} não encontrado!")
+            return None
+        finally:
+            if self.arquivo:
+                self.arquivo.close()
+                print("✅ Arquivo fechado")</code></pre>
+                </div>
+
+                <h3>✅ Bloco Else</h3>
+                <p>O bloco <code>else</code> é executado <strong>apenas se nenhuma exceção ocorrer</strong>.</p>
+                <div class="code-block">
+                    <pre><code>try:
+    numero = int(input("Digite um número: "))
+    resultado = 10 / numero
+except ValueError:
+    print("❌ Valor inválido!")
+except ZeroDivisionError:
+    print("❌ Divisão por zero!")
+else:
+    # Executa APENAS se não houver exceção
+    print(f"✅ Resultado: {resultado}")
+
+# Exemplo prático
+def processar_dados(dados):
+    try:
+        resultado = dados["valor"] / dados["divisor"]
+    except KeyError:
+        print("❌ Chave não encontrada!")
+        return None
+    except ZeroDivisionError:
+        print("❌ Divisão por zero!")
+        return None
+    else:
+        # Só executa se tudo der certo
+        print(f"✅ Processamento concluído: {resultado}")
+        return resultado</code></pre>
+                </div>
+
+                <h3>🔄 Estrutura Completa: Try-Except-Else-Finally</h3>
+                <div class="code-block">
+                    <pre><code>try:
+    # Código que pode gerar exceção
+    arquivo = open("dados.txt", "r")
+    numero = int(arquivo.readline())
+    resultado = 100 / numero
+except FileNotFoundError:
+    print("❌ Arquivo não encontrado!")
+except ValueError:
+    print("❌ Valor inválido no arquivo!")
+except ZeroDivisionError:
+    print("❌ Divisão por zero!")
+else:
+    # Executa se NENHUMA exceção ocorrer
+    print(f"✅ Resultado calculado: {resultado}")
+finally:
+    # SEMPRE executa
+    if 'arquivo' in locals():
+        arquivo.close()
+    print("✅ Limpeza concluída")</code></pre>
+                </div>
+
+                <h3>💡 Exemplo: Classe com Finally</h3>
+                <div class="code-block">
+                    <pre><code>class ConexaoBanco:
+    def __init__(self):
+        self.conectado = False
+    
+    def conectar(self):
+        try:
+            # Simula conexão
+            self.conectado = True
+            print("✅ Conectado ao banco")
+        except Exception as e:
+            print(f"❌ Erro na conexão: {e}")
+        finally:
+            # Sempre executa
+            print("🔧 Tentativa de conexão finalizada")
+    
+    def executar_query(self, query):
+        try:
+            if not self.conectado:
+                raise ConnectionError("Não conectado ao banco!")
+            print(f"✅ Executando: {query}")
+            return "Resultado da query"
+        except ConnectionError as e:
+            print(f"❌ {e}")
+            return None
+        finally:
+            print("🔧 Query processada")
+
+# Uso
+conexao = ConexaoBanco()
+conexao.conectar()
+conexao.executar_query("SELECT * FROM usuarios")</code></pre>
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Dica</h4>
+                    <p>Use <code>finally</code> para garantir que recursos sejam liberados (arquivos fechados, 
+                    conexões encerradas, etc.), independente de erros. Use <code>else</code> para código que 
+                    só deve executar quando tudo der certo!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

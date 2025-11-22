@@ -225,12 +225,14 @@
             position: relative;
             overflow: hidden;
             margin: 20px 0;
+            padding: 0 10px; /* Espaço para não cortar cards */
         }
         
         .carousel-wrapper {
             display: flex;
             transition: transform 0.3s ease;
             gap: 20px;
+            padding-right: 20px; /* Espaço extra no final */
         }
         
         .carousel-card {
@@ -835,6 +837,23 @@
                                 <i class="fas fa-play"></i> Acessar BEP-021
                             </a>
                         </div>
+
+                        <!-- BEP-022: Tratamento de Exceções em POO -->
+                        <div class="carousel-card">
+                            <h3><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções</h3>
+                            <p>Melhore a segurança e robustez do código através do tratamento adequado de exceções. 
+                            Aprenda a criar exceções customizadas e usar try-except dentro de classes.</p>
+                            <ul class="features">
+                                <li><i class="fas fa-check"></i> Try-except básico e avançado</li>
+                                <li><i class="fas fa-check"></i> Exceções customizadas</li>
+                                <li><i class="fas fa-check"></i> Tratamento de exceções em classes</li>
+                                <li><i class="fas fa-check"></i> Hierarquia de exceções</li>
+                                <li><i class="fas fa-check"></i> Boas práticas e exercícios práticos</li>
+                            </ul>
+                            <a href="BEP-022/index.html" class="access-button">
+                                <i class="fas fa-play"></i> Acessar BEP-022
+                            </a>
+                        </div>
                     </div>
                     <div class="carousel-nav">
                         <button class="carousel-btn" id="prevBtn3" onclick="moveCarousel3(-1)">
@@ -889,7 +908,7 @@
         let currentSlide3 = 0; // Módulo 3
         const totalSlides1 = 10; // Módulo 1
         const totalSlides2 = 6;  // Módulo 2
-        const totalSlides3 = 4;  // Módulo 3
+        const totalSlides3 = 6;  // Módulo 3 (BEP-017 a BEP-022)
         const slideWidth = 320; // 300px + 20px gap
         
         // Módulo 1 - Lógica de Programação

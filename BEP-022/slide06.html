@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 06: Hierarquia de Exceções</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-sitemap"></i> Hierarquia de Exceções</h2>
+                <p>Múltiplos except e ordem de captura</p>
+                
+                <h3>📊 Hierarquia de Exceções em Python</h3>
+                <div class="code-block">
+                    <pre><code>BaseException
+    ├── Exception
+    │   ├── ArithmeticError
+    │   │   └── ZeroDivisionError
+    │   ├── ValueError
+    │   ├── TypeError
+    │   ├── KeyError
+    │   ├── IndexError
+    │   └── ... (outras exceções)
+    └── SystemExit
+    └── KeyboardInterrupt</code></pre>
+                </div>
+
+                <h3>⚠️ Ordem Importa!</h3>
+                <p>Python verifica os <code>except</code> na ordem que aparecem. Coloque exceções mais 
+                específicas primeiro!</p>
+                <div class="code-block">
+                    <pre><code>try:
+    # código que pode gerar exceções
+    resultado = 10 / 0
+except ZeroDivisionError:  # ✅ Específica primeiro
+    print("Divisão por zero!")
+except ArithmeticError:    # ✅ Depois a mais genérica
+    print("Erro aritmético!")
+except Exception:          # ✅ Por último, a mais genérica
+    print("Erro genérico!")
+
+# ❌ ERRADO - ordem invertida
+try:
+    resultado = 10 / 0
+except Exception:          # ❌ Captura tudo primeiro!
+    print("Erro genérico!")
+except ZeroDivisionError:  # ❌ Nunca será executado!
+    print("Divisão por zero!")</code></pre>
+                </div>
+
+                <h3>🏗️ Criando Hierarquia de Exceções Customizadas</h3>
+                <div class="code-block">
+                    <pre><code># Exceção base
+class ErroBancario(Exception):
+    """Exceção base para erros bancários"""
+    pass
+
+# Exceções específicas que herdam da base
+class SaldoInsuficienteError(ErroBancario):
+    """Erro quando saldo é insuficiente"""
+    pass
+
+class ContaNaoEncontradaError(ErroBancario):
+    """Erro quando conta não é encontrada"""
+    pass
+
+class LimiteExcedidoError(ErroBancario):
+    """Erro quando limite é excedido"""
+    pass
+
+# Uso
+try:
+    # código que pode gerar erros bancários
+    conta.sacar(1000)
+except SaldoInsuficienteError:
+    print("❌ Saldo insuficiente!")
+except ContaNaoEncontradaError:
+    print("❌ Conta não encontrada!")
+except ErroBancario:  # Captura qualquer erro bancário
+    print("❌ Erro bancário genérico!")
+except Exception:
+    print("❌ Erro inesperado!")</code></pre>
+                </div>
+
+                <h3>💡 Exemplo Completo: Sistema de Validação</h3>
+                <div class="code-block">
+                    <pre><code># Hierarquia de exceções
+class ErroValidacao(Exception):
+    """Exceção base para erros de validação"""
+    pass
+
+class ErroFormato(ErroValidacao):
+    """Erro de formato"""
+    pass
+
+class EmailInvalidoError(ErroFormato):
+    """Email inválido"""
+    pass
+
+class TelefoneInvalidoError(ErroFormato):
+    """Telefone inválido"""
+    pass
+
+class ErroRegraNegocio(ErroValidacao):
+    """Erro de regra de negócio"""
+    pass
+
+class IdadeMinimaError(ErroRegraNegocio):
+    """Idade mínima não atingida"""
+    pass
+
+# Uso com hierarquia
+def validar_usuario(email, telefone, idade):
+    try:
+        if '@' not in email:
+            raise EmailInvalidoError("Email inválido")
+        if len(telefone) < 10:
+            raise TelefoneInvalidoError("Telefone inválido")
+        if idade < 18:
+            raise IdadeMinimaError("Idade mínima: 18 anos")
+        return True
+    except EmailInvalidoError:
+        print("❌ Erro: Email inválido")
+    except TelefoneInvalidoError:
+        print("❌ Erro: Telefone inválido")
+    except ErroFormato:  # Captura EmailInvalidoError e TelefoneInvalidoError
+        print("❌ Erro de formato")
+    except IdadeMinimaError:
+        print("❌ Erro: Idade mínima não atingida")
+    except ErroValidacao:  # Captura todos os erros de validação
+        print("❌ Erro de validação")
+    except Exception:
+        print("❌ Erro inesperado")</code></pre>
+                </div>
+
+                <div class="warning">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Atenção</h4>
+                    <p>Sempre coloque exceções mais específicas antes das mais genéricas! 
+                    Python verifica na ordem e para no primeiro <code>except</code> que corresponder.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

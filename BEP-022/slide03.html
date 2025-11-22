@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 03: Try-Except Dentro de Classes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-cube"></i> Try-Except Dentro de Classes</h2>
+                <p>Tratamento de exceções em métodos de classes</p>
+                
+                <h3>🏗️ Estrutura Básica</h3>
+                <p>Em POO, podemos tratar exceções dentro dos métodos das classes:</p>
+                <div class="code-block">
+                    <pre><code>class Calculadora:
+    def dividir(self, a, b):
+        try:
+            return a / b
+        except ZeroDivisionError:
+            print("❌ Erro: Divisão por zero!")
+            return None
+    
+    def raiz_quadrada(self, numero):
+        try:
+            if numero < 0:
+                raise ValueError("Número negativo não tem raiz real!")
+            return numero ** 0.5
+        except ValueError as e:
+            print(f"❌ Erro: {e}")
+            return None
+
+calc = Calculadora()
+print(calc.dividir(10, 0))        # Erro tratado
+print(calc.raiz_quadrada(-4))     # Erro tratado</code></pre>
+                </div>
+
+                <h3>💡 Exemplo: Classe Conta Bancária</h3>
+                <div class="code-block">
+                    <pre><code>class ContaBancaria:
+    def __init__(self, titular, saldo_inicial=0):
+        self.titular = titular
+        self.saldo = saldo_inicial
+    
+    def depositar(self, valor):
+        try:
+            if valor <= 0:
+                raise ValueError("Valor deve ser positivo!")
+            self.saldo += valor
+            print(f"✅ Depósito de R$ {valor:.2f} realizado")
+            return True
+        except ValueError as e:
+            print(f"❌ Erro no depósito: {e}")
+            return False
+    
+    def sacar(self, valor):
+        try:
+            if valor <= 0:
+                raise ValueError("Valor deve ser positivo!")
+            if valor > self.saldo:
+                raise ValueError("Saldo insuficiente!")
+            self.saldo -= valor
+            print(f"✅ Saque de R$ {valor:.2f} realizado")
+            return True
+        except ValueError as e:
+            print(f"❌ Erro no saque: {e}")
+            return False
+    
+    def transferir(self, destino, valor):
+        try:
+            if self.sacar(valor):
+                destino.depositar(valor)
+                print(f"✅ Transferência de R$ {valor:.2f} realizada")
+                return True
+            return False
+        except AttributeError:
+            print("❌ Erro: Conta destino inválida!")
+            return False
+
+# Uso
+conta1 = ContaBancaria("Ana", 1000)
+conta2 = ContaBancaria("João", 500)
+
+conta1.sacar(1500)        # Erro: Saldo insuficiente
+conta1.depositar(-100)    # Erro: Valor inválido
+conta1.transferir(conta2, 200)  # Sucesso!</code></pre>
+                </div>
+
+                <h3>🔄 Retornando Valores ou Exceções</h3>
+                <div class="code-block">
+                    <pre><code>class Validador:
+    def validar_idade(self, idade_str):
+        try:
+            idade = int(idade_str)
+            if idade < 0:
+                raise ValueError("Idade não pode ser negativa!")
+            if idade > 150:
+                raise ValueError("Idade inválida!")
+            return idade
+        except ValueError as e:
+            print(f"❌ Erro: {e}")
+            return None
+        except Exception as e:
+            print(f"❌ Erro inesperado: {e}")
+            return None
+    
+    def validar_email(self, email):
+        try:
+            if '@' not in email:
+                raise ValueError("Email inválido! Deve conter @")
+            if '.' not in email.split('@')[1]:
+                raise ValueError("Email inválido! Deve conter domínio")
+            return True
+        except ValueError as e:
+            print(f"❌ Erro: {e}")
+            return False
+
+validador = Validador()
+idade = validador.validar_idade("25")      # ✅ 25
+idade = validador.validar_idade("abc")     # ❌ Erro
+email_ok = validador.validar_email("ana@email.com")  # ✅ True</code></pre>
+                </div>
+
+                <div class="info">
+                    <h4><i class="fas fa-lightbulb"></i> Boa Prática</h4>
+                    <p>Em métodos de classes, sempre trate exceções e retorne valores apropriados 
+                    (True/False, None, ou lançe exceções customizadas) para que o código que chama 
+                    o método saiba como lidar com o resultado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-022 - Slide 12: Resumo e Checklist</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; margin-bottom:16px; }
+        .resumo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 16px; margin: 12px 0; border-radius: 4px; }
+        .checklist { background: #F0FFF4; border-left: 4px solid #38A169; padding: 16px; margin: 12px 0; border-radius: 4px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .try-except { background: #EBF8FF; border: 2px solid #3182CE; border-radius: 12px; padding: 18px; }
+        .custom { background: #F0FFF4; border: 2px solid #38A169; border-radius: 12px; padding: 18px; }
+        ul li { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-022: Tratamento de Exceções em POO</h1>
+            <p>Melhorando a segurança e robustez do código</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-check-square"></i> Resumo e Checklist</h2>
+                <p>Confirme seu domínio dos conceitos</p>
+                
+                <div class="card">
+                    <h3><i class="fas fa-list"></i> Resumo dos Conceitos</h3>
+                    
+                    <div class="comparacao">
+                        <div class="try-except">
+                            <h4><i class="fas fa-code"></i> Try-Except</h4>
+                            <ul>
+                                <li>Captura exceções durante execução</li>
+                                <li>Permite tratamento de erros</li>
+                                <li>Mantém programa funcionando</li>
+                                <li>Ordem: específico → genérico</li>
+                                <li>Finally: sempre executa</li>
+                                <li>Else: executa se não houver erro</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="custom">
+                            <h4><i class="fas fa-tools"></i> Exceções Customizadas</h4>
+                            <ul>
+                                <li>Herda de Exception</li>
+                                <li>Mensagens específicas do domínio</li>
+                                <li>Melhor organização</li>
+                                <li>Facilita tratamento</li>
+                                <li>Pode criar hierarquia</li>
+                                <li>Adiciona informações úteis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-question-circle"></i> Pergunta-Chave</h3>
+                    <div class="resumo">
+                        <p><strong>"O que acontece se este código falhar?"</strong></p>
+                        <ul style="margin-top: 12px;">
+                            <li>Se pode falhar → Use <strong>try-except</strong></li>
+                            <li>Se erro é específico → Crie <strong>exceção customizada</strong></li>
+                            <li>Se precisa limpar → Use <strong>finally</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-check-square"></i> Checklist de Aprendizado</h3>
+                    <div class="checklist">
+                        <h4>Conceitos Fundamentais</h4>
+                        <ul>
+                            <li>☐ Entendo o que são exceções</li>
+                            <li>☐ Sei usar try-except básico</li>
+                            <li>☐ Compreendo a ordem de captura</li>
+                            <li>☐ Entendo finally e else</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 16px;">Implementação</h4>
+                        <ul>
+                            <li>☐ Sei usar try-except dentro de classes</li>
+                            <li>☐ Sei criar exceções customizadas</li>
+                            <li>☐ Sei criar hierarquia de exceções</li>
+                            <li>☐ Sei tratar exceções específicas</li>
+                        </ul>
+                        
+                        <h4 style="margin-top: 16px;">Aplicação Prática</h4>
+                        <ul>
+                            <li>☐ Consigo identificar onde tratar exceções</li>
+                            <li>☐ Consigo criar exceções apropriadas</li>
+                            <li>☐ Consigo melhorar robustez do código</li>
+                            <li>☐ Consigo resolver exercícios práticos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-lightbulb"></i> Boas Práticas</h3>
+                    <ul>
+                        <li>✅ <strong>Seja específico</strong> nas exceções capturadas</li>
+                        <li>✅ <strong>Ordene</strong> do específico para o genérico</li>
+                        <li>✅ <strong>Crie exceções customizadas</strong> para seu domínio</li>
+                        <li>✅ <strong>Não ignore</strong> exceções silenciosamente</li>
+                        <li>✅ <strong>Use finally</strong> para limpeza de recursos</li>
+                        <li>✅ <strong>Adicione informações</strong> úteis nas exceções</li>
+                        <li>✅ <strong>Documente</strong> as exceções que podem ser lançadas</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-arrow-right"></i> Próximos Passos</h3>
+                    <ul>
+                        <li>📚 Pratique criando mais sistemas com tratamento de exceções</li>
+                        <li>📚 Estude logging para registrar exceções</li>
+                        <li>📚 Aprenda sobre context managers (with)</li>
+                        <li>📚 Explore tratamento de exceções em funções assíncronas</li>
+                        <li>📚 Continue desenvolvendo projetos que usem POO com tratamento robusto</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-star"></i> Conclusão</h3>
+                    <p>Você agora entende como tratar exceções em Programação Orientada a Objetos! 
+                    O tratamento adequado de exceções torna o código mais robusto, seguro e profissional. 
+                    Continue praticando e aplicando esses conceitos em seus projetos para criar sistemas 
+                    mais confiáveis!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-022: Tratamento de Exceções em POO</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+
