@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 10: Anti-padrões - O que Evitar</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .antipadrao { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .solucao { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-exclamation-triangle"></i> Anti-padrões: O que Evitar</h2>
+                <p>Erros comuns ao usar padrões de projeto</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que são Anti-padrões?</h3>
+                    <p><strong>Anti-padrões</strong> são soluções comuns a problemas recorrentes que são <strong>ineficazes</strong> 
+                    ou <strong>contraproducentes</strong>. São padrões que parecem bons, mas na prática causam mais problemas.</p>
+                    <div class="antipadrao" style="margin-top: 12px;">
+                        <strong>⚠️ Atenção:</strong> Anti-padrões são tão importantes quanto padrões! 
+                        Conhecê-los ajuda a evitar erros comuns.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bug"></i> Anti-padrão 1: God Object</h3>
+                    <p><strong>Problema:</strong> Uma classe que faz tudo, violando o princípio de responsabilidade única.</p>
+                    <div class="code-block">
+                        <pre><code># ❌ God Object - faz tudo
+class Sistema:
+    def processar_pedido(self): pass
+    def enviar_email(self): pass
+    def calcular_imposto(self): pass
+    def gerar_relatorio(self): pass
+    def conectar_banco(self): pass
+    # ... 50 métodos mais</code></pre>
+                    </div>
+                    <div class="solucao" style="margin-top: 12px;">
+                        <strong>✅ Solução:</strong> Dividir em classes menores com responsabilidades específicas. 
+                        Usar padrões como Facade para simplificar interface se necessário.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bug"></i> Anti-padrão 2: Singleton Excessivo</h3>
+                    <p><strong>Problema:</strong> Usar Singleton para tudo, criando dependências globais difíceis de testar.</p>
+                    <div class="code-block">
+                        <pre><code># ❌ Singleton em tudo
+class Configuracao(Singleton): pass
+class Logger(Singleton): pass
+class Cache(Singleton): pass
+class Database(Singleton): pass
+class EmailService(Singleton): pass
+# ... tudo é Singleton!</code></pre>
+                    </div>
+                    <div class="solucao" style="margin-top: 12px;">
+                        <strong>✅ Solução:</strong> Use Singleton apenas quando realmente precisa de uma única instância. 
+                        Considere injeção de dependência para melhor testabilidade.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bug"></i> Anti-padrão 3: Over-Engineering</h3>
+                    <p><strong>Problema:</strong> Aplicar padrões complexos para problemas simples.</p>
+                    <div class="code-block">
+                        <pre><code># ❌ Over-engineering
+# Criando AbstractFactory + Builder + Strategy
+# para um sistema que apenas salva dados simples
+
+class SimpleDataSaver:
+    def save(self, data):
+        # Solução simples seria suficiente
+        with open("data.txt", "w") as f:
+            f.write(data)</code></pre>
+                    </div>
+                    <div class="solucao" style="margin-top: 12px;">
+                        <strong>✅ Solução:</strong> Comece simples. Adicione padrões apenas quando necessário. 
+                        "Premature optimization is the root of all evil."
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bug"></i> Anti-padrão 4: Cargo Cult Programming</h3>
+                    <p><strong>Problema:</strong> Copiar padrões sem entender por quê, apenas porque "é assim que se faz".</p>
+                    <div class="antipadrao" style="margin-top: 12px;">
+                        <strong>Exemplo:</strong> Usar Factory para criar apenas um tipo de objeto, 
+                        ou usar Observer quando um simples callback seria suficiente.
+                    </div>
+                    <div class="solucao" style="margin-top: 12px;">
+                        <strong>✅ Solução:</strong> Entenda o problema antes de aplicar o padrão. 
+                        Pergunte-se: "Este padrão realmente resolve meu problema?"
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-list"></i> Outros Anti-padrões Comuns</h3>
+                    <ul>
+                        <li>❌ <strong>Spaghetti Code:</strong> Código sem estrutura, difícil de seguir</li>
+                        <li>❌ <strong>Copy-Paste Programming:</strong> Duplicar código em vez de reutilizar</li>
+                        <li>❌ <strong>Golden Hammer:</strong> Usar sempre o mesmo padrão para tudo</li>
+                        <li>❌ <strong>Magic Numbers/Strings:</strong> Valores hardcoded sem explicação</li>
+                        <li>❌ <strong>Premature Abstraction:</strong> Criar abstrações antes de precisar</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Como Evitar Anti-padrões</h3>
+                    <ul>
+                        <li>✅ <strong>Entenda o problema</strong> antes de escolher solução</li>
+                        <li>✅ <strong>Comece simples</strong>, adicione complexidade quando necessário</li>
+                        <li>✅ <strong>Refatore</strong> quando identificar problemas</li>
+                        <li>✅ <strong>Code review</strong> ajuda a identificar anti-padrões</li>
+                        <li>✅ <strong>Aprenda</strong> com erros e experiências</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

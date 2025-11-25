@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 04: Padrões Estruturais</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .padrao { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-sitemap"></i> Classificação: Padrões Estruturais</h2>
+                <p>Padrões que organizam a estrutura de classes e objetos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que são Padrões Estruturais?</h3>
+                    <p>Padrões <strong>Estruturais</strong> explicam como <strong>compor objetos e classes</strong> para formar 
+                    estruturas maiores, mantendo flexibilidade e eficiência.</p>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Objetivo:</strong> Facilitar o design identificando maneiras simples de relacionar 
+                        entidades, permitindo que partes do sistema trabalhem juntas de forma eficiente.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Principais Padrões Estruturais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="padrao">
+                            <h4><i class="fas fa-layer-group"></i> Adapter</h4>
+                            <p><strong>Adapta interfaces incompatíveis</strong> para trabalharem juntas.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Integrar sistemas legados, APIs diferentes.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-box"></i> Decorator</h4>
+                            <p><strong>Adiciona funcionalidades</strong> a objetos dinamicamente.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Adicionar features sem modificar classe base.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-project-diagram"></i> Facade</h4>
+                            <p><strong>Simplifica interface</strong> de um subsistema complexo.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Esconder complexidade, criar APIs simples.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-cube"></i> Proxy</h4>
+                            <p><strong>Controla acesso</strong> a um objeto através de um intermediário.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Lazy loading, cache, controle de acesso.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-puzzle-piece"></i> Composite</h4>
+                            <p><strong>Compor objetos</strong> em estruturas de árvore.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Hierarquias, estruturas recursivas.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-link"></i> Bridge</h4>
+                            <p><strong>Separa abstração</strong> da implementação.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Plataformas diferentes, múltiplas implementações.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Adapter</h3>
+                    <p><strong>Cenário:</strong> Integrar um sistema antigo com interface diferente.</p>
+                    <div class="code-block">
+                        <pre><code># Sistema antigo (interface incompatível)
+class SistemaAntigo:
+    def processar_dados_antigo(self, dados):
+        return f"Processado: {dados}"
+
+# Nova interface esperada
+class Adapter:
+    def __init__(self, sistema_antigo):
+        self.sistema = sistema_antigo
+    
+    def processar(self, dados):  # Nova interface
+        return self.sistema.processar_dados_antigo(dados)
+
+# Uso
+antigo = SistemaAntigo()
+adapter = Adapter(antigo)
+resultado = adapter.processar("dados")  # Interface compatível!</code></pre>
+                    </div>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Permite usar código legado sem modificá-lo, apenas adaptando a interface.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Decorator</h3>
+                    <p><strong>Cenário:</strong> Adicionar funcionalidades a um objeto sem modificar sua classe.</p>
+                    <div class="code-block">
+                        <pre><code># Classe base
+class Cafe:
+    def custo(self):
+        return 5.0
+
+# Decorator para adicionar leite
+class CafeComLeite:
+    def __init__(self, cafe):
+        self.cafe = cafe
+    
+    def custo(self):
+        return self.cafe.custo() + 2.0
+
+# Uso
+cafe = Cafe()
+cafe_leite = CafeComLeite(cafe)
+print(cafe_leite.custo())  # 7.0</code></pre>
+                    </div>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Adiciona funcionalidades dinamicamente, sem modificar código existente.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Quando Usar Padrões Estruturais?</h3>
+                    <ul>
+                        <li>✅ Quando precisa <strong>integrar</strong> sistemas com interfaces diferentes (Adapter)</li>
+                        <li>✅ Quando quer <strong>adicionar funcionalidades</strong> sem modificar classes (Decorator)</li>
+                        <li>✅ Quando precisa <strong>simplificar</strong> interfaces complexas (Facade)</li>
+                        <li>✅ Quando precisa <strong>controlar acesso</strong> a objetos (Proxy)</li>
+                        <li>✅ Quando trabalha com <strong>hierarquias</strong> de objetos (Composite)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

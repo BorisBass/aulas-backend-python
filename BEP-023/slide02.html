@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 02: Por que Usar Design Patterns?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .beneficio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+        .sem-padrao { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px; }
+        .com-padrao { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-question-circle"></i> Por que Usar Design Patterns?</h2>
+                <p>Benefícios e vantagens de aplicar padrões</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-trophy"></i> Benefícios Principais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="beneficio">
+                            <h4><i class="fas fa-code"></i> 1. Código Mais Limpo</h4>
+                            <p>Padrões ajudam a organizar código de forma clara e consistente, 
+                            facilitando leitura e compreensão.</p>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-users"></i> 2. Comunicação Eficiente</h4>
+                            <p>Nomes padronizados permitem que desenvolvedores se comuniquem 
+                            rapidamente sobre soluções.</p>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-recycle"></i> 3. Reutilização</h4>
+                            <p>Soluções testadas podem ser aplicadas em diferentes contextos, 
+                            economizando tempo e esforço.</p>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-shield-alt"></i> 4. Soluções Testadas</h4>
+                            <p>Padrões são soluções que já foram validadas em projetos reais, 
+                            reduzindo riscos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> Comparação: Com vs Sem Padrões</h3>
+                    <div class="comparacao">
+                        <div class="sem-padrao">
+                            <h4>❌ Sem Design Pattern</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Código duplicado</li>
+                                <li>Dificuldade de manutenção</li>
+                                <li>Falta de consistência</li>
+                                <li>Reinvenção da roda</li>
+                                <li>Comunicação confusa</li>
+                            </ul>
+                        </div>
+                        <div class="com-padrao">
+                            <h4>✅ Com Design Pattern</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Código organizado</li>
+                                <li>Fácil manutenção</li>
+                                <li>Consistência no projeto</li>
+                                <li>Reutilização de soluções</li>
+                                <li>Comunicação clara</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo Prático: Organização de Código</h3>
+                    <p><strong>Problema:</strong> Criar diferentes tipos de notificações (email, SMS, push)</p>
+                    
+                    <div class="sem-padrao" style="margin-top: 12px;">
+                        <h4>❌ Sem Padrão (Código Desorganizado)</h4>
+                        <div class="code-block">
+                            <pre><code># Código espalhado e difícil de manter
+def enviar_email(destinatario, mensagem):
+    # código para email...
+
+def enviar_sms(numero, mensagem):
+    # código para SMS...
+
+def enviar_push(token, mensagem):
+    # código para push...
+
+# Cada função em lugar diferente
+# Difícil adicionar novos tipos
+# Código duplicado</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="com-padrao" style="margin-top: 12px;">
+                        <h4>✅ Com Padrão Factory (Organizado)</h4>
+                        <div class="code-block">
+                            <pre><code># Código organizado com padrão Factory
+class NotificacaoFactory:
+    @staticmethod
+    def criar(tipo):
+        if tipo == "email":
+            return EmailNotificacao()
+        elif tipo == "sms":
+            return SMSNotificacao()
+        elif tipo == "push":
+            return PushNotificacao()
+
+# Fácil adicionar novos tipos
+# Código centralizado
+# Fácil manutenção</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-chart-line"></i> Impacto no Desenvolvimento</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="beneficio">
+                            <h4>📈 Produtividade</h4>
+                            <p>Desenvolvedores trabalham mais rápido ao reconhecer padrões conhecidos.</p>
+                        </div>
+                        <div class="beneficio">
+                            <h4>🔧 Manutenibilidade</h4>
+                            <p>Código organizado é mais fácil de modificar e estender.</p>
+                        </div>
+                        <div class="beneficio">
+                            <h4>🎓 Aprendizado</h4>
+                            <p>Novos desenvolvedores aprendem o código mais rapidamente.</p>
+                        </div>
+                        <div class="beneficio">
+                            <h4>🐛 Qualidade</h4>
+                            <p>Soluções testadas reduzem bugs e problemas comuns.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Importante: Não é Solução Mágica</h3>
+                    <p>Design Patterns são <strong>ferramentas</strong>, não regras. Use quando fizer sentido:</p>
+                    <ul style="margin-top: 8px;">
+                        <li>✅ Quando o padrão resolve um problema real</li>
+                        <li>✅ Quando melhora a organização do código</li>
+                        <li>✅ Quando facilita manutenção futura</li>
+                        <li>❌ <strong>NÃO</strong> use apenas porque "é bonito"</li>
+                        <li>❌ <strong>NÃO</strong> force padrões onde não são necessários</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

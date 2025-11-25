@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 08: Exemplo Prático - Observer</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-bell"></i> Exemplo Prático: Observer</h2>
+                <p>Implementando o padrão Observer em Python</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é Observer?</h3>
+                    <p>O padrão <strong>Observer</strong> define uma dependência um-para-muitos entre objetos, 
+                    de modo que quando um objeto muda de estado, todos os seus dependentes são notificados 
+                    e atualizados automaticamente.</p>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Quando usar:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Sistemas de eventos</li>
+                            <li>Notificações em tempo real</li>
+                            <li>Arquitetura MVC (Model-View-Controller)</li>
+                            <li>Atualizações de interface</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Implementação Básica</h3>
+                    <div class="code-block">
+                        <pre><code>class Subject:
+    def __init__(self):
+        self._observers = []
+    
+    def adicionar(self, observer):
+        self._observers.append(observer)
+    
+    def remover(self, observer):
+        self._observers.remove(observer)
+    
+    def notificar(self, evento):
+        for observer in self._observers:
+            observer.atualizar(evento)
+
+class Observer:
+    def atualizar(self, evento):
+        print(f"Observer recebeu: {evento}")
+
+# Uso
+subject = Subject()
+observer1 = Observer()
+observer2 = Observer()
+
+subject.adicionar(observer1)
+subject.adicionar(observer2)
+subject.notificar("Evento importante!")</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo Completo: Sistema de Notificações</h3>
+                    <div class="code-block">
+                        <pre><code># Subject (Observado)
+class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self._preco = preco
+        self._observers = []
+    
+    def adicionar_observer(self, observer):
+        self._observers.append(observer)
+    
+    def remover_observer(self, observer):
+        self._observers.remove(observer)
+    
+    @property
+    def preco(self):
+        return self._preco
+    
+    @preco.setter
+    def preco(self, novo_preco):
+        if novo_preco != self._preco:
+            antigo_preco = self._preco
+            self._preco = novo_preco
+            self._notificar_mudanca_preco(antigo_preco, novo_preco)
+    
+    def _notificar_mudanca_preco(self, antigo, novo):
+        for observer in self._observers:
+            observer.preco_mudou(self, antigo, novo)
+
+# Observers
+class ClienteObserver:
+    def __init__(self, nome):
+        self.nome = nome
+    
+    def preco_mudou(self, produto, antigo, novo):
+        if novo < antigo:
+            print(f"🎉 {self.nome}: {produto.nome} está mais barato!")
+            print(f"   De R$ {antigo:.2f} para R$ {novo:.2f}")
+        else:
+            print(f"📢 {self.nome}: {produto.nome} aumentou de preço")
+            print(f"   De R$ {antigo:.2f} para R$ {novo:.2f}")
+
+class EstoqueObserver:
+    def preco_mudou(self, produto, antigo, novo):
+        print(f"📊 [ESTOQUE] Preço de {produto.nome} atualizado no sistema")
+
+# Uso
+produto = Produto("Notebook", 3000.00)
+
+cliente1 = ClienteObserver("João")
+cliente2 = ClienteObserver("Maria")
+estoque = EstoqueObserver()
+
+produto.adicionar_observer(cliente1)
+produto.adicionar_observer(cliente2)
+produto.adicionar_observer(estoque)
+
+# Mudança de preço notifica todos
+produto.preco = 2500.00  # Desconto!</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Resultado:</strong> Todos os observers são notificados automaticamente 
+                        quando o preço muda, sem acoplamento direto.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Sistema de Eventos</h3>
+                    <div class="code-block">
+                        <pre><code>class EventManager:
+    def __init__(self):
+        self._listeners = {}
+    
+    def on(self, evento, callback):
+        if evento not in self._listeners:
+            self._listeners[evento] = []
+        self._listeners[evento].append(callback)
+    
+    def emit(self, evento, dados=None):
+        if evento in self._listeners:
+            for callback in self._listeners[evento]:
+                callback(dados)
+
+# Uso
+eventos = EventManager()
+
+# Registrar listeners
+eventos.on("usuario_login", lambda d: print(f"✅ Login: {d}"))
+eventos.on("usuario_login", lambda d: print(f"📧 Email enviado para {d}"))
+eventos.on("compra_realizada", lambda d: print(f"💰 Compra: R$ {d}"))
+
+# Emitir eventos
+eventos.emit("usuario_login", "joao@email.com")
+eventos.emit("compra_realizada", 150.00)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Observer</h3>
+                    <ul>
+                        <li>✅ <strong>Desacoplamento:</strong> Subject e Observers são independentes</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos observers</li>
+                        <li>✅ <strong>Comunicação:</strong> Notificações automáticas e eficientes</li>
+                        <li>✅ <strong>Flexibilidade:</strong> Observers podem ser adicionados/removidos dinamicamente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

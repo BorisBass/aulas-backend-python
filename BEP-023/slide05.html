@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 05: Padrões Comportamentais</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .padrao { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-exchange-alt"></i> Classificação: Padrões Comportamentais</h2>
+                <p>Padrões que definem comunicação entre objetos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que são Padrões Comportamentais?</h3>
+                    <p>Padrões <strong>Comportamentais</strong> estão preocupados com <strong>algoritmos e responsabilidades</strong> 
+                    entre objetos, focando em como objetos interagem e se comunicam.</p>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Objetivo:</strong> Definir padrões de comunicação entre objetos, tornando a comunicação 
+                        mais flexível e permitindo que objetos trabalhem juntos de forma eficiente.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Principais Padrões Comportamentais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="padrao">
+                            <h4><i class="fas fa-bell"></i> Observer</h4>
+                            <p><strong>Notifica mudanças</strong> a múltiplos objetos.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Eventos, notificações, MVC.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-list-ul"></i> Strategy</h4>
+                            <p><strong>Define família de algoritmos</strong> intercambiáveis.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Diferentes formas de processar dados.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-tasks"></i> Command</h4>
+                            <p><strong>Encapsula requisições</strong> como objetos.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Filas, undo/redo, macros.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-sitemap"></i> Chain of Responsibility</h4>
+                            <p><strong>Passa requisições</strong> por uma cadeia de handlers.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Middleware, validações, tratamento de erros.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-user-cog"></i> Template Method</h4>
+                            <p><strong>Define esqueleto</strong> de algoritmo em classe base.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Algoritmos com passos comuns.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-user-friends"></i> Mediator</h4>
+                            <p><strong>Centraliza comunicação</strong> entre objetos.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Reduzir acoplamento entre componentes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Observer</h3>
+                    <p><strong>Cenário:</strong> Sistema de notificações quando um evento ocorre.</p>
+                    <div class="code-block">
+                        <pre><code># Padrão Observer
+class Subject:
+    def __init__(self):
+        self._observers = []
+    
+    def adicionar_observer(self, observer):
+        self._observers.append(observer)
+    
+    def notificar(self, evento):
+        for observer in self._observers:
+            observer.atualizar(evento)
+
+class Observer:
+    def atualizar(self, evento):
+        print(f"Observer recebeu: {evento}")
+
+# Uso
+subject = Subject()
+observer1 = Observer()
+observer2 = Observer()
+
+subject.adicionar_observer(observer1)
+subject.adicionar_observer(observer2)
+subject.notificar("Evento importante!")</code></pre>
+                    </div>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Objetos são notificados automaticamente quando algo muda, 
+                        sem acoplamento direto.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Strategy</h3>
+                    <p><strong>Cenário:</strong> Diferentes formas de calcular desconto.</p>
+                    <div class="code-block">
+                        <pre><code># Padrão Strategy
+class DescontoStrategy:
+    def calcular(self, valor):
+        pass
+
+class DescontoFixo(DescontoStrategy):
+    def calcular(self, valor):
+        return valor * 0.1  # 10%
+
+class DescontoPercentual(DescontoStrategy):
+    def __init__(self, percentual):
+        self.percentual = percentual
+    
+    def calcular(self, valor):
+        return valor * (self.percentual / 100)
+
+class Venda:
+    def __init__(self, estrategia):
+        self.estrategia = estrategia
+    
+    def calcular_desconto(self, valor):
+        return self.estrategia.calcular(valor)
+
+# Uso
+venda = Venda(DescontoPercentual(15))
+desconto = venda.calcular_desconto(100)  # 15</code></pre>
+                    </div>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Algoritmos podem ser trocados em tempo de execução, 
+                        sem modificar código cliente.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Quando Usar Padrões Comportamentais?</h3>
+                    <ul>
+                        <li>✅ Quando precisa <strong>notificar</strong> múltiplos objetos (Observer)</li>
+                        <li>✅ Quando tem <strong>algoritmos intercambiáveis</strong> (Strategy)</li>
+                        <li>✅ Quando precisa <strong>encapsular operações</strong> (Command)</li>
+                        <li>✅ Quando precisa <strong>processar requisições</strong> em cadeia (Chain)</li>
+                        <li>✅ Quando quer <strong>reduzir acoplamento</strong> entre objetos (Mediator)</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-table"></i> Resumo das Três Classificações</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Foco</th>
+                            <th>Exemplos</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Criacionais</strong></td>
+                            <td>Criação de objetos</td>
+                            <td>Singleton, Factory, Builder</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estruturais</strong></td>
+                            <td>Estrutura de classes</td>
+                            <td>Adapter, Decorator, Facade</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comportamentais</strong></td>
+                            <td>Comunicação entre objetos</td>
+                            <td>Observer, Strategy, Command</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

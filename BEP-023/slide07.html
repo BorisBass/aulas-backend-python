@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 07: Exemplo Prático - Factory</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-industry"></i> Exemplo Prático: Factory</h2>
+                <p>Implementando o padrão Factory em Python</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é Factory?</h3>
+                    <p>O padrão <strong>Factory</strong> fornece uma interface para criar objetos sem especificar 
+                    suas classes exatas. A criação é delegada a subclasses ou métodos específicos.</p>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Quando usar:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Quando não sabe antecipadamente os tipos exatos de objetos</li>
+                            <li>Quando quer desacoplar criação de uso</li>
+                            <li>Quando precisa criar objetos relacionados</li>
+                            <li>Quando quer centralizar lógica de criação</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Implementação Básica</h3>
+                    <div class="code-block">
+                        <pre><code># Classes de produtos
+class Carro:
+    def acelerar(self):
+        print("Carro acelerando...")
+
+class Moto:
+    def acelerar(self):
+        print("Moto acelerando...")
+
+# Factory
+class VeiculoFactory:
+    @staticmethod
+    def criar(tipo):
+        if tipo == "carro":
+            return Carro()
+        elif tipo == "moto":
+            return Moto()
+        else:
+            raise ValueError(f"Tipo {tipo} não suportado")
+
+# Uso
+veiculo = VeiculoFactory.criar("carro")
+veiculo.acelerar()</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo Completo: Factory de Notificações</h3>
+                    <div class="code-block">
+                        <pre><code># Classes de notificação
+class Notificacao:
+    def enviar(self, mensagem):
+        pass
+
+class EmailNotificacao(Notificacao):
+    def enviar(self, mensagem):
+        print(f"📧 Email enviado: {mensagem}")
+
+class SMSNotificacao(Notificacao):
+    def enviar(self, mensagem):
+        print(f"📱 SMS enviado: {mensagem}")
+
+class PushNotificacao(Notificacao):
+    def enviar(self, mensagem):
+        print(f"🔔 Push enviado: {mensagem}")
+
+# Factory
+class NotificacaoFactory:
+    @staticmethod
+    def criar(tipo):
+        tipos = {
+            "email": EmailNotificacao,
+            "sms": SMSNotificacao,
+            "push": PushNotificacao
+        }
+        
+        classe = tipos.get(tipo.lower())
+        if classe:
+            return classe()
+        else:
+            raise ValueError(f"Tipo de notificação '{tipo}' não suportado")
+
+# Uso
+notificacao = NotificacaoFactory.criar("email")
+notificacao.enviar("Bem-vindo ao sistema!")
+
+notificacao2 = NotificacaoFactory.criar("sms")
+notificacao2.enviar("Seu código é 1234")</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Código cliente não precisa saber como criar cada tipo. 
+                        Fácil adicionar novos tipos sem modificar código existente.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Factory com Configuração</h3>
+                    <div class="code-block">
+                        <pre><code>class DatabaseFactory:
+    @staticmethod
+    def criar_conexao(tipo, **kwargs):
+        if tipo == "sqlite":
+            return SQLiteConnection(kwargs.get("database"))
+        elif tipo == "mysql":
+            return MySQLConnection(
+                host=kwargs.get("host"),
+                user=kwargs.get("user"),
+                password=kwargs.get("password")
+            )
+        elif tipo == "postgresql":
+            return PostgreSQLConnection(
+                host=kwargs.get("host"),
+                user=kwargs.get("user"),
+                password=kwargs.get("password")
+            )
+        else:
+            raise ValueError(f"Tipo de banco '{tipo}' não suportado")
+
+# Uso
+db = DatabaseFactory.criar_conexao(
+    "sqlite",
+    database="app.db"
+)
+
+db2 = DatabaseFactory.criar_conexao(
+    "mysql",
+    host="localhost",
+    user="admin",
+    password="senha123"
+)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Factory</h3>
+                    <ul>
+                        <li>✅ <strong>Desacoplamento:</strong> Cliente não conhece classes concretas</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos tipos</li>
+                        <li>✅ <strong>Centralização:</strong> Lógica de criação em um só lugar</li>
+                        <li>✅ <strong>Manutenção:</strong> Mudanças na criação não afetam cliente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

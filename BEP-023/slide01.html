@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 01: Introdução - O que são Design Patterns?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .historia { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> Introdução: O que são Design Patterns?</h2>
+                <p>Conceito, origem e importância dos padrões de projeto</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Definição</h3>
+                    <p><strong>Design Patterns</strong> (Padrões de Projeto) são <strong>soluções reutilizáveis</strong> 
+                    para problemas comuns que ocorrem durante o desenvolvimento de software.</p>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Analogia:</strong> Assim como receitas de culinária descrevem como preparar pratos 
+                        específicos, design patterns descrevem como resolver problemas específicos de programação.
+                    </div>
+                </div>
+
+                <div class="two-col" style="margin-top: 20px;">
+                    <div class="card">
+                        <h3><i class="fas fa-book"></i> Origem</h3>
+                        <p>O conceito foi popularizado pelo livro <strong>"Design Patterns: Elements of Reusable 
+                        Object-Oriented Software"</strong> (Gang of Four - GoF), publicado em 1994.</p>
+                        <div class="historia" style="margin-top: 12px;">
+                            <strong>Os 4 autores (GoF):</strong>
+                            <ul style="margin-top: 8px;">
+                                <li>Erich Gamma</li>
+                                <li>Richard Helm</li>
+                                <li>Ralph Johnson</li>
+                                <li>John Vlissides</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-lightbulb"></i> Características</h3>
+                        <p>Design Patterns são:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Soluções testadas:</strong> Já foram usadas e validadas</li>
+                            <li>✅ <strong>Reutilizáveis:</strong> Aplicáveis em diferentes contextos</li>
+                            <li>✅ <strong>Documentadas:</strong> Têm nomes e descrições claras</li>
+                            <li>✅ <strong>Linguagem-agnósticos:</strong> Funcionam em várias linguagens</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Problema Comum</h3>
+                    <p>Situação: Você precisa garantir que uma classe tenha apenas uma instância (ex: conexão com banco de dados).</p>
+                    <div class="code-block">
+                        <pre><code># ❌ Sem padrão - pode criar múltiplas instâncias
+class DatabaseConnection:
+    def __init__(self):
+        self.connection = "Conectado"
+
+# Problema: cada vez que criar, será uma nova instância
+db1 = DatabaseConnection()
+db2 = DatabaseConnection()
+# db1 e db2 são objetos diferentes!</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Solução com Design Pattern:</strong> Usar o padrão <strong>Singleton</strong> para garantir 
+                        apenas uma instância. Veremos isso em detalhes nos próximos slides!
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> O que Design Patterns NÃO são</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div style="background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px;">
+                            <h4>❌ Não são:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Bibliotecas ou frameworks</li>
+                                <li>Código pronto para copiar</li>
+                                <li>Soluções para todos os problemas</li>
+                                <li>Regras obrigatórias</li>
+                            </ul>
+                        </div>
+                        <div style="background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px;">
+                            <h4>✅ São:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Guias de design</li>
+                                <li>Templates de solução</li>
+                                <li>Boas práticas documentadas</li>
+                                <li>Ferramentas para pensar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-star"></i> Importância dos Design Patterns</h3>
+                    <ul>
+                        <li>✅ <strong>Comunicação:</strong> Nomes comuns facilitam discussão entre desenvolvedores</li>
+                        <li>✅ <strong>Documentação:</strong> Padrões documentam intenções de design</li>
+                        <li>✅ <strong>Reutilização:</strong> Soluções comprovadas economizam tempo</li>
+                        <li>✅ <strong>Manutenção:</strong> Código mais organizado e fácil de manter</li>
+                        <li>✅ <strong>Qualidade:</strong> Aplicação de soluções testadas e validadas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

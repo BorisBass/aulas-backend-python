@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 06: Exemplo Prático - Singleton</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-cube"></i> Exemplo Prático: Singleton</h2>
+                <p>Implementando o padrão Singleton em Python</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é Singleton?</h3>
+                    <p>O padrão <strong>Singleton</strong> garante que uma classe tenha <strong>apenas uma instância</strong> 
+                    e fornece um ponto global de acesso a ela.</p>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Quando usar:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Conexões com banco de dados</li>
+                            <li>Loggers (sistemas de log)</li>
+                            <li>Configurações globais</li>
+                            <li>Cache compartilhado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Implementação Básica</h3>
+                    <div class="code-block">
+                        <pre><code>class Singleton:
+    _instancia = None
+    
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+        return cls._instancia
+
+# Teste
+s1 = Singleton()
+s2 = Singleton()
+print(s1 is s2)  # True - mesma instância!</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo Completo: Logger Singleton</h3>
+                    <div class="code-block">
+                        <pre><code>class Logger:
+    _instancia = None
+    _logs = []
+    
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+        return cls._instancia
+    
+    def __init__(self):
+        if not hasattr(self, 'inicializado'):
+            self.inicializado = True
+            self._logs = []
+    
+    def log(self, mensagem):
+        self._logs.append(mensagem)
+        print(f"[LOG] {mensagem}")
+    
+    def obter_logs(self):
+        return self._logs.copy()
+
+# Uso
+logger1 = Logger()
+logger1.log("Primeira mensagem")
+
+logger2 = Logger()  # Mesma instância!
+logger2.log("Segunda mensagem")
+
+print(logger1 is logger2)  # True
+print(logger1.obter_logs())  # Ambas as mensagens</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Garante que todos os logs vão para o mesmo lugar, 
+                        independente de onde o Logger é criado.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Conexão com Banco de Dados</h3>
+                    <div class="code-block">
+                        <pre><code>import sqlite3
+
+class DatabaseConnection:
+    _instancia = None
+    _conexao = None
+    
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+        return cls._instancia
+    
+    def conectar(self, database="app.db"):
+        if self._conexao is None:
+            self._conexao = sqlite3.connect(database)
+            print("✅ Conexão estabelecida")
+        return self._conexao
+    
+    def fechar(self):
+        if self._conexao:
+            self._conexao.close()
+            self._conexao = None
+            print("🔒 Conexão fechada")
+
+# Uso - sempre a mesma conexão
+db1 = DatabaseConnection()
+db1.conectar()
+
+db2 = DatabaseConnection()  # Mesma instância!
+conn = db2.conectar()  # Reutiliza conexão existente</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados com Singleton</h3>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>⚠️ Problemas potenciais:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Dificulta testes unitários (dependência global)</li>
+                            <li>Pode esconder dependências</li>
+                            <li>Pode causar problemas em ambientes multi-thread</li>
+                            <li>Pode ser um "code smell" se usado demais</li>
+                        </ul>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>✅ Use quando:</strong> Realmente precisa de uma única instância global 
+                        (ex: configurações, conexões, loggers).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

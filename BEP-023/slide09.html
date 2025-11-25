@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 09: Quando Usar Design Patterns?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .usar { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .nao-usar { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-question-circle"></i> Quando Usar Design Patterns?</h2>
+                <p>Identificando oportunidades de aplicação</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Sinais de que Precisa de um Padrão</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="usar">
+                            <h4>✅ Use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Você <strong>reconhece</strong> um problema comum</li>
+                                <li>O código está <strong>duplicado</strong> ou desorganizado</li>
+                                <li>Precisa <strong>desacoplar</strong> componentes</li>
+                                <li>Quer <strong>facilitar manutenção</strong> futura</li>
+                                <li>Precisa <strong>comunicar</strong> intenção claramente</li>
+                            </ul>
+                        </div>
+                        <div class="nao-usar">
+                            <h4>❌ Não use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>O problema é <strong>simples</strong> demais</li>
+                                <li>Adiciona <strong>complexidade</strong> desnecessária</li>
+                                <li>Não há <strong>necessidade real</strong></li>
+                                <li>O código atual já está <strong>bom</strong></li>
+                                <li>Está apenas <strong>seguindo moda</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-search"></i> Identificando Problemas Comuns</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="usar">
+                            <h4>🔍 Problema: Múltiplas Instâncias</h4>
+                            <p><strong>Sintoma:</strong> Criando vários objetos que deveriam ser únicos</p>
+                            <p style="margin-top: 8px;"><strong>Solução:</strong> Singleton</p>
+                        </div>
+                        <div class="usar">
+                            <h4>🔍 Problema: Criação Complexa</h4>
+                            <p><strong>Sintoma:</strong> Muita lógica para criar objetos</p>
+                            <p style="margin-top: 8px;"><strong>Solução:</strong> Factory</p>
+                        </div>
+                        <div class="usar">
+                            <h4>🔍 Problema: Interfaces Incompatíveis</h4>
+                            <p><strong>Sintoma:</strong> Sistemas que não se comunicam</p>
+                            <p style="margin-top: 8px;"><strong>Solução:</strong> Adapter</p>
+                        </div>
+                        <div class="usar">
+                            <h4>🔍 Problema: Notificações Múltiplas</h4>
+                            <p><strong>Sintoma:</strong> Muitos objetos precisam ser avisados</p>
+                            <p style="margin-top: 8px;"><strong>Solução:</strong> Observer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Refatoração com Padrão</h3>
+                    <p><strong>Antes:</strong> Código sem padrão (duplicado e difícil de manter)</p>
+                    <div class="code-block">
+                        <pre><code># ❌ Sem padrão
+def criar_notificacao_email(destinatario, mensagem):
+    # código específico para email...
+    pass
+
+def criar_notificacao_sms(numero, mensagem):
+    # código específico para SMS...
+    pass
+
+def criar_notificacao_push(token, mensagem):
+    # código específico para push...
+    pass
+
+# Cada função em lugar diferente
+# Difícil adicionar novos tipos
+# Código duplicado</code></pre>
+                    </div>
+                    <p style="margin-top: 12px;"><strong>Depois:</strong> Com padrão Factory (organizado e extensível)</p>
+                    <div class="code-block">
+                        <pre><code># ✅ Com Factory Pattern
+class NotificacaoFactory:
+    @staticmethod
+    def criar(tipo, **kwargs):
+        tipos = {
+            "email": EmailNotificacao,
+            "sms": SMSNotificacao,
+            "push": PushNotificacao
+        }
+        classe = tipos.get(tipo)
+        if classe:
+            return classe(**kwargs)
+        raise ValueError(f"Tipo {tipo} não suportado")
+
+# Fácil adicionar novos tipos
+# Código centralizado
+# Fácil manutenção</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-list"></i> Checklist: Devo Usar um Padrão?</h3>
+                    <ul>
+                        <li>✅ O padrão resolve um <strong>problema real</strong> que você tem?</li>
+                        <li>✅ O código atual está <strong>difícil de manter</strong> ou estender?</li>
+                        <li>✅ O padrão <strong>simplifica</strong> o código?</li>
+                        <li>✅ Outros desenvolvedores vão <strong>entender</strong> facilmente?</li>
+                        <li>✅ O padrão <strong>melhora</strong> a qualidade do código?</li>
+                    </ul>
+                    <div class="usar" style="margin-top: 12px;">
+                        <strong>Se respondeu "sim" para a maioria:</strong> Provavelmente é uma boa ideia usar o padrão!
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Regra de Ouro</h3>
+                    <p><strong>"Use padrões quando eles resolvem problemas reais, não porque são 'bonitos'."</strong></p>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="usar">
+                            <h4>✅ Boa Aplicação</h4>
+                            <p>Você tem um problema → Identifica padrão adequado → Implementa → Código melhora</p>
+                        </div>
+                        <div class="nao-usar">
+                            <h4>❌ Má Aplicação</h4>
+                            <p>Você quer usar padrão → Procura problema → Força implementação → Código piora</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

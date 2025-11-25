@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-023 - Slide 03: Padrões Criacionais</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .padrao { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-magic"></i> Classificação: Padrões Criacionais</h2>
+                <p>Padrões que lidam com a criação de objetos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que são Padrões Criacionais?</h3>
+                    <p>Padrões <strong>Criacionais</strong> fornecem mecanismos para <strong>criar objetos</strong> de forma 
+                    que aumentem a flexibilidade e reutilização do código existente.</p>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Objetivo:</strong> Abstrair o processo de criação de objetos, tornando o sistema 
+                        independente de como seus objetos são criados, compostos e representados.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Principais Padrões Criacionais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="padrao">
+                            <h4><i class="fas fa-cube"></i> Singleton</h4>
+                            <p><strong>Garante uma única instância</strong> de uma classe.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Conexões de banco, loggers, configurações globais.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-industry"></i> Factory Method</h4>
+                            <p><strong>Cria objetos</strong> sem especificar a classe exata.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Criar diferentes tipos de objetos relacionados.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-building"></i> Abstract Factory</h4>
+                            <p><strong>Cria famílias</strong> de objetos relacionados.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Interfaces de usuário, temas, sistemas operacionais.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-copy"></i> Builder</h4>
+                            <p><strong>Constrói objetos complexos</strong> passo a passo.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Objetos com muitos parâmetros opcionais.</p>
+                        </div>
+                        <div class="padrao">
+                            <h4><i class="fas fa-clone"></i> Prototype</h4>
+                            <p><strong>Copia objetos existentes</strong> em vez de criar novos.</p>
+                            <p style="margin-top: 8px;"><strong>Uso:</strong> Quando criação é custosa ou complexa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Factory Method</h3>
+                    <p><strong>Cenário:</strong> Sistema que precisa criar diferentes tipos de veículos.</p>
+                    <div class="code-block">
+                        <pre><code># Padrão Factory Method
+class VeiculoFactory:
+    @staticmethod
+    def criar_veiculo(tipo):
+        if tipo == "carro":
+            return Carro()
+        elif tipo == "moto":
+            return Moto()
+        elif tipo == "bicicleta":
+            return Bicicleta()
+        else:
+            raise ValueError(f"Tipo {tipo} não suportado")
+
+# Uso
+veiculo = VeiculoFactory.criar_veiculo("carro")
+veiculo.acelerar()</code></pre>
+                    </div>
+                    <div class="padrao" style="margin-top: 12px;">
+                        <strong>Vantagem:</strong> Código cliente não precisa saber como criar cada tipo de veículo. 
+                        Fácil adicionar novos tipos sem modificar código existente.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Quando Usar Padrões Criacionais?</h3>
+                    <ul>
+                        <li>✅ Quando o sistema precisa ser <strong>independente</strong> de como objetos são criados</li>
+                        <li>✅ Quando você quer <strong>reutilizar</strong> código de criação</li>
+                        <li>✅ Quando a criação de objetos é <strong>complexa</strong> ou <strong>custosa</strong></li>
+                        <li>✅ Quando você precisa <strong>controlar</strong> o número de instâncias (Singleton)</li>
+                        <li>✅ Quando precisa criar <strong>famílias</strong> de objetos relacionados</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-table"></i> Resumo dos Padrões Criacionais</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Padrão</th>
+                            <th>Problema Resolve</th>
+                            <th>Quando Usar</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Singleton</strong></td>
+                            <td>Múltiplas instâncias</td>
+                            <td>Recursos compartilhados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Factory</strong></td>
+                            <td>Criação complexa</td>
+                            <td>Diferentes tipos relacionados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Builder</strong></td>
+                            <td>Objetos com muitos parâmetros</td>
+                            <td>Construtores complexos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Prototype</strong></td>
+                            <td>Criação custosa</td>
+                            <td>Clonar objetos existentes</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+
