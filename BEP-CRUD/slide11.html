@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 11: Conceitos Aplicados - BEP-001 a BEP-016</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .conceito { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-book"></i> Conceitos Aplicados: BEP-001 a BEP-016</h2>
+                <p>Revisão dos conceitos básicos aplicados na Versão 1</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Conceitos Utilizados</h3>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-001 a BEP-010: Python Básico</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Variáveis e tipos:</strong> Strings, inteiros, floats</li>
+                            <li>✅ <strong>Estruturas condicionais:</strong> if/elif/else para validações</li>
+                            <li>✅ <strong>Estruturas de repetição:</strong> while para menu principal</li>
+                            <li>✅ <strong>Funções:</strong> Organização do código em funções</li>
+                            <li>✅ <strong>Tratamento de erros:</strong> try/except básico</li>
+                        </ul>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-011 a BEP-016: Banco de Dados</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>SQLite:</strong> Banco de dados embutido</li>
+                            <li>✅ <strong>Conexão:</strong> sqlite3.connect()</li>
+                            <li>✅ <strong>Cursor:</strong> Execução de queries SQL</li>
+                            <li>✅ <strong>CRUD:</strong> CREATE, READ, UPDATE, DELETE</li>
+                            <li>✅ <strong>Módulos:</strong> Organização em arquivos separados</li>
+                            <li>✅ <strong>if __name__ == "__main__":</strong> Execução controlada</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Aplicação dos Conceitos</h3>
+                    <div class="code-block">
+                        <pre><code># BEP-001 a BEP-010: Python básico
+def cadastrar_aluno(cursor, conn):
+    # Variáveis e tipos (BEP-002)
+    nome = input("Nome: ").strip()  # String
+    idade = input("Idade: ").strip()  # String
+    
+    # Estruturas condicionais (BEP-004)
+    if not nome:
+        print("❌ Nome é obrigatório!")
+        return
+    
+    # Tratamento de erros (BEP-010)
+    try:
+        idade = int(idade)  # Conversão de tipo
+    except ValueError:
+        print("❌ Idade inválida!")
+        return
+    
+    # BEP-011 a BEP-016: Banco de dados
+    cursor.execute('''
+        INSERT INTO alunos (nome, idade)
+        VALUES (?, ?)
+    ''', (nome, idade))
+    conn.commit()  # Salvar no banco</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Todos os Conceitos Básicos Aplicados</h3>
+                    <p>A Versão 1 demonstra o uso prático de todos os conceitos aprendidos nas primeiras 16 aulas!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

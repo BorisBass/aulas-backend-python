@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 01: Introdução - Duas Versões do Mesmo Sistema</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-info-circle"></i> Introdução: Duas Versões do Mesmo Sistema</h2>
+                <p>Apresentação das duas versões do CRUD</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-history"></i> Contexto</h3>
+                    <p>Durante o curso, desenvolvemos um <strong>Sistema CRUD de Gerenciamento de Alunos</strong> 
+                    que evoluiu junto com nosso aprendizado:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>BEP-001 a BEP-010:</strong> Aprendemos Python básico</li>
+                        <li>✅ <strong>BEP-011 a BEP-016:</strong> Aprendemos banco de dados e criamos o CRUD (Versão 1)</li>
+                        <li>✅ <strong>BEP-017 a BEP-022:</strong> Aprendemos POO e refatoramos o CRUD (Versão 2)</li>
+                    </ul>
+                </div>
+
+                <div class="two-col" style="margin-top: 20px;">
+                    <div class="versao1">
+                        <h3><i class="fas fa-file-code"></i> Versão 1: Procedural</h3>
+                        <p><strong>Localização:</strong> <code>BEP-016/crud_sistema/</code></p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Funções organizadas em módulos</li>
+                            <li>✅ Dados em tuplas e dicionários</li>
+                            <li>✅ Validação manual</li>
+                            <li>✅ Conceitos: BEP-001 a BEP-016</li>
+                        </ul>
+                        <p style="margin-top: 12px;"><strong>Paradigma:</strong> Programação Procedural</p>
+                    </div>
+                    
+                    <div class="versao2">
+                        <h3><i class="fas fa-cube"></i> Versão 2: Orientada a Objetos</h3>
+                        <p><strong>Localização:</strong> <code>BEP-016/crud_sistema_v2/</code></p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Classes e objetos</li>
+                            <li>✅ Dados encapsulados em objetos</li>
+                            <li>✅ Validação automática</li>
+                            <li>✅ Conceitos: BEP-017 a BEP-022</li>
+                        </ul>
+                        <p style="margin-top: 12px;"><strong>Paradigma:</strong> Programação Orientada a Objetos</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-question-circle"></i> Por que Comparar?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div>
+                            <h4>🎯 Objetivos da Comparação:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Ver os mesmos conceitos aplicados de formas diferentes</li>
+                                <li>Entender vantagens e desvantagens de cada abordagem</li>
+                                <li>Compreender quando usar cada paradigma</li>
+                                <li>Consolidar o aprendizado das BEP's</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>📚 O que Vamos Comparar:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Estrutura e organização do código</li>
+                                <li>Representação de dados</li>
+                                <li>Validação e encapsulamento</li>
+                                <li>Tratamento de exceções</li>
+                                <li>Reutilização e manutenção</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Importante</h3>
+                    <p><strong>Nenhuma versão é "melhor" que a outra!</strong> Cada uma tem seu lugar:</p>
+                    <ul style="margin-top: 8px;">
+                        <li>✅ <strong>Procedural:</strong> Simples, direto, fácil de entender para iniciantes</li>
+                        <li>✅ <strong>OO:</strong> Organizado, extensível, adequado para sistemas maiores</li>
+                        <li>✅ <strong>Escolha:</strong> Depende do contexto, tamanho do projeto e equipe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

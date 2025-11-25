@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 04: Comparação - Representação de Dados</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-database"></i> Comparação: Representação de Dados</h2>
+                <p>Tuplas vs Objetos - Como os dados são armazenados</p>
+                
+                <div class="comparacao" style="margin-top: 20px;">
+                    <div class="versao1">
+                        <h3>📦 Versão 1: Tuplas</h3>
+                        <div class="code-block" style="margin-top: 12px;">
+                            <pre><code># Dados retornados como tupla
+cursor.execute("SELECT * FROM alunos")
+aluno = cursor.fetchone()
+# aluno = (1, "João", 20, "Python", 9.5, "2025-01-15")
+
+# Acesso aos dados
+id_aluno = aluno[0]      # Por índice
+nome = aluno[1]
+idade = aluno[2]
+
+# Problema: difícil lembrar índices
+# aluno[3] é o quê mesmo?</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="versao2">
+                        <h3>🎯 Versão 2: Objetos</h3>
+                        <div class="code-block" style="margin-top: 12px;">
+                            <pre><code># Dados retornados como objeto
+aluno = repository.buscar_por_id(1)
+# aluno é uma instância de Aluno
+
+# Acesso aos dados
+id_aluno = aluno.id      # Por propriedade
+nome = aluno.nome
+idade = aluno.idade
+
+# Vantagem: código mais legível
+# aluno.curso é claro e autodocumentado</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo Prático: Trabalhar com Dados</h3>
+                    <div class="comparacao" style="margin-top: 12px;">
+                        <div class="versao1">
+                            <h4>Versão 1: Tupla</h4>
+                            <div class="code-block">
+                                <pre><code># Buscar aluno
+cursor.execute("SELECT * FROM alunos WHERE id = 1")
+aluno = cursor.fetchone()
+
+# Verificar se nota é maior que 8
+if aluno[4] and aluno[4] > 8:
+    print(f"{aluno[1]} tem nota {aluno[4]}")
+
+# Atualizar nota
+cursor.execute(
+    "UPDATE alunos SET nota = ? WHERE id = ?",
+    (9.0, aluno[0])
+)</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="versao2">
+                            <h4>Versão 2: Objeto</h4>
+                            <div class="code-block">
+                                <pre><code># Buscar aluno
+aluno = repository.buscar_por_id(1)
+
+# Verificar se nota é maior que 8
+if aluno.nota and aluno.nota > 8:
+    print(f"{aluno.nome} tem nota {aluno.nota}")
+
+# Atualizar nota
+aluno.nota = 9.0
+repository.atualizar(aluno)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-balance-scale"></i> Comparação</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Versão 1 (Tuplas)</th>
+                            <th>Versão 2 (Objetos)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Legibilidade</strong></td>
+                            <td>❌ Índices numéricos confusos</td>
+                            <td>✅ Nomes descritivos claros</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Manutenção</strong></td>
+                            <td>❌ Mudar ordem quebra código</td>
+                            <td>✅ Mudanças isoladas na classe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Validação</strong></td>
+                            <td>❌ Manual em cada função</td>
+                            <td>✅ Automática na classe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documentação</strong></td>
+                            <td>❌ Precisa comentar índices</td>
+                            <td>✅ Código autodocumentado</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

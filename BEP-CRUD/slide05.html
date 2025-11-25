@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 05: Comparação - Validação de Dados</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-shield-alt"></i> Comparação: Validação de Dados</h2>
+                <p>Validação manual vs automática</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Validação Manual</h3>
+                    <div class="versao1" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Validação repetida em cada função
+def cadastrar_aluno(cursor, conn):
+    nome = input("Nome: ").strip()
+    if not nome:
+        print("❌ Nome é obrigatório!")
+        return
+    
+    idade = input("Idade: ").strip()
+    if idade:
+        try:
+            idade = int(idade)
+        except ValueError:
+            print("❌ Idade inválida!")
+            return
+    
+    nota = input("Nota: ").strip()
+    if nota:
+        try:
+            nota = float(nota)
+            if nota < 0 or nota > 10:
+                print("❌ Nota inválida!")
+                return
+        except ValueError:
+            print("❌ Nota inválida!")
+            return
+
+def atualizar_aluno(cursor, conn):
+    # Mesma validação repetida aqui!
+    nome = input("Nome: ").strip()
+    if not nome:
+        print("❌ Nome é obrigatório!")
+        return
+    # ... código duplicado</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Problema:</strong> Código duplicado, fácil esquecer validações</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Validação Automática</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Validação centralizada na classe Aluno
+class Aluno:
+    def __init__(self, nome, idade=None, nota=None):
+        self._validar_nome(nome)
+        self._validar_idade(idade)
+        self._validar_nota(nota)
+        self._nome = nome
+        self._idade = idade
+        self._nota = nota
+    
+    def _validar_nota(self, nota):
+        if nota is not None and (nota < 0 or nota > 10):
+            raise DadosInvalidosError("nota", nota, "Nota deve estar entre 0 e 10")
+
+# Uso: validação automática
+def _cadastrar_aluno(self):
+    nome = input("Nome: ").strip()
+    idade = int(input("Idade: ")) if input("Idade: ") else None
+    nota = float(input("Nota: ")) if input("Nota: ") else None
+    
+    # Validação acontece automaticamente aqui!
+    aluno = Aluno(nome=nome, idade=idade, nota=nota)
+    self._repository.criar(aluno)</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Validação centralizada, impossível esquecer</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Comparação</h3>
+                    <ul>
+                        <li>✅ <strong>Versão 1:</strong> Validação manual, código duplicado, fácil esquecer</li>
+                        <li>✅ <strong>Versão 2:</strong> Validação automática, centralizada, sempre aplicada</li>
+                        <li>✅ <strong>Manutenção:</strong> Versão 2 é mais fácil de manter (mudar validação em um lugar só)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

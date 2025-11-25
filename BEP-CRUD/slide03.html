@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 03: Versão 2 - Estrutura Orientada a Objetos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-cube"></i> Versão 2: Estrutura Orientada a Objetos</h2>
+                <p>Como o sistema foi reorganizado na versão 2</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> Estrutura de Arquivos</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <pre style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 4px; overflow-x: auto;">
+crud_sistema_v2/
+├── __init__.py          # Inicialização do pacote
+├── models.py            # Classe Aluno (entidade)
+├── database.py          # Classe DatabaseManager
+├── repository.py        # Classe AlunoRepository
+├── menu.py              # Classe Menu
+├── sistema.py           # Classe SistemaAlunos
+└── exceptions.py        # Exceções customizadas</pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Características Principais</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <h4>📦 Organização por Classes</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>models.py:</strong> Classe <code>Aluno</code> (entidade com validação)</li>
+                            <li><strong>database.py:</strong> Classe <code>DatabaseManager</code> (gerencia conexões)</li>
+                            <li><strong>repository.py:</strong> Classe <code>AlunoRepository</code> (operações CRUD)</li>
+                            <li><strong>menu.py:</strong> Classe <code>Menu</code> (interface)</li>
+                            <li><strong>sistema.py:</strong> Classe <code>SistemaAlunos</code> (orquestrador)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: database.py</h3>
+                    <div class="code-block">
+                        <pre><code># Versão 2: Classe com métodos
+class DatabaseManager:
+    def __init__(self, db_name='alunos_v2.db'):
+        self._db_name = db_name
+        self._connection = None
+    
+    def conectar(self):
+        """Conecta ao banco"""
+        if not self._connection:
+            self._connection = sqlite3.connect(self._db_name)
+            self._criar_tabela()
+        return self._connection
+    
+    @contextmanager
+    def get_cursor(self):
+        """Context manager para cursor"""
+        yield self._connection.cursor()
+        self._connection.commit()</code></pre>
+                    </div>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <strong>Características:</strong> Estado encapsulado, context manager, tratamento de erros com exceções customizadas
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: models.py</h3>
+                    <div class="code-block">
+                        <pre><code># Versão 2: Classe com encapsulamento
+class Aluno:
+    def __init__(self, nome, idade=None, curso=None, nota=None):
+        # Validação automática
+        self._validar_nome(nome)
+        self._validar_nota(nota)
+        
+        # Atributos privados
+        self._nome = nome
+        self._idade = idade
+        self._nota = nota
+    
+    @property
+    def nome(self):
+        return self._nome
+    
+    @nome.setter
+    def nome(self, valor):
+        self._validar_nome(valor)
+        self._nome = valor</code></pre>
+                    </div>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <strong>Características:</strong> Encapsulamento, validação automática, propriedades com getters/setters
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Pontos Fortes da Versão 2</h3>
+                    <ul>
+                        <li>✅ <strong>Organizado:</strong> Responsabilidades bem definidas</li>
+                        <li>✅ <strong>Encapsulado:</strong> Dados protegidos e validados</li>
+                        <li>✅ <strong>Extensível:</strong> Fácil adicionar funcionalidades</li>
+                        <li>✅ <strong>Reutilizável:</strong> Classes podem ser usadas em outros contextos</li>
+                        <li>✅ <strong>Profissional:</strong> Adequado para sistemas maiores</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

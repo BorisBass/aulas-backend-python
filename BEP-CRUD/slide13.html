@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 13: Exemplo Prático - Cadastrar Aluno</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide13">
+                <h2><i class="fas fa-code"></i> Exemplo Prático: Cadastrar Aluno</h2>
+                <p>Comparação lado a lado do mesmo código</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Procedural</h3>
+                    <div class="versao1" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># crud_operations.py
+def cadastrar_aluno(cursor, conn):
+    """Cadastra um novo aluno"""
+    try:
+        nome = input("Nome completo: ").strip()
+        if not nome:
+            print("❌ Nome é obrigatório!")
+            return
+        
+        idade = input("Idade: ").strip()
+        if idade:
+            try:
+                idade = int(idade)
+            except ValueError:
+                print("❌ Idade deve ser um número!")
+                return
+        
+        curso = input("Curso: ").strip()
+        
+        nota = input("Nota (0-10): ").strip()
+        if nota:
+            try:
+                nota = float(nota)
+                if nota < 0 or nota > 10:
+                    print("❌ Nota deve estar entre 0 e 10!")
+                    return
+            except ValueError:
+                print("❌ Nota deve ser um número!")
+                return
+        
+        # Inserir no banco
+        cursor.execute('''
+            INSERT INTO alunos (nome, idade, curso, nota)
+            VALUES (?, ?, ?, ?)
+        ''', (nome, idade, curso, nota))
+        
+        conn.commit()
+        print(f"✅ Aluno '{nome}' cadastrado com sucesso!")
+        
+    except sqlite3.Error as e:
+        print(f"❌ Erro no banco: {e}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Orientada a Objetos</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># sistema.py
+def _cadastrar_aluno(self):
+    """Cadastra um novo aluno"""
+    self._menu.exibir_cabecalho("📝 CADASTRO DE NOVO ALUNO")
+    
+    try:
+        nome = input("Nome completo: ").strip()
+        if not nome:
+            raise DadosInvalidosError("nome", motivo="Nome é obrigatório")
+        
+        idade_str = input("Idade: ").strip()
+        idade = int(idade_str) if idade_str else None
+        
+        curso = input("Curso: ").strip() or None
+        
+        nota_str = input("Nota (0-10): ").strip()
+        nota = float(nota_str) if nota_str else None
+        
+        # Criar objeto Aluno (validação automática)
+        aluno = Aluno(nome=nome, idade=idade, curso=curso, nota=nota)
+        
+        # Salvar no banco
+        aluno_criado = self._repository.criar(aluno)
+        print(f"✅ Aluno '{aluno_criado.nome}' cadastrado! (ID: {aluno_criado.id})")
+    
+    except ValueError as e:
+        raise DadosInvalidosError("dados", motivo=f"Formato inválido: {e}")
+    except DadosInvalidosError:
+        raise</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> Diferenças Principais</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Versão 1</th>
+                            <th>Versão 2</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Validação</strong></td>
+                            <td>Manual em cada campo</td>
+                            <td>Automática no construtor de Aluno</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Parâmetros</strong></td>
+                            <td>Recebe cursor e conn</td>
+                            <td>Usa self._repository</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dados</strong></td>
+                            <td>Tupla (nome, idade, curso, nota)</td>
+                            <td>Objeto Aluno</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exceções</strong></td>
+                            <td>Genéricas (sqlite3.Error)</td>
+                            <td>Customizadas (DadosInvalidosError)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Linhas de código</strong></td>
+                            <td>~50 linhas</td>
+                            <td>~30 linhas</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Onde está a Validação na Versão 2?</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <p>A validação está na classe <code>Aluno</code> (models.py):</p>
+                        <div class="code-block" style="margin-top: 8px;">
+                            <pre><code>class Aluno:
+    def __init__(self, nome, idade=None, curso=None, nota=None):
+        # Validação automática
+        self._validar_nome(nome)
+        self._validar_idade(idade)
+        self._validar_nota(nota)
+        
+        self._nome = nome
+        self._idade = idade
+        # ...
+    
+    def _validar_nota(self, nota):
+        if nota is not None and (nota < 0 or nota > 10):
+            raise DadosInvalidosError("nota", nota, "Nota deve estar entre 0 e 10")</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Validação centralizada, reutilizável em qualquer lugar!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

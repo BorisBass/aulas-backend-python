@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 09: Comparação - Reutilização</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-recycle"></i> Comparação: Reutilização</h2>
+                <p>Funções vs Classes - Qual é mais reutilizável?</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Reutilização de Funções</h3>
+                    <div class="versao1" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Função pode ser importada
+from crud_sistema.crud_operations import cadastrar_aluno
+
+# Mas precisa passar cursor e conn toda vez
+conn, cursor = conectar_banco()
+cadastrar_aluno(cursor, conn)
+
+# Problema: dependência explícita de cursor/conn
+# Difícil usar em outros contextos</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Limitação:</strong> Funções dependem de parâmetros externos (cursor, conn)</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Reutilização de Classes</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Classe pode ser instanciada e reutilizada
+from crud_sistema_v2 import Aluno, AlunoRepository, DatabaseManager
+
+# Configurar uma vez
+db = DatabaseManager('meu_banco.db')
+db.conectar()
+repo = AlunoRepository(db)
+
+# Usar em qualquer lugar
+aluno = Aluno(nome="João", idade=20)
+repo.criar(aluno)
+
+# Vantagem: estado encapsulado, fácil reutilizar</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Classes encapsulam estado, mais fácil reutilizar em diferentes contextos</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Exemplo: Usar em Outro Projeto</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Versão 2: Fácil reutilizar
+from crud_sistema_v2 import Aluno, AlunoRepository, DatabaseManager
+
+# Em um script diferente, API, etc.
+db = DatabaseManager('outro_banco.db')
+repo = AlunoRepository(db)
+
+# Mesma classe, contexto diferente
+aluno = Aluno(nome="Maria", curso="Python")
+repo.criar(aluno)
+
+# Versão 1: Mais difícil
+# Precisa importar funções e gerenciar cursor/conn manualmente</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

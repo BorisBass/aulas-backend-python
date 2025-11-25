@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 10: Vantagens e Desvantagens</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .vantagem { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .desvantagem { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-balance-scale"></i> Vantagens e Desvantagens</h2>
+                <p>Quando usar cada abordagem</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Procedural</h3>
+                    <div class="vantagem" style="margin-top: 12px;">
+                        <h4>✅ Vantagens</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Simples:</strong> Fácil de entender para iniciantes</li>
+                            <li><strong>Direto:</strong> Código linear, sem abstrações</li>
+                            <li><strong>Rápido:</strong> Menos overhead, execução mais direta</li>
+                            <li><strong>Adequado:</strong> Para scripts pequenos e médios</li>
+                        </ul>
+                    </div>
+                    <div class="desvantagem" style="margin-top: 12px;">
+                        <h4>❌ Desvantagens</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Código duplicado:</strong> Validações repetidas</li>
+                            <li><strong>Difícil manutenção:</strong> Mudanças em vários lugares</li>
+                            <li><strong>Sem proteção:</strong> Dados podem ser modificados incorretamente</li>
+                            <li><strong>Limitado:</strong> Difícil escalar para sistemas grandes</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Orientada a Objetos</h3>
+                    <div class="vantagem" style="margin-top: 12px;">
+                        <h4>✅ Vantagens</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Organizado:</strong> Código bem estruturado</li>
+                            <li><strong>Reutilizável:</strong> Classes podem ser usadas em outros contextos</li>
+                            <li><strong>Extensível:</strong> Fácil adicionar funcionalidades</li>
+                            <li><strong>Protegido:</strong> Encapsulamento garante integridade</li>
+                            <li><strong>Profissional:</strong> Adequado para sistemas grandes</li>
+                        </ul>
+                    </div>
+                    <div class="desvantagem" style="margin-top: 12px;">
+                        <h4>❌ Desvantagens</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Complexo:</strong> Mais conceitos para aprender</li>
+                            <li><strong>Overhead:</strong> Mais código, mais abstrações</li>
+                            <strong>Over-engineering:</strong> Pode ser excessivo para projetos simples</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-question-circle"></i> Quando Usar Cada Uma?</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Situação</th>
+                            <th>Versão 1 (Procedural)</th>
+                            <th>Versão 2 (OO)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Scripts simples</strong></td>
+                            <td>✅ Ideal</td>
+                            <td>❌ Desnecessário</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Projetos pequenos</strong></td>
+                            <td>✅ Adequado</td>
+                            <td>⚠️ Pode ser excessivo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Projetos médios</strong></td>
+                            <td>⚠️ Funciona, mas...</td>
+                            <td>✅ Recomendado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Projetos grandes</strong></td>
+                            <td>❌ Não recomendado</td>
+                            <td>✅ Essencial</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Equipe grande</strong></td>
+                            <td>❌ Difícil coordenar</td>
+                            <td>✅ Facilita colaboração</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

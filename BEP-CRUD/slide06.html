@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 06: Comparação - Encapsulamento</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-lock"></i> Comparação: Encapsulamento</h2>
+                <p>Dados expostos vs dados protegidos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Sem Encapsulamento</h3>
+                    <div class="versao1" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Dados em tupla - totalmente expostos
+aluno = (1, "João", 20, "Python", 9.5, "2025-01-15")
+
+# Qualquer um pode modificar diretamente
+aluno = (1, "João", -5, "Python", 15.0, "2025-01-15")
+# ❌ Idade negativa e nota > 10 - sem validação!
+
+# Ou modificar índices incorretamente
+aluno[1] = ""  # Nome vazio - sem validação!
+
+# Não há proteção dos dados</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Problema:</strong> Dados podem ser modificados incorretamente sem validação</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Com Encapsulamento</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Dados em objeto - protegidos
+aluno = Aluno(nome="João", idade=20, curso="Python", nota=9.5)
+
+# Atributos privados (com _)
+# aluno._nome  # Não deve ser acessado diretamente
+
+# Acesso controlado via propriedades
+aluno.nome = "Maria"  # ✅ Validação automática
+aluno.nota = 15.0     # ❌ Erro! Nota > 10 (validação)
+
+# Tentar acessar diretamente (não recomendado)
+aluno._nota = 15.0    # ⚠️ Funciona, mas quebra encapsulamento
+
+# Setter com validação
+@nota.setter
+def nota(self, valor):
+    self._validar_nota(valor)  # Validação sempre!
+    self._nota = valor</code></pre>
+                        </div>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Dados protegidos, validação sempre aplicada</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-shield-alt"></i> Conceito de Encapsulamento (BEP-019)</h3>
+                    <ul>
+                        <li>✅ <strong>Atributos privados:</strong> <code>_nome</code>, <code>_idade</code> (convenção Python)</li>
+                        <li>✅ <strong>Getters:</strong> <code>@property</code> para leitura controlada</li>
+                        <li>✅ <strong>Setters:</strong> <code>@nome.setter</code> para escrita com validação</li>
+                        <li>✅ <strong>Proteção:</strong> Dados não podem ser modificados incorretamente</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

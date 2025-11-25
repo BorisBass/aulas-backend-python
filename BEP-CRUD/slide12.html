@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 12: Conceitos Aplicados - BEP-017 a BEP-022</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .conceito { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide12">
+                <h2><i class="fas fa-book"></i> Conceitos Aplicados: BEP-017 a BEP-022</h2>
+                <p>Conceitos de OO aplicados na Versão 2</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Conceitos Utilizados</h3>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-017: Fundamentos de POO</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Classes:</strong> Aluno, DatabaseManager, AlunoRepository, etc.</li>
+                            <li>✅ <strong>Objetos:</strong> Instâncias das classes</li>
+                            <li>✅ <strong>Atributos e Métodos:</strong> Cada classe tem seus próprios</li>
+                        </ul>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-018: Criando e Instanciando Classes</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Construtores:</strong> __init__ em todas as classes</li>
+                            <li>✅ <strong>Instanciação:</strong> aluno = Aluno(...)</li>
+                        </ul>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-019: Encapsulamento</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Atributos privados:</strong> _nome, _idade (convenção _)</li>
+                            <li>✅ <strong>Getters:</strong> @property para leitura</li>
+                            <li>✅ <strong>Setters:</strong> @nome.setter com validação</li>
+                        </ul>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-020: Herança e Polimorfismo</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Herança:</strong> Exceções customizadas herdam de ErroSistema</li>
+                        </ul>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-021: Composição e Associação</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Composição:</strong> SistemaAlunos tem AlunoRepository e Menu</li>
+                            <li>✅ <strong>Associação:</strong> AlunoRepository usa DatabaseManager</li>
+                        </ul>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4>BEP-022: Tratamento de Exceções</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Exceções customizadas:</strong> ErroSistema, DadosInvalidosError, etc.</li>
+                            <li>✅ <strong>Try-except em classes:</strong> Tratamento em todos os métodos</li>
+                            <li>✅ <strong>Hierarquia:</strong> Exceções organizadas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Todos os Conceitos de OO Aplicados</h3>
+                    <p>A Versão 2 demonstra o uso prático de todos os conceitos de Programação Orientada a Objetos aprendidos nas BEP-017 a BEP-022!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

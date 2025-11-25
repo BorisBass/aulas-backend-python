@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 08: Comparação - Organização do Código</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-sitemap"></i> Comparação: Organização do Código</h2>
+                <p>Módulos vs Classes - Estrutura e responsabilidades</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Organização por Módulos</h3>
+                    <div class="versao1" style="margin-top: 12px;">
+                        <pre style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 4px;">
+crud_sistema/
+├── database.py          # Funções de BD
+│   ├── conectar_banco()
+│   └── fechar_conexao()
+├── crud_operations.py   # Funções CRUD
+│   ├── cadastrar_aluno()
+│   ├── listar_alunos()
+│   └── ...
+├── menu.py              # Funções de interface
+│   └── exibir_menu()
+└── main.py              # Orquestração</pre>
+                        <p style="margin-top: 12px;"><strong>Características:</strong> Funções agrupadas por responsabilidade, mas sem estado compartilhado</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Organização por Classes</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <pre style="background: #1A202C; color: #E2E8F0; padding: 12px; border-radius: 4px;">
+crud_sistema_v2/
+├── models.py            # Entidades
+│   └── class Aluno
+├── database.py          # Gerenciamento de BD
+│   └── class DatabaseManager
+├── repository.py        # Operações CRUD
+│   └── class AlunoRepository
+├── menu.py              # Interface
+│   └── class Menu
+└── sistema.py           # Orquestrador
+    └── class SistemaAlunos</pre>
+                        <p style="margin-top: 12px;"><strong>Características:</strong> Classes com responsabilidades bem definidas, estado encapsulado</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-balance-scale"></i> Comparação de Responsabilidades</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Responsabilidade</th>
+                            <th>Versão 1</th>
+                            <th>Versão 2</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Representar Aluno</strong></td>
+                            <td>Tupla genérica</td>
+                            <td>Classe Aluno</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gerenciar BD</strong></td>
+                            <td>Funções em database.py</td>
+                            <td>Classe DatabaseManager</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Operações CRUD</strong></td>
+                            <td>Funções em crud_operations.py</td>
+                            <td>Classe AlunoRepository</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interface</strong></td>
+                            <td>Funções em menu.py</td>
+                            <td>Classe Menu</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Orquestração</strong></td>
+                            <td>main.py com if/elif</td>
+                            <td>Classe SistemaAlunos</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

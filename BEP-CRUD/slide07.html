@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 07: Comparação - Tratamento de Exceções</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .versao1 { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .versao2 { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-exclamation-triangle"></i> Comparação: Tratamento de Exceções</h2>
+                <p>Exceções genéricas vs customizadas</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Versão 1: Exceções Genéricas</h3>
+                    <div class="versao1" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Tratamento genérico
+def cadastrar_aluno(cursor, conn):
+    try:
+        # ... código ...
+        cursor.execute('''
+            INSERT INTO alunos (nome, idade, curso, nota)
+            VALUES (?, ?, ?, ?)
+        ''', (nome, idade, curso, nota))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"❌ Erro no banco: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")
+
+# Problema: mensagens genéricas, difícil identificar tipo de erro</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Versão 2: Exceções Customizadas</h3>
+                    <div class="versao2" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># Exceções customizadas (BEP-022)
+class ErroSistema(Exception):
+    """Exceção base"""
+    pass
+
+class DadosInvalidosError(ErroSistema):
+    """Erro quando dados são inválidos"""
+    def __init__(self, campo, valor=None, motivo=None):
+        # Mensagem específica e clara
+        super().__init__(f"Campo '{campo}': {motivo}")
+
+class AlunoNaoEncontradoError(ErroSistema):
+    """Erro quando aluno não existe"""
+    pass
+
+# Uso: tratamento específico
+try:
+    aluno = Aluno(nome="", nota=15.0)  # Dados inválidos
+except DadosInvalidosError as e:
+    print(f"❌ {e}")  # Mensagem clara e específica</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens das Exceções Customizadas</h3>
+                    <ul>
+                        <li>✅ <strong>Mensagens claras:</strong> Específicas para cada tipo de erro</li>
+                        <li>✅ <strong>Tratamento específico:</strong> Diferentes ações para diferentes erros</li>
+                        <li>✅ <strong>Hierarquia:</strong> Exceções organizadas (BEP-022)</li>
+                        <li>✅ <strong>Manutenção:</strong> Fácil identificar e corrigir problemas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

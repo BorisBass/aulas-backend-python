@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-CRUD - Slide 14: Resumo e Conclusões</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .resumo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code-compare"></i> BEP-CRUD: Comparação entre Versões do Sistema CRUD</h1>
+            <p>Procedural vs Orientado a Objetos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide14">
+                <h2><i class="fas fa-check-circle"></i> Resumo e Conclusões</h2>
+                <p>Principais diferenças e aprendizados</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Principais Diferenças</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Versão 1 (Procedural)</th>
+                            <th>Versão 2 (OO)</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Estrutura</strong></td>
+                            <td>Funções em módulos</td>
+                            <td>Classes e objetos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dados</strong></td>
+                            <td>Tuplas e dicionários</td>
+                            <td>Objetos encapsulados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Validação</strong></td>
+                            <td>Manual em cada função</td>
+                            <td>Automática na classe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Encapsulamento</strong></td>
+                            <td>Não há</td>
+                            <td>Atributos privados</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exceções</strong></td>
+                            <td>Genéricas</td>
+                            <td>Customizadas e hierárquicas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reutilização</strong></td>
+                            <td>Funções</td>
+                            <td>Classes reutilizáveis</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Aprendizados Principais</h3>
+                    <div class="resumo" style="margin-top: 12px;">
+                        <h4>📚 Conceitos Consolidados</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Procedural vs OO:</strong> Dois paradigmas válidos, cada um com seu lugar</li>
+                            <li>✅ <strong>Evolução do código:</strong> Como refatorar de procedural para OO</li>
+                            <li>✅ <strong>Organização:</strong> Importância de estruturar código adequadamente</li>
+                            <li>✅ <strong>Validação:</strong> Centralizar validações melhora manutenção</li>
+                            <li>✅ <strong>Encapsulamento:</strong> Proteger dados garante integridade</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-quote-left"></i> Conclusão</h3>
+                    <div class="resumo" style="margin-top: 12px;">
+                        <p><strong>Nenhuma versão é "melhor" que a outra!</strong> Cada uma tem seu lugar:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Versão 1 (Procedural):</strong> Ideal para scripts simples, projetos pequenos, aprendizado inicial</li>
+                            <li>✅ <strong>Versão 2 (OO):</strong> Ideal para projetos médios/grandes, sistemas complexos, trabalho em equipe</li>
+                            <li>✅ <strong>Escolha:</strong> Depende do contexto, tamanho do projeto e necessidades específicas</li>
+                        </ul>
+                        <p style="margin-top: 12px;"><strong>O importante é entender ambos os paradigmas e saber quando usar cada um!</strong></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-star"></i> Próximos Passos</h3>
+                    <ul>
+                        <li>✅ Explore ambas as versões do código</li>
+                        <li>✅ Compare implementações lado a lado</li>
+                        <li>✅ Pratique refatorando código procedural para OO</li>
+                        <li>✅ Aplique os conceitos em seus próprios projetos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-CRUD: Comparação entre Versões</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
