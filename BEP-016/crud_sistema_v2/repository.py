@@ -1,30 +1,28 @@
 """
-Módulo de Repositório (Padrão Repository)
-Aplica conceitos de BEP-017, BEP-018, BEP-021: Classes, Composição
+Módulo de Repositório (Operações CRUD)
+Aplica conceitos básicos de BEP-017, BEP-021: Classes, Composição simples
 """
 
-from typing import List, Optional
 from .models import Aluno
 from .database import DatabaseManager
-from .exceptions import AlunoNaoEncontradoError, ErroBancoDados
 
 
 class AlunoRepository:
     """
     Classe responsável pelas operações CRUD no banco de dados
-    Aplica: Classes, Composição (tem DatabaseManager), Encapsulamento
+    Versão simplificada - apenas métodos de classe
     """
     
-    def __init__(self, db_manager: DatabaseManager):
+    def __init__(self, db_manager):
         """
         Inicializa o repositório com um gerenciador de banco
         
         Args:
             db_manager: Instância de DatabaseManager (Composição)
         """
-        self._db_manager = db_manager
+        self.db_manager = db_manager
     
-    def criar(self, aluno: Aluno) -> Aluno:
+    def criar(self, aluno):
         """
         Cria um novo aluno no banco de dados
         
@@ -33,28 +31,26 @@ class AlunoRepository:
         
         Returns:
             Aluno criado com ID atribuído
-        
-        Raises:
-            ErroBancoDados: Se houver erro no banco
         """
         try:
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute('''
-                    INSERT INTO alunos (nome, idade, curso, nota)
-                    VALUES (?, ?, ?, ?)
-                ''', aluno.to_tuple())
-                
-                # Obter ID gerado
-                aluno_id = cursor.lastrowid
-                
-                # Buscar aluno completo
-                return self.buscar_por_id(aluno_id)
+            cursor = self.db_manager.get_cursor()
+            cursor.execute('''
+                INSERT INTO alunos (nome, idade, curso, nota)
+                VALUES (?, ?, ?, ?)
+            ''', (aluno.nome, aluno.idade, aluno.curso, aluno.nota))
+            
+            self.db_manager.connection.commit()
+            
+            # Obter ID gerado
+            aluno_id = cursor.lastrowid
+            
+            # Buscar aluno completo
+            return self.buscar_por_id(aluno_id)
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("criar aluno", e)
+            print(f"❌ Erro ao criar aluno: {e}")
+            return None
     
-    def buscar_por_id(self, aluno_id: int) -> Aluno:
+    def buscar_por_id(self, aluno_id):
         """
         Busca um aluno pelo ID
         
@@ -62,29 +58,31 @@ class AlunoRepository:
             aluno_id: ID do aluno
         
         Returns:
-            Objeto Aluno encontrado
-        
-        Raises:
-            AlunoNaoEncontradoError: Se aluno não for encontrado
-            ErroBancoDados: Se houver erro no banco
+            Objeto Aluno encontrado ou None
         """
         try:
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute("SELECT * FROM alunos WHERE id = ?", (aluno_id,))
-                resultado = cursor.fetchone()
-                
-                if not resultado:
-                    raise AlunoNaoEncontradoError(aluno_id=aluno_id)
-                
-                return Aluno.from_tuple(resultado)
-        except AlunoNaoEncontradoError:
-            raise
+            cursor = self.db_manager.get_cursor()
+            cursor.execute("SELECT * FROM alunos WHERE id = ?", (aluno_id,))
+            resultado = cursor.fetchone()
+            
+            if not resultado:
+                return None
+            
+            # Criar objeto Aluno a partir da tupla
+            aluno_id_db, nome, idade, curso, nota, data_cadastro = resultado
+            return Aluno(
+                nome=nome,
+                idade=idade,
+                curso=curso,
+                nota=nota,
+                aluno_id=aluno_id_db,
+                data_cadastro=data_cadastro
+            )
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("buscar aluno", e)
+            print(f"❌ Erro ao buscar aluno: {e}")
+            return None
     
-    def buscar_por_nome(self, nome: str) -> List[Aluno]:
+    def buscar_por_nome(self, nome):
         """
         Busca alunos por nome (usando LIKE)
         
@@ -93,46 +91,64 @@ class AlunoRepository:
         
         Returns:
             Lista de alunos encontrados
-        
-        Raises:
-            ErroBancoDados: Se houver erro no banco
         """
         try:
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute(
-                    "SELECT * FROM alunos WHERE nome LIKE ? ORDER BY nome",
-                    (f"%{nome}%",)
+            cursor = self.db_manager.get_cursor()
+            cursor.execute(
+                "SELECT * FROM alunos WHERE nome LIKE ? ORDER BY nome",
+                (f"%{nome}%",)
+            )
+            resultados = cursor.fetchall()
+            
+            alunos = []
+            for row in resultados:
+                aluno_id, nome_db, idade, curso, nota, data_cadastro = row
+                aluno = Aluno(
+                    nome=nome_db,
+                    idade=idade,
+                    curso=curso,
+                    nota=nota,
+                    aluno_id=aluno_id,
+                    data_cadastro=data_cadastro
                 )
-                resultados = cursor.fetchall()
-                
-                return [Aluno.from_tuple(row) for row in resultados]
+                alunos.append(aluno)
+            
+            return alunos
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("buscar alunos por nome", e)
+            print(f"❌ Erro ao buscar alunos: {e}")
+            return []
     
-    def listar_todos(self) -> List[Aluno]:
+    def listar_todos(self):
         """
         Lista todos os alunos cadastrados
         
         Returns:
             Lista de todos os alunos
-        
-        Raises:
-            ErroBancoDados: Se houver erro no banco
         """
         try:
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute("SELECT * FROM alunos ORDER BY nome")
-                resultados = cursor.fetchall()
-                
-                return [Aluno.from_tuple(row) for row in resultados]
+            cursor = self.db_manager.get_cursor()
+            cursor.execute("SELECT * FROM alunos ORDER BY nome")
+            resultados = cursor.fetchall()
+            
+            alunos = []
+            for row in resultados:
+                aluno_id, nome, idade, curso, nota, data_cadastro = row
+                aluno = Aluno(
+                    nome=nome,
+                    idade=idade,
+                    curso=curso,
+                    nota=nota,
+                    aluno_id=aluno_id,
+                    data_cadastro=data_cadastro
+                )
+                alunos.append(aluno)
+            
+            return alunos
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("listar alunos", e)
+            print(f"❌ Erro ao listar alunos: {e}")
+            return []
     
-    def atualizar(self, aluno: Aluno) -> Aluno:
+    def atualizar(self, aluno):
         """
         Atualiza um aluno existente
         
@@ -140,35 +156,33 @@ class AlunoRepository:
             aluno: Objeto Aluno com dados atualizados (deve ter ID)
         
         Returns:
-            Aluno atualizado
-        
-        Raises:
-            AlunoNaoEncontradoError: Se aluno não for encontrado
-            ErroBancoDados: Se houver erro no banco
+            True se atualizado com sucesso, False caso contrário
         """
         if not aluno.id:
-            raise ValueError("Aluno deve ter ID para ser atualizado")
+            print("❌ Aluno deve ter ID para ser atualizado")
+            return False
         
         try:
             # Verificar se existe
-            self.buscar_por_id(aluno.id)
+            aluno_existente = self.buscar_por_id(aluno.id)
+            if not aluno_existente:
+                print(f"❌ Aluno com ID {aluno.id} não encontrado!")
+                return False
             
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute('''
-                    UPDATE alunos 
-                    SET nome = ?, idade = ?, curso = ?, nota = ?
-                    WHERE id = ?
-                ''', (*aluno.to_tuple(), aluno.id))
-                
-                return self.buscar_por_id(aluno.id)
-        except AlunoNaoEncontradoError:
-            raise
+            cursor = self.db_manager.get_cursor()
+            cursor.execute('''
+                UPDATE alunos 
+                SET nome = ?, idade = ?, curso = ?, nota = ?
+                WHERE id = ?
+            ''', (aluno.nome, aluno.idade, aluno.curso, aluno.nota, aluno.id))
+            
+            self.db_manager.connection.commit()
+            return True
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("atualizar aluno", e)
+            print(f"❌ Erro ao atualizar aluno: {e}")
+            return False
     
-    def remover(self, aluno_id: int) -> bool:
+    def remover(self, aluno_id):
         """
         Remove um aluno do banco de dados
         
@@ -176,96 +190,84 @@ class AlunoRepository:
             aluno_id: ID do aluno a ser removido
         
         Returns:
-            True se removido com sucesso
-        
-        Raises:
-            AlunoNaoEncontradoError: Se aluno não for encontrado
-            ErroBancoDados: Se houver erro no banco
+            True se removido com sucesso, False caso contrário
         """
         try:
             # Verificar se existe
-            self.buscar_por_id(aluno_id)
+            aluno = self.buscar_por_id(aluno_id)
+            if not aluno:
+                print(f"❌ Aluno com ID {aluno_id} não encontrado!")
+                return False
             
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute("DELETE FROM alunos WHERE id = ?", (aluno_id,))
-                return True
-        except AlunoNaoEncontradoError:
-            raise
+            cursor = self.db_manager.get_cursor()
+            cursor.execute("DELETE FROM alunos WHERE id = ?", (aluno_id,))
+            self.db_manager.connection.commit()
+            return True
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("remover aluno", e)
+            print(f"❌ Erro ao remover aluno: {e}")
+            return False
     
-    def contar_total(self) -> int:
+    def contar_total(self):
         """
         Retorna o total de alunos cadastrados
         
         Returns:
             Número total de alunos
-        
-        Raises:
-            ErroBancoDados: Se houver erro no banco
         """
         try:
-            with self._db_manager.get_cursor() as cursor:
-                cursor.execute("SELECT COUNT(*) FROM alunos")
-                return cursor.fetchone()[0]
+            cursor = self.db_manager.get_cursor()
+            cursor.execute("SELECT COUNT(*) FROM alunos")
+            return cursor.fetchone()[0]
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("contar alunos", e)
+            print(f"❌ Erro ao contar alunos: {e}")
+            return 0
     
-    def obter_estatisticas(self) -> dict:
+    def obter_estatisticas(self):
         """
         Obtém estatísticas do banco de dados
         
         Returns:
             Dicionário com estatísticas
-        
-        Raises:
-            ErroBancoDados: Se houver erro no banco
         """
         try:
             stats = {}
+            cursor = self.db_manager.get_cursor()
             
-            with self._db_manager.get_cursor() as cursor:
-                # Total de alunos
-                cursor.execute("SELECT COUNT(*) FROM alunos")
-                stats['total'] = cursor.fetchone()[0]
-                
-                # Alunos por curso
-                cursor.execute('''
-                    SELECT curso, COUNT(*) as quantidade 
-                    FROM alunos 
-                    WHERE curso IS NOT NULL AND curso != ''
-                    GROUP BY curso 
-                    ORDER BY quantidade DESC
-                ''')
-                stats['por_curso'] = dict(cursor.fetchall())
-                
-                # Média das notas
-                cursor.execute("SELECT AVG(nota) FROM alunos WHERE nota IS NOT NULL")
-                resultado = cursor.fetchone()[0]
-                stats['media_notas'] = round(resultado, 2) if resultado else None
-                
-                # Cadastrados hoje
-                cursor.execute("SELECT COUNT(*) FROM alunos WHERE data_cadastro = DATE('now')")
-                stats['cadastrados_hoje'] = cursor.fetchone()[0]
-                
-                # Melhor nota
-                cursor.execute("SELECT MAX(nota), nome FROM alunos WHERE nota IS NOT NULL")
-                resultado = cursor.fetchone()
-                if resultado[0]:
-                    stats['melhor_nota'] = {
-                        'nota': round(resultado[0], 1),
-                        'aluno': resultado[1]
-                    }
-                else:
-                    stats['melhor_nota'] = None
+            # Total de alunos
+            cursor.execute("SELECT COUNT(*) FROM alunos")
+            stats['total'] = cursor.fetchone()[0]
+            
+            # Alunos por curso
+            cursor.execute('''
+                SELECT curso, COUNT(*) as quantidade 
+                FROM alunos 
+                WHERE curso IS NOT NULL AND curso != ''
+                GROUP BY curso 
+                ORDER BY quantidade DESC
+            ''')
+            stats['por_curso'] = dict(cursor.fetchall())
+            
+            # Média das notas
+            cursor.execute("SELECT AVG(nota) FROM alunos WHERE nota IS NOT NULL")
+            resultado = cursor.fetchone()[0]
+            stats['media_notas'] = round(resultado, 2) if resultado else None
+            
+            # Cadastrados hoje
+            cursor.execute("SELECT COUNT(*) FROM alunos WHERE data_cadastro = DATE('now')")
+            stats['cadastrados_hoje'] = cursor.fetchone()[0]
+            
+            # Melhor nota
+            cursor.execute("SELECT MAX(nota), nome FROM alunos WHERE nota IS NOT NULL")
+            resultado = cursor.fetchone()
+            if resultado[0]:
+                stats['melhor_nota'] = {
+                    'nota': round(resultado[0], 1),
+                    'aluno': resultado[1]
+                }
+            else:
+                stats['melhor_nota'] = None
             
             return stats
         except Exception as e:
-            if isinstance(e, ErroBancoDados):
-                raise
-            raise ErroBancoDados("obter estatísticas", e)
-
+            print(f"❌ Erro ao obter estatísticas: {e}")
+            return {}

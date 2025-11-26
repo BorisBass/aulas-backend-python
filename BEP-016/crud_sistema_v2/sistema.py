@@ -1,28 +1,21 @@
 """
 Módulo Principal do Sistema
-Aplica conceitos de BEP-017 a BEP-022: Classes, Composição, Tratamento de Exceções
+Aplica conceitos básicos de BEP-017 a BEP-022: Classes, Composição, Tratamento de Exceções simples
 """
 
-from typing import Optional
 from .database import DatabaseManager
 from .repository import AlunoRepository
 from .menu import Menu
 from .models import Aluno
-from .exceptions import (
-    ErroSistema,
-    AlunoNaoEncontradoError,
-    DadosInvalidosError,
-    ErroBancoDados
-)
 
 
 class SistemaAlunos:
     """
     Classe principal que orquestra o sistema
-    Aplica: Classes, Composição (tem Repository e Menu), Tratamento de Exceções
+    Versão simplificada - apenas classes e métodos básicos
     """
     
-    def __init__(self, db_name: str = 'alunos_v2.db'):
+    def __init__(self, db_name='alunos_v2.db'):
         """
         Inicializa o sistema
         
@@ -30,18 +23,18 @@ class SistemaAlunos:
             db_name: Nome do arquivo do banco de dados
         """
         # Composição: Sistema tem DatabaseManager e AlunoRepository
-        self._db_manager = DatabaseManager(db_name)
-        self._repository = AlunoRepository(self._db_manager)
-        self._menu = Menu()
+        self.db_manager = DatabaseManager(db_name)
+        self.repository = AlunoRepository(self.db_manager)
+        self.menu = Menu()
     
     def iniciar(self):
         """Inicia o sistema"""
         try:
             print("🚀 Iniciando Sistema de Gerenciamento de Alunos (Versão OO)...")
-            self._db_manager.conectar()
+            self.db_manager.conectar()
             
             while True:
-                self._menu.exibir_menu_principal()
+                self.menu.exibir_menu_principal()
                 opcao = input("👉 Escolha uma opção: ").strip()
                 
                 try:
@@ -62,10 +55,8 @@ class SistemaAlunos:
                         break
                     else:
                         print("❌ Opção inválida! Tente novamente.")
-                except (DadosInvalidosError, AlunoNaoEncontradoError) as e:
-                    print(f"❌ {e}")
-                except ErroBancoDados as e:
-                    print(f"❌ {e}")
+                except ValueError as e:
+                    print(f"❌ Erro: {e}")
                 except Exception as e:
                     print(f"❌ Erro inesperado: {e}")
                 
@@ -76,16 +67,17 @@ class SistemaAlunos:
         except Exception as e:
             print(f"\n❌ Erro crítico: {e}")
         finally:
-            self._db_manager.fechar()
+            self.db_manager.fechar()
     
     def _cadastrar_aluno(self):
         """Cadastra um novo aluno"""
-        self._menu.exibir_cabecalho("📝 CADASTRO DE NOVO ALUNO")
+        self.menu.exibir_cabecalho("📝 CADASTRO DE NOVO ALUNO")
         
         try:
             nome = input("Nome completo: ").strip()
             if not nome:
-                raise DadosInvalidosError("nome", motivo="Nome é obrigatório")
+                print("❌ Nome é obrigatório!")
+                return
             
             idade_str = input("Idade: ").strip()
             idade = int(idade_str) if idade_str else None
@@ -99,19 +91,24 @@ class SistemaAlunos:
             aluno = Aluno(nome=nome, idade=idade, curso=curso, nota=nota)
             
             # Salvar no banco
-            aluno_criado = self._repository.criar(aluno)
-            print(f"✅ Aluno '{aluno_criado.nome}' cadastrado com sucesso! (ID: {aluno_criado.id})")
+            aluno_criado = self.repository.criar(aluno)
+            if aluno_criado:
+                print(f"✅ Aluno '{aluno_criado.nome}' cadastrado com sucesso! (ID: {aluno_criado.id})")
+            else:
+                print("❌ Erro ao cadastrar aluno!")
         
         except ValueError as e:
-            raise DadosInvalidosError("dados", motivo=f"Formato inválido: {e}")
+            print(f"❌ Erro: {e}")
+        except Exception as e:
+            print(f"❌ Erro inesperado: {e}")
     
     def _listar_alunos(self):
         """Lista todos os alunos"""
         try:
-            alunos = self._repository.listar_todos()
-            self._menu.exibir_lista_alunos(alunos)
-        except ErroBancoDados as e:
-            print(f"❌ {e}")
+            alunos = self.repository.listar_todos()
+            self.menu.exibir_lista_alunos(alunos)
+        except Exception as e:
+            print(f"❌ Erro: {e}")
     
     def _buscar_aluno(self):
         """Busca alunos por nome"""
@@ -121,18 +118,18 @@ class SistemaAlunos:
             return
         
         try:
-            alunos = self._repository.buscar_por_nome(nome_busca)
-            self._menu.exibir_lista_alunos(alunos, f"RESULTADO DA BUSCA por '{nome_busca}'")
-        except ErroBancoDados as e:
-            print(f"❌ {e}")
+            alunos = self.repository.buscar_por_nome(nome_busca)
+            self.menu.exibir_lista_alunos(alunos, f"RESULTADO DA BUSCA por '{nome_busca}'")
+        except Exception as e:
+            print(f"❌ Erro: {e}")
     
     def _atualizar_aluno(self):
         """Atualiza dados de um aluno"""
-        self._menu.exibir_cabecalho("✏️ ATUALIZAR DADOS DO ALUNO")
+        self.menu.exibir_cabecalho("✏️ ATUALIZAR DADOS DO ALUNO")
         
         try:
             # Listar alunos
-            alunos = self._repository.listar_todos()
+            alunos = self.repository.listar_todos()
             if not alunos:
                 print("📭 Nenhum aluno cadastrado!")
                 return
@@ -143,10 +140,15 @@ class SistemaAlunos:
             
             aluno_id_str = input("\nDigite o ID do aluno: ").strip()
             if not aluno_id_str:
-                raise DadosInvalidosError("ID", motivo="ID é obrigatório")
+                print("❌ ID é obrigatório!")
+                return
             
             aluno_id = int(aluno_id_str)
-            aluno = self._repository.buscar_por_id(aluno_id)
+            aluno = self.repository.buscar_por_id(aluno_id)
+            
+            if not aluno:
+                print(f"❌ Aluno com ID {aluno_id} não encontrado!")
+                return
             
             print(f"\n📝 Atualizando dados de: {aluno.nome}")
             print("Deixe em branco para manter o valor atual")
@@ -162,19 +164,23 @@ class SistemaAlunos:
             aluno.atualizar(nome=nome, idade=idade, curso=curso, nota=nota)
             
             # Salvar no banco
-            aluno_atualizado = self._repository.atualizar(aluno)
-            print(f"✅ Aluno {aluno_id} atualizado com sucesso!")
+            if self.repository.atualizar(aluno):
+                print(f"✅ Aluno {aluno_id} atualizado com sucesso!")
+            else:
+                print("❌ Erro ao atualizar aluno!")
         
-        except ValueError:
-            raise DadosInvalidosError("ID", motivo="ID deve ser um número")
+        except ValueError as e:
+            print(f"❌ Erro: {e}")
+        except Exception as e:
+            print(f"❌ Erro inesperado: {e}")
     
     def _remover_aluno(self):
         """Remove um aluno"""
-        self._menu.exibir_cabecalho("🗑️ REMOVER ALUNO")
+        self.menu.exibir_cabecalho("🗑️ REMOVER ALUNO")
         
         try:
             # Listar alunos
-            alunos = self._repository.listar_todos()
+            alunos = self.repository.listar_todos()
             if not alunos:
                 print("📭 Nenhum aluno cadastrado!")
                 return
@@ -185,31 +191,40 @@ class SistemaAlunos:
             
             aluno_id_str = input("\nDigite o ID do aluno para remover: ").strip()
             if not aluno_id_str:
-                raise DadosInvalidosError("ID", motivo="ID é obrigatório")
+                print("❌ ID é obrigatório!")
+                return
             
             aluno_id = int(aluno_id_str)
-            aluno = self._repository.buscar_por_id(aluno_id)
+            aluno = self.repository.buscar_por_id(aluno_id)
+            
+            if not aluno:
+                print(f"❌ Aluno com ID {aluno_id} não encontrado!")
+                return
             
             confirmacao = input(f"\n⚠️ Tem certeza que deseja remover '{aluno.nome}'? (s/n): ").strip().lower()
             
             if confirmacao == 's':
-                self._repository.remover(aluno_id)
-                print(f"✅ Aluno '{aluno.nome}' removido com sucesso!")
+                if self.repository.remover(aluno_id):
+                    print(f"✅ Aluno '{aluno.nome}' removido com sucesso!")
+                else:
+                    print("❌ Erro ao remover aluno!")
             else:
                 print("❌ Operação cancelada.")
         
-        except ValueError:
-            raise DadosInvalidosError("ID", motivo="ID deve ser um número")
+        except ValueError as e:
+            print(f"❌ Erro: {e}")
+        except Exception as e:
+            print(f"❌ Erro inesperado: {e}")
     
     def _mostrar_estatisticas(self):
         """Mostra estatísticas do sistema"""
-        self._menu.exibir_cabecalho("📊 ESTATÍSTICAS DO SISTEMA")
+        self.menu.exibir_cabecalho("📊 ESTATÍSTICAS DO SISTEMA")
         
         try:
-            stats = self._repository.obter_estatisticas()
-            self._menu.exibir_estatisticas(stats)
-        except ErroBancoDados as e:
-            print(f"❌ {e}")
+            stats = self.repository.obter_estatisticas()
+            self.menu.exibir_estatisticas(stats)
+        except Exception as e:
+            print(f"❌ Erro: {e}")
 
 
 def main():
@@ -220,4 +235,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
