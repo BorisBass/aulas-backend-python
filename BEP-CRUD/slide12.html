@@ -45,15 +45,16 @@
                     <div class="conceito" style="margin-top: 12px;">
                         <h4>BEP-019: Encapsulamento</h4>
                         <ul style="margin-top: 8px;">
-                            <li>✅ <strong>Atributos privados:</strong> _nome, _idade (convenção _)</li>
-                            <li>✅ <strong>Getters:</strong> @property para leitura</li>
-                            <li>✅ <strong>Setters:</strong> @nome.setter com validação</li>
+                            <li>✅ <strong>Atributos privados:</strong> uso de <code>_</code> e <code>__</code> em atributos internos (convenção de encapsulamento)</li>
+                            <li>✅ <strong>Getters:</strong> <code>@property</code> para leitura de dados (forma “pythônica”)</li>
+                            <li>✅ <strong>Setters:</strong> <code>@nome.setter</code>, <code>@nota.setter</code> com validação de dados</li>
                         </ul>
                     </div>
                     <div class="conceito" style="margin-top: 12px;">
                         <h4>BEP-020: Herança e Polimorfismo</h4>
                         <ul style="margin-top: 8px;">
-                            <li>✅ <strong>Herança:</strong> Exceções customizadas herdam de ErroSistema</li>
+                            <li>✅ <strong>Herança simples:</strong> exceção <code>ErroSistema</code> herda de <code>Exception</code></li>
+                            <li>ℹ️ <strong>Observação:</strong> nesta versão simplificada não usamos uma hierarquia grande de exceções nem polimorfismo avançado.</li>
                         </ul>
                     </div>
                     <div class="conceito" style="margin-top: 12px;">
@@ -66,16 +67,36 @@
                     <div class="conceito" style="margin-top: 12px;">
                         <h4>BEP-022: Tratamento de Exceções</h4>
                         <ul style="margin-top: 8px;">
-                            <li>✅ <strong>Exceções customizadas:</strong> ErroSistema, DadosInvalidosError, etc.</li>
-                            <li>✅ <strong>Try-except em classes:</strong> Tratamento em todos os métodos</li>
-                            <li>✅ <strong>Hierarquia:</strong> Exceções organizadas</li>
+                            <li>✅ <strong>Try-except em classes:</strong> uso de <code>try/except</code> em métodos do sistema</li>
+                            <li>✅ <strong>Exceções simples:</strong> uso de <code>ValueError</code>, <code>Exception</code> e da exceção customizada <code>ErroSistema</code></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-check-circle"></i> Todos os Conceitos de OO Aplicados</h3>
-                    <p>A Versão 2 demonstra o uso prático de todos os conceitos de Programação Orientada a Objetos aprendidos nas BEP-017 a BEP-022!</p>
+                    <h3><i class="fas fa-plus-circle"></i> Conceitos que vão além das BEP-017 a BEP-022</h3>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✨ <strong><code>@staticmethod</code> (novo):</strong> usado na classe <code>Menu</code> para funções que não precisam de <code>self</code>, apenas para organizar a interface.</li>
+                            <li>✨ <strong>Pacotes e imports relativos (novos):</strong> uso de <code>__init__.py</code> e imports como <code>from .models import Aluno</code> para organizar o projeto como um pacote Python.</li>
+                            <li>✨ <strong>Metadados do módulo:</strong> nomes especiais como <code>__version__</code>, <code>__author__</code> e <code>__all__</code> em <code>__init__.py</code>, que ajudam na documentação/organização, mas não são obrigatórios.</li>
+                            <li>✨ <strong>Papéis das classes:</strong> <code>Aluno</code> (entidade), <code>AlunoRepository</code> (fala com o banco), <code>DatabaseManager</code> (gerencia conexão), <code>Menu</code> (interface de texto) e <code>SistemaAlunos</code> (orquestrador) — primeiros passos em direção a “padrões de projeto”.</li>
+                            <li>✨ <strong>Método especial <code>__str__</code>:</strong> usado em <code>Aluno</code> para imprimir o objeto de forma mais amigável.</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Importante:</strong> esses recursos são apresentados aqui como <em>bônus</em>, para aproximar o código de projetos reais, mas vão além do mínimo exigido nas BEP-017 a BEP-022.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-font"></i> Convenções de Nomes Usadas no Código</h3>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>🧱 <strong>Classes:</strong> nomes em CamelCase (CapWords), como <code>Aluno</code>, <code>DatabaseManager</code>, <code>AlunoRepository</code>, <code>SistemaAlunos</code> — é uma <strong>convenção</strong> de estilo recomendada (PEP 8), não uma regra da linguagem.</li>
+                            <li>📄 <strong>Arquivos e módulos:</strong> nomes em minúsculas com underline, como <code>models.py</code>, <code>database.py</code>, <code>repository.py</code>.</li>
+                            <li>🔑 <strong>Atributos e métodos:</strong> em minúsculas com underline, como <code>nome_completo</code>, <code>get_cursor()</code>.</li>
+                            <li>🔒 <strong>Encapsulamento por convenção:</strong> um underscore (<code>_idade</code>) indica “uso interno”, dois underscores (<code>__nome</code>) indicam atributo mais protegido; o Python aceita outros nomes, mas seguir essas convenções deixa o código mais claro para qualquer pessoa que leia.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

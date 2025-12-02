@@ -42,7 +42,47 @@
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-code"></i> Implementação Básica</h3>
+                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: muitos <code>if</code> espalhados</h3>
+                    <p>Vamos usar o <strong>mesmo exemplo de notificações</strong>, mas <strong>sem</strong> Factory.</p>
+                    <div class="code-block">
+                        <pre><code>class EmailNotificacao:
+    def enviar(self, mensagem):
+        print(f"📧 Email enviado: {mensagem}")
+
+class SMSNotificacao:
+    def enviar(self, mensagem):
+        print(f"📱 SMS enviado: {mensagem}")
+
+class PushNotificacao:
+    def enviar(self, mensagem):
+        print(f"🔔 Push enviado: {mensagem}")
+
+def enviar_notificacao(tipo, mensagem):
+    if tipo == "email":
+        notif = EmailNotificacao()
+        notif.enviar(mensagem)
+    elif tipo == "sms":
+        notif = SMSNotificacao()
+        notif.enviar(mensagem)
+    elif tipo == "push":
+        notif = PushNotificacao()
+        notif.enviar(mensagem)
+    else:
+        print("Tipo não suportado")
+
+# Uso
+enviar_notificacao("email", "Bem-vindo!")
+enviar_notificacao("sms", "Seu código é 1234")</code></pre>
+                    </div>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>Problema:</strong> essa lógica de <code>if/elif</code> tende a se repetir 
+                        em vários lugares do sistema. Se surgir um novo tipo (ex: WhatsApp), você terá que 
+                        alterar todos os pontos em que essa criação aparece.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Com Factory: criação centralizada</h3>
                     <div class="code-block">
                         <pre><code># Classes de produtos
 class Carro:

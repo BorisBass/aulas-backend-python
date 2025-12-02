@@ -69,7 +69,39 @@ crud_sistema_v2/
 
 ## 🚀 Como Usar
 
-### Execução Direta
+### ⚙️ Ambiente Virtual (venv) - Opcional mas Recomendado
+
+**📌 Importante:** Este projeto usa apenas a biblioteca padrão do Python (`sqlite3`), então **tecnicamente não é obrigatório** usar um ambiente virtual.
+
+**Porém, é uma boa prática usar venv porque:**
+- ✅ Ensina boas práticas desde o início
+- ✅ Prepara para projetos futuros que terão dependências externas
+- ✅ Isola o ambiente do sistema operacional
+- ✅ É uma prática profissional padrão em Python
+
+**Como criar e usar um venv (opcional):**
+
+```bash
+# 1. Criar o ambiente virtual (na raiz do projeto ou na pasta do sistema)
+python3 -m venv venv
+
+# 2. Ativar o ambiente virtual
+# No Linux/Mac:
+source venv/bin/activate
+
+# No Windows:
+# venv\Scripts\activate
+
+# 3. Executar o sistema normalmente
+python3 -m BEP-016.crud_sistema_v2.sistema
+
+# 4. Desativar quando terminar (opcional)
+deactivate
+```
+
+**💡 Dica:** Se você não usar venv, pode executar diretamente. O sistema funcionará normalmente!
+
+### Execução do Sistema
 
 **⚠️ IMPORTANTE:** Este sistema deve ser executado como módulo Python devido aos imports relativos.
 
@@ -83,42 +115,96 @@ python3 -m BEP-016.crud_sistema_v2.sistema
 python -m BEP-016.crud_sistema_v2.sistema
 ```
 
-**Por que não funciona executar diretamente?**
-- Os arquivos usam imports relativos (`from .database import ...`)
-- Imports relativos só funcionam quando executados como módulo (`-m`)
-- Isso é uma prática comum em Python para manter a estrutura de pacotes
+### 📚 Entendendo Imports Relativos e Módulos Python
 
-### Como Módulo
+#### O que são Imports Relativos?
 
-**Nota:** Como o nome da pasta `BEP-016` contém hífen, não é possível importar diretamente. Use uma das opções abaixo:
+No código deste sistema, você verá imports assim:
 
-**Opção 1: Ajustar sys.path**
 ```python
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-# Agora pode importar usando importlib
-import importlib.util
-spec = importlib.util.spec_from_file_location(
-    "crud_sistema_v2", 
-    "BEP-016/crud_sistema_v2/sistema.py"
-)
-sistema_module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(sistema_module)
-
-sistema = sistema_module.SistemaAlunos()
-sistema.iniciar()
+# Em sistema.py
+from .database import DatabaseManager
+from .repository import AlunoRepository
+from .menu import Menu
+from .models import Aluno
 ```
 
-**Opção 2: Executar como módulo (recomendado)**
+O **ponto (`.`)** no início indica um **import relativo**. Isso significa:
+- `from .database import ...` = "importe do módulo `database` que está na **mesma pasta**"
+- `from ..pasta import ...` = "importe da pasta **pai**"
+- `from .models import ...` = "importe do módulo `models` que está na **mesma pasta**"
+
+#### Por que não funciona executar diretamente?
+
+Se você tentar executar o arquivo diretamente:
+
 ```bash
-python -m BEP-016.crud_sistema_v2.sistema
+# ❌ ISSO NÃO FUNCIONA:
+python3 BEP-016/crud_sistema_v2/sistema.py
 ```
+
+Você receberá um erro: `ImportError: attempted relative import with no known parent package`
+
+**Por quê?**
+- Quando você executa um arquivo Python diretamente, o Python **não sabe** que ele faz parte de um pacote
+- O Python trata o arquivo como um **script isolado**
+- Sem contexto de pacote, o ponto (`.`) não tem significado - não há "pasta atual" definida
+- O Python não consegue encontrar `database.py`, `models.py`, etc.
+
+#### Como funciona com `python3 -m`?
+
+Quando você usa `python3 -m`:
+
+```bash
+# ✅ ISSO FUNCIONA:
+python3 -m BEP-016.crud_sistema_v2.sistema
+```
+
+O Python:
+1. **Entende** que `BEP-016.crud_sistema_v2` é um **pacote** (pasta com `__init__.py`)
+2. **Define o contexto** para os imports relativos
+3. O ponto (`.`) agora significa "mesma pasta do pacote"
+4. Consegue encontrar `database.py`, `models.py`, etc. corretamente
+
+#### Analogia Simples
+
+- **Executar diretamente:** É como pedir "pegue o arquivo da pasta ao lado" sem saber onde você está
+- **Executar como módulo:** É como dizer "estou na pasta `BEP-016/crud_sistema_v2`, pegue o arquivo da pasta ao lado"
+
+#### Por que o nome da pasta tem hífen?
+
+**⚠️ Observação importante:** O nome da pasta `BEP-016` contém um **hífen (`-`)**, o que causa uma limitação:
+
+- **Não é possível** fazer imports absolutos como `from BEP-016.crud_sistema_v2 import ...` porque hífens não são válidos em nomes de módulos Python
+- Por isso, usamos **imports relativos** (`from .database import ...`)
+- E por isso precisamos executar como módulo com `python3 -m`
+
+**💡 Dica para projetos futuros:** Use **underscore (`_`)** em vez de hífen nos nomes de pastas que contêm código Python (ex: `BEP_016` em vez de `BEP-016`). Isso permite usar tanto imports relativos quanto absolutos!
+
+#### Resumo
+
+| Forma de Executar | Funciona? | Por quê? |
+|-------------------|-----------|----------|
+| `python3 sistema.py` | ❌ Não | Python não sabe que é um pacote |
+| `python3 -m BEP-016.crud_sistema_v2.sistema` | ✅ Sim | Python entende a estrutura do pacote |
+
+#### Alternativa (se não houvesse hífen)
+
+Se a pasta se chamasse `BEP_016` (com underscore), você poderia usar imports absolutos:
+
+```python
+# Em vez de imports relativos:
+from .database import DatabaseManager
+
+# Poderia usar imports absolutos:
+from BEP_016.crud_sistema_v2.database import DatabaseManager
+```
+
+E poderia executar diretamente (embora ainda seja melhor usar `-m` para manter a estrutura de pacote).
 
 ### Uso das Classes Individualmente
 
-**Nota:** Devido ao hífen no nome da pasta, é mais simples executar o sistema diretamente ou usar os arquivos individualmente dentro da pasta.
+**Nota:** Devido ao hífen no nome da pasta `BEP-016`, a forma mais simples é executar o sistema completo ou trabalhar dentro da pasta `crud_sistema_v2/` diretamente.
 
 # Criar aluno
 aluno = Aluno(nome="João Silva", idade=20, curso="Python", nota=9.5)

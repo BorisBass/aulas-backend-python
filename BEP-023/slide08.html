@@ -42,7 +42,42 @@
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-code"></i> Implementação Básica</h3>
+                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: tudo acoplado no produto</h3>
+                    <p>Vamos usar o <strong>mesmo exemplo de mudança de preço</strong>, mas <strong>sem</strong> Observer.</p>
+                    <div class="code-block">
+                        <pre><code>def notificar_clientes(produto, antigo, novo):
+    print(f"🎉 Clientes: {produto} mudou de preço!")
+
+def atualizar_estoque(produto, antigo, novo):
+    print(f"📊 Estoque: atualizando preço de {produto}")
+
+class ProdutoSimples:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self._preco = preco
+    
+    @property
+    def preco(self):
+        return self._preco
+    
+    @preco.setter
+    def preco(self, novo_preco):
+        if novo_preco != self._preco:
+            antigo = self._preco
+            self._preco = novo_preco
+            # Chamadas diretas (acoplamento forte)
+            notificar_clientes(self.nome, antigo, novo_preco)
+            atualizar_estoque(self.nome, antigo, novo_preco)</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px; background:#FED7D7; border-left-color:#E53E3E;">
+                        <strong>Problema:</strong> a classe <code>ProdutoSimples</code> conhece diretamente 
+                        todas as funções que precisam ser chamadas. Se surgir um novo tipo de notificação, 
+                        o código da classe terá que ser alterado.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Com Observer: produto avisa, observers reagem</h3>
                     <div class="code-block">
                         <pre><code>class Subject:
     def __init__(self):

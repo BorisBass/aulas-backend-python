@@ -82,12 +82,13 @@ def cadastrar_aluno(cursor, conn):
                             <pre><code># sistema.py
 def _cadastrar_aluno(self):
     """Cadastra um novo aluno"""
-    self._menu.exibir_cabecalho("📝 CADASTRO DE NOVO ALUNO")
+    self.menu.exibir_cabecalho("📝 CADASTRO DE NOVO ALUNO")
     
     try:
         nome = input("Nome completo: ").strip()
         if not nome:
-            raise DadosInvalidosError("nome", motivo="Nome é obrigatório")
+            print("❌ Nome é obrigatório!")
+            return
         
         idade_str = input("Idade: ").strip()
         idade = int(idade_str) if idade_str else None
@@ -101,13 +102,16 @@ def _cadastrar_aluno(self):
         aluno = Aluno(nome=nome, idade=idade, curso=curso, nota=nota)
         
         # Salvar no banco
-        aluno_criado = self._repository.criar(aluno)
-        print(f"✅ Aluno '{aluno_criado.nome}' cadastrado! (ID: {aluno_criado.id})")
+        aluno_criado = self.repository.criar(aluno)
+        if aluno_criado:
+            print(f"✅ Aluno '{aluno_criado.nome}' cadastrado com sucesso! (ID: {aluno_criado.id})")
+        else:
+            print("❌ Erro ao cadastrar aluno!")
     
     except ValueError as e:
-        raise DadosInvalidosError("dados", motivo=f"Formato inválido: {e}")
-    except DadosInvalidosError:
-        raise</code></pre>
+        print(f"❌ Erro: {e}")
+    except Exception as e:
+        print(f"❌ Erro inesperado: {e}")</code></pre>
                         </div>
                     </div>
                 </div>
@@ -128,7 +132,7 @@ def _cadastrar_aluno(self):
                         <tr>
                             <td><strong>Parâmetros</strong></td>
                             <td>Recebe cursor e conn</td>
-                            <td>Usa self._repository</td>
+                            <td>Usa <code>self.repository</code> e <code>self.menu</code> (composição)</td>
                         </tr>
                         <tr>
                             <td><strong>Dados</strong></td>
@@ -138,7 +142,7 @@ def _cadastrar_aluno(self):
                         <tr>
                             <td><strong>Exceções</strong></td>
                             <td>Genéricas (sqlite3.Error)</td>
-                            <td>Customizadas (DadosInvalidosError)</td>
+                            <td><code>try/except</code> simples com <code>ValueError</code> e <code>Exception</code></td>
                         </tr>
                         <tr>
                             <td><strong>Linhas de código</strong></td>
@@ -151,24 +155,46 @@ def _cadastrar_aluno(self):
                 <div class="card" style="margin-top: 16px;">
                     <h3><i class="fas fa-lightbulb"></i> Onde está a Validação na Versão 2?</h3>
                     <div class="versao2" style="margin-top: 12px;">
-                        <p>A validação está na classe <code>Aluno</code> (models.py):</p>
+                        <p>A validação principal da Versão 2 está na classe <code>Aluno</code> (models.py), usando <code>@property</code> e <code>@setter</code>:</p>
                         <div class="code-block" style="margin-top: 8px;">
                             <pre><code>class Aluno:
-    def __init__(self, nome, idade=None, curso=None, nota=None):
-        # Validação automática
-        self._validar_nome(nome)
-        self._validar_idade(idade)
-        self._validar_nota(nota)
-        
-        self._nome = nome
+    def __init__(self, nome, idade=None, curso=None, nota=None, aluno_id=None, data_cadastro=None):
+        self._id = aluno_id
+        self._curso = curso
+        self._data_cadastro = data_cadastro
         self._idade = idade
-        # ...
+        
+        # Atributos com validação via setter
+        self.__nome = ""
+        self.nome = nome  # usa o setter com validação
+        
+        self.__nota = 0
+        if nota is not None:
+            self.nota = nota  # usa o setter com validação
+        else:
+            self.__nota = None
     
-    def _validar_nota(self, nota):
-        if nota is not None and (nota < 0 or nota > 10):
-            raise DadosInvalidosError("nota", nota, "Nota deve estar entre 0 e 10")</code></pre>
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, valor):
+        if not valor or not valor.strip():
+            raise ValueError("Nome é obrigatório e não pode estar vazio")
+        self.__nome = valor
+    
+    @property
+    def nota(self):
+        return self.__nota
+    
+    @nota.setter
+    def nota(self, valor):
+        if valor is not None and (valor < 0 or valor > 10):
+            raise ValueError("Nota deve estar entre 0 e 10")
+        self.__nota = valor</code></pre>
                         </div>
-                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Validação centralizada, reutilizável em qualquer lugar!</p>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> sempre que alguém tentar alterar nome ou nota, a validação acontece automaticamente dentro da classe, sem repetir código em cada função.</p>
                     </div>
                 </div>
             </div>
