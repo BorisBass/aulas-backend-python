@@ -72,31 +72,48 @@ def atualizar_aluno(cursor, conn):
                     <h3><i class="fas fa-cube"></i> Versão 2: Validação Automática</h3>
                     <div class="versao2" style="margin-top: 12px;">
                         <div class="code-block">
-                            <pre><code># Validação centralizada na classe Aluno
+                            <pre><code># Validação centralizada na classe Aluno (BEP-019)
 class Aluno:
     def __init__(self, nome, idade=None, nota=None):
-        self._validar_nome(nome)
-        self._validar_idade(idade)
-        self._validar_nota(nota)
-        self._nome = nome
-        self._idade = idade
-        self._nota = nota
+        # Atributos privados (convenção Python)
+        self.__nome = ""
+        self.nome = nome  # Usa o setter para validar
+        
+        self.__nota = 0
+        if nota is not None:
+            self.nota = nota  # Usa o setter para validar
     
-    def _validar_nota(self, nota):
-        if nota is not None and (nota < 0 or nota > 10):
-            raise DadosInvalidosError("nota", nota, "Nota deve estar entre 0 e 10")
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, valor):
+        if not valor or not valor.strip():
+            raise ValueError("Nome é obrigatório")
+        self.__nome = valor
+    
+    @property
+    def nota(self):
+        return self.__nota
+    
+    @nota.setter
+    def nota(self, valor):
+        if valor is not None and (valor < 0 or valor > 10):
+            raise ValueError("Nota deve estar entre 0 e 10")
+        self.__nota = valor
 
 # Uso: validação automática
 def _cadastrar_aluno(self):
     nome = input("Nome: ").strip()
-    idade = int(input("Idade: ")) if input("Idade: ") else None
-    nota = float(input("Nota: ")) if input("Nota: ") else None
+    nota_str = input("Nota: ").strip()
+    nota = float(nota_str) if nota_str else None
     
     # Validação acontece automaticamente aqui!
-    aluno = Aluno(nome=nome, idade=idade, nota=nota)
-    self._repository.criar(aluno)</code></pre>
+    aluno = Aluno(nome=nome, nota=nota)
+    self.repository.criar(aluno)</code></pre>
                         </div>
-                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Validação centralizada, impossível esquecer</p>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Validação centralizada com @property/@setter (forma pythônica - BEP-019), impossível esquecer</p>
                     </div>
                 </div>
 

@@ -53,33 +53,31 @@ aluno[1] = ""  # Nome vazio - sem validação!
                             <pre><code># Dados em objeto - protegidos
 aluno = Aluno(nome="João", idade=20, curso="Python", nota=9.5)
 
-# Atributos privados (com _)
-# aluno._nome  # Não deve ser acessado diretamente
+# Atributos privados (com __ para nome e nota)
+# aluno.__nome  # Não deve ser acessado diretamente
 
-# Acesso controlado via propriedades
-aluno.nome = "Maria"  # ✅ Validação automática
-aluno.nota = 15.0     # ❌ Erro! Nota > 10 (validação)
+# Acesso controlado via propriedades (@property)
+aluno.nome = "Maria"  # ✅ Validação automática via setter
+aluno.nota = 15.0     # ❌ Erro! ValueError (nota > 10)
 
-# Tentar acessar diretamente (não recomendado)
-aluno._nota = 15.0    # ⚠️ Funciona, mas quebra encapsulamento
-
-# Setter com validação
+# Setter com validação direta (BEP-019)
 @nota.setter
 def nota(self, valor):
-    self._validar_nota(valor)  # Validação sempre!
-    self._nota = valor</code></pre>
+    if valor is not None and (valor < 0 or valor > 10):
+        raise ValueError("Nota deve estar entre 0 e 10")
+    self.__nota = valor  # Atributo privado com __</code></pre>
                         </div>
-                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Dados protegidos, validação sempre aplicada</p>
+                        <p style="margin-top: 12px;"><strong>Vantagem:</strong> Dados protegidos, validação sempre aplicada via @property/@setter</p>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 16px;">
                     <h3><i class="fas fa-shield-alt"></i> Conceito de Encapsulamento (BEP-019)</h3>
                     <ul>
-                        <li>✅ <strong>Atributos privados:</strong> <code>_nome</code>, <code>_idade</code> (convenção Python)</li>
+                        <li>✅ <strong>Atributos privados:</strong> <code>__nome</code>, <code>__nota</code> (com validação) ou <code>_idade</code>, <code>_curso</code> (sem validação especial)</li>
                         <li>✅ <strong>Getters:</strong> <code>@property</code> para leitura controlada</li>
-                        <li>✅ <strong>Setters:</strong> <code>@nome.setter</code> para escrita com validação</li>
-                        <li>✅ <strong>Proteção:</strong> Dados não podem ser modificados incorretamente</li>
+                        <li>✅ <strong>Setters:</strong> <code>@nome.setter</code>, <code>@nota.setter</code> para escrita com validação</li>
+                        <li>✅ <strong>Proteção:</strong> Dados não podem ser modificados incorretamente (validação automática)</li>
                     </ul>
                 </div>
             </div>

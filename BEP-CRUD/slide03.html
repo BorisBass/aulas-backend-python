@@ -60,24 +60,29 @@ crud_sistema_v2/
                         <pre><code># Versão 2: Classe com métodos
 class DatabaseManager:
     def __init__(self, db_name='alunos_v2.db'):
-        self._db_name = db_name
-        self._connection = None
+        self.db_name = db_name
+        self.connection = None
     
     def conectar(self):
         """Conecta ao banco"""
-        if not self._connection:
-            self._connection = sqlite3.connect(self._db_name)
+        if not self.connection:
+            self.connection = sqlite3.connect(self.db_name)
             self._criar_tabela()
-        return self._connection
+        return self.connection
     
-    @contextmanager
     def get_cursor(self):
-        """Context manager para cursor"""
-        yield self._connection.cursor()
-        self._connection.commit()</code></pre>
+        """Retorna um cursor do banco"""
+        if not self.connection:
+            self.conectar()
+        return self.connection.cursor()
+    
+    def fechar(self):
+        """Fecha a conexão"""
+        if self.connection:
+            self.connection.close()</code></pre>
                     </div>
                     <div class="versao2" style="margin-top: 12px;">
-                        <strong>Características:</strong> Estado encapsulado, context manager, tratamento de erros com exceções customizadas
+                        <strong>Características:</strong> Estado encapsulado, métodos simples para gerenciar conexão
                     </div>
                 </div>
 

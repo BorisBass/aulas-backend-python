@@ -50,39 +50,39 @@ def cadastrar_aluno(cursor, conn):
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-cube"></i> Versão 2: Exceções Customizadas</h3>
+                    <h3><i class="fas fa-cube"></i> Versão 2: Exceções Simplificadas</h3>
                     <div class="versao2" style="margin-top: 12px;">
                         <div class="code-block">
-                            <pre><code># Exceções customizadas (BEP-022)
+                            <pre><code># Exceções customizadas básicas (BEP-022)
 class ErroSistema(Exception):
-    """Exceção base"""
+    """Exceção base para erros do sistema"""
     pass
 
-class DadosInvalidosError(ErroSistema):
-    """Erro quando dados são inválidos"""
-    def __init__(self, campo, valor=None, motivo=None):
-        # Mensagem específica e clara
-        super().__init__(f"Campo '{campo}': {motivo}")
+# Validação usa ValueError (padrão Python)
+class Aluno:
+    @nome.setter
+    def nome(self, valor):
+        if not valor or not valor.strip():
+            raise ValueError("Nome é obrigatório")
+        self.__nome = valor
 
-class AlunoNaoEncontradoError(ErroSistema):
-    """Erro quando aluno não existe"""
-    pass
-
-# Uso: tratamento específico
+# Uso: tratamento com ValueError
 try:
     aluno = Aluno(nome="", nota=15.0)  # Dados inválidos
-except DadosInvalidosError as e:
-    print(f"❌ {e}")  # Mensagem clara e específica</code></pre>
+except ValueError as e:
+    print(f"❌ {e}")  # Mensagem clara
+except Exception as e:
+    print(f"❌ Erro inesperado: {e}")</code></pre>
                         </div>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-check-circle"></i> Vantagens das Exceções Customizadas</h3>
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Tratamento de Exceções</h3>
                     <ul>
-                        <li>✅ <strong>Mensagens claras:</strong> Específicas para cada tipo de erro</li>
-                        <li>✅ <strong>Tratamento específico:</strong> Diferentes ações para diferentes erros</li>
-                        <li>✅ <strong>Hierarquia:</strong> Exceções organizadas (BEP-022)</li>
+                        <li>✅ <strong>Mensagens claras:</strong> ValueError com mensagens específicas</li>
+                        <li>✅ <strong>Tratamento adequado:</strong> Captura de ValueError para validação, Exception para erros gerais</li>
+                        <li>✅ <strong>Simplicidade:</strong> Uso de exceções padrão Python (BEP-022)</li>
                         <li>✅ <strong>Manutenção:</strong> Fácil identificar e corrigir problemas</li>
                     </ul>
                 </div>
