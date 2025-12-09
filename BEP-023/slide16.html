@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 16: Exercícios Práticos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exercicio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .dica { background: #FEF5E7; border-left: 4px solid #F6AD55; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> Módulo 4 - Padrões de Desenvolvimento de Software</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide16">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Aplicando padrões em situações reais</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Exercício 1: Singleton para Logger</h3>
+                    <div class="exercicio" style="margin-top: 12px;">
+                        <p><strong>Desafio:</strong> Crie uma classe Logger usando o padrão Singleton que:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Permite apenas uma instância</li>
+                            <li>Armazena logs em uma lista</li>
+                            <li>Possui método <code>log(mensagem, nivel)</code> onde nível pode ser "INFO", "WARNING", "ERROR"</li>
+                            <li>Possui método <code>obter_logs()</code> que retorna todos os logs</li>
+                            <li>Possui método <code>limpar_logs()</code> que limpa a lista</li>
+                        </ul>
+                    </div>
+                    <div class="dica" style="margin-top: 12px;">
+                        <strong>💡 Dica:</strong> Use <code>__new__</code> para garantir uma única instância. 
+                        Verifique se já foi inicializado antes de criar a lista de logs.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Exercício 2: Factory de Formas Geométricas</h3>
+                    <div class="exercicio" style="margin-top: 12px;">
+                        <p><strong>Desafio:</strong> Crie um sistema usando Factory Pattern que:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Cria diferentes formas geométricas (Círculo, Retângulo, Triângulo)</li>
+                            <li>Cada forma tem método <code>calcular_area()</code></li>
+                            <li>Factory recebe tipo e parâmetros necessários</li>
+                            <li>Factory valida se tipo é suportado</li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Exemplo de uso:</strong></p>
+                        <div class="code-block" style="margin-top: 8px;">
+                            <pre><code>forma1 = FormaFactory.criar("circulo", raio=5)
+forma2 = FormaFactory.criar("retangulo", largura=10, altura=5)
+print(forma1.calcular_area())  # ~78.54
+print(forma2.calcular_area())  # 50</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Exercício 3: Observer para Sistema de Notificações</h3>
+                    <div class="exercicio" style="margin-top: 12px;">
+                        <p><strong>Desafio:</strong> Implemente um sistema de notificações usando Observer Pattern:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Classe <code>NotificacaoSubject</code> que gerencia observers</li>
+                            <li>Métodos: <code>adicionar_observer()</code>, <code>remover_observer()</code>, <code>notificar()</code></li>
+                            <li>Diferentes tipos de observers: <code>EmailObserver</code>, <code>SMSObserver</code>, <code>PushObserver</code></li>
+                            <li>Cada observer implementa método <code>atualizar(mensagem)</code></li>
+                        </ul>
+                        <p style="margin-top: 8px;"><strong>Exemplo de uso:</strong></p>
+                        <div class="code-block" style="margin-top: 8px;">
+                            <pre><code>sistema = NotificacaoSubject()
+sistema.adicionar_observer(EmailObserver())
+sistema.adicionar_observer(SMSObserver())
+sistema.notificar("Nova mensagem recebida!")</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Exercício 4: Identificar Padrões</h3>
+                    <div class="exercicio" style="margin-top: 12px;">
+                        <p><strong>Desafio:</strong> Analise os seguintes cenários e identifique qual padrão seria mais adequado:</p>
+                        <ol style="margin-top: 8px;">
+                            <li>Sistema precisa garantir apenas uma conexão com banco de dados</li>
+                            <li>Precisa criar diferentes tipos de documentos (PDF, Word, HTML) dinamicamente</li>
+                            <li>Múltiplos componentes precisam ser notificados quando um arquivo é salvo</li>
+                            <li>Precisa adaptar uma API antiga para trabalhar com código novo</li>
+                            <li>Quer adicionar funcionalidades (cache, logging) a métodos sem modificar classes</li>
+                        </ol>
+                    </div>
+                    <div class="dica" style="margin-top: 12px;">
+                        <strong>💡 Dica:</strong> Revise os slides anteriores para identificar os padrões adequados!
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Exercício 5: Refatoração</h3>
+                    <div class="exercicio" style="margin-top: 12px;">
+                        <p><strong>Desafio:</strong> Refatore o código abaixo usando um padrão apropriado:</p>
+                        <div class="code-block" style="margin-top: 8px;">
+                            <pre><code># Código atual (sem padrão)
+def processar_pagamento(tipo, valor):
+    if tipo == "credito":
+        # lógica para cartão de crédito
+        print(f"Processando pagamento crédito: R$ {valor}")
+    elif tipo == "debito":
+        # lógica para débito
+        print(f"Processando pagamento débito: R$ {valor}")
+    elif tipo == "pix":
+        # lógica para PIX
+        print(f"Processando pagamento PIX: R$ {valor}")
+    elif tipo == "boleto":
+        # lógica para boleto
+        print(f"Processando pagamento boleto: R$ {valor}")
+    else:
+        print("Tipo inválido")
+
+# Refatore usando Factory Pattern</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas para Resolver os Exercícios</h3>
+                    <ul>
+                        <li>✅ Comece identificando o <strong>problema</strong> que precisa resolver</li>
+                        <li>✅ Escolha o padrão mais <strong>adequado</strong> para o problema</li>
+                        <li>✅ Implemente de forma <strong>simples</strong> primeiro</li>
+                        <li>✅ Teste sua implementação com <strong>exemplos práticos</strong></li>
+                        <li>✅ Revise e <strong>melhore</strong> se necessário</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px; background: #F0FFF4; border-left: 4px solid #38A169;">
+                    <h3><i class="fas fa-book"></i> Respostas dos Exercícios</h3>
+                    <p style="margin-top: 10px;">
+                        Confira as respostas comentadas e detalhadas para todos os exercícios:
+                    </p>
+                    <a href="RESPOSTAS_EXERCICIOS_DESIGN_PATTERNS.md" target="_blank" 
+                       style="display: inline-block; margin-top: 12px; padding: 10px 20px; 
+                              background: #38A169; color: white; text-decoration: none; 
+                              border-radius: 5px; font-weight: bold;">
+                        <i class="fas fa-file-alt"></i> Ver Respostas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

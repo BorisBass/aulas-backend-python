@@ -3,135 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-023 - Slide 10: Anti-padrões - O que Evitar</title>
+    <title>BEP-026 - Slide 10: Padrão Observer - Teoria</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
-        .antipadrao { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
-        .solucao { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .conceito { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .quando-usar { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
-            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-026: Padrão Observer</h1>
+            <p>Comunicação desacoplada entre objetos</p>
         </div>
         
         <div class="nav"></div>
 
         <div class="content">
             <div class="slide active" id="slide10">
-                <h2><i class="fas fa-exclamation-triangle"></i> Anti-padrões: O que Evitar</h2>
-                <p>Erros comuns ao usar padrões de projeto</p>
+                <h2><i class="fas fa-bell"></i> Padrão Observer - Conceito e Teoria</h2>
+                <p>Entendendo quando e por que usar Observer</p>
                 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-info-circle"></i> O que são Anti-padrões?</h3>
-                    <p><strong>Anti-padrões</strong> são soluções comuns a problemas recorrentes que são <strong>ineficazes</strong> 
-                    ou <strong>contraproducentes</strong>. São padrões que parecem bons, mas na prática causam mais problemas.</p>
-                    <div class="antipadrao" style="margin-top: 12px;">
-                        <strong>⚠️ Atenção:</strong> Anti-padrões são tão importantes quanto padrões! 
-                        Conhecê-los ajuda a evitar erros comuns.
+                    <h3><i class="fas fa-info-circle"></i> O que é Observer?</h3>
+                    <p>O padrão <strong>Observer</strong> define uma dependência um-para-muitos entre objetos, 
+                    de modo que quando um objeto muda de estado, todos os seus dependentes são notificados 
+                    e atualizados automaticamente.</p>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Definição formal:</strong> Observer é um padrão comportamental que permite 
+                        que um objeto (Subject) notifique múltiplos objetos (Observers) sobre mudanças em seu estado, 
+                        sem acoplamento forte entre eles.
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-bug"></i> Anti-padrão 1: God Object</h3>
-                    <p><strong>Problema:</strong> Uma classe que faz tudo, violando o princípio de responsabilidade única.</p>
-                    <div class="code-block">
-                        <pre><code># ❌ God Object - faz tudo
-class Sistema:
-    def processar_pedido(self): pass
-    def enviar_email(self): pass
-    def calcular_imposto(self): pass
-    def gerar_relatorio(self): pass
-    def conectar_banco(self): pass
-    # ... 50 métodos mais</code></pre>
+                    <h3><i class="fas fa-question-circle"></i> Problema que Resolve</h3>
+                    <p>Quando você tem um objeto que muda de estado e outros objetos precisam ser notificados:</p>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>❌ Sem Observer:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Objeto conhece diretamente todos que precisam ser notificados</li>
+                            <li>Acoplamento forte - mudanças em um afetam outros</li>
+                            <li>Difícil adicionar novos "ouvintes" sem modificar código</li>
+                            <li>Lógica de notificação espalhada</li>
+                            <li>Chamadas diretas a múltiplas funções/objetos</li>
+                        </ul>
                     </div>
-                    <div class="solucao" style="margin-top: 12px;">
-                        <strong>✅ Solução:</strong> Dividir em classes menores com responsabilidades específicas. 
-                        Usar padrões como Facade para simplificar interface se necessário.
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-bug"></i> Anti-padrão 2: Singleton Excessivo</h3>
-                    <p><strong>Problema:</strong> Usar Singleton para tudo, criando dependências globais difíceis de testar.</p>
-                    <div class="code-block">
-                        <pre><code># ❌ Singleton em tudo
-class Configuracao(Singleton): pass
-class Logger(Singleton): pass
-class Cache(Singleton): pass
-class Database(Singleton): pass
-class EmailService(Singleton): pass
-# ... tudo é Singleton!</code></pre>
-                    </div>
-                    <div class="solucao" style="margin-top: 12px;">
-                        <strong>✅ Solução:</strong> Use Singleton apenas quando realmente precisa de uma única instância. 
-                        Considere injeção de dependência para melhor testabilidade.
+                    <div class="quando-usar" style="margin-top: 12px;">
+                        <strong>✅ Com Observer:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Subject não conhece Observers concretos</li>
+                            <li>Desacoplamento - Subject e Observers são independentes</li>
+                            <li>Fácil adicionar/remover Observers dinamicamente</li>
+                            <li>Notificações automáticas e eficientes</li>
+                            <li>Comunicação através de interface comum</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-bug"></i> Anti-padrão 3: Over-Engineering</h3>
-                    <p><strong>Problema:</strong> Aplicar padrões complexos para problemas simples.</p>
-                    <div class="code-block">
-                        <pre><code># ❌ Over-engineering
-# Criando AbstractFactory + Builder + Strategy
-# para um sistema que apenas salva dados simples
-
-class SimpleDataSaver:
-    def save(self, data):
-        # Solução simples seria suficiente
-        with open("data.txt", "w") as f:
-            f.write(data)</code></pre>
-                    </div>
-                    <div class="solucao" style="margin-top: 12px;">
-                        <strong>✅ Solução:</strong> Comece simples. Adicione padrões apenas quando necessário. 
-                        "Premature optimization is the root of all evil."
+                    <h3><i class="fas fa-check-circle"></i> Quando Usar Observer?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="quando-usar">
+                            <h4>✅ Use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Um objeto precisa notificar <strong>múltiplos objetos</strong></li>
+                                <li>Quer <strong>desacoplar</strong> o objeto que muda dos que reagem</li>
+                                <li>Precisa de <strong>sistema de eventos</strong></li>
+                                <li>Quer <strong>adicionar/remover</strong> listeners dinamicamente</li>
+                                <li>Precisa de <strong>comunicação assíncrona</strong></li>
+                            </ul>
+                        </div>
+                        <div class="problema">
+                            <h4>❌ Não use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Há apenas <strong>um observador</strong> (overhead desnecessário)</li>
+                                <li>Notificações são <strong>muito frequentes</strong> (pode ser ineficiente)</li>
+                                <li>Observers precisam de <strong>ordem específica</strong> complexa</li>
+                                <li>Comunicação é <strong>simples</strong> e direta</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-bug"></i> Anti-padrão 4: Cargo Cult Programming</h3>
-                    <p><strong>Problema:</strong> Copiar padrões sem entender por quê, apenas porque "é assim que se faz".</p>
-                    <div class="antipadrao" style="margin-top: 12px;">
-                        <strong>Exemplo:</strong> Usar Factory para criar apenas um tipo de objeto, 
-                        ou usar Observer quando um simples callback seria suficiente.
-                    </div>
-                    <div class="solucao" style="margin-top: 12px;">
-                        <strong>✅ Solução:</strong> Entenda o problema antes de aplicar o padrão. 
-                        Pergunte-se: "Este padrão realmente resolve meu problema?"
+                    <h3><i class="fas fa-list"></i> Casos de Uso Comuns</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4><i class="fas fa-shopping-cart"></i> E-commerce</h4>
+                            <p>Quando preço de produto muda, notificar clientes interessados, atualizar estoque, etc.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-desktop"></i> Interface Gráfica (GUI)</h4>
+                            <p>Quando dados mudam, atualizar múltiplos componentes da interface automaticamente.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-bell"></i> Sistemas de Notificação</h4>
+                            <p>Quando evento ocorre, notificar email, SMS, push, etc. simultaneamente.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-chart-line"></i> Model-View-Controller (MVC)</h4>
+                            <p>Quando Model muda, Views são atualizadas automaticamente.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-list"></i> Outros Anti-padrões Comuns</h3>
-                    <ul>
-                        <li>❌ <strong>Spaghetti Code:</strong> Código sem estrutura, difícil de seguir</li>
-                        <li>❌ <strong>Copy-Paste Programming:</strong> Duplicar código em vez de reutilizar</li>
-                        <li>❌ <strong>Golden Hammer:</strong> Usar sempre o mesmo padrão para tudo</li>
-                        <li>❌ <strong>Magic Numbers/Strings:</strong> Valores hardcoded sem explicação</li>
-                        <li>❌ <strong>Premature Abstraction:</strong> Criar abstrações antes de precisar</li>
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> Componentes do Observer</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4><i class="fas fa-broadcast-tower"></i> Subject (Observado)</h4>
+                            <p>O objeto que muda de estado e notifica os observers:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Mantém lista de observers</li>
+                                <li>Método para adicionar observer</li>
+                                <li>Método para remover observer</li>
+                                <li>Método para notificar todos</li>
+                            </ul>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-eye"></i> Observer (Observador)</h4>
+                            <p>O objeto que recebe notificações:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Implementa interface comum</li>
+                                <li>Método para receber atualização</li>
+                                <li>Reage à mudança do Subject</li>
+                                <li>Pode ser múltiplos tipos diferentes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Observer</h3>
+                    <ul style="margin-top: 8px;">
+                        <li>✅ <strong>Desacoplamento:</strong> Subject e Observers são independentes</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos observers sem modificar Subject</li>
+                        <li>✅ <strong>Comunicação:</strong> Notificações automáticas e eficientes</li>
+                        <li>✅ <strong>Flexibilidade:</strong> Observers podem ser adicionados/removidos dinamicamente</li>
+                        <li>✅ <strong>Reutilização:</strong> Observers podem ser reutilizados em diferentes Subjects</li>
                     </ul>
                 </div>
 
                 <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-check-circle"></i> Como Evitar Anti-padrões</h3>
-                    <ul>
-                        <li>✅ <strong>Entenda o problema</strong> antes de escolher solução</li>
-                        <li>✅ <strong>Comece simples</strong>, adicione complexidade quando necessário</li>
-                        <li>✅ <strong>Refatore</strong> quando identificar problemas</li>
-                        <li>✅ <strong>Code review</strong> ajuda a identificar anti-padrões</li>
-                        <li>✅ <strong>Aprenda</strong> com erros e experiências</li>
-                    </ul>
+                    <h3><i class="fas fa-lightbulb"></i> Princípio por Trás do Observer</h3>
+                    <p>O Observer funciona através de:</p>
+                    <ol style="margin-top: 8px;">
+                        <li><strong>Registro:</strong> Observers se registram no Subject</li>
+                        <li><strong>Mudança de estado:</strong> Subject muda seu estado</li>
+                        <li><strong>Notificação:</strong> Subject percorre lista e notifica cada Observer</li>
+                        <li><strong>Reação:</strong> Cada Observer reage à notificação</li>
+                    </ol>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Próximo slide:</strong> Veremos como implementar Observer em Python, 
+                        criando um Subject que mantém lista de Observers e os notifica quando há mudanças.
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <p>BEP-026: Padrão Observer</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
@@ -139,5 +175,4 @@ class SimpleDataSaver:
     <script src="../script.js"></script>
 </body>
 </html>
-
 

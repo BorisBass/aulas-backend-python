@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-023 - Slide 07: Exemplo Prático - Factory</title>
+    <title>BEP-024 - Slide 07: Padrão Singleton - Prática</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
@@ -15,202 +15,274 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
-            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-024: Padrão Singleton</h1>
+            <p>Garantindo uma única instância de uma classe</p>
         </div>
         
         <div class="nav"></div>
 
         <div class="content">
             <div class="slide active" id="slide07">
-                <h2><i class="fas fa-industry"></i> Exemplo Prático: Factory</h2>
-                <p>Implementando o padrão Factory em Python</p>
+                <h2><i class="fas fa-cube"></i> Exemplo Prático: Singleton</h2>
+                <p>Implementando o padrão Singleton em Python</p>
                 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-info-circle"></i> O que é Factory?</h3>
-                    <p>O padrão <strong>Factory</strong> fornece uma interface para criar objetos sem especificar 
-                    suas classes exatas. A criação é delegada a subclasses ou métodos específicos.</p>
+                    <h3><i class="fas fa-info-circle"></i> O que é Singleton?</h3>
+                    <p>O padrão <strong>Singleton</strong> garante que uma classe tenha <strong>apenas uma instância</strong> 
+                    e fornece um ponto global de acesso a ela.</p>
                     <div class="exemplo" style="margin-top: 12px;">
                         <strong>Quando usar:</strong>
                         <ul style="margin-top: 8px;">
-                            <li>Quando não sabe antecipadamente os tipos exatos de objetos</li>
-                            <li>Quando quer desacoplar criação de uso</li>
-                            <li>Quando precisa criar objetos relacionados</li>
-                            <li>Quando quer centralizar lógica de criação</li>
+                            <li>Conexões com banco de dados</li>
+                            <li>Loggers (sistemas de log)</li>
+                            <li>Configurações globais</li>
+                            <li>Cache compartilhado</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: muitos <code>if</code> espalhados</h3>
-                    <p>Vamos usar o <strong>mesmo exemplo de notificações</strong>, mas <strong>sem</strong> Factory.</p>
+                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: vários loggers independentes</h3>
+                    <p>Aqui temos o <strong>mesmo exemplo de Logger</strong>, mas <strong>sem</strong> usar o padrão Singleton.</p>
                     <div class="code-block">
-                        <pre><code>class EmailNotificacao:
-    def enviar(self, mensagem):
-        print(f"📧 Email enviado: {mensagem}")
+                        <pre><code>class LoggerSimples:
+    def __init__(self):
+        self._logs = []
+    
+    def log(self, mensagem):
+        self._logs.append(mensagem)
+        print(f"[LOG] {mensagem}")
+    
+    def obter_logs(self):
+        return self._logs.copy()
 
-class SMSNotificacao:
-    def enviar(self, mensagem):
-        print(f"📱 SMS enviado: {mensagem}")
+# Uso - CADA parte do sistema cria seu próprio logger
+logger_a = LoggerSimples()
+logger_a.log("Mensagem A")
 
-class PushNotificacao:
-    def enviar(self, mensagem):
-        print(f"🔔 Push enviado: {mensagem}")
+logger_b = LoggerSimples()
+logger_b.log("Mensagem B")
 
-def enviar_notificacao(tipo, mensagem):
-    if tipo == "email":
-        notif = EmailNotificacao()
-        notif.enviar(mensagem)
-    elif tipo == "sms":
-        notif = SMSNotificacao()
-        notif.enviar(mensagem)
-    elif tipo == "push":
-        notif = PushNotificacao()
-        notif.enviar(mensagem)
-    else:
-        print("Tipo não suportado")
-
-# Uso
-enviar_notificacao("email", "Bem-vindo!")
-enviar_notificacao("sms", "Seu código é 1234")</code></pre>
+print(logger_a is logger_b)      # False - instâncias diferentes
+print(logger_a.obter_logs())     # Só tem a mensagem A
+print(logger_b.obter_logs())     # Só tem a mensagem B</code></pre>
                     </div>
                     <div class="problema" style="margin-top: 12px;">
-                        <strong>Problema:</strong> essa lógica de <code>if/elif</code> tende a se repetir 
-                        em vários lugares do sistema. Se surgir um novo tipo (ex: WhatsApp), você terá que 
-                        alterar todos os pontos em que essa criação aparece.
+                        <strong>Problema:</strong> cada parte do sistema tem uma lista de logs separada. 
+                        Fica difícil ter uma visão única do que aconteceu no sistema.
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-check-circle"></i> Com Factory: criação centralizada</h3>
+                    <h3><i class="fas fa-check-circle"></i> Versão Simples: Singleton com <code>@classmethod</code></h3>
+                    <p><strong>✅ Esta versão é suficiente para começar!</strong> Usa apenas conceitos que você já conhece.</p>
                     <div class="code-block">
-                        <pre><code># Classes de produtos
-class Carro:
-    def acelerar(self):
-        print("Carro acelerando...")
+                        <pre><code>class Logger:
+    _instancia = None
+    
+    def __init__(self):
+        self._logs = []
+    
+    @classmethod
+    def obter_instancia(cls):
+        """Método que garante uma única instância"""
+        if cls._instancia is None:
+            cls._instancia = cls()  # Cria apenas na primeira vez
+        return cls._instancia
+    
+    def log(self, mensagem):
+        self._logs.append(mensagem)
+        print(f"[LOG] {mensagem}")
+    
+    def obter_logs(self):
+        return self._logs.copy()
 
-class Moto:
-    def acelerar(self):
-        print("Moto acelerando...")
+# Uso - IMPORTANTE: sempre usar obter_instancia()
+logger1 = Logger.obter_instancia()
+logger1.log("Primeira mensagem")
 
-# Factory
-class VeiculoFactory:
-    @staticmethod
-    def criar(tipo):
-        if tipo == "carro":
-            return Carro()
-        elif tipo == "moto":
-            return Moto()
-        else:
-            raise ValueError(f"Tipo {tipo} não suportado")
+logger2 = Logger.obter_instancia()  # Mesma instância!
+logger2.log("Segunda mensagem")
 
-# Uso
-veiculo = VeiculoFactory.criar("carro")
-veiculo.acelerar()</code></pre>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-code"></i> Exemplo Completo: Factory de Notificações</h3>
-                    <div class="code-block">
-                        <pre><code># Classes de notificação
-class Notificacao:
-    def enviar(self, mensagem):
-        pass
-
-class EmailNotificacao(Notificacao):
-    def enviar(self, mensagem):
-        print(f"📧 Email enviado: {mensagem}")
-
-class SMSNotificacao(Notificacao):
-    def enviar(self, mensagem):
-        print(f"📱 SMS enviado: {mensagem}")
-
-class PushNotificacao(Notificacao):
-    def enviar(self, mensagem):
-        print(f"🔔 Push enviado: {mensagem}")
-
-# Factory
-class NotificacaoFactory:
-    @staticmethod
-    def criar(tipo):
-        tipos = {
-            "email": EmailNotificacao,
-            "sms": SMSNotificacao,
-            "push": PushNotificacao
-        }
-        
-        classe = tipos.get(tipo.lower())
-        if classe:
-            return classe()
-        else:
-            raise ValueError(f"Tipo de notificação '{tipo}' não suportado")
-
-# Uso
-notificacao = NotificacaoFactory.criar("email")
-notificacao.enviar("Bem-vindo ao sistema!")
-
-notificacao2 = NotificacaoFactory.criar("sms")
-notificacao2.enviar("Seu código é 1234")</code></pre>
+print(logger1 is logger2)  # True
+print(logger1.obter_logs())  # Ambas as mensagens</code></pre>
                     </div>
                     <div class="exemplo" style="margin-top: 12px;">
-                        <strong>Vantagem:</strong> Código cliente não precisa saber como criar cada tipo. 
-                        Fácil adicionar novos tipos sem modificar código existente.
+                        <strong>✅ Vantagens desta versão:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Usa apenas conceitos que você já conhece (<code>@classmethod</code>, <code>__init__</code>)</li>
+                            <li>Fácil de entender e implementar</li>
+                            <li>Funciona perfeitamente para garantir uma única instância</li>
+                        </ul>
+                        <p style="margin-top: 12px;"><strong>⚠️ Único detalhe:</strong> Precisa lembrar de usar <code>Logger.obter_instancia()</code> 
+                        em vez de <code>Logger()</code> diretamente.</p>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-code"></i> Exemplo: Factory com Configuração</h3>
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-star"></i> Versão Avançada: Singleton com <code>__new__</code></h3>
+                    <p><strong>📚 Conteúdo novo:</strong> Esta versão usa <code>__new__</code>, um método especial que você ainda não viu.</p>
                     <div class="code-block">
-                        <pre><code>class DatabaseFactory:
-    @staticmethod
-    def criar_conexao(tipo, **kwargs):
-        if tipo == "sqlite":
-            return SQLiteConnection(kwargs.get("database"))
-        elif tipo == "mysql":
-            return MySQLConnection(
-                host=kwargs.get("host"),
-                user=kwargs.get("user"),
-                password=kwargs.get("password")
-            )
-        elif tipo == "postgresql":
-            return PostgreSQLConnection(
-                host=kwargs.get("host"),
-                user=kwargs.get("user"),
-                password=kwargs.get("password")
-            )
-        else:
-            raise ValueError(f"Tipo de banco '{tipo}' não suportado")
+                        <pre><code>class Logger:
+    _instancia = None
+    
+    def __new__(cls):
+        """Controla a criação do objeto"""
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+        return cls._instancia
+    
+    def __init__(self):
+        if not hasattr(self, 'inicializado'):
+            self.inicializado = True
+            self._logs = []
+    
+    def log(self, mensagem):
+        self._logs.append(mensagem)
+        print(f"[LOG] {mensagem}")
+    
+    def obter_logs(self):
+        return self._logs.copy()
 
-# Uso
-db = DatabaseFactory.criar_conexao(
-    "sqlite",
-    database="app.db"
-)
+# Uso - Parece uma classe normal!
+logger1 = Logger()  # Pode usar Logger() diretamente
+logger1.log("Primeira mensagem")
 
-db2 = DatabaseFactory.criar_conexao(
-    "mysql",
-    host="localhost",
-    user="admin",
-    password="senha123"
-)</code></pre>
+logger2 = Logger()  # Mesma instância!
+logger2.log("Segunda mensagem")
+
+print(logger1 is logger2)  # True
+print(logger1.obter_logs())  # Ambas as mensagens</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>✅ Vantagem desta versão:</strong> Parece uma classe normal (<code>Logger()</code>), mas por baixo dos panos 
+                        garante uma única instância. Mais "transparente" para quem usa.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-question-circle"></i> Por que introduzir <code>__new__</code>?</h3>
+                    <p><strong>Importante:</strong> <code>__new__</code> <strong>NÃO é obrigatório</strong> para implementar Singleton! 
+                    A versão simples com <code>@classmethod</code> funciona perfeitamente.</p>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Diferença entre __new__ e __init__:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li><code>__new__</code>: Chamado <strong>ANTES</strong> - <strong>CRIA</strong> o objeto em memória</li>
+                            <li><code>__init__</code>: Chamado <strong>DEPOIS</strong> - <strong>INICIALIZA</strong> o objeto já criado</li>
+                        </ul>
+                        <p style="margin-top: 12px;"><strong>Por que mostrar __new__ então?</strong></p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Transparência:</strong> Permite usar <code>Logger()</code> como uma classe normal</li>
+                            <li>✅ <strong>Conceito avançado:</strong> Mostra como Python cria objetos internamente</li>
+                            <li>✅ <strong>Curiosidade:</strong> Você verá esse padrão em código mais avançado</li>
+                        </ul>
+                        <p style="margin-top: 12px;"><strong>🎓 Para começar:</strong> Use a versão simples com <code>@classmethod</code>. 
+                        É suficiente e mais fácil de entender!</p>
+                        <p style="margin-top: 8px;"><strong>📚 Veja explicação detalhada:</strong> <code>EXPLICACAO_NEW.md</code> na pasta BEP-023</p>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-check-circle"></i> Vantagens do Factory</h3>
-                    <ul>
-                        <li>✅ <strong>Desacoplamento:</strong> Cliente não conhece classes concretas</li>
-                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos tipos</li>
-                        <li>✅ <strong>Centralização:</strong> Lógica de criação em um só lugar</li>
-                        <li>✅ <strong>Manutenção:</strong> Mudanças na criação não afetam cliente</li>
-                    </ul>
+                    <h3><i class="fas fa-code"></i> Exemplo: Conexão com Banco de Dados</h3>
+                    <div class="code-block">
+                        <pre><code>import sqlite3
+
+class DatabaseConnection:
+    _instancia = None
+    _conexao = None
+    
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+        return cls._instancia
+    
+    def conectar(self, database="app.db"):
+        if self._conexao is None:
+            self._conexao = sqlite3.connect(database)
+            print("✅ Conexão estabelecida")
+        return self._conexao
+    
+    def fechar(self):
+        if self._conexao:
+            self._conexao.close()
+            self._conexao = None
+            print("🔒 Conexão fechada")
+
+# Uso - sempre a mesma conexão
+db1 = DatabaseConnection()
+db1.conectar()
+
+db2 = DatabaseConnection()  # Mesma instância!
+conn = db2.conectar()  # Reutiliza conexão existente</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Conexão com Banco de Dados (versão com __new__)</h3>
+                    <p><strong>Nota:</strong> Este exemplo usa <code>__new__</code> (versão avançada). 
+                    Você pode fazer a mesma coisa com <code>@classmethod</code> (versão simples).</p>
+                    <div class="code-block">
+                        <pre><code>import sqlite3
+
+class DatabaseConnection:
+    _instancia = None
+    _conexao = None
+    
+    def __new__(cls):
+        if cls._instancia is None:
+            cls._instancia = super().__new__(cls)
+        return cls._instancia
+    
+    def conectar(self, database="app.db"):
+        if self._conexao is None:
+            self._conexao = sqlite3.connect(database)
+            print("✅ Conexão estabelecida")
+        return self._conexao
+    
+    def fechar(self):
+        if self._conexao:
+            self._conexao.close()
+            self._conexao = None
+            print("🔒 Conexão fechada")
+
+# Uso - sempre a mesma conexão
+db1 = DatabaseConnection()
+db1.conectar()
+
+db2 = DatabaseConnection()  # Mesma instância!
+conn = db2.conectar()  # Reutiliza conexão existente</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Cuidados com Singleton</h3>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>⚠️ Problemas potenciais:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Dificulta testes unitários (dependência global)</li>
+                            <li>Pode esconder dependências</li>
+                            <li>Pode causar problemas em ambientes multi-thread</li>
+                            <li>Pode ser um "code smell" se usado demais</li>
+                        </ul>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>✅ Use quando:</strong> Realmente precisa de uma única instância global 
+                        (ex: configurações, conexões, loggers).
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px; background: #F0FFF4; border-left: 4px solid #38A169;">
+                        <strong>🎓 Resumo para começar:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Versão simples com <code>@classmethod</code>:</strong> Suficiente para a maioria dos casos</li>
+                            <li>✅ <strong>Versão com <code>__new__</code>:</strong> Mais "transparente", mas conteúdo avançado</li>
+                            <li>✅ <strong>Escolha:</strong> Comece com a versão simples, depois explore a avançada</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <p>BEP-024: Padrão Singleton</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>

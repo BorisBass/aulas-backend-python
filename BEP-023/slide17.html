@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 17: Resumo e Checklist</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .resumo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .checklist { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> Módulo 4 - Padrões de Desenvolvimento de Software</h1>
+            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide17">
+                <h2><i class="fas fa-check-circle"></i> Resumo e Checklist</h2>
+                <p>Confirme seu domínio dos conceitos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Resumo dos Conceitos</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="resumo">
+                            <h4>📚 O que Aprendemos</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Design Patterns são <strong>soluções reutilizáveis</strong> para problemas comuns</li>
+                                <li>Foram popularizados pelo livro <strong>Gang of Four (GoF)</strong></li>
+                                <li>São <strong>guias de design</strong>, não código pronto</li>
+                                <li>Ajudam na <strong>comunicação</strong> e <strong>organização</strong> do código</li>
+                            </ul>
+                        </div>
+                        <div class="resumo">
+                            <h4>📊 Classificações</h4>
+                            <ul style="margin-top: 8px;">
+                                <li><strong>Criacionais:</strong> Criação de objetos (Singleton, Factory)</li>
+                                <li><strong>Estruturais:</strong> Estrutura de classes (Adapter, Decorator)</li>
+                                <li><strong>Comportamentais:</strong> Comunicação (Observer, Strategy)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-square"></i> Checklist de Aprendizado</h3>
+                    <div class="checklist" style="margin-top: 12px;">
+                        <p><strong>Você consegue:</strong></p>
+                        <ul style="margin-top: 8px;">
+                            <li>☐ Explicar o que são Design Patterns e sua importância?</li>
+                            <li>☐ Identificar as três classificações principais?</li>
+                            <li>☐ Implementar o padrão Singleton em Python?</li>
+                            <li>☐ Implementar o padrão Factory em Python?</li>
+                            <li>☐ Implementar o padrão Observer em Python?</li>
+                            <li>☐ Identificar quando usar cada padrão?</li>
+                            <li>☐ Reconhecer anti-padrões comuns?</li>
+                            <li>☐ Aplicar padrões em situações práticas?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-key"></i> Conceitos-Chave</h3>
+                    <table class="code-table">
+                        <tr>
+                            <th>Conceito</th>
+                            <th>Definição</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Design Pattern</strong></td>
+                            <td>Solução reutilizável para problema comum</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Singleton</strong></td>
+                            <td>Garante uma única instância de classe</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Factory</strong></td>
+                            <td>Cria objetos sem especificar classe exata</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Observer</strong></td>
+                            <td>Notifica mudanças a múltiplos objetos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anti-padrão</strong></td>
+                            <td>Solução comum que é ineficaz</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Próximos Passos</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="resumo">
+                            <h4>🎯 Para Praticar</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Implemente os exercícios propostos</li>
+                                <li>Identifique padrões em código existente</li>
+                                <li>Refatore código usando padrões</li>
+                                <li>Estude outros padrões (Builder, Strategy, etc.)</li>
+                            </ul>
+                        </div>
+                        <div class="resumo">
+                            <h4>📖 Para Aprofundar</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Leia o livro "Design Patterns: GoF"</li>
+                                <li>Explore padrões específicos do Python</li>
+                                <li>Estude arquiteturas de software</li>
+                                <li>Pratique em projetos reais</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-quote-left"></i> Lembrete Final</h3>
+                    <div class="resumo" style="margin-top: 12px;">
+                        <p><strong>"Design Patterns são ferramentas, não regras. Use quando fizer sentido, 
+                        não apenas porque são 'bonitos'. O objetivo é código mais limpo, organizado e manutenível."</strong></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-star"></i> Parabéns!</h3>
+                    <p>Você completou a introdução aos Design Patterns! Agora você tem as bases para:</p>
+                    <ul style="margin-top: 8px;">
+                        <li>✅ Reconhecer padrões em código existente</li>
+                        <li>✅ Aplicar padrões em seus projetos</li>
+                        <li>✅ Comunicar soluções usando nomes padronizados</li>
+                        <li>✅ Escrever código mais profissional e organizado</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

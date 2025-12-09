@@ -308,7 +308,7 @@ function getTotalSlides() {
         'BEP-020': 12,
         'BEP-021': 12,
         'BEP-022': 12,
-        'BEP-023': 12,
+        'BEP-023': 17,
         'BEP-CRUD': 14
     };
     

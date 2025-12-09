@@ -3,146 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-023 - Slide 11: Exercícios Práticos</title>
+    <title>BEP-026 - Slide 11: Padrão Observer - Prática</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
-        .exercicio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
-        .dica { background: #FEF5E7; border-left: 4px solid #F6AD55; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
-            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-026: Padrão Observer</h1>
+            <p>Comunicação desacoplada entre objetos</p>
         </div>
         
         <div class="nav"></div>
 
         <div class="content">
             <div class="slide active" id="slide11">
-                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
-                <p>Aplicando padrões em situações reais</p>
+                <h2><i class="fas fa-bell"></i> Exemplo Prático: Observer</h2>
+                <p>Implementando o padrão Observer em Python</p>
                 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-tasks"></i> Exercício 1: Singleton para Logger</h3>
-                    <div class="exercicio" style="margin-top: 12px;">
-                        <p><strong>Desafio:</strong> Crie uma classe Logger usando o padrão Singleton que:</p>
+                    <h3><i class="fas fa-info-circle"></i> O que é Observer?</h3>
+                    <p>O padrão <strong>Observer</strong> define uma dependência um-para-muitos entre objetos, 
+                    de modo que quando um objeto muda de estado, todos os seus dependentes são notificados 
+                    e atualizados automaticamente.</p>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Quando usar:</strong>
                         <ul style="margin-top: 8px;">
-                            <li>Permite apenas uma instância</li>
-                            <li>Armazena logs em uma lista</li>
-                            <li>Possui método <code>log(mensagem, nivel)</code> onde nível pode ser "INFO", "WARNING", "ERROR"</li>
-                            <li>Possui método <code>obter_logs()</code> que retorna todos os logs</li>
-                            <li>Possui método <code>limpar_logs()</code> que limpa a lista</li>
+                            <li>Sistemas de eventos</li>
+                            <li>Notificações em tempo real</li>
+                            <li>Arquitetura MVC (Model-View-Controller)</li>
+                            <li>Atualizações de interface</li>
                         </ul>
                     </div>
-                    <div class="dica" style="margin-top: 12px;">
-                        <strong>💡 Dica:</strong> Use <code>__new__</code> para garantir uma única instância. 
-                        Verifique se já foi inicializado antes de criar a lista de logs.
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: tudo acoplado no produto</h3>
+                    <p>Vamos usar o <strong>mesmo exemplo de mudança de preço</strong>, mas <strong>sem</strong> Observer.</p>
+                    <div class="code-block">
+                        <pre><code>def notificar_clientes(produto, antigo, novo):
+    print(f"🎉 Clientes: {produto} mudou de preço!")
+
+def atualizar_estoque(produto, antigo, novo):
+    print(f"📊 Estoque: atualizando preço de {produto}")
+
+class ProdutoSimples:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self._preco = preco
+    
+    @property
+    def preco(self):
+        return self._preco
+    
+    @preco.setter
+    def preco(self, novo_preco):
+        if novo_preco != self._preco:
+            antigo = self._preco
+            self._preco = novo_preco
+            # Chamadas diretas (acoplamento forte)
+            notificar_clientes(self.nome, antigo, novo_preco)
+            atualizar_estoque(self.nome, antigo, novo_preco)</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px; background:#FED7D7; border-left-color:#E53E3E;">
+                        <strong>Problema:</strong> a classe <code>ProdutoSimples</code> conhece diretamente 
+                        todas as funções que precisam ser chamadas. Se surgir um novo tipo de notificação, 
+                        o código da classe terá que ser alterado.
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-tasks"></i> Exercício 2: Factory de Formas Geométricas</h3>
-                    <div class="exercicio" style="margin-top: 12px;">
-                        <p><strong>Desafio:</strong> Crie um sistema usando Factory Pattern que:</p>
-                        <ul style="margin-top: 8px;">
-                            <li>Cria diferentes formas geométricas (Círculo, Retângulo, Triângulo)</li>
-                            <li>Cada forma tem método <code>calcular_area()</code></li>
-                            <li>Factory recebe tipo e parâmetros necessários</li>
-                            <li>Factory valida se tipo é suportado</li>
-                        </ul>
-                        <p style="margin-top: 8px;"><strong>Exemplo de uso:</strong></p>
-                        <div class="code-block" style="margin-top: 8px;">
-                            <pre><code>forma1 = FormaFactory.criar("circulo", raio=5)
-forma2 = FormaFactory.criar("retangulo", largura=10, altura=5)
-print(forma1.calcular_area())  # ~78.54
-print(forma2.calcular_area())  # 50</code></pre>
-                        </div>
+                    <h3><i class="fas fa-check-circle"></i> Com Observer: produto avisa, observers reagem</h3>
+                    <div class="code-block">
+                        <pre><code>class Subject:
+    def __init__(self):
+        self._observers = []
+    
+    def adicionar(self, observer):
+        self._observers.append(observer)
+    
+    def remover(self, observer):
+        self._observers.remove(observer)
+    
+    def notificar(self, evento):
+        for observer in self._observers:
+            observer.atualizar(evento)
+
+class Observer:
+    def atualizar(self, evento):
+        print(f"Observer recebeu: {evento}")
+
+# Uso
+subject = Subject()
+observer1 = Observer()
+observer2 = Observer()
+
+subject.adicionar(observer1)
+subject.adicionar(observer2)
+subject.notificar("Evento importante!")</code></pre>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-tasks"></i> Exercício 3: Observer para Sistema de Notificações</h3>
-                    <div class="exercicio" style="margin-top: 12px;">
-                        <p><strong>Desafio:</strong> Implemente um sistema de notificações usando Observer Pattern:</p>
-                        <ul style="margin-top: 8px;">
-                            <li>Classe <code>NotificacaoSubject</code> que gerencia observers</li>
-                            <li>Métodos: <code>adicionar_observer()</code>, <code>remover_observer()</code>, <code>notificar()</code></li>
-                            <li>Diferentes tipos de observers: <code>EmailObserver</code>, <code>SMSObserver</code>, <code>PushObserver</code></li>
-                            <li>Cada observer implementa método <code>atualizar(mensagem)</code></li>
-                        </ul>
-                        <p style="margin-top: 8px;"><strong>Exemplo de uso:</strong></p>
-                        <div class="code-block" style="margin-top: 8px;">
-                            <pre><code>sistema = NotificacaoSubject()
-sistema.adicionar_observer(EmailObserver())
-sistema.adicionar_observer(SMSObserver())
-sistema.notificar("Nova mensagem recebida!")</code></pre>
-                        </div>
-                    </div>
-                </div>
+                    <h3><i class="fas fa-code"></i> Exemplo Completo: Sistema de Notificações</h3>
+                    <div class="code-block">
+                        <pre><code># Subject (Observado)
+class Produto:
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self._preco = preco
+        self._observers = []
+    
+    def adicionar_observer(self, observer):
+        self._observers.append(observer)
+    
+    def remover_observer(self, observer):
+        self._observers.remove(observer)
+    
+    @property
+    def preco(self):
+        return self._preco
+    
+    @preco.setter
+    def preco(self, novo_preco):
+        if novo_preco != self._preco:
+            antigo_preco = self._preco
+            self._preco = novo_preco
+            self._notificar_mudanca_preco(antigo_preco, novo_preco)
+    
+    def _notificar_mudanca_preco(self, antigo, novo):
+        for observer in self._observers:
+            observer.preco_mudou(self, antigo, novo)
 
-                <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-tasks"></i> Exercício 4: Identificar Padrões</h3>
-                    <div class="exercicio" style="margin-top: 12px;">
-                        <p><strong>Desafio:</strong> Analise os seguintes cenários e identifique qual padrão seria mais adequado:</p>
-                        <ol style="margin-top: 8px;">
-                            <li>Sistema precisa garantir apenas uma conexão com banco de dados</li>
-                            <li>Precisa criar diferentes tipos de documentos (PDF, Word, HTML) dinamicamente</li>
-                            <li>Múltiplos componentes precisam ser notificados quando um arquivo é salvo</li>
-                            <li>Precisa adaptar uma API antiga para trabalhar com código novo</li>
-                            <li>Quer adicionar funcionalidades (cache, logging) a métodos sem modificar classes</li>
-                        </ol>
-                    </div>
-                    <div class="dica" style="margin-top: 12px;">
-                        <strong>💡 Dica:</strong> Revise os slides anteriores para identificar os padrões adequados!
-                    </div>
-                </div>
+# Observers
+class ClienteObserver:
+    def __init__(self, nome):
+        self.nome = nome
+    
+    def preco_mudou(self, produto, antigo, novo):
+        if novo < antigo:
+            print(f"🎉 {self.nome}: {produto.nome} está mais barato!")
+            print(f"   De R$ {antigo:.2f} para R$ {novo:.2f}")
+        else:
+            print(f"📢 {self.nome}: {produto.nome} aumentou de preço")
+            print(f"   De R$ {antigo:.2f} para R$ {novo:.2f}")
 
-                <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-tasks"></i> Exercício 5: Refatoração</h3>
-                    <div class="exercicio" style="margin-top: 12px;">
-                        <p><strong>Desafio:</strong> Refatore o código abaixo usando um padrão apropriado:</p>
-                        <div class="code-block" style="margin-top: 8px;">
-                            <pre><code># Código atual (sem padrão)
-def processar_pagamento(tipo, valor):
-    if tipo == "credito":
-        # lógica para cartão de crédito
-        print(f"Processando pagamento crédito: R$ {valor}")
-    elif tipo == "debito":
-        # lógica para débito
-        print(f"Processando pagamento débito: R$ {valor}")
-    elif tipo == "pix":
-        # lógica para PIX
-        print(f"Processando pagamento PIX: R$ {valor}")
-    elif tipo == "boleto":
-        # lógica para boleto
-        print(f"Processando pagamento boleto: R$ {valor}")
-    else:
-        print("Tipo inválido")
+class EstoqueObserver:
+    def preco_mudou(self, produto, antigo, novo):
+        print(f"📊 [ESTOQUE] Preço de {produto.nome} atualizado no sistema")
 
-# Refatore usando Factory Pattern</code></pre>
-                        </div>
+# Uso
+produto = Produto("Notebook", 3000.00)
+
+cliente1 = ClienteObserver("João")
+cliente2 = ClienteObserver("Maria")
+estoque = EstoqueObserver()
+
+produto.adicionar_observer(cliente1)
+produto.adicionar_observer(cliente2)
+produto.adicionar_observer(estoque)
+
+# Mudança de preço notifica todos
+produto.preco = 2500.00  # Desconto!</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Resultado:</strong> Todos os observers são notificados automaticamente 
+                        quando o preço muda, sem acoplamento direto.
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-lightbulb"></i> Dicas para Resolver os Exercícios</h3>
+                    <h3><i class="fas fa-code"></i> Exemplo: Sistema de Eventos</h3>
+                    <div class="code-block">
+                        <pre><code>class EventManager:
+    def __init__(self):
+        self._listeners = {}
+    
+    def on(self, evento, callback):
+        if evento not in self._listeners:
+            self._listeners[evento] = []
+        self._listeners[evento].append(callback)
+    
+    def emit(self, evento, dados=None):
+        if evento in self._listeners:
+            for callback in self._listeners[evento]:
+                callback(dados)
+
+# Uso
+eventos = EventManager()
+
+# Registrar listeners
+eventos.on("usuario_login", lambda d: print(f"✅ Login: {d}"))
+eventos.on("usuario_login", lambda d: print(f"📧 Email enviado para {d}"))
+eventos.on("compra_realizada", lambda d: print(f"💰 Compra: R$ {d}"))
+
+# Emitir eventos
+eventos.emit("usuario_login", "joao@email.com")
+eventos.emit("compra_realizada", 150.00)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Observer</h3>
                     <ul>
-                        <li>✅ Comece identificando o <strong>problema</strong> que precisa resolver</li>
-                        <li>✅ Escolha o padrão mais <strong>adequado</strong> para o problema</li>
-                        <li>✅ Implemente de forma <strong>simples</strong> primeiro</li>
-                        <li>✅ Teste sua implementação com <strong>exemplos práticos</strong></li>
-                        <li>✅ Revise e <strong>melhore</strong> se necessário</li>
+                        <li>✅ <strong>Desacoplamento:</strong> Subject e Observers são independentes</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos observers</li>
+                        <li>✅ <strong>Comunicação:</strong> Notificações automáticas e eficientes</li>
+                        <li>✅ <strong>Flexibilidade:</strong> Observers podem ser adicionados/removidos dinamicamente</li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <p>BEP-026: Padrão Observer</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>

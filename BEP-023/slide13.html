@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-027 - Slide 13: Padrão Decorator - Prática</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-027: Padrão Decorator</h1>
+            <p>Adicionando funcionalidades dinamicamente</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide13">
+                <h2><i class="fas fa-code"></i> Padrão Decorator - Implementação Prática</h2>
+                <p>Implementando o padrão Decorator em Python</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: explosão de classes</h3>
+                    <p>Vamos usar o exemplo de <strong>bebidas e adicionais</strong>, mas <strong>sem</strong> Decorator.</p>
+                    <div class="code-block">
+                        <pre><code># ❌ Sem Decorator - explosão de classes
+class Cafe:
+    def custo(self):
+        return 5.0
+
+class CafeComLeite(Cafe):
+    def custo(self):
+        return super().custo() + 2.0
+
+class CafeComAcucar(Cafe):
+    def custo(self):
+        return super().custo() + 1.0
+
+class CafeComLeiteEAcucar(Cafe):
+    def custo(self):
+        return super().custo() + 2.0 + 1.0
+
+# E se quiser café com leite, açúcar E chantilly?
+# Precisa criar outra classe!
+# E se quiser outras combinações? Mais classes!</code></pre>
+                    </div>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>Problema:</strong> Para cada combinação de adicionais, precisa criar uma nova classe. 
+                        Isso leva a uma explosão de classes e código duplicado.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Com Decorator: composição dinâmica</h3>
+                    <div class="code-block">
+                        <pre><code># ✅ Componente base
+class Bebida:
+    def __init__(self):
+        self._descricao = "Bebida"
+    
+    def descricao(self):
+        return self._descricao
+    
+    def custo(self):
+        return 0.0
+
+# Componente concreto
+class Cafe(Bebida):
+    def __init__(self):
+        super().__init__()
+        self._descricao = "Café"
+    
+    def custo(self):
+        return 5.0
+
+# Decorator abstrato
+class Adicional(Bebida):
+    def __init__(self, bebida):
+        self._bebida = bebida
+    
+    def descricao(self):
+        return self._bebida.descricao()
+    
+    def custo(self):
+        return self._bebida.custo()
+
+# Decorators concretos
+class Leite(Adicional):
+    def descricao(self):
+        return self._bebida.descricao() + ", Leite"
+    
+    def custo(self):
+        return self._bebida.custo() + 2.0
+
+class Acucar(Adicional):
+    def descricao(self):
+        return self._bebida.descricao() + ", Açúcar"
+    
+    def custo(self):
+        return self._bebida.custo() + 1.0
+
+class Chantilly(Adicional):
+    def descricao(self):
+        return self._bebida.descricao() + ", Chantilly"
+    
+    def custo(self):
+        return self._bebida.custo() + 3.0
+
+# Uso - composição dinâmica!
+cafe = Cafe()
+print(f"{cafe.descricao()}: R$ {cafe.custo():.2f}")
+# Café: R$ 5.00
+
+cafe_com_leite = Leite(Cafe())
+print(f"{cafe_com_leite.descricao()}: R$ {cafe_com_leite.custo():.2f}")
+# Café, Leite: R$ 7.00
+
+cafe_completo = Chantilly(Acucar(Leite(Cafe())))
+print(f"{cafe_completo.descricao()}: R$ {cafe_completo.custo():.2f}")
+# Café, Leite, Açúcar, Chantilly: R$ 11.00</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>✅ Vantagem:</strong> Pode combinar qualquer quantidade de adicionais dinamicamente, 
+                        sem precisar criar novas classes para cada combinação!
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Streams de Dados</h3>
+                    <div class="code-block">
+                        <pre><code># Componente base
+class Stream:
+    def ler(self):
+        pass
+    
+    def escrever(self, dados):
+        pass
+
+# Componente concreto
+class FileStream(Stream):
+    def __init__(self, arquivo):
+        self.arquivo = arquivo
+    
+    def ler(self):
+        return f"Dados de {self.arquivo}"
+    
+    def escrever(self, dados):
+        print(f"Escrevendo em {self.arquivo}: {dados}")
+
+# Decorator
+class StreamDecorator(Stream):
+    def __init__(self, stream):
+        self._stream = stream
+    
+    def ler(self):
+        return self._stream.ler()
+    
+    def escrever(self, dados):
+        self._stream.escrever(dados)
+
+# Decorators concretos
+class CompressaoStream(StreamDecorator):
+    def escrever(self, dados):
+        dados_comprimidos = f"[COMPRIMIDO] {dados}"
+        self._stream.escrever(dados_comprimidos)
+    
+    def ler(self):
+        dados = self._stream.ler()
+        return dados.replace("[COMPRIMIDO] ", "")
+
+class CriptografiaStream(StreamDecorator):
+    def escrever(self, dados):
+        dados_criptografados = f"[CRIPTOGRAFADO] {dados}"
+        self._stream.escrever(dados_criptografados)
+    
+    def ler(self):
+        dados = self._stream.ler()
+        return dados.replace("[CRIPTOGRAFADO] ", "")
+
+# Uso - combinando decorators
+stream_base = FileStream("dados.txt")
+
+# Apenas compressão
+stream_comp = CompressaoStream(stream_base)
+stream_comp.escrever("Dados importantes")
+
+# Compressão + Criptografia
+stream_seguro = CriptografiaStream(CompressaoStream(FileStream("seguro.txt")))
+stream_seguro.escrever("Dados secretos")</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Formatação de Texto</h3>
+                    <div class="code-block">
+                        <pre><code># Componente base
+class Texto:
+    def __init__(self, conteudo):
+        self._conteudo = conteudo
+    
+    def renderizar(self):
+        return self._conteudo
+
+# Decorator
+class Formatador(Texto):
+    def __init__(self, texto):
+        self._texto = texto
+    
+    def renderizar(self):
+        return self._texto.renderizar()
+
+# Decorators concretos
+class Negrito(Formatador):
+    def renderizar(self):
+        return f"<b>{self._texto.renderizar()}</b>"
+
+class Italico(Formatador):
+    def renderizar(self):
+        return f"<i>{self._texto.renderizar()}</i>"
+
+class Sublinhado(Formatador):
+    def renderizar(self):
+        return f"<u>{self._texto.renderizar()}</u>"
+
+# Uso - combinando formatações
+texto = Texto("Olá Mundo")
+
+texto_negrito = Negrito(texto)
+print(texto_negrito.renderizar())
+# <b>Olá Mundo</b>
+
+texto_completo = Sublinhado(Italico(Negrito(Texto("Python"))))
+print(texto_completo.renderizar())
+# <u><i><b>Python</b></i></u></code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Decorator</h3>
+                    <ul>
+                        <li>✅ <strong>Flexibilidade:</strong> Adiciona funcionalidades dinamicamente</li>
+                        <li>✅ <strong>Composição:</strong> Combina múltiplas funcionalidades facilmente</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos decorators</li>
+                        <li>✅ <strong>Separação:</strong> Cada decorator tem responsabilidade única</li>
+                        <li>✅ <strong>Reutilização:</strong> Decorators podem ser reutilizados</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas de Implementação</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>💡 Lembre-se:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Decorator mantém referência ao objeto decorado</li>
+                            <li>Decorator delega chamadas ao objeto decorado</li>
+                            <li>Múltiplos decorators podem ser encadeados</li>
+                            <li>Ordem dos decorators importa (mais externo é aplicado primeiro)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-027: Padrão Decorator</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

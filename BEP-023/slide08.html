@@ -3,224 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-023 - Slide 08: Exemplo Prático - Observer</title>
+    <title>BEP-025 - Slide 08: Padrão Factory Method - Teoria</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
-        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .conceito { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .quando-usar { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
-            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-025: Padrão Factory Method</h1>
+            <p>Criando objetos sem expor a lógica de criação</p>
         </div>
         
         <div class="nav"></div>
 
         <div class="content">
             <div class="slide active" id="slide08">
-                <h2><i class="fas fa-bell"></i> Exemplo Prático: Observer</h2>
-                <p>Implementando o padrão Observer em Python</p>
+                <h2><i class="fas fa-industry"></i> Padrão Factory Method - Conceito e Teoria</h2>
+                <p>Entendendo quando e por que usar Factory Method</p>
                 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-info-circle"></i> O que é Observer?</h3>
-                    <p>O padrão <strong>Observer</strong> define uma dependência um-para-muitos entre objetos, 
-                    de modo que quando um objeto muda de estado, todos os seus dependentes são notificados 
-                    e atualizados automaticamente.</p>
-                    <div class="exemplo" style="margin-top: 12px;">
-                        <strong>Quando usar:</strong>
+                    <h3><i class="fas fa-info-circle"></i> O que é Factory Method?</h3>
+                    <p>O padrão <strong>Factory Method</strong> fornece uma interface para criar objetos sem especificar 
+                    suas classes exatas. A criação é delegada a subclasses ou métodos específicos.</p>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Definição formal:</strong> Factory Method é um padrão criacional que define uma interface 
+                        para criar objetos, mas permite que subclasses decidam qual classe instanciar. O Factory Method 
+                        adia a instanciação para subclasses.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-question-circle"></i> Problema que Resolve</h3>
+                    <p>Quando você precisa criar objetos, mas não sabe antecipadamente qual tipo exato será necessário:</p>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>❌ Sem Factory Method:</strong>
                         <ul style="margin-top: 8px;">
-                            <li>Sistemas de eventos</li>
-                            <li>Notificações em tempo real</li>
-                            <li>Arquitetura MVC (Model-View-Controller)</li>
-                            <li>Atualizações de interface</li>
+                            <li>Código cliente conhece todas as classes concretas</li>
+                            <li>Lógica de criação espalhada em vários lugares</li>
+                            <li>Difícil adicionar novos tipos sem modificar código existente</li>
+                            <li>Acoplamento forte entre cliente e classes concretas</li>
+                            <li>Múltiplos <code>if/elif</code> para decidir qual objeto criar</li>
+                        </ul>
+                    </div>
+                    <div class="quando-usar" style="margin-top: 12px;">
+                        <strong>✅ Com Factory Method:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Cliente não conhece classes concretas</li>
+                            <li>Lógica de criação centralizada</li>
+                            <li>Fácil adicionar novos tipos</li>
+                            <li>Desacoplamento entre cliente e criação</li>
+                            <li>Código mais limpo e organizado</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-times-circle"></i> Antes do padrão: tudo acoplado no produto</h3>
-                    <p>Vamos usar o <strong>mesmo exemplo de mudança de preço</strong>, mas <strong>sem</strong> Observer.</p>
-                    <div class="code-block">
-                        <pre><code>def notificar_clientes(produto, antigo, novo):
-    print(f"🎉 Clientes: {produto} mudou de preço!")
-
-def atualizar_estoque(produto, antigo, novo):
-    print(f"📊 Estoque: atualizando preço de {produto}")
-
-class ProdutoSimples:
-    def __init__(self, nome, preco):
-        self.nome = nome
-        self._preco = preco
-    
-    @property
-    def preco(self):
-        return self._preco
-    
-    @preco.setter
-    def preco(self, novo_preco):
-        if novo_preco != self._preco:
-            antigo = self._preco
-            self._preco = novo_preco
-            # Chamadas diretas (acoplamento forte)
-            notificar_clientes(self.nome, antigo, novo_preco)
-            atualizar_estoque(self.nome, antigo, novo_preco)</code></pre>
-                    </div>
-                    <div class="exemplo" style="margin-top: 12px; background:#FED7D7; border-left-color:#E53E3E;">
-                        <strong>Problema:</strong> a classe <code>ProdutoSimples</code> conhece diretamente 
-                        todas as funções que precisam ser chamadas. Se surgir um novo tipo de notificação, 
-                        o código da classe terá que ser alterado.
+                    <h3><i class="fas fa-check-circle"></i> Quando Usar Factory Method?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="quando-usar">
+                            <h4>✅ Use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Não sabe <strong>antecipadamente</strong> os tipos exatos de objetos</li>
+                                <li>Quer <strong>desacoplar</strong> criação de uso</li>
+                                <li>Precisa criar <strong>objetos relacionados</strong></li>
+                                <li>Quer <strong>centralizar</strong> lógica de criação</li>
+                                <li>Precisa <strong>extensibilidade</strong> para novos tipos</li>
+                            </ul>
+                        </div>
+                        <div class="problema">
+                            <h4>❌ Não use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Objetos são <strong>simples</strong> e diretos de criar</li>
+                                <li>Não há <strong>variação</strong> nos tipos de objetos</li>
+                                <li>Adiciona <strong>complexidade</strong> desnecessária</li>
+                                <li>Criação é <strong>trivial</strong> e não muda</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-check-circle"></i> Com Observer: produto avisa, observers reagem</h3>
-                    <div class="code-block">
-                        <pre><code>class Subject:
-    def __init__(self):
-        self._observers = []
-    
-    def adicionar(self, observer):
-        self._observers.append(observer)
-    
-    def remover(self, observer):
-        self._observers.remove(observer)
-    
-    def notificar(self, evento):
-        for observer in self._observers:
-            observer.atualizar(evento)
-
-class Observer:
-    def atualizar(self, evento):
-        print(f"Observer recebeu: {evento}")
-
-# Uso
-subject = Subject()
-observer1 = Observer()
-observer2 = Observer()
-
-subject.adicionar(observer1)
-subject.adicionar(observer2)
-subject.notificar("Evento importante!")</code></pre>
+                    <h3><i class="fas fa-list"></i> Casos de Uso Comuns</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4><i class="fas fa-bell"></i> Sistemas de Notificação</h4>
+                            <p>Criar diferentes tipos de notificações (Email, SMS, Push) sem o cliente conhecer cada tipo.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-database"></i> Conexões de Banco</h4>
+                            <p>Criar conexões para diferentes bancos (SQLite, MySQL, PostgreSQL) de forma unificada.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-file"></i> Parsers de Arquivo</h4>
+                            <p>Criar parsers diferentes (JSON, XML, CSV) baseado no tipo de arquivo.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-shapes"></i> Formas Geométricas</h4>
+                            <p>Criar diferentes formas (Círculo, Retângulo, Triângulo) através de uma interface comum.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-code"></i> Exemplo Completo: Sistema de Notificações</h3>
-                    <div class="code-block">
-                        <pre><code># Subject (Observado)
-class Produto:
-    def __init__(self, nome, preco):
-        self.nome = nome
-        self._preco = preco
-        self._observers = []
-    
-    def adicionar_observer(self, observer):
-        self._observers.append(observer)
-    
-    def remover_observer(self, observer):
-        self._observers.remove(observer)
-    
-    @property
-    def preco(self):
-        return self._preco
-    
-    @preco.setter
-    def preco(self, novo_preco):
-        if novo_preco != self._preco:
-            antigo_preco = self._preco
-            self._preco = novo_preco
-            self._notificar_mudanca_preco(antigo_preco, novo_preco)
-    
-    def _notificar_mudanca_preco(self, antigo, novo):
-        for observer in self._observers:
-            observer.preco_mudou(self, antigo, novo)
-
-# Observers
-class ClienteObserver:
-    def __init__(self, nome):
-        self.nome = nome
-    
-    def preco_mudou(self, produto, antigo, novo):
-        if novo < antigo:
-            print(f"🎉 {self.nome}: {produto.nome} está mais barato!")
-            print(f"   De R$ {antigo:.2f} para R$ {novo:.2f}")
-        else:
-            print(f"📢 {self.nome}: {produto.nome} aumentou de preço")
-            print(f"   De R$ {antigo:.2f} para R$ {novo:.2f}")
-
-class EstoqueObserver:
-    def preco_mudou(self, produto, antigo, novo):
-        print(f"📊 [ESTOQUE] Preço de {produto.nome} atualizado no sistema")
-
-# Uso
-produto = Produto("Notebook", 3000.00)
-
-cliente1 = ClienteObserver("João")
-cliente2 = ClienteObserver("Maria")
-estoque = EstoqueObserver()
-
-produto.adicionar_observer(cliente1)
-produto.adicionar_observer(cliente2)
-produto.adicionar_observer(estoque)
-
-# Mudança de preço notifica todos
-produto.preco = 2500.00  # Desconto!</code></pre>
+                    <h3><i class="fas fa-exchange-alt"></i> Factory Method vs Simple Factory</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4>Simple Factory</h4>
+                            <p>Um método estático que cria objetos baseado em parâmetros:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Mais simples</li>
+                                <li>✅ Fácil de entender</li>
+                                <li>❌ Menos flexível</li>
+                                <li>❌ Não usa herança</li>
+                            </ul>
+                        </div>
+                        <div class="conceito">
+                            <h4>Factory Method</h4>
+                            <p>Usa herança - subclasses implementam o método de criação:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Mais flexível</li>
+                                <li>✅ Usa polimorfismo</li>
+                                <li>✅ Extensível via herança</li>
+                                <li>❌ Mais complexo</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="exemplo" style="margin-top: 12px;">
-                        <strong>Resultado:</strong> Todos os observers são notificados automaticamente 
-                        quando o preço muda, sem acoplamento direto.
+                    <div class="quando-usar" style="margin-top: 12px;">
+                        <strong>💡 Para este curso:</strong> Começaremos com Simple Factory (mais simples) e depois 
+                        veremos Factory Method completo (com herança).
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-code"></i> Exemplo: Sistema de Eventos</h3>
-                    <div class="code-block">
-                        <pre><code>class EventManager:
-    def __init__(self):
-        self._listeners = {}
-    
-    def on(self, evento, callback):
-        if evento not in self._listeners:
-            self._listeners[evento] = []
-        self._listeners[evento].append(callback)
-    
-    def emit(self, evento, dados=None):
-        if evento in self._listeners:
-            for callback in self._listeners[evento]:
-                callback(dados)
-
-# Uso
-eventos = EventManager()
-
-# Registrar listeners
-eventos.on("usuario_login", lambda d: print(f"✅ Login: {d}"))
-eventos.on("usuario_login", lambda d: print(f"📧 Email enviado para {d}"))
-eventos.on("compra_realizada", lambda d: print(f"💰 Compra: R$ {d}"))
-
-# Emitir eventos
-eventos.emit("usuario_login", "joao@email.com")
-eventos.emit("compra_realizada", 150.00)</code></pre>
-                    </div>
-                </div>
-
-                <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-check-circle"></i> Vantagens do Observer</h3>
-                    <ul>
-                        <li>✅ <strong>Desacoplamento:</strong> Subject e Observers são independentes</li>
-                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos observers</li>
-                        <li>✅ <strong>Comunicação:</strong> Notificações automáticas e eficientes</li>
-                        <li>✅ <strong>Flexibilidade:</strong> Observers podem ser adicionados/removidos dinamicamente</li>
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Factory Method</h3>
+                    <ul style="margin-top: 8px;">
+                        <li>✅ <strong>Desacoplamento:</strong> Cliente não conhece classes concretas</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos tipos sem modificar código existente</li>
+                        <li>✅ <strong>Centralização:</strong> Lógica de criação em um só lugar</li>
+                        <li>✅ <strong>Manutenção:</strong> Mudanças na criação não afetam cliente</li>
+                        <li>✅ <strong>Testabilidade:</strong> Fácil criar mocks para testes</li>
                     </ul>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Princípio por Trás do Factory Method</h3>
+                    <p>O Factory Method funciona através de:</p>
+                    <ol style="margin-top: 8px;">
+                        <li><strong>Interface comum:</strong> Todos os objetos criados implementam a mesma interface</li>
+                        <li><strong>Método de criação:</strong> Factory tem um método que decide qual objeto criar</li>
+                        <li><strong>Encapsulamento:</strong> Lógica de criação fica escondida do cliente</li>
+                        <li><strong>Polimorfismo:</strong> Cliente trabalha com a interface, não com implementações</li>
+                    </ol>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Próximo slide:</strong> Veremos como implementar Factory Method em Python, 
+                        começando com Simple Factory e depois Factory Method completo.
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <p>BEP-025: Padrão Factory Method</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
@@ -228,5 +178,4 @@ eventos.emit("compra_realizada", 150.00)</code></pre>
     <script src="../script.js"></script>
 </body>
 </html>
-
 

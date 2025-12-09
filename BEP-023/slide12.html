@@ -3,147 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-023 - Slide 12: Resumo e Checklist</title>
+    <title>BEP-027 - Slide 12: Padrão Decorator - Teoria</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
-        .resumo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
-        .checklist { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .conceito { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .quando-usar { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-puzzle-piece"></i> BEP-023: Introdução aos Padrões de Projeto</h1>
-            <p>Organizando código e promovendo reutilização através de padrões comprovados</p>
+            <h1><i class="fas fa-puzzle-piece"></i> BEP-027: Padrão Decorator</h1>
+            <p>Adicionando funcionalidades dinamicamente</p>
         </div>
         
         <div class="nav"></div>
 
         <div class="content">
             <div class="slide active" id="slide12">
-                <h2><i class="fas fa-check-circle"></i> Resumo e Checklist</h2>
-                <p>Confirme seu domínio dos conceitos</p>
+                <h2><i class="fas fa-box"></i> Padrão Decorator - Conceito e Teoria</h2>
+                <p>Entendendo quando e por que usar Decorator</p>
                 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-book"></i> Resumo dos Conceitos</h3>
-                    <div class="two-col" style="margin-top: 12px;">
-                        <div class="resumo">
-                            <h4>📚 O que Aprendemos</h4>
-                            <ul style="margin-top: 8px;">
-                                <li>Design Patterns são <strong>soluções reutilizáveis</strong> para problemas comuns</li>
-                                <li>Foram popularizados pelo livro <strong>Gang of Four (GoF)</strong></li>
-                                <li>São <strong>guias de design</strong>, não código pronto</li>
-                                <li>Ajudam na <strong>comunicação</strong> e <strong>organização</strong> do código</li>
-                            </ul>
-                        </div>
-                        <div class="resumo">
-                            <h4>📊 Classificações</h4>
-                            <ul style="margin-top: 8px;">
-                                <li><strong>Criacionais:</strong> Criação de objetos (Singleton, Factory)</li>
-                                <li><strong>Estruturais:</strong> Estrutura de classes (Adapter, Decorator)</li>
-                                <li><strong>Comportamentais:</strong> Comunicação (Observer, Strategy)</li>
-                            </ul>
-                        </div>
+                    <h3><i class="fas fa-info-circle"></i> O que é Decorator?</h3>
+                    <p>O padrão <strong>Decorator</strong> permite adicionar novos comportamentos a objetos dinamicamente, 
+                    colocando-os dentro de objetos wrapper que contêm esses comportamentos.</p>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Definição formal:</strong> Decorator é um padrão estrutural que permite anexar novos 
+                        comportamentos a objetos, colocando-os dentro de objetos wrapper especiais que contêm esses comportamentos. 
+                        O Decorator fornece uma alternativa flexível à herança para estender funcionalidades.
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-check-square"></i> Checklist de Aprendizado</h3>
-                    <div class="checklist" style="margin-top: 12px;">
-                        <p><strong>Você consegue:</strong></p>
+                    <h3><i class="fas fa-question-circle"></i> Problema que Resolve</h3>
+                    <p>Quando você precisa adicionar funcionalidades a objetos, mas não quer usar herança:</p>
+                    <div class="problema" style="margin-top: 12px;">
+                        <strong>❌ Sem Decorator (usando herança):</strong>
                         <ul style="margin-top: 8px;">
-                            <li>☐ Explicar o que são Design Patterns e sua importância?</li>
-                            <li>☐ Identificar as três classificações principais?</li>
-                            <li>☐ Implementar o padrão Singleton em Python?</li>
-                            <li>☐ Implementar o padrão Factory em Python?</li>
-                            <li>☐ Implementar o padrão Observer em Python?</li>
-                            <li>☐ Identificar quando usar cada padrão?</li>
-                            <li>☐ Reconhecer anti-padrões comuns?</li>
-                            <li>☐ Aplicar padrões em situações práticas?</li>
+                            <li>Explosão de classes (Café, CaféComLeite, CaféComAçúcar, CaféComLeiteEAçúcar...)</li>
+                            <li>Herança estática - não pode mudar em tempo de execução</li>
+                            <li>Dificulta combinações de funcionalidades</li>
+                            <li>Modificar classe base afeta todas as subclasses</li>
+                            <li>Rígido e difícil de estender</li>
+                        </ul>
+                    </div>
+                    <div class="quando-usar" style="margin-top: 12px;">
+                        <strong>✅ Com Decorator:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>Composição dinâmica de funcionalidades</li>
+                            <li>Pode adicionar/remover funcionalidades em tempo de execução</li>
+                            <li>Fácil combinar múltiplas funcionalidades</li>
+                            <li>Não modifica classe base</li>
+                            <li>Flexível e extensível</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-key"></i> Conceitos-Chave</h3>
-                    <table class="code-table">
-                        <tr>
-                            <th>Conceito</th>
-                            <th>Definição</th>
-                        </tr>
-                        <tr>
-                            <td><strong>Design Pattern</strong></td>
-                            <td>Solução reutilizável para problema comum</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Singleton</strong></td>
-                            <td>Garante uma única instância de classe</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Factory</strong></td>
-                            <td>Cria objetos sem especificar classe exata</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Observer</strong></td>
-                            <td>Notifica mudanças a múltiplos objetos</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Anti-padrão</strong></td>
-                            <td>Solução comum que é ineficaz</td>
-                        </tr>
-                    </table>
+                    <h3><i class="fas fa-check-circle"></i> Quando Usar Decorator?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="quando-usar">
+                            <h4>✅ Use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Precisa adicionar funcionalidades <strong>dinamicamente</strong></li>
+                                <li>Quer <strong>combinar</strong> múltiplas funcionalidades</li>
+                                <li>Herança não é <strong>apropriada</strong> (explosão de classes)</li>
+                                <li>Quer <strong>estender</strong> sem modificar classe base</li>
+                                <li>Precisa de <strong>flexibilidade</strong> em tempo de execução</li>
+                            </ul>
+                        </div>
+                        <div class="problema">
+                            <h4>❌ Não use quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Funcionalidades são <strong>fixas</strong> e não mudam</li>
+                                <li>Herança simples é <strong>suficiente</strong></li>
+                                <li>Adiciona <strong>complexidade</strong> desnecessária</li>
+                                <li>Objetos são <strong>simples</strong> e não precisam de extensão</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-lightbulb"></i> Próximos Passos</h3>
+                    <h3><i class="fas fa-list"></i> Casos de Uso Comuns</h3>
                     <div class="two-col" style="margin-top: 12px;">
-                        <div class="resumo">
-                            <h4>🎯 Para Praticar</h4>
+                        <div class="conceito">
+                            <h4><i class="fas fa-coffee"></i> Bebidas e Adicionais</h4>
+                            <p>Café base + leite + açúcar + chantilly, combinando funcionalidades dinamicamente.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-file"></i> Streams de Dados</h4>
+                            <p>Adicionar compressão, criptografia, buffering a streams de forma combinável.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-lock"></i> Autenticação e Autorização</h4>
+                            <p>Adicionar diferentes camadas de segurança (HTTPS, autenticação, autorização).</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-chart-bar"></i> Formatação de Texto</h4>
+                            <p>Adicionar negrito + itálico + sublinhado a textos de forma combinável.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Decorator vs Herança</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4>Herança</h4>
+                            <p>Estática, definida em tempo de compilação:</p>
                             <ul style="margin-top: 8px;">
-                                <li>Implemente os exercícios propostos</li>
-                                <li>Identifique padrões em código existente</li>
-                                <li>Refatore código usando padrões</li>
-                                <li>Estude outros padrões (Builder, Strategy, etc.)</li>
+                                <li>✅ Mais simples para casos fixos</li>
+                                <li>✅ Melhor performance</li>
+                                <li>❌ Não pode mudar em runtime</li>
+                                <li>❌ Explosão de classes</li>
                             </ul>
                         </div>
-                        <div class="resumo">
-                            <h4>📖 Para Aprofundar</h4>
+                        <div class="conceito">
+                            <h4>Decorator</h4>
+                            <p>Dinâmica, definida em tempo de execução:</p>
                             <ul style="margin-top: 8px;">
-                                <li>Leia o livro "Design Patterns: GoF"</li>
-                                <li>Explore padrões específicos do Python</li>
-                                <li>Estude arquiteturas de software</li>
-                                <li>Pratique em projetos reais</li>
+                                <li>✅ Flexível em runtime</li>
+                                <li>✅ Combina funcionalidades</li>
+                                <li>✅ Não modifica classe base</li>
+                                <li>❌ Mais complexo</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-quote-left"></i> Lembrete Final</h3>
-                    <div class="resumo" style="margin-top: 12px;">
-                        <p><strong>"Design Patterns são ferramentas, não regras. Use quando fizer sentido, 
-                        não apenas porque são 'bonitos'. O objetivo é código mais limpo, organizado e manutenível."</strong></p>
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> Estrutura do Decorator</h3>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Componente:</strong> Interface comum que define operações básicas<br>
+                        <strong>Componente Concreto:</strong> Implementação básica do componente<br>
+                        <strong>Decorator:</strong> Classe abstrata que mantém referência ao componente<br>
+                        <strong>Decorator Concreto:</strong> Implementações específicas que adicionam funcionalidades
+                    </div>
+                    <div class="quando-usar" style="margin-top: 12px;">
+                        <strong>💡 Analogia:</strong> Como uma cebola - você pode adicionar camadas (decorators) 
+                        ao redor do objeto base, cada camada adiciona uma funcionalidade.
                     </div>
                 </div>
 
-                <div class="card" style="margin-top: 16px;">
-                    <h3><i class="fas fa-star"></i> Parabéns!</h3>
-                    <p>Você completou a introdução aos Design Patterns! Agora você tem as bases para:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do Decorator</h3>
                     <ul style="margin-top: 8px;">
-                        <li>✅ Reconhecer padrões em código existente</li>
-                        <li>✅ Aplicar padrões em seus projetos</li>
-                        <li>✅ Comunicar soluções usando nomes padronizados</li>
-                        <li>✅ Escrever código mais profissional e organizado</li>
+                        <li>✅ <strong>Flexibilidade:</strong> Adiciona funcionalidades dinamicamente</li>
+                        <li>✅ <strong>Composição:</strong> Combina múltiplas funcionalidades</li>
+                        <li>✅ <strong>Extensibilidade:</strong> Fácil adicionar novos decorators</li>
+                        <li>✅ <strong>Separação:</strong> Cada decorator tem responsabilidade única</li>
+                        <li>✅ <strong>Reutilização:</strong> Decorators podem ser reutilizados</li>
                     </ul>
+                </div>
+
+                <div class="card" style="margin-top: 16px;">
+                    <h3><i class="fas fa-lightbulb"></i> Princípio por Trás do Decorator</h3>
+                    <p>O Decorator funciona através de:</p>
+                    <ol style="margin-top: 8px;">
+                        <li><strong>Composição:</strong> Decorator mantém referência ao objeto decorado</li>
+                        <li><strong>Delegação:</strong> Decorator delega chamadas ao objeto decorado</li>
+                        <li><strong>Envolvimento:</strong> Decorator "envolve" o objeto, adicionando comportamento</li>
+                        <li><strong>Encadeamento:</strong> Múltiplos decorators podem ser encadeados</li>
+                    </ol>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <strong>Próximo slide:</strong> Veremos como implementar Decorator em Python, 
+                        criando decorators que envolvem objetos e adicionam funcionalidades dinamicamente.
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>BEP-023: Introdução aos Padrões de Projeto</p>
+            <p>BEP-027: Padrão Decorator</p>
             <img src="../Rodape.png" alt="Rodapé">
         </div>
     </div>
@@ -151,5 +188,4 @@
     <script src="../script.js"></script>
 </body>
 </html>
-
 
