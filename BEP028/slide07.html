@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 07: Exemplo Prático Simples</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-code"></i> Exemplo Prático Simples</h2>
+                <p>Implementação básica de MVC em Python - Sistema de Tarefas</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Sistema: Gerenciador de Tarefas</h3>
+                    <p>Vamos criar um sistema simples de tarefas usando MVC:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>📝 Criar tarefa</li>
+                        <li>📋 Listar tarefas</li>
+                        <li>✅ Marcar como concluída</li>
+                        <li>🗑️ Remover tarefa</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Model: Tarefa</h3>
+                    <div class="code-block">
+                        <pre><code># models.py
+class Tarefa:
+    """Model - Gerencia dados de uma tarefa"""
+    
+    def __init__(self, titulo, descricao=""):
+        if not titulo or not titulo.strip():
+            raise ValueError("Título é obrigatório")
+        self._titulo = titulo.strip()
+        self._descricao = descricao.strip()
+        self._concluida = False
+    
+    @property
+    def titulo(self):
+        return self._titulo
+    
+    @property
+    def descricao(self):
+        return self._descricao
+    
+    @property
+    def concluida(self):
+        return self._concluida
+    
+    def marcar_concluida(self):
+        """Marca tarefa como concluída"""
+        self._concluida = True
+    
+    def __str__(self):
+        status = "✅" if self._concluida else "⏳"
+        return f"{status} {self._titulo}"
+
+
+class TarefaRepository:
+    """Gerencia persistência das tarefas"""
+    
+    def __init__(self):
+        self._tarefas = []
+        self._proximo_id = 1
+    
+    def criar(self, tarefa):
+        """Adiciona nova tarefa"""
+        self._tarefas.append(tarefa)
+        return len(self._tarefas) - 1
+    
+    def listar_todas(self):
+        """Retorna todas as tarefas"""
+        return self._tarefas.copy()
+    
+    def buscar_por_indice(self, indice):
+        """Busca tarefa por índice"""
+        if 0 <= indice < len(self._tarefas):
+            return self._tarefas[indice]
+        return None
+    
+    def remover(self, indice):
+        """Remove tarefa"""
+        if 0 <= indice < len(self._tarefas):
+            return self._tarefas.pop(indice)
+        return None</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-desktop"></i> View: TarefaView</h3>
+                    <div class="code-block">
+                        <pre><code># views.py
+class TarefaView:
+    """View - Responsável pela apresentação"""
+    
+    def exibir_menu(self):
+        """Exibe menu principal"""
+        print("\n" + "="*40)
+        print("📋 GERENCIADOR DE TAREFAS")
+        print("="*40)
+        print("1. Criar tarefa")
+        print("2. Listar tarefas")
+        print("3. Marcar como concluída")
+        print("4. Remover tarefa")
+        print("0. Sair")
+        print("="*40)
+    
+    def solicitar_dados_tarefa(self):
+        """Coleta dados para nova tarefa"""
+        titulo = input("Título da tarefa: ").strip()
+        descricao = input("Descrição (opcional): ").strip()
+        return titulo, descricao
+    
+    def exibir_tarefas(self, tarefas):
+        """Exibe lista de tarefas"""
+        if not tarefas:
+            print("📭 Nenhuma tarefa cadastrada!")
+            return
+        print("\n📋 LISTA DE TAREFAS:")
+        for i, tarefa in enumerate(tarefas, 1):
+            print(f"  {i}. {tarefa}")
+    
+    def solicitar_indice(self):
+        """Solicita índice da tarefa"""
+        try:
+            indice = int(input("Número da tarefa: ")) - 1
+            return indice
+        except ValueError:
+            return None
+    
+    def exibir_mensagem(self, mensagem, tipo="info"):
+        """Exibe mensagens"""
+        if tipo == "erro":
+            print(f"❌ {mensagem}")
+        elif tipo == "sucesso":
+            print(f"✅ {mensagem}")
+        else:
+            print(f"ℹ️ {mensagem}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Controller: TarefaController</h3>
+                    <div class="code-block">
+                        <pre><code># controllers.py
+from models import Tarefa, TarefaRepository
+from views import TarefaView
+
+class TarefaController:
+    """Controller - Coordena Model e View"""
+    
+    def __init__(self):
+        self.repository = TarefaRepository()
+        self.view = TarefaView()
+    
+    def iniciar(self):
+        """Inicia o sistema"""
+        while True:
+            self.view.exibir_menu()
+            opcao = input("👉 Escolha: ").strip()
+            
+            if opcao == '1':
+                self.criar_tarefa()
+            elif opcao == '2':
+                self.listar_tarefas()
+            elif opcao == '3':
+                self.marcar_concluida()
+            elif opcao == '4':
+                self.remover_tarefa()
+            elif opcao == '0':
+                break
+            else:
+                self.view.exibir_mensagem("Opção inválida!", "erro")
+    
+    def criar_tarefa(self):
+        """Processa criação de tarefa"""
+        try:
+            titulo, descricao = self.view.solicitar_dados_tarefa()
+            tarefa = Tarefa(titulo, descricao)
+            self.repository.criar(tarefa)
+            self.view.exibir_mensagem("Tarefa criada!", "sucesso")
+        except ValueError as e:
+            self.view.exibir_mensagem(str(e), "erro")
+    
+    def listar_tarefas(self):
+        """Lista todas as tarefas"""
+        tarefas = self.repository.listar_todas()
+        self.view.exibir_tarefas(tarefas)
+    
+    def marcar_concluida(self):
+        """Marca tarefa como concluída"""
+        tarefas = self.repository.listar_todas()
+        self.view.exibir_tarefas(tarefas)
+        indice = self.view.solicitar_indice()
+        tarefa = self.repository.buscar_por_indice(indice)
+        if tarefa:
+            tarefa.marcar_concluida()
+            self.view.exibir_mensagem("Tarefa concluída!", "sucesso")
+        else:
+            self.view.exibir_mensagem("Tarefa não encontrada!", "erro")
+    
+    def remover_tarefa(self):
+        """Remove tarefa"""
+        tarefas = self.repository.listar_todas()
+        self.view.exibir_tarefas(tarefas)
+        indice = self.view.solicitar_indice()
+        tarefa = self.repository.remover(indice)
+        if tarefa:
+            self.view.exibir_mensagem("Tarefa removida!", "sucesso")
+        else:
+            self.view.exibir_mensagem("Tarefa não encontrada!", "erro")
+
+
+# main.py
+if __name__ == "__main__":
+    controller = TarefaController()
+    controller.iniciar()</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Estrutura de Arquivos</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <pre><code>tarefas_mvc/
+├── models.py      # Tarefa, TarefaRepository
+├── views.py       # TarefaView
+├── controllers.py # TarefaController
+└── main.py        # Ponto de entrada</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 08: Aplicando MVC no CRUD</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .mapeamento { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-sync-alt"></i> Aplicando MVC no CRUD</h2>
+                <p>Refatorando o sistema CRUD usando MVC</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-map"></i> Mapeamento: CRUD v2 → MVC</h3>
+                    <div class="mapeamento" style="margin-top: 12px;">
+                        <p><strong>Como o CRUD v2 se relaciona com MVC:</strong></p>
+                        <div class="two-col" style="margin-top: 15px;">
+                            <div>
+                                <h4>📦 Model</h4>
+                                <ul style="margin-top: 8px;">
+                                    <li><code>models.py</code> → <code>Aluno</code></li>
+                                    <li><code>repository.py</code> → <code>AlunoRepository</code></li>
+                                    <li><code>database.py</code> → <code>DatabaseManager</code></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>🖥️ View</h4>
+                                <ul style="margin-top: 8px;">
+                                    <li><code>menu.py</code> → <code>Menu</code></li>
+                                    <li>Métodos de exibição</li>
+                                    <li>Coleta de entrada</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>🎮 Controller</h4>
+                                <ul style="margin-top: 8px;">
+                                    <li><code>sistema.py</code> → <code>SistemaAlunos</code></li>
+                                    <li>Coordena Model e View</li>
+                                    <li>Gerencia fluxo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Estrutura MVC do CRUD</h3>
+                    <div class="code-block">
+                        <pre><code># Estrutura de arquivos
+crud_sistema_v2/
+├── models/
+│   ├── __init__.py
+│   └── aluno.py          # Model: Aluno
+├── repositories/
+│   ├── __init__.py
+│   └── aluno_repository.py  # Persistência
+├── views/
+│   ├── __init__.py
+│   └── aluno_view.py     # View: Menu e exibição
+├── controllers/
+│   ├── __init__.py
+│   └── aluno_controller.py  # Controller: Coordenação
+└── main.py               # Ponto de entrada</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Model: Aluno (já existe)</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <p><strong>O Model já está bem separado no CRUD v2:</strong></p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <code>models.py</code> contém apenas a classe <code>Aluno</code></li>
+                            <li>✅ Lógica de negócio (validação) está no Model</li>
+                            <li>✅ Não depende de View ou Controller</li>
+                            <li>✅ Pode ser reutilizado</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-desktop"></i> View: Refatorar Menu</h3>
+                    <div class="code-block">
+                        <pre><code># views/aluno_view.py
+class AlunoView:
+    """View - Apresentação e coleta de dados"""
+    
+    def exibir_menu(self):
+        """Exibe menu principal"""
+        print("\n" + "="*50)
+        print("🎓 SISTEMA DE GERENCIAMENTO DE ALUNOS")
+        print("="*50)
+        print("1. 📝 Cadastrar novo aluno")
+        print("2. 📋 Listar todos os alunos")
+        print("3. 🔍 Buscar aluno por nome")
+        print("4. ✏️ Atualizar dados do aluno")
+        print("5. 🗑️ Remover aluno")
+        print("0. 🚪 Sair")
+        print("="*50)
+    
+    def solicitar_dados_aluno(self):
+        """Coleta dados do usuário"""
+        nome = input("Nome completo: ").strip()
+        idade = input("Idade: ").strip()
+        curso = input("Curso: ").strip()
+        nota = input("Nota (0-10): ").strip()
+        return nome, idade, curso, nota
+    
+    def exibir_aluno(self, aluno):
+        """Exibe um aluno formatado"""
+        print(f"\n📋 Dados do Aluno:")
+        print(f"   ID: {aluno.id}")
+        print(f"   Nome: {aluno.nome}")
+        print(f"   Idade: {aluno.idade}")
+        print(f"   Curso: {aluno.curso}")
+        if aluno.nota:
+            print(f"   Nota: {aluno.nota:.1f}")
+    
+    def exibir_lista(self, alunos):
+        """Exibe lista de alunos"""
+        # ... lógica de exibição
+        pass
+    
+    def exibir_mensagem(self, mensagem, tipo="info"):
+        """Exibe mensagens"""
+        # ... lógica de mensagens
+        pass</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Controller: Refatorar Sistema</h3>
+                    <div class="code-block">
+                        <pre><code># controllers/aluno_controller.py
+from models.aluno import Aluno
+from repositories.aluno_repository import AlunoRepository
+from views.aluno_view import AlunoView
+
+class AlunoController:
+    """Controller - Coordena Model e View"""
+    
+    def __init__(self, repository):
+        self.repository = repository
+        self.view = AlunoView()
+    
+    def iniciar(self):
+        """Inicia o sistema"""
+        while True:
+            self.view.exibir_menu()
+            opcao = input("👉 Escolha uma opção: ").strip()
+            
+            if opcao == '1':
+                self.cadastrar_aluno()
+            elif opcao == '2':
+                self.listar_alunos()
+            elif opcao == '3':
+                self.buscar_aluno()
+            elif opcao == '4':
+                self.atualizar_aluno()
+            elif opcao == '5':
+                self.remover_aluno()
+            elif opcao == '0':
+                self.view.exibir_mensagem("Até logo!", "sucesso")
+                break
+            else:
+                self.view.exibir_mensagem("Opção inválida!", "erro")
+    
+    def cadastrar_aluno(self):
+        """Processa cadastro"""
+        try:
+            # View coleta dados
+            nome, idade, curso, nota = self.view.solicitar_dados_aluno()
+            
+            # Cria Model (validação no Model)
+            aluno = Aluno(
+                nome, 
+                int(idade) if idade else None,
+                curso,
+                float(nota) if nota else None
+            )
+            
+            # Repository salva
+            self.repository.salvar(aluno)
+            
+            # View exibe resultado
+            self.view.exibir_mensagem(f"Aluno '{nome}' cadastrado!", "sucesso")
+        except ValueError as e:
+            self.view.exibir_mensagem(str(e), "erro")
+        except Exception as e:
+            self.view.exibir_mensagem(f"Erro: {e}", "erro")
+    
+    def listar_alunos(self):
+        """Lista todos os alunos"""
+        alunos = self.repository.listar_todos()
+        self.view.exibir_lista(alunos)
+    
+    # ... outros métodos</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Benefícios da Refatoração</h3>
+                    <ul>
+                        <li>✅ <strong>Separação Clara:</strong> Cada componente tem responsabilidade única</li>
+                        <li>✅ <strong>Testabilidade:</strong> Fácil testar cada parte isoladamente</li>
+                        <li>✅ <strong>Manutenção:</strong> Mudanças isoladas em cada componente</li>
+                        <li>✅ <strong>Reutilização:</strong> View pode ser trocada (web, desktop, etc.)</li>
+                        <li>✅ <strong>Escalabilidade:</strong> Fácil adicionar novas funcionalidades</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 02: Componente Model</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .responsabilidade { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .exemplo { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-database"></i> Componente Model</h2>
+                <p>Responsabilidades e características do Model</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é o Model?</h3>
+                    <p>O <strong>Model</strong> (Modelo) é responsável por:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>📦 <strong>Gerenciar dados:</strong> Armazenar e recuperar informações</li>
+                        <li>🔒 <strong>Lógica de negócio:</strong> Regras e validações do domínio</li>
+                        <li>💾 <strong>Persistência:</strong> Interação com banco de dados ou arquivos</li>
+                        <li>✅ <strong>Validação:</strong> Garantir integridade dos dados</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Responsabilidades do Model</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-check-circle"></i> Deve Fazer:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Representar entidades do domínio</li>
+                                <li>Validar dados antes de salvar</li>
+                                <li>Interagir com banco de dados</li>
+                                <li>Implementar regras de negócio</li>
+                                <li>Fornecer métodos para acesso aos dados</li>
+                            </ul>
+                        </div>
+                        <div class="responsabilidade" style="background: #FED7D7; border-left-color: #E53E3E;">
+                            <h4><i class="fas fa-times-circle"></i> NÃO Deve Fazer:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Exibir dados ao usuário</li>
+                                <li>Processar entrada do usuário</li>
+                                <li>Decidir qual View mostrar</li>
+                                <li>Gerenciar navegação</li>
+                                <li>Formatação de saída</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Model de Aluno</h3>
+                    <div class="code-block">
+                        <pre><code># Model: models.py
+class Aluno:
+    """Model - Gerencia dados e lógica de negócio"""
+    
+    def __init__(self, nome, idade, curso, nota=None):
+        self._nome = None
+        self._idade = None
+        self._curso = None
+        self._nota = None
+        
+        # Validação (lógica de negócio)
+        self.nome = nome
+        self.idade = idade
+        self.curso = curso
+        if nota is not None:
+            self.nota = nota
+    
+    @property
+    def nome(self):
+        return self._nome
+    
+    @nome.setter
+    def nome(self, valor):
+        if not valor or not valor.strip():
+            raise ValueError("Nome é obrigatório")
+        self._nome = valor.strip()
+    
+    @property
+    def nota(self):
+        return self._nota
+    
+    @nota.setter
+    def nota(self, valor):
+        if valor is not None and (valor < 0 or valor > 10):
+            raise ValueError("Nota deve estar entre 0 e 10")
+        self._nota = valor
+    
+    def __str__(self):
+        return f"Aluno: {self.nome} - {self.curso}"</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Características do Model:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Contém apenas lógica de negócio e dados</li>
+                            <li>✅ Não sabe nada sobre como os dados são exibidos</li>
+                            <li>✅ Pode ser reutilizado por diferentes Views</li>
+                            <li>✅ Fácil de testar isoladamente</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Model e Persistência</h3>
+                    <p>O Model pode interagir com repositórios ou camadas de acesso a dados:</p>
+                    <div class="code-block" style="margin-top: 10px;">
+                        <pre><code># Model pode usar Repository para persistência
+class AlunoRepository:
+    """Gerencia persistência dos dados de Aluno"""
+    
+    def __init__(self, db_manager):
+        self.db = db_manager
+    
+    def salvar(self, aluno):
+        """Salva aluno no banco de dados"""
+        # Lógica de inserção/atualização
+        pass
+    
+    def buscar_por_id(self, id):
+        """Busca aluno por ID"""
+        # Lógica de consulta
+        pass
+    
+    def listar_todos(self):
+        """Lista todos os alunos"""
+        # Lógica de listagem
+        pass</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Princípios do Model</h3>
+                    <ul>
+                        <li>✅ <strong>Independência:</strong> Não depende de View ou Controller</li>
+                        <li>✅ <strong>Reutilização:</strong> Pode ser usado por múltiplas Views</li>
+                        <li>✅ <strong>Testabilidade:</strong> Fácil de testar sem interface</li>
+                        <li>✅ <strong>Encapsulamento:</strong> Protege dados e regras de negócio</li>
+                        <li>✅ <strong>Simplicidade:</strong> Foca apenas em dados e lógica de negócio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

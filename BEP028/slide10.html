@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 10: Exercícios Práticos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exercicio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .dica { background: #FEF5E7; border-left: 4px solid #C05621; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Identificar e aplicar MVC em projetos pequenos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 1: Identificar Componentes</h3>
+                    <div class="exercicio">
+                        <p><strong>Objetivo:</strong> Analisar código existente e identificar Model, View e Controller.</p>
+                        <p style="margin-top: 10px;"><strong>Tarefa:</strong></p>
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>Abra o arquivo <code>BEP-016/crud_sistema_v2/sistema.py</code></li>
+                            <li>Identifique quais partes são Model, View e Controller</li>
+                            <li>Liste as responsabilidades de cada componente</li>
+                            <li>Identifique o que poderia ser melhorado para seguir MVC</li>
+                        </ol>
+                        <div class="dica" style="margin-top: 12px;">
+                            <strong>💡 Dica:</strong> Procure por:
+                            <ul style="margin-top: 8px;">
+                                <li>Model: Classes que representam dados e regras de negócio</li>
+                                <li>View: Código que exibe informações (print, input)</li>
+                                <li>Controller: Código que coordena Model e View</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 2: Sistema de Livros</h3>
+                    <div class="exercicio">
+                        <p><strong>Objetivo:</strong> Criar um sistema simples de gerenciamento de livros usando MVC.</p>
+                        <p style="margin-top: 10px;"><strong>Requisitos:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Cadastrar livro (título, autor, ano, ISBN)</li>
+                            <li>Listar todos os livros</li>
+                            <li>Buscar livro por título</li>
+                            <li>Marcar livro como lido</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Tarefa:</strong></p>
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>Crie a estrutura de pastas: <code>models/</code>, <code>views/</code>, <code>controllers/</code></li>
+                            <li>Implemente o Model <code>Livro</code> com validações</li>
+                            <li>Implemente a View <code>LivroView</code> para exibição e entrada</li>
+                            <li>Implemente o Controller <code>LivroController</code> para coordenação</li>
+                            <li>Crie um <code>main.py</code> para iniciar o sistema</li>
+                        </ol>
+                        <div class="dica" style="margin-top: 12px;">
+                            <strong>💡 Dica:</strong> Use o exemplo do slide 07 como referência!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 3: Refatorar Código Existente</h3>
+                    <div class="exercicio">
+                        <p><strong>Objetivo:</strong> Refatorar um código procedural para usar MVC.</p>
+                        <p style="margin-top: 10px;"><strong>Código a refatorar:</strong></p>
+                        <div class="code-block" style="margin-top: 10px;">
+                            <pre><code># sistema_procedural.py
+alunos = []
+
+def cadastrar():
+    nome = input("Nome: ")
+    idade = int(input("Idade: "))
+    alunos.append({"nome": nome, "idade": idade})
+    print("Cadastrado!")
+
+def listar():
+    for aluno in alunos:
+        print(f"{aluno['nome']} - {aluno['idade']}")
+
+while True:
+    print("1. Cadastrar 2. Listar 0. Sair")
+    op = input("Opção: ")
+    if op == '1':
+        cadastrar()
+    elif op == '2':
+        listar()
+    elif op == '0':
+        break</code></pre>
+                        </div>
+                        <p style="margin-top: 10px;"><strong>Tarefa:</strong></p>
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>Identifique o que é Model, View e Controller</li>
+                            <li>Separe o código em arquivos apropriados</li>
+                            <li>Adicione validações no Model</li>
+                            <li>Melhore a View com formatação</li>
+                            <li>Implemente o Controller para coordenação</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 4: Múltiplas Views</h3>
+                    <div class="exercicio">
+                        <p><strong>Objetivo:</strong> Criar múltiplas Views para o mesmo Model.</p>
+                        <p style="margin-top: 10px;"><strong>Tarefa:</strong></p>
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>Use o Model <code>Aluno</code> do CRUD v2</li>
+                            <li>Crie <code>AlunoViewConsole</code> (interface texto)</li>
+                            <li>Crie <code>AlunoViewHTML</code> (gera HTML simples)</li>
+                            <li>Modifique o Controller para usar qualquer View</li>
+                            <li>Demonstre que o mesmo Model funciona com ambas Views</li>
+                        </ol>
+                        <div class="dica" style="margin-top: 12px;">
+                            <strong>💡 Dica:</strong> Isso demonstra o poder do MVC - mesmo Model, diferentes apresentações!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 5: Sistema de Contatos</h3>
+                    <div class="exercicio">
+                        <p><strong>Objetivo:</strong> Criar um sistema completo de agenda de contatos usando MVC.</p>
+                        <p style="margin-top: 10px;"><strong>Requisitos:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 8px;">
+                            <li>Cadastrar contato (nome, telefone, email)</li>
+                            <li>Listar contatos</li>
+                            <li>Buscar contato por nome</li>
+                            <li>Atualizar contato</li>
+                            <li>Remover contato</li>
+                            <li>Salvar em arquivo JSON (persistência simples)</li>
+                        </ul>
+                        <p style="margin-top: 10px;"><strong>Tarefa:</strong></p>
+                        <ol style="margin-left: 20px; margin-top: 8px;">
+                            <li>Implemente Model <code>Contato</code> com validações (email válido, telefone)</li>
+                            <li>Implemente Repository para salvar/carregar JSON</li>
+                            <li>Implemente View completa com menu e formatação</li>
+                            <li>Implemente Controller com todas as operações</li>
+                            <li>Teste o sistema completo</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Checklist de Avaliação</h3>
+                    <p>Use este checklist para avaliar seus exercícios:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ Model contém apenas dados e lógica de negócio?</li>
+                        <li>✅ View contém apenas código de apresentação?</li>
+                        <li>✅ Controller coordena Model e View?</li>
+                        <li>✅ View não acessa Model diretamente?</li>
+                        <li>✅ Model não chama View diretamente?</li>
+                        <li>✅ Código está organizado em arquivos/pastas apropriadas?</li>
+                        <li>✅ Cada componente tem responsabilidade única?</li>
+                        <li>✅ Código está testável e manutenível?</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Recursos para Prática</h3>
+                    <ul>
+                        <li>📚 Revise os slides anteriores para referência</li>
+                        <li>💻 Use o código do CRUD v2 como exemplo</li>
+                        <li>🔍 Analise frameworks que usam MVC (Django, Flask)</li>
+                        <li>🤝 Discuta com colegas sobre suas implementações</li>
+                        <li>📝 Documente suas decisões de design</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px; background: #F0FFF4; border: 2px solid #38A169;">
+                    <h3><i class="fas fa-check-circle"></i> Respostas dos Exercícios</h3>
+                    <p style="margin-top: 10px;">Confira as respostas comentadas para todos os exercícios:</p>
+                    <a href="RESPOSTAS_EXERCICIOS_MVC.md" target="_blank" style="display: inline-block; margin-top: 15px; background: #38A169; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                        <i class="fas fa-file-alt"></i> Ver Respostas Completas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

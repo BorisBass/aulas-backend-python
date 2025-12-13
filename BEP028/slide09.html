@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 09: Comparação: Sem MVC vs Com MVC</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+        .sem-mvc { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px; }
+        .com-mvc { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px; }
+        .tabela { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .tabela th, .tabela td { padding: 12px; text-align: left; border: 1px solid #E2E8F0; }
+        .tabela th { background: #4299E1; color: white; }
+        .tabela tr:nth-child(even) { background: #F7FAFC; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide09">
+                <h2><i class="fas fa-balance-scale"></i> Comparação: Sem MVC vs Com MVC</h2>
+                <p>Vantagens e diferenças práticas</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-table"></i> Comparação Geral</h3>
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Aspecto</th>
+                                <th>❌ Sem MVC</th>
+                                <th>✅ Com MVC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Organização</strong></td>
+                                <td>Tudo em um arquivo/classe</td>
+                                <td>Separado em Model, View, Controller</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Manutenção</strong></td>
+                                <td>Difícil encontrar código</td>
+                                <td>Fácil localizar funcionalidades</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Testes</strong></td>
+                                <td>Difícil testar partes isoladas</td>
+                                <td>Fácil testar cada componente</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reutilização</strong></td>
+                                <td>Código duplicado</td>
+                                <td>Componentes reutilizáveis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Escalabilidade</strong></td>
+                                <td>Difícil adicionar features</td>
+                                <td>Fácil adicionar funcionalidades</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Trabalho em Equipe</strong></td>
+                                <td>Conflitos frequentes</td>
+                                <td>Poucos conflitos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Código Sem MVC</h3>
+                    <div class="sem-mvc" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># ❌ Tudo misturado em uma classe
+class SistemaAlunos:
+    def __init__(self):
+        self.alunos = []  # Dados
+        self.db = sqlite3.connect('alunos.db')  # Banco
+    
+    def cadastrar(self):
+        # Interface
+        nome = input("Nome: ")
+        idade = input("Idade: ")
+        
+        # Validação
+        if not nome:
+            print("Erro!")
+            return
+        
+        # Lógica de negócio
+        if int(idade) < 0:
+            print("Erro!")
+            return
+        
+        # Persistência
+        cursor = self.db.cursor()
+        cursor.execute("INSERT INTO...")
+        self.db.commit()
+        
+        # Exibição
+        print("Cadastrado!")
+    
+    def listar(self):
+        # Consulta
+        cursor = self.db.cursor()
+        cursor.execute("SELECT * FROM...")
+        alunos = cursor.fetchall()
+        
+        # Formatação
+        for aluno in alunos:
+            print(f"{aluno[0]} - {aluno[1]}")
+        
+        # Tudo junto = difícil manter!</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Código Com MVC</h3>
+                    <div class="com-mvc" style="margin-top: 12px;">
+                        <div class="code-block">
+                            <pre><code># ✅ Separado em componentes
+
+# Model: models.py
+class Aluno:
+    def __init__(self, nome, idade):
+        self._nome = None
+        self._idade = None
+        self.nome = nome  # Validação aqui
+        self.idade = idade
+
+# View: views.py
+class AlunoView:
+    def solicitar_dados(self):
+        nome = input("Nome: ")
+        idade = input("Idade: ")
+        return nome, idade
+    
+    def exibir_mensagem(self, msg):
+        print(msg)
+
+# Controller: controllers.py
+class AlunoController:
+    def __init__(self, repository, view):
+        self.repository = repository
+        self.view = view
+    
+    def cadastrar(self):
+        nome, idade = self.view.solicitar_dados()
+        aluno = Aluno(nome, idade)  # Validação no Model
+        self.repository.salvar(aluno)
+        self.view.exibir_mensagem("Cadastrado!")
+
+# Cada parte tem responsabilidade única!</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-chart-bar"></i> Comparação: Manutenção</h3>
+                    <div class="comparacao">
+                        <div class="sem-mvc">
+                            <h4>❌ Sem MVC</h4>
+                            <p><strong>Cenário:</strong> Mudar formato de exibição</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Precisa encontrar código no meio de tudo</li>
+                                <li>Risco de quebrar lógica de negócio</li>
+                                <li>Difícil testar mudança isoladamente</li>
+                                <li>Tempo: ⏱️ Alto</li>
+                            </ul>
+                        </div>
+                        <div class="com-mvc">
+                            <h4>✅ Com MVC</h4>
+                            <p><strong>Cenário:</strong> Mudar formato de exibição</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Muda apenas na View</li>
+                                <li>Model e Controller não são afetados</li>
+                                <li>Fácil testar mudança isoladamente</li>
+                                <li>Tempo: ⚡ Baixo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-users"></i> Comparação: Trabalho em Equipe</h3>
+                    <div class="comparacao">
+                        <div class="sem-mvc">
+                            <h4>❌ Sem MVC</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Conflitos no mesmo arquivo</li>
+                                <li>Dificulta trabalho paralelo</li>
+                                <li>Risco de sobrescrever código</li>
+                                <li>Revisão de código complexa</li>
+                            </ul>
+                        </div>
+                        <div class="com-mvc">
+                            <h4>✅ Com MVC</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Arquivos separados = menos conflitos</li>
+                                <li>Trabalho paralelo facilitado</li>
+                                <li>Um no Model, outro na View</li>
+                                <li>Revisão de código mais simples</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Quando Usar MVC?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="com-mvc">
+                            <h4>✅ Use MVC quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Projeto tem interface de usuário</li>
+                                <li>Projeto será mantido/evoluído</li>
+                                <li>Múltiplas formas de visualização</li>
+                                <li>Trabalho em equipe</li>
+                                <li>Projeto médio/grande</li>
+                            </ul>
+                        </div>
+                        <div class="sem-mvc" style="background: #FEF5E7; border-left-color: #C05621;">
+                            <h4>⚠️ Pode não precisar quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Scripts muito simples</li>
+                                <li>Projetos de aprendizado</li>
+                                <li>Protótipos rápidos</li>
+                                <li>Aplicações sem interface</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

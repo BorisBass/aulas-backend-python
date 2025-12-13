@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 01: Introdução ao MVC</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .conceito { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .problema { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .solucao { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> Introdução ao MVC</h2>
+                <p>O que é MVC e sua importância no desenvolvimento de software</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é MVC?</h3>
+                    <p><strong>MVC</strong> (Model-View-Controller) é um <strong>padrão arquitetural</strong> que 
+                    organiza o código de uma aplicação em três componentes principais:</p>
+                    <div class="two-col" style="margin-top: 15px;">
+                        <div class="conceito">
+                            <h4><i class="fas fa-database"></i> Model (Modelo)</h4>
+                            <p>Gerencia os <strong>dados</strong> e a <strong>lógica de negócio</strong> da aplicação.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-desktop"></i> View (Visão)</h4>
+                            <p>Responsável pela <strong>apresentação</strong> dos dados ao usuário.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-cogs"></i> Controller (Controlador)</h4>
+                            <p>Intermedia a <strong>comunicação</strong> entre Model e View.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Por que MVC é Importante?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="solucao">
+                            <h4>✅ Separação de Responsabilidades</h4>
+                            <p>Cada componente tem uma função específica, facilitando manutenção e testes.</p>
+                        </div>
+                        <div class="solucao">
+                            <h4>✅ Reutilização de Código</h4>
+                            <p>Model pode ser usado por diferentes Views sem modificação.</p>
+                        </div>
+                        <div class="solucao">
+                            <h4>✅ Facilita Trabalho em Equipe</h4>
+                            <p>Desenvolvedores podem trabalhar em componentes diferentes simultaneamente.</p>
+                        </div>
+                        <div class="solucao">
+                            <h4>✅ Manutenção Simplificada</h4>
+                            <p>Mudanças em um componente não afetam diretamente os outros.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Problema: Código Sem Organização</h3>
+                    <div class="problema" style="margin-top: 12px;">
+                        <p><strong>Antes do MVC:</strong> Tudo misturado em um único arquivo ou classe</p>
+                        <div class="code-block" style="margin-top: 10px;">
+                            <pre><code># ❌ Tudo misturado - difícil de manter
+class SistemaAlunos:
+    def __init__(self):
+        self.alunos = []  # Dados
+        self.db = sqlite3.connect('alunos.db')  # Banco
+    
+    def cadastrar(self):
+        nome = input("Nome: ")  # Interface
+        # Lógica de negócio
+        # Validação
+        # Inserção no banco
+        # Exibição de mensagem
+        # ... tudo junto!</code></pre>
+                        </div>
+                    </div>
+                    <div class="solucao" style="margin-top: 12px;">
+                        <p><strong>Com MVC:</strong> Cada responsabilidade em seu lugar</p>
+                        <ul style="margin-top: 8px;">
+                            <li>📦 <strong>Model:</strong> Gerencia dados e regras de negócio</li>
+                            <li>🖥️ <strong>View:</strong> Exibe informações ao usuário</li>
+                            <li>🎮 <strong>Controller:</strong> Coordena Model e View</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-history"></i> Origem do MVC</h3>
+                    <p>O padrão MVC foi criado por <strong>Trygve Reenskaug</strong> em 1979, enquanto trabalhava 
+                    no Smalltalk-80, uma das primeiras linguagens orientadas a objetos.</p>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <p><strong>Evolução:</strong> Desde então, MVC se tornou um dos padrões mais utilizados em 
+                        desenvolvimento de software, sendo adotado por frameworks como Django, Flask, Ruby on Rails, 
+                        Spring, Angular, React e muitos outros.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Quando Usar MVC?</h3>
+                    <ul>
+                        <li>✅ Aplicações com interface de usuário (web, desktop, mobile)</li>
+                        <li>✅ Sistemas que precisam separar lógica de negócio da apresentação</li>
+                        <li>✅ Projetos que serão mantidos e evoluídos ao longo do tempo</li>
+                        <li>✅ Aplicações com múltiplas formas de visualização dos mesmos dados</li>
+                        <li>✅ Quando você quer facilitar testes unitários e integração</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

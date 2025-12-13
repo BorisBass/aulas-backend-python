@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 03: Componente View</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .responsabilidade { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .exemplo { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-desktop"></i> Componente View</h2>
+                <p>Responsabilidades e características da View</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é a View?</h3>
+                    <p>A <strong>View</strong> (Visão) é responsável por:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>🖥️ <strong>Apresentação:</strong> Exibir dados ao usuário</li>
+                        <li>🎨 <strong>Formatação:</strong> Como os dados são mostrados</li>
+                        <li>📝 <strong>Interface:</strong> Coletar entrada do usuário</li>
+                        <li>🔄 <strong>Atualização:</strong> Refletir mudanças nos dados</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Responsabilidades da View</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-check-circle"></i> Deve Fazer:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Exibir dados do Model</li>
+                                <li>Formatar saída para o usuário</li>
+                                <li>Coletar entrada do usuário</li>
+                                <li>Mostrar mensagens e erros</li>
+                                <li>Atualizar quando dados mudam</li>
+                            </ul>
+                        </div>
+                        <div class="responsabilidade" style="background: #FED7D7; border-left-color: #E53E3E;">
+                            <h4><i class="fas fa-times-circle"></i> NÃO Deve Fazer:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Processar lógica de negócio</li>
+                                <li>Validar dados complexos</li>
+                                <li>Acessar banco de dados diretamente</li>
+                                <li>Decidir qual ação tomar</li>
+                                <li>Manter estado de negócio</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: View de Aluno (Console)</h3>
+                    <div class="code-block">
+                        <pre><code># View: view.py
+class AlunoView:
+    """View - Responsável pela apresentação"""
+    
+    def exibir_menu(self):
+        """Exibe o menu principal"""
+        print("\n" + "="*50)
+        print("🎓 SISTEMA DE GERENCIAMENTO DE ALUNOS")
+        print("="*50)
+        print("1. 📝 Cadastrar novo aluno")
+        print("2. 📋 Listar todos os alunos")
+        print("3. 🔍 Buscar aluno por nome")
+        print("4. ✏️ Atualizar dados do aluno")
+        print("5. 🗑️ Remover aluno")
+        print("0. 🚪 Sair")
+        print("="*50)
+    
+    def solicitar_dados_aluno(self):
+        """Coleta dados do usuário"""
+        nome = input("Nome completo: ").strip()
+        idade = input("Idade: ").strip()
+        curso = input("Curso: ").strip()
+        nota = input("Nota (0-10): ").strip()
+        return nome, idade, curso, nota
+    
+    def exibir_aluno(self, aluno):
+        """Exibe um aluno formatado"""
+        print(f"\n📋 Dados do Aluno:")
+        print(f"   Nome: {aluno.nome}")
+        print(f"   Idade: {aluno.idade}")
+        print(f"   Curso: {aluno.curso}")
+        if aluno.nota:
+            print(f"   Nota: {aluno.nota:.1f}")
+    
+    def exibir_lista(self, alunos):
+        """Exibe lista de alunos"""
+        if not alunos:
+            print("📭 Nenhum aluno cadastrado!")
+            return
+        print(f"\n📋 LISTA DE ALUNOS ({len(alunos)} cadastrados)")
+        for aluno in alunos:
+            self.exibir_aluno(aluno)
+    
+    def exibir_mensagem(self, mensagem, tipo="info"):
+        """Exibe mensagens ao usuário"""
+        if tipo == "erro":
+            print(f"❌ {mensagem}")
+        elif tipo == "sucesso":
+            print(f"✅ {mensagem}")
+        else:
+            print(f"ℹ️ {mensagem}")</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Características da View:</strong>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Apenas formatação e exibição</li>
+                            <li>✅ Não contém lógica de negócio</li>
+                            <li>✅ Pode ser trocada sem afetar Model</li>
+                            <li>✅ Pode ter múltiplas Views para o mesmo Model</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-mobile-alt"></i> Tipos de View</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-terminal"></i> Console/CLI</h4>
+                            <p>Interface de linha de comando (texto)</p>
+                            <p style="margin-top: 8px;"><strong>Exemplo:</strong> Menu com print() e input()</p>
+                        </div>
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-globe"></i> Web</h4>
+                            <p>Interface web (HTML, CSS, JavaScript)</p>
+                            <p style="margin-top: 8px;"><strong>Exemplo:</strong> Páginas HTML renderizadas</p>
+                        </div>
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-window-maximize"></i> Desktop</h4>
+                            <p>Interface gráfica (GUI)</p>
+                            <p style="margin-top: 8px;"><strong>Exemplo:</strong> Tkinter, PyQt, etc.</p>
+                        </div>
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-mobile-alt"></i> Mobile</h4>
+                            <p>Interface para dispositivos móveis</p>
+                            <p style="margin-top: 8px;"><strong>Exemplo:</strong> Apps Android/iOS</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Princípios da View</h3>
+                    <ul>
+                        <li>✅ <strong>Passividade:</strong> Não processa lógica complexa</li>
+                        <li>✅ <strong>Reutilização:</strong> Pode usar o mesmo Model</li>
+                        <li>✅ <strong>Substituibilidade:</strong> Fácil trocar uma View por outra</li>
+                        <li>✅ <strong>Simplicidade:</strong> Foca apenas em apresentação</li>
+                        <li>✅ <strong>Observação:</strong> Pode observar mudanças no Model</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

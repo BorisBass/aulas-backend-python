@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 04: Componente Controller</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .responsabilidade { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .exemplo { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-cogs"></i> Componente Controller</h2>
+                <p>Responsabilidades e características do Controller</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é o Controller?</h3>
+                    <p>O <strong>Controller</strong> (Controlador) é responsável por:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>🎮 <strong>Coordenação:</strong> Conectar Model e View</li>
+                        <li>📥 <strong>Entrada:</strong> Processar ações do usuário</li>
+                        <li>🔄 <strong>Fluxo:</strong> Decidir qual ação executar</li>
+                        <li>🔗 <strong>Comunicação:</strong> Mediar entre Model e View</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Responsabilidades do Controller</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="responsabilidade">
+                            <h4><i class="fas fa-check-circle"></i> Deve Fazer:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Receber entrada do usuário</li>
+                                <li>Validar entrada básica</li>
+                                <li>Chamar métodos do Model</li>
+                                <li>Decidir qual View mostrar</li>
+                                <li>Gerenciar fluxo da aplicação</li>
+                                <li>Tratar erros e exceções</li>
+                            </ul>
+                        </div>
+                        <div class="responsabilidade" style="background: #FED7D7; border-left-color: #E53E3E;">
+                            <h4><i class="fas fa-times-circle"></i> NÃO Deve Fazer:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Armazenar dados permanentemente</li>
+                                <li>Exibir dados diretamente</li>
+                                <li>Implementar regras de negócio complexas</li>
+                                <li>Acessar banco diretamente</li>
+                                <li>Formatação de saída</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Controller de Aluno</h3>
+                    <div class="code-block">
+                        <pre><code># Controller: controller.py
+from .models import Aluno
+from .repository import AlunoRepository
+from .view import AlunoView
+
+class AlunoController:
+    """Controller - Coordena Model e View"""
+    
+    def __init__(self, repository, view):
+        self.repository = repository
+        self.view = view
+    
+    def iniciar(self):
+        """Inicia o sistema"""
+        while True:
+            self.view.exibir_menu()
+            opcao = input("👉 Escolha uma opção: ").strip()
+            
+            if opcao == '1':
+                self.cadastrar_aluno()
+            elif opcao == '2':
+                self.listar_alunos()
+            elif opcao == '3':
+                self.buscar_aluno()
+            elif opcao == '0':
+                self.view.exibir_mensagem("Até logo!", "sucesso")
+                break
+            else:
+                self.view.exibir_mensagem("Opção inválida!", "erro")
+    
+    def cadastrar_aluno(self):
+        """Processa cadastro de aluno"""
+        try:
+            # View coleta dados
+            nome, idade, curso, nota = self.view.solicitar_dados_aluno()
+            
+            # Validação básica no Controller
+            if not nome:
+                self.view.exibir_mensagem("Nome é obrigatório!", "erro")
+                return
+            
+            # Cria Model (validação de negócio no Model)
+            aluno = Aluno(nome, int(idade) if idade else None, 
+                        curso, float(nota) if nota else None)
+            
+            # Repository salva (persistência)
+            self.repository.salvar(aluno)
+            
+            # View exibe resultado
+            self.view.exibir_mensagem(f"Aluno '{nome}' cadastrado!", "sucesso")
+        except ValueError as e:
+            self.view.exibir_mensagem(str(e), "erro")
+        except Exception as e:
+            self.view.exibir_mensagem(f"Erro: {e}", "erro")
+    
+    def listar_alunos(self):
+        """Lista todos os alunos"""
+        alunos = self.repository.listar_todos()
+        self.view.exibir_lista(alunos)
+    
+    def buscar_aluno(self):
+        """Busca aluno por nome"""
+        nome = input("Digite o nome: ").strip()
+        alunos = self.repository.buscar_por_nome(nome)
+        self.view.exibir_lista(alunos)</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <strong>Fluxo do Controller:</strong>
+                        <ol style="margin-top: 8px;">
+                            <li>📥 Recebe entrada do usuário (via View)</li>
+                            <li>✅ Valida entrada básica</li>
+                            <li>📦 Usa Model para criar/validar dados</li>
+                            <li>💾 Usa Repository para persistir</li>
+                            <li>🖥️ Usa View para exibir resultado</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Controller como Intermediário</h3>
+                    <div class="responsabilidade" style="margin-top: 12px;">
+                        <p><strong>O Controller NUNCA comunica Model e View diretamente:</strong></p>
+                        <ul style="margin-top: 8px;">
+                            <li>❌ <strong>Errado:</strong> View acessa Model diretamente</li>
+                            <li>❌ <strong>Errado:</strong> Model chama View diretamente</li>
+                            <li>✅ <strong>Correto:</strong> Controller coordena tudo</li>
+                        </ul>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <p><strong>Fluxo correto:</strong></p>
+                        <p style="margin-top: 8px;">Usuário → View → Controller → Model → Repository → Banco</p>
+                        <p style="margin-top: 8px;">Banco → Repository → Model → Controller → View → Usuário</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Princípios do Controller</h3>
+                    <ul>
+                        <li>✅ <strong>Coordenação:</strong> Orquestra Model e View</li>
+                        <li>✅ <strong>Magreza:</strong> Deve ser "magro" (pouca lógica)</li>
+                        <li>✅ <strong>Delegação:</strong> Delega trabalho ao Model</li>
+                        <li>✅ <strong>Roteamento:</strong> Decide qual ação executar</li>
+                        <li>✅ <strong>Tratamento:</strong> Gerencia erros e exceções</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

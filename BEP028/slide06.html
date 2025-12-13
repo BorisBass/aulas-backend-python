@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 06: Como Padrões Facilitam Organização</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .beneficio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+        .sem-mvc { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px; }
+        .com-mvc { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-tools"></i> Como Padrões Facilitam Organização</h2>
+                <p>Benefícios de usar MVC para manutenção e escalabilidade</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-chart-line"></i> Organização do Código</h3>
+                    <div class="comparacao">
+                        <div class="sem-mvc">
+                            <h4>❌ Sem MVC</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Tudo em um arquivo</li>
+                                <li>Lógica misturada</li>
+                                <li>Difícil encontrar código</li>
+                                <li>Dependências confusas</li>
+                                <li>Código duplicado</li>
+                            </ul>
+                        </div>
+                        <div class="com-mvc">
+                            <h4>✅ Com MVC</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Arquivos organizados</li>
+                                <li>Responsabilidades claras</li>
+                                <li>Fácil localizar código</li>
+                                <li>Dependências explícitas</li>
+                                <li>Código reutilizável</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-wrench"></i> Facilita Manutenção</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="beneficio">
+                            <h4><i class="fas fa-search"></i> Localização Rápida</h4>
+                            <p>Saber onde está cada funcionalidade:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Dados? → Model</li>
+                                <li>Exibição? → View</li>
+                                <li>Lógica? → Controller</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-edit"></i> Mudanças Isoladas</h4>
+                            <p>Alterar uma parte não afeta outras:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Mudar View não afeta Model</li>
+                                <li>Mudar Model não quebra View</li>
+                                <li>Controller coordena mudanças</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-bug"></i> Debug Simplificado</h4>
+                            <p>Erros ficam isolados:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Erro de exibição? → View</li>
+                                <li>Erro de dados? → Model</li>
+                                <li>Erro de fluxo? → Controller</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-users"></i> Trabalho em Equipe</h4>
+                            <p>Múltiplos desenvolvedores:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Um trabalha no Model</li>
+                                <li>Outro na View</li>
+                                <li>Outro no Controller</li>
+                                <li>Sem conflitos!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-expand-arrows-alt"></i> Facilita Escalabilidade</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="beneficio">
+                            <h4><i class="fas fa-plus-circle"></i> Adicionar Funcionalidades</h4>
+                            <p>Novas features são fáceis:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Novo método no Controller</li>
+                                <li>Nova View se necessário</li>
+                                <li>Reutiliza Model existente</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-mobile-alt"></i> Múltiplas Interfaces</h4>
+                            <p>Mesmo Model, diferentes Views:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>View Console</li>
+                                <li>View Web</li>
+                                <li>View Mobile</li>
+                                <li>Todas usam o mesmo Model!</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-exchange-alt"></i> Trocar Componentes</h4>
+                            <p>Fácil substituir partes:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Trocar banco de dados</li>
+                                <li>Trocar interface</li>
+                                <li>Trocar lógica de negócio</li>
+                                <li>Sem quebrar o resto!</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-code-branch"></i> Modularidade</h4>
+                            <p>Código organizado em módulos:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>models/</li>
+                                <li>views/</li>
+                                <li>controllers/</li>
+                                <li>Fácil navegar!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-vial"></i> Facilita Testes</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="beneficio">
+                            <h4><i class="fas fa-check-double"></i> Testes Unitários</h4>
+                            <p>Testar cada componente isoladamente:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Testar Model sem View</li>
+                                <li>Testar Controller com Mock</li>
+                                <li>Testar View com dados fake</li>
+                            </ul>
+                        </div>
+                        <div class="beneficio">
+                            <h4><i class="fas fa-link"></i> Testes de Integração</h4>
+                            <p>Testar interação entre componentes:</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Controller + Model</li>
+                                <li>Controller + View</li>
+                                <li>Fluxo completo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-graduation-cap"></i> Facilita Aprendizado</h3>
+                    <ul>
+                        <li>✅ <strong>Estrutura Clara:</strong> Novos desenvolvedores entendem rápido</li>
+                        <li>✅ <strong>Padrão Conhecido:</strong> MVC é amplamente usado</li>
+                        <li>✅ <strong>Documentação:</strong> Estrutura documenta o código</li>
+                        <li>✅ <strong>Onboarding:</strong> Fácil integrar novos membros</li>
+                        <li>✅ <strong>Boas Práticas:</strong> Ensina organização profissional</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
