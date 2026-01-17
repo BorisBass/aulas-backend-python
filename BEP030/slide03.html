@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 03: Métodos HTTP: GET</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .get-info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-download"></i> Métodos HTTP: GET</h2>
+                <p>Buscar e recuperar recursos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é GET?</h3>
+                    <p>O método <strong>GET</strong> é usado para <strong>buscar e recuperar</strong> informações de um recurso. 
+                    É o método mais comum e usado para leitura de dados.</p>
+                    <div class="get-info" style="margin-top: 15px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Idempotente:</strong> Múltiplas requisições retornam o mesmo resultado</li>
+                            <li>✅ <strong>Seguro:</strong> Não modifica dados no servidor</li>
+                            <li>✅ <strong>Cacheável:</strong> Respostas podem ser armazenadas em cache</li>
+                            <li>✅ <strong>Sem corpo:</strong> Não envia dados no corpo da requisição</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplos de Uso</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Buscar todos os usuários
+GET /api/usuarios HTTP/1.1
+Host: exemplo.com
+Accept: application/json
+
+// Resposta
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "usuarios": [
+    {"id": 1, "nome": "João"},
+    {"id": 2, "nome": "Maria"}
+  ]
+}
+
+// Buscar um usuário específico
+GET /api/usuarios/123 HTTP/1.1
+Host: exemplo.com
+
+// Resposta
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao@exemplo.com"
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-check"></i> Quando Usar GET?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="get-info">
+                            <h4><i class="fas fa-check"></i> Use GET para:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Buscar lista de recursos</li>
+                                <li>Buscar um recurso específico</li>
+                                <li>Filtrar e pesquisar dados</li>
+                                <li>Operações de leitura</li>
+                            </ul>
+                        </div>
+                        <div style="background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-times"></i> NÃO use GET para:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Criar novos recursos</li>
+                                <li>Atualizar dados</li>
+                                <li>Deletar recursos</li>
+                                <li>Operações que modificam dados</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-filter"></i> GET com Parâmetros</h3>
+                    <p>GET pode usar parâmetros de query string para filtrar, paginar ou buscar dados:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Buscar com filtros
+GET /api/usuarios?nome=João&idade=25 HTTP/1.1
+
+// Buscar com paginação
+GET /api/usuarios?page=1&limit=10 HTTP/1.1
+
+// Buscar com ordenação
+GET /api/usuarios?sort=nome&order=asc HTTP/1.1</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 10: Consumindo APIs Públicas</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .dica { background: #FEF5E7; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide10">
+                <h2><i class="fas fa-globe"></i> Consumindo APIs Públicas</h2>
+                <p>Exemplos simples de requisições GET</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-link"></i> Exemplo 1: JSONPlaceholder</h3>
+                    <p>API pública de testes para simular recursos.</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Listar posts
+GET https://jsonplaceholder.typicode.com/posts
+
+# Buscar post específico
+GET https://jsonplaceholder.typicode.com/posts/1
+
+# Filtrar por usuário
+GET https://jsonplaceholder.typicode.com/posts?userId=1</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 10px;">
+                        <p>Documentação: <code>https://jsonplaceholder.typicode.com/guide/</code></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-map-marker-alt"></i> Exemplo 2: ViaCEP</h3>
+                    <p>API pública brasileira para consulta de CEP.</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Consultar CEP
+GET https://viacep.com.br/ws/01001000/json/
+
+# Consultar por endereço
+GET https://viacep.com.br/ws/BA/Salvador/Barra/json/</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 10px;">
+                        <p>Documentação: <code>https://viacep.com.br/</code></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fab fa-python"></i> Consumo no Python (GET + print)</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+# JSONPlaceholder
+resp = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+print(resp.json())
+
+# ViaCEP
+resp = requests.get("https://viacep.com.br/ws/01001000/json/")
+print(resp.json())</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 10px;">
+                        <p>Instalação: <code>pip install requests</code></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-dumbbell"></i> Exercícios rápidos (GET)</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ol style="margin-top: 8px;">
+                            <li>Busque o post <code>/posts/2</code> no JSONPlaceholder.</li>
+                            <li>Liste os posts do usuário <code>userId=3</code>.</li>
+                            <li>Consulte o CEP <code>01310-100</code> no ViaCEP.</li>
+                            <li>Busque endereços por <code>BA/Salvador/Pelourinho</code>.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Boas práticas no Python</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+url = "https://jsonplaceholder.typicode.com/posts/1"
+
+try:
+    resp = requests.get(url, timeout=5)
+    print("Status:", resp.status_code)
+    if resp.status_code == 200:
+        print(resp.json())
+    else:
+        print("Erro HTTP:", resp.text)
+except requests.exceptions.Timeout:
+    print("Timeout ao acessar a API")
+except requests.exceptions.RequestException as e:
+    print("Erro de rede:", e)</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Verifique o status code antes de usar o JSON</li>
+                            <li>✅ Trate erros de rede e timeouts</li>
+                            <li>✅ Leia a documentação da API</li>
+                        </ul>
+                    </div>
+                    <div class="dica" style="margin-top: 10px;">
+                        <p><strong>Docs:</strong> <code>https://jsonplaceholder.typicode.com/guide/</code> | <code>https://viacep.com.br/</code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

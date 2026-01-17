@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 07: Status HTTP</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .success { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .error { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-info-circle"></i> Status HTTP</h2>
+                <p>Códigos de status HTTP comuns</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Categorias de Status</h3>
+                    <p>Os códigos de status HTTP são divididos em 5 categorias:</p>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="info">
+                            <h4><i class="fas fa-1"></i> 1xx - Informativo</h4>
+                            <p>Requisição recebida, processando...</p>
+                        </div>
+                        <div class="success">
+                            <h4><i class="fas fa-2"></i> 2xx - Sucesso</h4>
+                            <p>Requisição processada com sucesso</p>
+                        </div>
+                        <div class="info">
+                            <h4><i class="fas fa-3"></i> 3xx - Redirecionamento</h4>
+                            <p>Requisição precisa de ação adicional</p>
+                        </div>
+                        <div class="error">
+                            <h4><i class="fas fa-4"></i> 4xx - Erro do Cliente</h4>
+                            <p>Erro na requisição do cliente</p>
+                        </div>
+                        <div class="error">
+                            <h4><i class="fas fa-5"></i> 5xx - Erro do Servidor</h4>
+                            <p>Erro no processamento do servidor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Status 2xx - Sucesso</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="success">
+                            <h4>200 OK</h4>
+                            <p>Requisição bem-sucedida. Usado em GET, PUT, PATCH.</p>
+                        </div>
+                        <div class="success">
+                            <h4>201 Created</h4>
+                            <p>Recurso criado com sucesso. Usado em POST.</p>
+                        </div>
+                        <div class="success">
+                            <h4>204 No Content</h4>
+                            <p>Sucesso sem conteúdo na resposta. Usado em DELETE.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Status 4xx - Erro do Cliente</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="error">
+                            <h4>400 Bad Request</h4>
+                            <p>Requisição inválida. Dados mal formatados ou faltando.</p>
+                        </div>
+                        <div class="error">
+                            <h4>401 Unauthorized</h4>
+                            <p>Não autenticado. Precisa fazer login.</p>
+                        </div>
+                        <div class="error">
+                            <h4>403 Forbidden</h4>
+                            <p>Sem permissão. Autenticado mas sem acesso.</p>
+                        </div>
+                        <div class="error">
+                            <h4>404 Not Found</h4>
+                            <p>Recurso não encontrado.</p>
+                        </div>
+                        <div class="error">
+                            <h4>409 Conflict</h4>
+                            <p>Conflito. Recurso já existe ou estado inválido.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-server"></i> Status 5xx - Erro do Servidor</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="error">
+                            <h4>500 Internal Server Error</h4>
+                            <p>Erro interno do servidor. Erro não tratado.</p>
+                        </div>
+                        <div class="error">
+                            <h4>502 Bad Gateway</h4>
+                            <p>Servidor recebeu resposta inválida de outro servidor.</p>
+                        </div>
+                        <div class="error">
+                            <h4>503 Service Unavailable</h4>
+                            <p>Serviço temporariamente indisponível.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-table"></i> Resumo dos Status Mais Comuns</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>GET    /api/usuarios/123    → 200 OK (encontrado) ou 404 Not Found
+POST   /api/usuarios        → 201 Created (criado) ou 400 Bad Request
+PUT    /api/usuarios/123    → 200 OK (atualizado) ou 404 Not Found
+PATCH  /api/usuarios/123    → 200 OK (atualizado) ou 404 Not Found
+DELETE /api/usuarios/123    → 204 No Content (deletado) ou 404 Not Found</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 06: Métodos HTTP: DELETE</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .delete-info { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-trash-alt"></i> Métodos HTTP: DELETE</h2>
+                <p>Remover recursos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é DELETE?</h3>
+                    <p>O método <strong>DELETE</strong> é usado para <strong>remover um recurso</strong> do servidor. 
+                    É uma operação destrutiva que deve ser usada com cuidado.</p>
+                    <div class="delete-info" style="margin-top: 15px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Remove recursos:</strong> Deleta dados do servidor</li>
+                            <li>✅ <strong>Idempotente:</strong> Deletar o mesmo recurso múltiplas vezes tem o mesmo efeito</li>
+                            <li>✅ <strong>Sem corpo:</strong> Geralmente não envia dados no corpo</li>
+                            <li>⚠️ <strong>Irreversível:</strong> A operação geralmente não pode ser desfeita</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo de Uso</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Deletar um usuário
+DELETE /api/usuarios/123 HTTP/1.1
+Host: exemplo.com
+
+// Resposta (sucesso)
+HTTP/1.1 204 No Content
+
+// Ou com mensagem
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "mensagem": "Usuário deletado com sucesso"
+}
+
+// Resposta (recurso não encontrado)
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "erro": "Usuário não encontrado"
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> Segurança e Cuidados</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="delete-info">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Cuidados:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>⚠️ Operação irreversível</li>
+                                <li>⚠️ Requer autenticação</li>
+                                <li>⚠️ Pode afetar dados relacionados</li>
+                                <li>⚠️ Considere soft delete</li>
+                            </ul>
+                        </div>
+                        <div style="background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-check-circle"></i> Boas Práticas:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Verificar permissões</li>
+                                <li>✅ Confirmar antes de deletar</li>
+                                <li>✅ Usar soft delete quando possível</li>
+                                <li>✅ Retornar 404 se não existir</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-check"></i> Status Codes para DELETE</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>204 No Content:</strong> Recurso deletado com sucesso (sem corpo na resposta)</li>
+                        <li>✅ <strong>200 OK:</strong> Recurso deletado com mensagem de confirmação</li>
+                        <li>⚠️ <strong>404 Not Found:</strong> Recurso não existe</li>
+                        <li>⚠️ <strong>403 Forbidden:</strong> Sem permissão para deletar</li>
+                        <li>❌ <strong>500 Internal Server Error:</strong> Erro no servidor</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Soft Delete vs Hard Delete</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div style="background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-undo"></i> Soft Delete</h4>
+                            <p>Marca o recurso como deletado, mas mantém os dados no banco. Permite recuperação.</p>
+                        </div>
+                        <div style="background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-trash"></i> Hard Delete</h4>
+                            <p>Remove completamente os dados do banco. Não pode ser desfeito.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

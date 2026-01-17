@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 07: Exemplos Práticos de Uso</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide07">
+                <h2><i class="fas fa-briefcase"></i> Exemplos Práticos de Uso</h2>
+                <p>Aplicações reais de WebServices no dia a dia</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shopping-cart"></i> E-commerce</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-store"></i> Sistema de E-commerce Integrado</h4>
+                        <p>Um sistema de e-commerce usa vários WebServices:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>💳 <strong>Gateway de Pagamento:</strong> Processa pagamentos via API</li>
+                            <li>📦 <strong>Sistema de Estoque:</strong> Verifica disponibilidade de produtos</li>
+                            <li>🚚 <strong>Calculadora de Frete:</strong> Calcula valores de entrega</li>
+                            <li>📧 <strong>Serviço de Email:</strong> Envia confirmações e notificações</li>
+                            <li>📊 <strong>Analytics:</strong> Envia dados para análise</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Exemplo: Verificar estoque
+GET /api/produtos/123/estoque HTTP/1.1
+Host: estoque.exemplo.com
+
+// Resposta
+{
+  "produto_id": 123,
+  "disponivel": true,
+  "quantidade": 50
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-mobile-alt"></i> Aplicativos Mobile</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-phone"></i> App de Redes Sociais</h4>
+                        <p>Aplicativos móveis consomem APIs para:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>👤 <strong>Autenticação:</strong> Login e registro de usuários</li>
+                            <li>📱 <strong>Feed:</strong> Buscar posts e atualizações</li>
+                            <li>💬 <strong>Mensagens:</strong> Enviar e receber mensagens</li>
+                            <li>📸 <strong>Upload:</strong> Enviar fotos e vídeos</li>
+                            <li>🔔 <strong>Notificações:</strong> Receber notificações push</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Exemplo: Buscar feed
+GET /api/posts?usuario_id=123 HTTP/1.1
+Host: api.rede-social.com
+Authorization: Bearer token123
+
+// Resposta
+{
+  "posts": [
+    {
+      "id": 1,
+      "autor": "João",
+      "conteudo": "Olá mundo!",
+      "data": "2025-01-15"
+    }
+  ]
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-map-marked-alt"></i> Serviços de Localização</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-route"></i> APIs de Mapas e Rotas</h4>
+                        <p>Serviços como Google Maps, OpenStreetMap fornecem APIs para:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>🗺️ <strong>Geocodificação:</strong> Converter endereços em coordenadas</li>
+                            <li>📍 <strong>Busca de lugares:</strong> Encontrar locais próximos</li>
+                            <li>🚗 <strong>Rotas:</strong> Calcular rotas entre pontos</li>
+                            <li>📍 <strong>Geolocalização:</strong> Obter localização atual</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Exemplo: Buscar rota
+GET /api/directions?origin=Salvador&destination=Recife HTTP/1.1
+Host: maps.exemplo.com
+
+// Resposta
+{
+  "distancia": "850 km",
+  "tempo": "10 horas",
+  "rotas": [...]
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cloud"></i> Serviços em Nuvem</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-server"></i> Cloud Computing</h4>
+                        <p>Serviços em nuvem expõem APIs para:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>💾 <strong>Armazenamento:</strong> Upload e download de arquivos</li>
+                            <li>🖥️ <strong>Computação:</strong> Processar dados e executar tarefas</li>
+                            <li>🤖 <strong>Machine Learning:</strong> Usar modelos de IA</li>
+                            <li>📊 <strong>Analytics:</strong> Processar e analisar dados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-envelope"></i> Serviços de Email</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-mail-bulk"></i> APIs de Email</h4>
+                        <p>Serviços como SendGrid, Mailgun fornecem APIs para:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>📧 <strong>Enviar emails:</strong> Enviar mensagens transacionais</li>
+                            <li>📬 <strong>Receber emails:</strong> Processar emails recebidos</li>
+                            <li>📊 <strong>Estatísticas:</strong> Acompanhar aberturas e cliques</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Exemplo: Enviar email
+POST /api/emails HTTP/1.1
+Host: email.exemplo.com
+Content-Type: application/json
+
+{
+  "to": "usuario@exemplo.com",
+  "subject": "Bem-vindo!",
+  "body": "Obrigado por se cadastrar!"
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Integração de Sistemas</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-sync"></i> Sincronização de Dados</h4>
+                        <p>WebServices permitem integrar diferentes sistemas:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>📊 <strong>CRM:</strong> Sincronizar dados de clientes</li>
+                            <li>💼 <strong>ERP:</strong> Integrar sistemas de gestão</li>
+                            <li>📈 <strong>Analytics:</strong> Enviar dados para análise</li>
+                            <li>🔄 <strong>Backup:</strong> Sincronizar dados entre sistemas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Exemplos de APIs Públicas</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="exemplo">
+                            <h4><i class="fab fa-github"></i> GitHub API</h4>
+                            <p>Gerenciar repositórios, issues, pull requests via API.</p>
+                        </div>
+                        <div class="exemplo">
+                            <h4><i class="fab fa-twitter"></i> Twitter API</h4>
+                            <p>Publicar tweets, buscar tweets, gerenciar perfis.</p>
+                        </div>
+                        <div class="exemplo">
+                            <h4><i class="fab fa-google"></i> Google APIs</h4>
+                            <p>Maps, Drive, Gmail, Calendar, etc.</p>
+                        </div>
+                        <div class="exemplo">
+                            <h4><i class="fas fa-cloud-sun-rain"></i> APIs de Clima</h4>
+                            <p>OpenWeatherMap, Weather.com fornecem dados meteorológicos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

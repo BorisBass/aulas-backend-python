@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 06: Formatos de Dados - JSON</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .json-info { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-code"></i> Formatos de Dados: JSON</h2>
+                <p>Estrutura e uso do formato JSON em WebServices</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é JSON?</h3>
+                    <p><strong>JSON</strong> (JavaScript Object Notation) é um formato de dados leve e fácil de ler, 
+                    amplamente usado em APIs REST modernas. É baseado em JavaScript, mas é independente de linguagem.</p>
+                    <div class="json-info" style="margin-top: 15px;">
+                        <h4><i class="fas fa-lightbulb"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Leve:</strong> Menor que XML, mais rápido para transmitir</li>
+                            <li>✅ <strong>Legível:</strong> Fácil de ler e entender</li>
+                            <li>✅ <strong>Nativo em JavaScript:</strong> Suportado nativamente</li>
+                            <li>✅ <strong>Simples:</strong> Estrutura simples e direta</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Estrutura Básica do JSON</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao@exemplo.com",
+  "idade": 30
+}</code></pre>
+                    </div>
+                    <div class="json-info" style="margin-top: 12px;">
+                        <h4><i class="fas fa-list"></i> Elementos:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Objeto:</strong> Delimitado por chaves { }</li>
+                            <li><strong>Propriedades:</strong> Pares chave-valor separados por vírgula</li>
+                            <li><strong>Valores:</strong> Podem ser strings, números, booleanos, arrays, objetos</li>
+                            <li><strong>Strings:</strong> Sempre entre aspas duplas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> JSON com Estrutura Complexa</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao@exemplo.com",
+      "endereco": {
+        "rua": "Rua das Flores, 123",
+        "cidade": "Salvador",
+        "estado": "BA"
+      },
+      "telefones": ["71999999999", "71333333333"]
+    },
+    {
+      "id": 2,
+      "nome": "Maria Santos",
+      "email": "maria@exemplo.com"
+    }
+  ]
+}</code></pre>
+                    </div>
+                    <div class="json-info" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Recursos Demonstrados:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Arrays:</strong> Lista de elementos entre [ ]</li>
+                            <li>✅ <strong>Objetos aninhados:</strong> Objeto dentro de objeto</li>
+                            <li>✅ <strong>Múltiplos tipos:</strong> Strings, números, arrays, objetos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> JSON em WebServices REST</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Requisição GET
+GET /api/usuarios/123 HTTP/1.1
+Host: exemplo.com
+Accept: application/json
+
+// Resposta
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao@exemplo.com"
+}
+
+// Requisição POST
+POST /api/usuarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "nome": "Maria Santos",
+  "email": "maria@exemplo.com"
+}</code></pre>
+                    </div>
+                    <div class="json-info" style="margin-top: 12px;">
+                        <p>Em APIs REST, JSON é o formato mais comum para troca de dados. 
+                        É usado tanto em requisições quanto em respostas.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do JSON</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="json-info">
+                            <h4><i class="fas fa-tachometer-alt"></i> Performance</h4>
+                            <p>Mais rápido para processar e transmitir que XML.</p>
+                        </div>
+                        <div class="json-info">
+                            <h4><i class="fas fa-weight"></i> Leve</h4>
+                            <p>Menor tamanho de arquivo, economiza banda.</p>
+                        </div>
+                        <div class="json-info">
+                            <h4><i class="fas fa-code"></i> Nativo</h4>
+                            <p>Suportado nativamente em JavaScript e muitas linguagens.</p>
+                        </div>
+                        <div class="json-info">
+                            <h4><i class="fas fa-eye"></i> Legível</h4>
+                            <p>Fácil de ler e entender.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Limitações do JSON</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>⚠️ <strong>Sem comentários:</strong> Não suporta comentários no formato</li>
+                        <li>⚠️ <strong>Sem namespaces:</strong> Não tem suporte a namespaces como XML</li>
+                        <li>⚠️ <strong>Tipos limitados:</strong> Suporta apenas tipos básicos (string, number, boolean, null, array, object)</li>
+                        <li>⚠️ <strong>Sem validação:</strong> Não tem esquemas de validação nativos (mas pode usar JSON Schema)</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> JSON vs XML</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="json-info">
+                            <h4><i class="fas fa-code"></i> JSON</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Mais leve e rápido</li>
+                                <li>✅ Mais simples</li>
+                                <li>✅ Nativo em JavaScript</li>
+                                <li>✅ Ideal para APIs REST</li>
+                                <li>❌ Sem validação nativa</li>
+                            </ul>
+                        </div>
+                        <div style="background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-file-code"></i> XML</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Mais robusto</li>
+                                <li>✅ Suporta validação (XSD)</li>
+                                <li>✅ Suporta namespaces</li>
+                                <li>✅ Ideal para SOAP</li>
+                                <li>❌ Mais verboso</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Quando Usar JSON?</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>APIs REST:</strong> Formato padrão para APIs REST modernas</li>
+                        <li>✅ <strong>Aplicativos web/mobile:</strong> Fácil integração com JavaScript</li>
+                        <li>✅ <strong>Microserviços:</strong> Formato leve e eficiente</li>
+                        <li>✅ <strong>Quando performance importa:</strong> Mais rápido que XML</li>
+                        <li>✅ <strong>Dados simples:</strong> Ideal para estruturas de dados simples</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 08: Estrutura de URLs RESTful</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .good { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .bad { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-link"></i> Estrutura de URLs RESTful</h2>
+                <p>Como estruturar URLs em APIs REST</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Princípios de URLs RESTful</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>Baseadas em recursos:</strong> URLs representam recursos, não ações</li>
+                        <li>✅ <strong>Nomes no plural:</strong> Use plural para coleções (/usuarios, /produtos)</li>
+                        <li>✅ <strong>Hierárquicas:</strong> Representam relacionamentos (/usuarios/123/pedidos)</li>
+                        <li>✅ <strong>Consistentes:</strong> Seguem um padrão previsível</li>
+                        <li>✅ <strong>Simples:</strong> Fáceis de entender e usar</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-table"></i> Padrão de URLs RESTful</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Coleção de recursos
+GET    /api/usuarios              → Lista todos os usuários
+POST   /api/usuarios              → Cria um novo usuário
+
+// Recurso específico
+GET    /api/usuarios/123          → Busca usuário com ID 123
+PUT    /api/usuarios/123          → Atualiza usuário 123
+PATCH  /api/usuarios/123          → Atualiza parcialmente usuário 123
+DELETE /api/usuarios/123          → Deleta usuário 123
+
+// Sub-recursos (relacionamentos)
+GET    /api/usuarios/123/pedidos  → Lista pedidos do usuário 123
+POST   /api/usuarios/123/pedidos  → Cria pedido para usuário 123</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check"></i> Exemplos: Boas Práticas</h3>
+                    <div class="good" style="margin-top: 12px;">
+                        <h4>✅ URLs RESTful (Corretas)</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><code>/api/usuarios</code> - Coleção de usuários</li>
+                            <li><code>/api/usuarios/123</code> - Usuário específico</li>
+                            <li><code>/api/produtos</code> - Coleção de produtos</li>
+                            <li><code>/api/produtos/456</code> - Produto específico</li>
+                            <li><code>/api/usuarios/123/pedidos</code> - Pedidos do usuário</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-times"></i> Exemplos: Evitar</h3>
+                    <div class="bad" style="margin-top: 12px;">
+                        <h4>❌ URLs Não-RESTful (Evitar)</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><code>/api/getUsuario?id=123</code> - Verbo na URL</li>
+                            <li><code>/api/createUsuario</code> - Ação na URL</li>
+                            <li><code>/api/deleteUsuario/123</code> - Ação na URL</li>
+                            <li><code>/api/usuario</code> - Singular (deve ser plural)</li>
+                            <li><code>/api/user/123</code> - Inglês inconsistente</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-filter"></i> Query Parameters</h3>
+                    <p>Use query parameters para filtros, paginação e busca:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Filtros
+GET /api/usuarios?idade=25
+GET /api/usuarios?cidade=Salvador&idade=25
+
+// Paginação
+GET /api/usuarios?page=1&limit=10
+
+// Busca
+GET /api/usuarios?search=João
+
+// Ordenação
+GET /api/usuarios?sort=nome&order=asc</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Versionamento de APIs</h3>
+                    <p>Inclua a versão da API na URL:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Versão na URL
+GET /api/v1/usuarios
+GET /api/v2/usuarios
+
+// Ou no header
+GET /api/usuarios
+Header: API-Version: 1.0</code></pre>
+                    </div>
+                    <div class="good" style="margin-top: 12px;">
+                        <p><strong>Recomendação:</strong> Use versão na URL para facilitar depreciação e evolução da API.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

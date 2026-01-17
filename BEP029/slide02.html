@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 02: Por que usar WebServices?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .vantagem { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .caso-uso { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-lightbulb"></i> Por que usar WebServices?</h2>
+                <p>Vantagens e casos de uso na prática</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Principais Vantagens</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="vantagem">
+                            <h4><i class="fas fa-puzzle-piece"></i> Integração de Sistemas</h4>
+                            <p>Permite integrar sistemas diferentes sem precisar reescrever código. 
+                            Sistemas legados podem se comunicar com sistemas modernos.</p>
+                        </div>
+                        <div class="vantagem">
+                            <h4><i class="fas fa-globe"></i> Independência de Plataforma</h4>
+                            <p>Um sistema em Python pode se comunicar com um sistema em Java, 
+                            C# ou qualquer outra linguagem, sem problemas.</p>
+                        </div>
+                        <div class="vantagem">
+                            <h4><i class="fas fa-code-branch"></i> Reutilização de Código</h4>
+                            <p>Funcionalidades podem ser expostas como serviços e reutilizadas 
+                            por múltiplas aplicações.</p>
+                        </div>
+                        <div class="vantagem">
+                            <h4><i class="fas fa-expand-arrows-alt"></i> Escalabilidade</h4>
+                            <p>Permite distribuir a carga entre diferentes servidores, 
+                            melhorando a performance e disponibilidade.</p>
+                        </div>
+                        <div class="vantagem">
+                            <h4><i class="fas fa-shield-alt"></i> Segurança</h4>
+                            <p>Permite implementar autenticação e autorização de forma centralizada, 
+                            além de usar HTTPS para comunicação segura.</p>
+                        </div>
+                        <div class="vantagem">
+                            <h4><i class="fas fa-tools"></i> Manutenção Facilitada</h4>
+                            <p>Mudanças em um serviço não afetam diretamente os clientes, 
+                            desde que a interface seja mantida.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-briefcase"></i> Casos de Uso Reais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="caso-uso">
+                            <h4><i class="fas fa-shopping-cart"></i> E-commerce</h4>
+                            <p>Integração com sistemas de pagamento, cálculo de frete, 
+                            verificação de estoque, etc.</p>
+                        </div>
+                        <div class="caso-uso">
+                            <h4><i class="fas fa-mobile-alt"></i> Aplicativos Mobile</h4>
+                            <p>Aplicativos móveis consomem APIs para buscar dados, 
+                            fazer login, enviar notificações, etc.</p>
+                        </div>
+                        <div class="caso-uso">
+                            <h4><i class="fas fa-map-marked-alt"></i> Serviços de Localização</h4>
+                            <p>APIs de mapas (Google Maps, OpenStreetMap) fornecem 
+                            informações de localização e rotas.</p>
+                        </div>
+                        <div class="caso-uso">
+                            <h4><i class="fas fa-cloud"></i> Integração com Cloud</h4>
+                            <p>Serviços em nuvem expõem APIs para gerenciar recursos, 
+                            armazenar dados, processar informações, etc.</p>
+                        </div>
+                        <div class="caso-uso">
+                            <h4><i class="fas fa-envelope"></i> Serviços de Email</h4>
+                            <p>APIs de email permitem enviar mensagens, verificar caixas 
+                            de entrada, gerenciar contatos, etc.</p>
+                        </div>
+                        <div class="caso-uso">
+                            <h4><i class="fas fa-database"></i> Integração de Dados</h4>
+                            <p>Sincronização de dados entre diferentes sistemas, 
+                            como CRM, ERP, sistemas de gestão, etc.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Antes vs Depois dos WebServices</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div style="background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-times-circle"></i> Sem WebServices</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Sistemas isolados e incompatíveis</li>
+                                <li>Necessidade de reescrever código</li>
+                                <li>Dificuldade para integrar sistemas</li>
+                                <li>Duplicação de funcionalidades</li>
+                                <li>Manutenção complexa</li>
+                            </ul>
+                        </div>
+                        <div style="background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-check-circle"></i> Com WebServices</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Sistemas integrados e comunicantes</li>
+                                <li>Reutilização de funcionalidades</li>
+                                <li>Integração facilitada</li>
+                                <li>Centralização de serviços</li>
+                                <li>Manutenção simplificada</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-chart-line"></i> Importância no Desenvolvimento Moderno</h3>
+                    <p>No desenvolvimento moderno de software, WebServices são <strong>essenciais</strong> porque:</p>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>Arquitetura de Microserviços:</strong> Cada serviço expõe uma API</li>
+                        <li>✅ <strong>APIs Públicas:</strong> Empresas expõem serviços para desenvolvedores (ex: Twitter API, GitHub API)</li>
+                        <li>✅ <strong>Mobile First:</strong> Aplicativos móveis dependem de APIs backend</li>
+                        <li>✅ <strong>Cloud Computing:</strong> Serviços em nuvem são acessados via APIs</li>
+                        <li>✅ <strong>IoT (Internet das Coisas):</strong> Dispositivos se comunicam através de APIs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

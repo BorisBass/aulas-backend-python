@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 05: Métodos HTTP: PUT e PATCH</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .put-info { background: #FEF5E7; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .patch-info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-edit"></i> Métodos HTTP: PUT e PATCH</h2>
+                <p>Atualizar recursos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> PUT vs PATCH</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="put-info">
+                            <h4><i class="fas fa-sync-alt"></i> PUT</h4>
+                            <p><strong>Substitui</strong> o recurso completo. Você deve enviar todos os campos, 
+                            mesmo os que não mudaram.</p>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Idempotente</li>
+                                <li>✅ Substitui recurso completo</li>
+                                <li>✅ Requer todos os campos</li>
+                            </ul>
+                        </div>
+                        <div class="patch-info">
+                            <h4><i class="fas fa-pencil-alt"></i> PATCH</h4>
+                            <p><strong>Atualiza parcialmente</strong> o recurso. Você envia apenas os campos que deseja alterar.</p>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Atualização parcial</li>
+                                <li>✅ Envia apenas campos alterados</li>
+                                <li>✅ Mais eficiente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: PUT</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Atualizar usuário completo (PUT)
+PUT /api/usuarios/123 HTTP/1.1
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao.novo@exemplo.com",
+  "idade": 31,
+  "cidade": "Salvador"
+}
+
+// Resposta
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao.novo@exemplo.com",
+  "idade": 31,
+  "cidade": "Salvador"
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: PATCH</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Atualizar apenas o email (PATCH)
+PATCH /api/usuarios/123 HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "joao.novo@exemplo.com"
+}
+
+// Resposta
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao.novo@exemplo.com",
+  "idade": 30,
+  "cidade": "Salvador"
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> Quando Usar Cada Um?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="put-info">
+                            <h4><i class="fas fa-check"></i> Use PUT quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Quer substituir o recurso completo</li>
+                                <li>Tem todos os dados do recurso</li>
+                                <li>Precisa de operação idempotente</li>
+                            </ul>
+                        </div>
+                        <div class="patch-info">
+                            <h4><i class="fas fa-check"></i> Use PATCH quando:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Quer atualizar apenas alguns campos</li>
+                                <li>Quer economizar banda (menos dados)</li>
+                                <li>Atualização parcial é suficiente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas Práticas</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>PATCH é mais comum:</strong> Na maioria dos casos, você só quer atualizar alguns campos</li>
+                        <li>✅ <strong>Validação:</strong> Valide os dados recebidos antes de atualizar</li>
+                        <li>✅ <strong>Status 404:</strong> Retorne 404 se o recurso não existir</li>
+                        <li>✅ <strong>Status 200 ou 204:</strong> Retorne 200 (com dados) ou 204 (sem dados) em sucesso</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 01: O que são WebServices?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .conceito { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .exemplo { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> O que são WebServices?</h2>
+                <p>Definição e função dos WebServices na comunicação entre sistemas</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Definição de WebService</h3>
+                    <p>Um <strong>WebService</strong> é uma <strong>interface de comunicação</strong> que permite 
+                    que diferentes sistemas troquem dados através da internet, usando protocolos padrão como HTTP/HTTPS.</p>
+                    <div class="conceito" style="margin-top: 15px;">
+                        <h4><i class="fas fa-lightbulb"></i> Em termos simples:</h4>
+                        <p>WebServices são como <strong>"pontes"</strong> que conectam diferentes aplicações, 
+                        permitindo que elas se comuniquem e compartilhem informações, mesmo que estejam em 
+                        servidores diferentes ou escritas em linguagens diferentes.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Função dos WebServices</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4><i class="fas fa-exchange-alt"></i> Comunicação entre Sistemas</h4>
+                            <p>Permitem que aplicações diferentes se comuniquem através da rede, 
+                            independente da linguagem ou plataforma.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-share-alt"></i> Compartilhamento de Dados</h4>
+                            <p>Facilitam o compartilhamento de informações entre sistemas distribuídos.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-puzzle-piece"></i> Integração de Aplicações</h4>
+                            <p>Permitem integrar diferentes sistemas e serviços de forma padronizada.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-network-wired"></i> Arquitetura Distribuída</h4>
+                            <p>Suportam arquiteturas onde componentes estão em locais diferentes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-building"></i> Exemplo do Mundo Real</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <p><strong>Cenário:</strong> Um sistema de e-commerce precisa verificar o estoque de produtos 
+                        e calcular o frete.</p>
+                        <ul style="margin-top: 10px;">
+                            <li>📦 <strong>Sistema de Estoque:</strong> Fornece informações sobre disponibilidade</li>
+                            <li>🚚 <strong>Sistema de Transporte:</strong> Calcula valores de frete</li>
+                            <li>🛒 <strong>Sistema de E-commerce:</strong> Consome ambos os serviços</li>
+                        </ul>
+                        <p style="margin-top: 10px;">Todos esses sistemas se comunicam através de <strong>WebServices</strong>, 
+                        permitindo que trabalhem juntos de forma integrada.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Características Principais</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>Baseados em padrões:</strong> Usam protocolos e formatos padronizados (HTTP, XML, JSON)</li>
+                        <li>✅ <strong>Independentes de plataforma:</strong> Funcionam entre diferentes sistemas operacionais</li>
+                        <li>✅ <strong>Independentes de linguagem:</strong> Sistemas em Python, Java, C# podem se comunicar</li>
+                        <li>✅ <strong>Acessíveis via rede:</strong> Utilizam protocolos de rede padrão (HTTP/HTTPS)</li>
+                        <li>✅ <strong>Descritos e descobertos:</strong> Podem ser descritos e descobertos automaticamente</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-search"></i> O que significa "Descritos e Descobertos"?</h3>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4><i class="fas fa-file-alt"></i> Descrição de WebServices</h4>
+                        <p>WebServices podem ser <strong>descritos</strong> usando formatos padronizados que explicam:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>📋 <strong>Quais operações estão disponíveis</strong> (endpoints, métodos HTTP)</li>
+                            <li>📥 <strong>Que dados recebem</strong> (parâmetros, formato, validações)</li>
+                            <li>📤 <strong>Que dados retornam</strong> (estrutura da resposta, exemplos)</li>
+                            <li>🔐 <strong>Como autenticar</strong> (tokens, chaves, etc.)</li>
+                        </ul>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-code"></i> Exemplos de Descrição:</h4>
+                        <div class="two-col" style="margin-top: 8px;">
+                            <div>
+                                <strong>SOAP:</strong> Usa <strong>WSDL</strong> (Web Services Description Language)
+                                <ul style="margin-top: 5px; font-size: 0.9em;">
+                                    <li>Arquivo XML que descreve o serviço</li>
+                                    <li>Lista todas as operações disponíveis</li>
+                                    <li>Define tipos de dados e estruturas</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>REST:</strong> Usa <strong>OpenAPI/Swagger</strong>
+                                <ul style="margin-top: 5px; font-size: 0.9em;">
+                                    <li>Documentação interativa da API</li>
+                                    <li>Pode testar endpoints diretamente</li>
+                                    <li>Gera código automaticamente</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conceito" style="margin-top: 12px;">
+                        <h4><i class="fas fa-compass"></i> Descoberta Automática</h4>
+                        <p><strong>Descoberta</strong> significa que sistemas podem <strong>encontrar e entender</strong> 
+                        WebServices automaticamente, sem configuração manual:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>🔍 <strong>SOAP:</strong> UDDI (Universal Description, Discovery and Integration) - 
+                            diretório de serviços onde sistemas podem buscar WebServices disponíveis</li>
+                            <li>🔍 <strong>REST:</strong> Documentação OpenAPI permite que ferramentas descubram 
+                            automaticamente endpoints e gerem clientes</li>
+                            <li>📚 <strong>Documentação automática:</strong> Ferramentas como Swagger geram 
+                            documentação interativa automaticamente a partir do código</li>
+                        </ul>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <h4><i class="fas fa-lightbulb"></i> Exemplo Prático:</h4>
+                        <p>Imagine que você precisa integrar com uma API de pagamento:</p>
+                        <ol style="margin-top: 8px;">
+                            <li>Você acessa a <strong>documentação Swagger</strong> da API</li>
+                            <li>A documentação <strong>descreve automaticamente</strong> todos os endpoints</li>
+                            <li>Você pode <strong>testar diretamente</strong> na interface</li>
+                            <li>Ferramentas podem <strong>gerar código cliente</strong> automaticamente</li>
+                            <li>Você não precisa ler código fonte ou perguntar ao desenvolvedor</li>
+                        </ol>
+                        <p style="margin-top: 10px;"><strong>Sem descrição:</strong> Você precisaria ler código, 
+                        fazer testes manuais, descobrir endpoints por tentativa e erro.</p>
+                        <p><strong>Com descrição:</strong> Tudo está documentado e pode ser descoberto automaticamente!</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> Componentes de um WebService</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="conceito">
+                            <h4><i class="fas fa-server"></i> Servidor (Provider)</h4>
+                            <p>Sistema que <strong>fornece</strong> o serviço, expondo funcionalidades através de APIs.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-desktop"></i> Cliente (Consumer)</h4>
+                            <p>Sistema que <strong>consome</strong> o serviço, fazendo requisições ao servidor.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-network-wired"></i> Protocolo</h4>
+                            <p>Meio de comunicação (geralmente HTTP/HTTPS) usado para trocar informações.</p>
+                        </div>
+                        <div class="conceito">
+                            <h4><i class="fas fa-file-code"></i> Formato de Dados</h4>
+                            <p>Formato usado para estruturar os dados (XML, JSON, etc.).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

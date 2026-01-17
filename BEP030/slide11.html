@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 11: Requests com Código</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-terminal"></i> Requests com Código</h2>
+                <p>Consumindo APIs com Python</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fab fa-python"></i> Python (requests)</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+resp = requests.get("https://viacep.com.br/ws/01001000/json/")
+print(resp.json())</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 10px;">
+                        <p>Instalação: <code>pip install requests</code></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> JSONPlaceholder: GET, POST, PUT, PATCH, DELETE</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+BASE = "https://jsonplaceholder.typicode.com"
+
+try:
+    # GET
+    r = requests.get(f"{BASE}/posts/1", timeout=5)
+    r.raise_for_status()
+    print("GET:", r.status_code, r.json())
+
+    # POST
+    novo = {"title": "Meu post", "body": "Conteúdo", "userId": 1}
+    r = requests.post(f"{BASE}/posts", json=novo, timeout=5)
+    r.raise_for_status()
+    print("POST:", r.status_code, r.json())
+
+    # PUT (substitui tudo)
+    atualizado = {"id": 1, "title": "Novo título", "body": "Novo texto", "userId": 1}
+    r = requests.put(f"{BASE}/posts/1", json=atualizado, timeout=5)
+    r.raise_for_status()
+    print("PUT:", r.status_code, r.json())
+
+    # PATCH (atualiza parte)
+    parcial = {"title": "Título parcial"}
+    r = requests.patch(f"{BASE}/posts/1", json=parcial, timeout=5)
+    r.raise_for_status()
+    print("PATCH:", r.status_code, r.json())
+
+    # DELETE
+    r = requests.delete(f"{BASE}/posts/1", timeout=5)
+    r.raise_for_status()
+    print("DELETE:", r.status_code)
+except requests.exceptions.Timeout:
+    print("Timeout ao acessar a API")
+except requests.exceptions.RequestException as e:
+    print("Erro na requisição:", e)</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 10px;">
+                        <p>Documentação: <code>https://jsonplaceholder.typicode.com/guide/</code></p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Boas práticas com APIs públicas</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+url = "https://jsonplaceholder.typicode.com/posts/1"
+
+try:
+    resp = requests.get(url, timeout=5)
+    resp.raise_for_status()  # valida status 2xx
+    print(resp.json())
+except requests.exceptions.Timeout:
+    print("Timeout ao acessar a API")
+except requests.exceptions.RequestException as e:
+    print("Erro na requisição:", e)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-play"></i> Executar no Jupyter ou no VS Code</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Jupyter Notebook
+# Execute a célula com o código Python acima
+
+# VS Code (ou editor)
+# 1) Salve em arquivo: consumo_api.py
+# 2) Rode no terminal:
+python consumo_api.py</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-eye"></i> Exemplo de saída (print)</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>{'cep': '01001-000', 'logradouro': 'Praça da Sé', 'complemento': 'lado ímpar',
+ 'bairro': 'Sé', 'localidade': 'São Paulo', 'uf': 'SP'}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas práticas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Verifique o status code antes de usar o JSON</li>
+                            <li>✅ Trate erros de rede e timeouts</li>
+                            <li>✅ Leia a documentação da API</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 03: Tipos de WebServices - SOAP vs REST</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .soap { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .rest { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .comparacao { background: #FFF5E1; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-balance-scale"></i> Tipos de WebServices: SOAP vs REST</h2>
+                <p>Comparação entre os principais tipos de WebServices</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Dois Principais Tipos</h3>
+                    <p>Existem dois tipos principais de WebServices amplamente utilizados:</p>
+                    <div class="two-col" style="margin-top: 15px;">
+                        <div class="soap">
+                            <h4><i class="fas fa-file-code"></i> SOAP</h4>
+                            <p><strong>Simple Object Access Protocol</strong></p>
+                            <p>Protocolo baseado em XML, mais rígido e padronizado.</p>
+                        </div>
+                        <div class="rest">
+                            <h4><i class="fas fa-code"></i> REST</h4>
+                            <p><strong>Representational State Transfer</strong></p>
+                            <p>Arquitetura baseada em princípios, mais flexível e simples.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> SOAP (Simple Object Access Protocol)</h3>
+                    <div class="soap" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Baseado em XML:</strong> Todas as mensagens são em formato XML</li>
+                            <li>✅ <strong>Protocolo definido:</strong> Segue um padrão rígido e bem definido</li>
+                            <li>✅ <strong>WSDL:</strong> Usa WSDL (Web Services Description Language) para descrever serviços</li>
+                            <li>✅ <strong>Segurança:</strong> Suporta WS-Security para segurança avançada</li>
+                            <li>✅ <strong>Transações:</strong> Suporta transações ACID</li>
+                        </ul>
+                        <div class="conceito" style="margin-top: 10px;">
+                            <strong>ACID</strong> significa:
+                            <ul style="margin-top: 6px;">
+                                <li><strong>Atomicidade:</strong> tudo ou nada</li>
+                                <li><strong>Consistência:</strong> mantém regras e integridade</li>
+                                <li><strong>Isolamento:</strong> transações não interferem entre si</li>
+                                <li><strong>Durabilidade:</strong> resultados persistem após confirmação</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code><!-- Exemplo de mensagem SOAP -->
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;getUsuario&gt;
+      &lt;id&gt;123&lt;/id&gt;
+    &lt;/getUsuario&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+                    </div>
+                    <div class="soap" style="margin-top: 12px;">
+                        <h4><i class="fas fa-lightbulb"></i> Quando usar SOAP:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>Sistemas corporativos que precisam de segurança robusta</li>
+                            <li>Quando há necessidade de transações complexas</li>
+                            <li>Integração com sistemas legados</li>
+                            <li>Quando há necessidade de contratos formais (WSDL)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> REST (Representational State Transfer)</h3>
+                    <div class="rest" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Arquitetura, não protocolo:</strong> Conjunto de princípios de design</li>
+                            <li>✅ <strong>HTTP nativo:</strong> Usa métodos HTTP (GET, POST, PUT, DELETE)</li>
+                            <li>✅ <strong>Formatos flexíveis:</strong> JSON, XML, HTML, etc.</li>
+                            <li>✅ <strong>Stateless:</strong> Cada requisição é independente</li>
+                            <li>✅ <strong>Simples:</strong> Mais fácil de entender e implementar</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Exemplo de requisição REST
+GET /api/usuarios/123 HTTP/1.1
+Host: exemplo.com
+Accept: application/json
+
+// Resposta JSON
+{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao@exemplo.com"
+}</code></pre>
+                    </div>
+                    <div class="rest" style="margin-top: 12px;">
+                        <h4><i class="fas fa-lightbulb"></i> Quando usar REST:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>APIs públicas e serviços web modernos</li>
+                            <li>Aplicativos móveis e web</li>
+                            <li>Quando simplicidade é prioridade</li>
+                            <li>Microserviços e arquiteturas modernas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> Comparação: SOAP vs REST</h3>
+                    <div class="comparacao" style="margin-top: 12px;">
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                            <thead>
+                                <tr style="background: #2D3748; color: white;">
+                                    <th style="padding: 10px; text-align: left;">Característica</th>
+                                    <th style="padding: 10px; text-align: left;">SOAP</th>
+                                    <th style="padding: 10px; text-align: left;">REST</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 10px;"><strong>Formato</strong></td>
+                                    <td style="padding: 10px;">XML obrigatório</td>
+                                    <td style="padding: 10px;">JSON, XML, HTML, etc.</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 10px;"><strong>Protocolo</strong></td>
+                                    <td style="padding: 10px;">HTTP, SMTP, etc.</td>
+                                    <td style="padding: 10px;">HTTP/HTTPS</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 10px;"><strong>Complexidade</strong></td>
+                                    <td style="padding: 10px;">Alta</td>
+                                    <td style="padding: 10px;">Baixa</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 10px;"><strong>Performance</strong></td>
+                                    <td style="padding: 10px;">Mais lento (XML pesado)</td>
+                                    <td style="padding: 10px;">Mais rápido (JSON leve)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 10px;"><strong>Segurança</strong></td>
+                                    <td style="padding: 10px;">WS-Security (robusto)</td>
+                                    <td style="padding: 10px;">HTTPS + tokens</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #E2E8F0;">
+                                    <td style="padding: 10px;"><strong>Uso Atual</strong></td>
+                                    <td style="padding: 10px;">Sistemas corporativos</td>
+                                    <td style="padding: 10px;">APIs modernas</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-chart-bar"></i> Qual Escolher?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="soap">
+                            <h4><i class="fas fa-building"></i> Escolha SOAP se:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Precisa de segurança robusta</li>
+                                <li>Trabalha com sistemas corporativos</li>
+                                <li>Precisa de transações ACID</li>
+                                <li>Integra com sistemas legados</li>
+                            </ul>
+                        </div>
+                        <div class="rest">
+                            <h4><i class="fas fa-mobile-alt"></i> Escolha REST se:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Desenvolve APIs modernas</li>
+                                <li>Quer simplicidade e velocidade</li>
+                                <li>Trabalha com aplicativos móveis/web</li>
+                                <li>Precisa de flexibilidade</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="comparacao" style="margin-top: 15px;">
+                        <p><strong>💡 Nota:</strong> Atualmente, <strong>REST é mais popular</strong> para a maioria 
+                        dos casos de uso modernos, especialmente em desenvolvimento web e mobile. SOAP ainda é 
+                        usado em ambientes corporativos que precisam de segurança e transações robustas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

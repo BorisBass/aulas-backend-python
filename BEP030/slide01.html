@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 01: O que é REST?</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .rest-info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-question-circle"></i> O que é REST?</h2>
+                <p>Conceitos fundamentais de REST</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Definição de REST</h3>
+                    <p><strong>REST</strong> (Representational State Transfer) é um <strong>estilo arquitetural</strong> 
+                    para projetar sistemas distribuídos, especialmente aplicações web. Foi criado por Roy Fielding em 2000.</p>
+                    <div class="rest-info" style="margin-top: 15px;">
+                        <h4><i class="fas fa-lightbulb"></i> Em termos simples:</h4>
+                        <p>REST é uma forma de organizar APIs web de maneira <strong>padrão e intuitiva</strong>, 
+                        usando os recursos e métodos HTTP de forma consistente.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cube"></i> Conceitos Fundamentais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="rest-info">
+                            <h4><i class="fas fa-box"></i> Recursos (Resources)</h4>
+                            <p>Tudo que pode ser identificado por uma URL. Exemplos: usuários, produtos, pedidos.</p>
+                        </div>
+                        <div class="rest-info">
+                            <h4><i class="fas fa-file-code"></i> Representações</h4>
+                            <p>Formato dos dados (JSON, XML, HTML). O mesmo recurso pode ter múltiplas representações.</p>
+                        </div>
+                        <div class="rest-info">
+                            <h4><i class="fas fa-exchange-alt"></i> Estado</h4>
+                            <p>Estado atual do recurso. Cada requisição transfere o estado atual.</p>
+                        </div>
+                        <div class="rest-info">
+                            <h4><i class="fas fa-network-wired"></i> Transferência</h4>
+                            <p>Comunicação entre cliente e servidor via HTTP.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Características do REST</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>Stateless:</strong> Cada requisição é independente, sem estado mantido no servidor</li>
+                        <li>✅ <strong>Baseado em recursos:</strong> URLs representam recursos, não ações</li>
+                        <li>✅ <strong>Usa métodos HTTP:</strong> GET, POST, PUT, DELETE para operações</li>
+                        <li>✅ <strong>Representações múltiplas:</strong> JSON, XML, HTML, etc.</li>
+                        <li>✅ <strong>Interface uniforme:</strong> Padrão consistente para todas as APIs</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> REST vs Não-REST (RPC/Ações)</h3>
+                    <p style="margin-top: 8px;">Regra de bolso: <strong>REST usa substantivos</strong> (recursos) na URL e <strong>métodos HTTP</strong> para as ações. 
+                    Não‑REST costuma usar <strong>verbos na URL</strong> e um único método para tudo.</p>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div style="background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-check-circle"></i> REST</h4>
+                            <ul style="margin-top: 8px;">
+                                <li><strong>Recurso na URL:</strong> /usuarios, /produtos</li>
+                                <li><strong>Ação no método:</strong> GET, POST, PUT, DELETE</li>
+                                <li><strong>Stateless:</strong> cada requisição é independente</li>
+                                <li><strong>Resposta padronizada:</strong> status HTTP (200, 404, 500)</li>
+                            </ul>
+                        </div>
+                        <div style="background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-times-circle"></i> Não-REST</h4>
+                            <ul style="margin-top: 8px;">
+                                <li><strong>Verbo na URL:</strong> /getUsuario, /createUsuario</li>
+                                <li><strong>Método fixo:</strong> quase tudo via POST</li>
+                                <li><strong>Estado acoplado:</strong> fluxo depende de chamadas anteriores</li>
+                                <li><strong>Menos padronização:</strong> códigos e formatos variados</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-examples"></i> Exemplo: REST vs Não-REST</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// ❌ Não-REST (RPC/Ações)
+POST /getUsuario?id=123
+POST /createUsuario
+POST /updateUsuario
+POST /deleteUsuario
+
+// ✅ REST (Recursos + métodos HTTP)
+GET    /usuarios/123      # Buscar usuário
+POST   /usuarios          # Criar usuário
+PUT    /usuarios/123      # Atualizar usuário
+DELETE /usuarios/123      # Deletar usuário</code></pre>
+                    </div>
+                    <p style="margin-top: 10px;"><strong>Resumo:</strong> em REST a URL identifica o recurso; o método indica a ação.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

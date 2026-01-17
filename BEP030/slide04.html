@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-030 - Slide 04: Métodos HTTP: POST</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .post-info { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-030: RESTful Web Services e Métodos HTTP</h1>
+            <p>Princípios REST e métodos HTTP para manipulação de recursos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-plus-circle"></i> Métodos HTTP: POST</h2>
+                <p>Criar novos recursos</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é POST?</h3>
+                    <p>O método <strong>POST</strong> é usado para <strong>criar novos recursos</strong> no servidor. 
+                    É o método usado para enviar dados que resultarão em uma nova entidade.</p>
+                    <div class="post-info" style="margin-top: 15px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Cria recursos:</strong> Adiciona novos dados ao servidor</li>
+                            <li>✅ <strong>Com corpo:</strong> Envia dados no corpo da requisição (JSON, XML, etc.)</li>
+                            <li>✅ <strong>Não idempotente:</strong> Múltiplas requisições criam múltiplos recursos</li>
+                            <li>✅ <strong>Modifica estado:</strong> Altera dados no servidor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo de Uso</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Criar um novo usuário
+POST /api/usuarios HTTP/1.1
+Host: exemplo.com
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@exemplo.com",
+  "idade": 30
+}
+
+// Resposta (recurso criado)
+HTTP/1.1 201 Created
+Content-Type: application/json
+Location: /api/usuarios/123
+
+{
+  "id": 123,
+  "nome": "João Silva",
+  "email": "joao@exemplo.com",
+  "idade": 30,
+  "criado_em": "2025-01-15T10:30:00Z"
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-check"></i> Quando Usar POST?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="post-info">
+                            <h4><i class="fas fa-check"></i> Use POST para:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Criar novos recursos</li>
+                                <li>Cadastrar usuários, produtos, etc.</li>
+                                <li>Enviar dados de formulários</li>
+                                <li>Operações que criam entidades</li>
+                            </ul>
+                        </div>
+                        <div style="background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px;">
+                            <h4><i class="fas fa-times"></i> NÃO use POST para:</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>Buscar dados (use GET)</li>
+                                <li>Atualizar recursos existentes (use PUT/PATCH)</li>
+                                <li>Deletar recursos (use DELETE)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> Validação em POST</h3>
+                    <p>POST geralmente requer validação dos dados enviados:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Requisição com dados inválidos
+POST /api/usuarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "nome": "",  // Nome vazio - inválido
+  "email": "email-invalido"  // Email inválido
+}
+
+// Resposta de erro
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "erro": "Dados inválidos",
+  "detalhes": {
+    "nome": "Nome é obrigatório",
+    "email": "Email inválido"
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Status Codes para POST</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>201 Created:</strong> Recurso criado com sucesso</li>
+                        <li>✅ <strong>200 OK:</strong> Recurso criado e retornado (menos comum)</li>
+                        <li>⚠️ <strong>400 Bad Request:</strong> Dados inválidos</li>
+                        <li>⚠️ <strong>409 Conflict:</strong> Recurso já existe</li>
+                        <li>❌ <strong>500 Internal Server Error:</strong> Erro no servidor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-030: RESTful Web Services e Métodos HTTP</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 05: Formatos de Dados - XML</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .xml-info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-file-code"></i> Formatos de Dados: XML</h2>
+                <p>Estrutura e uso do formato XML em WebServices</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é XML?</h3>
+                    <p><strong>XML</strong> (eXtensible Markup Language) é uma linguagem de marcação que permite 
+                    estruturar dados de forma hierárquica e legível. É amplamente usado em WebServices, 
+                    especialmente em SOAP.</p>
+                    <div class="xml-info" style="margin-top: 15px;">
+                        <h4><i class="fas fa-lightbulb"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Legível por humanos:</strong> Fácil de ler e entender</li>
+                            <li>✅ <strong>Estruturado:</strong> Organiza dados de forma hierárquica</li>
+                            <li>✅ <strong>Extensível:</strong> Permite criar suas próprias tags</li>
+                            <li>✅ <strong>Padronizado:</strong> Segue padrões bem definidos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Estrutura Básica do XML</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;usuario&gt;
+    &lt;id&gt;123&lt;/id&gt;
+    &lt;nome&gt;João Silva&lt;/nome&gt;
+    &lt;email&gt;joao@exemplo.com&lt;/email&gt;
+    &lt;idade&gt;30&lt;/idade&gt;
+&lt;/usuario&gt;</code></pre>
+                    </div>
+                    <div class="xml-info" style="margin-top: 12px;">
+                        <h4><i class="fas fa-list"></i> Elementos:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li><strong>Declaração XML:</strong> &lt;?xml version="1.0" encoding="UTF-8"?&gt;</li>
+                            <li><strong>Elemento raiz:</strong> &lt;usuario&gt; (contém todos os outros elementos)</li>
+                            <li><strong>Elementos filhos:</strong> &lt;id&gt;, &lt;nome&gt;, &lt;email&gt;, &lt;idade&gt;</li>
+                            <li><strong>Tags de fechamento:</strong> Cada tag de abertura tem uma de fechamento</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> XML com Estrutura Complexa</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;usuarios&gt;
+    &lt;usuario id="1"&gt;
+        &lt;nome&gt;João Silva&lt;/nome&gt;
+        &lt;email&gt;joao@exemplo.com&lt;/email&gt;
+        &lt;endereco&gt;
+            &lt;rua&gt;Rua das Flores, 123&lt;/rua&gt;
+            &lt;cidade&gt;Salvador&lt;/cidade&gt;
+            &lt;estado&gt;BA&lt;/estado&gt;
+        &lt;/endereco&gt;
+    &lt;/usuario&gt;
+    &lt;usuario id="2"&gt;
+        &lt;nome&gt;Maria Santos&lt;/nome&gt;
+        &lt;email&gt;maria@exemplo.com&lt;/email&gt;
+    &lt;/usuario&gt;
+&lt;/usuarios&gt;</code></pre>
+                    </div>
+                    <div class="xml-info" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Recursos Demonstrados:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Atributos:</strong> id="1" (informações sobre o elemento)</li>
+                            <li>✅ <strong>Elementos aninhados:</strong> &lt;endereco&gt; dentro de &lt;usuario&gt;</li>
+                            <li>✅ <strong>Múltiplos elementos:</strong> Vários &lt;usuario&gt; dentro de &lt;usuarios&gt;</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> XML em WebServices (SOAP)</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;getUsuarioResponse&gt;
+            &lt;usuario&gt;
+                &lt;id&gt;123&lt;/id&gt;
+                &lt;nome&gt;João Silva&lt;/nome&gt;
+                &lt;email&gt;joao@exemplo.com&lt;/email&gt;
+            &lt;/usuario&gt;
+        &lt;/getUsuarioResponse&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</code></pre>
+                    </div>
+                    <div class="xml-info" style="margin-top: 12px;">
+                        <p>Em WebServices SOAP, todas as mensagens são formatadas em XML, 
+                        seguindo uma estrutura específica com envelope, cabeçalho e corpo.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens do XML</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="xml-info">
+                            <h4><i class="fas fa-eye"></i> Legibilidade</h4>
+                            <p>Fácil de ler e entender, mesmo sem ferramentas especiais.</p>
+                        </div>
+                        <div class="xml-info">
+                            <h4><i class="fas fa-expand-arrows-alt"></i> Flexibilidade</h4>
+                            <p>Permite estruturas complexas e hierárquicas.</p>
+                        </div>
+                        <div class="xml-info">
+                            <h4><i class="fas fa-shield-alt"></i> Validação</h4>
+                            <p>Pode ser validado usando DTD ou XSD.</p>
+                        </div>
+                        <div class="xml-info">
+                            <h4><i class="fas fa-globe"></i> Padrão</h4>
+                            <p>Amplamente aceito e suportado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Desvantagens do XML</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>⚠️ <strong>Verboso:</strong> Requer mais caracteres que JSON</li>
+                        <li>⚠️ <strong>Processamento:</strong> Pode ser mais lento para processar</li>
+                        <li>⚠️ <strong>Tamanho:</strong> Arquivos XML tendem a ser maiores</li>
+                        <li>⚠️ <strong>Complexidade:</strong> Pode ser mais complexo para estruturas simples</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Quando Usar XML?</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>WebServices SOAP:</strong> Padrão obrigatório</li>
+                        <li>✅ <strong>Documentos estruturados:</strong> Quando precisa de validação rigorosa</li>
+                        <li>✅ <strong>Integração com sistemas legados:</strong> Muitos sistemas antigos usam XML</li>
+                        <li>✅ <strong>Quando precisa de metadados:</strong> XML suporta atributos e namespaces</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

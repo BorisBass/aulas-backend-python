@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 08: Arquitetura de WebServices</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .arquitetura { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide08">
+                <h2><i class="fas fa-sitemap"></i> Arquitetura de WebServices</h2>
+                <p>Como os sistemas se comunicam através de WebServices</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Componentes da Arquitetura</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="arquitetura">
+                            <h4><i class="fas fa-server"></i> Servidor (Provider)</h4>
+                            <p>Sistema que <strong>fornece</strong> o serviço, expondo APIs para acesso aos dados e funcionalidades.</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Expõe endpoints (URLs)</li>
+                                <li>Processa requisições</li>
+                                <li>Retorna respostas</li>
+                            </ul>
+                        </div>
+                        <div class="arquitetura">
+                            <h4><i class="fas fa-desktop"></i> Cliente (Consumer)</h4>
+                            <p>Sistema que <strong>consome</strong> o serviço, fazendo requisições ao servidor.</p>
+                            <ul style="margin-top: 8px;">
+                                <li>Faz requisições HTTP</li>
+                                <li>Processa respostas</li>
+                                <li>Exibe dados ao usuário</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Fluxo de Comunicação</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>1. Cliente faz requisição HTTP
+   GET /api/usuarios/123 HTTP/1.1
+   Host: servidor.exemplo.com
+
+2. Servidor processa requisição
+   - Valida autenticação
+   - Busca dados no banco
+   - Formata resposta
+
+3. Servidor envia resposta
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   {
+     "id": 123,
+     "nome": "João"
+   }
+
+4. Cliente processa resposta
+   - Parse do JSON
+   - Exibe dados
+   - Atualiza interface</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-network-wired"></i> Arquitetura Cliente-Servidor</h3>
+                    <div class="arquitetura" style="margin-top: 12px;">
+                        <h4><i class="fas fa-sitemap"></i> Modelo Cliente-Servidor</h4>
+                        <p>Em WebServices, seguimos o modelo <strong>cliente-servidor</strong>:</p>
+                        <ul style="margin-top: 10px;">
+                            <li>📱 <strong>Cliente:</strong> Faz requisições (aplicativo, navegador, outro servidor)</li>
+                            <li>🖥️ <strong>Servidor:</strong> Processa requisições e retorna respostas</li>
+                            <li>🌐 <strong>Rede:</strong> HTTP/HTTPS como meio de comunicação</li>
+                            <li>📦 <strong>Dados:</strong> JSON, XML ou outros formatos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Tipos de Arquitetura</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="arquitetura">
+                            <h4><i class="fas fa-server"></i> Monolítica</h4>
+                            <p>Um único servidor fornece todos os serviços. Simples, mas pode ter limitações de escala.</p>
+                        </div>
+                        <div class="arquitetura">
+                            <h4><i class="fas fa-cubes"></i> Microserviços</h4>
+                            <p>Múltiplos serviços independentes, cada um com sua própria API. Mais escalável e flexível.</p>
+                        </div>
+                        <div class="arquitetura">
+                            <h4><i class="fas fa-layer-group"></i> Em Camadas</h4>
+                            <p>Serviços organizados em camadas (apresentação, negócio, dados). Boa organização.</p>
+                        </div>
+                        <div class="arquitetura">
+                            <h4><i class="fas fa-cloud"></i> Distribuída</h4>
+                            <p>Serviços distribuídos em diferentes servidores/locações. Alta disponibilidade.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> Camadas de Segurança</h3>
+                    <div class="arquitetura" style="margin-top: 12px;">
+                        <ul style="margin-top: 10px;">
+                            <li>🔒 <strong>HTTPS:</strong> Criptografia na transmissão</li>
+                            <li>🔑 <strong>Autenticação:</strong> Verificação de identidade (tokens, API keys)</li>
+                            <li>🛡️ <strong>Autorização:</strong> Controle de acesso (permissões, roles)</li>
+                            <li>🚧 <strong>Rate Limiting:</strong> Limitação de requisições</li>
+                            <li>🔍 <strong>Validação:</strong> Validação de dados de entrada</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas Práticas de Arquitetura</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>Separação de responsabilidades:</strong> Cada serviço tem uma função específica</li>
+                        <li>✅ <strong>Stateless:</strong> Serviços não mantêm estado entre requisições</li>
+                        <li>✅ <strong>Versionamento:</strong> APIs devem ser versionadas (/api/v1/, /api/v2/)</li>
+                        <li>✅ <strong>Documentação:</strong> APIs devem ser bem documentadas</li>
+                        <li>✅ <strong>Tratamento de erros:</strong> Respostas de erro padronizadas</li>
+                        <li>✅ <strong>Monitoramento:</strong> Logs e métricas para acompanhamento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

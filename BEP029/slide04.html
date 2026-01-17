@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-029 - Slide 04: Protocolos HTTP e HTTPS</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .http { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .https { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-globe"></i> BEP-029: Conceitos Fundamentais de WebServices</h1>
+            <p>Introdução aos WebServices e comunicação entre sistemas distribuídos</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-network-wired"></i> Protocolos: HTTP e HTTPS</h2>
+                <p>Entendendo os protocolos de comunicação usados em WebServices</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que são Protocolos?</h3>
+                    <p>Protocolos são <strong>conjuntos de regras</strong> que definem como os dados são 
+                    transmitidos e recebidos através da rede. Em WebServices, os protocolos mais comuns são 
+                    <strong>HTTP</strong> e <strong>HTTPS</strong>.</p>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> HTTP (HyperText Transfer Protocol)</h3>
+                    <div class="http" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>Protocolo de aplicação:</strong> Usado para comunicação web</li>
+                            <li>✅ <strong>Stateless:</strong> Cada requisição é independente</li>
+                            <li>✅ <strong>Baseado em requisição-resposta:</strong> Cliente faz requisição, servidor responde</li>
+                            <li>✅ <strong>Porta padrão:</strong> 80</li>
+                            <li>⚠️ <strong>Não criptografado:</strong> Dados trafegam em texto plano</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Exemplo de requisição HTTP
+GET /api/usuarios HTTP/1.1
+Host: exemplo.com
+Accept: application/json
+
+// Resposta HTTP
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "usuarios": [...]
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lock"></i> HTTPS (HTTP Secure)</h3>
+                    <div class="https" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Características:</h4>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>HTTP + SSL/TLS:</strong> HTTP com camada de segurança</li>
+                            <li>✅ <strong>Criptografado:</strong> Dados trafegam criptografados</li>
+                            <li>✅ <strong>Autenticação:</strong> Verifica identidade do servidor</li>
+                            <li>✅ <strong>Integridade:</strong> Garante que dados não foram alterados</li>
+                            <li>✅ <strong>Porta padrão:</strong> 443</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// HTTPS adiciona criptografia
+https://exemplo.com/api/usuarios
+
+// A comunicação é criptografada usando SSL/TLS
+// Dados são protegidos durante a transmissão</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> HTTP vs HTTPS</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="http">
+                            <h4><i class="fas fa-unlock"></i> HTTP</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>❌ Dados em texto plano</li>
+                                <li>❌ Vulnerável a interceptação</li>
+                                <li>❌ Não verifica identidade</li>
+                                <li>✅ Mais rápido (sem criptografia)</li>
+                                <li>✅ Adequado para dados públicos</li>
+                            </ul>
+                        </div>
+                        <div class="https">
+                            <h4><i class="fas fa-lock"></i> HTTPS</h4>
+                            <ul style="margin-top: 8px;">
+                                <li>✅ Dados criptografados</li>
+                                <li>✅ Protegido contra interceptação</li>
+                                <li>✅ Verifica identidade do servidor</li>
+                                <li>⚠️ Um pouco mais lento (criptografia)</li>
+                                <li>✅ <strong>Obrigatório</strong> para dados sensíveis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> Por que HTTPS é Importante?</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="https">
+                            <h4><i class="fas fa-user-shield"></i> Proteção de Dados</h4>
+                            <p>Senhas, informações pessoais e dados sensíveis são protegidos 
+                            durante a transmissão.</p>
+                        </div>
+                        <div class="https">
+                            <h4><i class="fas fa-certificate"></i> Confiança</h4>
+                            <p>Usuários confiam mais em sites que usam HTTPS, 
+                            especialmente em e-commerce e bancos.</p>
+                        </div>
+                        <div class="https">
+                            <h4><i class="fas fa-search"></i> SEO</h4>
+                            <p>Google prioriza sites com HTTPS nos resultados de busca, 
+                            melhorando o posicionamento.</p>
+                        </div>
+                        <div class="https">
+                            <h4><i class="fas fa-gavel"></i> Conformidade</h4>
+                            <p>Muitas regulamentações (LGPD, GDPR) exigem HTTPS 
+                            para proteção de dados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Como Funciona a Comunicação HTTP/HTTPS</h3>
+                    <div style="margin-top: 12px;">
+                        <ol style="line-height: 2;">
+                            <li><strong>Cliente faz requisição:</strong> Envia uma requisição HTTP/HTTPS ao servidor</li>
+                            <li><strong>Servidor processa:</strong> Servidor recebe e processa a requisição</li>
+                            <li><strong>Servidor responde:</strong> Envia uma resposta com os dados solicitados</li>
+                            <li><strong>Cliente recebe:</strong> Cliente recebe e processa a resposta</li>
+                        </ol>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Fluxo de uma requisição HTTP
+1. Cliente → GET /api/usuarios HTTP/1.1
+2. Servidor → HTTP/1.1 200 OK
+3. Servidor → { "usuarios": [...] }
+4. Cliente processa os dados</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas Práticas</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>Sempre use HTTPS</strong> em produção, especialmente para dados sensíveis</li>
+                        <li>✅ <strong>Use certificados válidos</strong> para evitar avisos de segurança</li>
+                        <li>✅ <strong>Configure redirecionamento</strong> de HTTP para HTTPS</li>
+                        <li>✅ <strong>Monitore a segurança</strong> e mantenha certificados atualizados</li>
+                        <li>✅ <strong>Use HTTP apenas</strong> para desenvolvimento local ou dados públicos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-029: Conceitos Fundamentais de WebServices</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
