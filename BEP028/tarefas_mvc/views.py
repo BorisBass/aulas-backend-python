@@ -17,6 +17,7 @@ class TarefaView:
     
     def solicitar_dados_tarefa(self):
         """Coleta dados para nova tarefa"""
+        print('#'*30)
         titulo = input("Título da tarefa: ").strip()
         descricao = input("Descrição (opcional): ").strip()
         return titulo, descricao

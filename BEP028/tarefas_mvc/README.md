@@ -92,3 +92,5 @@ Descrição (opcional): Revisar conceitos de POO
 - Os dados são perdidos quando o programa é encerrado
 - Para persistência permanente, seria necessário integrar com banco de dados (como no exemplo do CRUD refatorado)
 
+
+

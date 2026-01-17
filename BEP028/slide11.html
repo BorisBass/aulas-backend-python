@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-028 - Slide 11: Adicionando Persistência com SQLite</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .destaque { background: #F0FFF4; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; }
+        .antes { background: #FED7D7; border-left: 4px solid #E53E3E; padding: 12px; border-radius: 4px; }
+        .depois { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-sitemap"></i> BEP-028: Introdução ao MVC</h1>
+            <p>Model-View-Controller: Organizando código e separando responsabilidades</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide11">
+                <h2><i class="fas fa-database"></i> Adicionando Persistência com SQLite</h2>
+                <p>Evoluindo o sistema de tarefas: de memória para banco de dados</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Por que Adicionar Persistência?</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>📦 <strong>Dados Permanentes:</strong> Tarefas não são perdidas ao fechar o programa</li>
+                        <li>💾 <strong>Histórico:</strong> Podemos rastrear quando tarefas foram criadas</li>
+                        <li>🔄 <strong>Múltiplas Sessões:</strong> Dados persistem entre execuções</li>
+                        <li>📊 <strong>Escalabilidade:</strong> Preparado para crescer</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-puzzle-piece"></i> Novo Componente: DatabaseManager</h3>
+                    <p>Classe para gerenciar conexão com SQLite (padrão BEP-017):</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># database.py
+class DatabaseManager:
+    """Gerencia conexões com banco de dados"""
+    
+    def __init__(self, db_name='tarefas.db'):
+        self.db_name = db_name
+        self.connection = None
+    
+    def conectar(self):
+        """Conecta e cria tabela se necessário"""
+        if not self.connection:
+            self.connection = sqlite3.connect(self.db_name)
+            self._criar_tabela()
+        return self.connection
+    
+    def _criar_tabela(self):
+        """Cria tabela de tarefas"""
+        cursor = self.connection.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS tarefas (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                titulo TEXT NOT NULL,
+                descricao TEXT,
+                concluida INTEGER DEFAULT 0,
+                data_criacao DATE DEFAULT CURRENT_DATE
+            )
+        ''')
+        self.connection.commit()
+    
+    def fechar(self):
+        """Fecha conexão"""
+        if self.connection:
+            self.connection.close()</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Mudanças no Model: Tarefa</h3>
+                    <div class="comparacao">
+                        <div class="antes">
+                            <strong>❌ Antes (Memória)</strong>
+                            <div class="code-block" style="margin-top: 8px; font-size: 0.85em;">
+                                <pre><code>def __init__(self, titulo, descricao=""):
+    self._titulo = titulo
+    self._descricao = descricao
+    self._concluida = False</code></pre>
+                            </div>
+                        </div>
+                        <div class="depois">
+                            <strong>✅ Depois (SQLite)</strong>
+                            <div class="code-block" style="margin-top: 8px; font-size: 0.85em;">
+                                <pre><code>def __init__(self, titulo, descricao="", 
+                 tarefa_id=None, concluida=False, 
+                 data_criacao=None):
+    self._id = tarefa_id
+    self._titulo = titulo
+    self._descricao = descricao
+    self._concluida = concluida
+    self._data_criacao = data_criacao</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="destaque" style="margin-top: 12px;">
+                        <strong>💡 Por quê?</strong> O banco gera IDs automaticamente e precisamos armazená-los para atualizar/remover tarefas.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Mudanças no Repository</h3>
+                    <div class="comparacao">
+                        <div class="antes">
+                            <strong>❌ Antes (Lista em Memória)</strong>
+                            <div class="code-block" style="margin-top: 8px; font-size: 0.8em;">
+                                <pre><code>def __init__(self):
+    self._tarefas = []
+
+def criar(self, tarefa):
+    self._tarefas.append(tarefa)
+    return len(self._tarefas) - 1
+
+def listar_todas(self):
+    return self._tarefas.copy()</code></pre>
+                            </div>
+                        </div>
+                        <div class="depois">
+                            <strong>✅ Depois (SQLite)</strong>
+                            <div class="code-block" style="margin-top: 8px; font-size: 0.8em;">
+                                <pre><code>def __init__(self, db_manager):
+    self.db = db_manager
+    self.db.conectar()
+
+def criar(self, tarefa):
+    cursor = self.db.get_cursor()
+    cursor.execute('''
+        INSERT INTO tarefas 
+        (titulo, descricao, concluida)
+        VALUES (?, ?, ?)
+    ''', (tarefa.titulo, tarefa.descricao, 
+          1 if tarefa.concluida else 0))
+    self.db.connection.commit()
+    return cursor.lastrowid
+
+def listar_todas(self):
+    cursor = self.db.get_cursor()
+    cursor.execute('SELECT * FROM tarefas')
+    # Converte resultados em objetos Tarefa
+    return tarefas</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="destaque" style="margin-top: 12px;">
+                        <strong>💡 Novo Método:</strong> <code>atualizar(tarefa)</code> - necessário para salvar mudanças no banco!
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Mudanças no Controller</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <p><strong>Antes:</strong></p>
+                        <pre><code>def __init__(self):
+    self.repository = TarefaRepository()
+    self.view = TarefaView()
+
+def marcar_concluida(self):
+    tarefa.marcar_concluida()  # Mudança em memória</code></pre>
+                    </div>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <p><strong>Depois:</strong></p>
+                        <pre><code>def __init__(self, repository, view):
+    self.repository = repository  # Injeção de dependência
+    self.view = view
+
+def marcar_concluida(self):
+    tarefa.marcar_concluida()
+    self.repository.atualizar(tarefa)  # Salva no banco!</code></pre>
+                    </div>
+                    <div class="destaque" style="margin-top: 12px;">
+                        <strong>💡 Injeção de Dependência:</strong> Controller recebe dependências no construtor, facilitando testes e manutenção.
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-play-circle"></i> Mudanças no Main</h3>
+                    <div class="code-block">
+                        <pre><code># main.py
+from database import DatabaseManager
+from models import TarefaRepository
+from views import TarefaView
+from controllers import TarefaController
+
+if __name__ == "__main__":
+    # Inicialização explícita de componentes
+    db_manager = DatabaseManager('tarefas.db')
+    repository = TarefaRepository(db_manager)
+    view = TarefaView()
+    controller = TarefaController(repository, view)
+    
+    try:
+        controller.iniciar()
+    finally:
+        db_manager.fechar()  # Garante fechamento</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> O que NÃO Mudou?</h3>
+                    <div class="destaque" style="margin-top: 12px;">
+                        <p><strong>✅ View (views.py):</strong> Nenhuma mudança necessária!</p>
+                        <p style="margin-top: 8px;">Isso demonstra a flexibilidade do MVC - podemos mudar a persistência sem alterar a apresentação.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sitemap"></i> Arquitetura Mantida</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <pre><code>tarefas_mvc_db/
+├── database.py      # DatabaseManager (novo!)
+├── models.py        # Tarefa + TarefaRepository (modificado)
+├── views.py         # TarefaView (inalterado!)
+├── controllers.py   # TarefaController (modificado)
+└── main.py          # Inicialização (modificado)</code></pre>
+                    </div>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ <strong>MVC mantido:</strong> Separação de responsabilidades intacta</li>
+                        <li>✅ <strong>Repository Pattern:</strong> Abstração de persistência preservada</li>
+                        <li>✅ <strong>Dependency Injection:</strong> Facilita testes e manutenção</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-table"></i> Estrutura da Tabela</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>CREATE TABLE tarefas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo TEXT NOT NULL,
+    descricao TEXT,
+    concluida INTEGER DEFAULT 0,  -- 0 = False, 1 = True
+    data_criacao DATE DEFAULT CURRENT_DATE
+)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> Comparação: Antes vs Depois</h3>
+                    <table style="width: 100%; margin-top: 12px; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: #E2E8F0;">
+                                <th style="padding: 10px; text-align: left; border: 1px solid #CBD5E0;">Aspecto</th>
+                                <th style="padding: 10px; text-align: left; border: 1px solid #CBD5E0;">Antes (Memória)</th>
+                                <th style="padding: 10px; text-align: left; border: 1px solid #CBD5E0;">Depois (SQLite)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;"><strong>Persistência</strong></td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">❌ Dados perdidos</td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">✅ Dados permanentes</td>
+                            </tr>
+                            <tr style="background: #F7FAFC;">
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;"><strong>IDs</strong></td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">Índices da lista</td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">IDs do banco</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;"><strong>Atualização</strong></td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">Automática (memória)</td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">Manual (repository.atualizar)</td>
+                            </tr>
+                            <tr style="background: #F7FAFC;">
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;"><strong>Estrutura MVC</strong></td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">✅ Mantida</td>
+                                <td style="padding: 8px; border: 1px solid #CBD5E0;">✅ Mantida</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card" style="margin-top: 20px; background: #F0FFF4; border: 2px solid #38A169;">
+                    <h3><i class="fas fa-book"></i> Documentação Completa</h3>
+                    <p style="margin-top: 10px;">Leia a explicação detalhada de todas as mudanças:</p>
+                    <a href="tarefas_mvc_db/EXPLICACAO_PERSISTENCIA.md" target="_blank" style="display: inline-block; margin-top: 15px; background: #38A169; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600;">
+                        <i class="fas fa-file-alt"></i> Ver Explicação Completa
+                    </a>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Como Testar</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <p><strong>Versão com banco de dados:</strong></p>
+                        <pre><code>cd BEP028/tarefas_mvc_db
+python main.py</code></pre>
+                        <p style="margin-top: 12px;"><strong>Versão original (memória):</strong></p>
+                        <pre><code>cd BEP028/tarefas_mvc
+python main.py</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-028: Introdução ao MVC</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
+
+
+

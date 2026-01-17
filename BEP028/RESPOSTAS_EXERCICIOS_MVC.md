@@ -970,3 +970,6 @@ O padrão MVC facilita:
 - Escalabilidade
 - Reutilização de componentes
 
+
+
+
