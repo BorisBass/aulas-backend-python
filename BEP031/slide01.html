@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-031 - Slide 01: Setup do Ambiente</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tools"></i> BEP-031: Criando uma API REST Simples</h1>
+            <p>Implementação prática de uma API REST básica</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-info-circle"></i> Setup do Ambiente</h2>
+                <p>Configurando FastAPI e criando a estrutura básica</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> O que precisamos</h3>
+                    <ul style="margin-top: 12px;">
+                        <li>✅ FastAPI (framework web rápido e simples)</li>
+                        <li>✅ Uvicorn (servidor ASGI)</li>
+                        <li>✅ Python 3.10+</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Instalação</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code># Instalar FastAPI e Uvicorn
+pip install fastapi uvicorn
+
+# Estrutura simples
+projeto/
+  main.py</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Primeiro arquivo: main.py</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI
+
+app = FastAPI(title="API Exemplo")
+
+@app.get("/")
+def raiz():
+    return {"mensagem": "API funcionando!"}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-play"></i> Executar o servidor</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>uvicorn main:app --reload
+
+# Acesse:
+# http://localhost:8000
+# http://localhost:8000/docs  (Swagger)
+# http://localhost:8000/redoc (ReDoc)</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Dica:</strong> O FastAPI já gera documentação automática em <code>/docs</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-031: Criando uma API REST Simples</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

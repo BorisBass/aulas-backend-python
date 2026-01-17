@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-032 - Slide 03: Token Authentication</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .flow { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-032: Autenticação e Autorização</h1>
+            <p>Conceitos de segurança em APIs: autenticação e autorização</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-ticket-alt"></i> Token Authentication</h2>
+                <p>Autenticação baseada em tokens</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> Como funciona</h3>
+                    <div class="flow" style="margin-top: 12px;">
+                        <ol style="line-height: 2;">
+                            <li>Cliente faz login</li>
+                            <li>Servidor gera token</li>
+                            <li>Cliente usa token nas próximas requisições</li>
+                            <li>Servidor valida token</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tools"></i> Implementação em FastAPI</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI, Depends, HTTPException
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import secrets
+
+app = FastAPI()
+security = HTTPBearer()
+TOKENS = {}
+
+@app.post("/login")
+def login(usuario: str, senha: str):
+    if usuario != "admin" or senha != "123":
+        raise HTTPException(status_code=401, detail="Credenciais inválidas")
+    token = secrets.token_urlsafe(32)
+    TOKENS[token] = {"usuario": usuario}
+    return {"token": token}
+
+@app.get("/protegido")
+def protegido(creds: HTTPAuthorizationCredentials = Depends(security)):
+    token = creds.credentials
+    if token not in TOKENS:
+        raise HTTPException(status_code=401, detail="Token inválido")
+    return {"mensagem": "Acesso autorizado"}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Vantagens</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Não envia senha a cada requisição</li>
+                            <li>✅ Token pode expirar e ser revogado</li>
+                            <li>✅ Mais seguro que Basic Auth</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-032: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

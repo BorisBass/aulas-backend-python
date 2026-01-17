@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-032 - Slide 05: Implementação Prática</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exemplo { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-032: Autenticação e Autorização</h1>
+            <p>Conceitos de segurança em APIs: autenticação e autorização</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-code"></i> Implementação Prática</h2>
+                <p>Exemplo completo com FastAPI + JWT</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-key"></i> Login e Token</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from jose import jwt
+from datetime import datetime, timedelta
+
+app = FastAPI()
+SECRET_KEY = "segredo"
+ALGORITHM = "HS256"
+
+class Login(BaseModel):
+    usuario: str
+    senha: str
+
+@app.post("/login")
+def login(dados: Login):
+    if dados.usuario != "admin" or dados.senha != "123":
+        raise HTTPException(status_code=401, detail="Credenciais inválidas")
+    exp = datetime.utcnow() + timedelta(minutes=30)
+    token = jwt.encode({"sub": dados.usuario, "exp": exp}, SECRET_KEY, algorithm=ALGORITHM)
+    return {"access_token": token, "token_type": "bearer"}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lock"></i> Endpoint Protegido</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+
+@app.get("/usuarios")
+def listar_usuarios(token: str = Depends(oauth2_scheme)):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Token inválido")
+    return [{"id": 1, "nome": "João"}]</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-vial"></i> Teste rápido</h3>
+                    <div class="exemplo" style="margin-top: 12px;">
+                        <pre><code># Login
+POST /login
+{
+  "usuario": "admin",
+  "senha": "123"
+}
+
+# Usar token
+GET /usuarios
+Authorization: Bearer &lt;token&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-032: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

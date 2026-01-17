@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-031 - Slide 02: Criando Rotas Simples</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tools"></i> BEP-031: Criando uma API REST Simples</h1>
+            <p>Implementação prática de uma API REST básica</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-route"></i> Criando Rotas Simples</h2>
+                <p>Primeiras rotas GET e POST com FastAPI</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Rota GET</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/usuarios")
+def listar_usuarios():
+    return [
+        {"id": 1, "nome": "João"},
+        {"id": 2, "nome": "Maria"}
+    ]</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Rota POST</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Usuario(BaseModel):
+    nome: str
+    email: str
+
+@app.post("/usuarios")
+def criar_usuario(usuario: Usuario):
+    return {"id": 3, **usuario.dict()}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Observações</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ <strong>@app.get</strong> e <strong>@app.post</strong> definem o método HTTP</li>
+                            <li>✅ FastAPI valida automaticamente os dados (Pydantic)</li>
+                            <li>✅ Respostas JSON são geradas automaticamente</li>
+                            <li>✅ Documentação aparece em <code>/docs</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-031: Criando uma API REST Simples</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

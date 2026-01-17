@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-034 - Slide 03: Implementação Básica</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-plug"></i> BEP-034: WebSockets e Comunicação em Tempo Real</h1>
+            <p>Comunicação bidirecional em tempo real com WebSockets</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-code"></i> Implementação Básica</h2>
+                <p>Como criar um WebSocket simples com FastAPI</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-download"></i> Instalação</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code># Instalar FastAPI e Uvicorn
+pip install fastapi uvicorn
+
+# Rodar servidor
+uvicorn main:app --reload</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> WebSocket básico</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI, WebSocket
+
+app = FastAPI()
+
+@app.websocket("/ws")
+async def websocket_endpoint(ws: WebSocket):
+    await ws.accept()
+    while True:
+        data = await ws.receive_text()
+        await ws.send_text(f"Echo: {data}")</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Cliente JavaScript</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>const socket = new WebSocket("ws://localhost:8000/ws");
+
+socket.onmessage = (event) => {
+  console.log("Recebido:", event.data);
+};
+
+socket.onopen = () => {
+  socket.send("Olá WebSocket!");
+};</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-users"></i> Broadcast com Gerenciador</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from typing import List
+from fastapi import WebSocket
+
+class ConnectionManager:
+    def __init__(self):
+        self.active: List[WebSocket] = []
+
+    async def connect(self, ws: WebSocket):
+        await ws.accept()
+        self.active.append(ws)
+
+    def disconnect(self, ws: WebSocket):
+        self.active.remove(ws)
+
+    async def broadcast(self, message: str):
+        for ws in self.active:
+            await ws.send_text(message)
+
+manager = ConnectionManager()
+
+@app.websocket("/ws/chat")
+async def chat(ws: WebSocket):
+    await manager.connect(ws)
+    try:
+        while True:
+            msg = await ws.receive_text()
+            await manager.broadcast(msg)
+    except:
+        manager.disconnect(ws)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas práticas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Validar mensagens recebidas</li>
+                            <li>✅ Tratar desconexões</li>
+                            <li>✅ Limitar frequência de mensagens</li>
+                            <li>✅ Autenticar usuários (se necessário)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-034: WebSockets e Comunicação em Tempo Real</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

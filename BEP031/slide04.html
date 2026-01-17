@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-031 - Slide 04: Enviando Respostas JSON</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tools"></i> BEP-031: Criando uma API REST Simples</h1>
+            <p>Implementação prática de uma API REST básica</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-paper-plane"></i> Enviando Respostas JSON</h2>
+                <p>Formatando e enviando respostas em JSON</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Resposta padrão</h3>
+                    <p>Em FastAPI, retornar um dict já gera JSON:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>@app.get("/status")
+def status():
+    return {"ok": True, "mensagem": "API online"}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Status Code</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import status
+
+@app.post("/usuarios", status_code=status.HTTP_201_CREATED)
+def criar_usuario(usuario: Usuario):
+    return {"id": 1, **usuario.dict()}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Erros com HTTPException</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import HTTPException
+
+@app.get("/usuarios/{user_id}")
+def buscar_usuario(user_id: int):
+    if user_id != 1:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+    return {"id": 1, "nome": "João"}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas práticas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Use status codes corretos</li>
+                            <li>✅ Respostas consistentes (mesma estrutura)</li>
+                            <li>✅ Mensagens claras para erros</li>
+                            <li>✅ Aproveite a documentação automática</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-031: Criando uma API REST Simples</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

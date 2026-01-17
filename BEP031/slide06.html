@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-031 - Slide 06: Documentação Automática</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .dica { background: #FEF5E7; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tools"></i> BEP-031: Criando uma API REST Simples</h1>
+            <p>Implementação prática de uma API REST básica</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide06">
+                <h2><i class="fas fa-book"></i> Documentação Automática</h2>
+                <p>Swagger e ReDoc gerados pelo FastAPI</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é gerado automaticamente?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Lista de endpoints (rotas)</li>
+                            <li>✅ Métodos HTTP (GET, POST, etc.)</li>
+                            <li>✅ Parâmetros de rota e query</li>
+                            <li>✅ Body de requisição (Pydantic)</li>
+                            <li>✅ Respostas e exemplos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-link"></i> Endereços</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>http://localhost:8000/docs   # Swagger UI (interativo)
+http://localhost:8000/redoc  # ReDoc (leitura organizada)</code></pre>
+                    </div>
+                    <div class="dica" style="margin-top: 12px;">
+                        <p><strong>Diferença:</strong> Swagger permite testar requisições. ReDoc é melhor para leitura.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cogs"></i> Como funciona</h3>
+                    <p>O FastAPI cria um schema OpenAPI automaticamente e usa esse schema para montar as duas páginas.</p>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Qualquer rota criada aparece na documentação</li>
+                            <li>✅ Type hints e Pydantic melhoram a documentação</li>
+                            <li>✅ É possível ocultar rotas com <code>include_in_schema=False</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-031: Criando uma API REST Simples</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
