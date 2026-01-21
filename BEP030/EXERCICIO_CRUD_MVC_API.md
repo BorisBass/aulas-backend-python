@@ -25,15 +25,19 @@ Objetivo: montar um CRUD em linha de comando seguindo o mesmo MVC das BEPs 23-28
 
 # criar a pasta do projeto
 
+```
 mkdir cep_crud_mvc
 cd cep_crud_mvc
 python -m venv .venv
 .venv\Scripts\activate
+```
 
 # Instalar dependencias:
 
+```
 pip install requests
 pip freeze > requirements.txt
+```
 
 ---
 
