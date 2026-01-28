@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-031 - Slide 03: Manipulando Requisições</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tools"></i> BEP-031: Criando uma API REST Simples</h1>
+            <p>Implementação prática de uma API REST básica</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-hand-paper"></i> Manipulando Requisições</h2>
+                <p>Lendo dados de requisições HTTP</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Body (JSON)</h3>
+                    <p>Recebendo o JSON como <code>dict</code> e validando manualmente:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import Body, FastAPI, HTTPException
+
+app = FastAPI()
+
+@app.post("/produtos")
+def criar_produto(produto: dict = Body(...)):
+    nome = produto.get("nome")
+    preco = produto.get("preco")
+    if not nome:
+        raise HTTPException(status_code=400, detail="Campo 'nome' obrigatorio.")
+    if preco is None:
+        raise HTTPException(status_code=400, detail="Campo 'preco' obrigatorio.")
+    return {"id": 1, "nome": nome, "preco": preco}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-filter"></i> Query Params</h3>
+                    <p>Parâmetros na URL para filtro e busca:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>@app.get("/produtos")
+def listar_produtos(categoria=None, preco_max=None):
+    itens = produtos
+    if categoria:
+        itens = [p for p in itens if p.get("categoria") == categoria]
+    if preco_max is not None:
+        try:
+            preco_max = float(preco_max)
+            itens = [p for p in itens if p["preco"] <= preco_max]
+        except ValueError:
+            raise HTTPException(status_code=400, detail="preco_max deve ser numero.")
+    return {
+        "categoria": categoria,
+        "preco_max": preco_max,
+        "itens": itens
+    }
+
+# Exemplo:
+# /produtos?categoria=eletronicos&preco_max=1000</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-key"></i> Path Params</h3>
+                    <p>Parâmetros na rota para identificar recursos:</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>@app.get("/produtos/{produto_id}")
+def buscar_produto(produto_id: int):
+    return {"id": produto_id, "nome": "Produto X"}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-play"></i> Exemplo prático</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div>
+                            <p><strong>GET com query params</strong></p>
+                            <div class="code-block" style="margin-top: 8px;">
+                                <pre><code>http://localhost:8000/produtos?categoria=livros&preco_max=80</code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <p><strong>POST com JSON</strong></p>
+                            <div class="code-block" style="margin-top: 8px;">
+                                <pre><code>POST http://localhost:8000/produtos
+Content-Type: application/json
+
+{
+  "nome": "Livro Python",
+  "preco": 79.9
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Observação:</strong> aqui validamos com <code>if</code> e retornamos <code>HTTPException</code> quando faltar dados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-031: Criando uma API REST Simples</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
