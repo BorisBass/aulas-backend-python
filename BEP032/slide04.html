@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-032 - Slide 04: JWT (JSON Web Tokens)</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .jwt { background: #C6F6D5; border-left: 4px solid #38A169; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-032: Autenticação e Autorização</h1>
+            <p>Conceitos de segurança em APIs: autenticação e autorização</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-certificate"></i> JWT (JSON Web Tokens)</h2>
+                <p>Padrão moderno de autenticação</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é JWT?</h3>
+                    <p>JWT é um token assinado que carrega dados do usuário e expiração.</p>
+                    <div class="jwt" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Compacto e autocontido</li>
+                            <li>✅ Assinado (integridade)</li>
+                            <li>✅ Muito usado em APIs REST</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tools"></i> JWT em FastAPI (comentado)</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code># pip install python-jose[cryptography]
+from fastapi import Body, Depends, FastAPI, HTTPException  # imports principais
+from fastapi.security import OAuth2PasswordBearer  # extrai token do header
+from jose import jwt, JWTError  # cria e valida JWT
+from datetime import datetime, timedelta  # expiração do token
+
+SECRET_KEY = "segredo"  # chave usada para assinar o JWT
+ALGORITHM = "HS256"  # algoritmo de assinatura
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")  # rota que gera token
+
+app = FastAPI()  # cria a aplicacao
+
+def criar_token(payload: dict, exp_minutos: int = 30):
+    dados = payload.copy()  # copia os dados
+    exp = datetime.utcnow() + timedelta(minutes=exp_minutos)  # expira em 30 min
+    dados.update({"exp": exp})  # adiciona expiracao
+    return jwt.encode(dados, SECRET_KEY, algorithm=ALGORITHM)  # assina o token
+
+@app.post("/login")  # rota de login
+def login(dados: dict = Body(...)):
+    usuario = dados.get("usuario")
+    senha = dados.get("senha")
+    if usuario != "admin" or senha != "123":
+        raise HTTPException(status_code=401, detail="Credenciais invalidas")
+    token = criar_token({"sub": usuario})  # sub = subject (usuario)
+    return {"token": token}
+
+@app.get("/protegido")  # rota protegida
+def protegido(token: str = Depends(oauth2_scheme)):
+    try:
+        dados = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])  # valida token
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Token invalido")
+    return {"usuario": dados.get("sub")}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-vial"></i> Testando com Insomnia</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ol style="margin-top: 8px;">
+                            <li>POST <code>http://localhost:8000/login</code></li>
+                            <li>Body → JSON: <code>{"usuario":"admin","senha":"123"}</code></li>
+                            <li>Copie o token da resposta</li>
+                            <li>GET <code>http://localhost:8000/protegido</code></li>
+                            <li>Auth → Bearer → cole o token</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fab fa-python"></i> Testando com Python (requests)</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>import requests
+
+# 1) login
+login = requests.post("http://localhost:8000/login", json={
+    "usuario": "admin",
+    "senha": "123"
+})
+token = login.json().get("token")
+
+# 2) acesso protegido
+headers = {"Authorization": f"Bearer {token}"}
+resp = requests.get("http://localhost:8000/protegido", headers=headers)
+print(resp.status_code)
+print(resp.json())</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-check-circle"></i> Vantagens</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Stateless (sem sessão no servidor)</li>
+                            <li>✅ Escalável</li>
+                            <li>✅ Contém dados do usuário</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-032: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

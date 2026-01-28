@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BEP-031 - Slide 05: Testes com Insomnia</title>
+    <title>BEP-031 - Slide 05: Testes com Python</title>
     <link rel="stylesheet" href="../style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
@@ -25,8 +25,8 @@
 
         <div class="content">
             <div class="slide active" id="slide05">
-                <h2><i class="fas fa-vial"></i> Testes com Insomnia</h2>
-                <p>Roteiro rápido para testar a API</p>
+                <h2><i class="fab fa-python"></i> Testes com Python</h2>
+                <p>Roteiro rápido com requests</p>
                 
                 <div class="card" style="margin-top: 20px;">
                     <h3><i class="fas fa-play"></i> Iniciar servidor</h3>
@@ -40,31 +40,29 @@
 
                 <div class="card" style="margin-top: 20px;">
                     <h3><i class="fas fa-play"></i> Testando GET</h3>
-                    <div class="info" style="margin-top: 12px;">
-                        <ol style="margin-top: 8px;">
-                            <li>Selecione método <strong>GET</strong></li>
-                            <li>URL: <code>http://localhost:8000/produtos</code></li>
-                            <li>Clique em <strong>Send</strong></li>
-                        </ol>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+resposta = requests.get("http://localhost:8000/produtos")
+print(resposta.status_code)
+print(resposta.json())</code></pre>
                     </div>
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
                     <h3><i class="fas fa-plus"></i> Testando POST</h3>
-                    <div class="info" style="margin-top: 12px;">
-                        <ol style="margin-top: 8px;">
-                            <li>Selecione método <strong>POST</strong></li>
-                            <li>URL: <code>http://localhost:8000/produtos</code></li>
-                            <li>Body → JSON</li>
-                            <li>Exemplo de JSON:</li>
-                        </ol>
-                        <div class="code-block" style="margin-top: 10px;">
-                            <pre><code>{
-  "nome": "Livro Python",
-  "preco": 79.9,
-  "categoria": "livros"
-}</code></pre>
-                        </div>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import requests
+
+novo = {
+    "nome": "Livro Python",
+    "preco": 79.9,
+    "categoria": "livros"
+}
+
+resposta = requests.post("http://localhost:8000/produtos", json=novo)
+print(resposta.status_code)
+print(resposta.json())</code></pre>
                     </div>
                 </div>
 

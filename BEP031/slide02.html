@@ -90,15 +90,18 @@ def criar_usuario(usuario: dict = Body(...)):
                             </div>
                         </div>
                         <div>
-                            <p><strong>POST no Insomnia/Postman</strong></p>
+                            <p><strong>POST com Python (requests)</strong></p>
                             <div class="code-block" style="margin-top: 8px;">
-                                <pre><code>POST http://localhost:8000/usuarios
-Content-Type: application/json
+                                <pre><code>import requests
 
-{
+novo = {
   "nome": "Ana",
   "email": "ana@email.com"
-}</code></pre>
+}
+
+resposta = requests.post("http://localhost:8000/usuarios", json=novo)
+print(resposta.status_code)
+print(resposta.json())</code></pre>
                             </div>
                         </div>
                     </div>
