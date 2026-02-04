@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-033 - Slide 04: Ferramentas de Logging</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-exclamation-triangle"></i> BEP-033: Manipulação de Erros e Logs</h1>
+            <p>Tratamento de erros e registro de logs em APIs</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-tools"></i> Ferramentas de Logging</h2>
+                <p>Logging em Python e FastAPI</p>
+                <div class="info" style="margin-top: 12px;">
+                    <p>
+                        O modulo <strong>logging</strong> faz parte do <strong>Python</strong> (biblioteca padrao).
+                        O FastAPI apenas usa esse modulo para registrar logs.
+                    </p>
+                </div>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Logging padrão do Python</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>import logging
+
+logging.basicConfig(
+    level=logging.INFO,  # nivel minimo exibido
+    format='%(asctime)s [%(levelname)s] %(message)s'  # formato do log
+)
+
+logger = logging.getLogger("api")  # cria um logger com nome
+logger.info("API iniciada")  # info: eventos normais
+logger.error("Erro ao processar")  # error: falha</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-table"></i> Metodos mais usados</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <table style="width:100%; border-collapse: collapse; font-size: 0.95em; color:#1A202C; background:#fff;">
+                            <thead>
+                                <tr style="background:#EDF2F7;">
+                                    <th style="text-align:left; padding:8px; border:1px solid #E2E8F0;">Metodo</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #E2E8F0;">Quando usar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logger.debug()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Detalhes tecnicos</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logger.info()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Fluxo normal do sistema</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logger.warning()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Algo inesperado, mas nao critico</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logger.error()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Erro que falha a operacao</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logger.critical()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Falha grave do sistema</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logger.exception()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Loga erro com traceback (em except)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logging.basicConfig()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Configura nivel e formato</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">logging.getLogger()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Cria/recupera um logger</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Middleware de Logging (FastAPI)</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI, Request
+import time
+import logging
+
+app = FastAPI()
+logger = logging.getLogger("api")  # logger do app
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start = time.time()  # inicio da requisicao
+    response = await call_next(request)  # chama a rota
+    duration = time.time() - start  # tempo total
+    logger.info(f"{request.method} {request.url.path} - {response.status_code} - {duration:.2f}s")
+    return response</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas práticas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Use níveis corretos (INFO, WARNING, ERROR)</li>
+                            <li>✅ Não logue dados sensíveis</li>
+                            <li>✅ Registre método, URL e status</li>
+                            <li>✅ Monitore erros 5xx</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-033: Manipulação de Erros e Logs</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

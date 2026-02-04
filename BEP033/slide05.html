@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-033 - Slide 05: Exercícios Práticos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .exercicio { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 15px; margin: 15px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-exclamation-triangle"></i> BEP-033: Manipulação de Erros e Logs</h1>
+            <p>Tratamento de erros e registro de logs em APIs</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Simulação e tratamento de erros</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 1</h3>
+                    <div class="exercicio">
+                        <p>Crie uma função de erro padronizada e use em uma rota FastAPI.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 2</h3>
+                    <div class="exercicio">
+                        <p>Implemente um middleware que loga método, URL, status e tempo de resposta.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-ol"></i> Exercício 3</h3>
+                    <div class="exercicio">
+                        <p>Simule erros 400, 404 e 500 em rotas diferentes e registre nos logs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-033: Manipulação de Erros e Logs</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

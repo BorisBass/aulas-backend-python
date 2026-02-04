@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-033 - Slide 03: O que Registrar em Logs</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        .importante { background: #FEF5E7; border-left: 4px solid #D69E2E; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-exclamation-triangle"></i> BEP-033: Manipulação de Erros e Logs</h1>
+            <p>Tratamento de erros e registro de logs em APIs</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-file-alt"></i> O que Registrar em Logs</h2>
+                <p>Informações importantes para logs</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> O que e um log?</h3>
+                    <p>
+                        <strong>Log</strong> e um registro cronologico de eventos do sistema. Ele serve para
+                        entender o que aconteceu, quando aconteceu e com qual resultado.
+                    </p>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Exemplo:</strong> "Usuario X tentou acessar /produtos e recebeu 401".</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list-check"></i> Informações Essenciais</h3>
+                    <div class="two-col" style="margin-top: 12px;">
+                        <div class="info"><strong>Timestamp</strong></div>
+                        <div class="info"><strong>Nível</strong> (INFO, WARNING, ERROR)</div>
+                        <div class="info"><strong>Endpoint</strong> e método HTTP</div>
+                        <div class="info"><strong>Status code</strong></div>
+                        <div class="info"><strong>Usuário/IP</strong> (se aplicável)</div>
+                        <div class="info"><strong>Mensagem</strong> do evento</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo de Log</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>2025-01-15 10:30:45 [INFO] GET /api/produtos - 200 - 0.04s
+2025-01-15 10:31:12 [WARNING] POST /api/usuarios - 400 - dados inválidos
+2025-01-15 10:33:20 [ERROR] GET /api/pedidos/500 - 500 - erro interno</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> O que NÃO registrar</h3>
+                    <div class="importante" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>❌ Senhas</li>
+                            <li>❌ Tokens completos</li>
+                            <li>❌ Dados sensíveis (CPF, cartão)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-033: Manipulação de Erros e Logs</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
