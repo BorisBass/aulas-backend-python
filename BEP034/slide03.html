@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-034 - Slide 03: Implementação Básica</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-plug"></i> BEP-034: WebSockets e Comunicação em Tempo Real</h1>
+            <p>Comunicação bidirecional em tempo real com WebSockets</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-code"></i> Implementação Básica</h2>
+                <p>Como criar um WebSocket simples com FastAPI</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> O que acontece no WebSocket?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>
+                            A rota WebSocket fica aberta depois do <strong>accept()</strong>. A partir disso, o
+                            servidor e o cliente podem enviar mensagens a qualquer momento, sem precisar
+                            abrir uma nova requisicao HTTP.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-download"></i> Instalação</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code># Instalar FastAPI e Uvicorn
+pip install fastapi uvicorn
+
+# Rodar servidor
+uvicorn main:app --reload</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> WebSocket básico</h3>
+                    <p>Fluxo: aceitar conexao, receber mensagem, enviar resposta.</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import FastAPI, WebSocket
+
+app = FastAPI()  # cria a aplicacao
+
+@app.websocket("/ws")
+async def websocket_endpoint(ws: WebSocket):
+    await ws.accept()  # aceita a conexao
+    while True:
+        data = await ws.receive_text()  # recebe mensagem
+        await ws.send_text(f"Echo: {data}")  # devolve resposta</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-users"></i> Broadcast com Gerenciador</h3>
+                    <p>Um gerenciador guarda as conexoes ativas e envia mensagem para todos. Isso permite criar um chat.</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>from fastapi import WebSocket
+
+class ConnectionManager:
+    def __init__(self):
+        self.active = []  # lista de conexoes
+
+    async def connect(self, ws: WebSocket):
+        await ws.accept()  # aceita a conexao
+        self.active.append(ws)  # guarda cliente
+
+    def disconnect(self, ws: WebSocket):
+        self.active.remove(ws)  # remove cliente
+
+    async def broadcast(self, message: str):
+        for ws in self.active:  # envia para todos
+            await ws.send_text(message)  # mensagem
+
+manager = ConnectionManager()
+
+@app.websocket("/ws/chat")
+async def chat(ws: WebSocket):
+    await manager.connect(ws)  # conecta cliente
+    try:
+        while True:
+            msg = await ws.receive_text()  # recebe mensagem
+            await manager.broadcast(msg)  # envia para todos
+    except:
+        manager.disconnect(ws)  # desconecta</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-table"></i> Metodos mais usados</h3>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <table style="width:100%; border-collapse: collapse; font-size: 0.95em; color:#1A202C; background:#fff;">
+                            <thead>
+                                <tr style="background:#EDF2F7;">
+                                    <th style="text-align:left; padding:8px; border:1px solid #E2E8F0;">Metodo</th>
+                                    <th style="text-align:left; padding:8px; border:1px solid #E2E8F0;">Para que serve</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.accept()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Aceita a conexao WebSocket</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.receive_text()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Recebe mensagem em texto</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.send_text(msg)</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Envia mensagem em texto</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.receive_bytes()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Recebe dados binarios</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.send_bytes(data)</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Envia dados binarios</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.receive_json()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Recebe mensagem JSON</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.send_json(obj)</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Envia mensagem JSON</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">await ws.close()</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Fecha a conexao</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">ws.client</td>
+                                    <td style="padding:8px; border:1px solid #E2E8F0;">Acessa IP e porta do cliente</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fab fa-python"></i> Cliente Python (websockets)</h3>
+                    <p>Este cliente abre a conexao, envia uma mensagem e recebe o retorno.</p>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code># pip install websockets
+import asyncio
+import websockets
+
+async def cliente():
+    try:
+        async with websockets.connect("ws://localhost:8000/ws") as ws:
+            await ws.send("Ola WebSocket!")  # envia mensagem
+            resposta = await ws.recv()  # espera resposta
+            print("Recebido:", resposta)  # mostra no terminal
+    except Exception as e:
+        print("Erro no cliente:", e)  # trata erro
+
+asyncio.run(cliente())</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Boas práticas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Validar mensagens recebidas</li>
+                            <li>✅ Tratar desconexões</li>
+                            <li>✅ Limitar frequência de mensagens</li>
+                            <li>✅ Autenticar usuários (se necessário)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-034: WebSockets e Comunicação em Tempo Real</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

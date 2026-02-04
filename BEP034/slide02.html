@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-034 - Slide 02: Casos de Uso</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .caso { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-plug"></i> BEP-034: WebSockets e Comunicação em Tempo Real</h1>
+            <p>Comunicação bidirecional em tempo real com WebSockets</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-briefcase"></i> Casos de Uso</h2>
+                <p>Chat, notificações, atualizações em tempo real</p>
+                
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-comments"></i> Chat em Tempo Real</h3>
+                    <div class="caso" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Aplicação:</h4>
+                        <p>Sistemas de chat onde mensagens precisam aparecer instantaneamente para todos os usuários.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Mensagens chegam em tempo real</li>
+                            <li>✅ Múltiplos usuários simultâneos</li>
+                            <li>✅ Indicadores de digitação</li>
+                            <li>✅ Status online/offline</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Usuário A envia mensagem
+Cliente A → WS: {"tipo": "mensagem", "texto": "Olá!"}
+
+// Servidor distribui para todos
+Servidor → WS: {"tipo": "mensagem", "usuario": "A", "texto": "Olá!"}
+Servidor → Cliente B: [recebe instantaneamente]
+Servidor → Cliente C: [recebe instantaneamente]</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bell"></i> Notificações Push</h3>
+                    <div class="caso" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Aplicação:</h4>
+                        <p>Notificações que aparecem instantaneamente sem o usuário precisar atualizar a página.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Notificações de novos emails</li>
+                            <li>✅ Alertas de sistema</li>
+                            <li>✅ Atualizações de status</li>
+                            <li>✅ Lembretes e avisos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sync-alt"></i> Atualizações em Tempo Real</h3>
+                    <div class="caso" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Aplicação:</h4>
+                        <p>Dados que mudam frequentemente e precisam ser atualizados automaticamente.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Dashboard com métricas em tempo real</li>
+                            <li>✅ Cotações de ações/criptomoedas</li>
+                            <li>✅ Contadores de likes/visualizações</li>
+                            <li>✅ Status de pedidos/delivery</li>
+                        </ul>
+                    </div>
+                    <div class="code-block" style="margin-top: 15px;">
+                        <pre><code>// Atualização de contador
+Servidor → WS: {"tipo": "atualizacao", "likes": 1250}
+Cliente → [Atualiza interface automaticamente]
+
+// Status de pedido
+Servidor → WS: {"tipo": "status", "pedido_id": 123, "status": "saiu_para_entrega"}
+Cliente → [Mostra notificação e atualiza status]</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-gamepad"></i> Jogos Online</h3>
+                    <div class="caso" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Aplicação:</h4>
+                        <p>Jogos multiplayer que precisam de sincronização em tempo real entre jogadores.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Movimentos de jogadores</li>
+                            <li>✅ Ações e eventos do jogo</li>
+                            <li>✅ Sincronização de estado</li>
+                            <li>✅ Chat durante o jogo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-users"></i> Colaboração em Tempo Real</h3>
+                    <div class="caso" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Aplicação:</h4>
+                        <p>Ferramentas colaborativas onde múltiplos usuários trabalham juntos.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Editores colaborativos (Google Docs)</li>
+                            <li>✅ Quadros brancos compartilhados</li>
+                            <li>✅ Cursor de outros usuários</li>
+                            <li>✅ Mudanças sincronizadas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-chart-line"></i> Monitoramento e Analytics</h3>
+                    <div class="caso" style="margin-top: 12px;">
+                        <h4><i class="fas fa-check-circle"></i> Aplicação:</h4>
+                        <p>Sistemas de monitoramento que mostram dados atualizados constantemente.</p>
+                        <ul style="margin-top: 8px;">
+                            <li>✅ Gráficos em tempo real</li>
+                            <li>✅ Métricas de servidor</li>
+                            <li>✅ Logs ao vivo</li>
+                            <li>✅ Alertas instantâneos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-034: WebSockets e Comunicação em Tempo Real</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

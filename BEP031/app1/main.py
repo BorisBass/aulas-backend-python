@@ -1,24 +1,6 @@
-import logging
-import time
-from fastapi import Body, FastAPI, HTTPException, Request
+from fastapi import Body, FastAPI, HTTPException
 
 app = FastAPI(title="API Exemplo")
-
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-)
-logger = logging.getLogger("api")
-
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    inicio = time.time()
-    resposta = await call_next(request)
-    duracao = time.time() - inicio
-    logger.info(
-        f"{request.method} {request.url.path} - {resposta.status_code} - {duracao:.2f}s"
-    )
-    return resposta
 
 usuarios = [
 ]
