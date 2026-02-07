@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-035 - Slide 03: Estrutura do Projeto</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-035: Introdução ao Django</h1>
+            <p>Compreender o framework Django e sua arquitetura</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-folder-open"></i> Estrutura do Projeto</h2>
+                <p>Arquivos principais e suas funcoes</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Estrutura inicial</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>meu_projeto/
+├─ manage.py
+└─ meu_projeto/
+   ├─ __init__.py
+   ├─ settings.py
+   ├─ urls.py
+   ├─ wsgi.py
+   └─ asgi.py</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-alt"></i> Para que serve cada arquivo</h3>
+                    <div class="info"><strong>manage.py</strong>: comandos do projeto</div>
+                    <div class="info"><strong>settings.py</strong>: configuracoes gerais</div>
+                    <div class="info"><strong>urls.py</strong>: mapeamento de rotas</div>
+                    <div class="info"><strong>wsgi.py</strong>: deploy em servidores WSGI (HTTP tradicional, síncrono)</div>
+                    <div class="info"><strong>asgi.py</strong>: deploy com ASGI (HTTP + async, suporte a web sockets)</div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-035: Introdução ao Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

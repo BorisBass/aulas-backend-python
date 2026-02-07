@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pagina inicial</title>
+</head>
+<body>
+<h2>Tarefas</h2>
+<ul>
+{% for t in tarefas %}
+  <li>{{ t.descricao }} - {{ t.prioridade }} - {{ t.status }}%</li>
+{% empty %}
+  <li>Nenhuma tarefa cadastrada.</li>
+{% endfor %}
+</ul>
+</body>
+</html>

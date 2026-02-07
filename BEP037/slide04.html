@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-037 - Slide 04: Renderização</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-037: Views e Templates</h1>
+            <p>Criar páginas dinâmicas utilizando views e templates</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-play"></i> render() e DTL</h2>
+                <p>Renderiza HTML com dados dinamicos.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> View que busca no banco</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.shortcuts import render
+from .models import Tarefa
+
+def lista(request):
+    tarefas = Tarefa.objects.all()  # SELECT no banco
+    contexto = {"tarefas": tarefas}
+    return render(request, "lista.html", contexto)</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-route"></i> URL da view</h3>
+                    <p>A URL liga o caminho do navegador com a funcao de view.</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/urls.py
+from django.urls import path
+from .views import lista
+
+urlpatterns = [
+    path("lista/", lista),  # /lista/
+]</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Template lista.html</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/lista.html -->
+&lt;h2&gt;Tarefas&lt;/h2&gt;
+&lt;ul&gt;
+{% for t in tarefas %}
+  &lt;li&gt;{{ t.descricao }} - {{ t.prioridade }} - {{ t.status }}%&lt;/li&gt;
+{% empty %}
+  &lt;li&gt;Nenhuma tarefa cadastrada.&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-037: Views e Templates</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

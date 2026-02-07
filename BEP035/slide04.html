@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-035 - Slide 04: Primeiro App</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-035: Introdução ao Django</h1>
+            <p>Compreender o framework Django e sua arquitetura</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-puzzle-piece"></i> Criando o primeiro app</h2>
+                <p>Apps organizam funcionalidades dentro do projeto</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-terminal"></i> Criar o app</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># criar app
+python manage.py startapp core</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-sliders-h"></i> Ajustes no settings.py</h3>
+                    <p>Pontos importantes para o projeto.</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># meu_projeto/settings.py
+
+# idioma padrao
+LANGUAGE_CODE = "pt-br"
+
+# fuso horario do Brasil
+TIME_ZONE = "America/Sao_Paulo"
+USE_TZ = True
+
+# banco de dados (padrao: SQLite)
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cog"></i> Registrar em settings.py</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># settings.py
+INSTALLED_APPS = [
+    # apps padrao do Django
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    # meu app
+    "core",
+]</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-route"></i> Roteamento (fluxo real)</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># meu_projeto/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path("admin/", admin.site.urls),
+    path("", include("core.urls")),
+]</code></pre>
+                    </div>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/urls.py
+from django.urls import path
+from .views import home
+
+urlpatterns = [
+    path("", home),
+]</code></pre>
+                    </div>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Ola Django!")</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h3><i class="fas fa-project-diagram"></i> Fluxo da requisicao</h3>
+            <p>Exemplo do caminho que a requisicao percorre:</p>
+            <div style="text-align: center; margin-top: 12px;">
+                <img src="fluxo-django-urls.png" alt="Fluxo de requisicao no Django" style="max-width: 100%; height: auto; border: 1px solid #E2E8F0; border-radius: 10px;">
+            </div>
+        </div>
+        <div class="footer">
+            <p>BEP-035: Introdução ao Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

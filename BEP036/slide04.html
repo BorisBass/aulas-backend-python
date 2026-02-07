@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-036 - Slide 04: Consultas</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-036: Modelos e Migrations</h1>
+            <p>Modelar dados com Django ORM</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-search"></i> Consultas básicas</h2>
+                <p>CRUD simples usando o ORM do Django.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-terminal"></i> Onde executar?</h3>
+                    <p>Use o <strong>Django shell</strong> para testar:</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>python manage.py shell</code></pre>
+                    </div>
+                    <p>Depois, importe o model:</p>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>from core.models import Tarefa</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># criar
+Tarefa.objects.create(descricao="Estudar Django", prioridade="alta")
+
+# listar tudo
+tarefas = Tarefa.objects.all()
+
+# filtrar
+altas = Tarefa.objects.filter(prioridade="alta")
+
+# pegar por id
+t = Tarefa.objects.get(id=1)
+
+# atualizar
+t.status = 50
+t.save()
+
+# remover
+t.delete()</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-terminal"></i> Ver o resultado no terminal</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># imprimir lista filtrada
+print(altas)
+
+# melhor: mostrar item por item
+for t in altas:
+    print(t)
+
+# mostrar campos
+for t in altas:
+    print(t.id, t.descricao, t.prioridade, t.status)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-036: Modelos e Migrations</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

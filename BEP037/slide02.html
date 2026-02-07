@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-037 - Slide 02: Templates</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> BEP-037: Views e Templates</h1>
+            <p>Criar páginas dinâmicas utilizando views e templates</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-file-code"></i> Template HTML com DTL</h2>
+                <p>Django Template Language (DTL) permite dados dinamicos.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-info-circle"></i> O que é DTL?</h3>
+                    <p><strong>DTL</strong> é a linguagem de templates do Django. Ela permite inserir variáveis
+                    e usar estruturas como <code>{% for %}</code> e <code>{% if %}</code> no HTML.</p>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-folder-open"></i> Onde criar o template?</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>core/
+├─ templates/
+│  └─ home.html</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/home.html -->
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;title&gt;Pagina inicial&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Ola, {{ nome }}!&lt;/h1&gt;
+  &lt;p&gt;Hoje e {{ data }}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-037: Views e Templates</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-036 - Slide 01: Models</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-database"></i> BEP-036: Modelos e Migrations</h1>
+            <p>Modelar dados com Django ORM</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-cubes"></i> O que são Models?</h2>
+                <p>Models representam tabelas do banco de dados.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo de model</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/models.py
+from django.db import models
+
+class Tarefa(models.Model):
+    descricao = models.CharField(max_length=200, db_index=True)  # cria indice neste campo
+    prioridade = models.CharField(max_length=20)  # alta, media, baixa
+    status = models.IntegerField(default=0)  # 0 a 100
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["prioridade"]),  # indice para buscas por prioridade
+        ]
+
+    def __str__(self):
+        return self.descricao</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Cada atributo vira uma coluna na tabela.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-036: Modelos e Migrations</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

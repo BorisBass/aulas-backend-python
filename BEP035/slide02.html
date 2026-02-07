@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-035 - Slide 02: Instalação e Ambiente</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fab fa-python"></i> BEP-035: Introdução ao Django</h1>
+            <p>Compreender o framework Django e sua arquitetura</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-download"></i> Instalação e Ambiente</h2>
+                <p>Preparando o ambiente com venv e Django</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-terminal"></i> Criar e ativar venv</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># criar venv
+python -m venv .venv
+
+# ativar no Linux
+source .venv/bin/activate
+
+# ativar no Windows (prompt de comando)
+.venv\Scripts\activate
+
+# ativar no Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-box"></i> Instalar Django</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># instalar
+pip install django
+
+# conferir versao
+django-admin --version</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-folder-plus"></i> Criar projeto</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># criar projeto
+django-admin startproject meu_projeto
+
+# entrar na pasta
+cd meu_projeto
+
+# rodar servidor
+python manage.py runserver</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>O servidor roda em <strong>http://127.0.0.1:8000</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-035: Introdução ao Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
