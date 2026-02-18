@@ -11,4 +11,4 @@ class Tarefa(models.Model):
         ]
 
     def __str__(self):
-        return self.descricao
+        return f"Descrição: {self.descricao} / Prioridade: {self.prioridade}"

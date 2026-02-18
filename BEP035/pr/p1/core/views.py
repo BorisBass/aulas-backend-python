@@ -1,7 +1,9 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 from datetime import date
 from .models import Tarefa
+
+# Create your views here.
 
 def home(request):
     contexto = {
@@ -14,5 +16,3 @@ def lista(request):
     tarefas = Tarefa.objects.all()  # SELECT no banco
     contexto = {"tarefas": tarefas}
     return render(request, "lista.html", contexto)
-
-# Create your views here.
