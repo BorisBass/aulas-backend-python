@@ -3,7 +3,10 @@
 README.md
 **/README.md
 # Exceção: arquivos de respostas dos exercícios devem ser versionados
-!BEP-*/RESPOSTAS_EXERCICIOS.md
+!BEP-???/EXE*.md
+!BEP-*/SOL*.md
+!BEP???/EXE*.md
+!BEP???/SOL*.md
 
 # Scripts de ferramentas e conversão (movidos para _recursos/ferramentas/)
 html_to_pdf.py
