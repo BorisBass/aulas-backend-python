@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-038 - Slide 05: Exercícios</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-route"></i> BEP-038: URLs e Rotas no Django</h1>
+            <p>Configurar rotas e URLs no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Pratique os conceitos aprendidos nesta aula.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Exercícios Propostos</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ol>
+                            <li><strong>Configurar URLs</strong>: Crie rotas para listar, criar, editar e deletar tarefas</li>
+                            <li><strong>Múltiplos Apps</strong>: Crie um app <code>produtos</code> e configure suas URLs</li>
+                            <li><strong>Namespaces</strong>: Configure namespaces para evitar conflitos</li>
+                            <li><strong>Reverse</strong>: Use <code>reverse()</code> e <code>{% url %}</code> nos templates</li>
+                            <li><strong>Parâmetros</strong>: Crie rotas com parâmetros dinâmicos (<code>&lt;int:id&gt;</code>)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Materiais</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>
+                            <a href="EXERCICIOS.md" target="_blank" style="color: #3182CE; font-weight: bold;">📘 Ver Exercícios</a>
+                            &nbsp;|&nbsp;
+                            <a href="SOLUCOES_EXERCICIOS.md" target="_blank" style="color: #3182CE; font-weight: bold;">✅ Ver Soluções</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Sempre use <code>name</code> nas rotas para facilitar manutenção</li>
+                            <li>Use namespaces quando tiver múltiplos apps</li>
+                            <li>Prefira <code>reverse()</code> e <code>{% url %}</code> em vez de URLs hardcoded</li>
+                            <li>Organize URLs por app para manter o código limpo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-038: URLs e Rotas no Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-040 - Slide 02: Login e Logout</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-040: Autenticação e Autorização</h1>
+            <p>Implementar sistemas de autenticação de usuários</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-sign-in-alt"></i> Login e Logout</h2>
+                <p>Implementando autenticação de usuários.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> View de Login</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # autentica o usuário
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)  # faz login do usuário
+            return redirect('core:home')
+        else:
+            messages.error(request, 'Usuário ou senha inválidos.')
+    
+    return render(request, 'login.html')</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>authenticate()</strong>: Verifica credenciais e retorna o objeto User se válido.</p>
+                        <p><strong>login()</strong>: Cria uma sessão para o usuário autenticado.</p>
+                        <p><strong>request.user</strong>: Após login, contém o usuário autenticado.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Template de Login</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/login.html -->
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    
+    {% if messages %}
+        {% for message in messages %}
+            &lt;div class="alert"&gt;{{ message }}&lt;/div&gt;
+        {% endfor %}
+    {% endif %}
+    
+    &lt;div&gt;
+        &lt;label&gt;Usuário:&lt;/label&gt;
+        &lt;input type="text" name="username" required&gt;
+    &lt;/div&gt;
+    
+    &lt;div&gt;
+        &lt;label&gt;Senha:&lt;/label&gt;
+        &lt;input type="password" name="password" required&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Entrar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> View de Logout</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)  # encerra a sessão do usuário
+    return redirect('core:login')</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>logout()</strong>: Remove a sessão do usuário autenticado.</p>
+                        <p>Após logout, <code>request.user</code> será um usuário anônimo.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Verificar Usuário Autenticado</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+def minha_view(request):
+    if request.user.is_authenticated:
+        # usuário está logado
+        nome = request.user.username
+        return render(request, 'home.html', {'nome': nome})
+    else:
+        # usuário não está logado
+        return redirect('core:login')</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>request.user.is_authenticated</strong>: Retorna <code>True</code> se o usuário está logado.</p>
+                        <p><strong>request.user</strong>: Objeto User do usuário atual (ou AnonymousUser se não logado).</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> URLs</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/urls.py
+from django.urls import path
+from .views import login_view, logout_view
+
+app_name = 'core'
+urlpatterns = [
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+]</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-040: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

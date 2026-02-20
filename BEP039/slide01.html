@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-039 - Slide 01: Django Forms</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-clipboard-list"></i> BEP-039: Formulários e Validação de Dados</h1>
+            <p>Manipular formulários com segurança no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-file-alt"></i> O que são Django Forms?</h2>
+                <p>Django Forms é um sistema que facilita a criação, validação e processamento de formulários HTML.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Por que usar Django Forms?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li><strong>Segurança</strong>: Proteção automática contra CSRF</li>
+                            <li><strong>Validação</strong>: Validação automática de dados</li>
+                            <li><strong>HTML automático</strong>: Gera HTML dos campos</li>
+                            <li><strong>Limpeza</strong>: Limpa e normaliza dados</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Criando um Form</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/forms.py
+from django import forms
+
+class TarefaForm(forms.Form):
+    descricao = forms.CharField(
+        max_length=200,
+        label='Descrição',
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
+    prioridade = forms.ChoiceField(
+        choices=[('alta', 'Alta'), ('media', 'Média'), ('baixa', 'Baixa')],
+        label='Prioridade'
+    )
+    status = forms.IntegerField(
+        min_value=0,
+        max_value=100,
+        initial=0,
+        label='Status (%)'
+    )</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>forms.Form</strong>: Classe base para criar formulários.</p>
+                        <p><strong>widget</strong>: Define como o campo será renderizado no HTML.</p>
+                        <p><strong>attrs</strong>: Atributos HTML adicionais (ex: classes CSS).</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Usando o Form na View</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.shortcuts import render, redirect
+from .forms import TarefaForm
+from .models import Tarefa
+
+def criar_tarefa(request):
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)  # cria form com dados do POST
+        if form.is_valid():  # valida os dados
+            descricao = form.cleaned_data['descricao']  # dados limpos
+            prioridade = form.cleaned_data['prioridade']
+            status = form.cleaned_data['status']
+            Tarefa.objects.create(descricao=descricao, prioridade=prioridade, status=status)
+            return redirect('core:lista')
+    else:
+        form = TarefaForm()  # form vazio para GET
+    
+    return render(request, 'criar_tarefa.html', {'form': form})</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>request.POST</strong>: Dados enviados pelo formulário.</p>
+                        <p><strong>is_valid()</strong>: Valida todos os campos do formulário.</p>
+                        <p><strong>cleaned_data</strong>: Dicionário com dados validados e limpos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-039: Formulários e Validação de Dados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

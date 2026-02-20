@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-039 - Slide 05: Exercícios</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-clipboard-list"></i> BEP-039: Formulários e Validação de Dados</h1>
+            <p>Manipular formulários com segurança no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Pratique os conceitos aprendidos nesta aula.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Exercícios Propostos</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ol>
+                            <li><strong>Criar Form</strong>: Crie um formulário para cadastrar tarefas</li>
+                            <li><strong>Validação</strong>: Adicione validações para campos obrigatórios</li>
+                            <li><strong>Limpeza</strong>: Implemente <code>clean_descricao()</code> para validar tamanho mínimo</li>
+                            <li><strong>Template</strong>: Crie template que exibe erros de validação</li>
+                            <li><strong>View</strong>: Implemente view que processa o formulário</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Materiais</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>
+                            <a href="EXERCICIOS.md" target="_blank" style="color: #3182CE; font-weight: bold;">📘 Ver Exercícios</a>
+                            &nbsp;|&nbsp;
+                            <a href="SOLUCOES_EXERCICIOS.md" target="_blank" style="color: #3182CE; font-weight: bold;">✅ Ver Soluções</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Sempre use <code>{% csrf_token %}</code> em formulários POST</li>
+                            <li>Use <code>form.is_valid()</code> antes de acessar <code>cleaned_data</code></li>
+                            <li>Customize mensagens de erro usando <code>ValidationError</code></li>
+                            <li>Use <code>clean()</code> para validações entre múltiplos campos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-039: Formulários e Validação de Dados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

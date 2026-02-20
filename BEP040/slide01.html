@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-040 - Slide 01: Sistema de Autenticação</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-040: Autenticação e Autorização</h1>
+            <p>Implementar sistemas de autenticação de usuários</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-key"></i> Sistema de Autenticação do Django</h2>
+                <p>Django possui um sistema completo de autenticação embutido.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> O que é autenticação?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Autenticação</strong>: Verificar quem é o usuário (login).</p>
+                        <p><strong>Autorização</strong>: Verificar o que o usuário pode fazer (permissões).</p>
+                        <p>Django fornece ambos os sistemas prontos para uso.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Modelo User</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Django já fornece um modelo User padrão
+from django.contrib.auth.models import User
+
+# Campos principais:
+# - username (obrigatório, único)
+# - email
+# - password (criptografado)
+# - first_name, last_name
+# - is_active, is_staff, is_superuser
+# - date_joined</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>User</strong>: Modelo padrão do Django para usuários.</p>
+                        <p><strong>is_active</strong>: Se o usuário está ativo (pode fazer login).</p>
+                        <p><strong>is_staff</strong>: Se o usuário pode acessar o admin.</p>
+                        <p><strong>is_superuser</strong>: Se o usuário tem todas as permissões.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cog"></i> Configuração</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># meu_projeto/settings.py
+INSTALLED_APPS = [
+    'django.contrib.auth',      # sistema de autenticação
+    'django.contrib.contenttypes',
+    # ... outros apps
+]
+
+# URLs de autenticação (já incluídas por padrão)
+# django.contrib.auth.urls fornece:
+# - /login/
+# - /logout/
+# - /password_change/
+# - etc.</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>django.contrib.auth</strong>: App de autenticação do Django (já incluído por padrão).</p>
+                        <p>As URLs de autenticação podem ser incluídas no projeto usando <code>include('django.contrib.auth.urls')</code>.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-user-plus"></i> Criar Usuário</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># No shell do Django (python manage.py shell)
+from django.contrib.auth.models import User
+
+# Criar usuário comum
+user = User.objects.create_user(
+    username='joao',
+    email='joao@email.com',
+    password='senha123'
+)
+
+# Criar superusuário
+admin = User.objects.create_superuser(
+    username='admin',
+    email='admin@email.com',
+    password='admin123'
+)</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>create_user()</strong>: Cria usuário comum com senha criptografada.</p>
+                        <p><strong>create_superuser()</strong>: Cria superusuário (pode acessar admin).</p>
+                        <p><strong>Nota</strong>: A senha é automaticamente criptografada (não salva em texto plano).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-040: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

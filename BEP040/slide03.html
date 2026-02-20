@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-040 - Slide 03: Restrição de Acesso</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-040: Autenticação e Autorização</h1>
+            <p>Implementar sistemas de autenticação de usuários</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-lock"></i> Restrição de Acesso</h2>
+                <p>Protegendo views para usuários autenticados.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Decorator @login_required</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>@login_required</strong>: Decorator que redireciona usuários não autenticados para a página de login.</p>
+                        <p>Se o usuário não estiver logado, será redirecionado automaticamente.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Usando @login_required</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .models import Tarefa
+
+@login_required  # protege a view
+def lista_tarefas(request):
+    tarefas = Tarefa.objects.filter(usuario=request.user)
+    return render(request, 'lista.html', {'tarefas': tarefas})
+
+@login_required
+def criar_tarefa(request):
+    if request.method == 'POST':
+        # ... criar tarefa ...
+        pass
+    return render(request, 'criar.html')</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>@login_required</strong>: Garante que apenas usuários autenticados acessem a view.</p>
+                        <p>Se não autenticado, redireciona para <code>/accounts/login/</code> (padrão).</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-cog"></i> Configurar URL de Login</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># meu_projeto/settings.py
+LOGIN_URL = '/login/'  # URL para redirecionar usuários não autenticados
+LOGIN_REDIRECT_URL = '/'  # URL após login bem-sucedido
+LOGOUT_REDIRECT_URL = '/login/'  # URL após logout</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>LOGIN_URL</strong>: Onde redirecionar usuários não autenticados.</p>
+                        <p><strong>LOGIN_REDIRECT_URL</strong>: Onde redirecionar após login.</p>
+                        <p><strong>LOGOUT_REDIRECT_URL</strong>: Onde redirecionar após logout.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Verificar no Template</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- template.html -->
+{% if user.is_authenticated %}
+    &lt;p&gt;Olá, {{ user.username }}!&lt;/p&gt;
+    &lt;a href="{% url 'core:logout' %}"&gt;Sair&lt;/a&gt;
+{% else %}
+    &lt;a href="{% url 'core:login' %}"&gt;Entrar&lt;/a&gt;
+{% endif %}</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>user</strong>: Variável disponível em todos os templates (equivalente a <code>request.user</code>).</p>
+                        <p>Use <code>{% if user.is_authenticated %}</code> para mostrar conteúdo apenas para usuários logados.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Verificar Permissões</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.contrib.auth.decorators import login_required, permission_required
+
+@login_required
+@permission_required('core.add_tarefa', raise_exception=True)
+def criar_tarefa_admin(request):
+    # apenas usuários com permissão 'core.add_tarefa'
+    return render(request, 'criar_admin.html')
+
+# Ou verificar manualmente
+@login_required
+def minha_view(request):
+    if request.user.has_perm('core.add_tarefa'):
+        # usuário tem permissão
+        pass
+    else:
+        # usuário não tem permissão
+        return redirect('core:sem_permissao')</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>@permission_required</strong>: Verifica se o usuário tem uma permissão específica.</p>
+                        <p><strong>has_perm()</strong>: Verifica permissão manualmente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-040: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-039 - Slide 03: Limpeza de Dados</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-clipboard-list"></i> BEP-039: Formulários e Validação de Dados</h1>
+            <p>Manipular formulários com segurança no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide03">
+                <h2><i class="fas fa-broom"></i> Limpeza de Dados</h2>
+                <p>Limpeza (cleaning) normaliza e valida dados de forma customizada.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> O que é limpeza?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Limpeza</strong> é o processo de normalizar e validar dados de um campo específico
+                        ou do formulário inteiro. Use métodos <code>clean_&lt;campo&gt;()</code> para campos individuais
+                        e <code>clean()</code> para validações que envolvem múltiplos campos.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> clean_&lt;campo&gt;() - Validação de Campo</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/forms.py
+from django import forms
+from django.core.exceptions import ValidationError
+
+class TarefaForm(forms.Form):
+    descricao = forms.CharField(max_length=200)
+    prioridade = forms.ChoiceField(choices=[('alta', 'Alta'), ('media', 'Média'), ('baixa', 'Baixa')])
+    
+    def clean_descricao(self):
+        descricao = self.cleaned_data.get('descricao')
+        if descricao and len(descricao.strip()) < 5:
+            raise ValidationError('A descrição deve ter pelo menos 5 caracteres.')
+        return descricao.strip()  # remove espaços extras e retorna</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>clean_descricao()</strong>: Método chamado automaticamente para validar o campo <code>descricao</code>.</p>
+                        <p><strong>self.cleaned_data.get('descricao')</strong>: Acessa o valor já validado do campo.</p>
+                        <p><strong>ValidationError</strong>: Exceção lançada quando a validação falha.</p>
+                        <p><strong>return</strong>: Retorna o valor limpo/normalizado.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> clean() - Validação do Formulário</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/forms.py
+class TarefaForm(forms.Form):
+    descricao = forms.CharField(max_length=200)
+    data_inicio = forms.DateField()
+    data_fim = forms.DateField()
+    
+    def clean(self):
+        cleaned_data = super().clean()  # chama limpeza padrão
+        data_inicio = cleaned_data.get('data_inicio')
+        data_fim = cleaned_data.get('data_fim')
+        
+        # validação que envolve múltiplos campos
+        if data_inicio and data_fim:
+            if data_fim < data_inicio:
+                raise ValidationError({
+                    'data_fim': 'A data de fim deve ser posterior à data de início.'
+                })
+        
+        return cleaned_data  # retorna todos os dados limpos</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>clean()</strong>: Valida o formulário inteiro, útil para validações entre campos.</p>
+                        <p><strong>super().clean()</strong>: Chama a limpeza padrão do Django primeiro.</p>
+                        <p><strong>ValidationError</strong> com dicionário: Associa erro a um campo específico.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Exemplo: Validação de E-mail Único</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/forms.py
+from django import forms
+from django.core.exceptions import ValidationError
+from .models import Usuario
+
+class UsuarioForm(forms.Form):
+    email = forms.EmailField()
+    nome = forms.CharField(max_length=100)
+    
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if Usuario.objects.filter(email=email).exists():
+            raise ValidationError('Este e-mail já está cadastrado.')
+        return email</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Este exemplo verifica se o e-mail já existe no banco antes de permitir o cadastro.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-039: Formulários e Validação de Dados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

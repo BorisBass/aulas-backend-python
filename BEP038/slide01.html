@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-038 - Slide 01: URLConf</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-route"></i> BEP-038: URLs e Rotas no Django</h1>
+            <p>Configurar rotas e URLs no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-cog"></i> O que é URLConf?</h2>
+                <p>URLConf (URL Configuration) é o sistema do Django que mapeia URLs para views.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Conceito</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>URLConf</strong> é um arquivo Python que define padrões de URL e suas views correspondentes.
+                        Quando o Django recebe uma requisição, ele verifica o arquivo <code>urls.py</code> para encontrar
+                        qual view deve ser executada.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Estrutura básica</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># meu_projeto/urls.py (raiz do projeto)
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),  # rota do admin
+    path('', include('core.urls')),   # inclui URLs do app core
+]</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>path()</strong>: Define uma rota. Recebe dois parâmetros principais:</p>
+                        <ul>
+                            <li><strong>Primeiro</strong>: padrão da URL (ex: <code>'admin/'</code>)</li>
+                            <li><strong>Segundo</strong>: view ou <code>include()</code> para incluir outras URLs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-link"></i> Fluxo de requisição</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>1.</strong> Usuário acessa <code>http://localhost:8000/lista/</code></p>
+                        <p><strong>2.</strong> Django verifica <code>meu_projeto/urls.py</code></p>
+                        <p><strong>3.</strong> Encontra <code>path('', include('core.urls'))</code></p>
+                        <p><strong>4.</strong> Verifica <code>core/urls.py</code></p>
+                        <p><strong>5.</strong> Encontra <code>path('lista/', lista)</code></p>
+                        <p><strong>6.</strong> Executa a função <code>lista</code> da view</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-038: URLs e Rotas no Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

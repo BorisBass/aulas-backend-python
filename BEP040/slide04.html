@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-040 - Slide 04: Customização de Usuários</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-040: Autenticação e Autorização</h1>
+            <p>Implementar sistemas de autenticação de usuários</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-user-cog"></i> Customização de Usuários</h2>
+                <p>Estendendo o modelo User padrão do Django.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Por que customizar?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>O modelo <code>User</code> padrão pode não ter todos os campos necessários.
+                        Você pode adicionar campos extras usando um modelo de perfil ou estendendo o User.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Método 1: Perfil (OneToOne)</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/models.py
+from django.contrib.auth.models import User
+from django.db import models
+
+class Perfil(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    telefone = models.CharField(max_length=20, blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
+    bio = models.TextField(blank=True)
+    foto = models.ImageField(upload_to='perfis/', blank=True)
+    
+    def __str__(self):
+        return f"Perfil de {self.user.username}"</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>OneToOneField</strong>: Cada User tem exatamente um Perfil.</p>
+                        <p><strong>on_delete=models.CASCADE</strong>: Se User for deletado, Perfil também é deletado.</p>
+                        <p><strong>Vantagem</strong>: Não altera o modelo User padrão, fácil de implementar.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Usando o Perfil</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+from django.contrib.auth.decorators import login_required
+from .models import Perfil
+
+@login_required
+def meu_perfil(request):
+    # Obter ou criar perfil
+    perfil, criado = Perfil.objects.get_or_create(user=request.user)
+    
+    return render(request, 'perfil.html', {'perfil': perfil})
+
+# No template
+# {{ perfil.telefone }}
+# {{ perfil.user.email }}</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>get_or_create()</strong>: Obtém o perfil se existir, ou cria um novo se não existir.</p>
+                        <p>Use este método para evitar erros quando o perfil ainda não foi criado.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Método 2: Estender User (AUTH_USER_MODEL)</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/models.py
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
+class UsuarioCustomizado(AbstractUser):
+    telefone = models.CharField(max_length=20, blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
+    bio = models.TextField(blank=True)
+    
+    class Meta:
+        db_table = 'usuarios'</code></pre>
+                    </div>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># meu_projeto/settings.py
+AUTH_USER_MODEL = 'core.UsuarioCustomizado'  # usar modelo customizado</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>AbstractUser</strong>: Classe base que estende o User padrão.</p>
+                        <p><strong>AUTH_USER_MODEL</strong>: Define qual modelo usar para usuários.</p>
+                        <p><strong>Importante</strong>: Configure antes de criar migrations! Não pode mudar depois.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Qual método usar?</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Perfil (OneToOne)</strong>: Use quando já tem dados no banco ou quer manter compatibilidade.</p>
+                        <p><strong>UsuarioCustomizado</strong>: Use em projetos novos quando precisa de campos extras desde o início.</p>
+                        <p><strong>Recomendação</strong>: Para iniciantes, use Perfil (mais simples e seguro).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-040: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

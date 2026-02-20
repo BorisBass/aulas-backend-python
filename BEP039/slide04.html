@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-039 - Slide 04: Mensagens de Erro</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-clipboard-list"></i> BEP-039: Formulários e Validação de Dados</h1>
+            <p>Manipular formulários com segurança no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-exclamation-circle"></i> Exibindo Mensagens de Erro</h2>
+                <p>Django Forms facilita a exibição de erros nos templates.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Template Básico com Erros</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/criar_tarefa.html -->
+&lt;form method="post"&gt;
+    {% csrf_token %}  &lt;!-- obrigatório para segurança --&gt;
+    
+    &lt;!-- Erros gerais do formulário --&gt;
+    {% if form.non_field_errors %}
+        &lt;div class="erros"&gt;
+            {{ form.non_field_errors }}
+        &lt;/div&gt;
+    {% endif %}
+    
+    &lt;!-- Campo descricao --&gt;
+    &lt;div&gt;
+        {{ form.descricao.label_tag }}
+        {{ form.descricao }}
+        {% if form.descricao.errors %}
+            &lt;div class="erro-campo"&gt;
+                {{ form.descricao.errors }}
+            &lt;/div&gt;
+        {% endif %}
+    &lt;/div&gt;
+    
+    &lt;!-- Campo prioridade --&gt;
+    &lt;div&gt;
+        {{ form.prioridade.label_tag }}
+        {{ form.prioridade }}
+        {% if form.prioridade.errors %}
+            &lt;div class="erro-campo"&gt;
+                {{ form.prioridade.errors }}
+            &lt;/div&gt;
+        {% endif %}
+    &lt;/div&gt;
+    
+    &lt;button type="submit"&gt;Salvar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>{% csrf_token %}</strong>: Token de segurança obrigatório em formulários POST.</p>
+                        <p><strong>form.non_field_errors</strong>: Erros que não estão associados a um campo específico.</p>
+                        <p><strong>form.campo.errors</strong>: Lista de erros do campo específico.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Template Simplificado</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/criar_tarefa.html -->
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    
+    &lt;!-- Renderiza todos os campos automaticamente --&gt;
+    {{ form.as_p }}  &lt;!-- como parágrafos --&gt;
+    &lt;!-- ou --&gt;
+    {{ form.as_table }}  &lt;!-- como tabela --&gt;
+    &lt;!-- ou --&gt;
+    {{ form.as_ul }}  &lt;!-- como lista --&gt;
+    
+    &lt;button type="submit"&gt;Salvar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>form.as_p</strong>: Renderiza campos como parágrafos (&lt;p&gt;), incluindo erros.</p>
+                        <p><strong>form.as_table</strong>: Renderiza como tabela HTML.</p>
+                        <p><strong>form.as_ul</strong>: Renderiza como lista não ordenada.</p>
+                        <p><strong>Nota</strong>: Esses métodos incluem os erros automaticamente.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Template Customizado com Loop</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/criar_tarefa.html -->
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    
+    {% for field in form %}
+        &lt;div class="campo"&gt;
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                &lt;ul class="erros"&gt;
+                    {% for error in field.errors %}
+                        &lt;li&gt;{{ error }}&lt;/li&gt;
+                    {% endfor %}
+                &lt;/ul&gt;
+            {% endif %}
+            {% if field.help_text %}
+                &lt;small&gt;{{ field.help_text }}&lt;/small&gt;
+            {% endif %}
+        &lt;/div&gt;
+    {% endfor %}
+    
+    &lt;button type="submit"&gt;Salvar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>{% for field in form %}</strong>: Itera sobre todos os campos do formulário.</p>
+                        <p><strong>field.help_text</strong>: Texto de ajuda do campo (se definido no form).</p>
+                        <p>Este método oferece mais controle sobre o layout.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-paint-brush"></i> Estilizando Erros</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>&lt;style&gt;
+    .erro-campo {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+    .erro-campo ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-039: Formulários e Validação de Dados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

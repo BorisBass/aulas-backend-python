@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-039 - Slide 02: Validação</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-clipboard-list"></i> BEP-039: Formulários e Validação de Dados</h1>
+            <p>Manipular formulários com segurança no Django</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide02">
+                <h2><i class="fas fa-check-circle"></i> Validação de Dados</h2>
+                <p>Django Forms valida automaticamente os dados antes de processá-los.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Validação Automática</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Quando você chama <code>form.is_valid()</code>, o Django valida:</p>
+                        <ul>
+                            <li><strong>Tipo</strong>: Se o valor corresponde ao tipo do campo</li>
+                            <li><strong>Obrigatoriedade</strong>: Se campos obrigatórios foram preenchidos</li>
+                            <li><strong>Limites</strong>: max_length, min_value, max_value, etc.</li>
+                            <li><strong>Formato</strong>: Email, URL, etc.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Campos com Validação</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/forms.py
+from django import forms
+
+class ContatoForm(forms.Form):
+    nome = forms.CharField(
+        max_length=100,
+        required=True,  # campo obrigatório
+        label='Nome'
+    )
+    email = forms.EmailField(
+        required=True,
+        label='E-mail'
+    )
+    idade = forms.IntegerField(
+        min_value=18,
+        max_value=120,
+        required=True,
+        label='Idade'
+    )
+    telefone = forms.CharField(
+        max_length=15,
+        required=False,  # campo opcional
+        label='Telefone'
+    )</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>required=True</strong>: Campo obrigatório (padrão).</p>
+                        <p><strong>required=False</strong>: Campo opcional.</p>
+                        <p><strong>EmailField</strong>: Valida formato de e-mail automaticamente.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-code"></i> Verificando Validação</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/views.py
+def criar_tarefa(request):
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            # dados válidos - processar
+            descricao = form.cleaned_data['descricao']
+            # ... salvar no banco ...
+            return redirect('core:lista')
+        else:
+            # dados inválidos - form.errors contém os erros
+            # o template mostrará os erros automaticamente
+            pass
+    
+    else:
+        form = TarefaForm()
+    
+    return render(request, 'criar_tarefa.html', {'form': form})</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>form.is_valid()</strong>: Retorna <code>True</code> se todos os campos são válidos.</p>
+                        <p><strong>form.errors</strong>: Dicionário com erros de validação por campo.</p>
+                        <p>Se <code>is_valid()</code> retornar <code>False</code>, o template pode exibir os erros.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Mensagens de Erro Padrão</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Django fornece mensagens de erro em português se configurado:</p>
+                        <ul>
+                            <li><strong>Campo obrigatório</strong>: "Este campo é obrigatório."</li>
+                            <li><strong>E-mail inválido</strong>: "Informe um endereço de e-mail válido."</li>
+                            <li><strong>Valor muito grande</strong>: "Certifique-se de que este valor seja menor ou igual a X."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-039: Formulários e Validação de Dados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>

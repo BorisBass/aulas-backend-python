@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-040 - Slide 05: Exercícios</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-shield-alt"></i> BEP-040: Autenticação e Autorização</h1>
+            <p>Implementar sistemas de autenticação de usuários</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-dumbbell"></i> Exercícios Práticos</h2>
+                <p>Pratique os conceitos aprendidos nesta aula.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Exercícios Propostos</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ol>
+                            <li><strong>Criar Usuário</strong>: Crie usuários usando o shell do Django</li>
+                            <li><strong>Login</strong>: Implemente view e template de login</li>
+                            <li><strong>Logout</strong>: Implemente view de logout</li>
+                            <li><strong>Proteger View</strong>: Use <code>@login_required</code> para proteger uma view</li>
+                            <li><strong>Perfil</strong>: Crie modelo Perfil com campos extras</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-book"></i> Materiais</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>
+                            <a href="EXERCICIOS.md" target="_blank" style="color: #3182CE; font-weight: bold;">📘 Ver Exercícios</a>
+                            &nbsp;|&nbsp;
+                            <a href="SOLUCOES_EXERCICIOS.md" target="_blank" style="color: #3182CE; font-weight: bold;">✅ Ver Soluções</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Sempre use <code>authenticate()</code> antes de <code>login()</code></li>
+                            <li>Use <code>@login_required</code> para proteger views sensíveis</li>
+                            <li>Configure <code>LOGIN_URL</code> no settings.py</li>
+                            <li>Use <code>request.user.is_authenticated</code> para verificar login</li>
+                            <li>Para campos extras, prefira modelo Perfil com OneToOne</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-040: Autenticação e Autorização</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
