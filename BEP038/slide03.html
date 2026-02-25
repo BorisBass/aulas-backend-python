@@ -35,6 +35,24 @@
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-exchange-alt"></i> Sem namespace x Com namespace</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># SEM namespace (tudo no mesmo \"saco\")
+{% url 'lista' %}        # qual lista? do core ou de produtos?
+
+# COM namespace (cada um no seu \"sobrenome\")
+{% url 'core:lista' %}       # lista do app core
+{% url 'produtos:lista' %}   # lista do app produtos</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Sem namespace, se dois apps tiverem <code>name='lista'</code>, o Django não sabe
+                        qual rota você quer usar.</p>
+                        <p>Com namespace, você chama <code>core:lista</code> ou <code>produtos:lista</code>
+                        e fica explícito de qual app é a URL.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
                     <h3><i class="fas fa-code"></i> Definindo namespace no include</h3>
                     <div class="code-block" style="margin-top: 12px;">
                         <pre><code># meu_projeto/urls.py
@@ -70,6 +88,31 @@ urlpatterns = [
                     <div class="info" style="margin-top: 12px;">
                         <p><strong>app_name</strong>: Define o nome do app para uso com namespaces.</p>
                         <p><strong>name</strong>: Dá um nome único para cada rota dentro do app.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-link"></i> Antes de namespace: tag {% url %}</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># core/urls.py (um único app)
+from django.urls import path
+from .views import lista  # mesma view 'lista' da BEP037
+
+urlpatterns = [
+    path('lista/', lista, name='lista'),
+]</code></pre>
+                    </div>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- home.html (template simples) -->
+&lt;!-- Gera a URL da rota chamada 'lista' --&gt;
+&lt;a href="{% url 'lista' %}"&gt;Ver lista de tarefas&lt;/a&gt;</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>A tag <code>{% url %}</code> recebe o <strong>name</strong> da rota
+                        (e não o caminho literal da URL) e gera o link correto.</p>
+                        <p>Com apenas um app, <code>{% url 'lista' %}</code> em um template como
+                        <code>home.html</code> cria o link para a mesma rota que, na BEP037, renderiza
+                        o <code>lista.html</code> com as tarefas.</p>
                     </div>
                 </div>
 
