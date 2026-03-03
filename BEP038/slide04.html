@@ -83,23 +83,53 @@ def detalhar(request, id):
                 </div>
 
                 <div class="card" style="margin-top: 20px;">
-                    <h3><i class="fas fa-code"></i> Exemplo completo</h3>
+                    <h3><i class="fas fa-balance-scale"></i> Comparação prática: sem e com os conceitos</h3>
                     <div class="code-block" style="margin-top: 12px;">
-                        <pre><code># core/urls.py
-app_name = 'core'
+                        <pre><code># SEM reverse / SEM namespace
+# (funciona, mas URLs ficam "hardcoded")
+
+# p1/urls.py
+path('', include('core.urls')),
+path('produtos/', include('produtos.urls')),
+
+# core/views.py
+def criar(request):
+    if request.method == 'POST':
+        # ...
+        return redirect('/')  # URL fixa
+
+# template.html
+&lt;a href="/detalhar/{{ tarefa.id }}/"&gt;Detalhar&lt;/a&gt;
+&lt;a href="/produtos/categoria/livros/2025/"&gt;Livros 2025&lt;/a&gt;</code></pre>
+                    </div>
+
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># COM reverse + namespace
+# (recomendado: manutenção e organização)
+
+# p1/urls.py
+path('', include(('core.urls', 'core'), namespace='core')),
+path('produtos/', include(('produtos.urls', 'produtos'), namespace='produtos')),
+
+# produtos/urls.py
+app_name = 'produtos'
 urlpatterns = [
-    path('lista/', lista, name='lista'),
-    path('detalhar/&lt;int:id&gt;/', detalhar, name='detalhar'),
+    path('categoria/&lt;str:categoria&gt;/&lt;int:ano&gt;/', categoria, name='categoria'),
 ]
 
 # core/views.py
-def detalhar(request, id):
-    tarefa = Tarefa.objects.get(id=id)
-    return render(request, 'detalhar.html', {'tarefa': tarefa})
+def criar(request):
+    if request.method == 'POST':
+        # ...
+        return redirect(reverse('core:lista'))
 
-# core/templates/detalhar.html
-&lt;h1&gt;{{ tarefa.descricao }}&lt;/h1&gt;
-&lt;a href="{% url 'core:lista' %}"&gt;Voltar para lista&lt;/a&gt;</code></pre>
+# template.html
+&lt;a href="{% url 'core:detalhar' tarefa.id %}"&gt;Detalhar&lt;/a&gt;
+&lt;a href="{% url 'produtos:categoria' categoria='livros' ano=2025 %}"&gt;Livros 2025&lt;/a&gt;</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>Resumo:</strong> sem os conceitos, você depende de strings de URL espalhadas; com
+                        <code>reverse</code> e namespace, trabalha por nome de rota e evita conflitos entre apps.</p>
                     </div>
                 </div>
             </div>
