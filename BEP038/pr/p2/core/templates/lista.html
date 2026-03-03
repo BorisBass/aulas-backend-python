@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Tarefas</title>
+</head>
+<body>
+  <h1>Tarefas</h1>
+  <p><a href="/criar/">Nova tarefa</a></p>
+  <ul>
+    {% for t in tarefas %}
+    <li>
+      <p>
+      <a href="/detalhar/{{ t.id }}/">{{ t.descricao }}</a> - 
+      {{ t.prioridade }} - {{ t.status }} </p>
+    </li>
+    {% empty %}
+    <li>Nenhuma tarefa.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
