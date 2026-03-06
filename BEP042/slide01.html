@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-042 - Slide 01: Preparação para Produção</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-rocket"></i> BEP-042: Deploy de Aplicações Django</h1>
+            <p>Diferenças entre desenvolvimento e produção</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-exchange-alt"></i> Dev x Produção</h2>
+                <p>Em desenvolvimento, priorizamos velocidade; em produção, priorizamos segurança, estabilidade e performance.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bug"></i> DEBUG</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># settings.py
+DEBUG = False  # Sempre False em produção</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Com <code>DEBUG = True</code>, Django mostra páginas de erro detalhadas (perigoso em produção).</li>
+                            <li>Com <code>DEBUG = False</code>, erros são escondidos do usuário final.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lock"></i> ALLOWED_HOSTS</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># settings.py
+ALLOWED_HOSTS = ["meu-dominio.com", "meu-ip-publico"]</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Define quais domínios/IPs podem servir a aplicação. Em produção, nunca deixe vazio.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-key"></i> SECRET_KEY e variáveis de ambiente</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>import os
+
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Nunca commitar a <code>SECRET_KEY</code> de produção no repositório.</li>
+                            <li>Use variáveis de ambiente (.env, painel da plataforma, etc.).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-images"></i> Arquivos estáticos em produção</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># settings.py (exemplo)
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Coletar estáticos
+python manage.py collectstatic</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Em produção, os arquivos estáticos são servidos por um servidor web (como Nginx) ou pela própria plataforma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-042: Deploy de Aplicações Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

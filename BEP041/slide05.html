@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-041 - Slide 05: Executando Testes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-vial"></i> BEP-041: Testes Automatizados</h1>
+            <p>Executar testes e interpretar resultados</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-play-circle"></i> Rodando a suíte de testes</h2>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-terminal"></i> Comandos principais</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Rodar todos os testes com o framework padrão do Django
+python manage.py test
+
+# Rodar testes de um app específico
+python manage.py test core
+
+# Usando pytest
+pytest
+pytest core/</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-list"></i> Interpretando a saída</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li><code>.</code> (ponto) – teste passou.</li>
+                            <li><code>F</code> – falha (assert falhou).</li>
+                            <li><code>E</code> – erro (exceção não tratada).</li>
+                            <li>Ao final, é exibido um resumo com a quantidade de testes executados.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-chart-bar"></i> Cobertura de testes</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Instalar o coverage
+pip install coverage
+
+# Rodar testes com coverage
+coverage run manage.py test
+
+# Gerar relatório no terminal
+coverage report
+
+# Gerar relatório HTML
+coverage html</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Próximos passos</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Adicionar testes sempre que criar uma funcionalidade importante.</li>
+                            <li>Criar testes de regressão sempre que um bug for corrigido.</li>
+                            <li>Integrar a suíte de testes ao pipeline de CI (GitHub Actions, GitLab CI etc.).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-041: Testes Automatizados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

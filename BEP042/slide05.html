@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-042 - Slide 05: Checklist de Deploy</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-rocket"></i> BEP-042: Deploy de Aplicações Django</h1>
+            <p>Checklist de deploy e exercícios</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide05">
+                <h2><i class="fas fa-clipboard-list"></i> Checklist de produção</h2>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lock"></i> Segurança</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li><strong>DEBUG</strong> desativado.</li>
+                            <li><strong>SECRET_KEY</strong> em variável de ambiente.</li>
+                            <li><strong>ALLOWED_HOSTS</strong> configurado.</li>
+                            <li>HTTPS habilitado (certificado TLS).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Banco de dados e arquivos</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Banco de dados de produção configurado (PostgreSQL, por exemplo).</li>
+                            <li>Migrações aplicadas (<code>python manage.py migrate</code>).</li>
+                            <li>Arquivos estáticos coletados (<code>python manage.py collectstatic</code>).</li>
+                            <li>Configuração para arquivos de mídia (uploads) definida.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tools"></i> Observabilidade</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Logs de erro e acesso disponíveis.</li>
+                            <li>Alguma forma de monitorar se a aplicação está no ar.</li>
+                            <li>Plano básico de backup para o banco de dados.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-tasks"></i> Exercício final</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Escolha um projeto Django que você já criou e monte um plano de deploy completo para ele,
+                        utilizando uma das plataformas vistas em aula. Mesmo que você não execute o deploy real agora,
+                        descreva cada passo e valide se seu código está pronto para produção.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-042: Deploy de Aplicações Django</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

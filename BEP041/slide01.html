@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-041 - Slide 01: Importância dos Testes</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-vial"></i> BEP-041: Testes Automatizados</h1>
+            <p>Introduzir o conceito de testes e sua importância</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide01">
+                <h2><i class="fas fa-exclamation-triangle"></i> Por que escrever testes?</h2>
+                <p>Testes automatizados ajudam a garantir que o código funciona hoje e continuará funcionando após mudanças.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-bug"></i> Problemas sem testes</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Alterar uma parte do código e quebrar outra sem perceber.</li>
+                            <li>Medo de refatorar por não saber o que pode quebrar.</li>
+                            <li>Bugs reaparecendo porque não há verificação automática.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-shield-alt"></i> Benefícios dos testes automatizados</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Detectam regressões rapidamente (algo que funcionava e parou de funcionar).</li>
+                            <li>Permitem refatorar com mais segurança.</li>
+                            <li>Servem como documentação viva do comportamento esperado do sistema.</li>
+                            <li>Reduzem o tempo gasto testando manualmente cada funcionalidade.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-balance-scale"></i> Teste manual x teste automatizado</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code># Teste manual (exemplo)
+1. Abrir o navegador
+2. Acessar /tarefas/
+3. Clicar em "Nova tarefa"
+4. Preencher o formulário
+5. Conferir se a tarefa aparece na lista
+
+# Teste automatizado (exemplo)
+def test_criar_tarefa(self):
+    response = self.client.post("/tarefas/nova/", data={"titulo": "Estudar testes"})
+    self.assertEqual(response.status_code, 302)
+    self.assertTrue(Tarefa.objects.filter(titulo="Estudar testes").exists())</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>O teste automatizado faz o trabalho repetitivo para você, sempre da mesma forma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-041: Testes Automatizados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+

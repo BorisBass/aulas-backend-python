@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-042: Deploy de Aplicações Django</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../index-bep.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-rocket"></i> BEP-042: Deploy de Aplicações Django</h1>
+            <p>Publicar aplicações Django em produção</p>
+        </div>
+
+        <div style="margin: 15px 0; text-align: right; padding: 0 40px;">
+            <a href="../index.html" style="background:#2D3748;color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px;">🏠 Índice geral</a>
+        </div>
+        
+        <div class="content">
+            <div class="objectives-section">
+                <h2><i class="fas fa-bullseye"></i> Objetivos da Aula</h2>
+                <ul>
+                    <li>Entender o que muda entre ambiente de desenvolvimento e produção.</li>
+                    <li>Preparar um projeto Django para rodar em produção.</li>
+                    <li>Conhecer o uso de Gunicorn e Nginx.</li>
+                    <li>Explorar plataformas de deploy gratuito (Heroku, Render, etc.).</li>
+                    <li>Executar um fluxo simples de deploy.</li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-presentation"></i> Slides da Aula</h2>
+                <div class="slides-grid">
+                    <div class="slide-card" onclick="window.open('slide01.html','_blank')">
+                        <div class="slide-number">01</div>
+                        <div class="slide-title">Preparação para Produção</div>
+                        <div class="slide-description">DEBUG, ALLOWED_HOSTS e variáveis de ambiente</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide02.html','_blank')">
+                        <div class="slide-number">02</div>
+                        <div class="slide-title">Gunicorn</div>
+                        <div class="slide-description">WSGI server para Django</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide03.html','_blank')">
+                        <div class="slide-number">03</div>
+                        <div class="slide-title">Nginx</div>
+                        <div class="slide-description">Servidor web reverso e estáticos</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide04.html','_blank')">
+                        <div class="slide-number">04</div>
+                        <div class="slide-title">Plataformas Gratuitas</div>
+                        <div class="slide-description">Heroku, Render e similares</div>
+                    </div>
+                    
+                    <div class="slide-card" onclick="window.open('slide05.html','_blank')">
+                        <div class="slide-number">05</div>
+                        <div class="slide-title">Checklist de Deploy</div>
+                        <div class="slide-description">Resumo prático e exercícios</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2><i class="fas fa-book"></i> Exercícios e Soluções</h2>
+                <p>
+                    <a href="EXERCICIOS.md" target="_blank">📘 Exercícios</a>
+                    &nbsp;|&nbsp;
+                    <a href="SOLUCOES_EXERCICIOS.md" target="_blank">✅ Soluções</a>
+                </p>
+            </div>
+            
+            <div class="section">
+                <h2><i class="fas fa-info-circle"></i> Sobre esta Aula</h2>
+                <p>Nesta aula você verá como preparar um projeto Django para produção, configurando variáveis
+                de ambiente, servidor de aplicação (Gunicorn) e servidor web (Nginx).</p>
+                <p>Também veremos opções de deploy em plataformas gratuitas como Heroku e Render, com foco em
+                entender o fluxo de publicação do código até a aplicação estar acessível na internet.</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 - Conteúdo Educacional</p>
+            <p>IFBA CEPEDI</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+</body>
+</html>
+

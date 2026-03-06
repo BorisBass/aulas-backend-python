@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BEP-041 - Slide 04: Criando Testes Simples</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 18px; }
+        .info { background: #EBF8FF; border-left: 4px solid #3182CE; padding: 12px; margin: 10px 0; border-radius: 4px; }
+        pre { background: #1A202C; color: #E2E8F0; padding: 16px; border-radius: 8px; overflow:auto; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-vial"></i> BEP-041: Testes Automatizados</h1>
+            <p>Criando testes simples para models, views e forms</p>
+        </div>
+        
+        <div class="nav"></div>
+
+        <div class="content">
+            <div class="slide active" id="slide04">
+                <h2><i class="fas fa-pencil-alt"></i> Escrevendo seus primeiros testes</h2>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-database"></i> Testando models</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>from django.test import TestCase
+from core.models import Tarefa
+
+
+class TarefaModelTest(TestCase):
+    def test_str_retorna_titulo(self):
+        tarefa = Tarefa.objects.create(titulo="Estudar testes")
+        self.assertEqual(str(tarefa), "Estudar testes")</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p>Comece testando comportamentos simples, como o método <code>__str__</code> ou propriedades calculadas.</p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-eye"></i> Testando views</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>from django.urls import reverse
+from django.test import TestCase
+
+
+class ListaTarefasViewTest(TestCase):
+    def test_status_code_e_template(self):
+        url = reverse("core:lista_tarefas")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "core/lista_tarefas.html")</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-clipboard-check"></i> Testando formulários</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code>from django.test import TestCase
+from core.forms import TarefaForm
+
+
+class TarefaFormTest(TestCase):
+    def test_form_valido(self):
+        form = TarefaForm(data={"titulo": "Estudar Django"})
+        self.assertTrue(form.is_valid())
+
+    def test_form_invalido_sem_titulo(self):
+        form = TarefaForm(data={"titulo": ""})
+        self.assertFalse(form.is_valid())</code></pre>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-lightbulb"></i> Dicas práticas</h3>
+                    <div class="info" style="margin-top: 12px;">
+                        <ul>
+                            <li>Comece testando as regras de negócio mais importantes.</li>
+                            <li>Evite depender de serviços externos (e-mails, APIs) nos testes básicos.</li>
+                            <li>Use <code>setUp()</code> para criar dados comuns usados em vários testes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>BEP-041: Testes Automatizados</p>
+            <img src="../Rodape.png" alt="Rodapé">
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+</body>
+</html>
+
