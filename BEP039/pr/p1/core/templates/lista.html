@@ -6,7 +6,8 @@
   </head>
   <body>
     <h1>Tarefas</h1>
-    <p><a href="{% url 'core:criar' %}">Nova tarefa</a></p>
+    <p><a href="{% url 'core:criar' %}">Nova tarefa do jeito antigo</a></p>
+<p><a href="{% url 'core:criar_tarefa' %}">Nova tarefa do jeito forms de ser</a></p>
 
     <ul>
       {% for t in tarefas %}
