@@ -65,6 +65,7 @@ class TarefaForm(forms.Form):
                         <p><strong>forms.Form</strong>: Classe base para criar formulários.</p>
                         <p><strong>widget</strong>: Define como o campo será renderizado no HTML.</p>
                         <p><strong>attrs</strong>: Atributos HTML adicionais (ex: classes CSS).</p>
+                        <p><strong>Tipos de campo:</strong> <a href="https://docs.djangoproject.com/en/stable/ref/forms/fields/" target="_blank" rel="noopener noreferrer">Documentação Django – Form fields (CharField, IntegerField, ChoiceField, etc.)</a></p>
                     </div>
                 </div>
 
@@ -96,7 +97,39 @@ def criar_tarefa(request):
                         <p><strong>cleaned_data</strong>: Dicionário com dados validados e limpos.</p>
                     </div>
                 </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <h3><i class="fas fa-file-code"></i> Template criar_tarefa.html</h3>
+                    <div class="code-block" style="margin-top: 12px;">
+                        <pre><code><!-- core/templates/criar_tarefa.html -->
+&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Criar tarefa&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Nova tarefa&lt;/h1&gt;
+    &lt;form method="post"&gt;
+        {% csrf_token %}
+        {{ form.as_p }}  &lt;!-- renderiza todos os campos do form --&gt;
+        &lt;button type="submit"&gt;Salvar&lt;/button&gt;
+    &lt;/form&gt;
+    &lt;p&gt;&lt;a href="{% url 'core:lista' %}"&gt;Voltar para lista&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                    <div class="info" style="margin-top: 12px;">
+                        <p><strong>criar_tarefa.html</strong> é o template chamado pela view <code>criar_tarefa</code>.</p>
+                        <p><strong>{{ form.as_p }}</strong> renderiza automaticamente os campos do <code>TarefaForm</code>.</p>
+                        <p>O link usa <code>{% url 'core:lista' %}</code> para voltar para a lista de tarefas (como no projeto de exemplo).</p>
+                    </div>
+                </div>
             </div>
+        </div>
+
+        <div class="section" style="margin-top: 20px; padding: 0 40px;">
+            <p><i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v=7YzjO02e020" target="_blank" rel="noopener noreferrer">Assistir videoaula deste slide</a></p>
         </div>
 
         <div class="footer">
