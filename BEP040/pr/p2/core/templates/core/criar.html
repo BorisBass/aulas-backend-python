@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Criar Tarefa</title>
+  </head>
+  <body>
+    <h1>Criar Tarefa</h1>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- renderiza todos os campos do form -->
+        <button type="submit">Salvar</button>
+      </form>
+    <p><a href="{% url 'core:lista' %}">Voltar à lista</a></p>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Tarefas</title>
+  </head>
+  <body>
+<h1>Minhas tarefas</h1>
+
+<p><a href="{% url 'core:criar' %}">Nova tarefa</a></p>
+<p><a href="{% url 'core:home' %}">Home</a></p>
+
+<ul>
+  {% for tarefa in tarefas %}
+  <li>
+    {{ tarefa.titulo }} {% if tarefa.concluida %}(concluída){% endif %} –
+    <a href="{% url 'core:editar' tarefa.pk %}">editar</a> –
+    <a href="{% url 'core:excluir' tarefa.pk %}">excluir</a>
+  </li>
+  {% empty %}
+  <li>Você ainda não tem tarefas.</li>
+  {% endfor %}
+</ul>
+  </body>
+</html>

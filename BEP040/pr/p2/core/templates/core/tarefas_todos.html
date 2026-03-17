@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Tarefas</title>
+  </head>
+  <body>
+    <p><a href="{% url 'core:home' %}">Home</a></p>
+<h1>Tarefas de todos os usuários</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Usuário</th>
+      <th>Concluída?</th>
+      <th>Criado em</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tarefa in tarefas %}
+    <tr>
+      <td>{{ tarefa.titulo }}</td>
+      <td>{{ tarefa.usuario.username }}</td>
+      <td>{{ tarefa.concluida|yesno:"Sim,Não" }}</td>
+      <td>{{ tarefa.criado_em }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4">Nenhuma tarefa cadastrada.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </body>
+</html>
