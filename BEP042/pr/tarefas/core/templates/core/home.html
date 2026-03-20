@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Página Inicial | TaskAdmin{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-dark">Bem-vindo, {{ nome }}!</h1>
+            <p class="lead text-muted">O que você deseja gerenciar hoje?</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-{% if request.user.is_staff %}6{% else %}12{% endif %}">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3 text-primary">📝</div>
+                        <h3 class="card-title h5 fw-bold">Minhas Tarefas</h3>
+                        <p class="card-text text-muted small">Gerencie sua lista pessoal, crie novas tarefas ou finalize as pendentes.</p>
+                        <a href="{% url 'core:lista' %}" class="btn btn-primary w-100 mt-2">
+                            Acessar Minha Lista
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            {% if request.user.is_staff %}
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-0 border-top border-info border-4">
+                    <div class="card-body text-center p-4">
+                        <div class="display-4 mb-3">🌐</div>
+                        <h3 class="card-title h5 fw-bold">Painel de Controle</h3>
+                        <p class="card-text text-muted small">Visão administrativa: visualize e monitore as tarefas de todos os colaboradores do sistema.</p>
+                        <a href="{% url 'core:tarefas_todos' %}" class="btn btn-outline-dark w-100 mt-2">
+                            Ver Todas as Tarefas
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="mt-5 text-center">
+            <hr class="w-25 mx-auto">
+            <p class="text-muted small">Sistema de Gestão Interna v1.0</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
