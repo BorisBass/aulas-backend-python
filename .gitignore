@@ -7,6 +7,8 @@ README.md
 !BEP-*/SOL*.md
 !BEP???/EXE*.md
 !BEP???/SOL*.md
+!BEP040/Refatoracao_do_sistema_de_tarefas_para_multiusuario.md
+!BEP040/pr/p3/Guia_de_Padronizacao_Sistema_de_Tarefas.md
 
 # Scripts de ferramentas e conversão (movidos para _recursos/ferramentas/)
 html_to_pdf.py
